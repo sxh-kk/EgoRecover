@@ -325,3 +325,8 @@
 - 用户要求在 sxh-kk 下新建 EgoRecover，并明确选择公开仓库。将当前工作区代码、配置、文档及轻量验证报告制作成独立首次提交；排除 exp/、数据、模型权重、SMPL-X 资产、缓存和测试 XML，不携带旧 Git 历史中的实验轨迹。
 - README 更新为 EgoRecover 总览；原始 E7 说明保留于 E7.md，SOURCE.md 保留上游仓库及提取提交。发布快照独立于训练工作区；原分支和运行中训练进程保持原状态。
 - 上传前测试：`tests data_pipeline/tests` **113 passed, 5 warnings in 18.45s**。已检查常见凭据模式，待上传代码未发现匹配项。GitHub 创建和推送结果待认证完成后补记。
+
+### 2026-09-29 00:20（UTC+8）：公开仓库已创建并完成首次推送
+
+- 仓库：[sxh-kk/EgoRecover](https://github.com/sxh-kk/EgoRecover)，可见性 PUBLIC，默认分支 main。首次代码提交 `385ba304063c419443b4a8dc3ee7ca2487a5741a`，181 个文件、约 4.22 MB；远端 main 与本地发布提交一致。
+- 干净快照中再次执行完整测试：**113 passed, 5 warnings in 18.33s**。数据、训练权重、SMPL-X、exp/ 与测试 XML 均未上传。当前训练工作区仍保留原 UEM-update 分支及 remote；运行中实验未中止。
