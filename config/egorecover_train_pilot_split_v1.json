@@ -1,0 +1,27 @@
+{
+  "base_split": "train",
+  "dataset_spec_sha256": "fe78379e17e2d05e854440aaf46134c9ff378600c3fea8f0d8bdad1cb020d263",
+  "profile": "pilot",
+  "schema_version": "egorecover-fixed-split-v1",
+  "source": "Frozen from the audited 12-take official-train pilot; no reseeding during training.",
+  "splits": {
+    "dev": [
+      "indiana_music_13_5",
+      "upenn_0725_Duet_Violin_1_2_8"
+    ],
+    "holdout": [
+      "sfu_basketball014_15",
+      "sfu_covid_001_12"
+    ],
+    "train": [
+      "fair_bike_08_10",
+      "georgiatech_bike_04_8",
+      "iiith_cooking_146_2",
+      "iiith_soccer_020_3",
+      "indiana_cooking_03_2",
+      "unc_basketball_03-31-23_02_23",
+      "uniandes_dance_013_19",
+      "uniandes_dance_020_50"
+    ]
+  }
+}

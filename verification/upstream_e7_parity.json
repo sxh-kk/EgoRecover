@@ -1,0 +1,58 @@
+{
+  "upstream_commit": "156ab79d5f692a6e8db3c3eb769abf1e4cb1fc08",
+  "torch": "2.12.0+cpu",
+  "device": "cpu",
+  "weights": "synthetic random upstream E7 state_dict",
+  "strict_state_dict": "<All keys matched successfully>",
+  "optimizer_parameter_order_equal": true,
+  "checks": {
+    "recon_forward": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    },
+    "fore_forward": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    },
+    "gen_forward": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    },
+    "guided_forward": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    },
+    "euler10_80frames": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    },
+    "disabled_repaint_80frames": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    },
+    "enabled_final_history": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    },
+    "training_loss": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    },
+    "training_local_mse": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    },
+    "training_global_mse": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    },
+    "training_output_gradient": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    },
+    "training_input_gradient": {
+      "max_abs_error": 0.0,
+      "bitwise_equal": true
+    }
+  }
+}

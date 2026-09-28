@@ -1,0 +1,49 @@
+{
+  "scope": "synthetic tensors, actual 12-layer G; no accuracy evaluation or optimizer update",
+  "device": "cuda",
+  "torch_version": "2.10.0+cu128",
+  "seed": 62,
+  "source_mode": "history",
+  "sigma": 1.0,
+  "nfe_per_action": 10,
+  "migration": null,
+  "loss": 3.0430290699005127,
+  "loss_finite": true,
+  "gradients_finite": true,
+  "history_unchanged": true,
+  "actions": {
+    "a11": {
+      "shape": [
+        1,
+        1,
+        243
+      ],
+      "finite": true
+    },
+    "a10": {
+      "shape": [
+        1,
+        1,
+        243
+      ],
+      "finite": true
+    },
+    "a01": {
+      "shape": [
+        1,
+        1,
+        243
+      ],
+      "finite": true
+    },
+    "a00": {
+      "shape": [
+        1,
+        1,
+        243
+      ],
+      "finite": true
+    }
+  },
+  "passed": true
+}

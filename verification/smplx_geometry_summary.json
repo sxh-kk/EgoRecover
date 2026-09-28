@@ -1,0 +1,193 @@
+{
+  "scope": "actual_smplx_geometry_on_official_val_engineering_pilot",
+  "model_bundle_version": "This is \"Version 1.0\" of SMPL-X.",
+  "smplx_asset_sha256": "376021446ddc86e99acacd795182bbef903e61d33b76b9d8b359c2b0865bd992",
+  "takes": 2,
+  "cases": 12,
+  "evaluated_frames": 2160,
+  "take_results": [
+    {
+      "take_index": 0,
+      "take": "iiith_soccer_002_2",
+      "report": "exp/egorecover_closed_loop_v3_take0/smplx_geometry.json",
+      "report_sha256": "ca45dc48cd0da1fa65b8e861b8ce697ad71f4021d9561e31b151ccd7a2f549ed",
+      "gt_asset_audit": {
+        "mean_mm": 0.0008803338860161602,
+        "max_mm": 0.04849809408187866,
+        "body_mean_mm": 6.22636143816635e-05,
+        "body_max_mm": 0.0003625609097070992,
+        "hands_mean_mm": 0.0015615503070876002,
+        "hands_max_mm": 0.04849809408187866
+      },
+      "cases": [
+        {
+          "source_mode": "gaussian",
+          "variant": "clean",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 172.382,
+          "smpl22_pa_mpjpe_mm": 75.785,
+          "smpl_hand_mpjpe_mm": 345.001,
+          "head_translation_mm": 54.9,
+          "foot_slide_mm": 70.734,
+          "fk_vs_direct_dense22_mm": 70.771,
+          "fk_vs_direct_root_mm": 6.1e-05
+        },
+        {
+          "source_mode": "gaussian",
+          "variant": "freeze_3s",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 172.33,
+          "smpl22_pa_mpjpe_mm": 75.765,
+          "smpl_hand_mpjpe_mm": 345.053,
+          "head_translation_mm": 54.898,
+          "foot_slide_mm": 70.765,
+          "fk_vs_direct_dense22_mm": 70.759,
+          "fk_vs_direct_root_mm": 6.1e-05
+        },
+        {
+          "source_mode": "gaussian",
+          "variant": "drift_0p03mps",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 173.471,
+          "smpl22_pa_mpjpe_mm": 75.538,
+          "smpl_hand_mpjpe_mm": 347.144,
+          "head_translation_mm": 57.401,
+          "foot_slide_mm": 70.901,
+          "fk_vs_direct_dense22_mm": 70.938,
+          "fk_vs_direct_root_mm": 6.1e-05
+        },
+        {
+          "source_mode": "history",
+          "variant": "clean",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 196.877,
+          "smpl22_pa_mpjpe_mm": 98.696,
+          "smpl_hand_mpjpe_mm": 493.392,
+          "head_translation_mm": 59.515,
+          "foot_slide_mm": 49.61,
+          "fk_vs_direct_dense22_mm": 54.782,
+          "fk_vs_direct_root_mm": 5.5e-05
+        },
+        {
+          "source_mode": "history",
+          "variant": "freeze_3s",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 196.838,
+          "smpl22_pa_mpjpe_mm": 98.678,
+          "smpl_hand_mpjpe_mm": 493.331,
+          "head_translation_mm": 59.492,
+          "foot_slide_mm": 49.623,
+          "fk_vs_direct_dense22_mm": 54.758,
+          "fk_vs_direct_root_mm": 5.8e-05
+        },
+        {
+          "source_mode": "history",
+          "variant": "drift_0p03mps",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 197.568,
+          "smpl22_pa_mpjpe_mm": 98.652,
+          "smpl_hand_mpjpe_mm": 494.908,
+          "head_translation_mm": 63.021,
+          "foot_slide_mm": 50.102,
+          "fk_vs_direct_dense22_mm": 54.812,
+          "fk_vs_direct_root_mm": 5.6e-05
+        }
+      ]
+    },
+    {
+      "take_index": 1,
+      "take": "georgiatech_covid_06_8",
+      "report": "exp/egorecover_closed_loop_v3_take1/smplx_geometry.json",
+      "report_sha256": "657e5fbc30b3feb197c803da43a1a8931d37f5e5acdf10a19cb09b36c5d6bfd4",
+      "gt_asset_audit": {
+        "mean_mm": 0.0006426061736419797,
+        "max_mm": 0.09253712743520737,
+        "body_mean_mm": 9.82623896561563e-05,
+        "body_max_mm": 0.0008259061723947525,
+        "hands_mean_mm": 0.0010955033358186483,
+        "hands_max_mm": 0.09253712743520737
+      },
+      "cases": [
+        {
+          "source_mode": "gaussian",
+          "variant": "clean",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 261.244,
+          "smpl22_pa_mpjpe_mm": 106.796,
+          "smpl_hand_mpjpe_mm": 331.832,
+          "head_translation_mm": 108.946,
+          "foot_slide_mm": 48.234,
+          "fk_vs_direct_dense22_mm": 89.057,
+          "fk_vs_direct_root_mm": 0.0
+        },
+        {
+          "source_mode": "gaussian",
+          "variant": "freeze_3s",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 261.555,
+          "smpl22_pa_mpjpe_mm": 106.409,
+          "smpl_hand_mpjpe_mm": 330.584,
+          "head_translation_mm": 109.189,
+          "foot_slide_mm": 48.434,
+          "fk_vs_direct_dense22_mm": 89.293,
+          "fk_vs_direct_root_mm": 0.0
+        },
+        {
+          "source_mode": "gaussian",
+          "variant": "drift_0p03mps",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 262.798,
+          "smpl22_pa_mpjpe_mm": 106.849,
+          "smpl_hand_mpjpe_mm": 336.734,
+          "head_translation_mm": 111.36,
+          "foot_slide_mm": 49.846,
+          "fk_vs_direct_dense22_mm": 89.053,
+          "fk_vs_direct_root_mm": 0.0
+        },
+        {
+          "source_mode": "history",
+          "variant": "clean",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 256.812,
+          "smpl22_pa_mpjpe_mm": 133.723,
+          "smpl_hand_mpjpe_mm": 429.07,
+          "head_translation_mm": 68.187,
+          "foot_slide_mm": 33.708,
+          "fk_vs_direct_dense22_mm": 69.872,
+          "fk_vs_direct_root_mm": 0.0
+        },
+        {
+          "source_mode": "history",
+          "variant": "freeze_3s",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 256.808,
+          "smpl22_pa_mpjpe_mm": 133.622,
+          "smpl_hand_mpjpe_mm": 429.124,
+          "head_translation_mm": 68.28,
+          "foot_slide_mm": 33.707,
+          "fk_vs_direct_dense22_mm": 69.956,
+          "fk_vs_direct_root_mm": 0.0
+        },
+        {
+          "source_mode": "history",
+          "variant": "drift_0p03mps",
+          "frames": 180,
+          "smpl22_mpjpe_mm": 257.995,
+          "smpl22_pa_mpjpe_mm": 133.676,
+          "smpl_hand_mpjpe_mm": 431.826,
+          "head_translation_mm": 66.605,
+          "foot_slide_mm": 35.42,
+          "fk_vs_direct_dense22_mm": 69.897,
+          "fk_vs_direct_root_mm": 0.0
+        }
+      ]
+    }
+  ],
+  "interpretation_limits": [
+    "Random E7 initialization; no pretrained initializer or formal method checkpoint.",
+    "Both takes are official validation engineering development data, not an independent test set.",
+    "The 200-frame/20-bootstrap protocol differs from the paper 80-frame strided validation.",
+    "Direct dense22 and fixed-shape SMPL-X FK disagree for some joints; the FK metric evaluates the actual reconstructed body.",
+    "TMR semantic similarity and FID are not computed."
+  ]
+}

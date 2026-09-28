@@ -1,0 +1,27 @@
+{
+  "schema_version": "egorecover-fixed-split-v1",
+  "profile": "pilot",
+  "base_split": "val",
+  "dataset_spec_sha256": "653060e84f482f5fa661647b862540749554f4dc4ebe30052421513952e78b75",
+  "source": "Frozen from the v3 engineering run (seed 62); training seeds must not change these take groups.",
+  "splits": {
+    "train": [
+      "uniandes_dance_024_45",
+      "georgiatech_bike_15_8",
+      "indiana_bike_10_12",
+      "utokyo_omelet_11_1001_4",
+      "uniandes_basketball_001_28",
+      "unc_basketball_03-09-23_01_10",
+      "upenn_0726_Violin_1_3",
+      "uniandes_dance_002_10"
+    ],
+    "dev": [
+      "iiith_soccer_002_2",
+      "georgiatech_covid_06_8"
+    ],
+    "holdout": [
+      "iiith_cooking_89_2",
+      "upenn_0721_Piano_1_3"
+    ]
+  }
+}
