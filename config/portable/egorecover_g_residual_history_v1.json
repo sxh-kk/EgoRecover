@@ -1,0 +1,87 @@
+{
+  "protocol": "g-residual-history-v1",
+  "status": "designed_not_implemented_or_started",
+  "parent_run": "exp/egorecover_observation_reference/v2",
+  "data_run": "exp/egorecover_g_pretraining/v1",
+  "prior_path": "exp/egorecover_observation_reference/v2/prior/prior.pt",
+  "groups": {
+    "S0": {
+      "geometric_residual": false,
+      "r0_history": false
+    },
+    "S1": {
+      "geometric_residual": true,
+      "r0_history": false
+    },
+    "S2": {
+      "geometric_residual": false,
+      "r0_history": true
+    },
+    "S3": {
+      "geometric_residual": true,
+      "r0_history": true
+    }
+  },
+  "seeds": [
+    62,
+    63,
+    64
+  ],
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "steps": 12000,
+  "batch_size": 64,
+  "microbatch": 16,
+  "learning_rate": 3e-05,
+  "weight_decay": 0.01,
+  "warmup_steps": 500,
+  "ema_decay": 0.992028,
+  "eval_every": 1000,
+  "dev_monitor_takes": 16,
+  "geometry_weight": 1.0,
+  "fk_weight": 0.0,
+  "source_mode": "gaussian",
+  "sigma": 1.0,
+  "observation_length": 21,
+  "body_history_length": 20,
+  "reference_mode": "predicted_planar",
+  "initialization": "per_seed_R0_best_backbone_absolute_head_kept_residual_head_zero_new_optimizer_and_ema",
+  "history": {
+    "gt_probability": 0.5,
+    "r0_probability_max": 0.25,
+    "r0_ramp_steps": 1000,
+    "teacher_probability": "0.5-r0_probability",
+    "cache_policy": "per_seed_frozen_parent_R0_once_no_refresh",
+    "cache_split": "all_existing_train_episodes",
+    "cache_nfe": 10,
+    "cache_draw": 1062,
+    "pilot_episodes": 64
+  },
+  "residual": {
+    "head_width": 171,
+    "joint_translation_scale_m": 0.1,
+    "joint_rotation_scale_rad": 1.0,
+    "reference_translation_scale_m": 0.1,
+    "reference_yaw_scale_rad": 1.0,
+    "auxiliary_scale": "original_motion_std_207_243",
+    "flow_space": "absolute243_x0",
+    "rotation_composition": "SO3_exp_left_on_P_local_joint_rotation"
+  },
+  "evaluation": {
+    "nfe": 10,
+    "draw": 1062,
+    "checkpoint": "dev_selected_best",
+    "benchmark": "same_222_repeated_takes",
+    "score_frames": [
+      40,
+      199
+    ],
+    "fixed_history_diagnostic": "dev16_GT_E7_R0_32_times_each",
+    "practical_body_improvement_goal_mm": 5.0
+  },
+  "design_document": "docs/design/g-residual-history-four-way.md"
+}

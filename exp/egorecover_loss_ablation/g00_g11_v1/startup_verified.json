@@ -1,0 +1,31 @@
+{
+  "time": "2026-09-29 00:02",
+  "queue_status": "running",
+  "training": [
+    {
+      "gpu": 4,
+      "pid": 1865951,
+      "step": "G/gaussian 200/2400: train=0.067521",
+      "prior_sha256": "628f412f95fb0a0caf18b7f5ebde4115b972f87925155a847596839734764a5d"
+    },
+    {
+      "gpu": 5,
+      "pid": 1865955,
+      "step": "G/history 200/2400: train=0.057717",
+      "prior_sha256": "628f412f95fb0a0caf18b7f5ebde4115b972f87925155a847596839734764a5d"
+    },
+    {
+      "gpu": 6,
+      "pid": 1865952,
+      "step": "G/gaussian 140/2400: train=0.530220",
+      "prior_sha256": "628f412f95fb0a0caf18b7f5ebde4115b972f87925155a847596839734764a5d"
+    },
+    {
+      "gpu": 7,
+      "pid": 1865954,
+      "step": "G/history 140/2400: train=0.503063",
+      "prior_sha256": "628f412f95fb0a0caf18b7f5ebde4115b972f87925155a847596839734764a5d"
+    }
+  ],
+  "gpu_memory": "index, memory.used [MiB], memory.free [MiB]\n0, 10579 MiB, 86929 MiB\n1, 10579 MiB, 86929 MiB\n2, 10579 MiB, 86929 MiB\n3, 10579 MiB, 86929 MiB\n4, 54630 MiB, 42878 MiB\n5, 52589 MiB, 44919 MiB\n6, 52297 MiB, 45211 MiB\n7, 52309 MiB, 45199 MiB\n"
+}

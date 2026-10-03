@@ -1,0 +1,36 @@
+{
+  "completed": false,
+  "group": "dev",
+  "takes": [
+    "fair_bike_01_12",
+    "georgiatech_bike_05_2",
+    "iiith_cooking_109_4",
+    "iiith_soccer_004_5",
+    "indiana_music_13_5",
+    "nus_cpr_52_1",
+    "sfu_basketball_03_44",
+    "sfu_basketball_08_15",
+    "unc_basketball_03-16-23_01_18",
+    "uniandes_dance_011_27",
+    "uniandes_dance_012_15",
+    "upenn_0725_Duet_Violin_1_2_8"
+  ],
+  "variants": [
+    "clean",
+    "freeze_3s",
+    "drift_0p03mps"
+  ],
+  "source_modes": [
+    "gaussian"
+  ],
+  "sampling_seed": 62,
+  "dataset_spec_sha256": "13ca5f22e713353a121282a365af735f8086b8ca3dae714742e116d0d5df14dd",
+  "evaluation_split_manifest_sha256": "fdddd32b47282bfece00215ef2652cbc361afdc655b6516bb5ab0740403481fc",
+  "bootstrap_cache_sha256": "3dec71f200f5d5d445d45f2f878a18cd73950365c402e16cb3404e3651018f56",
+  "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+  "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+  "experiments": {
+    "g1f1_gaussian": "exp/egorecover_loss_ablation/g00_g11_v1/train/g1f1_gaussian"
+  },
+  "results": []
+}

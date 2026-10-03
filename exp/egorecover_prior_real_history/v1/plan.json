@@ -1,0 +1,161 @@
+{
+  "status": "designed_not_started",
+  "scope": "frozen_original_e7_causal_history_P_evaluation",
+  "method": "docs/experiments/p-real-history.md",
+  "output": "exp/egorecover_prior_real_history/v1",
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "train_P": false,
+  "train_G": false,
+  "split_manifest": "config/egorecover_train_72take_split_v1.json",
+  "group": "dev",
+  "takes": [
+    "fair_bike_01_12",
+    "georgiatech_bike_05_2",
+    "iiith_cooking_109_4",
+    "iiith_soccer_004_5",
+    "indiana_music_13_5",
+    "nus_cpr_52_1",
+    "sfu_basketball_03_44",
+    "sfu_basketball_08_15",
+    "unc_basketball_03-16-23_01_18",
+    "uniandes_dance_011_27",
+    "uniandes_dance_012_15",
+    "upenn_0725_Duet_Violin_1_2_8"
+  ],
+  "holdout_used": false,
+  "variants": [
+    "clean",
+    "freeze_3s",
+    "drift_0p03mps"
+  ],
+  "frames": 200,
+  "fps": 10,
+  "history_frames": 20,
+  "primary_target_range": {
+    "start_inclusive": 20,
+    "stop_exclusive": 200
+  },
+  "full_e7_window_target_range": {
+    "start_inclusive": 100,
+    "stop_exclusive": 200
+  },
+  "generator": {
+    "architecture": "model.uniegomotion.UniEgoMotion",
+    "checkpoint": "exp/e7/last.ckpt",
+    "checkpoint_declared_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+    "verify_checkpoint_at_execution": true,
+    "weight_source": "ema",
+    "configuration": "config/e7.yaml",
+    "window_policy": "causal trailing min(80,s+1); commit terminal frame once",
+    "solver": "Euler",
+    "nfe": 10,
+    "repaint": false,
+    "P_conditioning": false,
+    "draw_seeds": [
+      1062,
+      1063,
+      1064
+    ],
+    "noise_pairing": "same take/time/draw across observation variants"
+  },
+  "startup": {
+    "cache": "exp/egorecover_train_72take_v1/bootstrap.pt",
+    "cache_sha256": "3dec71f200f5d5d445d45f2f878a18cd73950365c402e16cb3404e3651018f56",
+    "reuse_across_draws_and_variants": true,
+    "freeze_beta_and_floor": true
+  },
+  "predictors": [
+    {
+      "name": "new_P_s62",
+      "training_seed": 62,
+      "checkpoint": "exp/egorecover_prior_data_budget/v1/train/D_s62/prior.pt",
+      "checkpoint_sha256": "ce0781ce93cb431b951a405c34d794f3d7d4c449b3f7a8a8b2bcd23e8e22e30e",
+      "selected_step": 9400,
+      "base_mode": "constant_velocity"
+    },
+    {
+      "name": "new_P_s63",
+      "training_seed": 63,
+      "checkpoint": "exp/egorecover_prior_data_budget/v1/train/D_s63/prior.pt",
+      "checkpoint_sha256": "e374e19d7166d0f8caded1ebddaf1ae6445520fc874cc630cdecad1fabc98921",
+      "selected_step": 7500,
+      "base_mode": "constant_velocity"
+    },
+    {
+      "name": "new_P_s64",
+      "training_seed": 64,
+      "checkpoint": "exp/egorecover_prior_data_budget/v1/train/D_s64/prior.pt",
+      "checkpoint_sha256": "866d01a699af51a47f0237fd7a14507a79ef4d90f3804a7c72b9e9d35eb3875c",
+      "selected_step": 8400,
+      "base_mode": "constant_velocity"
+    }
+  ],
+  "primary_metric": "world_SMPL22_Body_MPJPE_mm",
+  "primary_comparisons": [
+    "new_P_E7_history_minus_same_new_P_GT_history"
+  ],
+  "primary_variant": "clean",
+  "statistics": {
+    "unit": "take",
+    "within_take_average": [
+      "frames",
+      "E7_draws",
+      "P_training_seeds"
+    ],
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 62,
+    "confidence_levels": [
+      0.95
+    ],
+    "GT_draw_handling": "One stored GT result per P seed and take/frame; average E7 draws before pairing, no GT pseudo-replication."
+  },
+  "GT_control": "Reuse stored D selected-checkpoint dev_prior.pt single metrics; identical take/frame, beta_boot, floor, codec and evaluation definitions; no GT inference rerun.",
+  "cache_reuse_policy": "existing HistoryUniEgoMotion/G+P caches are incompatible",
+  "state": "plan only; implementation and execution pending",
+  "revision": "new_P_only_paired_with_existing_GT_results",
+  "post_startup_target_range": {
+    "start_inclusive": 40,
+    "stop_exclusive": 200
+  },
+  "existing_GT_results": [
+    {
+      "training_seed": 62,
+      "artifact": "exp/egorecover_prior_data_budget/v1/train/D_s62/dev_prior.pt",
+      "artifact_sha256": "a145c9fda8e19f13b72a220f22af5f3d07293f312cc56a97a065e1b5350578f9",
+      "report": "exp/egorecover_prior_data_budget/v1/train/D_s62/report.json",
+      "target_range": [
+        20,
+        200
+      ],
+      "frames": 2160
+    },
+    {
+      "training_seed": 63,
+      "artifact": "exp/egorecover_prior_data_budget/v1/train/D_s63/dev_prior.pt",
+      "artifact_sha256": "0b2ad2c8093f87fd91a81ee2310fbaafe6c08ea36b342c54c98c80fc9a26e27c",
+      "report": "exp/egorecover_prior_data_budget/v1/train/D_s63/report.json",
+      "target_range": [
+        20,
+        200
+      ],
+      "frames": 2160
+    },
+    {
+      "training_seed": 64,
+      "artifact": "exp/egorecover_prior_data_budget/v1/train/D_s64/dev_prior.pt",
+      "artifact_sha256": "572e2bf1539ef526f5f47c8cbd54237e795af917962b8674a1ad00e4122df5bd",
+      "report": "exp/egorecover_prior_data_budget/v1/train/D_s64/report.json",
+      "target_range": [
+        20,
+        200
+      ],
+      "frames": 2160
+    }
+  ],
+  "interpretation": "Measures input-history sensitivity of new P; no claims of superiority to old P/CV/Hold on E7 history."
+}

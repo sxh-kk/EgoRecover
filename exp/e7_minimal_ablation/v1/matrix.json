@@ -1,0 +1,46 @@
+[
+  {
+    "id": "E0",
+    "inference_id": "E0",
+    "window": "offline",
+    "floor": "source",
+    "padding": "pad80",
+    "noise": "independent",
+    "encoder": "native",
+    "beta": "window",
+    "decoder": "native"
+  },
+  {
+    "id": "E1",
+    "inference_id": "E1",
+    "window": "causal",
+    "floor": "source",
+    "padding": "pad80",
+    "noise": "independent",
+    "encoder": "native",
+    "beta": "window",
+    "decoder": "native"
+  },
+  {
+    "id": "E2",
+    "inference_id": "E2",
+    "window": "offline",
+    "floor": "startup",
+    "padding": "pad80",
+    "noise": "independent",
+    "encoder": "native",
+    "beta": "window",
+    "decoder": "native"
+  },
+  {
+    "id": "E3",
+    "inference_id": "E3",
+    "window": "causal",
+    "floor": "startup",
+    "padding": "pad80",
+    "noise": "independent",
+    "encoder": "native",
+    "beta": "window",
+    "decoder": "native"
+  }
+]

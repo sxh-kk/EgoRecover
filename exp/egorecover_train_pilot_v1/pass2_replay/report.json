@@ -1,0 +1,586 @@
+{
+  "scope": "mixed_history_development_pilot",
+  "base_split": "train",
+  "history_source": "training mixture of GT and frozen-model predicted histories; model bootstrap only on train takes; dev diagnostic remains GT-history",
+  "floor_source": "startup_head_z_median_minus_training_mean_head_height",
+  "contact_floor_source": "annotation",
+  "metric": "single-step dense22 diagnostic; closed-loop FK selection only when explicitly requested",
+  "initialization": "exp/e7/last.ckpt",
+  "seed": 62,
+  "training_seed": 62,
+  "sampling_seed": 1062,
+  "split_manifest": "config/egorecover_train_pilot_split_v1.json",
+  "split_manifest_sha256": "ccca72e5c7446e1b03be8a650cc7bf2b5406b041cecb7d86f37066ccec6a3ae3",
+  "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+  "e7_weight_source": "ema",
+  "splits": {
+    "train": [
+      "fair_bike_08_10",
+      "georgiatech_bike_04_8",
+      "iiith_cooking_146_2",
+      "iiith_soccer_020_3",
+      "indiana_cooking_03_2",
+      "unc_basketball_03-31-23_02_23",
+      "uniandes_dance_013_19",
+      "uniandes_dance_020_50"
+    ],
+    "dev": [
+      "indiana_music_13_5",
+      "upenn_0725_Duet_Violin_1_2_8"
+    ],
+    "holdout": [
+      "sfu_basketball014_15",
+      "sfu_covid_001_12"
+    ]
+  },
+  "sigma": 1.0,
+  "nfe": 10,
+  "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+  "dataset_handoff": {
+    "code_root": "/gaozt-test1/guanzerong/EgoRecover/data_pipeline",
+    "completed_at": "2026-09-28T03:15:24.973655+00:00",
+    "datasets": [
+      {
+        "audit_report": "/gaozt-test1/guanzerong/EgoRecover/data/ee4d_mismatch_train_pilot_v1/audit/validation.json",
+        "base_split": "train",
+        "manifest": "/gaozt-test1/guanzerong/EgoRecover/data/ee4d_mismatch_train_pilot_v1/dev.jsonl",
+        "manifest_sha256": "80dbc245b0bf6603c4b9111a713fb7cfd4ca7ef4049de5599daa8324bd45dcfe",
+        "num_sequences": 12,
+        "num_takes": 12,
+        "num_variants": 84,
+        "path": "/gaozt-test1/guanzerong/EgoRecover/data/ee4d_mismatch_train_pilot_v1",
+        "physical_frames": 2400,
+        "profile": "pilot",
+        "purpose": "development",
+        "scope": "sampled_takes",
+        "spec_sha256": "fe78379e17e2d05e854440aaf46134c9ff378600c3fea8f0d8bdad1cb020d263"
+      }
+    ],
+    "message": "Audited official-train 12-take P/G development pilot; official val remains unused.",
+    "source_root": "/gaozt-test1/guanzerong/EgoRecover/data/ee4d_motion_uniegomotion",
+    "status": "complete",
+    "tests": {
+      "failed": 0,
+      "passed": 92,
+      "scope": "data_pipeline and EgoRecover local test suites"
+    },
+    "usage": "Official train development pilot only; holdout is withheld until settings are frozen."
+  },
+  "prior_steps": 400,
+  "flow_steps": 400,
+  "batch_size": 32,
+  "reference_mode": "planar",
+  "geometry_weight": 1.0,
+  "fk_weight": 0.0,
+  "bootstrap_cache_sha256": "324de02053dbcdb084c8c22bf05c7a999b7caec7dfd1c382bb005824dc616e8d",
+  "bootstrap_identity": {
+    "scope": "model_generated_clean_prefix_bootstraps",
+    "groups": [
+      "train",
+      "dev",
+      "holdout"
+    ],
+    "reference_mode": "planar",
+    "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+    "e7_weight_source": "ema",
+    "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+    "split_manifest_sha256": "ccca72e5c7446e1b03be8a650cc7bf2b5406b041cecb7d86f37066ccec6a3ae3",
+    "dataset_spec_sha256": "fe78379e17e2d05e854440aaf46134c9ff378600c3fea8f0d8bdad1cb020d263",
+    "sampling_seed": 1062,
+    "prefix_frames": 20,
+    "sampler": "FlowMatching Euler10"
+  },
+  "smplx_asset_sha256": "43d8f3a1375d7c5baae207870a5d51def0f7e6b507df709b4937598b5e7d965d",
+  "geometry_scale_m": 0.1,
+  "prior_selection": "dense",
+  "flow_selection": "closed_loop_fk",
+  "predicted_history_cache": {
+    "path": "exp/egorecover_train_pilot_v1/replay_cache/frames.pt",
+    "sha256": "a59841baa6485b8b2a94362be2b9e55bc65b5912288cb356c513dce6b9159680",
+    "identity": {
+      "scope": "training_only_predicted_histories",
+      "reference_mode": "planar",
+      "bootstrap": "frozen E7 clean first 20 frames on TRAINING takes; no resets",
+      "bootstrap_is_model": true,
+      "bootstrap_cache_sha256": "324de02053dbcdb084c8c22bf05c7a999b7caec7dfd1c382bb005824dc616e8d",
+      "bootstrap_identity": {
+        "scope": "model_generated_clean_prefix_bootstraps",
+        "groups": [
+          "train",
+          "dev",
+          "holdout"
+        ],
+        "reference_mode": "planar",
+        "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+        "e7_weight_source": "ema",
+        "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+        "split_manifest_sha256": "ccca72e5c7446e1b03be8a650cc7bf2b5406b041cecb7d86f37066ccec6a3ae3",
+        "dataset_spec_sha256": "fe78379e17e2d05e854440aaf46134c9ff378600c3fea8f0d8bdad1cb020d263",
+        "sampling_seed": 1062,
+        "prefix_frames": 20,
+        "sampler": "FlowMatching Euler10"
+      },
+      "policy": "a11 frozen P/G; pooled gaussian/history policies",
+      "generator_experiment": "exp/egorecover_train_pilot_v1/pass1",
+      "g_sha256": {
+        "gaussian": "7fda398557cbaeec99629ac81e449cdbdb0ba1b8fd0fb9e5f590048c9d6a321b",
+        "history": "856d078ba8c7d262143f2ed1d779a363e39937a986848aa25e8bc20cd66abbf1"
+      },
+      "p_sha256": "861cf2127fee75039afb415c2aa0bfebb1b0289475ceb3ec8016c3275342ff79",
+      "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+      "dataset_spec_sha256": "fe78379e17e2d05e854440aaf46134c9ff378600c3fea8f0d8bdad1cb020d263",
+      "split_manifest_sha256": "ccca72e5c7446e1b03be8a650cc7bf2b5406b041cecb7d86f37066ccec6a3ae3",
+      "train_takes": [
+        "fair_bike_08_10",
+        "georgiatech_bike_04_8",
+        "iiith_cooking_146_2",
+        "iiith_soccer_020_3",
+        "indiana_cooking_03_2",
+        "unc_basketball_03-31-23_02_23",
+        "uniandes_dance_013_19",
+        "uniandes_dance_020_50"
+      ],
+      "variants": [
+        "clean",
+        "freeze_3s",
+        "drift_0p03mps"
+      ],
+      "seed": 62,
+      "sigma": 1.0,
+      "nfe": 10
+    },
+    "frames": 8640,
+    "sample_probability": 0.5
+  },
+  "init_experiment": "exp/egorecover_train_pilot_v1/pass1",
+  "sources": {
+    "gaussian": {
+      "dev_loss_before": 0.05812112241983414,
+      "dev_loss_after": 0.12701186537742615,
+      "selected_step": 200,
+      "curve": [
+        {
+          "step": 20,
+          "train_loss": 1.007234811782837
+        },
+        {
+          "step": 40,
+          "train_loss": 0.8366323709487915
+        },
+        {
+          "step": 60,
+          "train_loss": 0.5045925378799438
+        },
+        {
+          "step": 80,
+          "train_loss": 0.7114723920822144
+        },
+        {
+          "step": 100,
+          "train_loss": 1.0237685441970825
+        },
+        {
+          "step": 120,
+          "train_loss": 0.5357459187507629
+        },
+        {
+          "step": 140,
+          "train_loss": 0.48929494619369507
+        },
+        {
+          "step": 160,
+          "train_loss": 0.6973422765731812
+        },
+        {
+          "step": 180,
+          "train_loss": 0.669709324836731
+        },
+        {
+          "step": 200,
+          "train_loss": 0.5401865243911743
+        },
+        {
+          "step": 200,
+          "train_loss": 0.5401865243911743,
+          "dev_sample_closed_loop_fk22_mm": 284.70999747514725
+        },
+        {
+          "step": 220,
+          "train_loss": 0.48354578018188477
+        },
+        {
+          "step": 240,
+          "train_loss": 0.3862564265727997
+        },
+        {
+          "step": 260,
+          "train_loss": 0.31238582730293274
+        },
+        {
+          "step": 280,
+          "train_loss": 0.39169710874557495
+        },
+        {
+          "step": 300,
+          "train_loss": 0.4855928421020508
+        },
+        {
+          "step": 320,
+          "train_loss": 0.4834187924861908
+        },
+        {
+          "step": 340,
+          "train_loss": 0.47335952520370483
+        },
+        {
+          "step": 360,
+          "train_loss": 0.5275061130523682
+        },
+        {
+          "step": 380,
+          "train_loss": 0.3094152808189392
+        },
+        {
+          "step": 400,
+          "train_loss": 0.4050997197628021
+        },
+        {
+          "step": 400,
+          "train_loss": 0.4050997197628021,
+          "dev_sample_closed_loop_fk22_mm": 347.44125604629517
+        }
+      ],
+      "dense22_mm_per_action": {
+        "a11": 130.00930786132812,
+        "a10": 133.03970336914062,
+        "a01": 164.48880004882812,
+        "a00": 164.30877685546875
+      },
+      "dense22_oracle_gap_mm": 6.708164215087891,
+      "oracle_action_counts": [
+        30,
+        22,
+        6,
+        6
+      ],
+      "checkpoint_sha256": "0daed794221d5cf5a82aaa959f6e47ee227b18725f45d6dc1affaf64a3bb5ee1"
+    },
+    "history": {
+      "dev_loss_before": 0.06764783710241318,
+      "dev_loss_after": 0.17343130707740784,
+      "selected_step": 400,
+      "curve": [
+        {
+          "step": 20,
+          "train_loss": 1.071987509727478
+        },
+        {
+          "step": 40,
+          "train_loss": 1.025525450706482
+        },
+        {
+          "step": 60,
+          "train_loss": 0.6119489669799805
+        },
+        {
+          "step": 80,
+          "train_loss": 0.69320148229599
+        },
+        {
+          "step": 100,
+          "train_loss": 0.9212515950202942
+        },
+        {
+          "step": 120,
+          "train_loss": 0.5826190710067749
+        },
+        {
+          "step": 140,
+          "train_loss": 0.5382187366485596
+        },
+        {
+          "step": 160,
+          "train_loss": 0.777951717376709
+        },
+        {
+          "step": 180,
+          "train_loss": 0.6480652093887329
+        },
+        {
+          "step": 200,
+          "train_loss": 0.5638742446899414
+        },
+        {
+          "step": 200,
+          "train_loss": 0.5638742446899414,
+          "dev_sample_closed_loop_fk22_mm": 400.10641515254974
+        },
+        {
+          "step": 220,
+          "train_loss": 0.5448411107063293
+        },
+        {
+          "step": 240,
+          "train_loss": 0.4304264783859253
+        },
+        {
+          "step": 260,
+          "train_loss": 0.31665098667144775
+        },
+        {
+          "step": 280,
+          "train_loss": 0.3992329239845276
+        },
+        {
+          "step": 300,
+          "train_loss": 0.4297213554382324
+        },
+        {
+          "step": 320,
+          "train_loss": 0.5102812647819519
+        },
+        {
+          "step": 340,
+          "train_loss": 0.5557332634925842
+        },
+        {
+          "step": 360,
+          "train_loss": 0.5011228322982788
+        },
+        {
+          "step": 380,
+          "train_loss": 0.3842167854309082
+        },
+        {
+          "step": 400,
+          "train_loss": 0.3596307039260864
+        },
+        {
+          "step": 400,
+          "train_loss": 0.3596307039260864,
+          "dev_sample_closed_loop_fk22_mm": 260.0380852818489
+        }
+      ],
+      "dense22_mm_per_action": {
+        "a11": 143.6683807373047,
+        "a10": 144.6030731201172,
+        "a01": 137.71258544921875,
+        "a00": 137.3912811279297
+      },
+      "dense22_oracle_gap_mm": 11.597051620483398,
+      "oracle_action_counts": [
+        14,
+        7,
+        19,
+        24
+      ],
+      "checkpoint_sha256": "8c79b7e18b13e870693f2183c79d97f6746d07230c8a9216d822945a3976d245"
+    }
+  },
+  "evaluation_history_source": "predicted history for G checkpoint selection; GT single-step metrics remain diagnostics",
+  "floor_diagnostics": {
+    "uniandes_dance_020_50": {
+      "estimate_m": -1.265808343887329,
+      "annotation_m_for_offline_comparison_only": -1.3067352867126465,
+      "error_m": 0.04092694282531739
+    },
+    "indiana_cooking_03_2": {
+      "estimate_m": -1.2870607376098633,
+      "annotation_m_for_offline_comparison_only": -1.3723837232589722,
+      "error_m": 0.0853229856491089
+    },
+    "georgiatech_bike_04_8": {
+      "estimate_m": -1.6202174425125122,
+      "annotation_m_for_offline_comparison_only": -1.372605094909668,
+      "error_m": -0.24761234760284423
+    },
+    "unc_basketball_03-31-23_02_23": {
+      "estimate_m": -1.2069438695907593,
+      "annotation_m_for_offline_comparison_only": -1.3989343738555908,
+      "error_m": 0.19199050426483155
+    },
+    "iiith_soccer_020_3": {
+      "estimate_m": -1.375417709350586,
+      "annotation_m_for_offline_comparison_only": -1.4758985137939453,
+      "error_m": 0.10048080444335938
+    },
+    "uniandes_dance_013_19": {
+      "estimate_m": -1.32793390750885,
+      "annotation_m_for_offline_comparison_only": -1.3359756565093994,
+      "error_m": 0.008041749000549325
+    },
+    "iiith_cooking_146_2": {
+      "estimate_m": -1.2313851118087769,
+      "annotation_m_for_offline_comparison_only": -1.3770313358306885,
+      "error_m": 0.14564622402191163
+    },
+    "fair_bike_08_10": {
+      "estimate_m": -1.3578022718429565,
+      "annotation_m_for_offline_comparison_only": -1.6219909286499024,
+      "error_m": 0.2641886568069458
+    },
+    "upenn_0725_Duet_Violin_1_2_8": {
+      "estimate_m": -1.6818313598632812,
+      "annotation_m_for_offline_comparison_only": -1.3496344184875488,
+      "error_m": -0.3321969413757324
+    },
+    "indiana_music_13_5": {
+      "estimate_m": -1.2052743434906006,
+      "annotation_m_for_offline_comparison_only": -1.1467805004119873,
+      "error_m": -0.05849384307861327
+    }
+  },
+  "prior": {
+    "baseline_dev_loss": 0.01720714010298252,
+    "selected_dev_loss": 0.01720714010298252,
+    "baseline_dev_dense22_mm": 8.470537185668945,
+    "selected_dev_dense22_mm": 8.470537185668945,
+    "baseline_dev_fk22_mm": 9.91746997833252,
+    "selected_dev_fk22_mm": 9.91746997833252,
+    "selected_step": 0,
+    "curve": [
+      {
+        "step": 20,
+        "train_loss": 2.4932777881622314,
+        "dev_loss": 0.137898251414299,
+        "dev_dense22_mm": 78.79961395263672,
+        "dev_fk22_mm": 77.09706115722656
+      },
+      {
+        "step": 40,
+        "train_loss": 2.813492774963379,
+        "dev_loss": 0.18349210917949677,
+        "dev_dense22_mm": 63.80583953857422,
+        "dev_fk22_mm": 60.643775939941406
+      },
+      {
+        "step": 60,
+        "train_loss": 2.180804967880249,
+        "dev_loss": 0.14761021733283997,
+        "dev_dense22_mm": 65.83836364746094,
+        "dev_fk22_mm": 67.48950958251953
+      },
+      {
+        "step": 80,
+        "train_loss": 2.479191541671753,
+        "dev_loss": 0.14041733741760254,
+        "dev_dense22_mm": 77.71625518798828,
+        "dev_fk22_mm": 73.9491958618164
+      },
+      {
+        "step": 100,
+        "train_loss": 1.557124376296997,
+        "dev_loss": 0.18438149988651276,
+        "dev_dense22_mm": 70.78699493408203,
+        "dev_fk22_mm": 64.44212341308594
+      },
+      {
+        "step": 120,
+        "train_loss": 2.3920326232910156,
+        "dev_loss": 0.11967103183269501,
+        "dev_dense22_mm": 66.03883361816406,
+        "dev_fk22_mm": 57.00994110107422
+      },
+      {
+        "step": 140,
+        "train_loss": 2.1983628273010254,
+        "dev_loss": 0.2730490565299988,
+        "dev_dense22_mm": 83.63328552246094,
+        "dev_fk22_mm": 80.18582916259766
+      },
+      {
+        "step": 160,
+        "train_loss": 1.910441517829895,
+        "dev_loss": 0.3130388557910919,
+        "dev_dense22_mm": 104.31733703613281,
+        "dev_fk22_mm": 98.67460632324219
+      },
+      {
+        "step": 180,
+        "train_loss": 1.3793056011199951,
+        "dev_loss": 0.23369461297988892,
+        "dev_dense22_mm": 80.937255859375,
+        "dev_fk22_mm": 76.7320785522461
+      },
+      {
+        "step": 200,
+        "train_loss": 1.9357149600982666,
+        "dev_loss": 0.3155491054058075,
+        "dev_dense22_mm": 107.71435546875,
+        "dev_fk22_mm": 100.26873016357422
+      },
+      {
+        "step": 220,
+        "train_loss": 1.1564148664474487,
+        "dev_loss": 0.26033949851989746,
+        "dev_dense22_mm": 93.03597259521484,
+        "dev_fk22_mm": 82.94404602050781
+      },
+      {
+        "step": 240,
+        "train_loss": 1.6328158378601074,
+        "dev_loss": 0.3681699335575104,
+        "dev_dense22_mm": 108.95663452148438,
+        "dev_fk22_mm": 108.08349609375
+      },
+      {
+        "step": 260,
+        "train_loss": 1.5436136722564697,
+        "dev_loss": 0.3882240355014801,
+        "dev_dense22_mm": 121.95185852050781,
+        "dev_fk22_mm": 112.09444427490234
+      },
+      {
+        "step": 280,
+        "train_loss": 1.9315485954284668,
+        "dev_loss": 0.2574129104614258,
+        "dev_dense22_mm": 106.85167694091797,
+        "dev_fk22_mm": 100.65994262695312
+      },
+      {
+        "step": 300,
+        "train_loss": 1.544151782989502,
+        "dev_loss": 0.28359898924827576,
+        "dev_dense22_mm": 94.29244995117188,
+        "dev_fk22_mm": 88.36885070800781
+      },
+      {
+        "step": 320,
+        "train_loss": 0.9511990547180176,
+        "dev_loss": 0.3388824462890625,
+        "dev_dense22_mm": 106.2975082397461,
+        "dev_fk22_mm": 101.14310455322266
+      },
+      {
+        "step": 340,
+        "train_loss": 1.2895647287368774,
+        "dev_loss": 0.3668076694011688,
+        "dev_dense22_mm": 103.78121948242188,
+        "dev_fk22_mm": 101.65623474121094
+      },
+      {
+        "step": 360,
+        "train_loss": 1.5422337055206299,
+        "dev_loss": 0.3943145275115967,
+        "dev_dense22_mm": 98.28520965576172,
+        "dev_fk22_mm": 102.35807800292969
+      },
+      {
+        "step": 380,
+        "train_loss": 1.246304988861084,
+        "dev_loss": 0.2221599966287613,
+        "dev_dense22_mm": 81.3512191772461,
+        "dev_fk22_mm": 83.6882553100586
+      },
+      {
+        "step": 400,
+        "train_loss": 1.8954912424087524,
+        "dev_loss": 0.3359898030757904,
+        "dev_dense22_mm": 103.36683654785156,
+        "dev_fk22_mm": 101.25131225585938
+      }
+    ]
+  },
+  "elapsed_seconds": 474.45358034875244,
+  "completed": true
+}

@@ -39,6 +39,14 @@ def parse_experiments(values):
     return experiments
 
 
+def experiment_weight_hashes(experiments, source_modes):
+    """Hash exactly the checkpoints load_model uses, including prior-only's G."""
+    sources = {"gaussian" if mode == "prior_only" else mode for mode in source_modes}
+    names = ("prior.pt", *(f"g_{source}.pt" for source in sorted(sources)), "report.json")
+    return {label: {name: file_sha256(path / name) for name in names}
+            for label, path in experiments.items()}
+
+
 def load_model(experiment, mode, *, device, stats_sha256, e7_sha256, reference_mode):
     report = json.loads((experiment / "report.json").read_text())
     if not report.get("completed") or report["stats_sha256"] != stats_sha256 or report["e7_checkpoint_sha256"] != e7_sha256:
@@ -175,11 +183,7 @@ def main():
     if args.include_frozen_e7:
         model_cases.append(("frozen_e7", None, "gaussian"))
     identity = {key: value for key, value in report.items() if key not in ("completed", "results")}
-    identity["weights"] = {
-        label: {name: file_sha256(path / name) for name in
-                ("prior.pt", "g_gaussian.pt", "g_history.pt", "report.json")}
-        for label, path in experiments.items()
-    }
+    identity["weights"] = experiment_weight_hashes(experiments, args.source_modes)
     root = Path(__file__).resolve().parents[1]
     identity["smplx_asset_sha256"] = file_sha256(
         Path(os.environ.get("SMPLX_MODEL_PATH", root / "body_models/smplx")) / "SMPLX_NEUTRAL.npz"

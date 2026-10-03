@@ -1,0 +1,25 @@
+2026-09-28T18:29:57.831588+00:00 Existing EgoRecover dependencies: {'exp/egorecover_stages_1_4/continuation_v1/queue.json': {'status': 'running', 'ready': False}, 'exp/egorecover_loss_ablation/g00_g11_v1/queue.json': {'status': 'running', 'ready': False}}
+2026-09-28T19:30:58.577803+00:00 Existing EgoRecover dependencies: {'exp/egorecover_stages_1_4/continuation_v1/queue.json': {'status': 'running', 'ready': False}, 'exp/egorecover_loss_ablation/g00_g11_v1/queue.json': {'status': 'failed', 'ready': False}}
+2026-09-28T21:35:00.664134+00:00 Existing EgoRecover dependencies: {'exp/egorecover_stages_1_4/continuation_v1/queue.json': {'status': 'complete', 'ready': True}, 'exp/egorecover_loss_ablation/g00_g11_v1/queue.json': {'status': 'failed', 'ready': False}}
+2026-09-29T04:02:06.937491+00:00 Existing EgoRecover dependencies: {'exp/egorecover_stages_1_4/continuation_v1/queue.json': {'status': 'complete', 'ready': True}, 'exp/egorecover_loss_ablation/g00_g11_v1/queue.json': {'status': 'waiting_for_gpu_memory', 'ready': False}}
+2026-09-29T04:02:36.941784+00:00 Existing EgoRecover dependencies: {'exp/egorecover_stages_1_4/continuation_v1/queue.json': {'status': 'complete', 'ready': True}, 'exp/egorecover_loss_ablation/g00_g11_v1/queue.json': {'status': 'running', 'ready': False}}
+2026-09-29T04:08:44.203474+00:00 Existing EgoRecover dependencies: {'exp/egorecover_stages_1_4/continuation_v1/queue.json': {'status': 'complete', 'ready': True}}
+2026-09-29T04:09:14.415730+00:00 Started prepare_data on GPU4, PID 2021091, log exp/egorecover_prior_two_forward/v1/jobs/prepare_data.1.log
+2026-09-29T04:18:38.356550+00:00 Existing EgoRecover dependencies: {'exp/egorecover_stages_1_4/continuation_v1/queue.json': {'status': 'complete', 'ready': True}}
+2026-09-29T04:19:08.660709+00:00 Started A_gt_dense_s62 on GPU0, PID 2025351, log exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s62.1.log
+2026-09-29T04:19:08.669402+00:00 Started B_two_forward_dense_s62 on GPU1, PID 2025352, log exp/egorecover_prior_two_forward/v1/jobs/B_two_forward_dense_s62.1.log
+2026-09-29T04:19:08.677500+00:00 Started C_gt_fk_s62 on GPU2, PID 2025353, log exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s62.1.log
+2026-09-29T04:19:08.684491+00:00 Started D_two_forward_fk_s62 on GPU3, PID 2025354, log exp/egorecover_prior_two_forward/v1/jobs/D_two_forward_fk_s62.1.log
+2026-09-29T04:23:09.671891+00:00 A_gt_dense_s62: complete
+2026-09-29T04:25:40.335263+00:00 C_gt_fk_s62: complete
+2026-09-29T04:26:40.684414+00:00 B_two_forward_dense_s62: complete
+2026-09-29T04:27:45.373301+00:00 Existing EgoRecover dependencies: {'exp/egorecover_stages_1_4/continuation_v1/queue.json': {'status': 'complete', 'ready': True}}
+2026-09-29T04:29:46.747817+00:00 D_two_forward_fk_s62: complete
+2026-09-29T04:29:47.308567+00:00 Started A_gt_dense_s63 on GPU0, PID 2029486, log exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s63.1.log
+2026-09-29T04:29:47.318447+00:00 Started C_gt_fk_s63 on GPU1, PID 2029487, log exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s63.1.log
+2026-09-29T04:29:47.333471+00:00 Started A_gt_dense_s64 on GPU2, PID 2029488, log exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s64.1.log
+2026-09-29T04:29:47.342615+00:00 Started C_gt_fk_s64 on GPU3, PID 2029489, log exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s64.1.log
+2026-09-29T04:33:18.179567+00:00 A_gt_dense_s63: complete
+2026-09-29T04:33:18.263337+00:00 A_gt_dense_s64: complete
+2026-09-29T04:36:19.040329+00:00 C_gt_fk_s63: complete
+2026-09-29T04:36:19.295479+00:00 C_gt_fk_s64: complete

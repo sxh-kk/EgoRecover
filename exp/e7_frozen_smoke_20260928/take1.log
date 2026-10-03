@@ -1,0 +1,30 @@
+START uniandes_dance_024_45: shared E7 EMA startup ready
+ROLLOUT uniandes_dance_024_45/a11/clean
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1/a11_clean.pt: 180 predicted frames
+ROLLOUT uniandes_dance_024_45/a11/freeze_3s
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1/a11_freeze_3s.pt: 180 predicted frames
+ROLLOUT uniandes_dance_024_45/a11/drift_0p03mps
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1/a11_drift_0p03mps.pt: 180 predicted frames
+ROLLOUT uniandes_dance_024_45/a10/clean
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1/a10_clean.pt: 180 predicted frames
+ROLLOUT uniandes_dance_024_45/a10/freeze_3s
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1/a10_freeze_3s.pt: 180 predicted frames
+ROLLOUT uniandes_dance_024_45/a10/drift_0p03mps
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1/a10_drift_0p03mps.pt: 180 predicted frames
+ROLLOUT uniandes_dance_024_45/a01/clean
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1/a01_clean.pt: 180 predicted frames
+ROLLOUT uniandes_dance_024_45/a01/freeze_3s
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1/a01_freeze_3s.pt: 180 predicted frames
+ROLLOUT uniandes_dance_024_45/a01/drift_0p03mps
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1/a01_drift_0p03mps.pt: 180 predicted frames
+2026-09-28 01:06:55.166 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+FK a11/clean: 272.42 mm
+FK a11/freeze_3s: 289.73 mm
+FK a11/drift_0p03mps: 262.78 mm
+FK a10/clean: 2964.88 mm
+FK a10/freeze_3s: 3080.19 mm
+FK a10/drift_0p03mps: 2964.88 mm
+FK a01/clean: 513.43 mm
+FK a01/freeze_3s: 513.43 mm
+FK a01/drift_0p03mps: 364.19 mm
+COMPLETE /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1/report.json

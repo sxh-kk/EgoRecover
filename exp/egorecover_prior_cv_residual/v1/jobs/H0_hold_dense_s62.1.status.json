@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.train_prior_cv_residual",
+    "--data",
+    "exp/egorecover_prior_two_forward/v1/data",
+    "--output",
+    "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62",
+    "--base-mode",
+    "hold",
+    "--fk-weight",
+    "0",
+    "--seed",
+    "62",
+    "--baselines"
+  ],
+  "gpu": 4,
+  "pid": 2065098,
+  "started_at": "2026-09-29T06:20:37.527867+00:00",
+  "exit_code": 0,
+  "child_pid": 2065334,
+  "ended_at": "2026-09-29T06:23:10.308065+00:00"
+}

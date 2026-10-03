@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.train_prior_two_forward",
+    "--data",
+    "exp/egorecover_prior_two_forward/v1/data",
+    "--output",
+    "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64",
+    "--fk-weight",
+    "0",
+    "--seed",
+    "64"
+  ],
+  "gpu": 2,
+  "pid": 2029488,
+  "started_at": "2026-09-29T04:29:48.421329+00:00",
+  "exit_code": 0,
+  "child_pid": 2029528,
+  "ended_at": "2026-09-29T04:33:13.742858+00:00"
+}

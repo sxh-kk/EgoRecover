@@ -1,0 +1,595 @@
+{
+  "started_at": "2026-10-02T23:10:14.753311+08:00",
+  "finished_at": "2026-10-02T23:10:17.809392+08:00",
+  "root": "/gaozt-test1/sxh/EgoRecover",
+  "scope": "All regular files/symlinks under root including .git; no symlink traversal; excludes this audit output. No uploads, archive construction, file deletion or checkpoint loading.",
+  "file_count": 14878,
+  "symlink_count": 4,
+  "path_logical_bytes": 152759097888,
+  "unique_inode_logical_bytes": 152759097888,
+  "unique_inode_allocated_bytes": 152783522304,
+  "by_category": {
+    "local_git": {
+      "files": 131,
+      "logical_bytes": 14065109,
+      "allocated_bytes": 14125056,
+      "symlinks": 0
+    },
+    "github_source": {
+      "files": 223,
+      "logical_bytes": 1748605,
+      "allocated_bytes": 1939456,
+      "symlinks": 0
+    },
+    "local_ephemeral": {
+      "files": 313,
+      "logical_bytes": 3120888,
+      "allocated_bytes": 3853312,
+      "symlinks": 0
+    },
+    "restricted_smplx": {
+      "files": 1,
+      "logical_bytes": 137106406,
+      "allocated_bytes": 137109504,
+      "symlinks": 0
+    },
+    "personal_review": {
+      "files": 8,
+      "logical_bytes": 358659,
+      "allocated_bytes": 385024,
+      "symlinks": 0
+    },
+    "derived_dataset_review": {
+      "files": 671,
+      "logical_bytes": 7122759,
+      "allocated_bytes": 11364864,
+      "symlinks": 0
+    },
+    "external_dataset_reference": {
+      "files": 8,
+      "logical_bytes": 38151555941,
+      "allocated_bytes": 38151585792,
+      "symlinks": 0
+    },
+    "github_experiment_metadata": {
+      "files": 992,
+      "logical_bytes": 57513373,
+      "allocated_bytes": 58390016,
+      "symlinks": 0
+    },
+    "baseline_checkpoint_review": {
+      "files": 1,
+      "logical_bytes": 1417277447,
+      "allocated_bytes": 1417281536,
+      "symlinks": 0
+    },
+    "hf_tensor_artifacts_review": {
+      "files": 2286,
+      "logical_bytes": 6054040119,
+      "allocated_bytes": 6060965888,
+      "symlinks": 0
+    },
+    "hf_logs_private": {
+      "files": 183,
+      "logical_bytes": 10074443,
+      "allocated_bytes": 10440192,
+      "symlinks": 0
+    },
+    "hf_cache_review": {
+      "files": 9698,
+      "logical_bytes": 11157092087,
+      "allocated_bytes": 11166926848,
+      "symlinks": 2
+    },
+    "hf_model_checkpoints": {
+      "files": 202,
+      "logical_bytes": 40474207509,
+      "allocated_bytes": 40474927104,
+      "symlinks": 0
+    },
+    "hf_training_resume": {
+      "files": 77,
+      "logical_bytes": 55249790475,
+      "allocated_bytes": 55249993728,
+      "symlinks": 0
+    },
+    "hf_other_artifacts_review": {
+      "files": 11,
+      "logical_bytes": 2384622,
+      "allocated_bytes": 2433024,
+      "symlinks": 2
+    },
+    "hf_source_snapshots": {
+      "files": 44,
+      "logical_bytes": 353094,
+      "allocated_bytes": 455168,
+      "symlinks": 0
+    },
+    "github_verification": {
+      "files": 20,
+      "logical_bytes": 2012422,
+      "allocated_bytes": 2037248,
+      "symlinks": 0
+    },
+    "local_verification_binary": {
+      "files": 9,
+      "logical_bytes": 19273930,
+      "allocated_bytes": 19308544,
+      "symlinks": 0
+    }
+  },
+  "by_top_directory": {
+    ".git": {
+      "files": 131,
+      "logical_bytes": 14065109,
+      "allocated_bytes": 14125056,
+      "symlinks": 0
+    },
+    "(root)": {
+      "files": 10,
+      "logical_bytes": 219089,
+      "allocated_bytes": 28160,
+      "symlinks": 0
+    },
+    ".pytest_cache": {
+      "files": 5,
+      "logical_bytes": 17029,
+      "allocated_bytes": 26624,
+      "symlinks": 0
+    },
+    "body_models": {
+      "files": 1,
+      "logical_bytes": 137106406,
+      "allocated_bytes": 137109504,
+      "symlinks": 0
+    },
+    "config": {
+      "files": 13,
+      "logical_bytes": 30792,
+      "allocated_bytes": 29696,
+      "symlinks": 0
+    },
+    "data": {
+      "files": 679,
+      "logical_bytes": 38158678700,
+      "allocated_bytes": 38162950656,
+      "symlinks": 0
+    },
+    "data_pipeline": {
+      "files": 39,
+      "logical_bytes": 369931,
+      "allocated_bytes": 426496,
+      "symlinks": 0
+    },
+    "dataset": {
+      "files": 21,
+      "logical_bytes": 161695,
+      "allocated_bytes": 207872,
+      "symlinks": 0
+    },
+    "docs": {
+      "files": 22,
+      "logical_bytes": 247219,
+      "allocated_bytes": 304128,
+      "symlinks": 0
+    },
+    "egorecover": {
+      "files": 83,
+      "logical_bytes": 564611,
+      "allocated_bytes": 724992,
+      "symlinks": 0
+    },
+    "eval": {
+      "files": 24,
+      "logical_bytes": 158493,
+      "allocated_bytes": 209920,
+      "symlinks": 0
+    },
+    "exp": {
+      "files": 13538,
+      "logical_bytes": 114422733201,
+      "allocated_bytes": 114441815552,
+      "symlinks": 4
+    },
+    "model": {
+      "files": 17,
+      "logical_bytes": 72290,
+      "allocated_bytes": 94208,
+      "symlinks": 0
+    },
+    "module": {
+      "files": 12,
+      "logical_bytes": 68693,
+      "allocated_bytes": 84480,
+      "symlinks": 0
+    },
+    "mydiffusion": {
+      "files": 6,
+      "logical_bytes": 38625,
+      "allocated_bytes": 58880,
+      "symlinks": 0
+    },
+    "run": {
+      "files": 129,
+      "logical_bytes": 1762221,
+      "allocated_bytes": 2179072,
+      "symlinks": 0
+    },
+    "tests": {
+      "files": 91,
+      "logical_bytes": 1000935,
+      "allocated_bytes": 1224192,
+      "symlinks": 0
+    },
+    "tools": {
+      "files": 2,
+      "logical_bytes": 21259,
+      "allocated_bytes": 24576,
+      "symlinks": 0
+    },
+    "utils": {
+      "files": 19,
+      "logical_bytes": 151592,
+      "allocated_bytes": 183808,
+      "symlinks": 0
+    },
+    "verification": {
+      "files": 29,
+      "logical_bytes": 21286352,
+      "allocated_bytes": 21345792,
+      "symlinks": 0
+    },
+    "图片和附件": {
+      "files": 7,
+      "logical_bytes": 343646,
+      "allocated_bytes": 368640,
+      "symlinks": 0
+    }
+  },
+  "by_extension": {
+    "(none)": {
+      "files": 119,
+      "logical_bytes": 635134,
+      "allocated_bytes": 701952,
+      "symlinks": 4
+    },
+    ".sample": {
+      "files": 13,
+      "logical_bytes": 23442,
+      "allocated_bytes": 22016,
+      "symlinks": 0
+    },
+    ".idx": {
+      "files": 1,
+      "logical_bytes": 16304,
+      "allocated_bytes": 16384,
+      "symlinks": 0
+    },
+    ".pack": {
+      "files": 1,
+      "logical_bytes": 13407012,
+      "allocated_bytes": 13410304,
+      "symlinks": 0
+    },
+    ".worktree": {
+      "files": 1,
+      "logical_bytes": 58,
+      "allocated_bytes": 512,
+      "symlinks": 0
+    },
+    ".tag": {
+      "files": 1,
+      "logical_bytes": 191,
+      "allocated_bytes": 512,
+      "symlinks": 0
+    },
+    ".md": {
+      "files": 49,
+      "logical_bytes": 526548,
+      "allocated_bytes": 379904,
+      "symlinks": 0
+    },
+    ".npz": {
+      "files": 639,
+      "logical_bytes": 143357057,
+      "allocated_bytes": 147562496,
+      "symlinks": 0
+    },
+    ".pyc": {
+      "files": 264,
+      "logical_bytes": 3103827,
+      "allocated_bytes": 3824640,
+      "symlinks": 0
+    },
+    ".py": {
+      "files": 236,
+      "logical_bytes": 1749538,
+      "allocated_bytes": 2228224,
+      "symlinks": 0
+    },
+    ".yaml": {
+      "files": 2,
+      "logical_bytes": 3210,
+      "allocated_bytes": 1024,
+      "symlinks": 0
+    },
+    ".json": {
+      "files": 5870,
+      "logical_bytes": 110694751,
+      "allocated_bytes": 110392832,
+      "symlinks": 0
+    },
+    ".jsonl": {
+      "files": 9,
+      "logical_bytes": 726256,
+      "allocated_bytes": 761856,
+      "symlinks": 0
+    },
+    ".pt": {
+      "files": 7389,
+      "logical_bytes": 147144247312,
+      "allocated_bytes": 147163095040,
+      "symlinks": 0
+    },
+    ".pkl": {
+      "files": 13,
+      "logical_bytes": 3909581530,
+      "allocated_bytes": 3909632000,
+      "symlinks": 0
+    },
+    ".xml": {
+      "files": 4,
+      "logical_bytes": 24803,
+      "allocated_bytes": 25600,
+      "symlinks": 0
+    },
+    ".yml": {
+      "files": 1,
+      "logical_bytes": 364,
+      "allocated_bytes": 512,
+      "symlinks": 0
+    },
+    ".ckpt": {
+      "files": 1,
+      "logical_bytes": 1417277447,
+      "allocated_bytes": 1417281536,
+      "symlinks": 0
+    },
+    ".log": {
+      "files": 191,
+      "logical_bytes": 10083719,
+      "allocated_bytes": 10444288,
+      "symlinks": 0
+    },
+    ".lock": {
+      "files": 40,
+      "logical_bytes": 0,
+      "allocated_bytes": 0,
+      "symlinks": 0
+    },
+    ".pid": {
+      "files": 4,
+      "logical_bytes": 32,
+      "allocated_bytes": 2048,
+      "symlinks": 0
+    },
+    ".pdf": {
+      "files": 8,
+      "logical_bytes": 220980,
+      "allocated_bytes": 262144,
+      "symlinks": 0
+    },
+    ".png": {
+      "files": 16,
+      "logical_bytes": 3414793,
+      "allocated_bytes": 3473408,
+      "symlinks": 0
+    },
+    ".toml": {
+      "files": 1,
+      "logical_bytes": 80,
+      "allocated_bytes": 512,
+      "symlinks": 0
+    },
+    ".txt": {
+      "files": 4,
+      "logical_bytes": 2124,
+      "allocated_bytes": 2048,
+      "symlinks": 0
+    },
+    ".npy": {
+      "files": 1,
+      "logical_bytes": 1376,
+      "allocated_bytes": 512,
+      "symlinks": 0
+    }
+  },
+  "top_30_files": [
+    {
+      "path": "data/ee4d_motion_uniegomotion/uniegomotion/egoview_dinov2_train.pt",
+      "size_bytes": 21824737142,
+      "category": "external_dataset_reference"
+    },
+    {
+      "path": "data/ee4d_motion_uniegomotion/uniegomotion/ee_train.pt",
+      "size_bytes": 6833936016,
+      "category": "external_dataset_reference"
+    },
+    {
+      "path": "data/ee4d_motion_uniegomotion/uniegomotion/egoview_dinov2_val.pt",
+      "size_bytes": 6471944981,
+      "category": "external_dataset_reference"
+    },
+    {
+      "path": "data/ee4d_motion_uniegomotion/uniegomotion/ee_val.pt",
+      "size_bytes": 2097615842,
+      "category": "external_dataset_reference"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R0/seed62/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R0/seed63/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R0/seed64/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R1/seed62/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R1/seed63/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R1/seed64/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R2/seed62/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R2/seed63/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R2/seed64/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R3/seed62/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R3/seed63/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R3/seed64/resume.pt",
+      "size_bytes": 1463129164,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R0_smoke/resume.pt",
+      "size_bytes": 1463093772,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R1_smoke/resume.pt",
+      "size_bytes": 1463093772,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R2_smoke/resume.pt",
+      "size_bytes": 1463093772,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R3_smoke/resume.pt",
+      "size_bytes": 1463093772,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/T0/seed62/resume.pt",
+      "size_bytes": 1462906632,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/T0/seed63/resume.pt",
+      "size_bytes": 1462906632,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/T0/seed64/resume.pt",
+      "size_bytes": 1462906632,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/T1/seed62/resume.pt",
+      "size_bytes": 1462906632,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/T1/seed63/resume.pt",
+      "size_bytes": 1462906632,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/T1/seed64/resume.pt",
+      "size_bytes": 1462906632,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/T2/seed62/resume.pt",
+      "size_bytes": 1462906632,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/T2/seed63/resume.pt",
+      "size_bytes": 1462906632,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/T2/seed64/resume.pt",
+      "size_bytes": 1462906632,
+      "category": "hf_training_resume"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/T3/seed62/resume.pt",
+      "size_bytes": 1462906632,
+      "category": "hf_training_resume"
+    }
+  ],
+  "hardlink_groups": [],
+  "links": [
+    {
+      "path": "exp/egorecover_observation_reference/v1/data",
+      "target": "/gaozt-test1/sxh/EgoRecover/exp/egorecover_g_pretraining/v1/data",
+      "resolved_target": "/gaozt-test1/sxh/EgoRecover/exp/egorecover_g_pretraining/v1/data",
+      "exists": true,
+      "internal": true
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/prior",
+      "target": "/gaozt-test1/sxh/EgoRecover/exp/egorecover_g_pretraining/v1/prior",
+      "resolved_target": "/gaozt-test1/sxh/EgoRecover/exp/egorecover_g_pretraining/v1/prior",
+      "exists": true,
+      "internal": true
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/data",
+      "target": "/gaozt-test1/sxh/EgoRecover/exp/egorecover_g_pretraining/v1/data",
+      "resolved_target": "/gaozt-test1/sxh/EgoRecover/exp/egorecover_g_pretraining/v1/data",
+      "exists": true,
+      "internal": true
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/prior",
+      "target": "/gaozt-test1/sxh/EgoRecover/exp/egorecover_g_pretraining/v1/prior",
+      "resolved_target": "/gaozt-test1/sxh/EgoRecover/exp/egorecover_g_pretraining/v1/prior",
+      "exists": true,
+      "internal": true
+    }
+  ],
+  "possible_secret_findings": 0,
+  "absolute_path_files": 329,
+  "small_candidate_sha256_files": 1232,
+  "errors": [],
+  "classification_note": "Destination suggestions only, based on paths/extensions. Binary artifacts can embed GT/observations/licensed assets; public release requires payload/provenance review. Categories are mutually exclusive; content deduplication was not run."
+}

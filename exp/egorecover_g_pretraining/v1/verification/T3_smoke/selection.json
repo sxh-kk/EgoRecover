@@ -1,0 +1,81 @@
+{
+  "best_step": 2,
+  "best_body_mm": 732.7053833007812,
+  "curve": [
+    {
+      "step": 2,
+      "scores": {
+        "body_mm": {
+          "mean": 732.7053833007812,
+          "per_take": {
+            "georgiatech_bike_06_6": 732.7053833007812
+          }
+        },
+        "all_body_mm": {
+          "mean": 732.7053833007812,
+          "per_take": {
+            "georgiatech_bike_06_6": 732.7053833007812
+          }
+        },
+        "startup_body_mm": {
+          "mean": 732.7053833007812,
+          "per_take": {
+            "georgiatech_bike_06_6": 732.7053833007812
+          }
+        },
+        "pa_mm": {
+          "mean": 149.3941192626953,
+          "per_take": {
+            "georgiatech_bike_06_6": 149.3941192626953
+          }
+        },
+        "root_mm": {
+          "mean": 689.2130126953125,
+          "per_take": {
+            "georgiatech_bike_06_6": 689.2130126953125
+          }
+        },
+        "root_relative_mm": {
+          "mean": 310.1634521484375,
+          "per_take": {
+            "georgiatech_bike_06_6": 310.1634521484375
+          }
+        },
+        "head_mm": {
+          "mean": 508.1533203125,
+          "per_take": {
+            "georgiatech_bike_06_6": 508.1533203125
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 73.46138000488281,
+          "per_take": {
+            "georgiatech_bike_06_6": 73.46138000488281
+          }
+        },
+        "velocity_mmps": {
+          "mean": 4713.0908203125,
+          "per_take": {
+            "georgiatech_bike_06_6": 4713.0908203125
+          }
+        },
+        "prior_body_mm": {
+          "mean": 563.5070190429688,
+          "per_take": {
+            "georgiatech_bike_06_6": 563.5070190429688
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": -169.19839477539062,
+          "per_take": {
+            "georgiatech_bike_06_6": -169.19839477539062
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 0.5610847417265177,
+      "frames": 4
+    }
+  ]
+}

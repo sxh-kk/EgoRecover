@@ -1,0 +1,81 @@
+{
+  "best_step": 2,
+  "best_body_mm": 7967112.5,
+  "curve": [
+    {
+      "step": 2,
+      "scores": {
+        "body_mm": {
+          "mean": 7967112.5,
+          "per_take": {
+            "georgiatech_bike_06_6": 7967112.5
+          }
+        },
+        "all_body_mm": {
+          "mean": 5871654.5,
+          "per_take": {
+            "georgiatech_bike_06_6": 5871654.5
+          }
+        },
+        "startup_body_mm": {
+          "mean": 4371.8271484375,
+          "per_take": {
+            "georgiatech_bike_06_6": 4371.8271484375
+          }
+        },
+        "pa_mm": {
+          "mean": 323.6440124511719,
+          "per_take": {
+            "georgiatech_bike_06_6": 323.6440124511719
+          }
+        },
+        "root_mm": {
+          "mean": 7967237.5,
+          "per_take": {
+            "georgiatech_bike_06_6": 7967237.5
+          }
+        },
+        "root_relative_mm": {
+          "mean": 403.3537292480469,
+          "per_take": {
+            "georgiatech_bike_06_6": 403.3537292480469
+          }
+        },
+        "head_mm": {
+          "mean": 7967093.5,
+          "per_take": {
+            "georgiatech_bike_06_6": 7967093.5
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 124.34626770019531,
+          "per_take": {
+            "georgiatech_bike_06_6": 124.34626770019531
+          }
+        },
+        "velocity_mmps": {
+          "mean": 10550324.0,
+          "per_take": {
+            "georgiatech_bike_06_6": 10550324.0
+          }
+        },
+        "prior_body_mm": {
+          "mean": 7259072.5,
+          "per_take": {
+            "georgiatech_bike_06_6": 7259072.5
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": -708040.3125,
+          "per_take": {
+            "georgiatech_bike_06_6": -708040.3125
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 18.046832860447466,
+      "frames": 76
+    }
+  ]
+}

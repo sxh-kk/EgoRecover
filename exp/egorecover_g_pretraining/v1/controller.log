@@ -1,0 +1,40 @@
+START prepare_gpu4 gpu 4 pid 3897300
+START prepare_gpu5 gpu 5 pid 3897307
+START prepare_gpu6 gpu 6 pid 3897309
+START prepare_gpu7 gpu 7 pid 3897311
+DONE prepare_gpu7
+DONE prepare_gpu5
+DONE prepare_gpu6
+DONE prepare_gpu4
+START prior_calibration gpu 5 pid 4080219
+DONE prior_calibration
+START T0_seed62 gpu 4 pid 4089415
+START T1_seed62 gpu 5 pid 4089417
+START T2_seed62 gpu 6 pid 4089419
+START T3_seed62 gpu 7 pid 4089431
+DONE T1_seed62
+DONE T0_seed62
+DONE T3_seed62
+DONE T2_seed62
+START T0_seed63 gpu 4 pid 162651
+START T1_seed63 gpu 5 pid 162653
+START T2_seed63 gpu 6 pid 162655
+START T3_seed63 gpu 7 pid 162657
+DONE T1_seed63
+DONE T2_seed63
+DONE T3_seed63
+DONE T0_seed63
+START T0_seed64 gpu 4 pid 389654
+START T1_seed64 gpu 5 pid 389656
+START T2_seed64 gpu 6 pid 389658
+START T3_seed64 gpu 7 pid 389660
+DONE T2_seed64
+DONE T3_seed64
+DONE T0_seed64
+DONE T1_seed64
+START e7_reference gpu 5 pid 712530
+DONE e7_reference
+START eval_T0_seed62 gpu 4 pid 713427
+START eval_T1_seed62 gpu 5 pid 713429
+START eval_T2_seed62 gpu 6 pid 713431
+START eval_T3_seed62 gpu 7 pid 713433

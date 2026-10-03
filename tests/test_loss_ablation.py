@@ -98,3 +98,19 @@ def test_summary_compares_clean_and_faults_without_mixing_generators(tmp_path):
     assert result["g1f1_minus_g0f0_history/clean"]["mean_difference_mm"] == -15
     assert result["g0f0_gaussian_minus_g1f0/clean"]["current_mean_mm"] == 105
     assert result["g0f0_gaussian_minus_g1f0/all_variants"]["current_mean_mm"] == 125
+
+
+@pytest.mark.parametrize('mode', ['gaussian', 'history', 'prior_only'])
+def test_paired_eval_hashes_only_checkpoints_used_by_requested_mode(tmp_path, mode):
+    from run.evaluate_paired_development import experiment_weight_hashes
+    source = 'gaussian' if mode == 'prior_only' else mode
+    names = {'prior.pt', f'g_{source}.pt', 'report.json'}
+    for name in names:
+        (tmp_path / name).write_bytes(name.encode())
+    result = experiment_weight_hashes({'single': tmp_path}, [mode])
+    assert set(result['single']) == names
+    old = result['single'][f'g_{source}.pt']
+    (tmp_path / f'g_{source}.pt').write_bytes(b'changed')
+    assert experiment_weight_hashes({'single': tmp_path}, [mode])['single'][f'g_{source}.pt'] != old
+    with pytest.raises(FileNotFoundError):
+        experiment_weight_hashes({'single': tmp_path}, ['gaussian', 'history'])

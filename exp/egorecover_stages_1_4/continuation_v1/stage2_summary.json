@@ -1,0 +1,3947 @@
+{
+  "identity": {
+    "group": "dev",
+    "variants": [
+      "clean",
+      "freeze_3s",
+      "drift_0p03mps"
+    ],
+    "sampling_seed": 62,
+    "dataset_spec_sha256": "13ca5f22e713353a121282a365af735f8086b8ca3dae714742e116d0d5df14dd",
+    "evaluation_split_manifest_sha256": "fdddd32b47282bfece00215ef2652cbc361afdc655b6516bb5ab0740403481fc",
+    "bootstrap_cache_sha256": "3dec71f200f5d5d445d45f2f878a18cd73950365c402e16cb3404e3651018f56",
+    "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+    "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793"
+  },
+  "takes": [
+    "fair_bike_01_12",
+    "georgiatech_bike_05_2",
+    "iiith_cooking_109_4",
+    "iiith_soccer_004_5",
+    "indiana_music_13_5",
+    "nus_cpr_52_1",
+    "sfu_basketball_03_44",
+    "sfu_basketball_08_15",
+    "unc_basketball_03-16-23_01_18",
+    "uniandes_dance_011_27",
+    "uniandes_dance_012_15",
+    "upenn_0725_Duet_Violin_1_2_8"
+  ],
+  "experiments": {
+    "12take_400": "exp/egorecover_stages_1_4/stage2_budget/12take_400",
+    "12take_1200": "exp/egorecover_stages_1_4/stage2_budget/12take_1200",
+    "72take_400": "exp/egorecover_train_72take_v1/pass1",
+    "72take_1200": "exp/egorecover_stages_1_4/stage2_budget/72take_1200",
+    "12take_2400": "exp/egorecover_stages_1_4/continuation_v1/stage2_budget/12take_2400",
+    "72take_2400": "exp/egorecover_stages_1_4/continuation_v1/stage2_budget/72take_2400"
+  },
+  "scores": {
+    "12take_1200/gaussian": {
+      "macro_smpl22_mm": 229.47373752005308,
+      "take_bootstrap_95ci_mm": [
+        185.08814539144066,
+        283.46954691498365
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 232.61937210648148,
+        "georgiatech_bike_05_2": 183.2221175723606,
+        "iiith_cooking_109_4": 124.25676639698169,
+        "iiith_soccer_004_5": 179.93156341270162,
+        "indiana_music_13_5": 174.2786408883554,
+        "nus_cpr_52_1": 448.5876373291016,
+        "sfu_basketball_03_44": 194.46853288721152,
+        "sfu_basketball_08_15": 216.62919280440715,
+        "unc_basketball_03-16-23_01_18": 349.2762435630516,
+        "uniandes_dance_011_27": 201.80898181774,
+        "uniandes_dance_012_15": 160.19794064274538,
+        "upenn_0725_Duet_Violin_1_2_8": 288.4078608194987
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 228.82619541309495,
+        "freeze_3s": 228.93288894229465,
+        "drift_0p03mps": 230.6621282047696
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.10983187357584635,
+          "fault_positive_auc_mm_s": 0.5957005818684896,
+          "fault_peak_increase_mm": 0.8302275339762369
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 4.017822562323677,
+          "fault_positive_auc_mm_s": 27.81434033711751,
+          "fault_peak_increase_mm": 32.12334760030111
+        }
+      }
+    },
+    "12take_1200/history": {
+      "macro_smpl22_mm": 229.69500108589364,
+      "take_bootstrap_95ci_mm": [
+        183.00875545136725,
+        284.0555358103764
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 224.21793080082648,
+        "georgiatech_bike_05_2": 195.43472427085598,
+        "iiith_cooking_109_4": 120.71932086238155,
+        "iiith_soccer_004_5": 152.96187696103698,
+        "indiana_music_13_5": 166.29668884277342,
+        "nus_cpr_52_1": 436.8423484519676,
+        "sfu_basketball_03_44": 198.90059178670245,
+        "sfu_basketball_08_15": 236.440635116012,
+        "unc_basketball_03-16-23_01_18": 375.03076827437786,
+        "uniandes_dance_011_27": 195.64413762975622,
+        "uniandes_dance_012_15": 163.67239102257625,
+        "upenn_0725_Duet_Violin_1_2_8": 290.1785990114565
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 229.3765711696059,
+        "freeze_3s": 229.4217750531656,
+        "drift_0p03mps": 230.28665703490927
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": -0.019250636630588115,
+          "fault_positive_auc_mm_s": 0.8961629231770832,
+          "fault_peak_increase_mm": 1.7427876790364583
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 5.476845868428548,
+          "fault_positive_auc_mm_s": 26.574657567342125,
+          "fault_peak_increase_mm": 28.099470774332683
+        }
+      }
+    },
+    "12take_1200/prior_only": {
+      "macro_smpl22_mm": 359.79956551657784,
+      "take_bootstrap_95ci_mm": [
+        258.2569454952523,
+        472.5318127067
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 364.7945411682129,
+        "georgiatech_bike_05_2": 197.2928375667996,
+        "iiith_cooking_109_4": 128.92075917985704,
+        "iiith_soccer_004_5": 344.6060329013401,
+        "indiana_music_13_5": 121.46494420369466,
+        "nus_cpr_52_1": 551.097169664171,
+        "sfu_basketball_03_44": 600.7752427842881,
+        "sfu_basketball_08_15": 527.5228807237413,
+        "unc_basketball_03-16-23_01_18": 704.5940895928276,
+        "uniandes_dance_011_27": 229.3825535244412,
+        "uniandes_dance_012_15": 274.3707814322578,
+        "upenn_0725_Duet_Violin_1_2_8": 272.7729534573025
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 359.79956551657784,
+        "freeze_3s": 359.79956551657784,
+        "drift_0p03mps": 359.79956551657784
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        }
+      }
+    },
+    "12take_2400/gaussian": {
+      "macro_smpl22_mm": 229.47373752005308,
+      "take_bootstrap_95ci_mm": [
+        185.08814539144066,
+        283.46954691498365
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 232.61937210648148,
+        "georgiatech_bike_05_2": 183.2221175723606,
+        "iiith_cooking_109_4": 124.25676639698169,
+        "iiith_soccer_004_5": 179.93156341270162,
+        "indiana_music_13_5": 174.2786408883554,
+        "nus_cpr_52_1": 448.5876373291016,
+        "sfu_basketball_03_44": 194.46853288721152,
+        "sfu_basketball_08_15": 216.62919280440715,
+        "unc_basketball_03-16-23_01_18": 349.2762435630516,
+        "uniandes_dance_011_27": 201.80898181774,
+        "uniandes_dance_012_15": 160.19794064274538,
+        "upenn_0725_Duet_Violin_1_2_8": 288.4078608194987
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 228.82619541309495,
+        "freeze_3s": 228.93288894229465,
+        "drift_0p03mps": 230.6621282047696
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.10983187357584635,
+          "fault_positive_auc_mm_s": 0.5957005818684896,
+          "fault_peak_increase_mm": 0.8302275339762369
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 4.017822562323677,
+          "fault_positive_auc_mm_s": 27.81434033711751,
+          "fault_peak_increase_mm": 32.12334760030111
+        }
+      }
+    },
+    "12take_2400/history": {
+      "macro_smpl22_mm": 229.69500108589364,
+      "take_bootstrap_95ci_mm": [
+        183.00875545136725,
+        284.0555358103764
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 224.21793080082648,
+        "georgiatech_bike_05_2": 195.43472427085598,
+        "iiith_cooking_109_4": 120.71932086238155,
+        "iiith_soccer_004_5": 152.96187696103698,
+        "indiana_music_13_5": 166.29668884277342,
+        "nus_cpr_52_1": 436.8423484519676,
+        "sfu_basketball_03_44": 198.90059178670245,
+        "sfu_basketball_08_15": 236.440635116012,
+        "unc_basketball_03-16-23_01_18": 375.03076827437786,
+        "uniandes_dance_011_27": 195.64413762975622,
+        "uniandes_dance_012_15": 163.67239102257625,
+        "upenn_0725_Duet_Violin_1_2_8": 290.1785990114565
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 229.3765711696059,
+        "freeze_3s": 229.4217750531656,
+        "drift_0p03mps": 230.28665703490927
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": -0.019250636630588115,
+          "fault_positive_auc_mm_s": 0.8961629231770832,
+          "fault_peak_increase_mm": 1.7427876790364583
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 5.476845868428548,
+          "fault_positive_auc_mm_s": 26.574657567342125,
+          "fault_peak_increase_mm": 28.099470774332683
+        }
+      }
+    },
+    "12take_2400/prior_only": {
+      "macro_smpl22_mm": 359.79956551657784,
+      "take_bootstrap_95ci_mm": [
+        258.2569454952523,
+        472.5318127067
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 364.7945411682129,
+        "georgiatech_bike_05_2": 197.2928375667996,
+        "iiith_cooking_109_4": 128.92075917985704,
+        "iiith_soccer_004_5": 344.6060329013401,
+        "indiana_music_13_5": 121.46494420369466,
+        "nus_cpr_52_1": 551.097169664171,
+        "sfu_basketball_03_44": 600.7752427842881,
+        "sfu_basketball_08_15": 527.5228807237413,
+        "unc_basketball_03-16-23_01_18": 704.5940895928276,
+        "uniandes_dance_011_27": 229.3825535244412,
+        "uniandes_dance_012_15": 274.3707814322578,
+        "upenn_0725_Duet_Violin_1_2_8": 272.7729534573025
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 359.79956551657784,
+        "freeze_3s": 359.79956551657784,
+        "drift_0p03mps": 359.79956551657784
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        }
+      }
+    },
+    "12take_400/gaussian": {
+      "macro_smpl22_mm": 232.66521558820463,
+      "take_bootstrap_95ci_mm": [
+        195.0944448335671,
+        267.25225699624895
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 248.62387179621945,
+        "georgiatech_bike_05_2": 261.374835035536,
+        "iiith_cooking_109_4": 122.48691367396601,
+        "iiith_soccer_004_5": 228.3074621271204,
+        "indiana_music_13_5": 124.88115194815175,
+        "nus_cpr_52_1": 247.37084771615488,
+        "sfu_basketball_03_44": 237.40435011121963,
+        "sfu_basketball_08_15": 275.79210188123915,
+        "unc_basketball_03-16-23_01_18": 356.6617443226002,
+        "uniandes_dance_011_27": 244.96377594559283,
+        "uniandes_dance_012_15": 171.66260453683358,
+        "upenn_0725_Duet_Violin_1_2_8": 272.452927963822
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 231.63061457916544,
+        "freeze_3s": 230.74834785284818,
+        "drift_0p03mps": 235.61668433260036
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 1.002050315009223,
+          "fault_positive_auc_mm_s": 5.583163770039877,
+          "fault_peak_increase_mm": 8.1503537495931
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 5.900567287868925,
+          "fault_positive_auc_mm_s": 28.62934748331706,
+          "fault_peak_increase_mm": 29.68284861246745
+        }
+      }
+    },
+    "12take_400/history": {
+      "macro_smpl22_mm": 239.98898065178483,
+      "take_bootstrap_95ci_mm": [
+        191.01510370807884,
+        297.0534078739308
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 292.42077975802954,
+        "georgiatech_bike_05_2": 254.27959946526423,
+        "iiith_cooking_109_4": 152.45717418105514,
+        "iiith_soccer_004_5": 185.77105024832267,
+        "indiana_music_13_5": 184.11286431771737,
+        "nus_cpr_52_1": 484.6216614334671,
+        "sfu_basketball_03_44": 168.2764885655156,
+        "sfu_basketball_08_15": 192.36901264897097,
+        "unc_basketball_03-16-23_01_18": 317.33771466855643,
+        "uniandes_dance_011_27": 179.6604845824065,
+        "uniandes_dance_012_15": 156.8945189299407,
+        "upenn_0725_Duet_Violin_1_2_8": 311.66641902217157
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 239.4993296711533,
+        "freeze_3s": 239.42602130925215,
+        "drift_0p03mps": 241.04159097494903
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.2889658610026042,
+          "fault_positive_auc_mm_s": 1.7512257258097332,
+          "fault_peak_increase_mm": 1.8316637674967449
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 8.280247052510578,
+          "fault_positive_auc_mm_s": 34.664740562438965,
+          "fault_peak_increase_mm": 32.36140060424805
+        }
+      }
+    },
+    "12take_400/prior_only": {
+      "macro_smpl22_mm": 359.79956551657784,
+      "take_bootstrap_95ci_mm": [
+        258.2569454952523,
+        472.5318127067
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 364.7945411682129,
+        "georgiatech_bike_05_2": 197.2928375667996,
+        "iiith_cooking_109_4": 128.92075917985704,
+        "iiith_soccer_004_5": 344.6060329013401,
+        "indiana_music_13_5": 121.46494420369466,
+        "nus_cpr_52_1": 551.097169664171,
+        "sfu_basketball_03_44": 600.7752427842881,
+        "sfu_basketball_08_15": 527.5228807237413,
+        "unc_basketball_03-16-23_01_18": 704.5940895928276,
+        "uniandes_dance_011_27": 229.3825535244412,
+        "uniandes_dance_012_15": 274.3707814322578,
+        "upenn_0725_Duet_Violin_1_2_8": 272.7729534573025
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 359.79956551657784,
+        "freeze_3s": 359.79956551657784,
+        "drift_0p03mps": 359.79956551657784
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        }
+      }
+    },
+    "72take_1200/gaussian": {
+      "macro_smpl22_mm": 221.04479568269517,
+      "take_bootstrap_95ci_mm": [
+        190.9683974142428,
+        254.0358161708455
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 199.37774536697952,
+        "georgiatech_bike_05_2": 249.1096289599383,
+        "iiith_cooking_109_4": 187.6514110635828,
+        "iiith_soccer_004_5": 184.69096159758394,
+        "indiana_music_13_5": 155.61686795552572,
+        "nus_cpr_52_1": 182.2301124572754,
+        "sfu_basketball_03_44": 306.96682363439487,
+        "sfu_basketball_08_15": 268.79075187400537,
+        "unc_basketball_03-16-23_01_18": 326.1358474448875,
+        "uniandes_dance_011_27": 237.49457044248228,
+        "uniandes_dance_012_15": 165.3407141155667,
+        "upenn_0725_Duet_Violin_1_2_8": 189.1321132801197
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 220.6647542035138,
+        "freeze_3s": 221.00660263697304,
+        "drift_0p03mps": 221.46303020759865
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": -0.23311898973253034,
+          "fault_positive_auc_mm_s": 0.8075867970784505,
+          "fault_peak_increase_mm": 1.4947503407796223
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 6.531579038831922,
+          "fault_positive_auc_mm_s": 32.42975298563639,
+          "fault_peak_increase_mm": 28.5772762298584
+        }
+      }
+    },
+    "72take_1200/history": {
+      "macro_smpl22_mm": 226.54147398089182,
+      "take_bootstrap_95ci_mm": [
+        187.62259846557808,
+        264.9199740792498
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 219.53489627131708,
+        "georgiatech_bike_05_2": 285.0122270654749,
+        "iiith_cooking_109_4": 123.92546908767135,
+        "iiith_soccer_004_5": 255.21687073884186,
+        "indiana_music_13_5": 152.9852248297797,
+        "nus_cpr_52_1": 331.2017067803277,
+        "sfu_basketball_03_44": 241.28474364104093,
+        "sfu_basketball_08_15": 220.4903889550103,
+        "unc_basketball_03-16-23_01_18": 359.2495294641565,
+        "uniandes_dance_011_27": 192.1253621419271,
+        "uniandes_dance_012_15": 165.12703246363887,
+        "upenn_0725_Duet_Violin_1_2_8": 172.34423633151584
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 225.76958254354975,
+        "freeze_3s": 225.8877982951977,
+        "drift_0p03mps": 227.96704110392815
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.23547691769070098,
+          "fault_positive_auc_mm_s": 1.2210835774739583,
+          "fault_peak_increase_mm": 1.2670885721842449
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 10.866528193155924,
+          "fault_positive_auc_mm_s": 39.934273974100755,
+          "fault_peak_increase_mm": 33.978284200032554
+        }
+      }
+    },
+    "72take_1200/prior_only": {
+      "macro_smpl22_mm": 747.3427538677497,
+      "take_bootstrap_95ci_mm": [
+        556.7455940882364,
+        949.1235156783351
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 526.6323608398437,
+        "georgiatech_bike_05_2": 507.4789652082655,
+        "iiith_cooking_109_4": 321.0864217758179,
+        "iiith_soccer_004_5": 861.9984046088325,
+        "indiana_music_13_5": 304.6063044865926,
+        "nus_cpr_52_1": 1330.4231353759765,
+        "sfu_basketball_03_44": 746.4542958577473,
+        "sfu_basketball_08_15": 1103.7659695095485,
+        "unc_basketball_03-16-23_01_18": 1279.741870795356,
+        "uniandes_dance_011_27": 370.82404386732316,
+        "uniandes_dance_012_15": 939.8372987323337,
+        "upenn_0725_Duet_Violin_1_2_8": 675.2639753553602
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 747.3427538677498,
+        "freeze_3s": 747.3427538677498,
+        "drift_0p03mps": 747.3427538677498
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        }
+      }
+    },
+    "72take_2400/gaussian": {
+      "macro_smpl22_mm": 201.3473737210403,
+      "take_bootstrap_95ci_mm": [
+        170.2245702961345,
+        232.54014062822603
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 274.3789404692473,
+        "georgiatech_bike_05_2": 198.2439244446931,
+        "iiith_cooking_109_4": 124.41246137265806,
+        "iiith_soccer_004_5": 176.91947175485117,
+        "indiana_music_13_5": 122.5195702093619,
+        "nus_cpr_52_1": 231.15674116346568,
+        "sfu_basketball_03_44": 218.82452214558919,
+        "sfu_basketball_08_15": 224.26331041124135,
+        "unc_basketball_03-16-23_01_18": 312.62075579607927,
+        "uniandes_dance_011_27": 208.52793887103044,
+        "uniandes_dance_012_15": 151.461001890677,
+        "upenn_0725_Duet_Violin_1_2_8": 172.8398461235894
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 200.44855585098264,
+        "freeze_3s": 200.45662058724295,
+        "drift_0p03mps": 203.13694472489533
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.029870986938476566,
+          "fault_positive_auc_mm_s": 0.2705001831054688,
+          "fault_peak_increase_mm": 0.2883764902750651
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 11.782269626193576,
+          "fault_positive_auc_mm_s": 40.620084826151526,
+          "fault_peak_increase_mm": 37.11991628011068
+        }
+      }
+    },
+    "72take_2400/history": {
+      "macro_smpl22_mm": 213.30490606331526,
+      "take_bootstrap_95ci_mm": [
+        172.65869734728776,
+        267.55186609044483
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 202.2809286682694,
+        "georgiatech_bike_05_2": 251.14154995105886,
+        "iiith_cooking_109_4": 164.97644711953623,
+        "iiith_soccer_004_5": 152.86914715237086,
+        "indiana_music_13_5": 138.36898227974223,
+        "nus_cpr_52_1": 456.6209177087855,
+        "sfu_basketball_03_44": 226.74711120040328,
+        "sfu_basketball_08_15": 199.07505024097586,
+        "unc_basketball_03-16-23_01_18": 282.81543952094177,
+        "uniandes_dance_011_27": 175.64615314624928,
+        "uniandes_dance_012_15": 129.13948463863798,
+        "upenn_0725_Duet_Violin_1_2_8": 179.9776611328125
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 212.8460969818963,
+        "freeze_3s": 213.44813305890125,
+        "drift_0p03mps": 213.62048814914843
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": -0.016630829705132383,
+          "fault_positive_auc_mm_s": 0.46420860290527344,
+          "fault_peak_increase_mm": 0.5784206390380859
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 5.386267450120715,
+          "fault_positive_auc_mm_s": 29.27269738515218,
+          "fault_peak_increase_mm": 30.94617207845052
+        }
+      }
+    },
+    "72take_2400/prior_only": {
+      "macro_smpl22_mm": 751.5819359408484,
+      "take_bootstrap_95ci_mm": [
+        648.6956393065276,
+        864.4466646477027
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 580.7178073035346,
+        "georgiatech_bike_05_2": 629.8577201843261,
+        "iiith_cooking_109_4": 481.7925656636556,
+        "iiith_soccer_004_5": 683.2876152038574,
+        "indiana_music_13_5": 814.1061670939129,
+        "nus_cpr_52_1": 816.1492253621419,
+        "sfu_basketball_03_44": 505.9383641560873,
+        "sfu_basketball_08_15": 776.9743765936959,
+        "unc_basketball_03-16-23_01_18": 893.9417568630643,
+        "uniandes_dance_011_27": 987.6379599677192,
+        "uniandes_dance_012_15": 675.7538550270929,
+        "upenn_0725_Duet_Violin_1_2_8": 1172.8258178710937
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 751.5819359408484,
+        "freeze_3s": 751.5819359408484,
+        "drift_0p03mps": 751.5819359408484
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        }
+      }
+    },
+    "72take_400/gaussian": {
+      "macro_smpl22_mm": 306.7201723699216,
+      "take_bootstrap_95ci_mm": [
+        269.4774124074865,
+        344.0137481359788
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 305.95191045690467,
+        "georgiatech_bike_05_2": 286.5211482153998,
+        "iiith_cooking_109_4": 188.73754381250453,
+        "iiith_soccer_004_5": 382.7446832444933,
+        "indiana_music_13_5": 258.1186942771629,
+        "nus_cpr_52_1": 432.76368594699437,
+        "sfu_basketball_03_44": 311.1128391407154,
+        "sfu_basketball_08_15": 275.61359381499113,
+        "unc_basketball_03-16-23_01_18": 377.6075764126247,
+        "uniandes_dance_011_27": 272.96719128644025,
+        "uniandes_dance_012_15": 249.9377816942003,
+        "upenn_0725_Duet_Violin_1_2_8": 338.56542013662835
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 309.0116802144934,
+        "freeze_3s": 306.547441736857,
+        "drift_0p03mps": 304.60139515841445
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.5090894487169053,
+          "fault_positive_auc_mm_s": 2.926019032796224,
+          "fault_peak_increase_mm": 3.2182388305664062
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 9.012129635281033,
+          "fault_positive_auc_mm_s": 33.4522752126058,
+          "fault_peak_increase_mm": 35.8691520690918
+        }
+      }
+    },
+    "72take_400/history": {
+      "macro_smpl22_mm": 313.64278528778647,
+      "take_bootstrap_95ci_mm": [
+        244.93279752378115,
+        394.4007326926714
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 600.8664073661522,
+        "georgiatech_bike_05_2": 549.0019585644758,
+        "iiith_cooking_109_4": 398.9856627005118,
+        "iiith_soccer_004_5": 269.2175769805908,
+        "indiana_music_13_5": 157.2598758838795,
+        "nus_cpr_52_1": 185.86793789333765,
+        "sfu_basketball_03_44": 244.9471543488679,
+        "sfu_basketball_08_15": 244.35160621360498,
+        "unc_basketball_03-16-23_01_18": 336.09809482715747,
+        "uniandes_dance_011_27": 295.99896257188584,
+        "uniandes_dance_012_15": 188.82883871572992,
+        "upenn_0725_Duet_Violin_1_2_8": 292.2893473872432
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 314.16425141228575,
+        "freeze_3s": 316.4432219858523,
+        "drift_0p03mps": 310.32088246522125
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": -0.8787916819254556,
+          "fault_positive_auc_mm_s": 5.9253688812255865,
+          "fault_peak_increase_mm": 8.095903396606445
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 7.258170212639702,
+          "fault_positive_auc_mm_s": 31.804160626729328,
+          "fault_peak_increase_mm": 27.563674926757812
+        }
+      }
+    },
+    "72take_400/prior_only": {
+      "macro_smpl22_mm": 749.1769924093177,
+      "take_bootstrap_95ci_mm": [
+        642.9008918691566,
+        871.9885460005868
+      ],
+      "per_take_macro_smpl22_mm": {
+        "fair_bike_01_12": 784.7477976904975,
+        "georgiatech_bike_05_2": 604.8174683888753,
+        "iiith_cooking_109_4": 638.5194943534003,
+        "iiith_soccer_004_5": 801.677219051785,
+        "indiana_music_13_5": 792.4152111901177,
+        "nus_cpr_52_1": 756.3029605441624,
+        "sfu_basketball_03_44": 1227.500178527832,
+        "sfu_basketball_08_15": 995.9973849826389,
+        "unc_basketball_03-16-23_01_18": 747.1666450500488,
+        "uniandes_dance_011_27": 643.1495612250434,
+        "uniandes_dance_012_15": 570.255966673957,
+        "upenn_0725_Duet_Violin_1_2_8": 427.5740212334527
+      },
+      "per_variant_smpl22_mm": {
+        "clean": 749.1769924093174,
+        "freeze_3s": 749.1769924093174,
+        "drift_0p03mps": 749.1769924093174
+      },
+      "fault_deltas": {
+        "freeze_3s": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        },
+        "drift_0p03mps": {
+          "fault_signed_mean_mm": 0.0,
+          "fault_positive_auc_mm_s": 0.0,
+          "fault_peak_increase_mm": 0.0
+        }
+      }
+    }
+  },
+  "paired": {
+    "12take_1200/gaussian minus 12take_1200/history": {
+      "mean_mm": -0.22126356584055054,
+      "take_bootstrap_95ci_mm": [
+        -8.109237415407929,
+        7.491132818622348
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 8.401441305654998,
+        "georgiatech_bike_05_2": -12.212606698495392,
+        "iiith_cooking_109_4": 3.5374455346001383,
+        "iiith_soccer_004_5": 26.969686451664643,
+        "indiana_music_13_5": 7.981952045581977,
+        "nus_cpr_52_1": 11.745288877133987,
+        "sfu_basketball_03_44": -4.432058899490926,
+        "sfu_basketball_08_15": -19.81144231160485,
+        "unc_basketball_03-16-23_01_18": -25.75452471132627,
+        "uniandes_dance_011_27": 6.164844187983789,
+        "uniandes_dance_012_15": -3.47445037983087,
+        "upenn_0725_Duet_Violin_1_2_8": -1.7707381919578324
+      }
+    },
+    "12take_1200/gaussian minus 12take_1200/prior_only": {
+      "mean_mm": -130.32582799652477,
+      "take_bootstrap_95ci_mm": [
+        -218.5969377382302,
+        -51.010046867676714
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -132.17516906173142,
+        "georgiatech_bike_05_2": -14.070719994439003,
+        "iiith_cooking_109_4": -4.663992782875354,
+        "iiith_soccer_004_5": -164.67446948863847,
+        "indiana_music_13_5": 52.81369668466074,
+        "nus_cpr_52_1": -102.50953233506942,
+        "sfu_basketball_03_44": -406.30670989707664,
+        "sfu_basketball_08_15": -310.8936879193342,
+        "unc_basketball_03-16-23_01_18": -355.317846029776,
+        "uniandes_dance_011_27": -27.573571706701188,
+        "uniandes_dance_012_15": -114.1728407895124,
+        "upenn_0725_Duet_Violin_1_2_8": 15.634907362196202
+      }
+    },
+    "12take_1200/gaussian minus 12take_2400/gaussian": {
+      "mean_mm": 0.0,
+      "take_bootstrap_95ci_mm": [
+        0.0,
+        0.0
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 0.0,
+        "georgiatech_bike_05_2": 0.0,
+        "iiith_cooking_109_4": 0.0,
+        "iiith_soccer_004_5": 0.0,
+        "indiana_music_13_5": 0.0,
+        "nus_cpr_52_1": 0.0,
+        "sfu_basketball_03_44": 0.0,
+        "sfu_basketball_08_15": 0.0,
+        "unc_basketball_03-16-23_01_18": 0.0,
+        "uniandes_dance_011_27": 0.0,
+        "uniandes_dance_012_15": 0.0,
+        "upenn_0725_Duet_Violin_1_2_8": 0.0
+      }
+    },
+    "12take_1200/gaussian minus 12take_2400/history": {
+      "mean_mm": -0.22126356584055054,
+      "take_bootstrap_95ci_mm": [
+        -8.109237415407929,
+        7.491132818622348
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 8.401441305654998,
+        "georgiatech_bike_05_2": -12.212606698495392,
+        "iiith_cooking_109_4": 3.5374455346001383,
+        "iiith_soccer_004_5": 26.969686451664643,
+        "indiana_music_13_5": 7.981952045581977,
+        "nus_cpr_52_1": 11.745288877133987,
+        "sfu_basketball_03_44": -4.432058899490926,
+        "sfu_basketball_08_15": -19.81144231160485,
+        "unc_basketball_03-16-23_01_18": -25.75452471132627,
+        "uniandes_dance_011_27": 6.164844187983789,
+        "uniandes_dance_012_15": -3.47445037983087,
+        "upenn_0725_Duet_Violin_1_2_8": -1.7707381919578324
+      }
+    },
+    "12take_1200/gaussian minus 12take_2400/prior_only": {
+      "mean_mm": -130.32582799652477,
+      "take_bootstrap_95ci_mm": [
+        -218.5969377382302,
+        -51.010046867676714
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -132.17516906173142,
+        "georgiatech_bike_05_2": -14.070719994439003,
+        "iiith_cooking_109_4": -4.663992782875354,
+        "iiith_soccer_004_5": -164.67446948863847,
+        "indiana_music_13_5": 52.81369668466074,
+        "nus_cpr_52_1": -102.50953233506942,
+        "sfu_basketball_03_44": -406.30670989707664,
+        "sfu_basketball_08_15": -310.8936879193342,
+        "unc_basketball_03-16-23_01_18": -355.317846029776,
+        "uniandes_dance_011_27": -27.573571706701188,
+        "uniandes_dance_012_15": -114.1728407895124,
+        "upenn_0725_Duet_Violin_1_2_8": 15.634907362196202
+      }
+    },
+    "12take_1200/gaussian minus 12take_400/gaussian": {
+      "mean_mm": -3.1914780681516,
+      "take_bootstrap_95ci_mm": [
+        -36.026362492125735,
+        42.55056853588716
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -16.00449968973797,
+        "georgiatech_bike_05_2": -78.15271746317543,
+        "iiith_cooking_109_4": 1.7698527230156742,
+        "iiith_soccer_004_5": -48.37589871441878,
+        "indiana_music_13_5": 49.397488940203644,
+        "nus_cpr_52_1": 201.2167896129467,
+        "sfu_basketball_03_44": -42.935817224008105,
+        "sfu_basketball_08_15": -59.162909076831994,
+        "unc_basketball_03-16-23_01_18": -7.38550075954862,
+        "uniandes_dance_011_27": -43.154794127852824,
+        "uniandes_dance_012_15": -11.464663894088204,
+        "upenn_0725_Duet_Violin_1_2_8": 15.954932855676702
+      }
+    },
+    "12take_1200/gaussian minus 12take_400/history": {
+      "mean_mm": -10.515243131731756,
+      "take_bootstrap_95ci_mm": [
+        -28.899410147137115,
+        8.163063595030064
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -59.80140765154806,
+        "georgiatech_bike_05_2": -71.05748189290364,
+        "iiith_cooking_109_4": -28.200407784073448,
+        "iiith_soccer_004_5": -5.839486835621045,
+        "indiana_music_13_5": -9.83422342936197,
+        "nus_cpr_52_1": -36.03402410436553,
+        "sfu_basketball_03_44": 26.19204432169593,
+        "sfu_basketball_08_15": 24.26018015543619,
+        "unc_basketball_03-16-23_01_18": 31.938528894495164,
+        "uniandes_dance_011_27": 22.148497235333508,
+        "uniandes_dance_012_15": 3.303421712804692,
+        "upenn_0725_Duet_Violin_1_2_8": -23.258558202672873
+      }
+    },
+    "12take_1200/gaussian minus 12take_400/prior_only": {
+      "mean_mm": -130.32582799652477,
+      "take_bootstrap_95ci_mm": [
+        -218.5969377382302,
+        -51.010046867676714
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -132.17516906173142,
+        "georgiatech_bike_05_2": -14.070719994439003,
+        "iiith_cooking_109_4": -4.663992782875354,
+        "iiith_soccer_004_5": -164.67446948863847,
+        "indiana_music_13_5": 52.81369668466074,
+        "nus_cpr_52_1": -102.50953233506942,
+        "sfu_basketball_03_44": -406.30670989707664,
+        "sfu_basketball_08_15": -310.8936879193342,
+        "unc_basketball_03-16-23_01_18": -355.317846029776,
+        "uniandes_dance_011_27": -27.573571706701188,
+        "uniandes_dance_012_15": -114.1728407895124,
+        "upenn_0725_Duet_Violin_1_2_8": 15.634907362196202
+      }
+    },
+    "12take_1200/gaussian minus 72take_1200/gaussian": {
+      "mean_mm": 8.428941837357884,
+      "take_bootstrap_95ci_mm": [
+        -38.67602693298718,
+        69.1191473537021
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 33.24162673950195,
+        "georgiatech_bike_05_2": -65.88751138757772,
+        "iiith_cooking_109_4": -63.39464466660111,
+        "iiith_soccer_004_5": -4.759398184882315,
+        "indiana_music_13_5": 18.661772932829678,
+        "nus_cpr_52_1": 266.3575248718262,
+        "sfu_basketball_03_44": -112.49829074718335,
+        "sfu_basketball_08_15": -52.16155906959821,
+        "unc_basketball_03-16-23_01_18": 23.14039611816412,
+        "uniandes_dance_011_27": -35.68558862474228,
+        "uniandes_dance_012_15": -5.142773472821318,
+        "upenn_0725_Duet_Violin_1_2_8": 99.27574753937898
+      }
+    },
+    "12take_1200/gaussian minus 72take_1200/history": {
+      "mean_mm": 2.9322635391612124,
+      "take_bootstrap_95ci_mm": [
+        -31.4085331634239,
+        40.750899832337
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 13.084475835164397,
+        "georgiatech_bike_05_2": -101.79010949311433,
+        "iiith_cooking_109_4": 0.33129730931034373,
+        "iiith_soccer_004_5": -75.28530732614024,
+        "indiana_music_13_5": 21.2934160585757,
+        "nus_cpr_52_1": 117.3859305487739,
+        "sfu_basketball_03_44": -46.81621075382941,
+        "sfu_basketball_08_15": -3.861196150603149,
+        "unc_basketball_03-16-23_01_18": -9.97328590110493,
+        "uniandes_dance_011_27": 9.683619675812906,
+        "uniandes_dance_012_15": -4.92909182089349,
+        "upenn_0725_Duet_Violin_1_2_8": 116.06362448798285
+      }
+    },
+    "12take_1200/gaussian minus 72take_1200/prior_only": {
+      "mean_mm": -517.8690163476969,
+      "take_bootstrap_95ci_mm": [
+        -683.6873178464394,
+        -351.3453893090473
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -294.01298873336225,
+        "georgiatech_bike_05_2": -324.25684763590493,
+        "iiith_cooking_109_4": -196.8296553788362,
+        "iiith_soccer_004_5": -682.0668411961309,
+        "indiana_music_13_5": -130.3276635982372,
+        "nus_cpr_52_1": -881.8354980468748,
+        "sfu_basketball_03_44": -551.9857629705358,
+        "sfu_basketball_08_15": -887.1367767051414,
+        "unc_basketball_03-16-23_01_18": -930.4656272323043,
+        "uniandes_dance_011_27": -169.01506204958315,
+        "uniandes_dance_012_15": -779.6393580895883,
+        "upenn_0725_Duet_Violin_1_2_8": -386.85611453586154
+      }
+    },
+    "12take_1200/gaussian minus 72take_2400/gaussian": {
+      "mean_mm": 28.126363799012736,
+      "take_bootstrap_95ci_mm": [
+        -5.809238572179538,
+        72.62207958197887
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -41.75956836276583,
+        "georgiatech_bike_05_2": -15.021806872332519,
+        "iiith_cooking_109_4": -0.15569497567636859,
+        "iiith_soccer_004_5": 3.0120916578504477,
+        "indiana_music_13_5": 51.759070678993496,
+        "nus_cpr_52_1": 217.43089616563591,
+        "sfu_basketball_03_44": -24.35598925837766,
+        "sfu_basketball_08_15": -7.634117606834195,
+        "unc_basketball_03-16-23_01_18": 36.65548776697233,
+        "uniandes_dance_011_27": -6.718957053290438,
+        "uniandes_dance_012_15": 8.736938752068369,
+        "upenn_0725_Duet_Violin_1_2_8": 115.56801469590928
+      }
+    },
+    "12take_1200/gaussian minus 72take_2400/history": {
+      "mean_mm": 16.16883145673775,
+      "take_bootstrap_95ci_mm": [
+        -8.072271521297516,
+        42.174516103885786
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 30.338443438212067,
+        "georgiatech_bike_05_2": -67.91943237869827,
+        "iiith_cooking_109_4": -40.71968072255454,
+        "iiith_soccer_004_5": 27.062416260330764,
+        "indiana_music_13_5": 35.90965860861317,
+        "nus_cpr_52_1": -8.033280379683902,
+        "sfu_basketball_03_44": -32.27857831319176,
+        "sfu_basketball_08_15": 17.5541425634313,
+        "unc_basketball_03-16-23_01_18": 66.46080404210983,
+        "uniandes_dance_011_27": 26.16282867149073,
+        "uniandes_dance_012_15": 31.0584560041074,
+        "upenn_0725_Duet_Violin_1_2_8": 108.4301996866862
+      }
+    },
+    "12take_1200/gaussian minus 72take_2400/prior_only": {
+      "mean_mm": -522.1081984207955,
+      "take_bootstrap_95ci_mm": [
+        -620.5611057811312,
+        -431.3266483177374
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -348.09843519705316,
+        "georgiatech_bike_05_2": -446.6356026119655,
+        "iiith_cooking_109_4": -357.5357992666739,
+        "iiith_soccer_004_5": -503.3560517911558,
+        "indiana_music_13_5": -639.8275262055574,
+        "nus_cpr_52_1": -367.5615880330403,
+        "sfu_basketball_03_44": -311.46983126887574,
+        "sfu_basketball_08_15": -560.3451837892887,
+        "unc_basketball_03-16-23_01_18": -544.6655133000127,
+        "uniandes_dance_011_27": -785.8289781499792,
+        "uniandes_dance_012_15": -515.5559143843475,
+        "upenn_0725_Duet_Violin_1_2_8": -884.4179570515951
+      }
+    },
+    "12take_1200/gaussian minus 72take_400/gaussian": {
+      "mean_mm": -77.24643484986859,
+      "take_bootstrap_95ci_mm": [
+        -108.50020668948139,
+        -50.21913192890309
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -73.33253835042319,
+        "georgiatech_bike_05_2": -103.29903064303923,
+        "iiith_cooking_109_4": -64.48077741552284,
+        "iiith_soccer_004_5": -202.81311983179165,
+        "indiana_music_13_5": -83.84005338880749,
+        "nus_cpr_52_1": 15.823951382107225,
+        "sfu_basketball_03_44": -116.64430625350386,
+        "sfu_basketball_08_15": -58.98440101058398,
+        "unc_basketball_03-16-23_01_18": -28.33133284957313,
+        "uniandes_dance_011_27": -71.15820946870025,
+        "uniandes_dance_012_15": -89.73984105145493,
+        "upenn_0725_Duet_Violin_1_2_8": -50.15755931712965
+      }
+    },
+    "12take_1200/gaussian minus 72take_400/history": {
+      "mean_mm": -84.16904776773339,
+      "take_bootstrap_95ci_mm": [
+        -180.4152977496018,
+        13.30143020771169
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -368.2470352596707,
+        "georgiatech_bike_05_2": -365.77984099211517,
+        "iiith_cooking_109_4": -274.7288963035301,
+        "iiith_soccer_004_5": -89.2860135678892,
+        "indiana_music_13_5": 17.01876500447591,
+        "nus_cpr_52_1": 262.7196994357639,
+        "sfu_basketball_03_44": -50.47862146165639,
+        "sfu_basketball_08_15": -27.722413409197827,
+        "unc_basketball_03-16-23_01_18": 13.178148735894126,
+        "uniandes_dance_011_27": -94.18998075414584,
+        "uniandes_dance_012_15": -28.630898072984536,
+        "upenn_0725_Duet_Violin_1_2_8": -3.8814865677445027
+      }
+    },
+    "12take_1200/gaussian minus 72take_400/prior_only": {
+      "mean_mm": -519.7032548892645,
+      "take_bootstrap_95ci_mm": [
+        -649.4766133155352,
+        -401.6888651235604
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -552.128425584016,
+        "georgiatech_bike_05_2": -421.5953508165147,
+        "iiith_cooking_109_4": -514.2627279564186,
+        "iiith_soccer_004_5": -621.7456556390833,
+        "indiana_music_13_5": -618.1365703017623,
+        "nus_cpr_52_1": -307.7153232150608,
+        "sfu_basketball_03_44": -1033.0316456406206,
+        "sfu_basketball_08_15": -779.3681921782318,
+        "unc_basketball_03-16-23_01_18": -397.89040148699723,
+        "uniandes_dance_011_27": -441.3405794073034,
+        "uniandes_dance_012_15": -410.0580260312116,
+        "upenn_0725_Duet_Violin_1_2_8": -139.166160413954
+      }
+    },
+    "12take_1200/history minus 12take_1200/prior_only": {
+      "mean_mm": -130.1045644306842,
+      "take_bootstrap_95ci_mm": [
+        -215.03419665112904,
+        -54.53194758744886
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -140.57661036738642,
+        "georgiatech_bike_05_2": -1.8581132959436104,
+        "iiith_cooking_109_4": -8.201438317475493,
+        "iiith_soccer_004_5": -191.6441559403031,
+        "indiana_music_13_5": 44.831744639078764,
+        "nus_cpr_52_1": -114.25482121220341,
+        "sfu_basketball_03_44": -401.8746509975857,
+        "sfu_basketball_08_15": -291.0822456077293,
+        "unc_basketball_03-16-23_01_18": -329.5633213184497,
+        "uniandes_dance_011_27": -33.73841589468498,
+        "uniandes_dance_012_15": -110.69839040968154,
+        "upenn_0725_Duet_Violin_1_2_8": 17.405645554154034
+      }
+    },
+    "12take_1200/history minus 12take_2400/gaussian": {
+      "mean_mm": 0.22126356584055054,
+      "take_bootstrap_95ci_mm": [
+        -7.461857139917066,
+        8.126752005683059
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -8.401441305654998,
+        "georgiatech_bike_05_2": 12.212606698495392,
+        "iiith_cooking_109_4": -3.5374455346001383,
+        "iiith_soccer_004_5": -26.969686451664643,
+        "indiana_music_13_5": -7.981952045581977,
+        "nus_cpr_52_1": -11.745288877133987,
+        "sfu_basketball_03_44": 4.432058899490926,
+        "sfu_basketball_08_15": 19.81144231160485,
+        "unc_basketball_03-16-23_01_18": 25.75452471132627,
+        "uniandes_dance_011_27": -6.164844187983789,
+        "uniandes_dance_012_15": 3.47445037983087,
+        "upenn_0725_Duet_Violin_1_2_8": 1.7707381919578324
+      }
+    },
+    "12take_1200/history minus 12take_2400/history": {
+      "mean_mm": 0.0,
+      "take_bootstrap_95ci_mm": [
+        0.0,
+        0.0
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 0.0,
+        "georgiatech_bike_05_2": 0.0,
+        "iiith_cooking_109_4": 0.0,
+        "iiith_soccer_004_5": 0.0,
+        "indiana_music_13_5": 0.0,
+        "nus_cpr_52_1": 0.0,
+        "sfu_basketball_03_44": 0.0,
+        "sfu_basketball_08_15": 0.0,
+        "unc_basketball_03-16-23_01_18": 0.0,
+        "uniandes_dance_011_27": 0.0,
+        "uniandes_dance_012_15": 0.0,
+        "upenn_0725_Duet_Violin_1_2_8": 0.0
+      }
+    },
+    "12take_1200/history minus 12take_2400/prior_only": {
+      "mean_mm": -130.1045644306842,
+      "take_bootstrap_95ci_mm": [
+        -215.03419665112904,
+        -54.53194758744886
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -140.57661036738642,
+        "georgiatech_bike_05_2": -1.8581132959436104,
+        "iiith_cooking_109_4": -8.201438317475493,
+        "iiith_soccer_004_5": -191.6441559403031,
+        "indiana_music_13_5": 44.831744639078764,
+        "nus_cpr_52_1": -114.25482121220341,
+        "sfu_basketball_03_44": -401.8746509975857,
+        "sfu_basketball_08_15": -291.0822456077293,
+        "unc_basketball_03-16-23_01_18": -329.5633213184497,
+        "uniandes_dance_011_27": -33.73841589468498,
+        "uniandes_dance_012_15": -110.69839040968154,
+        "upenn_0725_Duet_Violin_1_2_8": 17.405645554154034
+      }
+    },
+    "12take_1200/history minus 12take_400/gaussian": {
+      "mean_mm": -2.970214502311048,
+      "take_bootstrap_95ci_mm": [
+        -35.390729133582404,
+        39.84659559461806
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -24.405940995392967,
+        "georgiatech_bike_05_2": -65.94011076468004,
+        "iiith_cooking_109_4": -1.7675928115844641,
+        "iiith_soccer_004_5": -75.34558516608342,
+        "indiana_music_13_5": 41.41553689462167,
+        "nus_cpr_52_1": 189.47150073581273,
+        "sfu_basketball_03_44": -38.50375832451718,
+        "sfu_basketball_08_15": -39.351466765227144,
+        "unc_basketball_03-16-23_01_18": 18.36902395177765,
+        "uniandes_dance_011_27": -49.31963831583661,
+        "uniandes_dance_012_15": -7.990213514257334,
+        "upenn_0725_Duet_Violin_1_2_8": 17.725671047634535
+      }
+    },
+    "12take_1200/history minus 12take_400/history": {
+      "mean_mm": -10.293979565891204,
+      "take_bootstrap_95ci_mm": [
+        -31.776206366809784,
+        13.039691872655617
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -68.20284895720306,
+        "georgiatech_bike_05_2": -58.844875194408246,
+        "iiith_cooking_109_4": -31.737853318673587,
+        "iiith_soccer_004_5": -32.80917328728569,
+        "indiana_music_13_5": -17.816175474943947,
+        "nus_cpr_52_1": -47.779312981499515,
+        "sfu_basketball_03_44": 30.624103221186857,
+        "sfu_basketball_08_15": 44.07162246704104,
+        "unc_basketball_03-16-23_01_18": 57.69305360582143,
+        "uniandes_dance_011_27": 15.98365304734972,
+        "uniandes_dance_012_15": 6.777872092635562,
+        "upenn_0725_Duet_Violin_1_2_8": -21.48782001071504
+      }
+    },
+    "12take_1200/history minus 12take_400/prior_only": {
+      "mean_mm": -130.1045644306842,
+      "take_bootstrap_95ci_mm": [
+        -215.03419665112904,
+        -54.53194758744886
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -140.57661036738642,
+        "georgiatech_bike_05_2": -1.8581132959436104,
+        "iiith_cooking_109_4": -8.201438317475493,
+        "iiith_soccer_004_5": -191.6441559403031,
+        "indiana_music_13_5": 44.831744639078764,
+        "nus_cpr_52_1": -114.25482121220341,
+        "sfu_basketball_03_44": -401.8746509975857,
+        "sfu_basketball_08_15": -291.0822456077293,
+        "unc_basketball_03-16-23_01_18": -329.5633213184497,
+        "uniandes_dance_011_27": -33.73841589468498,
+        "uniandes_dance_012_15": -110.69839040968154,
+        "upenn_0725_Duet_Violin_1_2_8": 17.405645554154034
+      }
+    },
+    "12take_1200/history minus 72take_1200/gaussian": {
+      "mean_mm": 8.650205403198436,
+      "take_bootstrap_95ci_mm": [
+        -37.31843868479314,
+        67.26639238640114
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 24.840185433846955,
+        "georgiatech_bike_05_2": -53.674904689082325,
+        "iiith_cooking_109_4": -66.93209020120125,
+        "iiith_soccer_004_5": -31.729084636546958,
+        "indiana_music_13_5": 10.6798208872477,
+        "nus_cpr_52_1": 254.6122359946922,
+        "sfu_basketball_03_44": -108.06623184769242,
+        "sfu_basketball_08_15": -32.35011675799336,
+        "unc_basketball_03-16-23_01_18": 48.89492082949039,
+        "uniandes_dance_011_27": -41.85043281272607,
+        "uniandes_dance_012_15": -1.6683230929904482,
+        "upenn_0725_Duet_Violin_1_2_8": 101.04648573133682
+      }
+    },
+    "12take_1200/history minus 72take_1200/history": {
+      "mean_mm": 3.153527105001764,
+      "take_bootstrap_95ci_mm": [
+        -32.02211153477798,
+        39.612194596985255
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 4.683034529509399,
+        "georgiatech_bike_05_2": -89.57750279461894,
+        "iiith_cooking_109_4": -3.2061482252897946,
+        "iiith_soccer_004_5": -102.25499377780488,
+        "indiana_music_13_5": 13.311464012993724,
+        "nus_cpr_52_1": 105.64064167163991,
+        "sfu_basketball_03_44": -42.384151854338484,
+        "sfu_basketball_08_15": 15.9502461610017,
+        "unc_basketball_03-16-23_01_18": 15.781238810221339,
+        "uniandes_dance_011_27": 3.5187754878291173,
+        "uniandes_dance_012_15": -1.4546414410626198,
+        "upenn_0725_Duet_Violin_1_2_8": 117.83436267994068
+      }
+    },
+    "12take_1200/history minus 72take_1200/prior_only": {
+      "mean_mm": -517.6477527818562,
+      "take_bootstrap_95ci_mm": [
+        -680.8207029389747,
+        -352.89483725229894
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -302.41443003901725,
+        "georgiatech_bike_05_2": -312.04424093740954,
+        "iiith_cooking_109_4": -200.36710091343633,
+        "iiith_soccer_004_5": -709.0365276477955,
+        "indiana_music_13_5": -138.30961564381917,
+        "nus_cpr_52_1": -893.5807869240089,
+        "sfu_basketball_03_44": -547.5537040710449,
+        "sfu_basketball_08_15": -867.3253343935365,
+        "unc_basketball_03-16-23_01_18": -904.7111025209781,
+        "uniandes_dance_011_27": -175.17990623756694,
+        "uniandes_dance_012_15": -776.1649077097575,
+        "upenn_0725_Duet_Violin_1_2_8": -385.0853763439037
+      }
+    },
+    "12take_1200/history minus 72take_2400/gaussian": {
+      "mean_mm": 28.347627364853285,
+      "take_bootstrap_95ci_mm": [
+        -5.578083775955953,
+        71.68568001853097
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -50.16100966842083,
+        "georgiatech_bike_05_2": -2.8092001738371266,
+        "iiith_cooking_109_4": -3.693140510276507,
+        "iiith_soccer_004_5": -23.957594793814195,
+        "indiana_music_13_5": 43.77711863341152,
+        "nus_cpr_52_1": 205.68560728850193,
+        "sfu_basketball_03_44": -19.923930358886736,
+        "sfu_basketball_08_15": 12.177324704770655,
+        "unc_basketball_03-16-23_01_18": 62.4100124782986,
+        "uniandes_dance_011_27": -12.883801241274227,
+        "uniandes_dance_012_15": 12.211389131899239,
+        "upenn_0725_Duet_Violin_1_2_8": 117.33875288786712
+      }
+    },
+    "12take_1200/history minus 72take_2400/history": {
+      "mean_mm": 16.390095022578297,
+      "take_bootstrap_95ci_mm": [
+        -9.705760078665657,
+        44.509962012444
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 21.93700213255707,
+        "georgiatech_bike_05_2": -55.70682568020288,
+        "iiith_cooking_109_4": -44.25712625715468,
+        "iiith_soccer_004_5": 0.09272980866612102,
+        "indiana_music_13_5": 27.927706563031194,
+        "nus_cpr_52_1": -19.77856925681789,
+        "sfu_basketball_03_44": -27.846519413700833,
+        "sfu_basketball_08_15": 37.36558487503615,
+        "unc_basketball_03-16-23_01_18": 92.2153287534361,
+        "uniandes_dance_011_27": 19.99798448350694,
+        "uniandes_dance_012_15": 34.53290638393827,
+        "upenn_0725_Duet_Violin_1_2_8": 110.20093787864403
+      }
+    },
+    "12take_1200/history minus 72take_2400/prior_only": {
+      "mean_mm": -521.8869348549548,
+      "take_bootstrap_95ci_mm": [
+        -621.8028232338987,
+        -432.9366216176822
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -356.49987650270816,
+        "georgiatech_bike_05_2": -434.4229959134701,
+        "iiith_cooking_109_4": -361.07324480127403,
+        "iiith_soccer_004_5": -530.3257382428204,
+        "indiana_music_13_5": -647.8094782511395,
+        "nus_cpr_52_1": -379.3068769101743,
+        "sfu_basketball_03_44": -307.0377723693848,
+        "sfu_basketball_08_15": -540.5337414776839,
+        "unc_basketball_03-16-23_01_18": -518.9109885886865,
+        "uniandes_dance_011_27": -791.993822337963,
+        "uniandes_dance_012_15": -512.0814640045166,
+        "upenn_0725_Duet_Violin_1_2_8": -882.6472188596372
+      }
+    },
+    "12take_1200/history minus 72take_400/gaussian": {
+      "mean_mm": -77.02517128402802,
+      "take_bootstrap_95ci_mm": [
+        -113.11946423495255,
+        -47.570537814387556
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -81.73397965607819,
+        "georgiatech_bike_05_2": -91.08642394454384,
+        "iiith_cooking_109_4": -68.01822295012298,
+        "iiith_soccer_004_5": -229.7828062834563,
+        "indiana_music_13_5": -91.82200543438947,
+        "nus_cpr_52_1": 4.078662504973238,
+        "sfu_basketball_03_44": -112.21224735401293,
+        "sfu_basketball_08_15": -39.17295869897913,
+        "unc_basketball_03-16-23_01_18": -2.576808138246861,
+        "uniandes_dance_011_27": -77.32305365668404,
+        "uniandes_dance_012_15": -86.26539067162406,
+        "upenn_0725_Duet_Violin_1_2_8": -48.38682112517182
+      }
+    },
+    "12take_1200/history minus 72take_400/history": {
+      "mean_mm": -83.94778420189282,
+      "take_bootstrap_95ci_mm": [
+        -180.10337952507868,
+        12.37027667657829
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -376.6484765653257,
+        "georgiatech_bike_05_2": -353.5672342936198,
+        "iiith_cooking_109_4": -278.26634183813024,
+        "iiith_soccer_004_5": -116.25570001955384,
+        "indiana_music_13_5": 9.036812958893933,
+        "nus_cpr_52_1": 250.97441055862996,
+        "sfu_basketball_03_44": -46.04656256216546,
+        "sfu_basketball_08_15": -7.910971097592977,
+        "unc_basketball_03-16-23_01_18": 38.932673447220395,
+        "uniandes_dance_011_27": -100.35482494212962,
+        "uniandes_dance_012_15": -25.156447693153666,
+        "upenn_0725_Duet_Violin_1_2_8": -2.1107483757866703
+      }
+    },
+    "12take_1200/history minus 72take_400/prior_only": {
+      "mean_mm": -519.481991323424,
+      "take_bootstrap_95ci_mm": [
+        -649.3684723989464,
+        -400.42160267064605
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -560.529866889671,
+        "georgiatech_bike_05_2": -409.38274411801933,
+        "iiith_cooking_109_4": -517.8001734910188,
+        "iiith_soccer_004_5": -648.715342090748,
+        "indiana_music_13_5": -626.1185223473443,
+        "nus_cpr_52_1": -319.46061209219476,
+        "sfu_basketball_03_44": -1028.5995867411295,
+        "sfu_basketball_08_15": -759.5567498666269,
+        "unc_basketball_03-16-23_01_18": -372.13587677567097,
+        "uniandes_dance_011_27": -447.5054235952872,
+        "uniandes_dance_012_15": -406.5835756513808,
+        "upenn_0725_Duet_Violin_1_2_8": -137.39542222199617
+      }
+    },
+    "12take_1200/prior_only minus 12take_2400/gaussian": {
+      "mean_mm": 130.32582799652477,
+      "take_bootstrap_95ci_mm": [
+        51.3563653357235,
+        218.7313475602939
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 132.17516906173142,
+        "georgiatech_bike_05_2": 14.070719994439003,
+        "iiith_cooking_109_4": 4.663992782875354,
+        "iiith_soccer_004_5": 164.67446948863847,
+        "indiana_music_13_5": -52.81369668466074,
+        "nus_cpr_52_1": 102.50953233506942,
+        "sfu_basketball_03_44": 406.30670989707664,
+        "sfu_basketball_08_15": 310.8936879193342,
+        "unc_basketball_03-16-23_01_18": 355.317846029776,
+        "uniandes_dance_011_27": 27.573571706701188,
+        "uniandes_dance_012_15": 114.1728407895124,
+        "upenn_0725_Duet_Violin_1_2_8": -15.634907362196202
+      }
+    },
+    "12take_1200/prior_only minus 12take_2400/history": {
+      "mean_mm": 130.1045644306842,
+      "take_bootstrap_95ci_mm": [
+        55.0966395266262,
+        215.04128905166817
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 140.57661036738642,
+        "georgiatech_bike_05_2": 1.8581132959436104,
+        "iiith_cooking_109_4": 8.201438317475493,
+        "iiith_soccer_004_5": 191.6441559403031,
+        "indiana_music_13_5": -44.831744639078764,
+        "nus_cpr_52_1": 114.25482121220341,
+        "sfu_basketball_03_44": 401.8746509975857,
+        "sfu_basketball_08_15": 291.0822456077293,
+        "unc_basketball_03-16-23_01_18": 329.5633213184497,
+        "uniandes_dance_011_27": 33.73841589468498,
+        "uniandes_dance_012_15": 110.69839040968154,
+        "upenn_0725_Duet_Violin_1_2_8": -17.405645554154034
+      }
+    },
+    "12take_1200/prior_only minus 12take_2400/prior_only": {
+      "mean_mm": 0.0,
+      "take_bootstrap_95ci_mm": [
+        0.0,
+        0.0
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 0.0,
+        "georgiatech_bike_05_2": 0.0,
+        "iiith_cooking_109_4": 0.0,
+        "iiith_soccer_004_5": 0.0,
+        "indiana_music_13_5": 0.0,
+        "nus_cpr_52_1": 0.0,
+        "sfu_basketball_03_44": 0.0,
+        "sfu_basketball_08_15": 0.0,
+        "unc_basketball_03-16-23_01_18": 0.0,
+        "uniandes_dance_011_27": 0.0,
+        "uniandes_dance_012_15": 0.0,
+        "upenn_0725_Duet_Violin_1_2_8": 0.0
+      }
+    },
+    "12take_1200/prior_only minus 12take_400/gaussian": {
+      "mean_mm": 127.13434992837317,
+      "take_bootstrap_95ci_mm": [
+        48.381000903212,
+        217.26848732748144
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 116.17066937199345,
+        "georgiatech_bike_05_2": -64.08199746873643,
+        "iiith_cooking_109_4": 6.433845505891028,
+        "iiith_soccer_004_5": 116.29857077421968,
+        "indiana_music_13_5": -3.416207744457097,
+        "nus_cpr_52_1": 303.7263219480161,
+        "sfu_basketball_03_44": 363.3708926730685,
+        "sfu_basketball_08_15": 251.73077884250216,
+        "unc_basketball_03-16-23_01_18": 347.93234527022736,
+        "uniandes_dance_011_27": -15.581222421151637,
+        "uniandes_dance_012_15": 102.7081768954242,
+        "upenn_0725_Duet_Violin_1_2_8": 0.32002549348050024
+      }
+    },
+    "12take_1200/prior_only minus 12take_400/history": {
+      "mean_mm": 119.81058486479299,
+      "take_bootstrap_95ci_mm": [
+        31.755027304755316,
+        222.5477263597795
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 72.37376141018336,
+        "georgiatech_bike_05_2": -56.986761898464636,
+        "iiith_cooking_109_4": -23.536415001198094,
+        "iiith_soccer_004_5": 158.83498265301742,
+        "indiana_music_13_5": -62.64792011402271,
+        "nus_cpr_52_1": 66.4755082307039,
+        "sfu_basketball_03_44": 432.49875421877255,
+        "sfu_basketball_08_15": 335.15386807477034,
+        "unc_basketball_03-16-23_01_18": 387.25637492427114,
+        "uniandes_dance_011_27": 49.722068942034696,
+        "uniandes_dance_012_15": 117.4762625023171,
+        "upenn_0725_Duet_Violin_1_2_8": -38.893465564869075
+      }
+    },
+    "12take_1200/prior_only minus 12take_400/prior_only": {
+      "mean_mm": 0.0,
+      "take_bootstrap_95ci_mm": [
+        0.0,
+        0.0
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 0.0,
+        "georgiatech_bike_05_2": 0.0,
+        "iiith_cooking_109_4": 0.0,
+        "iiith_soccer_004_5": 0.0,
+        "indiana_music_13_5": 0.0,
+        "nus_cpr_52_1": 0.0,
+        "sfu_basketball_03_44": 0.0,
+        "sfu_basketball_08_15": 0.0,
+        "unc_basketball_03-16-23_01_18": 0.0,
+        "uniandes_dance_011_27": 0.0,
+        "uniandes_dance_012_15": 0.0,
+        "upenn_0725_Duet_Violin_1_2_8": 0.0
+      }
+    },
+    "12take_1200/prior_only minus 72take_1200/gaussian": {
+      "mean_mm": 138.75476983388265,
+      "take_bootstrap_95ci_mm": [
+        54.822228709562324,
+        229.7344276899173
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 165.41679580123338,
+        "georgiatech_bike_05_2": -51.816791393138715,
+        "iiith_cooking_109_4": -58.730651883725756,
+        "iiith_soccer_004_5": 159.91507130375615,
+        "indiana_music_13_5": -34.15192375183106,
+        "nus_cpr_52_1": 368.86705720689565,
+        "sfu_basketball_03_44": 293.80841914989327,
+        "sfu_basketball_08_15": 258.73212884973594,
+        "unc_basketball_03-16-23_01_18": 378.4582421479401,
+        "uniandes_dance_011_27": -8.112016918041093,
+        "uniandes_dance_012_15": 109.03006731669109,
+        "upenn_0725_Duet_Violin_1_2_8": 83.64084017718278
+      }
+    },
+    "12take_1200/prior_only minus 72take_1200/history": {
+      "mean_mm": 133.25809153568596,
+      "take_bootstrap_95ci_mm": [
+        57.36084104114108,
+        218.45733411930226
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 145.25964489689582,
+        "georgiatech_bike_05_2": -87.71938949867533,
+        "iiith_cooking_109_4": 4.995290092185698,
+        "iiith_soccer_004_5": 89.38916216249822,
+        "indiana_music_13_5": -31.52028062608504,
+        "nus_cpr_52_1": 219.89546288384332,
+        "sfu_basketball_03_44": 359.49049914324723,
+        "sfu_basketball_08_15": 307.032491768731,
+        "unc_basketball_03-16-23_01_18": 345.34456012867105,
+        "uniandes_dance_011_27": 37.257191382514094,
+        "uniandes_dance_012_15": 109.24374896861892,
+        "upenn_0725_Duet_Violin_1_2_8": 100.42871712578665
+      }
+    },
+    "12take_1200/prior_only minus 72take_1200/prior_only": {
+      "mean_mm": -387.543188351172,
+      "take_bootstrap_95ci_mm": [
+        -514.9287686913102,
+        -261.45151129475346
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -161.83781967163083,
+        "georgiatech_bike_05_2": -310.1861276414659,
+        "iiith_cooking_109_4": -192.16566259596084,
+        "iiith_soccer_004_5": -517.3923717074924,
+        "indiana_music_13_5": -183.14136028289795,
+        "nus_cpr_52_1": -779.3259657118055,
+        "sfu_basketball_03_44": -145.67905307345916,
+        "sfu_basketball_08_15": -576.2430887858072,
+        "unc_basketball_03-16-23_01_18": -575.1477812025283,
+        "uniandes_dance_011_27": -141.44149034288196,
+        "uniandes_dance_012_15": -665.4665173000759,
+        "upenn_0725_Duet_Violin_1_2_8": -402.49102189805774
+      }
+    },
+    "12take_1200/prior_only minus 72take_2400/gaussian": {
+      "mean_mm": 158.45219179553746,
+      "take_bootstrap_95ci_mm": [
+        80.55525632198946,
+        249.42578669771737
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 90.41560069896559,
+        "georgiatech_bike_05_2": -0.9510868778935162,
+        "iiith_cooking_109_4": 4.508297807198986,
+        "iiith_soccer_004_5": 167.6865611464889,
+        "indiana_music_13_5": -1.0546260056672452,
+        "nus_cpr_52_1": 319.94042850070537,
+        "sfu_basketball_03_44": 381.95072063869895,
+        "sfu_basketball_08_15": 303.25957031249993,
+        "unc_basketball_03-16-23_01_18": 391.9733337967483,
+        "uniandes_dance_011_27": 20.85461465341075,
+        "uniandes_dance_012_15": 122.90977954158078,
+        "upenn_0725_Duet_Violin_1_2_8": 99.93310733371308
+      }
+    },
+    "12take_1200/prior_only minus 72take_2400/history": {
+      "mean_mm": 146.4946594532625,
+      "take_bootstrap_95ci_mm": [
+        65.14787435001797,
+        240.48604380760662
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 162.5136124999435,
+        "georgiatech_bike_05_2": -53.84871238425927,
+        "iiith_cooking_109_4": -36.05568793967919,
+        "iiith_soccer_004_5": 191.73688574896923,
+        "indiana_music_13_5": -16.90403807604757,
+        "nus_cpr_52_1": 94.47625195538552,
+        "sfu_basketball_03_44": 374.02813158388483,
+        "sfu_basketball_08_15": 328.4478304827654,
+        "unc_basketball_03-16-23_01_18": 421.7786500718858,
+        "uniandes_dance_011_27": 53.73640037819192,
+        "uniandes_dance_012_15": 145.2312967936198,
+        "upenn_0725_Duet_Violin_1_2_8": 92.79529232448999
+      }
+    },
+    "12take_1200/prior_only minus 72take_2400/prior_only": {
+      "mean_mm": -391.7823704242707,
+      "take_bootstrap_95ci_mm": [
+        -546.4659899517342,
+        -241.76201512725268
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -215.92326613532174,
+        "georgiatech_bike_05_2": -432.56488261752656,
+        "iiith_cooking_109_4": -352.87180648379854,
+        "iiith_soccer_004_5": -338.6815823025173,
+        "indiana_music_13_5": -692.6412228902182,
+        "nus_cpr_52_1": -265.0520556979709,
+        "sfu_basketball_03_44": 94.83687862820085,
+        "sfu_basketball_08_15": -249.45149586995456,
+        "unc_basketball_03-16-23_01_18": -189.34766727023668,
+        "uniandes_dance_011_27": -758.255406443278,
+        "uniandes_dance_012_15": -401.3830735948351,
+        "upenn_0725_Duet_Violin_1_2_8": -900.0528644137912
+      }
+    },
+    "12take_1200/prior_only minus 72take_400/gaussian": {
+      "mean_mm": 53.07939314665617,
+      "take_bootstrap_95ci_mm": [
+        -28.60149457837328,
+        144.83638294655597
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 58.84263071130823,
+        "georgiatech_bike_05_2": -89.22831064860023,
+        "iiith_cooking_109_4": -59.81678463264748,
+        "iiith_soccer_004_5": -38.13865034315319,
+        "indiana_music_13_5": -136.65375007346825,
+        "nus_cpr_52_1": 118.33348371717665,
+        "sfu_basketball_03_44": 289.66240364357276,
+        "sfu_basketball_08_15": 251.90928690875018,
+        "unc_basketball_03-16-23_01_18": 326.98651318020285,
+        "uniandes_dance_011_27": -43.58463776199906,
+        "uniandes_dance_012_15": 24.432999738057475,
+        "upenn_0725_Duet_Violin_1_2_8": -65.79246667932586
+      }
+    },
+    "12take_1200/prior_only minus 72take_400/history": {
+      "mean_mm": 46.15678022879138,
+      "take_bootstrap_95ci_mm": [
+        -90.12368030194887,
+        190.96448665136168
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -236.0718661979393,
+        "georgiatech_bike_05_2": -351.7091209976762,
+        "iiith_cooking_109_4": -270.06490352065475,
+        "iiith_soccer_004_5": 75.38845592074927,
+        "indiana_music_13_5": -35.79493168018483,
+        "nus_cpr_52_1": 365.2292317708334,
+        "sfu_basketball_03_44": 355.8280884354202,
+        "sfu_basketball_08_15": 283.1712745101363,
+        "unc_basketball_03-16-23_01_18": 368.4959947656701,
+        "uniandes_dance_011_27": -66.61640904744465,
+        "uniandes_dance_012_15": 85.54194271652787,
+        "upenn_0725_Duet_Violin_1_2_8": -19.516393929940705
+      }
+    },
+    "12take_1200/prior_only minus 72take_400/prior_only": {
+      "mean_mm": -389.3774268927398,
+      "take_bootstrap_95ci_mm": [
+        -491.6066101180182,
+        -284.1207303365073
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -419.95325652228456,
+        "georgiatech_bike_05_2": -407.5246308220758,
+        "iiith_cooking_109_4": -509.5987351735433,
+        "iiith_soccer_004_5": -457.0711861504449,
+        "indiana_music_13_5": -670.950266986423,
+        "nus_cpr_52_1": -205.20579087999135,
+        "sfu_basketball_03_44": -626.7249357435439,
+        "sfu_basketball_08_15": -468.4745042588976,
+        "unc_basketball_03-16-23_01_18": -42.572555457221256,
+        "uniandes_dance_011_27": -413.7670077006022,
+        "uniandes_dance_012_15": -295.8851852416992,
+        "upenn_0725_Duet_Violin_1_2_8": -154.8010677761502
+      }
+    },
+    "12take_2400/gaussian minus 12take_2400/history": {
+      "mean_mm": -0.22126356584055054,
+      "take_bootstrap_95ci_mm": [
+        -8.109237415407929,
+        7.491132818622348
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 8.401441305654998,
+        "georgiatech_bike_05_2": -12.212606698495392,
+        "iiith_cooking_109_4": 3.5374455346001383,
+        "iiith_soccer_004_5": 26.969686451664643,
+        "indiana_music_13_5": 7.981952045581977,
+        "nus_cpr_52_1": 11.745288877133987,
+        "sfu_basketball_03_44": -4.432058899490926,
+        "sfu_basketball_08_15": -19.81144231160485,
+        "unc_basketball_03-16-23_01_18": -25.75452471132627,
+        "uniandes_dance_011_27": 6.164844187983789,
+        "uniandes_dance_012_15": -3.47445037983087,
+        "upenn_0725_Duet_Violin_1_2_8": -1.7707381919578324
+      }
+    },
+    "12take_2400/gaussian minus 12take_2400/prior_only": {
+      "mean_mm": -130.32582799652477,
+      "take_bootstrap_95ci_mm": [
+        -218.5969377382302,
+        -51.010046867676714
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -132.17516906173142,
+        "georgiatech_bike_05_2": -14.070719994439003,
+        "iiith_cooking_109_4": -4.663992782875354,
+        "iiith_soccer_004_5": -164.67446948863847,
+        "indiana_music_13_5": 52.81369668466074,
+        "nus_cpr_52_1": -102.50953233506942,
+        "sfu_basketball_03_44": -406.30670989707664,
+        "sfu_basketball_08_15": -310.8936879193342,
+        "unc_basketball_03-16-23_01_18": -355.317846029776,
+        "uniandes_dance_011_27": -27.573571706701188,
+        "uniandes_dance_012_15": -114.1728407895124,
+        "upenn_0725_Duet_Violin_1_2_8": 15.634907362196202
+      }
+    },
+    "12take_2400/gaussian minus 12take_400/gaussian": {
+      "mean_mm": -3.1914780681516,
+      "take_bootstrap_95ci_mm": [
+        -36.026362492125735,
+        42.55056853588716
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -16.00449968973797,
+        "georgiatech_bike_05_2": -78.15271746317543,
+        "iiith_cooking_109_4": 1.7698527230156742,
+        "iiith_soccer_004_5": -48.37589871441878,
+        "indiana_music_13_5": 49.397488940203644,
+        "nus_cpr_52_1": 201.2167896129467,
+        "sfu_basketball_03_44": -42.935817224008105,
+        "sfu_basketball_08_15": -59.162909076831994,
+        "unc_basketball_03-16-23_01_18": -7.38550075954862,
+        "uniandes_dance_011_27": -43.154794127852824,
+        "uniandes_dance_012_15": -11.464663894088204,
+        "upenn_0725_Duet_Violin_1_2_8": 15.954932855676702
+      }
+    },
+    "12take_2400/gaussian minus 12take_400/history": {
+      "mean_mm": -10.515243131731756,
+      "take_bootstrap_95ci_mm": [
+        -28.899410147137115,
+        8.163063595030064
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -59.80140765154806,
+        "georgiatech_bike_05_2": -71.05748189290364,
+        "iiith_cooking_109_4": -28.200407784073448,
+        "iiith_soccer_004_5": -5.839486835621045,
+        "indiana_music_13_5": -9.83422342936197,
+        "nus_cpr_52_1": -36.03402410436553,
+        "sfu_basketball_03_44": 26.19204432169593,
+        "sfu_basketball_08_15": 24.26018015543619,
+        "unc_basketball_03-16-23_01_18": 31.938528894495164,
+        "uniandes_dance_011_27": 22.148497235333508,
+        "uniandes_dance_012_15": 3.303421712804692,
+        "upenn_0725_Duet_Violin_1_2_8": -23.258558202672873
+      }
+    },
+    "12take_2400/gaussian minus 12take_400/prior_only": {
+      "mean_mm": -130.32582799652477,
+      "take_bootstrap_95ci_mm": [
+        -218.5969377382302,
+        -51.010046867676714
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -132.17516906173142,
+        "georgiatech_bike_05_2": -14.070719994439003,
+        "iiith_cooking_109_4": -4.663992782875354,
+        "iiith_soccer_004_5": -164.67446948863847,
+        "indiana_music_13_5": 52.81369668466074,
+        "nus_cpr_52_1": -102.50953233506942,
+        "sfu_basketball_03_44": -406.30670989707664,
+        "sfu_basketball_08_15": -310.8936879193342,
+        "unc_basketball_03-16-23_01_18": -355.317846029776,
+        "uniandes_dance_011_27": -27.573571706701188,
+        "uniandes_dance_012_15": -114.1728407895124,
+        "upenn_0725_Duet_Violin_1_2_8": 15.634907362196202
+      }
+    },
+    "12take_2400/gaussian minus 72take_1200/gaussian": {
+      "mean_mm": 8.428941837357884,
+      "take_bootstrap_95ci_mm": [
+        -38.67602693298718,
+        69.1191473537021
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 33.24162673950195,
+        "georgiatech_bike_05_2": -65.88751138757772,
+        "iiith_cooking_109_4": -63.39464466660111,
+        "iiith_soccer_004_5": -4.759398184882315,
+        "indiana_music_13_5": 18.661772932829678,
+        "nus_cpr_52_1": 266.3575248718262,
+        "sfu_basketball_03_44": -112.49829074718335,
+        "sfu_basketball_08_15": -52.16155906959821,
+        "unc_basketball_03-16-23_01_18": 23.14039611816412,
+        "uniandes_dance_011_27": -35.68558862474228,
+        "uniandes_dance_012_15": -5.142773472821318,
+        "upenn_0725_Duet_Violin_1_2_8": 99.27574753937898
+      }
+    },
+    "12take_2400/gaussian minus 72take_1200/history": {
+      "mean_mm": 2.9322635391612124,
+      "take_bootstrap_95ci_mm": [
+        -31.4085331634239,
+        40.750899832337
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 13.084475835164397,
+        "georgiatech_bike_05_2": -101.79010949311433,
+        "iiith_cooking_109_4": 0.33129730931034373,
+        "iiith_soccer_004_5": -75.28530732614024,
+        "indiana_music_13_5": 21.2934160585757,
+        "nus_cpr_52_1": 117.3859305487739,
+        "sfu_basketball_03_44": -46.81621075382941,
+        "sfu_basketball_08_15": -3.861196150603149,
+        "unc_basketball_03-16-23_01_18": -9.97328590110493,
+        "uniandes_dance_011_27": 9.683619675812906,
+        "uniandes_dance_012_15": -4.92909182089349,
+        "upenn_0725_Duet_Violin_1_2_8": 116.06362448798285
+      }
+    },
+    "12take_2400/gaussian minus 72take_1200/prior_only": {
+      "mean_mm": -517.8690163476969,
+      "take_bootstrap_95ci_mm": [
+        -683.6873178464394,
+        -351.3453893090473
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -294.01298873336225,
+        "georgiatech_bike_05_2": -324.25684763590493,
+        "iiith_cooking_109_4": -196.8296553788362,
+        "iiith_soccer_004_5": -682.0668411961309,
+        "indiana_music_13_5": -130.3276635982372,
+        "nus_cpr_52_1": -881.8354980468748,
+        "sfu_basketball_03_44": -551.9857629705358,
+        "sfu_basketball_08_15": -887.1367767051414,
+        "unc_basketball_03-16-23_01_18": -930.4656272323043,
+        "uniandes_dance_011_27": -169.01506204958315,
+        "uniandes_dance_012_15": -779.6393580895883,
+        "upenn_0725_Duet_Violin_1_2_8": -386.85611453586154
+      }
+    },
+    "12take_2400/gaussian minus 72take_2400/gaussian": {
+      "mean_mm": 28.126363799012736,
+      "take_bootstrap_95ci_mm": [
+        -5.809238572179538,
+        72.62207958197887
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -41.75956836276583,
+        "georgiatech_bike_05_2": -15.021806872332519,
+        "iiith_cooking_109_4": -0.15569497567636859,
+        "iiith_soccer_004_5": 3.0120916578504477,
+        "indiana_music_13_5": 51.759070678993496,
+        "nus_cpr_52_1": 217.43089616563591,
+        "sfu_basketball_03_44": -24.35598925837766,
+        "sfu_basketball_08_15": -7.634117606834195,
+        "unc_basketball_03-16-23_01_18": 36.65548776697233,
+        "uniandes_dance_011_27": -6.718957053290438,
+        "uniandes_dance_012_15": 8.736938752068369,
+        "upenn_0725_Duet_Violin_1_2_8": 115.56801469590928
+      }
+    },
+    "12take_2400/gaussian minus 72take_2400/history": {
+      "mean_mm": 16.16883145673775,
+      "take_bootstrap_95ci_mm": [
+        -8.072271521297516,
+        42.174516103885786
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 30.338443438212067,
+        "georgiatech_bike_05_2": -67.91943237869827,
+        "iiith_cooking_109_4": -40.71968072255454,
+        "iiith_soccer_004_5": 27.062416260330764,
+        "indiana_music_13_5": 35.90965860861317,
+        "nus_cpr_52_1": -8.033280379683902,
+        "sfu_basketball_03_44": -32.27857831319176,
+        "sfu_basketball_08_15": 17.5541425634313,
+        "unc_basketball_03-16-23_01_18": 66.46080404210983,
+        "uniandes_dance_011_27": 26.16282867149073,
+        "uniandes_dance_012_15": 31.0584560041074,
+        "upenn_0725_Duet_Violin_1_2_8": 108.4301996866862
+      }
+    },
+    "12take_2400/gaussian minus 72take_2400/prior_only": {
+      "mean_mm": -522.1081984207955,
+      "take_bootstrap_95ci_mm": [
+        -620.5611057811312,
+        -431.3266483177374
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -348.09843519705316,
+        "georgiatech_bike_05_2": -446.6356026119655,
+        "iiith_cooking_109_4": -357.5357992666739,
+        "iiith_soccer_004_5": -503.3560517911558,
+        "indiana_music_13_5": -639.8275262055574,
+        "nus_cpr_52_1": -367.5615880330403,
+        "sfu_basketball_03_44": -311.46983126887574,
+        "sfu_basketball_08_15": -560.3451837892887,
+        "unc_basketball_03-16-23_01_18": -544.6655133000127,
+        "uniandes_dance_011_27": -785.8289781499792,
+        "uniandes_dance_012_15": -515.5559143843475,
+        "upenn_0725_Duet_Violin_1_2_8": -884.4179570515951
+      }
+    },
+    "12take_2400/gaussian minus 72take_400/gaussian": {
+      "mean_mm": -77.24643484986859,
+      "take_bootstrap_95ci_mm": [
+        -108.50020668948139,
+        -50.21913192890309
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -73.33253835042319,
+        "georgiatech_bike_05_2": -103.29903064303923,
+        "iiith_cooking_109_4": -64.48077741552284,
+        "iiith_soccer_004_5": -202.81311983179165,
+        "indiana_music_13_5": -83.84005338880749,
+        "nus_cpr_52_1": 15.823951382107225,
+        "sfu_basketball_03_44": -116.64430625350386,
+        "sfu_basketball_08_15": -58.98440101058398,
+        "unc_basketball_03-16-23_01_18": -28.33133284957313,
+        "uniandes_dance_011_27": -71.15820946870025,
+        "uniandes_dance_012_15": -89.73984105145493,
+        "upenn_0725_Duet_Violin_1_2_8": -50.15755931712965
+      }
+    },
+    "12take_2400/gaussian minus 72take_400/history": {
+      "mean_mm": -84.16904776773339,
+      "take_bootstrap_95ci_mm": [
+        -180.4152977496018,
+        13.30143020771169
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -368.2470352596707,
+        "georgiatech_bike_05_2": -365.77984099211517,
+        "iiith_cooking_109_4": -274.7288963035301,
+        "iiith_soccer_004_5": -89.2860135678892,
+        "indiana_music_13_5": 17.01876500447591,
+        "nus_cpr_52_1": 262.7196994357639,
+        "sfu_basketball_03_44": -50.47862146165639,
+        "sfu_basketball_08_15": -27.722413409197827,
+        "unc_basketball_03-16-23_01_18": 13.178148735894126,
+        "uniandes_dance_011_27": -94.18998075414584,
+        "uniandes_dance_012_15": -28.630898072984536,
+        "upenn_0725_Duet_Violin_1_2_8": -3.8814865677445027
+      }
+    },
+    "12take_2400/gaussian minus 72take_400/prior_only": {
+      "mean_mm": -519.7032548892645,
+      "take_bootstrap_95ci_mm": [
+        -649.4766133155352,
+        -401.6888651235604
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -552.128425584016,
+        "georgiatech_bike_05_2": -421.5953508165147,
+        "iiith_cooking_109_4": -514.2627279564186,
+        "iiith_soccer_004_5": -621.7456556390833,
+        "indiana_music_13_5": -618.1365703017623,
+        "nus_cpr_52_1": -307.7153232150608,
+        "sfu_basketball_03_44": -1033.0316456406206,
+        "sfu_basketball_08_15": -779.3681921782318,
+        "unc_basketball_03-16-23_01_18": -397.89040148699723,
+        "uniandes_dance_011_27": -441.3405794073034,
+        "uniandes_dance_012_15": -410.0580260312116,
+        "upenn_0725_Duet_Violin_1_2_8": -139.166160413954
+      }
+    },
+    "12take_2400/history minus 12take_2400/prior_only": {
+      "mean_mm": -130.1045644306842,
+      "take_bootstrap_95ci_mm": [
+        -215.03419665112904,
+        -54.53194758744886
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -140.57661036738642,
+        "georgiatech_bike_05_2": -1.8581132959436104,
+        "iiith_cooking_109_4": -8.201438317475493,
+        "iiith_soccer_004_5": -191.6441559403031,
+        "indiana_music_13_5": 44.831744639078764,
+        "nus_cpr_52_1": -114.25482121220341,
+        "sfu_basketball_03_44": -401.8746509975857,
+        "sfu_basketball_08_15": -291.0822456077293,
+        "unc_basketball_03-16-23_01_18": -329.5633213184497,
+        "uniandes_dance_011_27": -33.73841589468498,
+        "uniandes_dance_012_15": -110.69839040968154,
+        "upenn_0725_Duet_Violin_1_2_8": 17.405645554154034
+      }
+    },
+    "12take_2400/history minus 12take_400/gaussian": {
+      "mean_mm": -2.970214502311048,
+      "take_bootstrap_95ci_mm": [
+        -35.390729133582404,
+        39.84659559461806
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -24.405940995392967,
+        "georgiatech_bike_05_2": -65.94011076468004,
+        "iiith_cooking_109_4": -1.7675928115844641,
+        "iiith_soccer_004_5": -75.34558516608342,
+        "indiana_music_13_5": 41.41553689462167,
+        "nus_cpr_52_1": 189.47150073581273,
+        "sfu_basketball_03_44": -38.50375832451718,
+        "sfu_basketball_08_15": -39.351466765227144,
+        "unc_basketball_03-16-23_01_18": 18.36902395177765,
+        "uniandes_dance_011_27": -49.31963831583661,
+        "uniandes_dance_012_15": -7.990213514257334,
+        "upenn_0725_Duet_Violin_1_2_8": 17.725671047634535
+      }
+    },
+    "12take_2400/history minus 12take_400/history": {
+      "mean_mm": -10.293979565891204,
+      "take_bootstrap_95ci_mm": [
+        -31.776206366809784,
+        13.039691872655617
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -68.20284895720306,
+        "georgiatech_bike_05_2": -58.844875194408246,
+        "iiith_cooking_109_4": -31.737853318673587,
+        "iiith_soccer_004_5": -32.80917328728569,
+        "indiana_music_13_5": -17.816175474943947,
+        "nus_cpr_52_1": -47.779312981499515,
+        "sfu_basketball_03_44": 30.624103221186857,
+        "sfu_basketball_08_15": 44.07162246704104,
+        "unc_basketball_03-16-23_01_18": 57.69305360582143,
+        "uniandes_dance_011_27": 15.98365304734972,
+        "uniandes_dance_012_15": 6.777872092635562,
+        "upenn_0725_Duet_Violin_1_2_8": -21.48782001071504
+      }
+    },
+    "12take_2400/history minus 12take_400/prior_only": {
+      "mean_mm": -130.1045644306842,
+      "take_bootstrap_95ci_mm": [
+        -215.03419665112904,
+        -54.53194758744886
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -140.57661036738642,
+        "georgiatech_bike_05_2": -1.8581132959436104,
+        "iiith_cooking_109_4": -8.201438317475493,
+        "iiith_soccer_004_5": -191.6441559403031,
+        "indiana_music_13_5": 44.831744639078764,
+        "nus_cpr_52_1": -114.25482121220341,
+        "sfu_basketball_03_44": -401.8746509975857,
+        "sfu_basketball_08_15": -291.0822456077293,
+        "unc_basketball_03-16-23_01_18": -329.5633213184497,
+        "uniandes_dance_011_27": -33.73841589468498,
+        "uniandes_dance_012_15": -110.69839040968154,
+        "upenn_0725_Duet_Violin_1_2_8": 17.405645554154034
+      }
+    },
+    "12take_2400/history minus 72take_1200/gaussian": {
+      "mean_mm": 8.650205403198436,
+      "take_bootstrap_95ci_mm": [
+        -37.31843868479314,
+        67.26639238640114
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 24.840185433846955,
+        "georgiatech_bike_05_2": -53.674904689082325,
+        "iiith_cooking_109_4": -66.93209020120125,
+        "iiith_soccer_004_5": -31.729084636546958,
+        "indiana_music_13_5": 10.6798208872477,
+        "nus_cpr_52_1": 254.6122359946922,
+        "sfu_basketball_03_44": -108.06623184769242,
+        "sfu_basketball_08_15": -32.35011675799336,
+        "unc_basketball_03-16-23_01_18": 48.89492082949039,
+        "uniandes_dance_011_27": -41.85043281272607,
+        "uniandes_dance_012_15": -1.6683230929904482,
+        "upenn_0725_Duet_Violin_1_2_8": 101.04648573133682
+      }
+    },
+    "12take_2400/history minus 72take_1200/history": {
+      "mean_mm": 3.153527105001764,
+      "take_bootstrap_95ci_mm": [
+        -32.02211153477798,
+        39.612194596985255
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 4.683034529509399,
+        "georgiatech_bike_05_2": -89.57750279461894,
+        "iiith_cooking_109_4": -3.2061482252897946,
+        "iiith_soccer_004_5": -102.25499377780488,
+        "indiana_music_13_5": 13.311464012993724,
+        "nus_cpr_52_1": 105.64064167163991,
+        "sfu_basketball_03_44": -42.384151854338484,
+        "sfu_basketball_08_15": 15.9502461610017,
+        "unc_basketball_03-16-23_01_18": 15.781238810221339,
+        "uniandes_dance_011_27": 3.5187754878291173,
+        "uniandes_dance_012_15": -1.4546414410626198,
+        "upenn_0725_Duet_Violin_1_2_8": 117.83436267994068
+      }
+    },
+    "12take_2400/history minus 72take_1200/prior_only": {
+      "mean_mm": -517.6477527818562,
+      "take_bootstrap_95ci_mm": [
+        -680.8207029389747,
+        -352.89483725229894
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -302.41443003901725,
+        "georgiatech_bike_05_2": -312.04424093740954,
+        "iiith_cooking_109_4": -200.36710091343633,
+        "iiith_soccer_004_5": -709.0365276477955,
+        "indiana_music_13_5": -138.30961564381917,
+        "nus_cpr_52_1": -893.5807869240089,
+        "sfu_basketball_03_44": -547.5537040710449,
+        "sfu_basketball_08_15": -867.3253343935365,
+        "unc_basketball_03-16-23_01_18": -904.7111025209781,
+        "uniandes_dance_011_27": -175.17990623756694,
+        "uniandes_dance_012_15": -776.1649077097575,
+        "upenn_0725_Duet_Violin_1_2_8": -385.0853763439037
+      }
+    },
+    "12take_2400/history minus 72take_2400/gaussian": {
+      "mean_mm": 28.347627364853285,
+      "take_bootstrap_95ci_mm": [
+        -5.578083775955953,
+        71.68568001853097
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -50.16100966842083,
+        "georgiatech_bike_05_2": -2.8092001738371266,
+        "iiith_cooking_109_4": -3.693140510276507,
+        "iiith_soccer_004_5": -23.957594793814195,
+        "indiana_music_13_5": 43.77711863341152,
+        "nus_cpr_52_1": 205.68560728850193,
+        "sfu_basketball_03_44": -19.923930358886736,
+        "sfu_basketball_08_15": 12.177324704770655,
+        "unc_basketball_03-16-23_01_18": 62.4100124782986,
+        "uniandes_dance_011_27": -12.883801241274227,
+        "uniandes_dance_012_15": 12.211389131899239,
+        "upenn_0725_Duet_Violin_1_2_8": 117.33875288786712
+      }
+    },
+    "12take_2400/history minus 72take_2400/history": {
+      "mean_mm": 16.390095022578297,
+      "take_bootstrap_95ci_mm": [
+        -9.705760078665657,
+        44.509962012444
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 21.93700213255707,
+        "georgiatech_bike_05_2": -55.70682568020288,
+        "iiith_cooking_109_4": -44.25712625715468,
+        "iiith_soccer_004_5": 0.09272980866612102,
+        "indiana_music_13_5": 27.927706563031194,
+        "nus_cpr_52_1": -19.77856925681789,
+        "sfu_basketball_03_44": -27.846519413700833,
+        "sfu_basketball_08_15": 37.36558487503615,
+        "unc_basketball_03-16-23_01_18": 92.2153287534361,
+        "uniandes_dance_011_27": 19.99798448350694,
+        "uniandes_dance_012_15": 34.53290638393827,
+        "upenn_0725_Duet_Violin_1_2_8": 110.20093787864403
+      }
+    },
+    "12take_2400/history minus 72take_2400/prior_only": {
+      "mean_mm": -521.8869348549548,
+      "take_bootstrap_95ci_mm": [
+        -621.8028232338987,
+        -432.9366216176822
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -356.49987650270816,
+        "georgiatech_bike_05_2": -434.4229959134701,
+        "iiith_cooking_109_4": -361.07324480127403,
+        "iiith_soccer_004_5": -530.3257382428204,
+        "indiana_music_13_5": -647.8094782511395,
+        "nus_cpr_52_1": -379.3068769101743,
+        "sfu_basketball_03_44": -307.0377723693848,
+        "sfu_basketball_08_15": -540.5337414776839,
+        "unc_basketball_03-16-23_01_18": -518.9109885886865,
+        "uniandes_dance_011_27": -791.993822337963,
+        "uniandes_dance_012_15": -512.0814640045166,
+        "upenn_0725_Duet_Violin_1_2_8": -882.6472188596372
+      }
+    },
+    "12take_2400/history minus 72take_400/gaussian": {
+      "mean_mm": -77.02517128402802,
+      "take_bootstrap_95ci_mm": [
+        -113.11946423495255,
+        -47.570537814387556
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -81.73397965607819,
+        "georgiatech_bike_05_2": -91.08642394454384,
+        "iiith_cooking_109_4": -68.01822295012298,
+        "iiith_soccer_004_5": -229.7828062834563,
+        "indiana_music_13_5": -91.82200543438947,
+        "nus_cpr_52_1": 4.078662504973238,
+        "sfu_basketball_03_44": -112.21224735401293,
+        "sfu_basketball_08_15": -39.17295869897913,
+        "unc_basketball_03-16-23_01_18": -2.576808138246861,
+        "uniandes_dance_011_27": -77.32305365668404,
+        "uniandes_dance_012_15": -86.26539067162406,
+        "upenn_0725_Duet_Violin_1_2_8": -48.38682112517182
+      }
+    },
+    "12take_2400/history minus 72take_400/history": {
+      "mean_mm": -83.94778420189282,
+      "take_bootstrap_95ci_mm": [
+        -180.10337952507868,
+        12.37027667657829
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -376.6484765653257,
+        "georgiatech_bike_05_2": -353.5672342936198,
+        "iiith_cooking_109_4": -278.26634183813024,
+        "iiith_soccer_004_5": -116.25570001955384,
+        "indiana_music_13_5": 9.036812958893933,
+        "nus_cpr_52_1": 250.97441055862996,
+        "sfu_basketball_03_44": -46.04656256216546,
+        "sfu_basketball_08_15": -7.910971097592977,
+        "unc_basketball_03-16-23_01_18": 38.932673447220395,
+        "uniandes_dance_011_27": -100.35482494212962,
+        "uniandes_dance_012_15": -25.156447693153666,
+        "upenn_0725_Duet_Violin_1_2_8": -2.1107483757866703
+      }
+    },
+    "12take_2400/history minus 72take_400/prior_only": {
+      "mean_mm": -519.481991323424,
+      "take_bootstrap_95ci_mm": [
+        -649.3684723989464,
+        -400.42160267064605
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -560.529866889671,
+        "georgiatech_bike_05_2": -409.38274411801933,
+        "iiith_cooking_109_4": -517.8001734910188,
+        "iiith_soccer_004_5": -648.715342090748,
+        "indiana_music_13_5": -626.1185223473443,
+        "nus_cpr_52_1": -319.46061209219476,
+        "sfu_basketball_03_44": -1028.5995867411295,
+        "sfu_basketball_08_15": -759.5567498666269,
+        "unc_basketball_03-16-23_01_18": -372.13587677567097,
+        "uniandes_dance_011_27": -447.5054235952872,
+        "uniandes_dance_012_15": -406.5835756513808,
+        "upenn_0725_Duet_Violin_1_2_8": -137.39542222199617
+      }
+    },
+    "12take_2400/prior_only minus 12take_400/gaussian": {
+      "mean_mm": 127.13434992837317,
+      "take_bootstrap_95ci_mm": [
+        48.381000903212,
+        217.26848732748144
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 116.17066937199345,
+        "georgiatech_bike_05_2": -64.08199746873643,
+        "iiith_cooking_109_4": 6.433845505891028,
+        "iiith_soccer_004_5": 116.29857077421968,
+        "indiana_music_13_5": -3.416207744457097,
+        "nus_cpr_52_1": 303.7263219480161,
+        "sfu_basketball_03_44": 363.3708926730685,
+        "sfu_basketball_08_15": 251.73077884250216,
+        "unc_basketball_03-16-23_01_18": 347.93234527022736,
+        "uniandes_dance_011_27": -15.581222421151637,
+        "uniandes_dance_012_15": 102.7081768954242,
+        "upenn_0725_Duet_Violin_1_2_8": 0.32002549348050024
+      }
+    },
+    "12take_2400/prior_only minus 12take_400/history": {
+      "mean_mm": 119.81058486479299,
+      "take_bootstrap_95ci_mm": [
+        31.755027304755316,
+        222.5477263597795
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 72.37376141018336,
+        "georgiatech_bike_05_2": -56.986761898464636,
+        "iiith_cooking_109_4": -23.536415001198094,
+        "iiith_soccer_004_5": 158.83498265301742,
+        "indiana_music_13_5": -62.64792011402271,
+        "nus_cpr_52_1": 66.4755082307039,
+        "sfu_basketball_03_44": 432.49875421877255,
+        "sfu_basketball_08_15": 335.15386807477034,
+        "unc_basketball_03-16-23_01_18": 387.25637492427114,
+        "uniandes_dance_011_27": 49.722068942034696,
+        "uniandes_dance_012_15": 117.4762625023171,
+        "upenn_0725_Duet_Violin_1_2_8": -38.893465564869075
+      }
+    },
+    "12take_2400/prior_only minus 12take_400/prior_only": {
+      "mean_mm": 0.0,
+      "take_bootstrap_95ci_mm": [
+        0.0,
+        0.0
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 0.0,
+        "georgiatech_bike_05_2": 0.0,
+        "iiith_cooking_109_4": 0.0,
+        "iiith_soccer_004_5": 0.0,
+        "indiana_music_13_5": 0.0,
+        "nus_cpr_52_1": 0.0,
+        "sfu_basketball_03_44": 0.0,
+        "sfu_basketball_08_15": 0.0,
+        "unc_basketball_03-16-23_01_18": 0.0,
+        "uniandes_dance_011_27": 0.0,
+        "uniandes_dance_012_15": 0.0,
+        "upenn_0725_Duet_Violin_1_2_8": 0.0
+      }
+    },
+    "12take_2400/prior_only minus 72take_1200/gaussian": {
+      "mean_mm": 138.75476983388265,
+      "take_bootstrap_95ci_mm": [
+        54.822228709562324,
+        229.7344276899173
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 165.41679580123338,
+        "georgiatech_bike_05_2": -51.816791393138715,
+        "iiith_cooking_109_4": -58.730651883725756,
+        "iiith_soccer_004_5": 159.91507130375615,
+        "indiana_music_13_5": -34.15192375183106,
+        "nus_cpr_52_1": 368.86705720689565,
+        "sfu_basketball_03_44": 293.80841914989327,
+        "sfu_basketball_08_15": 258.73212884973594,
+        "unc_basketball_03-16-23_01_18": 378.4582421479401,
+        "uniandes_dance_011_27": -8.112016918041093,
+        "uniandes_dance_012_15": 109.03006731669109,
+        "upenn_0725_Duet_Violin_1_2_8": 83.64084017718278
+      }
+    },
+    "12take_2400/prior_only minus 72take_1200/history": {
+      "mean_mm": 133.25809153568596,
+      "take_bootstrap_95ci_mm": [
+        57.36084104114108,
+        218.45733411930226
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 145.25964489689582,
+        "georgiatech_bike_05_2": -87.71938949867533,
+        "iiith_cooking_109_4": 4.995290092185698,
+        "iiith_soccer_004_5": 89.38916216249822,
+        "indiana_music_13_5": -31.52028062608504,
+        "nus_cpr_52_1": 219.89546288384332,
+        "sfu_basketball_03_44": 359.49049914324723,
+        "sfu_basketball_08_15": 307.032491768731,
+        "unc_basketball_03-16-23_01_18": 345.34456012867105,
+        "uniandes_dance_011_27": 37.257191382514094,
+        "uniandes_dance_012_15": 109.24374896861892,
+        "upenn_0725_Duet_Violin_1_2_8": 100.42871712578665
+      }
+    },
+    "12take_2400/prior_only minus 72take_1200/prior_only": {
+      "mean_mm": -387.543188351172,
+      "take_bootstrap_95ci_mm": [
+        -514.9287686913102,
+        -261.45151129475346
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -161.83781967163083,
+        "georgiatech_bike_05_2": -310.1861276414659,
+        "iiith_cooking_109_4": -192.16566259596084,
+        "iiith_soccer_004_5": -517.3923717074924,
+        "indiana_music_13_5": -183.14136028289795,
+        "nus_cpr_52_1": -779.3259657118055,
+        "sfu_basketball_03_44": -145.67905307345916,
+        "sfu_basketball_08_15": -576.2430887858072,
+        "unc_basketball_03-16-23_01_18": -575.1477812025283,
+        "uniandes_dance_011_27": -141.44149034288196,
+        "uniandes_dance_012_15": -665.4665173000759,
+        "upenn_0725_Duet_Violin_1_2_8": -402.49102189805774
+      }
+    },
+    "12take_2400/prior_only minus 72take_2400/gaussian": {
+      "mean_mm": 158.45219179553746,
+      "take_bootstrap_95ci_mm": [
+        80.55525632198946,
+        249.42578669771737
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 90.41560069896559,
+        "georgiatech_bike_05_2": -0.9510868778935162,
+        "iiith_cooking_109_4": 4.508297807198986,
+        "iiith_soccer_004_5": 167.6865611464889,
+        "indiana_music_13_5": -1.0546260056672452,
+        "nus_cpr_52_1": 319.94042850070537,
+        "sfu_basketball_03_44": 381.95072063869895,
+        "sfu_basketball_08_15": 303.25957031249993,
+        "unc_basketball_03-16-23_01_18": 391.9733337967483,
+        "uniandes_dance_011_27": 20.85461465341075,
+        "uniandes_dance_012_15": 122.90977954158078,
+        "upenn_0725_Duet_Violin_1_2_8": 99.93310733371308
+      }
+    },
+    "12take_2400/prior_only minus 72take_2400/history": {
+      "mean_mm": 146.4946594532625,
+      "take_bootstrap_95ci_mm": [
+        65.14787435001797,
+        240.48604380760662
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 162.5136124999435,
+        "georgiatech_bike_05_2": -53.84871238425927,
+        "iiith_cooking_109_4": -36.05568793967919,
+        "iiith_soccer_004_5": 191.73688574896923,
+        "indiana_music_13_5": -16.90403807604757,
+        "nus_cpr_52_1": 94.47625195538552,
+        "sfu_basketball_03_44": 374.02813158388483,
+        "sfu_basketball_08_15": 328.4478304827654,
+        "unc_basketball_03-16-23_01_18": 421.7786500718858,
+        "uniandes_dance_011_27": 53.73640037819192,
+        "uniandes_dance_012_15": 145.2312967936198,
+        "upenn_0725_Duet_Violin_1_2_8": 92.79529232448999
+      }
+    },
+    "12take_2400/prior_only minus 72take_2400/prior_only": {
+      "mean_mm": -391.7823704242707,
+      "take_bootstrap_95ci_mm": [
+        -546.4659899517342,
+        -241.76201512725268
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -215.92326613532174,
+        "georgiatech_bike_05_2": -432.56488261752656,
+        "iiith_cooking_109_4": -352.87180648379854,
+        "iiith_soccer_004_5": -338.6815823025173,
+        "indiana_music_13_5": -692.6412228902182,
+        "nus_cpr_52_1": -265.0520556979709,
+        "sfu_basketball_03_44": 94.83687862820085,
+        "sfu_basketball_08_15": -249.45149586995456,
+        "unc_basketball_03-16-23_01_18": -189.34766727023668,
+        "uniandes_dance_011_27": -758.255406443278,
+        "uniandes_dance_012_15": -401.3830735948351,
+        "upenn_0725_Duet_Violin_1_2_8": -900.0528644137912
+      }
+    },
+    "12take_2400/prior_only minus 72take_400/gaussian": {
+      "mean_mm": 53.07939314665617,
+      "take_bootstrap_95ci_mm": [
+        -28.60149457837328,
+        144.83638294655597
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 58.84263071130823,
+        "georgiatech_bike_05_2": -89.22831064860023,
+        "iiith_cooking_109_4": -59.81678463264748,
+        "iiith_soccer_004_5": -38.13865034315319,
+        "indiana_music_13_5": -136.65375007346825,
+        "nus_cpr_52_1": 118.33348371717665,
+        "sfu_basketball_03_44": 289.66240364357276,
+        "sfu_basketball_08_15": 251.90928690875018,
+        "unc_basketball_03-16-23_01_18": 326.98651318020285,
+        "uniandes_dance_011_27": -43.58463776199906,
+        "uniandes_dance_012_15": 24.432999738057475,
+        "upenn_0725_Duet_Violin_1_2_8": -65.79246667932586
+      }
+    },
+    "12take_2400/prior_only minus 72take_400/history": {
+      "mean_mm": 46.15678022879138,
+      "take_bootstrap_95ci_mm": [
+        -90.12368030194887,
+        190.96448665136168
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -236.0718661979393,
+        "georgiatech_bike_05_2": -351.7091209976762,
+        "iiith_cooking_109_4": -270.06490352065475,
+        "iiith_soccer_004_5": 75.38845592074927,
+        "indiana_music_13_5": -35.79493168018483,
+        "nus_cpr_52_1": 365.2292317708334,
+        "sfu_basketball_03_44": 355.8280884354202,
+        "sfu_basketball_08_15": 283.1712745101363,
+        "unc_basketball_03-16-23_01_18": 368.4959947656701,
+        "uniandes_dance_011_27": -66.61640904744465,
+        "uniandes_dance_012_15": 85.54194271652787,
+        "upenn_0725_Duet_Violin_1_2_8": -19.516393929940705
+      }
+    },
+    "12take_2400/prior_only minus 72take_400/prior_only": {
+      "mean_mm": -389.3774268927398,
+      "take_bootstrap_95ci_mm": [
+        -491.6066101180182,
+        -284.1207303365073
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -419.95325652228456,
+        "georgiatech_bike_05_2": -407.5246308220758,
+        "iiith_cooking_109_4": -509.5987351735433,
+        "iiith_soccer_004_5": -457.0711861504449,
+        "indiana_music_13_5": -670.950266986423,
+        "nus_cpr_52_1": -205.20579087999135,
+        "sfu_basketball_03_44": -626.7249357435439,
+        "sfu_basketball_08_15": -468.4745042588976,
+        "unc_basketball_03-16-23_01_18": -42.572555457221256,
+        "uniandes_dance_011_27": -413.7670077006022,
+        "uniandes_dance_012_15": -295.8851852416992,
+        "upenn_0725_Duet_Violin_1_2_8": -154.8010677761502
+      }
+    },
+    "12take_400/gaussian minus 12take_400/history": {
+      "mean_mm": -7.323765063580157,
+      "take_bootstrap_95ci_mm": [
+        -59.89980606856168,
+        35.50663566000669
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -43.79690796181009,
+        "georgiatech_bike_05_2": 7.095235570271797,
+        "iiith_cooking_109_4": -29.970260507089122,
+        "iiith_soccer_004_5": 42.536411878797736,
+        "indiana_music_13_5": -59.231712369565614,
+        "nus_cpr_52_1": -237.25081371731224,
+        "sfu_basketball_03_44": 69.12786154570404,
+        "sfu_basketball_08_15": 83.42308923226818,
+        "unc_basketball_03-16-23_01_18": 39.324029654043784,
+        "uniandes_dance_011_27": 65.30329136318633,
+        "uniandes_dance_012_15": 14.768085606892896,
+        "upenn_0725_Duet_Violin_1_2_8": -39.213491058349575
+      }
+    },
+    "12take_400/gaussian minus 12take_400/prior_only": {
+      "mean_mm": -127.13434992837317,
+      "take_bootstrap_95ci_mm": [
+        -216.87434460969612,
+        -48.307648975466485
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -116.17066937199345,
+        "georgiatech_bike_05_2": 64.08199746873643,
+        "iiith_cooking_109_4": -6.433845505891028,
+        "iiith_soccer_004_5": -116.29857077421968,
+        "indiana_music_13_5": 3.416207744457097,
+        "nus_cpr_52_1": -303.7263219480161,
+        "sfu_basketball_03_44": -363.3708926730685,
+        "sfu_basketball_08_15": -251.73077884250216,
+        "unc_basketball_03-16-23_01_18": -347.93234527022736,
+        "uniandes_dance_011_27": 15.581222421151637,
+        "uniandes_dance_012_15": -102.7081768954242,
+        "upenn_0725_Duet_Violin_1_2_8": -0.32002549348050024
+      }
+    },
+    "12take_400/gaussian minus 72take_1200/gaussian": {
+      "mean_mm": 11.620419905509486,
+      "take_bootstrap_95ci_mm": [
+        -14.610698562786899,
+        36.27153651743761
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 49.24612642923992,
+        "georgiatech_bike_05_2": 12.265206075597717,
+        "iiith_cooking_109_4": -65.16449738961678,
+        "iiith_soccer_004_5": 43.61650052953647,
+        "indiana_music_13_5": -30.735716007373966,
+        "nus_cpr_52_1": 65.14073525887949,
+        "sfu_basketball_03_44": -69.56247352317524,
+        "sfu_basketball_08_15": 7.001350007233782,
+        "unc_basketball_03-16-23_01_18": 30.52589687771274,
+        "uniandes_dance_011_27": 7.469205503110544,
+        "uniandes_dance_012_15": 6.321890421266886,
+        "upenn_0725_Duet_Violin_1_2_8": 83.32081468370228
+      }
+    },
+    "12take_400/gaussian minus 72take_1200/history": {
+      "mean_mm": 6.1237416073128115,
+      "take_bootstrap_95ci_mm": [
+        -19.205585573926378,
+        32.82414243132981
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 29.088975524902366,
+        "georgiatech_bike_05_2": -23.637392029938894,
+        "iiith_cooking_109_4": -1.4385554137053305,
+        "iiith_soccer_004_5": -26.90940861172146,
+        "indiana_music_13_5": -28.104072881627943,
+        "nus_cpr_52_1": -83.83085906417281,
+        "sfu_basketball_03_44": -3.880393529821305,
+        "sfu_basketball_08_15": 55.301712926228845,
+        "unc_basketball_03-16-23_01_18": -2.58778514155631,
+        "uniandes_dance_011_27": 52.83841380366573,
+        "uniandes_dance_012_15": 6.5355720731947144,
+        "upenn_0725_Duet_Violin_1_2_8": 100.10869163230615
+      }
+    },
+    "12take_400/gaussian minus 72take_1200/prior_only": {
+      "mean_mm": -514.677538279545,
+      "take_bootstrap_95ci_mm": [
+        -697.0364377575155,
+        -340.1309869931068
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -278.0084890436243,
+        "georgiatech_bike_05_2": -246.10413017272947,
+        "iiith_cooking_109_4": -198.59950810185188,
+        "iiith_soccer_004_5": -633.6909424817121,
+        "indiana_music_13_5": -179.72515253844085,
+        "nus_cpr_52_1": -1083.0522876598216,
+        "sfu_basketball_03_44": -509.04994574652767,
+        "sfu_basketball_08_15": -827.9738676283093,
+        "unc_basketball_03-16-23_01_18": -923.0801264727556,
+        "uniandes_dance_011_27": -125.86026792173033,
+        "uniandes_dance_012_15": -768.1746941955001,
+        "upenn_0725_Duet_Violin_1_2_8": -402.81104739153824
+      }
+    },
+    "12take_400/gaussian minus 72take_2400/gaussian": {
+      "mean_mm": 31.317841867164333,
+      "take_bootstrap_95ci_mm": [
+        12.71428885754244,
+        49.67703209099947
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -25.755068673027864,
+        "georgiatech_bike_05_2": 63.130910590842916,
+        "iiith_cooking_109_4": -1.9255476986920428,
+        "iiith_soccer_004_5": 51.38799037226923,
+        "indiana_music_13_5": 2.3615817387898517,
+        "nus_cpr_52_1": 16.214106552689202,
+        "sfu_basketball_03_44": 18.579827965630443,
+        "sfu_basketball_08_15": 51.5287914699978,
+        "unc_basketball_03-16-23_01_18": 44.04098852652095,
+        "uniandes_dance_011_27": 36.435837074562386,
+        "uniandes_dance_012_15": 20.201602646156573,
+        "upenn_0725_Duet_Violin_1_2_8": 99.61308184023258
+      }
+    },
+    "12take_400/gaussian minus 72take_2400/history": {
+      "mean_mm": 19.36030952488935,
+      "take_bootstrap_95ci_mm": [
+        -30.764923083340676,
+        56.889012934837844
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 46.342943127950036,
+        "georgiatech_bike_05_2": 10.23328508447716,
+        "iiith_cooking_109_4": -42.48953344557022,
+        "iiith_soccer_004_5": 75.43831497474955,
+        "indiana_music_13_5": -13.487830331590473,
+        "nus_cpr_52_1": -209.2500699926306,
+        "sfu_basketball_03_44": 10.657238910816346,
+        "sfu_basketball_08_15": 76.71705164026329,
+        "unc_basketball_03-16-23_01_18": 73.84630480165845,
+        "uniandes_dance_011_27": 69.31762279934355,
+        "uniandes_dance_012_15": 42.5231198981956,
+        "upenn_0725_Duet_Violin_1_2_8": 92.47526683100949
+      }
+    },
+    "12take_400/gaussian minus 72take_2400/prior_only": {
+      "mean_mm": -518.9167203526437,
+      "take_bootstrap_95ci_mm": [
+        -624.6170653555129,
+        -424.9539145151775
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -332.0939355073152,
+        "georgiatech_bike_05_2": -368.4828851487901,
+        "iiith_cooking_109_4": -359.3056519896896,
+        "iiith_soccer_004_5": -454.980153076737,
+        "indiana_music_13_5": -689.2250151457611,
+        "nus_cpr_52_1": -568.778377645987,
+        "sfu_basketball_03_44": -268.53401404486766,
+        "sfu_basketball_08_15": -501.1822747124567,
+        "unc_basketball_03-16-23_01_18": -537.280012540464,
+        "uniandes_dance_011_27": -742.6741840221264,
+        "uniandes_dance_012_15": -504.0912504902593,
+        "upenn_0725_Duet_Violin_1_2_8": -900.3728899072717
+      }
+    },
+    "12take_400/gaussian minus 72take_400/gaussian": {
+      "mean_mm": -74.05495678171698,
+      "take_bootstrap_95ci_mm": [
+        -106.98766817104668,
+        -44.54917303132421
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -57.32803866068522,
+        "georgiatech_bike_05_2": -25.146313179863796,
+        "iiith_cooking_109_4": -66.25063013853851,
+        "iiith_soccer_004_5": -154.43722111737287,
+        "indiana_music_13_5": -133.23754232901115,
+        "nus_cpr_52_1": -185.3928382308395,
+        "sfu_basketball_03_44": -73.70848902949575,
+        "sfu_basketball_08_15": 0.17850806624801407,
+        "unc_basketball_03-16-23_01_18": -20.94583209002451,
+        "uniandes_dance_011_27": -28.003415340847425,
+        "uniandes_dance_012_15": -78.27517715736673,
+        "upenn_0725_Duet_Violin_1_2_8": -66.11249217280636
+      }
+    },
+    "12take_400/gaussian minus 72take_400/history": {
+      "mean_mm": -80.97756969958175,
+      "take_bootstrap_95ci_mm": [
+        -162.44342016997166,
+        -11.228104286429312
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -352.2425355699328,
+        "georgiatech_bike_05_2": -287.62712352893976,
+        "iiith_cooking_109_4": -276.4987490265458,
+        "iiith_soccer_004_5": -40.91011485347042,
+        "indiana_music_13_5": -32.378723935727734,
+        "nus_cpr_52_1": 61.50290982281723,
+        "sfu_basketball_03_44": -7.542804237648284,
+        "sfu_basketball_08_15": 31.440495667634167,
+        "unc_basketball_03-16-23_01_18": 20.563649495442746,
+        "uniandes_dance_011_27": -51.03518662629301,
+        "uniandes_dance_012_15": -17.16623417889633,
+        "upenn_0725_Duet_Violin_1_2_8": -19.836419423421205
+      }
+    },
+    "12take_400/gaussian minus 72take_400/prior_only": {
+      "mean_mm": -516.5117768211128,
+      "take_bootstrap_95ci_mm": [
+        -637.9485646571642,
+        -406.448219047358
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -536.123925894278,
+        "georgiatech_bike_05_2": -343.4426333533393,
+        "iiith_cooking_109_4": -516.0325806794343,
+        "iiith_soccer_004_5": -573.3697569246646,
+        "indiana_music_13_5": -667.5340592419659,
+        "nus_cpr_52_1": -508.93211282800746,
+        "sfu_basketball_03_44": -990.0958284166124,
+        "sfu_basketball_08_15": -720.2052831013998,
+        "unc_basketball_03-16-23_01_18": -390.5049007274486,
+        "uniandes_dance_011_27": -398.18578527945056,
+        "uniandes_dance_012_15": -398.59336213712345,
+        "upenn_0725_Duet_Violin_1_2_8": -155.1210932696307
+      }
+    },
+    "12take_400/history minus 12take_400/prior_only": {
+      "mean_mm": -119.81058486479299,
+      "take_bootstrap_95ci_mm": [
+        -222.38223000396917,
+        -31.414020848568587
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -72.37376141018336,
+        "georgiatech_bike_05_2": 56.986761898464636,
+        "iiith_cooking_109_4": 23.536415001198094,
+        "iiith_soccer_004_5": -158.83498265301742,
+        "indiana_music_13_5": 62.64792011402271,
+        "nus_cpr_52_1": -66.4755082307039,
+        "sfu_basketball_03_44": -432.49875421877255,
+        "sfu_basketball_08_15": -335.15386807477034,
+        "unc_basketball_03-16-23_01_18": -387.25637492427114,
+        "uniandes_dance_011_27": -49.722068942034696,
+        "uniandes_dance_012_15": -117.4762625023171,
+        "upenn_0725_Duet_Violin_1_2_8": 38.893465564869075
+      }
+    },
+    "12take_400/history minus 72take_1200/gaussian": {
+      "mean_mm": 18.944184969089644,
+      "take_bootstrap_95ci_mm": [
+        -40.32228847079808,
+        86.79706704822588
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 93.04303439105001,
+        "georgiatech_bike_05_2": 5.169970505325921,
+        "iiith_cooking_109_4": -35.19423688252766,
+        "iiith_soccer_004_5": 1.0800886507387304,
+        "indiana_music_13_5": 28.495996362191647,
+        "nus_cpr_52_1": 302.39154897619176,
+        "sfu_basketball_03_44": -138.69033506887928,
+        "sfu_basketball_08_15": -76.4217392250344,
+        "unc_basketball_03-16-23_01_18": -8.798132776331045,
+        "uniandes_dance_011_27": -57.83408586007579,
+        "uniandes_dance_012_15": -8.44619518562601,
+        "upenn_0725_Duet_Violin_1_2_8": 122.53430574205186
+      }
+    },
+    "12take_400/history minus 72take_1200/history": {
+      "mean_mm": 13.447506670892968,
+      "take_bootstrap_95ci_mm": [
+        -25.866643251607456,
+        56.926646013024396
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 72.88588348671246,
+        "georgiatech_bike_05_2": -30.73262760021069,
+        "iiith_cooking_109_4": 28.531705093383792,
+        "iiith_soccer_004_5": -69.4458204905192,
+        "indiana_music_13_5": 31.12763948793767,
+        "nus_cpr_52_1": 153.41995465313943,
+        "sfu_basketball_03_44": -73.00825507552534,
+        "sfu_basketball_08_15": -28.121376306039338,
+        "unc_basketball_03-16-23_01_18": -41.911814795600094,
+        "uniandes_dance_011_27": -12.464877559520602,
+        "uniandes_dance_012_15": -8.232513533698182,
+        "upenn_0725_Duet_Violin_1_2_8": 139.32218269065572
+      }
+    },
+    "12take_400/history minus 72take_1200/prior_only": {
+      "mean_mm": -507.35377321596496,
+      "take_bootstrap_95ci_mm": [
+        -683.7969295166155,
+        -336.52614421962215
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -234.2115810818142,
+        "georgiatech_bike_05_2": -253.19936574300127,
+        "iiith_cooking_109_4": -168.62924759476275,
+        "iiith_soccer_004_5": -676.2273543605098,
+        "indiana_music_13_5": -120.49344016887522,
+        "nus_cpr_52_1": -845.8014739425093,
+        "sfu_basketball_03_44": -578.1778072922317,
+        "sfu_basketball_08_15": -911.3969568605776,
+        "unc_basketball_03-16-23_01_18": -962.4041561267995,
+        "uniandes_dance_011_27": -191.16355928491666,
+        "uniandes_dance_012_15": -782.942779802393,
+        "upenn_0725_Duet_Violin_1_2_8": -363.59755633318866
+      }
+    },
+    "12take_400/history minus 72take_2400/gaussian": {
+      "mean_mm": 38.641606930744494,
+      "take_bootstrap_95ci_mm": [
+        -2.8846734152899933,
+        88.84537522351299
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 18.041839288782228,
+        "georgiatech_bike_05_2": 56.03567502057112,
+        "iiith_cooking_109_4": 28.04471280839708,
+        "iiith_soccer_004_5": 8.851578493471493,
+        "indiana_music_13_5": 61.593294108355465,
+        "nus_cpr_52_1": 253.46492027000144,
+        "sfu_basketball_03_44": -50.54803358007359,
+        "sfu_basketball_08_15": -31.894297762270384,
+        "unc_basketball_03-16-23_01_18": 4.716958872477164,
+        "uniandes_dance_011_27": -28.867454288623946,
+        "uniandes_dance_012_15": 5.433517039263677,
+        "upenn_0725_Duet_Violin_1_2_8": 138.82657289858216
+      }
+    },
+    "12take_400/history minus 72take_2400/history": {
+      "mean_mm": 26.684074588469503,
+      "take_bootstrap_95ci_mm": [
+        1.080839119428461,
+        53.601774132104545
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 90.13985108976013,
+        "georgiatech_bike_05_2": 3.1380495142053633,
+        "iiith_cooking_109_4": -12.519272938481095,
+        "iiith_soccer_004_5": 32.90190309595181,
+        "indiana_music_13_5": 45.74388203797514,
+        "nus_cpr_52_1": 28.000743724681627,
+        "sfu_basketball_03_44": -58.47062263488769,
+        "sfu_basketball_08_15": -6.70603759200489,
+        "unc_basketball_03-16-23_01_18": 34.522275147614664,
+        "uniandes_dance_011_27": 4.014331436157221,
+        "uniandes_dance_012_15": 27.755034291302707,
+        "upenn_0725_Duet_Violin_1_2_8": 131.68875788935907
+      }
+    },
+    "12take_400/history minus 72take_2400/prior_only": {
+      "mean_mm": -511.5929552890636,
+      "take_bootstrap_95ci_mm": [
+        -615.1142492200122,
+        -413.4152300917072
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -288.2970275455051,
+        "georgiatech_bike_05_2": -375.57812071906187,
+        "iiith_cooking_109_4": -329.33539148260047,
+        "iiith_soccer_004_5": -497.5165649555347,
+        "indiana_music_13_5": -629.9933027761955,
+        "nus_cpr_52_1": -331.5275639286748,
+        "sfu_basketball_03_44": -337.6618755905717,
+        "sfu_basketball_08_15": -584.6053639447249,
+        "unc_basketball_03-16-23_01_18": -576.6040421945079,
+        "uniandes_dance_011_27": -807.9774753853127,
+        "uniandes_dance_012_15": -518.8593360971522,
+        "upenn_0725_Duet_Violin_1_2_8": -861.1593988489221
+      }
+    },
+    "12take_400/history minus 72take_400/gaussian": {
+      "mean_mm": -66.73119171813683,
+      "take_bootstrap_95ci_mm": [
+        -102.18669322626091,
+        -32.92579132951337
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -13.531130698875131,
+        "georgiatech_bike_05_2": -32.24154875013559,
+        "iiith_cooking_109_4": -36.28036963144939,
+        "iiith_soccer_004_5": -196.9736329961706,
+        "indiana_music_13_5": -74.00582995944552,
+        "nus_cpr_52_1": 51.85797548647275,
+        "sfu_basketball_03_44": -142.8363505751998,
+        "sfu_basketball_08_15": -83.24458116602017,
+        "unc_basketball_03-16-23_01_18": -60.269861744068294,
+        "uniandes_dance_011_27": -93.30670670403376,
+        "uniandes_dance_012_15": -93.04326276425962,
+        "upenn_0725_Duet_Violin_1_2_8": -26.89900111445678
+      }
+    },
+    "12take_400/history minus 72take_400/history": {
+      "mean_mm": -73.65380463600161,
+      "take_bootstrap_95ci_mm": [
+        -159.58538294662665,
+        22.386325631318254
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -308.44562760812266,
+        "georgiatech_bike_05_2": -294.72235909921153,
+        "iiith_cooking_109_4": -246.52848851945666,
+        "iiith_soccer_004_5": -83.44652673226815,
+        "indiana_music_13_5": 26.85298843383788,
+        "nus_cpr_52_1": 298.7537235401295,
+        "sfu_basketball_03_44": -76.67066578335232,
+        "sfu_basketball_08_15": -51.982593564634016,
+        "unc_basketball_03-16-23_01_18": -18.760380158601038,
+        "uniandes_dance_011_27": -116.33847798947934,
+        "uniandes_dance_012_15": -31.934319785789228,
+        "upenn_0725_Duet_Violin_1_2_8": 19.37707163492837
+      }
+    },
+    "12take_400/history minus 72take_400/prior_only": {
+      "mean_mm": -509.1880117575328,
+      "take_bootstrap_95ci_mm": [
+        -651.536814003815,
+        -387.47906859362575
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -492.3270179324679,
+        "georgiatech_bike_05_2": -350.5378689236111,
+        "iiith_cooking_109_4": -486.06232017234515,
+        "iiith_soccer_004_5": -615.9061688034623,
+        "indiana_music_13_5": -608.3023468724003,
+        "nus_cpr_52_1": -271.68129911069525,
+        "sfu_basketball_03_44": -1059.2236899623165,
+        "sfu_basketball_08_15": -803.6283723336679,
+        "unc_basketball_03-16-23_01_18": -429.8289303814924,
+        "uniandes_dance_011_27": -463.48907664263686,
+        "uniandes_dance_012_15": -413.36144774401635,
+        "upenn_0725_Duet_Violin_1_2_8": -115.90760221128113
+      }
+    },
+    "12take_400/prior_only minus 72take_1200/gaussian": {
+      "mean_mm": 138.75476983388265,
+      "take_bootstrap_95ci_mm": [
+        54.822228709562324,
+        229.7344276899173
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 165.41679580123338,
+        "georgiatech_bike_05_2": -51.816791393138715,
+        "iiith_cooking_109_4": -58.730651883725756,
+        "iiith_soccer_004_5": 159.91507130375615,
+        "indiana_music_13_5": -34.15192375183106,
+        "nus_cpr_52_1": 368.86705720689565,
+        "sfu_basketball_03_44": 293.80841914989327,
+        "sfu_basketball_08_15": 258.73212884973594,
+        "unc_basketball_03-16-23_01_18": 378.4582421479401,
+        "uniandes_dance_011_27": -8.112016918041093,
+        "uniandes_dance_012_15": 109.03006731669109,
+        "upenn_0725_Duet_Violin_1_2_8": 83.64084017718278
+      }
+    },
+    "12take_400/prior_only minus 72take_1200/history": {
+      "mean_mm": 133.25809153568596,
+      "take_bootstrap_95ci_mm": [
+        57.36084104114108,
+        218.45733411930226
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 145.25964489689582,
+        "georgiatech_bike_05_2": -87.71938949867533,
+        "iiith_cooking_109_4": 4.995290092185698,
+        "iiith_soccer_004_5": 89.38916216249822,
+        "indiana_music_13_5": -31.52028062608504,
+        "nus_cpr_52_1": 219.89546288384332,
+        "sfu_basketball_03_44": 359.49049914324723,
+        "sfu_basketball_08_15": 307.032491768731,
+        "unc_basketball_03-16-23_01_18": 345.34456012867105,
+        "uniandes_dance_011_27": 37.257191382514094,
+        "uniandes_dance_012_15": 109.24374896861892,
+        "upenn_0725_Duet_Violin_1_2_8": 100.42871712578665
+      }
+    },
+    "12take_400/prior_only minus 72take_1200/prior_only": {
+      "mean_mm": -387.543188351172,
+      "take_bootstrap_95ci_mm": [
+        -514.9287686913102,
+        -261.45151129475346
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -161.83781967163083,
+        "georgiatech_bike_05_2": -310.1861276414659,
+        "iiith_cooking_109_4": -192.16566259596084,
+        "iiith_soccer_004_5": -517.3923717074924,
+        "indiana_music_13_5": -183.14136028289795,
+        "nus_cpr_52_1": -779.3259657118055,
+        "sfu_basketball_03_44": -145.67905307345916,
+        "sfu_basketball_08_15": -576.2430887858072,
+        "unc_basketball_03-16-23_01_18": -575.1477812025283,
+        "uniandes_dance_011_27": -141.44149034288196,
+        "uniandes_dance_012_15": -665.4665173000759,
+        "upenn_0725_Duet_Violin_1_2_8": -402.49102189805774
+      }
+    },
+    "12take_400/prior_only minus 72take_2400/gaussian": {
+      "mean_mm": 158.45219179553746,
+      "take_bootstrap_95ci_mm": [
+        80.55525632198946,
+        249.42578669771737
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 90.41560069896559,
+        "georgiatech_bike_05_2": -0.9510868778935162,
+        "iiith_cooking_109_4": 4.508297807198986,
+        "iiith_soccer_004_5": 167.6865611464889,
+        "indiana_music_13_5": -1.0546260056672452,
+        "nus_cpr_52_1": 319.94042850070537,
+        "sfu_basketball_03_44": 381.95072063869895,
+        "sfu_basketball_08_15": 303.25957031249993,
+        "unc_basketball_03-16-23_01_18": 391.9733337967483,
+        "uniandes_dance_011_27": 20.85461465341075,
+        "uniandes_dance_012_15": 122.90977954158078,
+        "upenn_0725_Duet_Violin_1_2_8": 99.93310733371308
+      }
+    },
+    "12take_400/prior_only minus 72take_2400/history": {
+      "mean_mm": 146.4946594532625,
+      "take_bootstrap_95ci_mm": [
+        65.14787435001797,
+        240.48604380760662
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 162.5136124999435,
+        "georgiatech_bike_05_2": -53.84871238425927,
+        "iiith_cooking_109_4": -36.05568793967919,
+        "iiith_soccer_004_5": 191.73688574896923,
+        "indiana_music_13_5": -16.90403807604757,
+        "nus_cpr_52_1": 94.47625195538552,
+        "sfu_basketball_03_44": 374.02813158388483,
+        "sfu_basketball_08_15": 328.4478304827654,
+        "unc_basketball_03-16-23_01_18": 421.7786500718858,
+        "uniandes_dance_011_27": 53.73640037819192,
+        "uniandes_dance_012_15": 145.2312967936198,
+        "upenn_0725_Duet_Violin_1_2_8": 92.79529232448999
+      }
+    },
+    "12take_400/prior_only minus 72take_2400/prior_only": {
+      "mean_mm": -391.7823704242707,
+      "take_bootstrap_95ci_mm": [
+        -546.4659899517342,
+        -241.76201512725268
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -215.92326613532174,
+        "georgiatech_bike_05_2": -432.56488261752656,
+        "iiith_cooking_109_4": -352.87180648379854,
+        "iiith_soccer_004_5": -338.6815823025173,
+        "indiana_music_13_5": -692.6412228902182,
+        "nus_cpr_52_1": -265.0520556979709,
+        "sfu_basketball_03_44": 94.83687862820085,
+        "sfu_basketball_08_15": -249.45149586995456,
+        "unc_basketball_03-16-23_01_18": -189.34766727023668,
+        "uniandes_dance_011_27": -758.255406443278,
+        "uniandes_dance_012_15": -401.3830735948351,
+        "upenn_0725_Duet_Violin_1_2_8": -900.0528644137912
+      }
+    },
+    "12take_400/prior_only minus 72take_400/gaussian": {
+      "mean_mm": 53.07939314665617,
+      "take_bootstrap_95ci_mm": [
+        -28.60149457837328,
+        144.83638294655597
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 58.84263071130823,
+        "georgiatech_bike_05_2": -89.22831064860023,
+        "iiith_cooking_109_4": -59.81678463264748,
+        "iiith_soccer_004_5": -38.13865034315319,
+        "indiana_music_13_5": -136.65375007346825,
+        "nus_cpr_52_1": 118.33348371717665,
+        "sfu_basketball_03_44": 289.66240364357276,
+        "sfu_basketball_08_15": 251.90928690875018,
+        "unc_basketball_03-16-23_01_18": 326.98651318020285,
+        "uniandes_dance_011_27": -43.58463776199906,
+        "uniandes_dance_012_15": 24.432999738057475,
+        "upenn_0725_Duet_Violin_1_2_8": -65.79246667932586
+      }
+    },
+    "12take_400/prior_only minus 72take_400/history": {
+      "mean_mm": 46.15678022879138,
+      "take_bootstrap_95ci_mm": [
+        -90.12368030194887,
+        190.96448665136168
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -236.0718661979393,
+        "georgiatech_bike_05_2": -351.7091209976762,
+        "iiith_cooking_109_4": -270.06490352065475,
+        "iiith_soccer_004_5": 75.38845592074927,
+        "indiana_music_13_5": -35.79493168018483,
+        "nus_cpr_52_1": 365.2292317708334,
+        "sfu_basketball_03_44": 355.8280884354202,
+        "sfu_basketball_08_15": 283.1712745101363,
+        "unc_basketball_03-16-23_01_18": 368.4959947656701,
+        "uniandes_dance_011_27": -66.61640904744465,
+        "uniandes_dance_012_15": 85.54194271652787,
+        "upenn_0725_Duet_Violin_1_2_8": -19.516393929940705
+      }
+    },
+    "12take_400/prior_only minus 72take_400/prior_only": {
+      "mean_mm": -389.3774268927398,
+      "take_bootstrap_95ci_mm": [
+        -491.6066101180182,
+        -284.1207303365073
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -419.95325652228456,
+        "georgiatech_bike_05_2": -407.5246308220758,
+        "iiith_cooking_109_4": -509.5987351735433,
+        "iiith_soccer_004_5": -457.0711861504449,
+        "indiana_music_13_5": -670.950266986423,
+        "nus_cpr_52_1": -205.20579087999135,
+        "sfu_basketball_03_44": -626.7249357435439,
+        "sfu_basketball_08_15": -468.4745042588976,
+        "unc_basketball_03-16-23_01_18": -42.572555457221256,
+        "uniandes_dance_011_27": -413.7670077006022,
+        "uniandes_dance_012_15": -295.8851852416992,
+        "upenn_0725_Duet_Violin_1_2_8": -154.8010677761502
+      }
+    },
+    "72take_1200/gaussian minus 72take_1200/history": {
+      "mean_mm": -5.496678298196673,
+      "take_bootstrap_95ci_mm": [
+        -41.31387640046484,
+        27.409609056402132
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -20.157150904337556,
+        "georgiatech_bike_05_2": -35.90259810553661,
+        "iiith_cooking_109_4": 63.725941975911454,
+        "iiith_soccer_004_5": -70.52590914125793,
+        "indiana_music_13_5": 2.6316431257460238,
+        "nus_cpr_52_1": -148.9715943230523,
+        "sfu_basketball_03_44": 65.68207999335394,
+        "sfu_basketball_08_15": 48.30036291899506,
+        "unc_basketball_03-16-23_01_18": -33.11368201926905,
+        "uniandes_dance_011_27": 45.36920830055519,
+        "uniandes_dance_012_15": 0.2136816519278284,
+        "upenn_0725_Duet_Violin_1_2_8": 16.787876948603866
+      }
+    },
+    "72take_1200/gaussian minus 72take_1200/prior_only": {
+      "mean_mm": -526.2979581850547,
+      "take_bootstrap_95ci_mm": [
+        -721.534572100345,
+        -345.6834836188657
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -327.2546154728642,
+        "georgiatech_bike_05_2": -258.36933624832716,
+        "iiith_cooking_109_4": -133.43501071223508,
+        "iiith_soccer_004_5": -677.3074430112486,
+        "indiana_music_13_5": -148.98943653106687,
+        "nus_cpr_52_1": -1148.193022918701,
+        "sfu_basketball_03_44": -439.4874722233524,
+        "sfu_basketball_08_15": -834.9752176355432,
+        "unc_basketball_03-16-23_01_18": -953.6060233504684,
+        "uniandes_dance_011_27": -133.32947342484087,
+        "uniandes_dance_012_15": -774.496584616767,
+        "upenn_0725_Duet_Violin_1_2_8": -486.1318620752405
+      }
+    },
+    "72take_1200/gaussian minus 72take_2400/gaussian": {
+      "mean_mm": 19.69742196165485,
+      "take_bootstrap_95ci_mm": [
+        -6.237626374209356,
+        44.0050594176775
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -75.00119510226779,
+        "georgiatech_bike_05_2": 50.8657045152452,
+        "iiith_cooking_109_4": 63.23894969092474,
+        "iiith_soccer_004_5": 7.7714898427327626,
+        "indiana_music_13_5": 33.09729774616382,
+        "nus_cpr_52_1": -48.926628706190286,
+        "sfu_basketball_03_44": 88.14230148880569,
+        "sfu_basketball_08_15": 44.52744146276402,
+        "unc_basketball_03-16-23_01_18": 13.515091648808209,
+        "uniandes_dance_011_27": 28.966631571451842,
+        "uniandes_dance_012_15": 13.879712224889687,
+        "upenn_0725_Duet_Violin_1_2_8": 16.2922671565303
+      }
+    },
+    "72take_1200/gaussian minus 72take_2400/history": {
+      "mean_mm": 7.739889619379864,
+      "take_bootstrap_95ci_mm": [
+        -48.322618558671756,
+        46.10662092927061
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -2.9031833012898858,
+        "georgiatech_bike_05_2": -2.0319209911205576,
+        "iiith_cooking_109_4": 22.674963944046567,
+        "iiith_soccer_004_5": 31.82181444521308,
+        "indiana_music_13_5": 17.247885675783493,
+        "nus_cpr_52_1": -274.3908052515101,
+        "sfu_basketball_03_44": 80.21971243399159,
+        "sfu_basketball_08_15": 69.71570163302951,
+        "unc_basketball_03-16-23_01_18": 43.32040792394571,
+        "uniandes_dance_011_27": 61.84841729623301,
+        "uniandes_dance_012_15": 36.20122947692872,
+        "upenn_0725_Duet_Violin_1_2_8": 9.154452147307211
+      }
+    },
+    "72take_1200/gaussian minus 72take_2400/prior_only": {
+      "mean_mm": -530.5371402581533,
+      "take_bootstrap_95ci_mm": [
+        -648.4684244126448,
+        -421.29061054123787
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -381.3400619365551,
+        "georgiatech_bike_05_2": -380.74809122438785,
+        "iiith_cooking_109_4": -294.1411546000728,
+        "iiith_soccer_004_5": -498.59665360627343,
+        "indiana_music_13_5": -658.4892991383872,
+        "nus_cpr_52_1": -633.9191129048666,
+        "sfu_basketball_03_44": -198.97154052169242,
+        "sfu_basketball_08_15": -508.1836247196905,
+        "unc_basketball_03-16-23_01_18": -567.8059094181767,
+        "uniandes_dance_011_27": -750.1433895252369,
+        "uniandes_dance_012_15": -510.41314091152617,
+        "upenn_0725_Duet_Violin_1_2_8": -983.693704590974
+      }
+    },
+    "72take_1200/gaussian minus 72take_400/gaussian": {
+      "mean_mm": -85.67537668722646,
+      "take_bootstrap_95ci_mm": [
+        -133.44558572828032,
+        -44.24185644550088
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -106.57416508992515,
+        "georgiatech_bike_05_2": -37.41151925546151,
+        "iiith_cooking_109_4": -1.0861327489217274,
+        "iiith_soccer_004_5": -198.05372164690934,
+        "indiana_music_13_5": -102.50182632163717,
+        "nus_cpr_52_1": -250.53357348971898,
+        "sfu_basketball_03_44": -4.146015506320509,
+        "sfu_basketball_08_15": -6.822841940985768,
+        "unc_basketball_03-16-23_01_18": -51.47172896773725,
+        "uniandes_dance_011_27": -35.47262084395797,
+        "uniandes_dance_012_15": -84.59706757863361,
+        "upenn_0725_Duet_Violin_1_2_8": -149.43330685650864
+      }
+    },
+    "72take_1200/gaussian minus 72take_400/history": {
+      "mean_mm": -92.59798960509124,
+      "take_bootstrap_95ci_mm": [
+        -174.73385365686303,
+        -22.262680585296067
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -401.4886619991727,
+        "georgiatech_bike_05_2": -299.8923296045375,
+        "iiith_cooking_109_4": -211.334251636929,
+        "iiith_soccer_004_5": -84.52661538300688,
+        "indiana_music_13_5": -1.643007928353768,
+        "nus_cpr_52_1": -3.6378254360622577,
+        "sfu_basketball_03_44": 62.01966928552696,
+        "sfu_basketball_08_15": 24.439145660400385,
+        "unc_basketball_03-16-23_01_18": -9.962247382269993,
+        "uniandes_dance_011_27": -58.504392129403556,
+        "uniandes_dance_012_15": -23.488124600163218,
+        "upenn_0725_Duet_Violin_1_2_8": -103.15723410712349
+      }
+    },
+    "72take_1200/gaussian minus 72take_400/prior_only": {
+      "mean_mm": -528.1321967266224,
+      "take_bootstrap_95ci_mm": [
+        -633.825924032706,
+        -430.22075667557897
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -585.3700523235179,
+        "georgiatech_bike_05_2": -355.70783942893706,
+        "iiith_cooking_109_4": -450.8680832898175,
+        "iiith_soccer_004_5": -616.986257454201,
+        "indiana_music_13_5": -636.798343234592,
+        "nus_cpr_52_1": -574.072848086887,
+        "sfu_basketball_03_44": -920.5333548934373,
+        "sfu_basketball_08_15": -727.2066331086335,
+        "unc_basketball_03-16-23_01_18": -421.03079760516135,
+        "uniandes_dance_011_27": -405.6549907825611,
+        "uniandes_dance_012_15": -404.9152525583903,
+        "upenn_0725_Duet_Violin_1_2_8": -238.441907953333
+      }
+    },
+    "72take_1200/history minus 72take_1200/prior_only": {
+      "mean_mm": -520.801279886858,
+      "take_bootstrap_95ci_mm": [
+        -689.5185903090018,
+        -350.58743246278647
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -307.0974645685267,
+        "georgiatech_bike_05_2": -222.46673814279058,
+        "iiith_cooking_109_4": -197.16095268814655,
+        "iiith_soccer_004_5": -606.7815338699907,
+        "indiana_music_13_5": -151.6210796568129,
+        "nus_cpr_52_1": -999.2214285956488,
+        "sfu_basketball_03_44": -505.1695522167064,
+        "sfu_basketball_08_15": -883.2755805545382,
+        "unc_basketball_03-16-23_01_18": -920.4923413311994,
+        "uniandes_dance_011_27": -178.69868172539606,
+        "uniandes_dance_012_15": -774.7102662686948,
+        "upenn_0725_Duet_Violin_1_2_8": -502.9197390238444
+      }
+    },
+    "72take_1200/history minus 72take_2400/gaussian": {
+      "mean_mm": 25.194100259851524,
+      "take_bootstrap_95ci_mm": [
+        0.11325325200587955,
+        50.44728794745456
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -54.84404419793023,
+        "georgiatech_bike_05_2": 86.76830262078181,
+        "iiith_cooking_109_4": -0.4869922849867123,
+        "iiith_soccer_004_5": 78.29739898399069,
+        "indiana_music_13_5": 30.465654620417794,
+        "nus_cpr_52_1": 100.04496561686202,
+        "sfu_basketball_03_44": 22.460221495451748,
+        "sfu_basketball_08_15": -3.772921456231046,
+        "unc_basketball_03-16-23_01_18": 46.62877366807726,
+        "uniandes_dance_011_27": -16.402576729103345,
+        "uniandes_dance_012_15": 13.666030572961859,
+        "upenn_0725_Duet_Violin_1_2_8": -0.4956097920735658
+      }
+    },
+    "72take_1200/history minus 72take_2400/history": {
+      "mean_mm": 13.236567917576537,
+      "take_bootstrap_95ci_mm": [
+        -20.97677194866135,
+        41.90175630899123
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 17.25396760304767,
+        "georgiatech_bike_05_2": 33.870677114416054,
+        "iiith_cooking_109_4": -41.05097803186489,
+        "iiith_soccer_004_5": 102.347723586471,
+        "indiana_music_13_5": 14.61624255003747,
+        "nus_cpr_52_1": -125.4192109284578,
+        "sfu_basketball_03_44": 14.537632440637651,
+        "sfu_basketball_08_15": 21.415338714034448,
+        "unc_basketball_03-16-23_01_18": 76.43408994321476,
+        "uniandes_dance_011_27": 16.479208995677823,
+        "uniandes_dance_012_15": 35.98754782500089,
+        "upenn_0725_Duet_Violin_1_2_8": -7.6334248012966555
+      }
+    },
+    "72take_1200/history minus 72take_2400/prior_only": {
+      "mean_mm": -525.0404619599566,
+      "take_bootstrap_95ci_mm": [
+        -644.5922712797001,
+        -421.5717850090545
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -361.1829110322176,
+        "georgiatech_bike_05_2": -344.8454931188512,
+        "iiith_cooking_109_4": -357.86709657598425,
+        "iiith_soccer_004_5": -428.07074446501554,
+        "indiana_music_13_5": -661.1209422641332,
+        "nus_cpr_52_1": -484.9475185818142,
+        "sfu_basketball_03_44": -264.6536205150463,
+        "sfu_basketball_08_15": -556.4839876386856,
+        "unc_basketball_03-16-23_01_18": -534.6922273989078,
+        "uniandes_dance_011_27": -795.5125978257921,
+        "uniandes_dance_012_15": -510.62682256345397,
+        "upenn_0725_Duet_Violin_1_2_8": -1000.4815815395779
+      }
+    },
+    "72take_1200/history minus 72take_400/gaussian": {
+      "mean_mm": -80.1786983890298,
+      "take_bootstrap_95ci_mm": [
+        -103.82300252266873,
+        -56.23726859210448
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -86.41701418558759,
+        "georgiatech_bike_05_2": -1.5089211499249018,
+        "iiith_cooking_109_4": -64.81207472483318,
+        "iiith_soccer_004_5": -127.52781250565141,
+        "indiana_music_13_5": -105.13346944738319,
+        "nus_cpr_52_1": -101.56197916666667,
+        "sfu_basketball_03_44": -69.82809549967445,
+        "sfu_basketball_08_15": -55.12320485998083,
+        "unc_basketball_03-16-23_01_18": -18.3580469484682,
+        "uniandes_dance_011_27": -80.84182914451316,
+        "uniandes_dance_012_15": -84.81074923056144,
+        "upenn_0725_Duet_Violin_1_2_8": -166.2211838051125
+      }
+    },
+    "72take_1200/history minus 72take_400/history": {
+      "mean_mm": -87.10131130689457,
+      "take_bootstrap_95ci_mm": [
+        -172.9743746056969,
+        -8.331557053695493
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -381.33151109483515,
+        "georgiatech_bike_05_2": -263.98973149900087,
+        "iiith_cooking_109_4": -275.06019361284046,
+        "iiith_soccer_004_5": -14.000706241748958,
+        "indiana_music_13_5": -4.274651054099792,
+        "nus_cpr_52_1": 145.33376888699004,
+        "sfu_basketball_03_44": -3.6624107078269788,
+        "sfu_basketball_08_15": -23.861217258594678,
+        "unc_basketball_03-16-23_01_18": 23.151434636999056,
+        "uniandes_dance_011_27": -103.87360042995874,
+        "uniandes_dance_012_15": -23.701806252091046,
+        "upenn_0725_Duet_Violin_1_2_8": -119.94511105572735
+      }
+    },
+    "72take_1200/history minus 72take_400/prior_only": {
+      "mean_mm": -522.6355184284258,
+      "take_bootstrap_95ci_mm": [
+        -637.445646436715,
+        -420.3308044963413
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -565.2129014191804,
+        "georgiatech_bike_05_2": -319.8052413234004,
+        "iiith_cooking_109_4": -514.594025265729,
+        "iiith_soccer_004_5": -546.4603483129431,
+        "indiana_music_13_5": -639.429986360338,
+        "nus_cpr_52_1": -425.1012537638347,
+        "sfu_basketball_03_44": -986.2154348867912,
+        "sfu_basketball_08_15": -775.5069960276286,
+        "unc_basketball_03-16-23_01_18": -387.9171155858923,
+        "uniandes_dance_011_27": -451.0241990831163,
+        "uniandes_dance_012_15": -405.1289342103181,
+        "upenn_0725_Duet_Violin_1_2_8": -255.22978490193685
+      }
+    },
+    "72take_1200/prior_only minus 72take_2400/gaussian": {
+      "mean_mm": 545.9953801467095,
+      "take_bootstrap_95ci_mm": [
+        370.1794380988604,
+        730.7685130649143
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 252.25342037059642,
+        "georgiatech_bike_05_2": 309.2350407635724,
+        "iiith_cooking_109_4": 196.6739604031598,
+        "iiith_soccer_004_5": 685.0789328539813,
+        "indiana_music_13_5": 182.08673427723068,
+        "nus_cpr_52_1": 1099.2663942125107,
+        "sfu_basketball_03_44": 527.6297737121581,
+        "sfu_basketball_08_15": 879.5026590983072,
+        "unc_basketball_03-16-23_01_18": 967.1211149992766,
+        "uniandes_dance_011_27": 162.2961049962927,
+        "uniandes_dance_012_15": 788.3762968416567,
+        "upenn_0725_Duet_Violin_1_2_8": 502.42412923177085
+      }
+    },
+    "72take_1200/prior_only minus 72take_2400/history": {
+      "mean_mm": 534.0378478044344,
+      "take_bootstrap_95ci_mm": [
+        366.26459255453983,
+        710.0534967322409
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 324.3514321715743,
+        "georgiatech_bike_05_2": 256.33741525720666,
+        "iiith_cooking_109_4": 156.10997465628165,
+        "iiith_soccer_004_5": 709.1292574564617,
+        "indiana_music_13_5": 166.23732220685037,
+        "nus_cpr_52_1": 873.8022176671909,
+        "sfu_basketball_03_44": 519.707184657344,
+        "sfu_basketball_08_15": 904.6909192685727,
+        "unc_basketball_03-16-23_01_18": 996.9264312744142,
+        "uniandes_dance_011_27": 195.17789072107388,
+        "uniandes_dance_012_15": 810.6978140936957,
+        "upenn_0725_Duet_Violin_1_2_8": 495.28631422254773
+      }
+    },
+    "72take_1200/prior_only minus 72take_2400/prior_only": {
+      "mean_mm": -4.239182073098685,
+      "take_bootstrap_95ci_mm": [
+        -213.81222113150136,
+        196.10657277107234
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -54.085446463690914,
+        "georgiatech_bike_05_2": -122.37875497606063,
+        "iiith_cooking_109_4": -160.7061438878377,
+        "iiith_soccer_004_5": 178.71078940497512,
+        "indiana_music_13_5": -509.49986260732027,
+        "nus_cpr_52_1": 514.2739100138346,
+        "sfu_basketball_03_44": 240.51593170166,
+        "sfu_basketball_08_15": 326.7915929158527,
+        "unc_basketball_03-16-23_01_18": 385.80011393229165,
+        "uniandes_dance_011_27": -616.813916100396,
+        "uniandes_dance_012_15": 264.0834437052408,
+        "upenn_0725_Duet_Violin_1_2_8": -497.5618425157335
+      }
+    },
+    "72take_1200/prior_only minus 72take_400/gaussian": {
+      "mean_mm": 440.62258149782815,
+      "take_bootstrap_95ci_mm": [
+        270.3820245542643,
+        615.7778301468601
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 220.68045038293906,
+        "georgiatech_bike_05_2": 220.95781699286567,
+        "iiith_cooking_109_4": 132.34887796331336,
+        "iiith_soccer_004_5": 479.25372136433924,
+        "indiana_music_13_5": 46.487610209429704,
+        "nus_cpr_52_1": 897.659449428982,
+        "sfu_basketball_03_44": 435.3414567170319,
+        "sfu_basketball_08_15": 828.1523756945573,
+        "unc_basketball_03-16-23_01_18": 902.1342943827312,
+        "uniandes_dance_011_27": 97.8568525808829,
+        "uniandes_dance_012_15": 689.8995170381334,
+        "upenn_0725_Duet_Violin_1_2_8": 336.6985552187319
+      }
+    },
+    "72take_1200/prior_only minus 72take_400/history": {
+      "mean_mm": 433.6999685799633,
+      "take_bootstrap_95ci_mm": [
+        202.76315214839983,
+        668.7148033542397
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -74.23404652630848,
+        "georgiatech_bike_05_2": -41.52299335621029,
+        "iiith_cooking_109_4": -77.89924092469391,
+        "iiith_soccer_004_5": 592.7808276282417,
+        "indiana_music_13_5": 147.3464286027131,
+        "nus_cpr_52_1": 1144.5551974826387,
+        "sfu_basketball_03_44": 501.5071415088794,
+        "sfu_basketball_08_15": 859.4143632959435,
+        "unc_basketball_03-16-23_01_18": 943.6437759681985,
+        "uniandes_dance_011_27": 74.82508129543731,
+        "uniandes_dance_012_15": 751.0084600166037,
+        "upenn_0725_Duet_Violin_1_2_8": 382.97462796811703
+      }
+    },
+    "72take_1200/prior_only minus 72take_400/prior_only": {
+      "mean_mm": -1.8342385415678042,
+      "take_bootstrap_95ci_mm": [
+        -208.00389644834732,
+        203.6148458480835
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -258.11543685065374,
+        "georgiatech_bike_05_2": -97.33850318060985,
+        "iiith_cooking_109_4": -317.43307257758244,
+        "iiith_soccer_004_5": 60.321185557047556,
+        "indiana_music_13_5": -487.8089067035251,
+        "nus_cpr_52_1": 574.1201748318141,
+        "sfu_basketball_03_44": -481.0458826700848,
+        "sfu_basketball_08_15": 107.76858452690965,
+        "unc_basketball_03-16-23_01_18": 532.5752257453071,
+        "uniandes_dance_011_27": -272.32551735772023,
+        "uniandes_dance_012_15": 369.5813320583767,
+        "upenn_0725_Duet_Violin_1_2_8": 247.68995412190753
+      }
+    },
+    "72take_2400/gaussian minus 72take_2400/history": {
+      "mean_mm": -11.957532342274988,
+      "take_bootstrap_95ci_mm": [
+        -58.287552131252546,
+        22.362444676881964
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 72.0980118009779,
+        "georgiatech_bike_05_2": -52.897625506365756,
+        "iiith_cooking_109_4": -40.563985746878174,
+        "iiith_soccer_004_5": 24.050324602480316,
+        "indiana_music_13_5": -15.849412070380325,
+        "nus_cpr_52_1": -225.46417654531982,
+        "sfu_basketball_03_44": -7.922589054814097,
+        "sfu_basketball_08_15": 25.188260170265494,
+        "unc_basketball_03-16-23_01_18": 29.8053162751375,
+        "uniandes_dance_011_27": 32.88178572478117,
+        "uniandes_dance_012_15": 22.32151725203903,
+        "upenn_0725_Duet_Violin_1_2_8": -7.13781500922309
+      }
+    },
+    "72take_2400/gaussian minus 72take_2400/prior_only": {
+      "mean_mm": -550.2345622198081,
+      "take_bootstrap_95ci_mm": [
+        -663.8799216594225,
+        -448.0819745352239
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -306.33886683428733,
+        "georgiatech_bike_05_2": -431.613795739633,
+        "iiith_cooking_109_4": -357.3801042909975,
+        "iiith_soccer_004_5": -506.3681434490062,
+        "indiana_music_13_5": -691.586596884551,
+        "nus_cpr_52_1": -584.9924841986763,
+        "sfu_basketball_03_44": -287.1138420104981,
+        "sfu_basketball_08_15": -552.7110661824545,
+        "unc_basketball_03-16-23_01_18": -581.321001066985,
+        "uniandes_dance_011_27": -779.1100210966888,
+        "uniandes_dance_012_15": -524.2928531364158,
+        "upenn_0725_Duet_Violin_1_2_8": -999.9859717475043
+      }
+    },
+    "72take_2400/gaussian minus 72take_400/gaussian": {
+      "mean_mm": -105.37279864888133,
+      "take_bootstrap_95ci_mm": [
+        -140.14313093997816,
+        -75.1733164228039
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -31.57296998765736,
+        "georgiatech_bike_05_2": -88.27722377070671,
+        "iiith_cooking_109_4": -64.32508243984647,
+        "iiith_soccer_004_5": -205.8252114896421,
+        "indiana_music_13_5": -135.59912406780097,
+        "nus_cpr_52_1": -201.6069447835287,
+        "sfu_basketball_03_44": -92.2883169951262,
+        "sfu_basketball_08_15": -51.350283403749785,
+        "unc_basketball_03-16-23_01_18": -64.98682061654546,
+        "uniandes_dance_011_27": -64.43925241540981,
+        "uniandes_dance_012_15": -98.4767798035233,
+        "upenn_0725_Duet_Violin_1_2_8": -165.72557401303894
+      }
+    },
+    "72take_2400/gaussian minus 72take_400/history": {
+      "mean_mm": -112.29541156674605,
+      "take_bootstrap_95ci_mm": [
+        -187.82236703354633,
+        -46.15952425238527
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -326.4874668969049,
+        "georgiatech_bike_05_2": -350.7580341197827,
+        "iiith_cooking_109_4": -274.5732013278537,
+        "iiith_soccer_004_5": -92.29810522573965,
+        "indiana_music_13_5": -34.740305674517586,
+        "nus_cpr_52_1": 45.28880327012803,
+        "sfu_basketball_03_44": -26.122632203278727,
+        "sfu_basketball_08_15": -20.088295802363632,
+        "unc_basketball_03-16-23_01_18": -23.477339031078202,
+        "uniandes_dance_011_27": -87.4710237008554,
+        "uniandes_dance_012_15": -37.367836825052905,
+        "upenn_0725_Duet_Violin_1_2_8": -119.44950126365379
+      }
+    },
+    "72take_2400/gaussian minus 72take_400/prior_only": {
+      "mean_mm": -547.8296186882772,
+      "take_bootstrap_95ci_mm": [
+        -663.4031943321228,
+        -448.50858660450695
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -510.36885722125015,
+        "georgiatech_bike_05_2": -406.57354394418223,
+        "iiith_cooking_109_4": -514.1070329807422,
+        "iiith_soccer_004_5": -624.7577472969338,
+        "indiana_music_13_5": -669.8956409807558,
+        "nus_cpr_52_1": -525.1462193806967,
+        "sfu_basketball_03_44": -1008.6756563822429,
+        "sfu_basketball_08_15": -771.7340745713975,
+        "unc_basketball_03-16-23_01_18": -434.54588925396956,
+        "uniandes_dance_011_27": -434.62162235401297,
+        "uniandes_dance_012_15": -418.79496478327997,
+        "upenn_0725_Duet_Violin_1_2_8": -254.7341751098633
+      }
+    },
+    "72take_2400/history minus 72take_2400/prior_only": {
+      "mean_mm": -538.2770298775332,
+      "take_bootstrap_95ci_mm": [
+        -655.6116755591498,
+        -429.8542004179072
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -378.4368786352652,
+        "georgiatech_bike_05_2": -378.71617023326723,
+        "iiith_cooking_109_4": -316.8161185441194,
+        "iiith_soccer_004_5": -530.4184680514866,
+        "indiana_music_13_5": -675.7371848141706,
+        "nus_cpr_52_1": -359.5283076533564,
+        "sfu_basketball_03_44": -279.19125295568404,
+        "sfu_basketball_08_15": -577.89932635272,
+        "unc_basketball_03-16-23_01_18": -611.1263173421225,
+        "uniandes_dance_011_27": -811.9918068214699,
+        "uniandes_dance_012_15": -546.6143703884549,
+        "upenn_0725_Duet_Violin_1_2_8": -992.8481567382812
+      }
+    },
+    "72take_2400/history minus 72take_400/gaussian": {
+      "mean_mm": -93.41526630660634,
+      "take_bootstrap_95ci_mm": [
+        -129.6084100752701,
+        -59.265366698488755
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -103.67098178863526,
+        "georgiatech_bike_05_2": -35.379598264340956,
+        "iiith_cooking_109_4": -23.761096692968295,
+        "iiith_soccer_004_5": -229.87553609212242,
+        "indiana_music_13_5": -119.74971199742066,
+        "nus_cpr_52_1": 23.857231761791127,
+        "sfu_basketball_03_44": -84.3657279403121,
+        "sfu_basketball_08_15": -76.53854357401528,
+        "unc_basketball_03-16-23_01_18": -94.79213689168296,
+        "uniandes_dance_011_27": -97.32103814019098,
+        "uniandes_dance_012_15": -120.79829705556233,
+        "upenn_0725_Duet_Violin_1_2_8": -158.58775900381585
+      }
+    },
+    "72take_2400/history minus 72take_400/history": {
+      "mean_mm": -100.33787922447111,
+      "take_bootstrap_95ci_mm": [
+        -189.93964094468106,
+        -5.659653127929306
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -398.58547869788276,
+        "georgiatech_bike_05_2": -297.8604086134169,
+        "iiith_cooking_109_4": -234.00921558097556,
+        "iiith_soccer_004_5": -116.34842982821996,
+        "indiana_music_13_5": -18.89089360413726,
+        "nus_cpr_52_1": 270.7529798154478,
+        "sfu_basketball_03_44": -18.20004314846463,
+        "sfu_basketball_08_15": -45.276555972629126,
+        "unc_basketball_03-16-23_01_18": -53.2826553062157,
+        "uniandes_dance_011_27": -120.35280942563656,
+        "uniandes_dance_012_15": -59.689354077091934,
+        "upenn_0725_Duet_Violin_1_2_8": -112.3116862544307
+      }
+    },
+    "72take_2400/history minus 72take_400/prior_only": {
+      "mean_mm": -535.8720863460022,
+      "take_bootstrap_95ci_mm": [
+        -659.942544457353,
+        -428.4512993453461
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -582.466869022228,
+        "georgiatech_bike_05_2": -353.67591843781645,
+        "iiith_cooking_109_4": -473.54304723386406,
+        "iiith_soccer_004_5": -648.8080718994141,
+        "indiana_music_13_5": -654.0462289103755,
+        "nus_cpr_52_1": -299.6820428353769,
+        "sfu_basketball_03_44": -1000.7530673274288,
+        "sfu_basketball_08_15": -796.922334741663,
+        "unc_basketball_03-16-23_01_18": -464.35120552910706,
+        "uniandes_dance_011_27": -467.5034080787941,
+        "uniandes_dance_012_15": -441.116482035319,
+        "upenn_0725_Duet_Violin_1_2_8": -247.5963601006402
+      }
+    },
+    "72take_2400/prior_only minus 72take_400/gaussian": {
+      "mean_mm": 444.86176357092677,
+      "take_bootstrap_95ci_mm": [
+        346.4417670020351,
+        554.6087716137921
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": 274.76589684662997,
+        "georgiatech_bike_05_2": 343.3365719689263,
+        "iiith_cooking_109_4": 293.0550218511511,
+        "iiith_soccer_004_5": 300.5429319593641,
+        "indiana_music_13_5": 555.9874728167499,
+        "nus_cpr_52_1": 383.38553941514755,
+        "sfu_basketball_03_44": 194.8255250153719,
+        "sfu_basketball_08_15": 501.36078277870473,
+        "unc_basketball_03-16-23_01_18": 516.3341804504396,
+        "uniandes_dance_011_27": 714.670768681279,
+        "uniandes_dance_012_15": 425.81607333289253,
+        "upenn_0725_Duet_Violin_1_2_8": 834.2603977344654
+      }
+    },
+    "72take_2400/prior_only minus 72take_400/history": {
+      "mean_mm": 437.9391506530621,
+      "take_bootstrap_95ci_mm": [
+        290.57458767949794,
+        587.2769651059751
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -20.14860006261756,
+        "georgiatech_bike_05_2": 80.85576161985034,
+        "iiith_cooking_109_4": 82.80690296314378,
+        "iiith_soccer_004_5": 414.0700382232666,
+        "indiana_music_13_5": 656.8462912100333,
+        "nus_cpr_52_1": 630.2812874688043,
+        "sfu_basketball_03_44": 260.9912098072194,
+        "sfu_basketball_08_15": 532.6227703800909,
+        "unc_basketball_03-16-23_01_18": 557.8436620359068,
+        "uniandes_dance_011_27": 691.6389973958334,
+        "uniandes_dance_012_15": 486.9250163113629,
+        "upenn_0725_Duet_Violin_1_2_8": 880.5364704838505
+      }
+    },
+    "72take_2400/prior_only minus 72take_400/prior_only": {
+      "mean_mm": 2.404943531530904,
+      "take_bootstrap_95ci_mm": [
+        -194.24904878757616,
+        191.34283462277168
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -204.02999038696282,
+        "georgiatech_bike_05_2": 25.040251795450786,
+        "iiith_cooking_109_4": -156.72692868974474,
+        "iiith_soccer_004_5": -118.38960384792756,
+        "indiana_music_13_5": 21.690955903795157,
+        "nus_cpr_52_1": 59.846264817979545,
+        "sfu_basketball_03_44": -721.5618143717447,
+        "sfu_basketball_08_15": -219.02300838894303,
+        "unc_basketball_03-16-23_01_18": 146.77511181301543,
+        "uniandes_dance_011_27": 344.4883987426758,
+        "uniandes_dance_012_15": 105.49788835313586,
+        "upenn_0725_Duet_Violin_1_2_8": 745.2517966376411
+      }
+    },
+    "72take_400/gaussian minus 72take_400/history": {
+      "mean_mm": -6.922612917864785,
+      "take_bootstrap_95ci_mm": [
+        -100.89728524596605,
+        77.42328563501805
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -294.91449690924753,
+        "georgiatech_bike_05_2": -262.48081034907597,
+        "iiith_cooking_109_4": -210.24811888800727,
+        "iiith_soccer_004_5": 113.52710626390245,
+        "indiana_music_13_5": 100.8588183932834,
+        "nus_cpr_52_1": 246.89574805365672,
+        "sfu_basketball_03_44": 66.16568479184747,
+        "sfu_basketball_08_15": 31.261987601386153,
+        "unc_basketball_03-16-23_01_18": 41.509481585467256,
+        "uniandes_dance_011_27": -23.031771285445586,
+        "uniandes_dance_012_15": 61.108942978470395,
+        "upenn_0725_Duet_Violin_1_2_8": 46.27607274938515
+      }
+    },
+    "72take_400/gaussian minus 72take_400/prior_only": {
+      "mean_mm": -442.456820039396,
+      "take_bootstrap_95ci_mm": [
+        -562.6111795019223,
+        -337.1441120954208
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -478.7958872335928,
+        "georgiatech_bike_05_2": -318.2963201734755,
+        "iiith_cooking_109_4": -449.78195054089576,
+        "iiith_soccer_004_5": -418.9325358072917,
+        "indiana_music_13_5": -534.2965169129548,
+        "nus_cpr_52_1": -323.539274597168,
+        "sfu_basketball_03_44": -916.3873393871168,
+        "sfu_basketball_08_15": -720.3837911676478,
+        "unc_basketball_03-16-23_01_18": -369.5590686374241,
+        "uniandes_dance_011_27": -370.18236993860313,
+        "uniandes_dance_012_15": -320.31818497975667,
+        "upenn_0725_Duet_Violin_1_2_8": -89.00860109682435
+      }
+    },
+    "72take_400/history minus 72take_400/prior_only": {
+      "mean_mm": -435.53420712153115,
+      "take_bootstrap_95ci_mm": [
+        -588.4855613337622,
+        -294.9937292157868
+      ],
+      "take_differences_mm": {
+        "fair_bike_01_12": -183.88139032434526,
+        "georgiatech_bike_05_2": -55.815509824399555,
+        "iiith_cooking_109_4": -239.53383165288852,
+        "iiith_soccer_004_5": -532.4596420711941,
+        "indiana_music_13_5": -635.1553353062382,
+        "nus_cpr_52_1": -570.4350226508247,
+        "sfu_basketball_03_44": -982.5530241789642,
+        "sfu_basketball_08_15": -751.6457787690339,
+        "unc_basketball_03-16-23_01_18": -411.06855022289136,
+        "uniandes_dance_011_27": -347.15059865315754,
+        "uniandes_dance_012_15": -381.42712795822706,
+        "upenn_0725_Duet_Violin_1_2_8": -135.2846738462095
+      }
+    }
+  },
+  "reports": [
+    "exp/egorecover_stages_1_4/continuation_v1/stage2_eval/12take_400/report.json",
+    "exp/egorecover_stages_1_4/continuation_v1/stage2_eval/12take_1200/report.json",
+    "exp/egorecover_stages_1_4/continuation_v1/stage2_eval/72take_400/report.json",
+    "exp/egorecover_stages_1_4/continuation_v1/stage2_eval/72take_1200/report.json",
+    "exp/egorecover_stages_1_4/continuation_v1/stage2_eval/12take_2400/report.json",
+    "exp/egorecover_stages_1_4/continuation_v1/stage2_eval/72take_2400/report.json"
+  ]
+}

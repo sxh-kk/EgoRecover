@@ -1,0 +1,240 @@
+{
+  "tasks": {
+    "prepare_data": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.prepare_prior_real_history",
+        "--plan",
+        "exp/egorecover_prior_real_history/v1/plan.json",
+        "--output",
+        "exp/egorecover_prior_real_history/v1/data"
+      ],
+      "output": "exp/egorecover_prior_real_history/v1/data",
+      "kind": "real_history_data",
+      "expected": 0,
+      "deps": [],
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2248435,
+      "gpu": 4,
+      "spec": "exp/egorecover_prior_real_history/v1/jobs/prepare_data.1.json",
+      "log": "exp/egorecover_prior_real_history/v1/jobs/prepare_data.1.log",
+      "started_at": "2026-09-29T09:09:42.608310+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T09:13:59.702658+00:00"
+    },
+    "smoke": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.evaluate_prior_real_history",
+        "--plan",
+        "exp/egorecover_prior_real_history/v1/plan.json",
+        "--data",
+        "exp/egorecover_prior_real_history/v1/data",
+        "--output",
+        "exp/egorecover_prior_real_history/v1/smoke",
+        "--work",
+        "exp/egorecover_prior_real_history/v1/work/smoke",
+        "--smoke"
+      ],
+      "output": "exp/egorecover_prior_real_history/v1/smoke",
+      "kind": "real_history",
+      "expected": 0,
+      "deps": [
+        "prepare_data"
+      ],
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2252546,
+      "gpu": 4,
+      "spec": "exp/egorecover_prior_real_history/v1/jobs/smoke.1.json",
+      "log": "exp/egorecover_prior_real_history/v1/jobs/smoke.1.log",
+      "started_at": "2026-09-29T09:13:59.837559+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T09:14:29.961686+00:00"
+    },
+    "eval_shard0": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.evaluate_prior_real_history",
+        "--plan",
+        "exp/egorecover_prior_real_history/v1/plan.json",
+        "--data",
+        "exp/egorecover_prior_real_history/v1/data",
+        "--output",
+        "exp/egorecover_prior_real_history/v1/shards/shard0",
+        "--work",
+        "exp/egorecover_prior_real_history/v1/work/shard0",
+        "--shard",
+        "0",
+        "--shards",
+        "4"
+      ],
+      "output": "exp/egorecover_prior_real_history/v1/shards/shard0",
+      "kind": "real_history",
+      "expected": 0,
+      "deps": [
+        "smoke"
+      ],
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2252941,
+      "gpu": 4,
+      "spec": "exp/egorecover_prior_real_history/v1/jobs/eval_shard0.1.json",
+      "log": "exp/egorecover_prior_real_history/v1/jobs/eval_shard0.1.log",
+      "started_at": "2026-09-29T09:14:30.172947+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T09:16:16.017639+00:00"
+    },
+    "eval_shard1": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.evaluate_prior_real_history",
+        "--plan",
+        "exp/egorecover_prior_real_history/v1/plan.json",
+        "--data",
+        "exp/egorecover_prior_real_history/v1/data",
+        "--output",
+        "exp/egorecover_prior_real_history/v1/shards/shard1",
+        "--work",
+        "exp/egorecover_prior_real_history/v1/work/shard1",
+        "--shard",
+        "1",
+        "--shards",
+        "4"
+      ],
+      "output": "exp/egorecover_prior_real_history/v1/shards/shard1",
+      "kind": "real_history",
+      "expected": 0,
+      "deps": [
+        "smoke"
+      ],
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2252942,
+      "gpu": 5,
+      "spec": "exp/egorecover_prior_real_history/v1/jobs/eval_shard1.1.json",
+      "log": "exp/egorecover_prior_real_history/v1/jobs/eval_shard1.1.log",
+      "started_at": "2026-09-29T09:14:30.185587+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T09:16:16.025588+00:00"
+    },
+    "eval_shard2": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.evaluate_prior_real_history",
+        "--plan",
+        "exp/egorecover_prior_real_history/v1/plan.json",
+        "--data",
+        "exp/egorecover_prior_real_history/v1/data",
+        "--output",
+        "exp/egorecover_prior_real_history/v1/shards/shard2",
+        "--work",
+        "exp/egorecover_prior_real_history/v1/work/shard2",
+        "--shard",
+        "2",
+        "--shards",
+        "4"
+      ],
+      "output": "exp/egorecover_prior_real_history/v1/shards/shard2",
+      "kind": "real_history",
+      "expected": 0,
+      "deps": [
+        "smoke"
+      ],
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2252943,
+      "gpu": 6,
+      "spec": "exp/egorecover_prior_real_history/v1/jobs/eval_shard2.1.json",
+      "log": "exp/egorecover_prior_real_history/v1/jobs/eval_shard2.1.log",
+      "started_at": "2026-09-29T09:14:30.196121+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T09:16:16.034834+00:00"
+    },
+    "eval_shard3": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.evaluate_prior_real_history",
+        "--plan",
+        "exp/egorecover_prior_real_history/v1/plan.json",
+        "--data",
+        "exp/egorecover_prior_real_history/v1/data",
+        "--output",
+        "exp/egorecover_prior_real_history/v1/shards/shard3",
+        "--work",
+        "exp/egorecover_prior_real_history/v1/work/shard3",
+        "--shard",
+        "3",
+        "--shards",
+        "4"
+      ],
+      "output": "exp/egorecover_prior_real_history/v1/shards/shard3",
+      "kind": "real_history",
+      "expected": 0,
+      "deps": [
+        "smoke"
+      ],
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2252944,
+      "gpu": 7,
+      "spec": "exp/egorecover_prior_real_history/v1/jobs/eval_shard3.1.json",
+      "log": "exp/egorecover_prior_real_history/v1/jobs/eval_shard3.1.log",
+      "started_at": "2026-09-29T09:14:30.203188+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T09:16:16.040869+00:00"
+    }
+  },
+  "created_at": "2026-09-29T09:09:27.364469+00:00",
+  "policy_changes": [
+    {
+      "at": "2026-09-29T09:09:27.364488+00:00",
+      "from": {
+        "gpus": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "allow_shared": false,
+        "minimum_free_gib": 32
+      },
+      "to": {
+        "gpus": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "allow_shared": true,
+        "minimum_free_gib": 16
+      }
+    }
+  ],
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "allow_shared": true,
+  "minimum_free_gib": 16,
+  "controller_pid": 2248196,
+  "status": "complete",
+  "updated_at": "2026-09-29T09:16:18.152482+00:00",
+  "start_logged": true,
+  "completed_at": "2026-09-29T09:16:18.152471+00:00"
+}

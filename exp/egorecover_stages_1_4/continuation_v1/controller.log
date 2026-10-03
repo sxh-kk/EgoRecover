@@ -1,0 +1,73 @@
+2026-09-28T09:48:27.474500+00:00 Queue started; only idle GPUs [0, 1, 2, 3] may be used. Status: exp/egorecover_stages_1_4/continuation_v1/queue.json
+2026-09-28T09:54:49.051769+00:00 Queue started; GPUs [4, 5, 6, 7], policy shared, at least 32 GiB free. Status: exp/egorecover_stages_1_4/continuation_v1/queue.json
+2026-09-28T09:55:46.915904+00:00 Started train_12take_2400 on GPU4, PID 1319876, log exp/egorecover_stages_1_4/continuation_v1/jobs/train_12take_2400.1.log
+2026-09-28T09:55:46.927235+00:00 Started train_72take_2400 on GPU5, PID 1319877, log exp/egorecover_stages_1_4/continuation_v1/jobs/train_72take_2400.1.log
+2026-09-28T09:55:46.936091+00:00 Started eval_12take_400 on GPU6, PID 1319878, log exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_400.1.log
+2026-09-28T09:55:46.944841+00:00 Started eval_12take_1200 on GPU7, PID 1319879, log exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_1200.1.log
+2026-09-28T09:56:16.950351+00:00 train_12take_2400: failed
+2026-09-28T09:56:16.956960+00:00 train_72take_2400: failed
+2026-09-28T09:56:16.965425+00:00 eval_12take_400: failed
+2026-09-28T09:56:16.978152+00:00 eval_12take_1200: failed
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/gaozt-test1/sxh/EgoRecover/run/complete_stages.py", line 503, in <module>
+    main()
+  File "/gaozt-test1/sxh/EgoRecover/run/complete_stages.py", line 494, in main
+    complete(queue)
+  File "/gaozt-test1/sxh/EgoRecover/run/complete_stages.py", line 388, in complete
+    queue.run(tasks)
+  File "/gaozt-test1/sxh/EgoRecover/run/complete_stages.py", line 243, in run
+    raise RuntimeError("Experiment failed; dependent stages were not started.")
+RuntimeError: Experiment failed; dependent stages were not started.
+2026-09-28T09:58:03.502459+00:00 Queue started; GPUs [4, 5, 6, 7], policy shared, at least 32 GiB free. Status: exp/egorecover_stages_1_4/continuation_v1/queue.json
+2026-09-28T09:58:58.762418+00:00 Preserved interrupted output: exp/egorecover_stages_1_4/continuation_v1/stage2_budget/12take_2400.interrupted_1790589538762118962
+2026-09-28T09:58:58.777145+00:00 Started train_12take_2400 on GPU4, PID 1322512, log exp/egorecover_stages_1_4/continuation_v1/jobs/train_12take_2400.2.log
+2026-09-28T09:58:58.777329+00:00 Preserved interrupted output: exp/egorecover_stages_1_4/continuation_v1/stage2_budget/72take_2400.interrupted_1790589538777198445
+2026-09-28T09:58:58.816764+00:00 Started train_72take_2400 on GPU5, PID 1322513, log exp/egorecover_stages_1_4/continuation_v1/jobs/train_72take_2400.2.log
+2026-09-28T09:58:58.827645+00:00 Started eval_12take_400 on GPU6, PID 1322514, log exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_400.2.log
+2026-09-28T09:58:58.856126+00:00 Started eval_12take_1200 on GPU7, PID 1322515, log exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_1200.2.log
+2026-09-28T11:39:53.334934+00:00 eval_12take_400: complete
+2026-09-28T11:39:53.453008+00:00 Started eval_72take_400 on GPU6, PID 1390580, log exp/egorecover_stages_1_4/continuation_v1/jobs/eval_72take_400.1.log
+2026-09-28T11:41:24.366529+00:00 eval_12take_1200: complete
+2026-09-28T11:41:24.490549+00:00 Started eval_72take_1200 on GPU7, PID 1391640, log exp/egorecover_stages_1_4/continuation_v1/jobs/eval_72take_1200.1.log
+2026-09-28T13:04:51.941025+00:00 train_72take_2400: complete
+2026-09-28T13:04:52.067091+00:00 Started eval_72take_2400 on GPU5, PID 1440929, log exp/egorecover_stages_1_4/continuation_v1/jobs/eval_72take_2400.1.log
+2026-09-28T13:20:56.601096+00:00 eval_72take_1200: complete
+2026-09-28T13:22:27.508261+00:00 eval_72take_400: complete
+2026-09-28T14:41:47.421365+00:00 eval_72take_2400: complete
+2026-09-28T15:39:41.039501+00:00 train_12take_2400: complete
+2026-09-28T15:39:41.161647+00:00 Started eval_12take_2400 on GPU4, PID 1860844, log exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_2400.1.log
+2026-09-28T17:34:37.652968+00:00 eval_12take_2400: complete
+2026-09-28T17:34:38.760804+00:00 Started cache_train_0 on GPU4, PID 1902423, log exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_0.1.log
+2026-09-28T17:34:38.770567+00:00 Started cache_train_1 on GPU5, PID 1902424, log exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_1.1.log
+2026-09-28T17:34:38.778998+00:00 Started cache_train_2 on GPU6, PID 1902425, log exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_2.1.log
+2026-09-28T17:34:38.786203+00:00 Started cache_train_3 on GPU7, PID 1902426, log exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_3.1.log
+2026-09-28T18:12:17.559393+00:00 cache_train_0: complete
+2026-09-28T18:12:17.685451+00:00 Started cache_dev_0 on GPU4, PID 1915728, log exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_0.1.log
+2026-09-28T18:12:47.979487+00:00 cache_train_1: complete
+2026-09-28T18:12:48.726535+00:00 cache_train_2: complete
+2026-09-28T18:12:48.948752+00:00 Started cache_dev_1 on GPU5, PID 1915912, log exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_1.1.log
+2026-09-28T18:12:49.038969+00:00 Started cache_dev_2 on GPU6, PID 1915913, log exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_2.1.log
+2026-09-28T18:13:19.553588+00:00 cache_train_3: complete
+2026-09-28T18:13:19.716859+00:00 Started cache_dev_3 on GPU7, PID 1916160, log exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_3.1.log
+2026-09-28T18:29:23.252331+00:00 cache_dev_0: complete
+2026-09-28T18:30:23.528514+00:00 cache_dev_1: complete
+2026-09-28T18:30:23.606873+00:00 cache_dev_2: complete
+2026-09-28T18:31:23.955894+00:00 cache_dev_3: complete
+2026-09-28T18:31:32.584922+00:00 Started train_replay_0 on GPU4, PID 1924072, log exp/egorecover_stages_1_4/continuation_v1/jobs/train_replay_0.1.log
+2026-09-28T18:31:32.596518+00:00 Started train_replay_0p25 on GPU5, PID 1924073, log exp/egorecover_stages_1_4/continuation_v1/jobs/train_replay_0p25.1.log
+2026-09-28T18:31:32.604745+00:00 Started train_replay_0p5 on GPU6, PID 1924074, log exp/egorecover_stages_1_4/continuation_v1/jobs/train_replay_0p5.1.log
+2026-09-28T19:45:55.077092+00:00 train_replay_0p25: complete
+2026-09-28T19:45:55.196202+00:00 Started eval_replay_0p25 on GPU5, PID 1937411, log exp/egorecover_stages_1_4/continuation_v1/jobs/eval_replay_0p25.1.log
+2026-09-28T19:46:32.061749+00:00 train_replay_0: complete
+2026-09-28T19:46:32.178273+00:00 Started eval_replay_0 on GPU4, PID 1937514, log exp/egorecover_stages_1_4/continuation_v1/jobs/eval_replay_0.1.log
+2026-09-28T19:47:39.587122+00:00 train_replay_0p5: complete
+2026-09-28T19:47:39.788549+00:00 Started eval_replay_0p5 on GPU6, PID 1937658, log exp/egorecover_stages_1_4/continuation_v1/jobs/eval_replay_0p5.1.log
+2026-09-28T21:20:00.867377+00:00 eval_replay_0p25: complete
+2026-09-28T21:20:31.342298+00:00 eval_replay_0: complete
+2026-09-28T21:24:02.447842+00:00 eval_replay_0p5: complete
+2026-09-28T21:24:03.101603+00:00 Started diagnose_train on GPU4, PID 1951537, log exp/egorecover_stages_1_4/continuation_v1/jobs/diagnose_train.1.log
+2026-09-28T21:24:03.132524+00:00 Started diagnose_dev on GPU5, PID 1951538, log exp/egorecover_stages_1_4/continuation_v1/jobs/diagnose_dev.1.log
+2026-09-28T21:30:04.286047+00:00 diagnose_dev: complete
+2026-09-28T21:34:35.430412+00:00 diagnose_train: complete

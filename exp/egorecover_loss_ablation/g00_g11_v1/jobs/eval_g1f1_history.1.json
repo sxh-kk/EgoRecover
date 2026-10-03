@@ -1,0 +1,27 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.evaluate_paired_development",
+    "--signal",
+    "data/EE4D_MISMATCH_TRAIN_72TAKE_READY.json",
+    "--split-manifest",
+    "config/egorecover_train_72take_split_v1.json",
+    "--bootstrap-cache",
+    "exp/egorecover_train_72take_v1/bootstrap.pt",
+    "--checkpoint",
+    "exp/e7/last.ckpt",
+    "--experiment",
+    "g1f1_history=exp/egorecover_loss_ablation/g00_g11_v1/train/g1f1_history",
+    "--source-modes",
+    "history",
+    "--group",
+    "dev",
+    "--seed",
+    "62",
+    "--output",
+    "exp/egorecover_loss_ablation/g00_g11_v1/eval/g1f1_history"
+  ],
+  "gpu": 7
+}

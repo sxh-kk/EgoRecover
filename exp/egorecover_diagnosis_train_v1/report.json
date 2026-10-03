@@ -1,0 +1,300 @@
+{
+  "scope": "OFFLINE root-cause diagnostics; oracle substitutions are not deployable results",
+  "experiment": "exp/egorecover_engineering_v1",
+  "eval_split": "train",
+  "probe_set": "none",
+  "random_bootstrap_copy": "physical_state_exact_copy_no_reencoding",
+  "single_step": {
+    "hold": {
+      "weighted_mse": 0.7371585369110107,
+      "channel_mse": {
+        "joint_rotation": 0.17545239627361298,
+        "joint_translation": 0.06724965572357178,
+        "reference_rotation": 3.6616122722625732,
+        "reference_translation": 0.7634878158569336,
+        "hands": 0.12387533485889435,
+        "contact": 0.45912057161331177,
+        "beta": 0.0
+      },
+      "dense22_mm": 34.86772155761719,
+      "planar_reference_dense22_mm": 34.86772155761719,
+      "oracle_reference_dense22_mm": 28.99420738220215,
+      "oracle_local_translation_dense22_mm": 31.272441864013672,
+      "root_relative_dense22_mm": 21.925872802734375
+    },
+    "constant_velocity": {
+      "weighted_mse": 0.5693227052688599,
+      "channel_mse": {
+        "joint_rotation": 0.2972370982170105,
+        "joint_translation": 0.11411289870738983,
+        "reference_rotation": 2.46158766746521,
+        "reference_translation": 0.22493967413902283,
+        "hands": 0.12387533485889435,
+        "contact": 0.45912057161331177,
+        "beta": 0.0
+      },
+      "dense22_mm": 21.661788940429688,
+      "planar_reference_dense22_mm": 21.66178321838379,
+      "oracle_reference_dense22_mm": 27.016769409179688,
+      "oracle_local_translation_dense22_mm": 16.426776885986328,
+      "root_relative_dense22_mm": 18.05099868774414
+    },
+    "P": {
+      "weighted_mse": 0.1854100525379181,
+      "channel_mse": {
+        "joint_rotation": 0.11353854835033417,
+        "joint_translation": 0.04860389605164528,
+        "reference_rotation": 0.660071849822998,
+        "reference_translation": 0.11801259219646454,
+        "hands": 0.12853236496448517,
+        "contact": 0.4700002670288086,
+        "beta": 0.0
+      },
+      "dense22_mm": 31.101903915405273,
+      "planar_reference_dense22_mm": 31.10189437866211,
+      "oracle_reference_dense22_mm": 28.954635620117188,
+      "oracle_local_translation_dense22_mm": 14.674604415893555,
+      "root_relative_dense22_mm": 24.03455352783203
+    },
+    "GT_roundtrip": {
+      "weighted_mse": 0.0,
+      "channel_mse": {
+        "joint_rotation": 0.0,
+        "joint_translation": 0.0,
+        "reference_rotation": 0.0,
+        "reference_translation": 0.0,
+        "hands": 0.0,
+        "contact": 0.0,
+        "beta": 0.0
+      },
+      "dense22_mm": 0.00024259557540062815,
+      "planar_reference_dense22_mm": 0.0002348794077988714,
+      "oracle_reference_dense22_mm": 0.00024259557540062815,
+      "oracle_local_translation_dense22_mm": 0.00024259557540062815,
+      "root_relative_dense22_mm": 0.00017381037469021976
+    },
+    "gaussian": {
+      "teacher_path": {
+        "0.1": {
+          "weighted_mse": 0.09816071391105652,
+          "channel_mse": {
+            "joint_rotation": 0.06787821650505066,
+            "joint_translation": 0.03889776021242142,
+            "reference_rotation": 0.29627203941345215,
+            "reference_translation": 0.06847681850194931,
+            "hands": 0.08707117289304733,
+            "contact": 0.16947394609451294,
+            "beta": 0.021684356033802032
+          },
+          "dense22_mm": 150.54135131835938,
+          "planar_reference_dense22_mm": 32.57729721069336,
+          "oracle_reference_dense22_mm": 31.64336395263672,
+          "oracle_local_translation_dense22_mm": 147.10736083984375,
+          "root_relative_dense22_mm": 58.037681579589844
+        },
+        "0.5": {
+          "weighted_mse": 0.09162953495979309,
+          "channel_mse": {
+            "joint_rotation": 0.0787736028432846,
+            "joint_translation": 0.03775700554251671,
+            "reference_rotation": 0.2223072052001953,
+            "reference_translation": 0.06380040943622589,
+            "hands": 0.09596358239650726,
+            "contact": 0.21914851665496826,
+            "beta": 0.020518247038125992
+          },
+          "dense22_mm": 134.50082397460938,
+          "planar_reference_dense22_mm": 31.059206008911133,
+          "oracle_reference_dense22_mm": 30.089263916015625,
+          "oracle_local_translation_dense22_mm": 130.1125030517578,
+          "root_relative_dense22_mm": 53.52134323120117
+        },
+        "1.0": {
+          "weighted_mse": 0.11883557587862015,
+          "channel_mse": {
+            "joint_rotation": 0.13059772551059723,
+            "joint_translation": 0.055068690329790115,
+            "reference_rotation": 0.187453955411911,
+            "reference_translation": 0.07930566370487213,
+            "hands": 0.15131314098834991,
+            "contact": 0.37016719579696655,
+            "beta": 0.021727969869971275
+          },
+          "dense22_mm": 133.01364135742188,
+          "planar_reference_dense22_mm": 36.599544525146484,
+          "oracle_reference_dense22_mm": 35.95301055908203,
+          "oracle_local_translation_dense22_mm": 124.89862060546875,
+          "root_relative_dense22_mm": 56.64389419555664
+        }
+      },
+      "sampling": {
+        "1": {
+          "weighted_mse": 0.11883557587862015,
+          "channel_mse": {
+            "joint_rotation": 0.13059772551059723,
+            "joint_translation": 0.05506868287920952,
+            "reference_rotation": 0.187453955411911,
+            "reference_translation": 0.07930566370487213,
+            "hands": 0.15131312608718872,
+            "contact": 0.37016719579696655,
+            "beta": 0.021727969869971275
+          },
+          "dense22_mm": 133.01364135742188,
+          "planar_reference_dense22_mm": 36.59954833984375,
+          "oracle_reference_dense22_mm": 35.95301055908203,
+          "oracle_local_translation_dense22_mm": 124.89861297607422,
+          "root_relative_dense22_mm": 56.64388656616211
+        },
+        "10": {
+          "weighted_mse": 0.137356698513031,
+          "channel_mse": {
+            "joint_rotation": 0.10917855054140091,
+            "joint_translation": 0.05544675514101982,
+            "reference_rotation": 0.3534884452819824,
+            "reference_translation": 0.10838054120540619,
+            "hands": 0.14352260529994965,
+            "contact": 0.35658448934555054,
+            "beta": 0.023380285128951073
+          },
+          "dense22_mm": 154.41766357421875,
+          "planar_reference_dense22_mm": 37.66577911376953,
+          "oracle_reference_dense22_mm": 36.70481872558594,
+          "oracle_local_translation_dense22_mm": 149.21060180664062,
+          "root_relative_dense22_mm": 60.40584945678711
+        },
+        "50": {
+          "weighted_mse": 0.15767036378383636,
+          "channel_mse": {
+            "joint_rotation": 0.1234983429312706,
+            "joint_translation": 0.06478317826986313,
+            "reference_rotation": 0.4077073037624359,
+            "reference_translation": 0.12949928641319275,
+            "hands": 0.16231828927993774,
+            "contact": 0.40391501784324646,
+            "beta": 0.028825704008340836
+          },
+          "dense22_mm": 162.38133239746094,
+          "planar_reference_dense22_mm": 42.17905807495117,
+          "oracle_reference_dense22_mm": 40.74736785888672,
+          "oracle_local_translation_dense22_mm": 154.0978546142578,
+          "root_relative_dense22_mm": 69.43953704833984
+        }
+      }
+    },
+    "history": {
+      "teacher_path": {
+        "0.1": {
+          "weighted_mse": 0.09184496104717255,
+          "channel_mse": {
+            "joint_rotation": 0.05021471157670021,
+            "joint_translation": 0.03170861676335335,
+            "reference_rotation": 0.31363916397094727,
+            "reference_translation": 0.09569396823644638,
+            "hands": 0.06363771855831146,
+            "contact": 0.16450461745262146,
+            "beta": 0.01758001185953617
+          },
+          "dense22_mm": 139.46946716308594,
+          "planar_reference_dense22_mm": 28.286802291870117,
+          "oracle_reference_dense22_mm": 27.164487838745117,
+          "oracle_local_translation_dense22_mm": 135.6947021484375,
+          "root_relative_dense22_mm": 45.24254608154297
+        },
+        "0.5": {
+          "weighted_mse": 0.0858653262257576,
+          "channel_mse": {
+            "joint_rotation": 0.052293628454208374,
+            "joint_translation": 0.03301187977194786,
+            "reference_rotation": 0.26591068506240845,
+            "reference_translation": 0.08977013826370239,
+            "hands": 0.07170983403921127,
+            "contact": 0.18981558084487915,
+            "beta": 0.017438678070902824
+          },
+          "dense22_mm": 136.6780242919922,
+          "planar_reference_dense22_mm": 29.391904830932617,
+          "oracle_reference_dense22_mm": 28.518211364746094,
+          "oracle_local_translation_dense22_mm": 132.23948669433594,
+          "root_relative_dense22_mm": 45.03300857543945
+        },
+        "1.0": {
+          "weighted_mse": 0.09294267743825912,
+          "channel_mse": {
+            "joint_rotation": 0.07810579985380173,
+            "joint_translation": 0.044744521379470825,
+            "reference_rotation": 0.19939672946929932,
+            "reference_translation": 0.09596904367208481,
+            "hands": 0.10387410968542099,
+            "contact": 0.30659663677215576,
+            "beta": 0.01968834362924099
+          },
+          "dense22_mm": 136.23699951171875,
+          "planar_reference_dense22_mm": 34.041893005371094,
+          "oracle_reference_dense22_mm": 33.21945571899414,
+          "oracle_local_translation_dense22_mm": 131.63983154296875,
+          "root_relative_dense22_mm": 48.26699447631836
+        }
+      },
+      "sampling": {
+        "1": {
+          "weighted_mse": 0.09294267743825912,
+          "channel_mse": {
+            "joint_rotation": 0.07810579985380173,
+            "joint_translation": 0.044744521379470825,
+            "reference_rotation": 0.19939672946929932,
+            "reference_translation": 0.09596904367208481,
+            "hands": 0.10387410968542099,
+            "contact": 0.30659663677215576,
+            "beta": 0.01968834362924099
+          },
+          "dense22_mm": 136.23699951171875,
+          "planar_reference_dense22_mm": 34.041893005371094,
+          "oracle_reference_dense22_mm": 33.21945571899414,
+          "oracle_local_translation_dense22_mm": 131.6398162841797,
+          "root_relative_dense22_mm": 48.26699447631836
+        },
+        "10": {
+          "weighted_mse": 0.14755937457084656,
+          "channel_mse": {
+            "joint_rotation": 0.10439959913492203,
+            "joint_translation": 0.0623156763613224,
+            "reference_rotation": 0.4057874083518982,
+            "reference_translation": 0.15383651852607727,
+            "hands": 0.13273285329341888,
+            "contact": 0.33938533067703247,
+            "beta": 0.02253582328557968
+          },
+          "dense22_mm": 152.2643585205078,
+          "planar_reference_dense22_mm": 37.45899963378906,
+          "oracle_reference_dense22_mm": 36.731014251708984,
+          "oracle_local_translation_dense22_mm": 145.9899139404297,
+          "root_relative_dense22_mm": 50.99208068847656
+        },
+        "50": {
+          "weighted_mse": 0.17599475383758545,
+          "channel_mse": {
+            "joint_rotation": 0.1419544517993927,
+            "joint_translation": 0.08187392354011536,
+            "reference_rotation": 0.43686696887016296,
+            "reference_translation": 0.163954958319664,
+            "hands": 0.15929296612739563,
+            "contact": 0.37951457500457764,
+            "beta": 0.022613536566495895
+          },
+          "dense22_mm": 157.2641143798828,
+          "planar_reference_dense22_mm": 42.36467742919922,
+          "oracle_reference_dense22_mm": 41.66241455078125,
+          "oracle_local_translation_dense22_mm": 149.75393676757812,
+          "root_relative_dense22_mm": 56.112548828125
+        }
+      }
+    }
+  },
+  "training_frame_counts": {
+    "unique_base_next_frame_targets": 1440,
+    "variants_per_take": 7,
+    "note": "7 variants share the same body labels; overlapping histories are not independent sequences"
+  },
+  "closed_loop": [],
+  "parameter_count_G": 88820979
+}

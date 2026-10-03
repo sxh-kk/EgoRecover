@@ -1,0 +1,1509 @@
+2026-09-28 18:07:10.230 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+Preparing take-disjoint teacher-forced engineering batches
+P 20/2400: train=0.416064 dev_mse=0.215718 dev_mm=46.309
+P 40/2400: train=0.964384 dev_mse=0.228145 dev_mm=49.037
+P 60/2400: train=0.550710 dev_mse=0.237816 dev_mm=47.233
+P 80/2400: train=0.420620 dev_mse=0.207589 dev_mm=44.679
+P 100/2400: train=0.447623 dev_mse=0.198507 dev_mm=41.081
+P 120/2400: train=0.228691 dev_mse=0.204180 dev_mm=43.496
+P 140/2400: train=0.247348 dev_mse=0.191967 dev_mm=41.609
+P 160/2400: train=0.288972 dev_mse=0.186445 dev_mm=42.221
+P 180/2400: train=0.185785 dev_mse=0.192603 dev_mm=42.818
+P 200/2400: train=0.230153 dev_mse=0.184917 dev_mm=42.025
+P 220/2400: train=0.172955 dev_mse=0.185236 dev_mm=43.249
+P 240/2400: train=0.171180 dev_mse=0.186862 dev_mm=43.929
+P 260/2400: train=0.462664 dev_mse=0.175289 dev_mm=42.918
+P 280/2400: train=0.180738 dev_mse=0.179869 dev_mm=43.118
+P 300/2400: train=0.154040 dev_mse=0.179968 dev_mm=44.126
+P 320/2400: train=0.122787 dev_mse=0.183863 dev_mm=43.985
+P 340/2400: train=0.139087 dev_mse=0.176893 dev_mm=44.908
+P 360/2400: train=0.120871 dev_mse=0.178402 dev_mm=44.561
+P 380/2400: train=0.103155 dev_mse=0.184345 dev_mm=45.991
+P 400/2400: train=0.518491 dev_mse=0.182240 dev_mm=45.631
+P 420/2400: train=0.165196 dev_mse=0.171557 dev_mm=43.586
+P 440/2400: train=0.128364 dev_mse=0.177538 dev_mm=44.807
+P 460/2400: train=0.110736 dev_mse=0.173499 dev_mm=43.491
+P 480/2400: train=0.124427 dev_mse=0.183303 dev_mm=45.864
+P 500/2400: train=0.283589 dev_mse=0.182718 dev_mm=46.529
+P 520/2400: train=0.139128 dev_mse=0.183857 dev_mm=45.573
+P 540/2400: train=0.157534 dev_mse=0.177790 dev_mm=44.265
+P 560/2400: train=0.126951 dev_mse=0.181914 dev_mm=45.327
+P 580/2400: train=0.130655 dev_mse=0.174213 dev_mm=43.390
+P 600/2400: train=0.199592 dev_mse=0.172820 dev_mm=44.104
+P 620/2400: train=0.245642 dev_mse=0.171774 dev_mm=43.697
+P 640/2400: train=0.094925 dev_mse=0.169557 dev_mm=42.410
+P 660/2400: train=0.135931 dev_mse=0.174174 dev_mm=43.689
+P 680/2400: train=0.131634 dev_mse=0.170475 dev_mm=44.303
+P 700/2400: train=0.145339 dev_mse=0.168371 dev_mm=42.956
+P 720/2400: train=0.164271 dev_mse=0.173506 dev_mm=44.729
+P 740/2400: train=0.109354 dev_mse=0.167408 dev_mm=43.434
+P 760/2400: train=0.103458 dev_mse=0.173336 dev_mm=43.244
+P 780/2400: train=0.112876 dev_mse=0.172726 dev_mm=44.311
+P 800/2400: train=0.101141 dev_mse=0.178544 dev_mm=43.506
+P 820/2400: train=0.115870 dev_mse=0.174893 dev_mm=42.751
+P 840/2400: train=0.089487 dev_mse=0.173567 dev_mm=44.435
+P 860/2400: train=0.165660 dev_mse=0.171259 dev_mm=43.832
+P 880/2400: train=0.288308 dev_mse=0.167559 dev_mm=42.409
+P 900/2400: train=0.074787 dev_mse=0.173649 dev_mm=42.218
+P 920/2400: train=0.101374 dev_mse=0.173847 dev_mm=43.061
+P 940/2400: train=0.177600 dev_mse=0.174725 dev_mm=43.550
+P 960/2400: train=0.093840 dev_mse=0.175066 dev_mm=44.421
+P 980/2400: train=0.113284 dev_mse=0.172742 dev_mm=43.398
+P 1000/2400: train=0.063962 dev_mse=0.168277 dev_mm=41.293
+P 1020/2400: train=0.128256 dev_mse=0.178005 dev_mm=42.565
+P 1040/2400: train=0.069885 dev_mse=0.174710 dev_mm=43.379
+P 1060/2400: train=0.091328 dev_mse=0.174785 dev_mm=43.167
+P 1080/2400: train=0.081388 dev_mse=0.172704 dev_mm=42.422
+P 1100/2400: train=0.178426 dev_mse=0.174208 dev_mm=42.822
+P 1120/2400: train=0.080546 dev_mse=0.176735 dev_mm=42.951
+P 1140/2400: train=0.125075 dev_mse=0.176801 dev_mm=45.144
+P 1160/2400: train=0.088294 dev_mse=0.172254 dev_mm=43.554
+P 1180/2400: train=0.064412 dev_mse=0.173150 dev_mm=43.227
+P 1200/2400: train=0.181048 dev_mse=0.174285 dev_mm=43.665
+P 1220/2400: train=0.075874 dev_mse=0.172754 dev_mm=43.656
+P 1240/2400: train=0.064819 dev_mse=0.174227 dev_mm=43.397
+P 1260/2400: train=0.110129 dev_mse=0.179579 dev_mm=42.898
+P 1280/2400: train=0.066466 dev_mse=0.179334 dev_mm=44.449
+P 1300/2400: train=0.052239 dev_mse=0.177009 dev_mm=43.729
+P 1320/2400: train=0.095837 dev_mse=0.176965 dev_mm=43.140
+P 1340/2400: train=0.089004 dev_mse=0.172401 dev_mm=43.040
+P 1360/2400: train=0.074342 dev_mse=0.173410 dev_mm=43.092
+P 1380/2400: train=0.082951 dev_mse=0.173830 dev_mm=42.831
+P 1400/2400: train=0.082999 dev_mse=0.175336 dev_mm=42.472
+P 1420/2400: train=0.072838 dev_mse=0.173577 dev_mm=42.758
+P 1440/2400: train=0.124831 dev_mse=0.175054 dev_mm=42.241
+P 1460/2400: train=0.153924 dev_mse=0.175951 dev_mm=42.613
+P 1480/2400: train=0.059752 dev_mse=0.176259 dev_mm=43.034
+P 1500/2400: train=0.059895 dev_mse=0.177510 dev_mm=43.219
+P 1520/2400: train=0.064198 dev_mse=0.175194 dev_mm=41.410
+P 1540/2400: train=0.066936 dev_mse=0.175502 dev_mm=43.035
+P 1560/2400: train=0.057799 dev_mse=0.179488 dev_mm=43.392
+P 1580/2400: train=0.066298 dev_mse=0.173989 dev_mm=43.155
+P 1600/2400: train=0.062978 dev_mse=0.180973 dev_mm=43.664
+P 1620/2400: train=0.102233 dev_mse=0.177904 dev_mm=41.819
+P 1640/2400: train=0.058017 dev_mse=0.181313 dev_mm=43.428
+P 1660/2400: train=0.066479 dev_mse=0.176921 dev_mm=42.531
+P 1680/2400: train=0.074923 dev_mse=0.174219 dev_mm=42.672
+P 1700/2400: train=0.106689 dev_mse=0.178068 dev_mm=42.919
+P 1720/2400: train=0.059940 dev_mse=0.175630 dev_mm=42.257
+P 1740/2400: train=0.088429 dev_mse=0.175994 dev_mm=42.549
+P 1760/2400: train=0.068100 dev_mse=0.178058 dev_mm=42.649
+P 1780/2400: train=0.047593 dev_mse=0.175557 dev_mm=43.105
+P 1800/2400: train=0.093759 dev_mse=0.176742 dev_mm=41.826
+P 1820/2400: train=0.094117 dev_mse=0.177537 dev_mm=43.659
+P 1840/2400: train=0.052421 dev_mse=0.178172 dev_mm=42.217
+P 1860/2400: train=0.050917 dev_mse=0.175333 dev_mm=42.283
+P 1880/2400: train=0.038941 dev_mse=0.173880 dev_mm=42.490
+P 1900/2400: train=0.084051 dev_mse=0.175868 dev_mm=42.405
+P 1920/2400: train=0.063807 dev_mse=0.176898 dev_mm=42.654
+P 1940/2400: train=0.055353 dev_mse=0.177523 dev_mm=42.710
+P 1960/2400: train=0.053148 dev_mse=0.177410 dev_mm=43.278
+P 1980/2400: train=0.054189 dev_mse=0.177311 dev_mm=42.979
+P 2000/2400: train=0.054376 dev_mse=0.174918 dev_mm=42.265
+P 2020/2400: train=0.055442 dev_mse=0.178838 dev_mm=42.665
+P 2040/2400: train=0.104715 dev_mse=0.177458 dev_mm=42.630
+P 2060/2400: train=0.048822 dev_mse=0.179121 dev_mm=43.053
+P 2080/2400: train=0.059759 dev_mse=0.174907 dev_mm=42.681
+P 2100/2400: train=0.051697 dev_mse=0.176191 dev_mm=43.361
+P 2120/2400: train=0.082523 dev_mse=0.175821 dev_mm=43.134
+P 2140/2400: train=0.049743 dev_mse=0.179518 dev_mm=42.910
+P 2160/2400: train=0.099632 dev_mse=0.180347 dev_mm=42.766
+P 2180/2400: train=0.057569 dev_mse=0.180893 dev_mm=43.206
+P 2200/2400: train=0.047768 dev_mse=0.179285 dev_mm=43.570
+P 2220/2400: train=0.042375 dev_mse=0.177320 dev_mm=41.923
+P 2240/2400: train=0.082354 dev_mse=0.178015 dev_mm=42.333
+P 2260/2400: train=0.055984 dev_mse=0.176548 dev_mm=42.656
+P 2280/2400: train=0.057296 dev_mse=0.178979 dev_mm=42.743
+P 2300/2400: train=0.055141 dev_mse=0.180411 dev_mm=42.353
+P 2320/2400: train=0.050430 dev_mse=0.180541 dev_mm=41.403
+P 2340/2400: train=0.051615 dev_mse=0.182432 dev_mm=42.645
+P 2360/2400: train=0.042233 dev_mse=0.176533 dev_mm=42.171
+P 2380/2400: train=0.048284 dev_mse=0.175496 dev_mm=42.889
+P 2400/2400: train=0.068328 dev_mse=0.173264 dev_mm=41.851
+G/gaussian 20/2400: train=0.404008
+G/gaussian 40/2400: train=0.361164
+G/gaussian 60/2400: train=0.322269
+G/gaussian 80/2400: train=0.281527
+G/gaussian 100/2400: train=0.287357
+G/gaussian 120/2400: train=0.222215
+G/gaussian 140/2400: train=0.271302
+G/gaussian 160/2400: train=0.255133
+G/gaussian 180/2400: train=0.244739
+G/gaussian 200/2400: train=0.227576
+G/gaussian dev sample 200: 232.975 mm (closed_loop_fk)
+G/gaussian 220/2400: train=0.187160
+G/gaussian 240/2400: train=0.159482
+G/gaussian 260/2400: train=0.208284
+G/gaussian 280/2400: train=0.218135
+G/gaussian 300/2400: train=0.193841
+G/gaussian 320/2400: train=0.223891
+G/gaussian 340/2400: train=0.243125
+G/gaussian 360/2400: train=0.151943
+G/gaussian 380/2400: train=0.134309
+G/gaussian 400/2400: train=0.159822
+G/gaussian dev sample 400: 248.794 mm (closed_loop_fk)
+G/gaussian 420/2400: train=0.170591
+G/gaussian 440/2400: train=0.215743
+G/gaussian 460/2400: train=0.143845
+G/gaussian 480/2400: train=0.162598
+G/gaussian 500/2400: train=0.152728
+G/gaussian 520/2400: train=0.154979
+G/gaussian 540/2400: train=0.146261
+G/gaussian 560/2400: train=0.187336
+G/gaussian 580/2400: train=0.156592
+G/gaussian 600/2400: train=0.150007
+G/gaussian dev sample 600: 236.904 mm (closed_loop_fk)
+G/gaussian 620/2400: train=0.160161
+G/gaussian 640/2400: train=0.130257
+G/gaussian 660/2400: train=0.118953
+G/gaussian 680/2400: train=0.103105
+G/gaussian 700/2400: train=0.134005
+G/gaussian 720/2400: train=0.119017
+G/gaussian 740/2400: train=0.131400
+G/gaussian 760/2400: train=0.142471
+G/gaussian 780/2400: train=0.105375
+G/gaussian 800/2400: train=0.116404
+G/gaussian dev sample 800: 249.163 mm (closed_loop_fk)
+G/gaussian 820/2400: train=0.112142
+G/gaussian 840/2400: train=0.116994
+G/gaussian 860/2400: train=0.109090
+G/gaussian 880/2400: train=0.147416
+G/gaussian 900/2400: train=0.125043
+G/gaussian 920/2400: train=0.100470
+G/gaussian 940/2400: train=0.142076
+G/gaussian 960/2400: train=0.099029
+G/gaussian 980/2400: train=0.103198
+G/gaussian 1000/2400: train=0.126821
+G/gaussian dev sample 1000: 226.277 mm (closed_loop_fk)
+G/gaussian 1020/2400: train=0.137995
+G/gaussian 1040/2400: train=0.135767
+G/gaussian 1060/2400: train=0.108251
+G/gaussian 1080/2400: train=0.098123
+G/gaussian 1100/2400: train=0.091527
+G/gaussian 1120/2400: train=0.098931
+G/gaussian 1140/2400: train=0.085152
+G/gaussian 1160/2400: train=0.083070
+G/gaussian 1180/2400: train=0.103249
+G/gaussian 1200/2400: train=0.182742
+G/gaussian dev sample 1200: 266.406 mm (closed_loop_fk)
+G/gaussian 1220/2400: train=0.104524
+G/gaussian 1240/2400: train=0.089902
+G/gaussian 1260/2400: train=0.104947
+G/gaussian 1280/2400: train=0.082011
+G/gaussian 1300/2400: train=0.088917
+G/gaussian 1320/2400: train=0.095109
+G/gaussian 1340/2400: train=0.105691
+G/gaussian 1360/2400: train=0.079774
+G/gaussian 1380/2400: train=0.097618
+G/gaussian 1400/2400: train=0.106813
+G/gaussian dev sample 1400: 227.382 mm (closed_loop_fk)
+G/gaussian 1420/2400: train=0.082987
+G/gaussian 1440/2400: train=0.088288
+G/gaussian 1460/2400: train=0.102384
+G/gaussian 1480/2400: train=0.110269
+G/gaussian 1500/2400: train=0.083688
+G/gaussian 1520/2400: train=0.090348
+G/gaussian 1540/2400: train=0.097770
+G/gaussian 1560/2400: train=0.079727
+G/gaussian 1580/2400: train=0.108483
+G/gaussian 1600/2400: train=0.076184
+G/gaussian dev sample 1600: 239.409 mm (closed_loop_fk)
+G/gaussian 1620/2400: train=0.069847
+G/gaussian 1640/2400: train=0.074247
+G/gaussian 1660/2400: train=0.098709
+G/gaussian 1680/2400: train=0.085257
+G/gaussian 1700/2400: train=0.072942
+G/gaussian 1720/2400: train=0.092598
+G/gaussian 1740/2400: train=0.070288
+G/gaussian 1760/2400: train=0.093126
+G/gaussian 1780/2400: train=0.083771
+G/gaussian 1800/2400: train=0.074795
+G/gaussian dev sample 1800: 232.165 mm (closed_loop_fk)
+G/gaussian 1820/2400: train=0.062602
+G/gaussian 1840/2400: train=0.075212
+G/gaussian 1860/2400: train=0.095150
+G/gaussian 1880/2400: train=0.098198
+G/gaussian 1900/2400: train=0.084587
+G/gaussian 1920/2400: train=0.075151
+G/gaussian 1940/2400: train=0.074301
+G/gaussian 1960/2400: train=0.064636
+G/gaussian 1980/2400: train=0.065474
+G/gaussian 2000/2400: train=0.072719
+G/gaussian dev sample 2000: 244.039 mm (closed_loop_fk)
+G/gaussian 2020/2400: train=0.075515
+G/gaussian 2040/2400: train=0.062844
+G/gaussian 2060/2400: train=0.090078
+G/gaussian 2080/2400: train=0.062557
+G/gaussian 2100/2400: train=0.079625
+G/gaussian 2120/2400: train=0.052411
+G/gaussian 2140/2400: train=0.080479
+G/gaussian 2160/2400: train=0.068938
+G/gaussian 2180/2400: train=0.094099
+G/gaussian 2200/2400: train=0.070840
+G/gaussian dev sample 2200: 250.627 mm (closed_loop_fk)
+G/gaussian 2220/2400: train=0.103873
+G/gaussian 2240/2400: train=0.053342
+G/gaussian 2260/2400: train=0.057388
+G/gaussian 2280/2400: train=0.073482
+G/gaussian 2300/2400: train=0.092381
+G/gaussian 2320/2400: train=0.071351
+G/gaussian 2340/2400: train=0.064598
+G/gaussian 2360/2400: train=0.075539
+G/gaussian 2380/2400: train=0.080355
+G/gaussian 2400/2400: train=0.050398
+G/gaussian dev sample 2400: 241.175 mm (closed_loop_fk)
+{
+  "dev_loss_before": 0.10280048847198486,
+  "dev_loss_after": 0.2003263533115387,
+  "selected_step": 1000,
+  "curve": [
+    {
+      "step": 20,
+      "train_loss": 0.4040079414844513
+    },
+    {
+      "step": 40,
+      "train_loss": 0.36116427183151245
+    },
+    {
+      "step": 60,
+      "train_loss": 0.3222689926624298
+    },
+    {
+      "step": 80,
+      "train_loss": 0.2815265655517578
+    },
+    {
+      "step": 100,
+      "train_loss": 0.28735727071762085
+    },
+    {
+      "step": 120,
+      "train_loss": 0.22221457958221436
+    },
+    {
+      "step": 140,
+      "train_loss": 0.2713022232055664
+    },
+    {
+      "step": 160,
+      "train_loss": 0.25513315200805664
+    },
+    {
+      "step": 180,
+      "train_loss": 0.24473851919174194
+    },
+    {
+      "step": 200,
+      "train_loss": 0.22757625579833984
+    },
+    {
+      "step": 200,
+      "train_loss": 0.22757625579833984,
+      "dev_sample_closed_loop_fk22_mm": 232.97541961073875
+    },
+    {
+      "step": 220,
+      "train_loss": 0.18715986609458923
+    },
+    {
+      "step": 240,
+      "train_loss": 0.15948247909545898
+    },
+    {
+      "step": 260,
+      "train_loss": 0.20828402042388916
+    },
+    {
+      "step": 280,
+      "train_loss": 0.21813508868217468
+    },
+    {
+      "step": 300,
+      "train_loss": 0.19384059309959412
+    },
+    {
+      "step": 320,
+      "train_loss": 0.2238912582397461
+    },
+    {
+      "step": 340,
+      "train_loss": 0.24312525987625122
+    },
+    {
+      "step": 360,
+      "train_loss": 0.15194319188594818
+    },
+    {
+      "step": 380,
+      "train_loss": 0.1343090534210205
+    },
+    {
+      "step": 400,
+      "train_loss": 0.159821555018425
+    },
+    {
+      "step": 400,
+      "train_loss": 0.159821555018425,
+      "dev_sample_closed_loop_fk22_mm": 248.79437312483788
+    },
+    {
+      "step": 420,
+      "train_loss": 0.17059095203876495
+    },
+    {
+      "step": 440,
+      "train_loss": 0.21574324369430542
+    },
+    {
+      "step": 460,
+      "train_loss": 0.14384520053863525
+    },
+    {
+      "step": 480,
+      "train_loss": 0.16259801387786865
+    },
+    {
+      "step": 500,
+      "train_loss": 0.1527279019355774
+    },
+    {
+      "step": 520,
+      "train_loss": 0.15497902035713196
+    },
+    {
+      "step": 540,
+      "train_loss": 0.14626070857048035
+    },
+    {
+      "step": 560,
+      "train_loss": 0.18733550608158112
+    },
+    {
+      "step": 580,
+      "train_loss": 0.15659195184707642
+    },
+    {
+      "step": 600,
+      "train_loss": 0.15000715851783752
+    },
+    {
+      "step": 600,
+      "train_loss": 0.15000715851783752,
+      "dev_sample_closed_loop_fk22_mm": 236.90417036414146
+    },
+    {
+      "step": 620,
+      "train_loss": 0.16016113758087158
+    },
+    {
+      "step": 640,
+      "train_loss": 0.13025720417499542
+    },
+    {
+      "step": 660,
+      "train_loss": 0.11895257234573364
+    },
+    {
+      "step": 680,
+      "train_loss": 0.10310468077659607
+    },
+    {
+      "step": 700,
+      "train_loss": 0.13400456309318542
+    },
+    {
+      "step": 720,
+      "train_loss": 0.11901739984750748
+    },
+    {
+      "step": 740,
+      "train_loss": 0.1313995122909546
+    },
+    {
+      "step": 760,
+      "train_loss": 0.14247070252895355
+    },
+    {
+      "step": 780,
+      "train_loss": 0.1053754910826683
+    },
+    {
+      "step": 800,
+      "train_loss": 0.11640384048223495
+    },
+    {
+      "step": 800,
+      "train_loss": 0.11640384048223495,
+      "dev_sample_closed_loop_fk22_mm": 249.1630439956983
+    },
+    {
+      "step": 820,
+      "train_loss": 0.11214163154363632
+    },
+    {
+      "step": 840,
+      "train_loss": 0.1169944629073143
+    },
+    {
+      "step": 860,
+      "train_loss": 0.10909049957990646
+    },
+    {
+      "step": 880,
+      "train_loss": 0.1474163979291916
+    },
+    {
+      "step": 900,
+      "train_loss": 0.12504267692565918
+    },
+    {
+      "step": 920,
+      "train_loss": 0.10046997666358948
+    },
+    {
+      "step": 940,
+      "train_loss": 0.14207586646080017
+    },
+    {
+      "step": 960,
+      "train_loss": 0.09902874380350113
+    },
+    {
+      "step": 980,
+      "train_loss": 0.10319756716489792
+    },
+    {
+      "step": 1000,
+      "train_loss": 0.1268206238746643
+    },
+    {
+      "step": 1000,
+      "train_loss": 0.1268206238746643,
+      "dev_sample_closed_loop_fk22_mm": 226.2772632141908
+    },
+    {
+      "step": 1020,
+      "train_loss": 0.13799501955509186
+    },
+    {
+      "step": 1040,
+      "train_loss": 0.1357666552066803
+    },
+    {
+      "step": 1060,
+      "train_loss": 0.10825061798095703
+    },
+    {
+      "step": 1080,
+      "train_loss": 0.09812265634536743
+    },
+    {
+      "step": 1100,
+      "train_loss": 0.09152688086032867
+    },
+    {
+      "step": 1120,
+      "train_loss": 0.09893070161342621
+    },
+    {
+      "step": 1140,
+      "train_loss": 0.0851522907614708
+    },
+    {
+      "step": 1160,
+      "train_loss": 0.08307017385959625
+    },
+    {
+      "step": 1180,
+      "train_loss": 0.1032494604587555
+    },
+    {
+      "step": 1200,
+      "train_loss": 0.18274244666099548
+    },
+    {
+      "step": 1200,
+      "train_loss": 0.18274244666099548,
+      "dev_sample_closed_loop_fk22_mm": 266.4058717588584
+    },
+    {
+      "step": 1220,
+      "train_loss": 0.10452374815940857
+    },
+    {
+      "step": 1240,
+      "train_loss": 0.08990196883678436
+    },
+    {
+      "step": 1260,
+      "train_loss": 0.10494650900363922
+    },
+    {
+      "step": 1280,
+      "train_loss": 0.08201095461845398
+    },
+    {
+      "step": 1300,
+      "train_loss": 0.08891680836677551
+    },
+    {
+      "step": 1320,
+      "train_loss": 0.09510865807533264
+    },
+    {
+      "step": 1340,
+      "train_loss": 0.10569107532501221
+    },
+    {
+      "step": 1360,
+      "train_loss": 0.07977387309074402
+    },
+    {
+      "step": 1380,
+      "train_loss": 0.09761819988489151
+    },
+    {
+      "step": 1400,
+      "train_loss": 0.10681302845478058
+    },
+    {
+      "step": 1400,
+      "train_loss": 0.10681302845478058,
+      "dev_sample_closed_loop_fk22_mm": 227.38190119465193
+    },
+    {
+      "step": 1420,
+      "train_loss": 0.08298719674348831
+    },
+    {
+      "step": 1440,
+      "train_loss": 0.08828809857368469
+    },
+    {
+      "step": 1460,
+      "train_loss": 0.10238407552242279
+    },
+    {
+      "step": 1480,
+      "train_loss": 0.11026910692453384
+    },
+    {
+      "step": 1500,
+      "train_loss": 0.08368831127882004
+    },
+    {
+      "step": 1520,
+      "train_loss": 0.0903475433588028
+    },
+    {
+      "step": 1540,
+      "train_loss": 0.09776969254016876
+    },
+    {
+      "step": 1560,
+      "train_loss": 0.0797271579504013
+    },
+    {
+      "step": 1580,
+      "train_loss": 0.1084834560751915
+    },
+    {
+      "step": 1600,
+      "train_loss": 0.07618436217308044
+    },
+    {
+      "step": 1600,
+      "train_loss": 0.07618436217308044,
+      "dev_sample_closed_loop_fk22_mm": 239.40895621975264
+    },
+    {
+      "step": 1620,
+      "train_loss": 0.06984659284353256
+    },
+    {
+      "step": 1640,
+      "train_loss": 0.07424721121788025
+    },
+    {
+      "step": 1660,
+      "train_loss": 0.09870859980583191
+    },
+    {
+      "step": 1680,
+      "train_loss": 0.08525685966014862
+    },
+    {
+      "step": 1700,
+      "train_loss": 0.07294249534606934
+    },
+    {
+      "step": 1720,
+      "train_loss": 0.09259789437055588
+    },
+    {
+      "step": 1740,
+      "train_loss": 0.07028824836015701
+    },
+    {
+      "step": 1760,
+      "train_loss": 0.0931260734796524
+    },
+    {
+      "step": 1780,
+      "train_loss": 0.08377097547054291
+    },
+    {
+      "step": 1800,
+      "train_loss": 0.07479502260684967
+    },
+    {
+      "step": 1800,
+      "train_loss": 0.07479502260684967,
+      "dev_sample_closed_loop_fk22_mm": 232.1651087452968
+    },
+    {
+      "step": 1820,
+      "train_loss": 0.06260184943675995
+    },
+    {
+      "step": 1840,
+      "train_loss": 0.07521168887615204
+    },
+    {
+      "step": 1860,
+      "train_loss": 0.09514982998371124
+    },
+    {
+      "step": 1880,
+      "train_loss": 0.09819750487804413
+    },
+    {
+      "step": 1900,
+      "train_loss": 0.08458738029003143
+    },
+    {
+      "step": 1920,
+      "train_loss": 0.07515053451061249
+    },
+    {
+      "step": 1940,
+      "train_loss": 0.07430072128772736
+    },
+    {
+      "step": 1960,
+      "train_loss": 0.06463618576526642
+    },
+    {
+      "step": 1980,
+      "train_loss": 0.0654740259051323
+    },
+    {
+      "step": 2000,
+      "train_loss": 0.07271921634674072
+    },
+    {
+      "step": 2000,
+      "train_loss": 0.07271921634674072,
+      "dev_sample_closed_loop_fk22_mm": 244.0394622584184
+    },
+    {
+      "step": 2020,
+      "train_loss": 0.07551533728837967
+    },
+    {
+      "step": 2040,
+      "train_loss": 0.06284381449222565
+    },
+    {
+      "step": 2060,
+      "train_loss": 0.09007807075977325
+    },
+    {
+      "step": 2080,
+      "train_loss": 0.0625566691160202
+    },
+    {
+      "step": 2100,
+      "train_loss": 0.07962474226951599
+    },
+    {
+      "step": 2120,
+      "train_loss": 0.05241083353757858
+    },
+    {
+      "step": 2140,
+      "train_loss": 0.08047929406166077
+    },
+    {
+      "step": 2160,
+      "train_loss": 0.06893786042928696
+    },
+    {
+      "step": 2180,
+      "train_loss": 0.09409940242767334
+    },
+    {
+      "step": 2200,
+      "train_loss": 0.07083969563245773
+    },
+    {
+      "step": 2200,
+      "train_loss": 0.07083969563245773,
+      "dev_sample_closed_loop_fk22_mm": 250.62650193770727
+    },
+    {
+      "step": 2220,
+      "train_loss": 0.1038726195693016
+    },
+    {
+      "step": 2240,
+      "train_loss": 0.05334150791168213
+    },
+    {
+      "step": 2260,
+      "train_loss": 0.05738784000277519
+    },
+    {
+      "step": 2280,
+      "train_loss": 0.07348152250051498
+    },
+    {
+      "step": 2300,
+      "train_loss": 0.09238125383853912
+    },
+    {
+      "step": 2320,
+      "train_loss": 0.07135121524333954
+    },
+    {
+      "step": 2340,
+      "train_loss": 0.0645982176065445
+    },
+    {
+      "step": 2360,
+      "train_loss": 0.07553870975971222
+    },
+    {
+      "step": 2380,
+      "train_loss": 0.08035452663898468
+    },
+    {
+      "step": 2400,
+      "train_loss": 0.05039780214428902
+    },
+    {
+      "step": 2400,
+      "train_loss": 0.05039780214428902,
+      "dev_sample_closed_loop_fk22_mm": 241.17539947231612
+    }
+  ],
+  "dense22_mm_per_action": {
+    "a11": 94.88581848144531,
+    "a10": 97.3297348022461,
+    "a01": 95.03955841064453,
+    "a00": 97.46711730957031
+  },
+  "dense22_oracle_gap_mm": 0.5406460762023926,
+  "oracle_action_counts": [
+    24,
+    7,
+    25,
+    8
+  ],
+  "checkpoint_sha256": "d1c1d5159c33b2078dc9b61697b8f800828a5da84c38cf3de9deaabce4ed42f3"
+}
+G/history 20/2400: train=0.377196
+G/history 40/2400: train=0.490739
+G/history 60/2400: train=0.282510
+G/history 80/2400: train=0.276065
+G/history 100/2400: train=0.239466
+G/history 120/2400: train=0.233716
+G/history 140/2400: train=0.264235
+G/history 160/2400: train=0.232963
+G/history 180/2400: train=0.213308
+G/history 200/2400: train=0.199514
+G/history dev sample 200: 244.698 mm (closed_loop_fk)
+G/history 220/2400: train=0.194701
+G/history 240/2400: train=0.144539
+G/history 260/2400: train=0.188148
+G/history 280/2400: train=0.205159
+G/history 300/2400: train=0.162696
+G/history 320/2400: train=0.211556
+G/history 340/2400: train=0.234069
+G/history 360/2400: train=0.183745
+G/history 380/2400: train=0.136038
+G/history 400/2400: train=0.193369
+G/history dev sample 400: 231.778 mm (closed_loop_fk)
+G/history 420/2400: train=0.177900
+G/history 440/2400: train=0.194443
+G/history 460/2400: train=0.136626
+G/history 480/2400: train=0.170380
+G/history 500/2400: train=0.155310
+G/history 520/2400: train=0.159191
+G/history 540/2400: train=0.132371
+G/history 560/2400: train=0.324300
+G/history 580/2400: train=0.178783
+G/history 600/2400: train=0.203072
+G/history dev sample 600: 235.850 mm (closed_loop_fk)
+G/history 620/2400: train=0.141333
+G/history 640/2400: train=0.123030
+G/history 660/2400: train=0.104251
+G/history 680/2400: train=0.089055
+G/history 700/2400: train=0.111847
+G/history 720/2400: train=0.130924
+G/history 740/2400: train=0.158315
+G/history 760/2400: train=0.121598
+G/history 780/2400: train=0.102876
+G/history 800/2400: train=0.133020
+G/history dev sample 800: 266.488 mm (closed_loop_fk)
+G/history 820/2400: train=0.124404
+G/history 840/2400: train=0.106493
+G/history 860/2400: train=0.104466
+G/history 880/2400: train=0.389059
+G/history 900/2400: train=0.134599
+G/history 920/2400: train=0.085885
+G/history 940/2400: train=0.125777
+G/history 960/2400: train=0.098300
+G/history 980/2400: train=0.097812
+G/history 1000/2400: train=0.108977
+G/history dev sample 1000: 228.483 mm (closed_loop_fk)
+G/history 1020/2400: train=0.168586
+G/history 1040/2400: train=0.129564
+G/history 1060/2400: train=0.108052
+G/history 1080/2400: train=0.088317
+G/history 1100/2400: train=0.086178
+G/history 1120/2400: train=0.096702
+G/history 1140/2400: train=0.083735
+G/history 1160/2400: train=0.072834
+G/history 1180/2400: train=0.099388
+G/history 1200/2400: train=0.135762
+G/history dev sample 1200: 239.097 mm (closed_loop_fk)
+G/history 1220/2400: train=0.098527
+G/history 1240/2400: train=0.112542
+G/history 1260/2400: train=0.108734
+G/history 1280/2400: train=0.076032
+G/history 1300/2400: train=0.092406
+G/history 1320/2400: train=0.101033
+G/history 1340/2400: train=0.134889
+G/history 1360/2400: train=0.082286
+G/history 1380/2400: train=0.088978
+G/history 1400/2400: train=0.096229
+G/history dev sample 1400: 236.493 mm (closed_loop_fk)
+G/history 1420/2400: train=0.096372
+G/history 1440/2400: train=0.087072
+G/history 1460/2400: train=0.082935
+G/history 1480/2400: train=0.089252
+G/history 1500/2400: train=0.083395
+G/history 1520/2400: train=0.081597
+G/history 1540/2400: train=0.129073
+G/history 1560/2400: train=0.090758
+G/history 1580/2400: train=0.082727
+G/history 1600/2400: train=0.070545
+G/history dev sample 1600: 244.891 mm (closed_loop_fk)
+G/history 1620/2400: train=0.066801
+G/history 1640/2400: train=0.065140
+G/history 1660/2400: train=0.102133
+G/history 1680/2400: train=0.079952
+G/history 1700/2400: train=0.076078
+G/history 1720/2400: train=0.075427
+G/history 1740/2400: train=0.075284
+G/history 1760/2400: train=0.067929
+G/history 1780/2400: train=0.076492
+G/history 1800/2400: train=0.074278
+G/history dev sample 1800: 236.949 mm (closed_loop_fk)
+G/history 1820/2400: train=0.090104
+G/history 1840/2400: train=0.081585
+G/history 1860/2400: train=0.080617
+G/history 1880/2400: train=0.089352
+G/history 1900/2400: train=0.082180
+G/history 1920/2400: train=0.078316
+G/history 1940/2400: train=0.071641
+G/history 1960/2400: train=0.064009
+G/history 1980/2400: train=0.090742
+G/history 2000/2400: train=0.073340
+G/history dev sample 2000: 236.342 mm (closed_loop_fk)
+G/history 2020/2400: train=0.077273
+G/history 2040/2400: train=0.056914
+G/history 2060/2400: train=0.109377
+G/history 2080/2400: train=0.055351
+G/history 2100/2400: train=0.091840
+G/history 2120/2400: train=0.050213
+G/history 2140/2400: train=0.068585
+G/history 2160/2400: train=0.072636
+G/history 2180/2400: train=0.076152
+G/history 2200/2400: train=0.067555
+G/history dev sample 2200: 258.873 mm (closed_loop_fk)
+G/history 2220/2400: train=0.081767
+G/history 2240/2400: train=0.052879
+G/history 2260/2400: train=0.051102
+G/history 2280/2400: train=0.084945
+G/history 2300/2400: train=0.082077
+G/history 2320/2400: train=0.064314
+G/history 2340/2400: train=0.069066
+G/history 2360/2400: train=0.062758
+G/history 2380/2400: train=0.069951
+G/history 2400/2400: train=0.056261
+G/history dev sample 2400: 248.160 mm (closed_loop_fk)
+{
+  "dev_loss_before": 0.3721171021461487,
+  "dev_loss_after": 0.19136931002140045,
+  "selected_step": 1000,
+  "curve": [
+    {
+      "step": 20,
+      "train_loss": 0.3771960735321045
+    },
+    {
+      "step": 40,
+      "train_loss": 0.4907391667366028
+    },
+    {
+      "step": 60,
+      "train_loss": 0.28251028060913086
+    },
+    {
+      "step": 80,
+      "train_loss": 0.2760652005672455
+    },
+    {
+      "step": 100,
+      "train_loss": 0.23946613073349
+    },
+    {
+      "step": 120,
+      "train_loss": 0.23371639847755432
+    },
+    {
+      "step": 140,
+      "train_loss": 0.2642354369163513
+    },
+    {
+      "step": 160,
+      "train_loss": 0.2329631745815277
+    },
+    {
+      "step": 180,
+      "train_loss": 0.2133081555366516
+    },
+    {
+      "step": 200,
+      "train_loss": 0.1995142549276352
+    },
+    {
+      "step": 200,
+      "train_loss": 0.1995142549276352,
+      "dev_sample_closed_loop_fk22_mm": 244.6981705725193
+    },
+    {
+      "step": 220,
+      "train_loss": 0.19470062851905823
+    },
+    {
+      "step": 240,
+      "train_loss": 0.14453856647014618
+    },
+    {
+      "step": 260,
+      "train_loss": 0.18814849853515625
+    },
+    {
+      "step": 280,
+      "train_loss": 0.20515882968902588
+    },
+    {
+      "step": 300,
+      "train_loss": 0.16269633173942566
+    },
+    {
+      "step": 320,
+      "train_loss": 0.2115556299686432
+    },
+    {
+      "step": 340,
+      "train_loss": 0.23406949639320374
+    },
+    {
+      "step": 360,
+      "train_loss": 0.1837449073791504
+    },
+    {
+      "step": 380,
+      "train_loss": 0.13603800535202026
+    },
+    {
+      "step": 400,
+      "train_loss": 0.1933685839176178
+    },
+    {
+      "step": 400,
+      "train_loss": 0.1933685839176178,
+      "dev_sample_closed_loop_fk22_mm": 231.7775102953116
+    },
+    {
+      "step": 420,
+      "train_loss": 0.17789997160434723
+    },
+    {
+      "step": 440,
+      "train_loss": 0.19444337487220764
+    },
+    {
+      "step": 460,
+      "train_loss": 0.13662591576576233
+    },
+    {
+      "step": 480,
+      "train_loss": 0.17037951946258545
+    },
+    {
+      "step": 500,
+      "train_loss": 0.15531015396118164
+    },
+    {
+      "step": 520,
+      "train_loss": 0.1591910719871521
+    },
+    {
+      "step": 540,
+      "train_loss": 0.13237054646015167
+    },
+    {
+      "step": 560,
+      "train_loss": 0.32430005073547363
+    },
+    {
+      "step": 580,
+      "train_loss": 0.17878268659114838
+    },
+    {
+      "step": 600,
+      "train_loss": 0.20307210087776184
+    },
+    {
+      "step": 600,
+      "train_loss": 0.20307210087776184,
+      "dev_sample_closed_loop_fk22_mm": 235.84975053866705
+    },
+    {
+      "step": 620,
+      "train_loss": 0.1413334757089615
+    },
+    {
+      "step": 640,
+      "train_loss": 0.12302961200475693
+    },
+    {
+      "step": 660,
+      "train_loss": 0.10425103455781937
+    },
+    {
+      "step": 680,
+      "train_loss": 0.08905543386936188
+    },
+    {
+      "step": 700,
+      "train_loss": 0.11184734106063843
+    },
+    {
+      "step": 720,
+      "train_loss": 0.13092422485351562
+    },
+    {
+      "step": 740,
+      "train_loss": 0.1583147794008255
+    },
+    {
+      "step": 760,
+      "train_loss": 0.12159837037324905
+    },
+    {
+      "step": 780,
+      "train_loss": 0.10287591814994812
+    },
+    {
+      "step": 800,
+      "train_loss": 0.1330195665359497
+    },
+    {
+      "step": 800,
+      "train_loss": 0.1330195665359497,
+      "dev_sample_closed_loop_fk22_mm": 266.48787905772525
+    },
+    {
+      "step": 820,
+      "train_loss": 0.12440378963947296
+    },
+    {
+      "step": 840,
+      "train_loss": 0.10649347305297852
+    },
+    {
+      "step": 860,
+      "train_loss": 0.10446591675281525
+    },
+    {
+      "step": 880,
+      "train_loss": 0.38905900716781616
+    },
+    {
+      "step": 900,
+      "train_loss": 0.1345992535352707
+    },
+    {
+      "step": 920,
+      "train_loss": 0.08588540554046631
+    },
+    {
+      "step": 940,
+      "train_loss": 0.12577737867832184
+    },
+    {
+      "step": 960,
+      "train_loss": 0.09830033779144287
+    },
+    {
+      "step": 980,
+      "train_loss": 0.09781181812286377
+    },
+    {
+      "step": 1000,
+      "train_loss": 0.1089768260717392
+    },
+    {
+      "step": 1000,
+      "train_loss": 0.1089768260717392,
+      "dev_sample_closed_loop_fk22_mm": 228.48285858829817
+    },
+    {
+      "step": 1020,
+      "train_loss": 0.16858598589897156
+    },
+    {
+      "step": 1040,
+      "train_loss": 0.1295638531446457
+    },
+    {
+      "step": 1060,
+      "train_loss": 0.10805218666791916
+    },
+    {
+      "step": 1080,
+      "train_loss": 0.0883173868060112
+    },
+    {
+      "step": 1100,
+      "train_loss": 0.08617760241031647
+    },
+    {
+      "step": 1120,
+      "train_loss": 0.09670209139585495
+    },
+    {
+      "step": 1140,
+      "train_loss": 0.08373511582612991
+    },
+    {
+      "step": 1160,
+      "train_loss": 0.07283449172973633
+    },
+    {
+      "step": 1180,
+      "train_loss": 0.09938809275627136
+    },
+    {
+      "step": 1200,
+      "train_loss": 0.13576194643974304
+    },
+    {
+      "step": 1200,
+      "train_loss": 0.13576194643974304,
+      "dev_sample_closed_loop_fk22_mm": 239.09674833218256
+    },
+    {
+      "step": 1220,
+      "train_loss": 0.09852749109268188
+    },
+    {
+      "step": 1240,
+      "train_loss": 0.11254159361124039
+    },
+    {
+      "step": 1260,
+      "train_loss": 0.10873350501060486
+    },
+    {
+      "step": 1280,
+      "train_loss": 0.07603175938129425
+    },
+    {
+      "step": 1300,
+      "train_loss": 0.09240648150444031
+    },
+    {
+      "step": 1320,
+      "train_loss": 0.1010332703590393
+    },
+    {
+      "step": 1340,
+      "train_loss": 0.13488945364952087
+    },
+    {
+      "step": 1360,
+      "train_loss": 0.08228567242622375
+    },
+    {
+      "step": 1380,
+      "train_loss": 0.08897779881954193
+    },
+    {
+      "step": 1400,
+      "train_loss": 0.09622932970523834
+    },
+    {
+      "step": 1400,
+      "train_loss": 0.09622932970523834,
+      "dev_sample_closed_loop_fk22_mm": 236.49257918198904
+    },
+    {
+      "step": 1420,
+      "train_loss": 0.09637202322483063
+    },
+    {
+      "step": 1440,
+      "train_loss": 0.08707182109355927
+    },
+    {
+      "step": 1460,
+      "train_loss": 0.08293475955724716
+    },
+    {
+      "step": 1480,
+      "train_loss": 0.08925230801105499
+    },
+    {
+      "step": 1500,
+      "train_loss": 0.08339451998472214
+    },
+    {
+      "step": 1520,
+      "train_loss": 0.0815967246890068
+    },
+    {
+      "step": 1540,
+      "train_loss": 0.12907260656356812
+    },
+    {
+      "step": 1560,
+      "train_loss": 0.09075821191072464
+    },
+    {
+      "step": 1580,
+      "train_loss": 0.08272689580917358
+    },
+    {
+      "step": 1600,
+      "train_loss": 0.07054463028907776
+    },
+    {
+      "step": 1600,
+      "train_loss": 0.07054463028907776,
+      "dev_sample_closed_loop_fk22_mm": 244.89141255617142
+    },
+    {
+      "step": 1620,
+      "train_loss": 0.06680144369602203
+    },
+    {
+      "step": 1640,
+      "train_loss": 0.06514005362987518
+    },
+    {
+      "step": 1660,
+      "train_loss": 0.10213257372379303
+    },
+    {
+      "step": 1680,
+      "train_loss": 0.07995201647281647
+    },
+    {
+      "step": 1700,
+      "train_loss": 0.07607772201299667
+    },
+    {
+      "step": 1720,
+      "train_loss": 0.07542664557695389
+    },
+    {
+      "step": 1740,
+      "train_loss": 0.07528416812419891
+    },
+    {
+      "step": 1760,
+      "train_loss": 0.06792914122343063
+    },
+    {
+      "step": 1780,
+      "train_loss": 0.07649178802967072
+    },
+    {
+      "step": 1800,
+      "train_loss": 0.07427847385406494
+    },
+    {
+      "step": 1800,
+      "train_loss": 0.07427847385406494,
+      "dev_sample_closed_loop_fk22_mm": 236.94869875907898
+    },
+    {
+      "step": 1820,
+      "train_loss": 0.09010414779186249
+    },
+    {
+      "step": 1840,
+      "train_loss": 0.08158528804779053
+    },
+    {
+      "step": 1860,
+      "train_loss": 0.08061717450618744
+    },
+    {
+      "step": 1880,
+      "train_loss": 0.08935248106718063
+    },
+    {
+      "step": 1900,
+      "train_loss": 0.08217952400445938
+    },
+    {
+      "step": 1920,
+      "train_loss": 0.078315868973732
+    },
+    {
+      "step": 1940,
+      "train_loss": 0.07164069265127182
+    },
+    {
+      "step": 1960,
+      "train_loss": 0.06400899589061737
+    },
+    {
+      "step": 1980,
+      "train_loss": 0.09074239432811737
+    },
+    {
+      "step": 2000,
+      "train_loss": 0.07333983480930328
+    },
+    {
+      "step": 2000,
+      "train_loss": 0.07333983480930328,
+      "dev_sample_closed_loop_fk22_mm": 236.34164407849312
+    },
+    {
+      "step": 2020,
+      "train_loss": 0.07727263867855072
+    },
+    {
+      "step": 2040,
+      "train_loss": 0.05691354721784592
+    },
+    {
+      "step": 2060,
+      "train_loss": 0.10937705636024475
+    },
+    {
+      "step": 2080,
+      "train_loss": 0.05535142123699188
+    },
+    {
+      "step": 2100,
+      "train_loss": 0.091840460896492
+    },
+    {
+      "step": 2120,
+      "train_loss": 0.05021273344755173
+    },
+    {
+      "step": 2140,
+      "train_loss": 0.06858523935079575
+    },
+    {
+      "step": 2160,
+      "train_loss": 0.07263592630624771
+    },
+    {
+      "step": 2180,
+      "train_loss": 0.0761524885892868
+    },
+    {
+      "step": 2200,
+      "train_loss": 0.06755506992340088
+    },
+    {
+      "step": 2200,
+      "train_loss": 0.06755506992340088,
+      "dev_sample_closed_loop_fk22_mm": 258.8728566964467
+    },
+    {
+      "step": 2220,
+      "train_loss": 0.0817665308713913
+    },
+    {
+      "step": 2240,
+      "train_loss": 0.05287910997867584
+    },
+    {
+      "step": 2260,
+      "train_loss": 0.05110159143805504
+    },
+    {
+      "step": 2280,
+      "train_loss": 0.08494547754526138
+    },
+    {
+      "step": 2300,
+      "train_loss": 0.08207696676254272
+    },
+    {
+      "step": 2320,
+      "train_loss": 0.06431406736373901
+    },
+    {
+      "step": 2340,
+      "train_loss": 0.06906592845916748
+    },
+    {
+      "step": 2360,
+      "train_loss": 0.06275755167007446
+    },
+    {
+      "step": 2380,
+      "train_loss": 0.06995126605033875
+    },
+    {
+      "step": 2400,
+      "train_loss": 0.05626087263226509
+    },
+    {
+      "step": 2400,
+      "train_loss": 0.05626087263226509,
+      "dev_sample_closed_loop_fk22_mm": 248.15991769234338
+    }
+  ],
+  "dense22_mm_per_action": {
+    "a11": 102.7706527709961,
+    "a10": 105.82173156738281,
+    "a01": 102.93277740478516,
+    "a00": 106.02166748046875
+  },
+  "dense22_oracle_gap_mm": 0.4860418438911438,
+  "oracle_action_counts": [
+    35,
+    14,
+    9,
+    6
+  ],
+  "checkpoint_sha256": "fabf0b245274f2e629dbd0881a1f7b6b823a54f11a2873d62a5418cf8aa636fd"
+}
+Saved pilot to exp/egorecover_stages_1_4/continuation_v1/stage2_budget/12take_2400; G selection=closed_loop_fk; independent validation remains separate.

@@ -1,0 +1,20 @@
+{
+  "scope": "closed_loop_dense_positions_only",
+  "initialization": "random E7; not pretrained",
+  "take": "georgiatech_covid_06_8",
+  "frames": 180,
+  "bootstrap": "same saved model outputs as G; no GT startup",
+  "reference_mode": "planar",
+  "results": {
+    "physical_hold": {
+      "mean_dense22_mm": 607.3983884586512,
+      "last_dense22_mm": 610.4790328019578,
+      "peak_dense22_mm": 644.7442743696419
+    },
+    "constant_velocity": {
+      "mean_dense22_mm": 31535.783257676856,
+      "last_dense22_mm": 62658.22549670532,
+      "peak_dense22_mm": 62658.22549670532
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "controller_pid": 3819864,
+  "status": "completed",
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "workers": [
+    {
+      "shard": 0,
+      "gpu": 4,
+      "pid": 3820459,
+      "exit_code": 0
+    },
+    {
+      "shard": 1,
+      "gpu": 5,
+      "pid": 3820460,
+      "exit_code": 0
+    },
+    {
+      "shard": 2,
+      "gpu": 6,
+      "pid": 3820461,
+      "exit_code": 0
+    },
+    {
+      "shard": 3,
+      "gpu": 7,
+      "pid": 3820462,
+      "exit_code": 0
+    }
+  ],
+  "updated_at": "2026-09-29T21:12:23.743504+08:00"
+}

@@ -1,0 +1,24 @@
+REUSE e7_context_diagnostic
+START smoke_R0 gpu 4 pid 1129560
+START smoke_R1 gpu 5 pid 1129582
+START smoke_R2 gpu 6 pid 1129584
+START smoke_R3 gpu 7 pid 1129586
+DONE smoke_R0
+DONE smoke_R3
+DONE smoke_R1
+DONE smoke_R2
+START R0_seed62 gpu 4 pid 1130475
+START R1_seed62 gpu 5 pid 1130483
+START R2_seed62 gpu 6 pid 1130485
+START R3_seed62 gpu 7 pid 1130487
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/gaozt-test1/sxh/EgoRecover/run/observation_reference_experiment.py", line 166, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/observation_reference_experiment.py", line 145, in main
+    stage(out,f'training_seed{seed}',[
+  File "/gaozt-test1/sxh/EgoRecover/run/g_pretraining_experiment.py", line 63, in stage
+    raise RuntimeError(f'{label} failed (exit={rc}); see jobs/{label}.log. Other launched jobs may still be running.')
+RuntimeError: R3_seed62 failed (exit=1); see jobs/R3_seed62.log. Other launched jobs may still be running.

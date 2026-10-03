@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.train_prior_two_forward",
+    "--data",
+    "exp/egorecover_prior_two_forward/v1/data",
+    "--output",
+    "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62",
+    "--fk-weight",
+    "0",
+    "--seed",
+    "62",
+    "--baselines",
+    "--old-prior",
+    "exp/egorecover_stages_1_4/continuation_v1/stage2_budget/72take_2400/prior.pt"
+  ],
+  "gpu": 0
+}

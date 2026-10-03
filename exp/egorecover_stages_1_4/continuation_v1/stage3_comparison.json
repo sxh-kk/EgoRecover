@@ -1,0 +1,49 @@
+{
+  "two_source_mean_mm": {
+    "before_replay": 207.3261398921778,
+    "replay_0": 193.0425850570938,
+    "replay_0p25": 254.71852203798883,
+    "replay_0p5": 224.96587068769668
+  },
+  "best_probability_label": "replay_0",
+  "paired": {
+    "replay_0 minus before_replay": {
+      "mean_mm": -14.28355483508404,
+      "take_bootstrap_95ci_mm": [
+        -25.734553467197156,
+        -2.6487374956225147
+      ]
+    },
+    "replay_0p25 minus before_replay": {
+      "mean_mm": 47.39238214581102,
+      "take_bootstrap_95ci_mm": [
+        -0.2018704069985328,
+        92.31976276062153
+      ]
+    },
+    "replay_0p25 minus replay_0": {
+      "mean_mm": 61.675936980895045,
+      "take_bootstrap_95ci_mm": [
+        17.14910284589837,
+        101.05341728351733
+      ]
+    },
+    "replay_0p5 minus before_replay": {
+      "mean_mm": 17.639730795518854,
+      "take_bootstrap_95ci_mm": [
+        -4.2994628264580115,
+        44.204786912600206
+      ]
+    },
+    "replay_0p5 minus replay_0": {
+      "mean_mm": 31.923285630602894,
+      "take_bootstrap_95ci_mm": [
+        5.737513193966431,
+        66.16535969987328
+      ]
+    }
+  },
+  "replay_improvement_supported": false,
+  "scope": "single-seed development comparison; no holdout or Q training",
+  "holdout_used": false
+}

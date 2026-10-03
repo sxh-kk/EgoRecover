@@ -1,0 +1,25 @@
+2026-09-29 03:16:46.945 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/gaozt-test1/sxh/EgoRecover/run/evaluate_paired_development.py", line 278, in <module>
+    main()
+  File "/root/miniconda3/envs/egorecover/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/evaluate_paired_development.py", line 178, in main
+    identity["weights"] = {
+                          ^
+  File "/gaozt-test1/sxh/EgoRecover/run/evaluate_paired_development.py", line 179, in <dictcomp>
+    label: {name: file_sha256(path / name) for name in
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/evaluate_paired_development.py", line 179, in <dictcomp>
+    label: {name: file_sha256(path / name) for name in
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/egorecover/evaluation_protocol.py", line 13, in file_sha256
+    with Path(path).open("rb") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/egorecover/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'exp/egorecover_loss_ablation/g00_g11_v1/train/g0f0_history/g_gaussian.pt'

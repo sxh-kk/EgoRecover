@@ -1,0 +1,738 @@
+{
+  "scope": "mixed_history_engineering_only",
+  "base_split": "official_val",
+  "history_source": "training mixture of GT and frozen-model predicted histories; GT-bootstrap only on train takes; dev diagnostic remains GT-history",
+  "floor_source": "startup_head_z_median_minus_training_mean_head_height",
+  "contact_floor_source": "annotation",
+  "metric": "dense22_position_error_mm (not SMPL22 FK MPJPE)",
+  "initialization": "random; no pretrained E7",
+  "seed": 62,
+  "splits": {
+    "train": [
+      "uniandes_dance_024_45",
+      "georgiatech_bike_15_8",
+      "indiana_bike_10_12",
+      "utokyo_omelet_11_1001_4",
+      "uniandes_basketball_001_28",
+      "unc_basketball_03-09-23_01_10",
+      "upenn_0726_Violin_1_3",
+      "uniandes_dance_002_10"
+    ],
+    "dev": [
+      "iiith_soccer_002_2",
+      "georgiatech_covid_06_8"
+    ],
+    "holdout": [
+      "iiith_cooking_89_2",
+      "upenn_0721_Piano_1_3"
+    ]
+  },
+  "sigma": 0.3,
+  "nfe": 10,
+  "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+  "dataset_handoff": {
+    "build_report": "/home/ld666/projects/EgoRecover/data_pipeline/BUILD_REPORT.md",
+    "code_root": "/home/ld666/projects/EgoRecover/data_pipeline",
+    "completed_at": "2026-09-23T04:52:14.773507+08:00",
+    "datasets": [
+      {
+        "audit_report": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_smoke_v0/audit/validation.json",
+        "frames_per_variant": 200,
+        "manifest": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_smoke_v0/engineering.jsonl",
+        "manifest_sha256": "70bc65685ec23fe232061b6a31c5eb0734bb089407f3d78a1e5b5dd00a4b23ed",
+        "num_takes": 2,
+        "num_variants": 36,
+        "path": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_smoke_v0",
+        "profile": "extended",
+        "spec_sha256": "b491dfae73708fd3b7ede119b9b690b168a14f60b68ad5813946b501306f4894"
+      },
+      {
+        "audit_report": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_pilot_v0/audit/validation.json",
+        "frames_per_variant": 200,
+        "manifest": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_pilot_v0/engineering.jsonl",
+        "manifest_sha256": "e4774edd4fa823d2d950ff2b2c67e68f3116e78304869d234ebd729618e515bd",
+        "num_takes": 12,
+        "num_variants": 84,
+        "path": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_pilot_v0",
+        "profile": "pilot",
+        "spec_sha256": "653060e84f482f5fa661647b862540749554f4dc4ebe30052421513952e78b75"
+      }
+    ],
+    "download_status": "/home/ld666/projects/EgoRecover/data/.ee4d_validation_download/status.json",
+    "handoff": "/home/ld666/projects/EgoRecover/data_pipeline/HANDOFF.md",
+    "message": "\u6570\u636e\u96c6\u6784\u5efa\u5b8c\u6210",
+    "next_step": "\u9605\u8bfb HANDOFF.md\uff0c\u4f7f\u7528 MismatchDataset.observations \u63a5\u5165\u6a21\u578b\uff0c\u7ee7\u7eed\u539f\u5bf9\u8bdd\u7684\u6a21\u578b\u5b9e\u73b0\u4efb\u52a1\u3002",
+    "source_root": "/home/ld666/projects/EgoRecover/data/ee4d_motion_uniegomotion",
+    "status": "complete",
+    "tests": {
+      "failed": 0,
+      "passed": 22,
+      "report": "/home/ld666/projects/EgoRecover/data_pipeline/test_results.xml",
+      "sha256": "f4797a7afd8c3dcfedb8425974ee3743b5feb62703e82b57175e684ce49f57a1"
+    },
+    "usage": "\u5b98\u65b9 val \u7684\u5de5\u7a0b\u68c0\u67e5\u6570\u636e\u3002\u4f7f\u7528\u8fd9\u4e9b take \u8c03\u53c2\u540e\uff0c\u6700\u7ec8\u72ec\u7acb\u8bc4\u4f30\u5fc5\u987b\u6392\u9664\u5b83\u4eec\u3002"
+  },
+  "prior_steps": 200,
+  "flow_steps": 1000,
+  "batch_size": 32,
+  "reference_mode": "planar",
+  "geometry_weight": 1.0,
+  "geometry_scale_m": 0.1,
+  "prior_selection": "dense",
+  "flow_selection": "dense",
+  "predicted_history_cache": {
+    "path": "exp/egorecover_predicted_train_v1/frames.pt",
+    "sha256": "d7d00cc3020af8151228f1b1654f719decd3593785b95f228a39791d0015ca9d",
+    "identity": {
+      "scope": "training_only_predicted_histories",
+      "reference_mode": "planar",
+      "bootstrap": "GT first 20 frames on TRAINING takes only; no resets afterwards",
+      "policy": "a11 frozen P/G; pooled gaussian/history policies",
+      "generator_experiment": "exp/egorecover_engineering_v1",
+      "g_sha256": {
+        "gaussian": "d66ee8b511b0e4f63bd0ed124f43191a3bed6d3aea27e816079fc782fb2ed5e6",
+        "history": "3e9754586121e961cc0f351851ec76213d97b972f9075467dd50e04f77785df2"
+      },
+      "p_sha256": "d8b01b7aeb67d9c254a77c5acf5c5e1ea71b8e0ed21a2041e92275564c973eed",
+      "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+      "train_takes": [
+        "uniandes_dance_024_45",
+        "georgiatech_bike_15_8",
+        "indiana_bike_10_12",
+        "utokyo_omelet_11_1001_4",
+        "uniandes_basketball_001_28",
+        "unc_basketball_03-09-23_01_10",
+        "upenn_0726_Violin_1_3",
+        "uniandes_dance_002_10"
+      ],
+      "variants": [
+        "clean",
+        "freeze_3s",
+        "drift_0p03mps"
+      ],
+      "seed": 62,
+      "sigma": 0.3,
+      "nfe": 10
+    },
+    "frames": 8640,
+    "sample_probability": 0.5
+  },
+  "sources": {
+    "gaussian": {
+      "dev_loss_before": 2.5908470153808594,
+      "dev_loss_after": 0.37045514583587646,
+      "selected_step": 800,
+      "curve": [
+        {
+          "step": 20,
+          "train_loss": 9.069384574890137
+        },
+        {
+          "step": 40,
+          "train_loss": 6.063097953796387
+        },
+        {
+          "step": 60,
+          "train_loss": 4.9086809158325195
+        },
+        {
+          "step": 80,
+          "train_loss": 4.12640905380249
+        },
+        {
+          "step": 100,
+          "train_loss": 3.3966829776763916
+        },
+        {
+          "step": 120,
+          "train_loss": 4.604342460632324
+        },
+        {
+          "step": 140,
+          "train_loss": 3.1213648319244385
+        },
+        {
+          "step": 160,
+          "train_loss": 2.554065704345703
+        },
+        {
+          "step": 180,
+          "train_loss": 2.763052463531494
+        },
+        {
+          "step": 200,
+          "train_loss": 3.09255051612854
+        },
+        {
+          "step": 200,
+          "train_loss": 3.09255051612854,
+          "dev_sample_dense22_mm": 158.54917907714844
+        },
+        {
+          "step": 220,
+          "train_loss": 2.9398975372314453
+        },
+        {
+          "step": 240,
+          "train_loss": 2.1222100257873535
+        },
+        {
+          "step": 260,
+          "train_loss": 1.8973320722579956
+        },
+        {
+          "step": 280,
+          "train_loss": 1.6170525550842285
+        },
+        {
+          "step": 300,
+          "train_loss": 1.7409663200378418
+        },
+        {
+          "step": 320,
+          "train_loss": 2.047715663909912
+        },
+        {
+          "step": 340,
+          "train_loss": 1.4307546615600586
+        },
+        {
+          "step": 360,
+          "train_loss": 1.3275986909866333
+        },
+        {
+          "step": 380,
+          "train_loss": 2.261260747909546
+        },
+        {
+          "step": 400,
+          "train_loss": 1.0492210388183594
+        },
+        {
+          "step": 400,
+          "train_loss": 1.0492210388183594,
+          "dev_sample_dense22_mm": 143.0626983642578
+        },
+        {
+          "step": 420,
+          "train_loss": 1.0521633625030518
+        },
+        {
+          "step": 440,
+          "train_loss": 1.1122024059295654
+        },
+        {
+          "step": 460,
+          "train_loss": 1.2536293268203735
+        },
+        {
+          "step": 480,
+          "train_loss": 1.008023738861084
+        },
+        {
+          "step": 500,
+          "train_loss": 0.7581037878990173
+        },
+        {
+          "step": 520,
+          "train_loss": 0.9122619032859802
+        },
+        {
+          "step": 540,
+          "train_loss": 0.9443362355232239
+        },
+        {
+          "step": 560,
+          "train_loss": 0.8736227750778198
+        },
+        {
+          "step": 580,
+          "train_loss": 1.3771858215332031
+        },
+        {
+          "step": 600,
+          "train_loss": 0.9719828367233276
+        },
+        {
+          "step": 600,
+          "train_loss": 0.9719828367233276,
+          "dev_sample_dense22_mm": 127.62001037597656
+        },
+        {
+          "step": 620,
+          "train_loss": 1.2357017993927002
+        },
+        {
+          "step": 640,
+          "train_loss": 0.7126550674438477
+        },
+        {
+          "step": 660,
+          "train_loss": 0.8792789578437805
+        },
+        {
+          "step": 680,
+          "train_loss": 0.9377924203872681
+        },
+        {
+          "step": 700,
+          "train_loss": 0.9203191995620728
+        },
+        {
+          "step": 720,
+          "train_loss": 0.6658588647842407
+        },
+        {
+          "step": 740,
+          "train_loss": 0.7889295816421509
+        },
+        {
+          "step": 760,
+          "train_loss": 0.7540384531021118
+        },
+        {
+          "step": 780,
+          "train_loss": 0.5563700199127197
+        },
+        {
+          "step": 800,
+          "train_loss": 0.6106323003768921
+        },
+        {
+          "step": 800,
+          "train_loss": 0.6106323003768921,
+          "dev_sample_dense22_mm": 117.37406158447266
+        },
+        {
+          "step": 820,
+          "train_loss": 0.691962480545044
+        },
+        {
+          "step": 840,
+          "train_loss": 0.8922179937362671
+        },
+        {
+          "step": 860,
+          "train_loss": 0.643642783164978
+        },
+        {
+          "step": 880,
+          "train_loss": 0.7410287857055664
+        },
+        {
+          "step": 900,
+          "train_loss": 0.5583475828170776
+        },
+        {
+          "step": 920,
+          "train_loss": 1.0616865158081055
+        },
+        {
+          "step": 940,
+          "train_loss": 0.6708517074584961
+        },
+        {
+          "step": 960,
+          "train_loss": 0.7955754995346069
+        },
+        {
+          "step": 980,
+          "train_loss": 0.6183676719665527
+        },
+        {
+          "step": 1000,
+          "train_loss": 0.5737255811691284
+        },
+        {
+          "step": 1000,
+          "train_loss": 0.5737255811691284,
+          "dev_sample_dense22_mm": 120.35626220703125
+        }
+      ],
+      "dense22_mm_per_action": {
+        "a11": 117.37406921386719,
+        "a10": 122.14450073242188,
+        "a01": 117.17588806152344,
+        "a00": 122.06781005859375
+      },
+      "dense22_oracle_gap_mm": 1.84708833694458,
+      "oracle_action_counts": [
+        14,
+        9,
+        34,
+        7
+      ],
+      "checkpoint_sha256": "62d7f8b333b48464c5e59100c923abdc16bd35275ad6b34e77a272d91209220b"
+    },
+    "history": {
+      "dev_loss_before": 2.6691856384277344,
+      "dev_loss_after": 0.30396610498428345,
+      "selected_step": 1000,
+      "curve": [
+        {
+          "step": 20,
+          "train_loss": 9.418996810913086
+        },
+        {
+          "step": 40,
+          "train_loss": 5.79843282699585
+        },
+        {
+          "step": 60,
+          "train_loss": 4.627720355987549
+        },
+        {
+          "step": 80,
+          "train_loss": 3.8900253772735596
+        },
+        {
+          "step": 100,
+          "train_loss": 3.3127872943878174
+        },
+        {
+          "step": 120,
+          "train_loss": 3.5889389514923096
+        },
+        {
+          "step": 140,
+          "train_loss": 2.645747184753418
+        },
+        {
+          "step": 160,
+          "train_loss": 2.088042736053467
+        },
+        {
+          "step": 180,
+          "train_loss": 3.0698676109313965
+        },
+        {
+          "step": 200,
+          "train_loss": 2.3089919090270996
+        },
+        {
+          "step": 200,
+          "train_loss": 2.3089919090270996,
+          "dev_sample_dense22_mm": 156.01844787597656
+        },
+        {
+          "step": 220,
+          "train_loss": 2.6758484840393066
+        },
+        {
+          "step": 240,
+          "train_loss": 1.861268401145935
+        },
+        {
+          "step": 260,
+          "train_loss": 2.25545334815979
+        },
+        {
+          "step": 280,
+          "train_loss": 1.5768977403640747
+        },
+        {
+          "step": 300,
+          "train_loss": 1.5947284698486328
+        },
+        {
+          "step": 320,
+          "train_loss": 1.989807367324829
+        },
+        {
+          "step": 340,
+          "train_loss": 1.429831624031067
+        },
+        {
+          "step": 360,
+          "train_loss": 1.2565875053405762
+        },
+        {
+          "step": 380,
+          "train_loss": 2.12479829788208
+        },
+        {
+          "step": 400,
+          "train_loss": 1.2774862051010132
+        },
+        {
+          "step": 400,
+          "train_loss": 1.2774862051010132,
+          "dev_sample_dense22_mm": 143.76486206054688
+        },
+        {
+          "step": 420,
+          "train_loss": 1.094756007194519
+        },
+        {
+          "step": 440,
+          "train_loss": 1.2118366956710815
+        },
+        {
+          "step": 460,
+          "train_loss": 1.026049017906189
+        },
+        {
+          "step": 480,
+          "train_loss": 0.8921700119972229
+        },
+        {
+          "step": 500,
+          "train_loss": 0.7008845806121826
+        },
+        {
+          "step": 520,
+          "train_loss": 0.8862402439117432
+        },
+        {
+          "step": 540,
+          "train_loss": 1.1501624584197998
+        },
+        {
+          "step": 560,
+          "train_loss": 0.8806735277175903
+        },
+        {
+          "step": 580,
+          "train_loss": 1.5942776203155518
+        },
+        {
+          "step": 600,
+          "train_loss": 0.9915131330490112
+        },
+        {
+          "step": 600,
+          "train_loss": 0.9915131330490112,
+          "dev_sample_dense22_mm": 144.17034912109375
+        },
+        {
+          "step": 620,
+          "train_loss": 1.198488473892212
+        },
+        {
+          "step": 640,
+          "train_loss": 0.6767712235450745
+        },
+        {
+          "step": 660,
+          "train_loss": 0.9957339763641357
+        },
+        {
+          "step": 680,
+          "train_loss": 0.9168194532394409
+        },
+        {
+          "step": 700,
+          "train_loss": 0.8842132687568665
+        },
+        {
+          "step": 720,
+          "train_loss": 0.6245378255844116
+        },
+        {
+          "step": 740,
+          "train_loss": 0.934457004070282
+        },
+        {
+          "step": 760,
+          "train_loss": 0.6981537938117981
+        },
+        {
+          "step": 780,
+          "train_loss": 0.5378378033638
+        },
+        {
+          "step": 800,
+          "train_loss": 0.5509107708930969
+        },
+        {
+          "step": 800,
+          "train_loss": 0.5509107708930969,
+          "dev_sample_dense22_mm": 132.578857421875
+        },
+        {
+          "step": 820,
+          "train_loss": 0.6749027967453003
+        },
+        {
+          "step": 840,
+          "train_loss": 1.3629924058914185
+        },
+        {
+          "step": 860,
+          "train_loss": 0.6801192164421082
+        },
+        {
+          "step": 880,
+          "train_loss": 0.7962324619293213
+        },
+        {
+          "step": 900,
+          "train_loss": 0.5975381135940552
+        },
+        {
+          "step": 920,
+          "train_loss": 1.333247184753418
+        },
+        {
+          "step": 940,
+          "train_loss": 0.6403113603591919
+        },
+        {
+          "step": 960,
+          "train_loss": 0.6953549385070801
+        },
+        {
+          "step": 980,
+          "train_loss": 0.6137570142745972
+        },
+        {
+          "step": 1000,
+          "train_loss": 0.5727715492248535
+        },
+        {
+          "step": 1000,
+          "train_loss": 0.5727715492248535,
+          "dev_sample_dense22_mm": 116.6221923828125
+        }
+      ],
+      "dense22_mm_per_action": {
+        "a11": 116.62218475341797,
+        "a10": 128.7267608642578,
+        "a01": 116.64915466308594,
+        "a00": 128.9442596435547
+      },
+      "dense22_oracle_gap_mm": 0.8341518044471741,
+      "oracle_action_counts": [
+        30,
+        2,
+        26,
+        6
+      ],
+      "checkpoint_sha256": "aea2368871bbfda22ea9898adc33e7bb7c793c0ebb2fbdb92360e35ae3760748"
+    }
+  },
+  "evaluation_history_source": "GT for the single-step dev diagnostic; evaluate closed loop separately",
+  "floor_diagnostics": {
+    "uniandes_dance_024_45": {
+      "estimate_m": -1.1291589736938477,
+      "annotation_m_for_offline_comparison_only": -1.2458219623565674,
+      "error_m": 0.11666298866271974
+    },
+    "upenn_0726_Violin_1_3": {
+      "estimate_m": -1.8344682455062866,
+      "annotation_m_for_offline_comparison_only": -1.5518221950531006,
+      "error_m": -0.282646050453186
+    },
+    "indiana_bike_10_12": {
+      "estimate_m": -1.809349775314331,
+      "annotation_m_for_offline_comparison_only": -1.3209498023986816,
+      "error_m": -0.4883999729156494
+    },
+    "uniandes_basketball_001_28": {
+      "estimate_m": -1.1048578023910522,
+      "annotation_m_for_offline_comparison_only": -1.2251696681976318,
+      "error_m": 0.1203118658065796
+    },
+    "uniandes_dance_002_10": {
+      "estimate_m": -1.2298083305358887,
+      "annotation_m_for_offline_comparison_only": -1.2982766723632813,
+      "error_m": 0.06846834182739259
+    },
+    "utokyo_omelet_11_1001_4": {
+      "estimate_m": -1.3270235061645508,
+      "annotation_m_for_offline_comparison_only": -1.4104489183425903,
+      "error_m": 0.08342541217803956
+    },
+    "georgiatech_bike_15_8": {
+      "estimate_m": -1.1662333011627197,
+      "annotation_m_for_offline_comparison_only": -1.2734334564208984,
+      "error_m": 0.10720015525817872
+    },
+    "unc_basketball_03-09-23_01_10": {
+      "estimate_m": -0.8716806173324585,
+      "annotation_m_for_offline_comparison_only": -1.29963303565979,
+      "error_m": 0.42795241832733155
+    },
+    "iiith_soccer_002_2": {
+      "estimate_m": -1.3265262842178345,
+      "annotation_m_for_offline_comparison_only": -1.3525847291946411,
+      "error_m": 0.02605844497680665
+    },
+    "georgiatech_covid_06_8": {
+      "estimate_m": 4.860020637512207,
+      "annotation_m_for_offline_comparison_only": 4.971132984161377,
+      "error_m": -0.11111234664917014
+    }
+  },
+  "prior": {
+    "baseline_dev_loss": 0.08470356464385986,
+    "selected_dev_loss": 0.08470356464385986,
+    "baseline_dev_dense22_mm": 25.94072723388672,
+    "selected_dev_dense22_mm": 25.94072723388672,
+    "selected_step": 0,
+    "curve": [
+      {
+        "step": 20,
+        "train_loss": 1.2468401193618774,
+        "dev_loss": 0.12480902671813965,
+        "dev_dense22_mm": 43.449153900146484
+      },
+      {
+        "step": 40,
+        "train_loss": 1.70352041721344,
+        "dev_loss": 0.12452738732099533,
+        "dev_dense22_mm": 52.72248840332031
+      },
+      {
+        "step": 60,
+        "train_loss": 1.8535046577453613,
+        "dev_loss": 0.11591523885726929,
+        "dev_dense22_mm": 49.72200393676758
+      },
+      {
+        "step": 80,
+        "train_loss": 0.925163984298706,
+        "dev_loss": 0.10990500450134277,
+        "dev_dense22_mm": 42.02354431152344
+      },
+      {
+        "step": 100,
+        "train_loss": 2.6727914810180664,
+        "dev_loss": 0.12735618650913239,
+        "dev_dense22_mm": 52.206172943115234
+      },
+      {
+        "step": 120,
+        "train_loss": 1.4416594505310059,
+        "dev_loss": 0.121473029255867,
+        "dev_dense22_mm": 46.965728759765625
+      },
+      {
+        "step": 140,
+        "train_loss": 1.350308895111084,
+        "dev_loss": 0.14942292869091034,
+        "dev_dense22_mm": 56.498619079589844
+      },
+      {
+        "step": 160,
+        "train_loss": 1.2504053115844727,
+        "dev_loss": 0.13451632857322693,
+        "dev_dense22_mm": 55.337196350097656
+      },
+      {
+        "step": 180,
+        "train_loss": 1.3489775657653809,
+        "dev_loss": 0.10767540335655212,
+        "dev_dense22_mm": 46.98409652709961
+      },
+      {
+        "step": 200,
+        "train_loss": 1.4293403625488281,
+        "dev_loss": 0.11919555068016052,
+        "dev_dense22_mm": 51.010982513427734
+      }
+    ]
+  },
+  "elapsed_seconds": 320.59186621615663,
+  "completed": true
+}

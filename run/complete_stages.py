@@ -6,13 +6,16 @@ import fcntl
 import io
 import json
 import os
+import re
 import shlex
 import subprocess
 import sys
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
+from urllib.parse import quote
 
 from egorecover.evaluation_protocol import file_sha256
 from egorecover.evaluation_resume import atomic_json
@@ -99,6 +102,24 @@ def verify_task(task):
     elif task.kind == "diagnostic":
         if len(report["rows"]) != task.expected or len(report["draw_averaged"]["states"]) * 3 != task.expected:
             raise ValueError("Incomplete four-action diagnostic.")
+    elif task.kind == "prior_data":
+        if report["sequences"] != task.expected or file_sha256(task.output / "sequences.pt") != report["cache_sha256"]:
+            raise ValueError("Incomplete or altered P sequence cache.")
+    elif task.kind == "prior":
+        import torch
+        checkpoint = torch.load(task.output / "prior.pt", map_location="cpu", weights_only=True)
+        if file_sha256(task.output / "prior.pt") != report["prior_sha256"] or checkpoint["selected_step"] != report["selected_step"]:
+            raise ValueError("P checkpoint differs from its report.")
+        if not all(bool(torch.isfinite(value).all()) for value in checkpoint["state_dict"].values()):
+            raise ValueError("Nonfinite P weights.")
+        if file_sha256(task.output / "initial.pt") != report["initial_sha256"]:
+            raise ValueError("Initial P weights differ from the report.")
+        for key in ("data_sha256", "two_forward", "fk_weight", "training_seed", "code_sha256"):
+            if checkpoint.get(key) != report[key]:
+                raise ValueError(f"P checkpoint identity differs: {key}.")
+        for result in report["results"].values():
+            if file_sha256(result["artifact"]) != result["artifact_sha256"]:
+                raise ValueError("P evaluation artifact differs from its report.")
     # Reject nonfinite numbers in all reports, including nested diagnostics.
     json.dumps(report, allow_nan=False)
     return report
@@ -196,6 +217,8 @@ class Queue:
         argv = list(task.argv)
         if task.output.exists():
             if task.kind == "eval" and (task.output / "progress.json").exists():
+                argv.append("--resume")
+            elif task.kind == "prior" and (task.output / "resume.pt").exists():
                 argv.append("--resume")
             else:
                 archive = task.output.with_name(task.output.name + f".interrupted_{time.time_ns()}")
@@ -360,10 +383,22 @@ def replay_selection(summary):
 
 
 def append_log(title, lines):
+    # Full per-checkpoint curves live in each experiment's selection.json.
+    if title == "独立 P 选点":
+        return
     # Append only, preserving all earlier user edits and historical runs.
+    def linked_path(match):
+        target = match.group(1)
+        if not (ROOT / target).exists():
+            return match.group(0)
+        return f"[{target}]({quote(target, safe='/')})"
+    lines = [re.sub(r"`((?:exp|verification|docs)/[^`\n]+)`", linked_path, line) for line in lines]
     with (ROOT / "LOG.md").open("a") as stream:
-        stream.write(f"\n## {now()}：{title}\n\n")
-        stream.write("\n".join(f"- {line}" for line in lines) + "\n")
+        fcntl.flock(stream, fcntl.LOCK_EX)
+        timestamp = datetime.now(ZoneInfo("Asia/Singapore")).strftime("%Y-%m-%d--%H：%M")
+        stream.write(f"\n## {timestamp}：{title}\n\n" + "\n".join(f"- {line}" for line in lines) + "\n")
+        stream.flush()
+        fcntl.flock(stream, fcntl.LOCK_UN)
 
 
 def write_results(output, budget_summary, choice, replay_summary, replay_choice, diagnostic_tasks):

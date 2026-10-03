@@ -1,0 +1,121 @@
+{
+  "scope": "closed_loop_stability_only",
+  "reference_mode": "planar",
+  "completion_semantics": "execution and finite metrics only; inspect magnitude separately",
+  "initialization": "random E7; not pretrained",
+  "bootstrap_is_trained": false,
+  "history_source": "model_predictions_only; no resets",
+  "take": "iiith_soccer_002_2",
+  "metric": "dense22_world_position_error_mm; not SMPL FK",
+  "results": [
+    {
+      "source_mode": "gaussian",
+      "variant": "clean",
+      "finite": true,
+      "mean_dense22_mm": 182.0691375732422,
+      "last_frame_dense22_mm": 145.10641479492188,
+      "first_frame_dense22_mm": 640.7123413085938,
+      "peak_dense22_mm": 640.7123413085938,
+      "phase_dense22_mm": {
+        "pre_fault": 202.02456665039062,
+        "fault": 179.3265838623047,
+        "recovery": 166.08584594726562
+      },
+      "latency_median_ms": 231.90633847843856,
+      "latency_p95_ms": 426.06438332004467,
+      "floor_estimate_m": -1.3265262842178345,
+      "frames": 180
+    },
+    {
+      "source_mode": "gaussian",
+      "variant": "freeze_3s",
+      "finite": true,
+      "mean_dense22_mm": 182.0320587158203,
+      "last_frame_dense22_mm": 145.0349884033203,
+      "first_frame_dense22_mm": 640.7123413085938,
+      "peak_dense22_mm": 640.7123413085938,
+      "phase_dense22_mm": {
+        "pre_fault": 202.02456665039062,
+        "fault": 179.2926483154297,
+        "recovery": 166.0159912109375
+      },
+      "latency_median_ms": 732.6891529373825,
+      "latency_p95_ms": 1032.5660383794454,
+      "floor_estimate_m": -1.3265262842178345,
+      "frames": 180
+    },
+    {
+      "source_mode": "gaussian",
+      "variant": "drift_0p03mps",
+      "finite": true,
+      "mean_dense22_mm": 186.23464965820312,
+      "last_frame_dense22_mm": 145.38381958007812,
+      "first_frame_dense22_mm": 640.7123413085938,
+      "peak_dense22_mm": 640.7123413085938,
+      "phase_dense22_mm": {
+        "pre_fault": 202.02456665039062,
+        "fault": 201.81382751464844,
+        "recovery": 167.013916015625
+      },
+      "latency_median_ms": 811.5519630955532,
+      "latency_p95_ms": 1627.669871028041,
+      "floor_estimate_m": -1.3265262842178345,
+      "frames": 180
+    },
+    {
+      "source_mode": "history",
+      "variant": "clean",
+      "finite": true,
+      "mean_dense22_mm": 185.41720581054688,
+      "last_frame_dense22_mm": 178.9777374267578,
+      "first_frame_dense22_mm": 594.2613525390625,
+      "peak_dense22_mm": 594.2613525390625,
+      "phase_dense22_mm": {
+        "pre_fault": 184.58023071289062,
+        "fault": 192.8568572998047,
+        "recovery": 183.3748016357422
+      },
+      "latency_median_ms": 792.0560810016468,
+      "latency_p95_ms": 1235.3697508457117,
+      "floor_estimate_m": -1.3265262842178345,
+      "frames": 180
+    },
+    {
+      "source_mode": "history",
+      "variant": "freeze_3s",
+      "finite": true,
+      "mean_dense22_mm": 185.4009552001953,
+      "last_frame_dense22_mm": 178.9644317626953,
+      "first_frame_dense22_mm": 594.2613525390625,
+      "peak_dense22_mm": 594.2613525390625,
+      "phase_dense22_mm": {
+        "pre_fault": 184.58023071289062,
+        "fault": 192.96487426757812,
+        "recovery": 183.29864501953125
+      },
+      "latency_median_ms": 884.2939080204815,
+      "latency_p95_ms": 1228.8193706306627,
+      "floor_estimate_m": -1.3265262842178345,
+      "frames": 180
+    },
+    {
+      "source_mode": "history",
+      "variant": "drift_0p03mps",
+      "finite": true,
+      "mean_dense22_mm": 188.18251037597656,
+      "last_frame_dense22_mm": 178.58352661132812,
+      "first_frame_dense22_mm": 594.2613525390625,
+      "peak_dense22_mm": 594.2613525390625,
+      "phase_dense22_mm": {
+        "pre_fault": 184.58023071289062,
+        "fault": 205.8131561279297,
+        "recovery": 184.72125244140625
+      },
+      "latency_median_ms": 435.93020900152624,
+      "latency_p95_ms": 881.3582796836268,
+      "floor_estimate_m": -1.3265262842178345,
+      "frames": 180
+    }
+  ],
+  "completed": true
+}

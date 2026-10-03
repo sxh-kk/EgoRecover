@@ -1,0 +1,340 @@
+{
+  "tasks": {
+    "prepare_data": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.prepare_prior_sequences",
+        "--output",
+        "exp/egorecover_prior_two_forward/v1/data"
+      ],
+      "output": "exp/egorecover_prior_two_forward/v1/data",
+      "kind": "prior_data",
+      "expected": 60,
+      "deps": [],
+      "assigned_gpu": 4,
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2021091,
+      "gpu": 4,
+      "spec": "exp/egorecover_prior_two_forward/v1/jobs/prepare_data.1.json",
+      "log": "exp/egorecover_prior_two_forward/v1/jobs/prepare_data.1.log",
+      "started_at": "2026-09-29T04:09:14.412457+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T04:13:40.337143+00:00"
+    },
+    "A_gt_dense_s62": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.train_prior_two_forward",
+        "--data",
+        "exp/egorecover_prior_two_forward/v1/data",
+        "--output",
+        "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62",
+        "--fk-weight",
+        "0",
+        "--seed",
+        "62",
+        "--baselines",
+        "--old-prior",
+        "exp/egorecover_stages_1_4/continuation_v1/stage2_budget/72take_2400/prior.pt"
+      ],
+      "output": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62",
+      "kind": "prior",
+      "expected": 0,
+      "deps": [],
+      "assigned_gpu": 0,
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2025351,
+      "gpu": 0,
+      "spec": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s62.1.json",
+      "log": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s62.1.log",
+      "started_at": "2026-09-29T04:19:08.655079+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T04:23:09.540075+00:00"
+    },
+    "B_two_forward_dense_s62": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.train_prior_two_forward",
+        "--data",
+        "exp/egorecover_prior_two_forward/v1/data",
+        "--output",
+        "exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62",
+        "--two-forward",
+        "--fk-weight",
+        "0",
+        "--seed",
+        "62"
+      ],
+      "output": "exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62",
+      "kind": "prior",
+      "expected": 0,
+      "deps": [],
+      "assigned_gpu": 1,
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2025352,
+      "gpu": 1,
+      "spec": "exp/egorecover_prior_two_forward/v1/jobs/B_two_forward_dense_s62.1.json",
+      "log": "exp/egorecover_prior_two_forward/v1/jobs/B_two_forward_dense_s62.1.log",
+      "started_at": "2026-09-29T04:19:08.665747+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T04:26:40.558444+00:00"
+    },
+    "C_gt_fk_s62": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.train_prior_two_forward",
+        "--data",
+        "exp/egorecover_prior_two_forward/v1/data",
+        "--output",
+        "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62",
+        "--fk-weight",
+        "1",
+        "--seed",
+        "62"
+      ],
+      "output": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62",
+      "kind": "prior",
+      "expected": 0,
+      "deps": [],
+      "assigned_gpu": 2,
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2025353,
+      "gpu": 2,
+      "spec": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s62.1.json",
+      "log": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s62.1.log",
+      "started_at": "2026-09-29T04:19:08.674171+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T04:25:40.221500+00:00"
+    },
+    "D_two_forward_fk_s62": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.train_prior_two_forward",
+        "--data",
+        "exp/egorecover_prior_two_forward/v1/data",
+        "--output",
+        "exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62",
+        "--two-forward",
+        "--fk-weight",
+        "1",
+        "--seed",
+        "62"
+      ],
+      "output": "exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62",
+      "kind": "prior",
+      "expected": 0,
+      "deps": [],
+      "assigned_gpu": 3,
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2025354,
+      "gpu": 3,
+      "spec": "exp/egorecover_prior_two_forward/v1/jobs/D_two_forward_fk_s62.1.json",
+      "log": "exp/egorecover_prior_two_forward/v1/jobs/D_two_forward_fk_s62.1.log",
+      "started_at": "2026-09-29T04:19:08.681224+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T04:29:46.560275+00:00"
+    },
+    "A_gt_dense_s63": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.train_prior_two_forward",
+        "--data",
+        "exp/egorecover_prior_two_forward/v1/data",
+        "--output",
+        "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63",
+        "--fk-weight",
+        "0",
+        "--seed",
+        "63"
+      ],
+      "output": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63",
+      "kind": "prior",
+      "expected": 0,
+      "deps": [],
+      "assigned_gpu": 0,
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2029486,
+      "gpu": 0,
+      "spec": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s63.1.json",
+      "log": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s63.1.log",
+      "started_at": "2026-09-29T04:29:47.302649+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T04:33:18.073535+00:00"
+    },
+    "C_gt_fk_s63": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.train_prior_two_forward",
+        "--data",
+        "exp/egorecover_prior_two_forward/v1/data",
+        "--output",
+        "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63",
+        "--fk-weight",
+        "1",
+        "--seed",
+        "63"
+      ],
+      "output": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63",
+      "kind": "prior",
+      "expected": 0,
+      "deps": [],
+      "assigned_gpu": 1,
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2029487,
+      "gpu": 1,
+      "spec": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s63.1.json",
+      "log": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s63.1.log",
+      "started_at": "2026-09-29T04:29:47.313639+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T04:36:18.927599+00:00"
+    },
+    "A_gt_dense_s64": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.train_prior_two_forward",
+        "--data",
+        "exp/egorecover_prior_two_forward/v1/data",
+        "--output",
+        "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64",
+        "--fk-weight",
+        "0",
+        "--seed",
+        "64"
+      ],
+      "output": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64",
+      "kind": "prior",
+      "expected": 0,
+      "deps": [],
+      "assigned_gpu": 2,
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2029488,
+      "gpu": 2,
+      "spec": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s64.1.json",
+      "log": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s64.1.log",
+      "started_at": "2026-09-29T04:29:47.328757+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T04:33:18.184221+00:00"
+    },
+    "C_gt_fk_s64": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.train_prior_two_forward",
+        "--data",
+        "exp/egorecover_prior_two_forward/v1/data",
+        "--output",
+        "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64",
+        "--fk-weight",
+        "1",
+        "--seed",
+        "64"
+      ],
+      "output": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64",
+      "kind": "prior",
+      "expected": 0,
+      "deps": [],
+      "assigned_gpu": 3,
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2029489,
+      "gpu": 3,
+      "spec": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s64.1.json",
+      "log": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s64.1.log",
+      "started_at": "2026-09-29T04:29:47.338231+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T04:36:19.044962+00:00"
+    }
+  },
+  "created_at": "2026-09-28T18:29:57.814956+00:00",
+  "policy_changes": [
+    {
+      "at": "2026-09-28T18:29:57.814974+00:00",
+      "from": {
+        "gpus": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "allow_shared": false,
+        "minimum_free_gib": 32
+      },
+      "to": {
+        "gpus": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "allow_shared": true,
+        "minimum_free_gib": 32
+      }
+    },
+    {
+      "at": "2026-09-29T04:18:38.301643+00:00",
+      "from": {
+        "gpus": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "allow_shared": true,
+        "minimum_free_gib": 32
+      },
+      "to": {
+        "gpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "allow_shared": true,
+        "minimum_free_gib": 32
+      }
+    }
+  ],
+  "gpus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "allow_shared": true,
+  "minimum_free_gib": 32,
+  "controller_pid": 2028981,
+  "status": "complete",
+  "updated_at": "2026-09-29T04:36:23.895470+00:00",
+  "dependencies": {
+    "exp/egorecover_stages_1_4/continuation_v1/queue.json": {
+      "status": "complete",
+      "ready": true
+    }
+  },
+  "completed_at": "2026-09-29T04:36:23.895448+00:00"
+}

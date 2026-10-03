@@ -1,0 +1,132 @@
+{
+  "as_of": "2026-09-30T01:24:00.204792+08:00",
+  "queue": {
+    "phase": "training_seed62",
+    "controller_pid": 3897298,
+    "updated_at": "2026-09-30T01:23:59.563342+08:00",
+    "jobs": [
+      {
+        "name": "T0_seed62",
+        "pid": 4089415,
+        "running": true
+      },
+      {
+        "name": "T1_seed62",
+        "pid": 4089417,
+        "running": true
+      },
+      {
+        "name": "T2_seed62",
+        "pid": 4089419,
+        "running": true
+      },
+      {
+        "name": "T3_seed62",
+        "pid": 4089431,
+        "running": true
+      }
+    ]
+  },
+  "groups": {
+    "T0": {
+      "progress": {
+        "step": 1280,
+        "total": 24000,
+        "loss": 0.18845831975340843,
+        "mixture_probability": 0.0,
+        "actual_mixture": 0.0,
+        "gradient_norm": 4.2959465980529785,
+        "pid": 4089415,
+        "elapsed_this_session_seconds": 553.8538248902187,
+        "steps_this_session": 1280,
+        "phase": "training",
+        "gpu": "4"
+      },
+      "formal_selection_available": false,
+      "mean_logged_loss_steps20_200": 0.33333267383277415,
+      "mean_logged_loss_steps700_900": 0.22668163715438408
+    },
+    "T1": {
+      "progress": {
+        "step": 1220,
+        "total": 24000,
+        "loss": 0.16890711709856987,
+        "mixture_probability": 0.0,
+        "actual_mixture": 0.0,
+        "gradient_norm": 3.555375576019287,
+        "pid": 4089417,
+        "elapsed_this_session_seconds": 551.4988090535626,
+        "steps_this_session": 1220,
+        "phase": "training",
+        "gpu": "5"
+      },
+      "formal_selection_available": false,
+      "mean_logged_loss_steps20_200": 0.37275732308626175,
+      "mean_logged_loss_steps700_900": 0.19081442379816013
+    },
+    "T2": {
+      "progress": {
+        "step": 1160,
+        "total": 24000,
+        "loss": 0.23492126166820526,
+        "mixture_probability": 0.0,
+        "actual_mixture": 0.0,
+        "gradient_norm": 4.110106468200684,
+        "pid": 4089419,
+        "elapsed_this_session_seconds": 553.7913667177781,
+        "steps_this_session": 1160,
+        "phase": "training",
+        "gpu": "6"
+      },
+      "formal_selection_available": false,
+      "mean_logged_loss_steps20_200": 0.33333267383277415,
+      "mean_logged_loss_steps700_900": 0.22668163715438408
+    },
+    "T3": {
+      "progress": {
+        "step": 1080,
+        "total": 24000,
+        "loss": 0.16038957238197327,
+        "mixture_probability": 0.0,
+        "actual_mixture": 0.0,
+        "gradient_norm": 3.3092331886291504,
+        "pid": 4089431,
+        "elapsed_this_session_seconds": 550.9731917353347,
+        "steps_this_session": 1080,
+        "phase": "training",
+        "gpu": "7"
+      },
+      "formal_selection_available": false,
+      "mean_logged_loss_steps20_200": 0.37275732308626175,
+      "mean_logged_loss_steps700_900": 0.19081442379816013
+    }
+  },
+  "prior": {
+    "before_mm": 26.90807020664215,
+    "selected_mm": 25.84371703863144,
+    "improvement_mm": 1.0643531680107117,
+    "improvement_percent": 3.955516541457441,
+    "improved_takes": 12,
+    "total_takes": 16,
+    "paired_delta_by_take": {
+      "georgiatech_bike_06_6": -0.33319664001464844,
+      "georgiatech_bike_07_2": 0.11133193969726562,
+      "georgiatech_bike_07_4": 0.4391899108886719,
+      "georgiatech_cooking_02_01_2": -2.793288230895996,
+      "georgiatech_cooking_02_02_6": -0.6895427703857422,
+      "georgiatech_cooking_06_01_2": 0.8737945556640625,
+      "georgiatech_covid_02_10": -1.4943981170654297,
+      "georgiatech_covid_02_4": -0.9596710205078125,
+      "iiith_soccer_002_6": 0.028240203857421875,
+      "iiith_soccer_015_2": -3.012054443359375,
+      "indiana_music_03_2": -2.3922624588012695,
+      "indiana_music_03_3": -1.8693304061889648,
+      "sfu_basketball012_12": -0.3540935516357422,
+      "sfu_basketball_04_17": -3.1196975708007812,
+      "uniandes_dance_002_11": -0.3073921203613281,
+      "uniandes_dance_002_2": -1.1572799682617188
+    },
+    "scope": "selected on 16 dev takes, 18 GT-history targets per take; not a held-out or generated-history result"
+  },
+  "conclusion": "P has a modest development-set calibration gain. No formal G closed-loop scores yet. All groups are still in GT-history warmup; mixed-history effect has not been tested."
+}

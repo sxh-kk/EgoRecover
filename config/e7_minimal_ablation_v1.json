@@ -1,0 +1,28 @@
+{
+  "status": "implementation_validation_pending_formal_not_started",
+  "design": "four_cells_window_by_floor",
+  "documentation": "docs/experiments/e7-minimal-ablation.md",
+  "upstream": "/gaozt-test1/sxh/UEM-update-original",
+  "upstream_commit": "156ab79d5f692a6e8db3c3eb769abf1e4cb1fc08",
+  "checkpoint": "exp/e7/last.ckpt",
+  "checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+  "smplx_sha256": "43d8f3a1375d7c5baae207870a5d51def0f7e6b507df709b4937598b5e7d965d",
+  "input_packets": "exp/egorecover_prior_real_history/v1/data/packets.pt",
+  "data_signal": "data/EE4D_MISMATCH_TRAIN_72TAKE_READY.json",
+  "output": "exp/e7_minimal_ablation/v1",
+  "train_P": false,
+  "train_G": false,
+  "holdout_used": false,
+  "draws": [1062, 1063, 1064],
+  "takes": [
+    "fair_bike_01_12", "georgiatech_bike_05_2", "iiith_cooking_109_4",
+    "iiith_soccer_004_5", "indiana_music_13_5", "nus_cpr_52_1",
+    "sfu_basketball_03_44", "sfu_basketball_08_15", "unc_basketball_03-16-23_01_18",
+    "uniandes_dance_011_27", "uniandes_dance_012_15", "upenn_0725_Duet_Violin_1_2_8"
+  ],
+  "primary_comparisons": ["E1-E0", "E2-E0", "E3-E1", "E3-E2", "(E3-E1)-(E2-E0)"],
+  "primary_metric": "source_world_SMPL22_Body_MPJPE_mm",
+  "target_frames": [20, 200],
+  "variant": "clean",
+  "fps": 10
+}

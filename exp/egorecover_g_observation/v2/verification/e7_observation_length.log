@@ -1,0 +1,33 @@
+2026-09-30 17:12:01.187 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+1/16 georgiatech_bike_06_6 elapsed=0.6s
+2/16 georgiatech_bike_07_2 elapsed=0.9s
+3/16 georgiatech_bike_07_4 elapsed=1.2s
+4/16 georgiatech_cooking_02_01_2 elapsed=1.5s
+5/16 georgiatech_cooking_02_02_6 elapsed=1.7s
+6/16 georgiatech_cooking_06_01_2 elapsed=2.0s
+7/16 georgiatech_covid_02_10 elapsed=2.3s
+8/16 georgiatech_covid_02_4 elapsed=2.6s
+9/16 iiith_soccer_002_6 elapsed=2.9s
+10/16 iiith_soccer_015_2 elapsed=3.2s
+11/16 indiana_music_03_2 elapsed=3.5s
+12/16 indiana_music_03_3 elapsed=3.8s
+13/16 sfu_basketball012_12 elapsed=4.1s
+14/16 sfu_basketball_04_17 elapsed=4.4s
+15/16 uniandes_dance_002_11 elapsed=4.7s
+16/16 uniandes_dance_002_2 elapsed=5.0s
+{
+  "completed": true,
+  "means_mm": {
+    "21": 107.2044346809387,
+    "80": 114.82940931320191
+  },
+  "delta80_minus21_mm": 7.624975204467773,
+  "improved_takes": 5,
+  "paired_take_bootstrap95_mm": [
+    0.15700511634349823,
+    16.763702392578125
+  ],
+  "use80": false,
+  "seconds": 4.958703899756074,
+  "limitations": "Sparse fixed dev frames and one draw; evidence about E7 observation length, not a G improvement claim."
+}

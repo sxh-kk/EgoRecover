@@ -1,0 +1,48 @@
+{
+  "status": "in_progress",
+  "github": {
+    "repo": "sxh-kk/EgoRecover",
+    "branch": "main",
+    "force_push": false
+  },
+  "hf_model": {
+    "repo": "sxhkk/EgoRecover",
+    "public": true,
+    "revision": "f58988fe13f92a9237db743f0951495cb241860a"
+  },
+  "hf_dataset": {
+    "repo": "sxhkk/EgoRecover-data",
+    "public": true,
+    "revision": "f395c5d72ec125bb3b020b723eed3288ed6ea447"
+  },
+  "tests": {
+    "passed": 183,
+    "failed": 0,
+    "model_payload_review_count": 158
+  },
+  "model_files": 158,
+  "model_bytes": 27514749188,
+  "dataset_files": 10424,
+  "note": "Exact byte counts and final revisions are populated from artifacts.json after upload.",
+  "dataset_bytes": 51202255722,
+  "shifted_checkout_verification": {
+    "G": "one take, two frames, CPU; finite output and strict checkpoint loading passed",
+    "P_D_seed62_body_mm": 34.0719249409658,
+    "P_D_seed62_delta_mm": -1.6592167071394215e-06,
+    "raw_source_archive": "8 members matched official source directory sizes and CRC; per-file SHA256 retained for extraction checks"
+  },
+  "dataset_restore_bytes": 51202255722,
+  "dataset_repo_payload_bytes": 44004988168,
+  "data_bundles": 17,
+  "original_archive_server_copy_commit": "ee9831a346fb5047356246ac384576e30783fb58",
+  "dataset_transport": "Pinned official archive mirror, lossless prepared ZIP bundles and 64MiB byte parts",
+  "transfer_note": "64MiB transport validated; direct storage connections restored transfer throughput; full asset upload ongoing.",
+  "parts": {
+    "model": 368,
+    "dataset": 142,
+    "verified_all_local_part_hashes": true
+  },
+  "available_presets": [
+    "g-smoke"
+  ]
+}

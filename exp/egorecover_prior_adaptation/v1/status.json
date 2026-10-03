@@ -1,0 +1,19 @@
+{
+  "controller_pid": 1898417,
+  "created_at": "2026-09-28T17:20:19.986484+00:00",
+  "status": "deferred_pending_protocol_revision",
+  "dependencies": {
+    "exp/egorecover_stages_1_4/continuation_v1/queue.json": {
+      "status": "running",
+      "ready": false
+    },
+    "exp/egorecover_loss_ablation/g00_g11_v1/queue.json": {
+      "status": "running",
+      "ready": false
+    }
+  },
+  "updated_at": "2026-09-28T18:29:56.706820+00:00",
+  "reason": "Superseded by independent P Two-Forward/FK comparison; old 100% frozen-G adaptation remains stopped.",
+  "revised_plan": "docs/experiments/p-motionstreamer.md",
+  "replacement_queue": "exp/egorecover_prior_two_forward/v1/queue.json"
+}

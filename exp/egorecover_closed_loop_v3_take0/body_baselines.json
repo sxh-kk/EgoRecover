@@ -1,0 +1,20 @@
+{
+  "scope": "closed_loop_dense_positions_only",
+  "initialization": "random E7; not pretrained",
+  "take": "iiith_soccer_002_2",
+  "frames": 180,
+  "bootstrap": "same saved model outputs as G; no GT startup",
+  "reference_mode": "planar",
+  "results": {
+    "physical_hold": {
+      "mean_dense22_mm": 646.5545332190325,
+      "last_dense22_mm": 707.863859659266,
+      "peak_dense22_mm": 828.2640163743714
+    },
+    "constant_velocity": {
+      "mean_dense22_mm": 28565.566521825785,
+      "last_dense22_mm": 56623.73689325554,
+      "peak_dense22_mm": 56623.73689325554
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "scope": "closed_loop_stability_only",
+  "reference_mode": "planar",
+  "completion_semantics": "execution and finite metrics only; inspect magnitude separately",
+  "initialization": "random E7; not pretrained",
+  "bootstrap_is_trained": false,
+  "history_source": "model_predictions_only; no resets",
+  "take": "iiith_soccer_002_2",
+  "metric": "dense22_world_position_error_mm; not SMPL FK",
+  "results": [
+    {
+      "source_mode": "gaussian",
+      "variant": "clean",
+      "finite": true,
+      "mean_dense22_mm": 177.20375061035156,
+      "last_frame_dense22_mm": 242.3750762939453,
+      "first_frame_dense22_mm": 783.3724365234375,
+      "peak_dense22_mm": 783.3724365234375,
+      "phase_dense22_mm": {
+        "pre_fault": 211.78892517089844,
+        "fault": 156.89710998535156,
+        "recovery": 155.26329040527344
+      },
+      "latency_median_ms": 574.7850799234584,
+      "latency_p95_ms": 940.5058139702305,
+      "floor_estimate_m": -1.3265262842178345,
+      "frames": 180,
+      "bootstrap_dense22_mm": 598.5603637695312
+    },
+    {
+      "source_mode": "history",
+      "variant": "clean",
+      "finite": true,
+      "mean_dense22_mm": 264.9971008300781,
+      "last_frame_dense22_mm": 295.20379638671875,
+      "first_frame_dense22_mm": 603.588134765625,
+      "peak_dense22_mm": 603.588134765625,
+      "phase_dense22_mm": {
+        "pre_fault": 215.3512725830078,
+        "fault": 259.56646728515625,
+        "recovery": 309.2993469238281
+      },
+      "latency_median_ms": 738.267675973475,
+      "latency_p95_ms": 995.6987781450151,
+      "floor_estimate_m": -1.3265262842178345,
+      "frames": 180,
+      "bootstrap_dense22_mm": 598.5603637695312
+    }
+  ],
+  "completed": true
+}

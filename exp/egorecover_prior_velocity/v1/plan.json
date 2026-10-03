@@ -1,0 +1,24 @@
+{
+  "cases": {
+    "control": false,
+    "velocity": true
+  },
+  "seeds": [
+    62,
+    63,
+    64
+  ],
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "data": "exp/egorecover_prior_two_forward/v1/data",
+  "base_mode": "constant_velocity",
+  "fk_weight": 0,
+  "steps": 2400,
+  "velocity_schema": "root_linear3_root_spatial_angular3_local_angular63_valid1_dt0.1_v1",
+  "method": "docs/experiments/p-explicit-velocity.md",
+  "rollout_role": "diagnostic_only"
+}

@@ -1,0 +1,118 @@
+{
+  "scope": "teacher_forced_development_pilot",
+  "base_split": "train",
+  "history_source": "GT for development diagnostic; not online evaluation",
+  "floor_source": "startup_head_z_median_minus_training_mean_head_height",
+  "contact_floor_source": "annotation",
+  "metric": "single-step dense22 diagnostic; closed-loop FK selection only when explicitly requested",
+  "initialization": "exp/e7/last.ckpt",
+  "seed": 62,
+  "training_seed": 62,
+  "sampling_seed": 1062,
+  "split_manifest": "config/egorecover_train_pilot_split_v1.json",
+  "split_manifest_sha256": "ccca72e5c7446e1b03be8a650cc7bf2b5406b041cecb7d86f37066ccec6a3ae3",
+  "selection_split_manifest_sha256": "fdddd32b47282bfece00215ef2652cbc361afdc655b6516bb5ab0740403481fc",
+  "selection_dataset_spec_sha256": "13ca5f22e713353a121282a365af735f8086b8ca3dae714742e116d0d5df14dd",
+  "selection_bootstrap_cache_sha256": "3dec71f200f5d5d445d45f2f878a18cd73950365c402e16cb3404e3651018f56",
+  "selection_dev_takes": [
+    "fair_bike_01_12",
+    "georgiatech_bike_05_2",
+    "iiith_cooking_109_4",
+    "iiith_soccer_004_5",
+    "indiana_music_13_5",
+    "nus_cpr_52_1",
+    "sfu_basketball_03_44",
+    "sfu_basketball_08_15",
+    "unc_basketball_03-16-23_01_18",
+    "uniandes_dance_011_27",
+    "uniandes_dance_012_15",
+    "upenn_0725_Duet_Violin_1_2_8"
+  ],
+  "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+  "e7_weight_source": "ema",
+  "splits": {
+    "train": [
+      "fair_bike_08_10",
+      "georgiatech_bike_04_8",
+      "iiith_cooking_146_2",
+      "iiith_soccer_020_3",
+      "indiana_cooking_03_2",
+      "unc_basketball_03-31-23_02_23",
+      "uniandes_dance_013_19",
+      "uniandes_dance_020_50"
+    ],
+    "dev": [
+      "indiana_music_13_5",
+      "upenn_0725_Duet_Violin_1_2_8"
+    ],
+    "holdout": [
+      "sfu_basketball014_15",
+      "sfu_covid_001_12"
+    ]
+  },
+  "sigma": 1.0,
+  "nfe": 10,
+  "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+  "dataset_handoff": {
+    "code_root": "/gaozt-test1/guanzerong/EgoRecover/data_pipeline",
+    "completed_at": "2026-09-28T03:15:24.973655+00:00",
+    "datasets": [
+      {
+        "audit_report": "/gaozt-test1/guanzerong/EgoRecover/data/ee4d_mismatch_train_pilot_v1/audit/validation.json",
+        "base_split": "train",
+        "manifest": "/gaozt-test1/guanzerong/EgoRecover/data/ee4d_mismatch_train_pilot_v1/dev.jsonl",
+        "manifest_sha256": "80dbc245b0bf6603c4b9111a713fb7cfd4ca7ef4049de5599daa8324bd45dcfe",
+        "num_sequences": 12,
+        "num_takes": 12,
+        "num_variants": 84,
+        "path": "/gaozt-test1/guanzerong/EgoRecover/data/ee4d_mismatch_train_pilot_v1",
+        "physical_frames": 2400,
+        "profile": "pilot",
+        "purpose": "development",
+        "scope": "sampled_takes",
+        "spec_sha256": "fe78379e17e2d05e854440aaf46134c9ff378600c3fea8f0d8bdad1cb020d263"
+      }
+    ],
+    "message": "Audited official-train 12-take P/G development pilot; official val remains unused.",
+    "source_root": "/gaozt-test1/guanzerong/EgoRecover/data/ee4d_motion_uniegomotion",
+    "status": "complete",
+    "tests": {
+      "failed": 0,
+      "passed": 92,
+      "scope": "data_pipeline and EgoRecover local test suites"
+    },
+    "usage": "Official train development pilot only; holdout is withheld until settings are frozen."
+  },
+  "prior_steps": 2400,
+  "flow_steps": 2400,
+  "batch_size": 32,
+  "reference_mode": "planar",
+  "geometry_weight": 1.0,
+  "fk_weight": 0.0,
+  "bootstrap_cache_sha256": "324de02053dbcdb084c8c22bf05c7a999b7caec7dfd1c382bb005824dc616e8d",
+  "bootstrap_identity": {
+    "scope": "model_generated_clean_prefix_bootstraps",
+    "groups": [
+      "train",
+      "dev",
+      "holdout"
+    ],
+    "reference_mode": "planar",
+    "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+    "e7_weight_source": "ema",
+    "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+    "split_manifest_sha256": "ccca72e5c7446e1b03be8a650cc7bf2b5406b041cecb7d86f37066ccec6a3ae3",
+    "dataset_spec_sha256": "fe78379e17e2d05e854440aaf46134c9ff378600c3fea8f0d8bdad1cb020d263",
+    "sampling_seed": 1062,
+    "prefix_frames": 20,
+    "sampler": "FlowMatching Euler10"
+  },
+  "smplx_asset_sha256": "43d8f3a1375d7c5baae207870a5d51def0f7e6b507df709b4937598b5e7d965d",
+  "geometry_scale_m": 0.1,
+  "prior_selection": "dense",
+  "flow_selection": "closed_loop_fk",
+  "predicted_history_cache": null,
+  "init_experiment": null,
+  "sources": {},
+  "evaluation_history_source": "predicted history for G checkpoint selection; GT single-step metrics remain diagnostics"
+}

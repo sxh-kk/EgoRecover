@@ -1,0 +1,938 @@
+{
+  "e7": {
+    "file_count": 2,
+    "logical_bytes": 1417279258,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 1811,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      },
+      "baseline_checkpoint_review": {
+        "files": 1,
+        "logical_bytes": 1417277447,
+        "allocated_bytes": 1417281536,
+        "symlinks": 0
+      }
+    }
+  },
+  "e7_frozen_smoke_20260928": {
+    "file_count": 26,
+    "logical_bytes": 8334318,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 4,
+        "logical_bytes": 328147,
+        "allocated_bytes": 328704,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 20,
+        "logical_bytes": 8002344,
+        "allocated_bytes": 8028160,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 2,
+        "logical_bytes": 3827,
+        "allocated_bytes": 1024,
+        "symlinks": 0
+      }
+    }
+  },
+  "e7_minimal_ablation": {
+    "file_count": 250,
+    "logical_bytes": 937522960,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 49,
+        "logical_bytes": 115921,
+        "allocated_bytes": 138240,
+        "symlinks": 0
+      },
+      "local_ephemeral": {
+        "files": 1,
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 8,
+        "logical_bytes": 18257,
+        "allocated_bytes": 11264,
+        "symlinks": 0
+      },
+      "hf_cache_review": {
+        "files": 2,
+        "logical_bytes": 20930664,
+        "allocated_bytes": 20931072,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 190,
+        "logical_bytes": 916458118,
+        "allocated_bytes": 916766720,
+        "symlinks": 0
+      }
+    }
+  },
+  "e7_official_full": {
+    "file_count": 6,
+    "logical_bytes": 2866801021,
+    "by_category": {
+      "hf_tensor_artifacts_review": {
+        "files": 6,
+        "logical_bytes": 2866801021,
+        "allocated_bytes": 2866823168,
+        "symlinks": 0
+      }
+    }
+  },
+  "e7_official_key": {
+    "file_count": 6,
+    "logical_bytes": 164628460,
+    "by_category": {
+      "hf_tensor_artifacts_review": {
+        "files": 6,
+        "logical_bytes": 164628460,
+        "allocated_bytes": 164651008,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_closed_loop_v0": {
+    "file_count": 1,
+    "logical_bytes": 1381,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 1381,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_closed_loop_v0_diagnosis": {
+    "file_count": 1,
+    "logical_bytes": 556,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 556,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_closed_loop_v1": {
+    "file_count": 1,
+    "logical_bytes": 1783,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 1783,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_closed_loop_v1_numeric_diagnosis": {
+    "file_count": 1,
+    "logical_bytes": 616,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 616,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_closed_loop_v1_planar_production": {
+    "file_count": 7,
+    "logical_bytes": 2490176,
+    "by_category": {
+      "hf_tensor_artifacts_review": {
+        "files": 6,
+        "logical_bytes": 2486155,
+        "allocated_bytes": 2506752,
+        "symlinks": 0
+      },
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 4021,
+        "allocated_bytes": 8192,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_closed_loop_v1_projection_fix": {
+    "file_count": 1,
+    "logical_bytes": 510,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 510,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_closed_loop_v2_clean": {
+    "file_count": 4,
+    "logical_bytes": 841926,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 2,
+        "logical_bytes": 2304,
+        "allocated_bytes": 1024,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 2,
+        "logical_bytes": 839622,
+        "allocated_bytes": 851968,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_closed_loop_v3_take0": {
+    "file_count": 9,
+    "logical_bytes": 2549270,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 3,
+        "logical_bytes": 30052,
+        "allocated_bytes": 41472,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 6,
+        "logical_bytes": 2519218,
+        "allocated_bytes": 2555904,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_closed_loop_v3_take1": {
+    "file_count": 9,
+    "logical_bytes": 2549412,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 3,
+        "logical_bytes": 30194,
+        "allocated_bytes": 41472,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 6,
+        "logical_bytes": 2519218,
+        "allocated_bytes": 2555904,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_diagnosis_dev_geometry_v1": {
+    "file_count": 1,
+    "logical_bytes": 12219,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 12219,
+        "allocated_bytes": 16384,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_diagnosis_geometry_v1": {
+    "file_count": 1,
+    "logical_bytes": 436928,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 436928,
+        "allocated_bytes": 442368,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_diagnosis_planar_seed63": {
+    "file_count": 1,
+    "logical_bytes": 235234,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 235234,
+        "allocated_bytes": 237568,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_diagnosis_planar_take2": {
+    "file_count": 1,
+    "logical_bytes": 231876,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 231876,
+        "allocated_bytes": 237568,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_diagnosis_train_v1": {
+    "file_count": 1,
+    "logical_bytes": 12261,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 12261,
+        "allocated_bytes": 16384,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_diagnosis_v1": {
+    "file_count": 1,
+    "logical_bytes": 522907,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 522907,
+        "allocated_bytes": 524288,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_engineering_v0": {
+    "file_count": 2,
+    "logical_bytes": 9364,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 2,
+        "logical_bytes": 9364,
+        "allocated_bytes": 16896,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_engineering_v1": {
+    "file_count": 2,
+    "logical_bytes": 17301,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 2,
+        "logical_bytes": 17301,
+        "allocated_bytes": 25088,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_engineering_v2": {
+    "file_count": 2,
+    "logical_bytes": 19430,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 2,
+        "logical_bytes": 19430,
+        "allocated_bytes": 25088,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_engineering_v3": {
+    "file_count": 2,
+    "logical_bytes": 20964,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 2,
+        "logical_bytes": 20964,
+        "allocated_bytes": 25088,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_g_observation": {
+    "file_count": 3,
+    "logical_bytes": 38368,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 2,
+        "logical_bytes": 37190,
+        "allocated_bytes": 41472,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 1,
+        "logical_bytes": 1178,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_g_pretraining": {
+    "file_count": 10047,
+    "logical_bytes": 43531763519,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 118,
+        "logical_bytes": 3868342,
+        "allocated_bytes": 3910656,
+        "symlinks": 0
+      },
+      "hf_model_checkpoints": {
+        "files": 33,
+        "logical_bytes": 12372776479,
+        "allocated_bytes": 12372860928,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 164,
+        "logical_bytes": 570803772,
+        "allocated_bytes": 571768832,
+        "symlinks": 0
+      },
+      "hf_training_resume": {
+        "files": 16,
+        "logical_bytes": 23406364544,
+        "allocated_bytes": 23406444544,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 45,
+        "logical_bytes": 4325725,
+        "allocated_bytes": 4397056,
+        "symlinks": 0
+      },
+      "local_ephemeral": {
+        "files": 29,
+        "logical_bytes": 8,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      },
+      "hf_cache_review": {
+        "files": 9642,
+        "logical_bytes": 7173624649,
+        "allocated_bytes": 7183348224,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_loss_ablation": {
+    "file_count": 62,
+    "logical_bytes": 1618818296,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 37,
+        "logical_bytes": 713702,
+        "allocated_bytes": 734208,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 10,
+        "logical_bytes": 233327,
+        "allocated_bytes": 248832,
+        "symlinks": 0
+      },
+      "local_ephemeral": {
+        "files": 2,
+        "logical_bytes": 8,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 5,
+        "logical_bytes": 478795,
+        "allocated_bytes": 507904,
+        "symlinks": 0
+      },
+      "hf_model_checkpoints": {
+        "files": 8,
+        "logical_bytes": 1617392464,
+        "allocated_bytes": 1617428480,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_observation_reference": {
+    "file_count": 430,
+    "logical_bytes": 45199264640,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 121,
+        "logical_bytes": 3931196,
+        "allocated_bytes": 3911680,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 39,
+        "logical_bytes": 4133426,
+        "allocated_bytes": 4238848,
+        "symlinks": 0
+      },
+      "hf_cache_review": {
+        "files": 0,
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "symlinks": 2
+      },
+      "hf_other_artifacts_review": {
+        "files": 0,
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "symlinks": 2
+      },
+      "local_ephemeral": {
+        "files": 2,
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "symlinks": 0
+      },
+      "hf_source_snapshots": {
+        "files": 44,
+        "logical_bytes": 353094,
+        "allocated_bytes": 455168,
+        "symlinks": 0
+      },
+      "hf_model_checkpoints": {
+        "files": 40,
+        "logical_bytes": 15445017176,
+        "allocated_bytes": 15445065728,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 164,
+        "logical_bytes": 484475820,
+        "allocated_bytes": 485425152,
+        "symlinks": 0
+      },
+      "hf_training_resume": {
+        "files": 20,
+        "logical_bytes": 29261353928,
+        "allocated_bytes": 29261430784,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_predicted_train_v1": {
+    "file_count": 1,
+    "logical_bytes": 2306,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 1,
+        "logical_bytes": 2306,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_prior_adaptation": {
+    "file_count": 5,
+    "logical_bytes": 1605,
+    "by_category": {
+      "local_ephemeral": {
+        "files": 2,
+        "logical_bytes": 8,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 1,
+        "logical_bytes": 255,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      },
+      "github_experiment_metadata": {
+        "files": 2,
+        "logical_bytes": 1342,
+        "allocated_bytes": 1024,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_prior_cv_residual": {
+    "file_count": 144,
+    "logical_bytes": 1224174366,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 78,
+        "logical_bytes": 7497943,
+        "allocated_bytes": 7622144,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 13,
+        "logical_bytes": 262675,
+        "allocated_bytes": 295424,
+        "symlinks": 0
+      },
+      "hf_other_artifacts_review": {
+        "files": 2,
+        "logical_bytes": 132394,
+        "allocated_bytes": 139264,
+        "symlinks": 0
+      },
+      "local_ephemeral": {
+        "files": 1,
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 14,
+        "logical_bytes": 22317078,
+        "allocated_bytes": 22372352,
+        "symlinks": 0
+      },
+      "hf_model_checkpoints": {
+        "files": 24,
+        "logical_bytes": 438608496,
+        "allocated_bytes": 438730752,
+        "symlinks": 0
+      },
+      "hf_training_resume": {
+        "files": 12,
+        "logical_bytes": 755355780,
+        "allocated_bytes": 755367936,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_prior_data_budget": {
+    "file_count": 431,
+    "logical_bytes": 682377744,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 217,
+        "logical_bytes": 5765753,
+        "allocated_bytes": 5904896,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 5,
+        "logical_bytes": 258937,
+        "allocated_bytes": 287232,
+        "symlinks": 0
+      },
+      "hf_cache_review": {
+        "files": 4,
+        "logical_bytes": 185833788,
+        "allocated_bytes": 185852416,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 195,
+        "logical_bytes": 191376549,
+        "allocated_bytes": 192094208,
+        "symlinks": 0
+      },
+      "local_ephemeral": {
+        "files": 1,
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "symlinks": 0
+      },
+      "hf_model_checkpoints": {
+        "files": 6,
+        "logical_bytes": 109712988,
+        "allocated_bytes": 109731840,
+        "symlinks": 0
+      },
+      "hf_training_resume": {
+        "files": 3,
+        "logical_bytes": 189429729,
+        "allocated_bytes": 189431808,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_prior_real_history": {
+    "file_count": 64,
+    "logical_bytes": 176165806,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 37,
+        "logical_bytes": 1625794,
+        "allocated_bytes": 1598464,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 7,
+        "logical_bytes": 6598,
+        "allocated_bytes": 3584,
+        "symlinks": 0
+      },
+      "hf_cache_review": {
+        "files": 2,
+        "logical_bytes": 36514029,
+        "allocated_bytes": 36519936,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 16,
+        "logical_bytes": 137707859,
+        "allocated_bytes": 137789440,
+        "symlinks": 0
+      },
+      "hf_other_artifacts_review": {
+        "files": 1,
+        "logical_bytes": 311526,
+        "allocated_bytes": 319488,
+        "symlinks": 0
+      },
+      "local_ephemeral": {
+        "files": 1,
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_prior_same_shape": {
+    "file_count": 142,
+    "logical_bytes": 1223937495,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 76,
+        "logical_bytes": 7197073,
+        "allocated_bytes": 7293952,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 13,
+        "logical_bytes": 313713,
+        "allocated_bytes": 369152,
+        "symlinks": 0
+      },
+      "hf_other_artifacts_review": {
+        "files": 2,
+        "logical_bytes": 132235,
+        "allocated_bytes": 139264,
+        "symlinks": 0
+      },
+      "local_ephemeral": {
+        "files": 1,
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 14,
+        "logical_bytes": 22320214,
+        "allocated_bytes": 22372352,
+        "symlinks": 0
+      },
+      "hf_model_checkpoints": {
+        "files": 24,
+        "logical_bytes": 438611568,
+        "allocated_bytes": 438730752,
+        "symlinks": 0
+      },
+      "hf_training_resume": {
+        "files": 12,
+        "logical_bytes": 755362692,
+        "allocated_bytes": 755367936,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_prior_two_forward": {
+    "file_count": 114,
+    "logical_bytes": 836091978,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 60,
+        "logical_bytes": 2321058,
+        "allocated_bytes": 2424832,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 11,
+        "logical_bytes": 178725,
+        "allocated_bytes": 198144,
+        "symlinks": 0
+      },
+      "local_ephemeral": {
+        "files": 2,
+        "logical_bytes": 8,
+        "allocated_bytes": 512,
+        "symlinks": 0
+      },
+      "hf_cache_review": {
+        "files": 2,
+        "logical_bytes": 19428900,
+        "allocated_bytes": 19439616,
+        "symlinks": 0
+      },
+      "hf_other_artifacts_review": {
+        "files": 4,
+        "logical_bytes": 1685484,
+        "allocated_bytes": 1703936,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 11,
+        "logical_bytes": 16714995,
+        "allocated_bytes": 16760832,
+        "symlinks": 0
+      },
+      "hf_model_checkpoints": {
+        "files": 16,
+        "logical_bytes": 292403168,
+        "allocated_bytes": 292487168,
+        "symlinks": 0
+      },
+      "hf_training_resume": {
+        "files": 8,
+        "logical_bytes": 503359640,
+        "allocated_bytes": 503382016,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_prior_velocity": {
+    "file_count": 76,
+    "logical_bytes": 615010760,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 40,
+        "logical_bytes": 3683153,
+        "allocated_bytes": 3745792,
+        "symlinks": 0
+      },
+      "hf_logs_private": {
+        "files": 7,
+        "logical_bytes": 125724,
+        "allocated_bytes": 147968,
+        "symlinks": 0
+      },
+      "hf_other_artifacts_review": {
+        "files": 2,
+        "logical_bytes": 122983,
+        "allocated_bytes": 131072,
+        "symlinks": 0
+      },
+      "local_ephemeral": {
+        "files": 1,
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 8,
+        "logical_bytes": 12757208,
+        "allocated_bytes": 12787712,
+        "symlinks": 0
+      },
+      "hf_model_checkpoints": {
+        "files": 12,
+        "logical_bytes": 219757530,
+        "allocated_bytes": 219807744,
+        "symlinks": 0
+      },
+      "hf_training_resume": {
+        "files": 6,
+        "logical_bytes": 378564162,
+        "allocated_bytes": 378568704,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_stages_1_4": {
+    "file_count": 1544,
+    "logical_bytes": 11265534788,
+    "by_category": {
+      "hf_logs_private": {
+        "files": 21,
+        "logical_bytes": 212076,
+        "allocated_bytes": 240640,
+        "symlinks": 0
+      },
+      "hf_cache_review": {
+        "files": 44,
+        "logical_bytes": 3488272590,
+        "allocated_bytes": 3488346112,
+        "symlinks": 0
+      },
+      "github_experiment_metadata": {
+        "files": 91,
+        "logical_bytes": 17126008,
+        "allocated_bytes": 17243136,
+        "symlinks": 0
+      },
+      "local_ephemeral": {
+        "files": 1,
+        "logical_bytes": 0,
+        "allocated_bytes": 0,
+        "symlinks": 0
+      },
+      "hf_model_checkpoints": {
+        "files": 30,
+        "logical_bytes": 7168648074,
+        "allocated_bytes": 7168770048,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 1357,
+        "logical_bytes": 591276040,
+        "allocated_bytes": 594673664,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_train_72take_v1": {
+    "file_count": 8,
+    "logical_bytes": 792449007,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 2,
+        "logical_bytes": 27625,
+        "allocated_bytes": 33280,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 3,
+        "logical_bytes": 1994860,
+        "allocated_bytes": 2015232,
+        "symlinks": 0
+      },
+      "hf_model_checkpoints": {
+        "files": 3,
+        "logical_bytes": 790426522,
+        "allocated_bytes": 790437888,
+        "symlinks": 0
+      }
+    }
+  },
+  "egorecover_train_pilot_v1": {
+    "file_count": 128,
+    "logical_bytes": 1852581988,
+    "by_category": {
+      "github_experiment_metadata": {
+        "files": 27,
+        "logical_bytes": 1678704,
+        "allocated_bytes": 1794560,
+        "symlinks": 0
+      },
+      "hf_tensor_artifacts_review": {
+        "files": 93,
+        "logical_bytes": 37562773,
+        "allocated_bytes": 37658624,
+        "symlinks": 0
+      },
+      "hf_model_checkpoints": {
+        "files": 6,
+        "logical_bytes": 1580853044,
+        "allocated_bytes": 1580875776,
+        "symlinks": 0
+      },
+      "hf_cache_review": {
+        "files": 2,
+        "logical_bytes": 232487467,
+        "allocated_bytes": 232489472,
+        "symlinks": 0
+      }
+    }
+  }
+}

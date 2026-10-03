@@ -1,0 +1,270 @@
+{
+  "scope": "teacher_forced_engineering_only",
+  "base_split": "official_val",
+  "history_source": "GT for development diagnostic; not online evaluation",
+  "floor_source": "startup_head_z_median_minus_training_mean_head_height",
+  "metric": "dense22_position_error_mm (not SMPL22 FK MPJPE)",
+  "initialization": "random; no pretrained E7",
+  "seed": 62,
+  "splits": {
+    "train": [
+      "uniandes_dance_024_45",
+      "georgiatech_bike_15_8",
+      "indiana_bike_10_12",
+      "utokyo_omelet_11_1001_4",
+      "uniandes_basketball_001_28",
+      "unc_basketball_03-09-23_01_10",
+      "upenn_0726_Violin_1_3",
+      "uniandes_dance_002_10"
+    ],
+    "dev": [
+      "iiith_soccer_002_2",
+      "georgiatech_covid_06_8"
+    ],
+    "holdout": [
+      "iiith_cooking_89_2",
+      "upenn_0721_Piano_1_3"
+    ]
+  },
+  "sigma": 1.0,
+  "nfe": 10,
+  "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+  "dataset_handoff": {
+    "build_report": "/home/ld666/projects/EgoRecover/data_pipeline/BUILD_REPORT.md",
+    "code_root": "/home/ld666/projects/EgoRecover/data_pipeline",
+    "completed_at": "2026-09-23T04:52:14.773507+08:00",
+    "datasets": [
+      {
+        "audit_report": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_smoke_v0/audit/validation.json",
+        "frames_per_variant": 200,
+        "manifest": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_smoke_v0/engineering.jsonl",
+        "manifest_sha256": "70bc65685ec23fe232061b6a31c5eb0734bb089407f3d78a1e5b5dd00a4b23ed",
+        "num_takes": 2,
+        "num_variants": 36,
+        "path": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_smoke_v0",
+        "profile": "extended",
+        "spec_sha256": "b491dfae73708fd3b7ede119b9b690b168a14f60b68ad5813946b501306f4894"
+      },
+      {
+        "audit_report": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_pilot_v0/audit/validation.json",
+        "frames_per_variant": 200,
+        "manifest": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_pilot_v0/engineering.jsonl",
+        "manifest_sha256": "e4774edd4fa823d2d950ff2b2c67e68f3116e78304869d234ebd729618e515bd",
+        "num_takes": 12,
+        "num_variants": 84,
+        "path": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_pilot_v0",
+        "profile": "pilot",
+        "spec_sha256": "653060e84f482f5fa661647b862540749554f4dc4ebe30052421513952e78b75"
+      }
+    ],
+    "download_status": "/home/ld666/projects/EgoRecover/data/.ee4d_validation_download/status.json",
+    "handoff": "/home/ld666/projects/EgoRecover/data_pipeline/HANDOFF.md",
+    "message": "\u6570\u636e\u96c6\u6784\u5efa\u5b8c\u6210",
+    "next_step": "\u9605\u8bfb HANDOFF.md\uff0c\u4f7f\u7528 MismatchDataset.observations \u63a5\u5165\u6a21\u578b\uff0c\u7ee7\u7eed\u539f\u5bf9\u8bdd\u7684\u6a21\u578b\u5b9e\u73b0\u4efb\u52a1\u3002",
+    "source_root": "/home/ld666/projects/EgoRecover/data/ee4d_motion_uniegomotion",
+    "status": "complete",
+    "tests": {
+      "failed": 0,
+      "passed": 22,
+      "report": "/home/ld666/projects/EgoRecover/data_pipeline/test_results.xml",
+      "sha256": "f4797a7afd8c3dcfedb8425974ee3743b5feb62703e82b57175e684ce49f57a1"
+    },
+    "usage": "\u5b98\u65b9 val \u7684\u5de5\u7a0b\u68c0\u67e5\u6570\u636e\u3002\u4f7f\u7528\u8fd9\u4e9b take \u8c03\u53c2\u540e\uff0c\u6700\u7ec8\u72ec\u7acb\u8bc4\u4f30\u5fc5\u987b\u6392\u9664\u5b83\u4eec\u3002"
+  },
+  "prior_steps": 200,
+  "flow_steps": 100,
+  "batch_size": 32,
+  "sources": {
+    "gaussian": {
+      "dev_loss_before": 2.6329762935638428,
+      "dev_loss_after": 0.5115871429443359,
+      "curve": [
+        {
+          "step": 20,
+          "train_loss": 1.196544885635376
+        },
+        {
+          "step": 40,
+          "train_loss": 1.3348188400268555
+        },
+        {
+          "step": 60,
+          "train_loss": 0.7301938533782959
+        },
+        {
+          "step": 80,
+          "train_loss": 0.6724462509155273
+        },
+        {
+          "step": 100,
+          "train_loss": 0.4992969334125519
+        }
+      ],
+      "dense22_mm_per_action": {
+        "a11": 400.819091796875,
+        "a10": 409.31976318359375,
+        "a01": 399.9837646484375,
+        "a00": 408.5238037109375
+      },
+      "dense22_oracle_gap_mm": 24.660673141479492,
+      "oracle_action_counts": [
+        20,
+        4,
+        8,
+        32
+      ],
+      "checkpoint_sha256": "18f4bb14f858316fd87a2525255daded2093de81c97154b0362709c10c8273a2"
+    },
+    "history": {
+      "dev_loss_before": 2.709197521209717,
+      "dev_loss_after": 0.45952075719833374,
+      "curve": [
+        {
+          "step": 20,
+          "train_loss": 1.1999925374984741
+        },
+        {
+          "step": 40,
+          "train_loss": 1.1537221670150757
+        },
+        {
+          "step": 60,
+          "train_loss": 0.6416580677032471
+        },
+        {
+          "step": 80,
+          "train_loss": 0.496494859457016
+        },
+        {
+          "step": 100,
+          "train_loss": 0.42623603343963623
+        }
+      ],
+      "dense22_mm_per_action": {
+        "a11": 288.32720947265625,
+        "a10": 296.53692626953125,
+        "a01": 282.8013000488281,
+        "a00": 293.3269958496094
+      },
+      "dense22_oracle_gap_mm": 22.351192474365234,
+      "oracle_action_counts": [
+        14,
+        9,
+        28,
+        13
+      ],
+      "checkpoint_sha256": "793a2a8f0e78e715cde29350de0fa532187dcb88579869ece8faaddac1f16868"
+    }
+  },
+  "floor_diagnostics": {
+    "uniandes_dance_024_45": {
+      "estimate_m": -1.1291589736938477,
+      "annotation_m_for_offline_comparison_only": -1.2458219623565674,
+      "error_m": 0.11666298866271974
+    },
+    "upenn_0726_Violin_1_3": {
+      "estimate_m": -1.8344682455062866,
+      "annotation_m_for_offline_comparison_only": -1.5518221950531006,
+      "error_m": -0.282646050453186
+    },
+    "indiana_bike_10_12": {
+      "estimate_m": -1.809349775314331,
+      "annotation_m_for_offline_comparison_only": -1.3209498023986816,
+      "error_m": -0.4883999729156494
+    },
+    "uniandes_basketball_001_28": {
+      "estimate_m": -1.1048578023910522,
+      "annotation_m_for_offline_comparison_only": -1.2251696681976318,
+      "error_m": 0.1203118658065796
+    },
+    "uniandes_dance_002_10": {
+      "estimate_m": -1.2298083305358887,
+      "annotation_m_for_offline_comparison_only": -1.2982766723632813,
+      "error_m": 0.06846834182739259
+    },
+    "utokyo_omelet_11_1001_4": {
+      "estimate_m": -1.3270235061645508,
+      "annotation_m_for_offline_comparison_only": -1.4104489183425903,
+      "error_m": 0.08342541217803956
+    },
+    "georgiatech_bike_15_8": {
+      "estimate_m": -1.1662333011627197,
+      "annotation_m_for_offline_comparison_only": -1.2734334564208984,
+      "error_m": 0.10720015525817872
+    },
+    "unc_basketball_03-09-23_01_10": {
+      "estimate_m": -0.8716806173324585,
+      "annotation_m_for_offline_comparison_only": -1.29963303565979,
+      "error_m": 0.42795241832733155
+    },
+    "iiith_soccer_002_2": {
+      "estimate_m": -1.3265262842178345,
+      "annotation_m_for_offline_comparison_only": -1.3525847291946411,
+      "error_m": 0.02605844497680665
+    },
+    "georgiatech_covid_06_8": {
+      "estimate_m": 4.860020637512207,
+      "annotation_m_for_offline_comparison_only": 4.971132984161377,
+      "error_m": -0.11111234664917014
+    }
+  },
+  "prior": {
+    "baseline_dev_loss": 0.0832376703619957,
+    "selected_dev_loss": 0.06835637986660004,
+    "selected_step": 200,
+    "curve": [
+      {
+        "step": 20,
+        "train_loss": 1.5119436979293823,
+        "dev_loss": 0.09103448688983917
+      },
+      {
+        "step": 40,
+        "train_loss": 0.18052470684051514,
+        "dev_loss": 0.08419151604175568
+      },
+      {
+        "step": 60,
+        "train_loss": 0.2618483603000641,
+        "dev_loss": 0.07777895033359528
+      },
+      {
+        "step": 80,
+        "train_loss": 0.22763031721115112,
+        "dev_loss": 0.08457944542169571
+      },
+      {
+        "step": 100,
+        "train_loss": 0.158220574259758,
+        "dev_loss": 0.08786871284246445
+      },
+      {
+        "step": 120,
+        "train_loss": 0.09424111992120743,
+        "dev_loss": 0.08139752596616745
+      },
+      {
+        "step": 140,
+        "train_loss": 0.20294485986232758,
+        "dev_loss": 0.07080770283937454
+      },
+      {
+        "step": 160,
+        "train_loss": 0.1066342368721962,
+        "dev_loss": 0.07107004523277283
+      },
+      {
+        "step": 180,
+        "train_loss": 0.13576841354370117,
+        "dev_loss": 0.07622238248586655
+      },
+      {
+        "step": 200,
+        "train_loss": 0.2483099102973938,
+        "dev_loss": 0.06835637986660004
+      }
+    ]
+  },
+  "elapsed_seconds": 50.92744528292678,
+  "completed": true
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "pid": 1903420,
+    "gpu": 3,
+    "take_index": 0,
+    "command": [
+      "/root/miniconda3/envs/egorecover/bin/python",
+      "-u",
+      "-m",
+      "run.check_frozen_e7_smoke",
+      "--signal",
+      "/gaozt-test1/guanzerong/EgoRecover/data/EE4D_MISMATCH_READY.json",
+      "--spec-sha256",
+      "7f09c95e27609ca3d01d6942276c915372811efd0b55b4863871fc0e17f6b7a2",
+      "--checkpoint",
+      "/gaozt-test1/guanzerong/EgoRecover/exp/e7/last.ckpt",
+      "--output",
+      "/gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0",
+      "--take-index",
+      "0"
+    ],
+    "log": "/gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0.log"
+  },
+  {
+    "pid": 1903421,
+    "gpu": 1,
+    "take_index": 1,
+    "command": [
+      "/root/miniconda3/envs/egorecover/bin/python",
+      "-u",
+      "-m",
+      "run.check_frozen_e7_smoke",
+      "--signal",
+      "/gaozt-test1/guanzerong/EgoRecover/data/EE4D_MISMATCH_READY.json",
+      "--spec-sha256",
+      "7f09c95e27609ca3d01d6942276c915372811efd0b55b4863871fc0e17f6b7a2",
+      "--checkpoint",
+      "/gaozt-test1/guanzerong/EgoRecover/exp/e7/last.ckpt",
+      "--output",
+      "/gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1",
+      "--take-index",
+      "1"
+    ],
+    "log": "/gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take1.log"
+  }
+]

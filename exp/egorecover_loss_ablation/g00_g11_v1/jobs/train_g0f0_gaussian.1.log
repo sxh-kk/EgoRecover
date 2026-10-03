@@ -1,0 +1,1536 @@
+2026-09-29 00:00:48.704 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+Preparing take-disjoint teacher-forced engineering batches
+G/gaussian 20/2400: train=0.108483
+G/gaussian components: {'loss': 0.1084832176566124, 'representation': 0.1084832176566124, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 40/2400: train=0.094231
+G/gaussian components: {'loss': 0.09423131495714188, 'representation': 0.09423131495714188, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 60/2400: train=0.077310
+G/gaussian components: {'loss': 0.07730958610773087, 'representation': 0.07730958610773087, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 80/2400: train=0.084543
+G/gaussian components: {'loss': 0.08454325050115585, 'representation': 0.08454325050115585, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 100/2400: train=0.081490
+G/gaussian components: {'loss': 0.08149049431085587, 'representation': 0.08149049431085587, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 120/2400: train=0.086157
+G/gaussian components: {'loss': 0.08615677803754807, 'representation': 0.08615677803754807, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 140/2400: train=0.070739
+G/gaussian components: {'loss': 0.07073900103569031, 'representation': 0.07073900103569031, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 160/2400: train=0.069430
+G/gaussian components: {'loss': 0.06942964345216751, 'representation': 0.06942964345216751, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 180/2400: train=0.102912
+G/gaussian components: {'loss': 0.10291243344545364, 'representation': 0.10291243344545364, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 200/2400: train=0.067521
+G/gaussian components: {'loss': 0.06752143800258636, 'representation': 0.06752143800258636, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 200: 201.492 mm (closed_loop_fk)
+G/gaussian 220/2400: train=0.063058
+G/gaussian components: {'loss': 0.063058041036129, 'representation': 0.063058041036129, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 240/2400: train=0.070955
+G/gaussian components: {'loss': 0.07095535099506378, 'representation': 0.07095535099506378, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 260/2400: train=0.061434
+G/gaussian components: {'loss': 0.06143366917967796, 'representation': 0.06143366917967796, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 280/2400: train=0.061910
+G/gaussian components: {'loss': 0.06191034987568855, 'representation': 0.06191034987568855, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 300/2400: train=0.106726
+G/gaussian components: {'loss': 0.10672593861818314, 'representation': 0.10672593861818314, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 320/2400: train=0.051799
+G/gaussian components: {'loss': 0.051799479871988297, 'representation': 0.051799479871988297, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 340/2400: train=0.157727
+G/gaussian components: {'loss': 0.15772725641727448, 'representation': 0.15772725641727448, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 360/2400: train=0.114282
+G/gaussian components: {'loss': 0.11428212374448776, 'representation': 0.11428212374448776, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 380/2400: train=0.080796
+G/gaussian components: {'loss': 0.0807964950799942, 'representation': 0.0807964950799942, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 400/2400: train=0.057545
+G/gaussian components: {'loss': 0.05754539370536804, 'representation': 0.05754539370536804, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 400: 284.285 mm (closed_loop_fk)
+G/gaussian 420/2400: train=0.072366
+G/gaussian components: {'loss': 0.07236588001251221, 'representation': 0.07236588001251221, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 440/2400: train=0.049721
+G/gaussian components: {'loss': 0.0497211292386055, 'representation': 0.0497211292386055, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 460/2400: train=0.062529
+G/gaussian components: {'loss': 0.06252939999103546, 'representation': 0.06252939999103546, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 480/2400: train=0.055971
+G/gaussian components: {'loss': 0.055970944464206696, 'representation': 0.055970944464206696, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 500/2400: train=0.055870
+G/gaussian components: {'loss': 0.05587031692266464, 'representation': 0.05587031692266464, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 520/2400: train=0.037305
+G/gaussian components: {'loss': 0.037304870784282684, 'representation': 0.037304870784282684, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 540/2400: train=0.058720
+G/gaussian components: {'loss': 0.05871962383389473, 'representation': 0.05871962383389473, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 560/2400: train=0.064852
+G/gaussian components: {'loss': 0.06485188752412796, 'representation': 0.06485188752412796, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 580/2400: train=0.151966
+G/gaussian components: {'loss': 0.1519656926393509, 'representation': 0.1519656926393509, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 600/2400: train=0.057366
+G/gaussian components: {'loss': 0.05736636370420456, 'representation': 0.05736636370420456, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 600: 286.093 mm (closed_loop_fk)
+G/gaussian 620/2400: train=0.065879
+G/gaussian components: {'loss': 0.06587915122509003, 'representation': 0.06587915122509003, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 640/2400: train=0.060260
+G/gaussian components: {'loss': 0.06026006117463112, 'representation': 0.06026006117463112, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 660/2400: train=0.053552
+G/gaussian components: {'loss': 0.05355172976851463, 'representation': 0.05355172976851463, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 680/2400: train=0.061445
+G/gaussian components: {'loss': 0.06144547462463379, 'representation': 0.06144547462463379, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 700/2400: train=0.053744
+G/gaussian components: {'loss': 0.05374404788017273, 'representation': 0.05374404788017273, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 720/2400: train=0.045527
+G/gaussian components: {'loss': 0.04552703723311424, 'representation': 0.04552703723311424, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 740/2400: train=0.059060
+G/gaussian components: {'loss': 0.05905963480472565, 'representation': 0.05905963480472565, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 760/2400: train=0.058793
+G/gaussian components: {'loss': 0.058793049305677414, 'representation': 0.058793049305677414, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 780/2400: train=0.067346
+G/gaussian components: {'loss': 0.06734572350978851, 'representation': 0.06734572350978851, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 800/2400: train=0.065843
+G/gaussian components: {'loss': 0.06584300100803375, 'representation': 0.06584300100803375, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 800: 235.547 mm (closed_loop_fk)
+G/gaussian 820/2400: train=0.060317
+G/gaussian components: {'loss': 0.06031746789813042, 'representation': 0.06031746789813042, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 840/2400: train=0.061121
+G/gaussian components: {'loss': 0.061121486127376556, 'representation': 0.061121486127376556, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 860/2400: train=0.059319
+G/gaussian components: {'loss': 0.05931935831904411, 'representation': 0.05931935831904411, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 880/2400: train=0.087763
+G/gaussian components: {'loss': 0.08776290714740753, 'representation': 0.08776290714740753, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 900/2400: train=0.053737
+G/gaussian components: {'loss': 0.05373699218034744, 'representation': 0.05373699218034744, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 920/2400: train=0.046626
+G/gaussian components: {'loss': 0.046626098453998566, 'representation': 0.046626098453998566, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 940/2400: train=0.061055
+G/gaussian components: {'loss': 0.0610545352101326, 'representation': 0.0610545352101326, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 960/2400: train=0.057800
+G/gaussian components: {'loss': 0.05780015140771866, 'representation': 0.05780015140771866, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 980/2400: train=0.035023
+G/gaussian components: {'loss': 0.035023126751184464, 'representation': 0.035023126751184464, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1000/2400: train=0.049459
+G/gaussian components: {'loss': 0.049459461122751236, 'representation': 0.049459461122751236, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 1000: 257.709 mm (closed_loop_fk)
+G/gaussian 1020/2400: train=0.056972
+G/gaussian components: {'loss': 0.05697224289178848, 'representation': 0.05697224289178848, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1040/2400: train=0.061325
+G/gaussian components: {'loss': 0.061325352638959885, 'representation': 0.061325352638959885, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1060/2400: train=0.040968
+G/gaussian components: {'loss': 0.04096774756908417, 'representation': 0.04096774756908417, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1080/2400: train=0.041495
+G/gaussian components: {'loss': 0.041494932025671005, 'representation': 0.041494932025671005, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1100/2400: train=0.068712
+G/gaussian components: {'loss': 0.06871175765991211, 'representation': 0.06871175765991211, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1120/2400: train=0.040204
+G/gaussian components: {'loss': 0.0402042493224144, 'representation': 0.0402042493224144, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1140/2400: train=0.050073
+G/gaussian components: {'loss': 0.05007293447852135, 'representation': 0.05007293447852135, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1160/2400: train=0.044485
+G/gaussian components: {'loss': 0.04448486119508743, 'representation': 0.04448486119508743, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1180/2400: train=0.041969
+G/gaussian components: {'loss': 0.04196864739060402, 'representation': 0.04196864739060402, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1200/2400: train=0.055126
+G/gaussian components: {'loss': 0.05512618273496628, 'representation': 0.05512618273496628, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 1200: 213.106 mm (closed_loop_fk)
+G/gaussian 1220/2400: train=0.077072
+G/gaussian components: {'loss': 0.07707218080759048, 'representation': 0.07707218080759048, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1240/2400: train=0.050672
+G/gaussian components: {'loss': 0.05067231506109238, 'representation': 0.05067231506109238, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1260/2400: train=0.064244
+G/gaussian components: {'loss': 0.0642438679933548, 'representation': 0.0642438679933548, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1280/2400: train=0.043457
+G/gaussian components: {'loss': 0.04345669597387314, 'representation': 0.04345669597387314, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1300/2400: train=0.047650
+G/gaussian components: {'loss': 0.04764994606375694, 'representation': 0.04764994606375694, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1320/2400: train=0.050692
+G/gaussian components: {'loss': 0.050692398101091385, 'representation': 0.050692398101091385, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1340/2400: train=0.050139
+G/gaussian components: {'loss': 0.05013897642493248, 'representation': 0.05013897642493248, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1360/2400: train=0.178749
+G/gaussian components: {'loss': 0.17874878644943237, 'representation': 0.17874878644943237, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1380/2400: train=0.120336
+G/gaussian components: {'loss': 0.1203356608748436, 'representation': 0.1203356608748436, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1400/2400: train=0.037359
+G/gaussian components: {'loss': 0.03735872358083725, 'representation': 0.03735872358083725, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 1400: 209.351 mm (closed_loop_fk)
+G/gaussian 1420/2400: train=0.057175
+G/gaussian components: {'loss': 0.05717523768544197, 'representation': 0.05717523768544197, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1440/2400: train=0.068922
+G/gaussian components: {'loss': 0.06892232596874237, 'representation': 0.06892232596874237, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1460/2400: train=0.050540
+G/gaussian components: {'loss': 0.05053984746336937, 'representation': 0.05053984746336937, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1480/2400: train=0.045623
+G/gaussian components: {'loss': 0.04562285542488098, 'representation': 0.04562285542488098, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1500/2400: train=0.041492
+G/gaussian components: {'loss': 0.04149208962917328, 'representation': 0.04149208962917328, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1520/2400: train=0.057430
+G/gaussian components: {'loss': 0.057429879903793335, 'representation': 0.057429879903793335, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1540/2400: train=0.042914
+G/gaussian components: {'loss': 0.04291427135467529, 'representation': 0.04291427135467529, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1560/2400: train=0.058366
+G/gaussian components: {'loss': 0.05836649611592293, 'representation': 0.05836649611592293, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1580/2400: train=0.055992
+G/gaussian components: {'loss': 0.055991753935813904, 'representation': 0.055991753935813904, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1600/2400: train=0.039555
+G/gaussian components: {'loss': 0.0395551435649395, 'representation': 0.0395551435649395, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 1600: 220.175 mm (closed_loop_fk)
+G/gaussian 1620/2400: train=0.045082
+G/gaussian components: {'loss': 0.0450822114944458, 'representation': 0.0450822114944458, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1640/2400: train=0.033517
+G/gaussian components: {'loss': 0.03351675346493721, 'representation': 0.03351675346493721, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1660/2400: train=0.094363
+G/gaussian components: {'loss': 0.09436284750699997, 'representation': 0.09436284750699997, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1680/2400: train=0.036383
+G/gaussian components: {'loss': 0.03638308122754097, 'representation': 0.03638308122754097, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1700/2400: train=0.036651
+G/gaussian components: {'loss': 0.036651208996772766, 'representation': 0.036651208996772766, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1720/2400: train=0.047126
+G/gaussian components: {'loss': 0.047125622630119324, 'representation': 0.047125622630119324, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1740/2400: train=0.050323
+G/gaussian components: {'loss': 0.05032256990671158, 'representation': 0.05032256990671158, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1760/2400: train=0.106787
+G/gaussian components: {'loss': 0.10678700357675552, 'representation': 0.10678700357675552, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1780/2400: train=0.052234
+G/gaussian components: {'loss': 0.05223387852311134, 'representation': 0.05223387852311134, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1800/2400: train=0.050887
+G/gaussian components: {'loss': 0.05088666453957558, 'representation': 0.05088666453957558, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 1800: 192.484 mm (closed_loop_fk)
+G/gaussian 1820/2400: train=0.041587
+G/gaussian components: {'loss': 0.04158693924546242, 'representation': 0.04158693924546242, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1840/2400: train=0.030036
+G/gaussian components: {'loss': 0.03003579191863537, 'representation': 0.03003579191863537, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1860/2400: train=0.052066
+G/gaussian components: {'loss': 0.05206625536084175, 'representation': 0.05206625536084175, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1880/2400: train=0.064385
+G/gaussian components: {'loss': 0.06438526511192322, 'representation': 0.06438526511192322, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1900/2400: train=0.052765
+G/gaussian components: {'loss': 0.05276450142264366, 'representation': 0.05276450142264366, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1920/2400: train=0.036065
+G/gaussian components: {'loss': 0.03606545552611351, 'representation': 0.03606545552611351, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1940/2400: train=0.044718
+G/gaussian components: {'loss': 0.044718243181705475, 'representation': 0.044718243181705475, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1960/2400: train=0.043910
+G/gaussian components: {'loss': 0.04391008988022804, 'representation': 0.04391008988022804, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 1980/2400: train=0.046213
+G/gaussian components: {'loss': 0.04621252045035362, 'representation': 0.04621252045035362, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2000/2400: train=0.414174
+G/gaussian components: {'loss': 0.4141744375228882, 'representation': 0.4141744375228882, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 2000: 215.085 mm (closed_loop_fk)
+G/gaussian 2020/2400: train=0.446245
+G/gaussian components: {'loss': 0.44624489545822144, 'representation': 0.44624489545822144, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2040/2400: train=0.047357
+G/gaussian components: {'loss': 0.047357115894556046, 'representation': 0.047357115894556046, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2060/2400: train=0.097264
+G/gaussian components: {'loss': 0.09726431220769882, 'representation': 0.09726431220769882, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2080/2400: train=0.043210
+G/gaussian components: {'loss': 0.04320993274450302, 'representation': 0.04320993274450302, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2100/2400: train=0.043734
+G/gaussian components: {'loss': 0.04373374581336975, 'representation': 0.04373374581336975, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2120/2400: train=0.031283
+G/gaussian components: {'loss': 0.031282905489206314, 'representation': 0.031282905489206314, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2140/2400: train=0.040514
+G/gaussian components: {'loss': 0.04051436111330986, 'representation': 0.04051436111330986, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2160/2400: train=0.066422
+G/gaussian components: {'loss': 0.06642229110002518, 'representation': 0.06642229110002518, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2180/2400: train=0.060389
+G/gaussian components: {'loss': 0.06038852035999298, 'representation': 0.06038852035999298, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2200/2400: train=0.034862
+G/gaussian components: {'loss': 0.03486204892396927, 'representation': 0.03486204892396927, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 2200: 185.465 mm (closed_loop_fk)
+G/gaussian 2220/2400: train=0.042168
+G/gaussian components: {'loss': 0.042168330401182175, 'representation': 0.042168330401182175, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2240/2400: train=0.056187
+G/gaussian components: {'loss': 0.05618693307042122, 'representation': 0.05618693307042122, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2260/2400: train=0.042143
+G/gaussian components: {'loss': 0.04214279726147652, 'representation': 0.04214279726147652, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2280/2400: train=0.043465
+G/gaussian components: {'loss': 0.04346497729420662, 'representation': 0.04346497729420662, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2300/2400: train=0.053002
+G/gaussian components: {'loss': 0.05300161615014076, 'representation': 0.05300161615014076, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2320/2400: train=0.164161
+G/gaussian components: {'loss': 0.16416077315807343, 'representation': 0.16416077315807343, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2340/2400: train=0.042974
+G/gaussian components: {'loss': 0.04297417774796486, 'representation': 0.04297417774796486, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2360/2400: train=0.041322
+G/gaussian components: {'loss': 0.04132158309221268, 'representation': 0.04132158309221268, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2380/2400: train=0.048341
+G/gaussian components: {'loss': 0.048341054469347, 'representation': 0.048341054469347, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian 2400/2400: train=0.036515
+G/gaussian components: {'loss': 0.03651469945907593, 'representation': 0.03651469945907593, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/gaussian dev sample 2400: 215.988 mm (closed_loop_fk)
+{
+  "dev_loss_before": 0.10280048847198486,
+  "dev_loss_after": 0.06809602677822113,
+  "selected_step": 2200,
+  "curve": [
+    {
+      "step": 20,
+      "train_loss": 0.1084832176566124,
+      "loss_components": {
+        "loss": 0.1084832176566124,
+        "representation": 0.1084832176566124,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 40,
+      "train_loss": 0.09423131495714188,
+      "loss_components": {
+        "loss": 0.09423131495714188,
+        "representation": 0.09423131495714188,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 60,
+      "train_loss": 0.07730958610773087,
+      "loss_components": {
+        "loss": 0.07730958610773087,
+        "representation": 0.07730958610773087,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 80,
+      "train_loss": 0.08454325050115585,
+      "loss_components": {
+        "loss": 0.08454325050115585,
+        "representation": 0.08454325050115585,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 100,
+      "train_loss": 0.08149049431085587,
+      "loss_components": {
+        "loss": 0.08149049431085587,
+        "representation": 0.08149049431085587,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 120,
+      "train_loss": 0.08615677803754807,
+      "loss_components": {
+        "loss": 0.08615677803754807,
+        "representation": 0.08615677803754807,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 140,
+      "train_loss": 0.07073900103569031,
+      "loss_components": {
+        "loss": 0.07073900103569031,
+        "representation": 0.07073900103569031,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 160,
+      "train_loss": 0.06942964345216751,
+      "loss_components": {
+        "loss": 0.06942964345216751,
+        "representation": 0.06942964345216751,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 180,
+      "train_loss": 0.10291243344545364,
+      "loss_components": {
+        "loss": 0.10291243344545364,
+        "representation": 0.10291243344545364,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 200,
+      "train_loss": 0.06752143800258636,
+      "loss_components": {
+        "loss": 0.06752143800258636,
+        "representation": 0.06752143800258636,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 200,
+      "train_loss": 0.06752143800258636,
+      "dev_sample_closed_loop_fk22_mm": 201.49215683341026
+    },
+    {
+      "step": 220,
+      "train_loss": 0.063058041036129,
+      "loss_components": {
+        "loss": 0.063058041036129,
+        "representation": 0.063058041036129,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 240,
+      "train_loss": 0.07095535099506378,
+      "loss_components": {
+        "loss": 0.07095535099506378,
+        "representation": 0.07095535099506378,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 260,
+      "train_loss": 0.06143366917967796,
+      "loss_components": {
+        "loss": 0.06143366917967796,
+        "representation": 0.06143366917967796,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 280,
+      "train_loss": 0.06191034987568855,
+      "loss_components": {
+        "loss": 0.06191034987568855,
+        "representation": 0.06191034987568855,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 300,
+      "train_loss": 0.10672593861818314,
+      "loss_components": {
+        "loss": 0.10672593861818314,
+        "representation": 0.10672593861818314,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 320,
+      "train_loss": 0.051799479871988297,
+      "loss_components": {
+        "loss": 0.051799479871988297,
+        "representation": 0.051799479871988297,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 340,
+      "train_loss": 0.15772725641727448,
+      "loss_components": {
+        "loss": 0.15772725641727448,
+        "representation": 0.15772725641727448,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 360,
+      "train_loss": 0.11428212374448776,
+      "loss_components": {
+        "loss": 0.11428212374448776,
+        "representation": 0.11428212374448776,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 380,
+      "train_loss": 0.0807964950799942,
+      "loss_components": {
+        "loss": 0.0807964950799942,
+        "representation": 0.0807964950799942,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 400,
+      "train_loss": 0.05754539370536804,
+      "loss_components": {
+        "loss": 0.05754539370536804,
+        "representation": 0.05754539370536804,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 400,
+      "train_loss": 0.05754539370536804,
+      "dev_sample_closed_loop_fk22_mm": 284.2852212488651
+    },
+    {
+      "step": 420,
+      "train_loss": 0.07236588001251221,
+      "loss_components": {
+        "loss": 0.07236588001251221,
+        "representation": 0.07236588001251221,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 440,
+      "train_loss": 0.0497211292386055,
+      "loss_components": {
+        "loss": 0.0497211292386055,
+        "representation": 0.0497211292386055,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 460,
+      "train_loss": 0.06252939999103546,
+      "loss_components": {
+        "loss": 0.06252939999103546,
+        "representation": 0.06252939999103546,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 480,
+      "train_loss": 0.055970944464206696,
+      "loss_components": {
+        "loss": 0.055970944464206696,
+        "representation": 0.055970944464206696,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 500,
+      "train_loss": 0.05587031692266464,
+      "loss_components": {
+        "loss": 0.05587031692266464,
+        "representation": 0.05587031692266464,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 520,
+      "train_loss": 0.037304870784282684,
+      "loss_components": {
+        "loss": 0.037304870784282684,
+        "representation": 0.037304870784282684,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 540,
+      "train_loss": 0.05871962383389473,
+      "loss_components": {
+        "loss": 0.05871962383389473,
+        "representation": 0.05871962383389473,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 560,
+      "train_loss": 0.06485188752412796,
+      "loss_components": {
+        "loss": 0.06485188752412796,
+        "representation": 0.06485188752412796,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 580,
+      "train_loss": 0.1519656926393509,
+      "loss_components": {
+        "loss": 0.1519656926393509,
+        "representation": 0.1519656926393509,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 600,
+      "train_loss": 0.05736636370420456,
+      "loss_components": {
+        "loss": 0.05736636370420456,
+        "representation": 0.05736636370420456,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 600,
+      "train_loss": 0.05736636370420456,
+      "dev_sample_closed_loop_fk22_mm": 286.09320024649304
+    },
+    {
+      "step": 620,
+      "train_loss": 0.06587915122509003,
+      "loss_components": {
+        "loss": 0.06587915122509003,
+        "representation": 0.06587915122509003,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 640,
+      "train_loss": 0.06026006117463112,
+      "loss_components": {
+        "loss": 0.06026006117463112,
+        "representation": 0.06026006117463112,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 660,
+      "train_loss": 0.05355172976851463,
+      "loss_components": {
+        "loss": 0.05355172976851463,
+        "representation": 0.05355172976851463,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 680,
+      "train_loss": 0.06144547462463379,
+      "loss_components": {
+        "loss": 0.06144547462463379,
+        "representation": 0.06144547462463379,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 700,
+      "train_loss": 0.05374404788017273,
+      "loss_components": {
+        "loss": 0.05374404788017273,
+        "representation": 0.05374404788017273,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 720,
+      "train_loss": 0.04552703723311424,
+      "loss_components": {
+        "loss": 0.04552703723311424,
+        "representation": 0.04552703723311424,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 740,
+      "train_loss": 0.05905963480472565,
+      "loss_components": {
+        "loss": 0.05905963480472565,
+        "representation": 0.05905963480472565,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 760,
+      "train_loss": 0.058793049305677414,
+      "loss_components": {
+        "loss": 0.058793049305677414,
+        "representation": 0.058793049305677414,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 780,
+      "train_loss": 0.06734572350978851,
+      "loss_components": {
+        "loss": 0.06734572350978851,
+        "representation": 0.06734572350978851,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 800,
+      "train_loss": 0.06584300100803375,
+      "loss_components": {
+        "loss": 0.06584300100803375,
+        "representation": 0.06584300100803375,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 800,
+      "train_loss": 0.06584300100803375,
+      "dev_sample_closed_loop_fk22_mm": 235.54747427503267
+    },
+    {
+      "step": 820,
+      "train_loss": 0.06031746789813042,
+      "loss_components": {
+        "loss": 0.06031746789813042,
+        "representation": 0.06031746789813042,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 840,
+      "train_loss": 0.061121486127376556,
+      "loss_components": {
+        "loss": 0.061121486127376556,
+        "representation": 0.061121486127376556,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 860,
+      "train_loss": 0.05931935831904411,
+      "loss_components": {
+        "loss": 0.05931935831904411,
+        "representation": 0.05931935831904411,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 880,
+      "train_loss": 0.08776290714740753,
+      "loss_components": {
+        "loss": 0.08776290714740753,
+        "representation": 0.08776290714740753,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 900,
+      "train_loss": 0.05373699218034744,
+      "loss_components": {
+        "loss": 0.05373699218034744,
+        "representation": 0.05373699218034744,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 920,
+      "train_loss": 0.046626098453998566,
+      "loss_components": {
+        "loss": 0.046626098453998566,
+        "representation": 0.046626098453998566,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 940,
+      "train_loss": 0.0610545352101326,
+      "loss_components": {
+        "loss": 0.0610545352101326,
+        "representation": 0.0610545352101326,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 960,
+      "train_loss": 0.05780015140771866,
+      "loss_components": {
+        "loss": 0.05780015140771866,
+        "representation": 0.05780015140771866,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 980,
+      "train_loss": 0.035023126751184464,
+      "loss_components": {
+        "loss": 0.035023126751184464,
+        "representation": 0.035023126751184464,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1000,
+      "train_loss": 0.049459461122751236,
+      "loss_components": {
+        "loss": 0.049459461122751236,
+        "representation": 0.049459461122751236,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1000,
+      "train_loss": 0.049459461122751236,
+      "dev_sample_closed_loop_fk22_mm": 257.70851721366245
+    },
+    {
+      "step": 1020,
+      "train_loss": 0.05697224289178848,
+      "loss_components": {
+        "loss": 0.05697224289178848,
+        "representation": 0.05697224289178848,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1040,
+      "train_loss": 0.061325352638959885,
+      "loss_components": {
+        "loss": 0.061325352638959885,
+        "representation": 0.061325352638959885,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1060,
+      "train_loss": 0.04096774756908417,
+      "loss_components": {
+        "loss": 0.04096774756908417,
+        "representation": 0.04096774756908417,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1080,
+      "train_loss": 0.041494932025671005,
+      "loss_components": {
+        "loss": 0.041494932025671005,
+        "representation": 0.041494932025671005,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1100,
+      "train_loss": 0.06871175765991211,
+      "loss_components": {
+        "loss": 0.06871175765991211,
+        "representation": 0.06871175765991211,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1120,
+      "train_loss": 0.0402042493224144,
+      "loss_components": {
+        "loss": 0.0402042493224144,
+        "representation": 0.0402042493224144,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1140,
+      "train_loss": 0.05007293447852135,
+      "loss_components": {
+        "loss": 0.05007293447852135,
+        "representation": 0.05007293447852135,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1160,
+      "train_loss": 0.04448486119508743,
+      "loss_components": {
+        "loss": 0.04448486119508743,
+        "representation": 0.04448486119508743,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1180,
+      "train_loss": 0.04196864739060402,
+      "loss_components": {
+        "loss": 0.04196864739060402,
+        "representation": 0.04196864739060402,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1200,
+      "train_loss": 0.05512618273496628,
+      "loss_components": {
+        "loss": 0.05512618273496628,
+        "representation": 0.05512618273496628,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1200,
+      "train_loss": 0.05512618273496628,
+      "dev_sample_closed_loop_fk22_mm": 213.1060684720675
+    },
+    {
+      "step": 1220,
+      "train_loss": 0.07707218080759048,
+      "loss_components": {
+        "loss": 0.07707218080759048,
+        "representation": 0.07707218080759048,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1240,
+      "train_loss": 0.05067231506109238,
+      "loss_components": {
+        "loss": 0.05067231506109238,
+        "representation": 0.05067231506109238,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1260,
+      "train_loss": 0.0642438679933548,
+      "loss_components": {
+        "loss": 0.0642438679933548,
+        "representation": 0.0642438679933548,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1280,
+      "train_loss": 0.04345669597387314,
+      "loss_components": {
+        "loss": 0.04345669597387314,
+        "representation": 0.04345669597387314,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1300,
+      "train_loss": 0.04764994606375694,
+      "loss_components": {
+        "loss": 0.04764994606375694,
+        "representation": 0.04764994606375694,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1320,
+      "train_loss": 0.050692398101091385,
+      "loss_components": {
+        "loss": 0.050692398101091385,
+        "representation": 0.050692398101091385,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1340,
+      "train_loss": 0.05013897642493248,
+      "loss_components": {
+        "loss": 0.05013897642493248,
+        "representation": 0.05013897642493248,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1360,
+      "train_loss": 0.17874878644943237,
+      "loss_components": {
+        "loss": 0.17874878644943237,
+        "representation": 0.17874878644943237,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1380,
+      "train_loss": 0.1203356608748436,
+      "loss_components": {
+        "loss": 0.1203356608748436,
+        "representation": 0.1203356608748436,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1400,
+      "train_loss": 0.03735872358083725,
+      "loss_components": {
+        "loss": 0.03735872358083725,
+        "representation": 0.03735872358083725,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1400,
+      "train_loss": 0.03735872358083725,
+      "dev_sample_closed_loop_fk22_mm": 209.35055861870447
+    },
+    {
+      "step": 1420,
+      "train_loss": 0.05717523768544197,
+      "loss_components": {
+        "loss": 0.05717523768544197,
+        "representation": 0.05717523768544197,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1440,
+      "train_loss": 0.06892232596874237,
+      "loss_components": {
+        "loss": 0.06892232596874237,
+        "representation": 0.06892232596874237,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1460,
+      "train_loss": 0.05053984746336937,
+      "loss_components": {
+        "loss": 0.05053984746336937,
+        "representation": 0.05053984746336937,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1480,
+      "train_loss": 0.04562285542488098,
+      "loss_components": {
+        "loss": 0.04562285542488098,
+        "representation": 0.04562285542488098,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1500,
+      "train_loss": 0.04149208962917328,
+      "loss_components": {
+        "loss": 0.04149208962917328,
+        "representation": 0.04149208962917328,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1520,
+      "train_loss": 0.057429879903793335,
+      "loss_components": {
+        "loss": 0.057429879903793335,
+        "representation": 0.057429879903793335,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1540,
+      "train_loss": 0.04291427135467529,
+      "loss_components": {
+        "loss": 0.04291427135467529,
+        "representation": 0.04291427135467529,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1560,
+      "train_loss": 0.05836649611592293,
+      "loss_components": {
+        "loss": 0.05836649611592293,
+        "representation": 0.05836649611592293,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1580,
+      "train_loss": 0.055991753935813904,
+      "loss_components": {
+        "loss": 0.055991753935813904,
+        "representation": 0.055991753935813904,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1600,
+      "train_loss": 0.0395551435649395,
+      "loss_components": {
+        "loss": 0.0395551435649395,
+        "representation": 0.0395551435649395,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1600,
+      "train_loss": 0.0395551435649395,
+      "dev_sample_closed_loop_fk22_mm": 220.1746099938949
+    },
+    {
+      "step": 1620,
+      "train_loss": 0.0450822114944458,
+      "loss_components": {
+        "loss": 0.0450822114944458,
+        "representation": 0.0450822114944458,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1640,
+      "train_loss": 0.03351675346493721,
+      "loss_components": {
+        "loss": 0.03351675346493721,
+        "representation": 0.03351675346493721,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1660,
+      "train_loss": 0.09436284750699997,
+      "loss_components": {
+        "loss": 0.09436284750699997,
+        "representation": 0.09436284750699997,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1680,
+      "train_loss": 0.03638308122754097,
+      "loss_components": {
+        "loss": 0.03638308122754097,
+        "representation": 0.03638308122754097,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1700,
+      "train_loss": 0.036651208996772766,
+      "loss_components": {
+        "loss": 0.036651208996772766,
+        "representation": 0.036651208996772766,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1720,
+      "train_loss": 0.047125622630119324,
+      "loss_components": {
+        "loss": 0.047125622630119324,
+        "representation": 0.047125622630119324,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1740,
+      "train_loss": 0.05032256990671158,
+      "loss_components": {
+        "loss": 0.05032256990671158,
+        "representation": 0.05032256990671158,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1760,
+      "train_loss": 0.10678700357675552,
+      "loss_components": {
+        "loss": 0.10678700357675552,
+        "representation": 0.10678700357675552,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1780,
+      "train_loss": 0.05223387852311134,
+      "loss_components": {
+        "loss": 0.05223387852311134,
+        "representation": 0.05223387852311134,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1800,
+      "train_loss": 0.05088666453957558,
+      "loss_components": {
+        "loss": 0.05088666453957558,
+        "representation": 0.05088666453957558,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1800,
+      "train_loss": 0.05088666453957558,
+      "dev_sample_closed_loop_fk22_mm": 192.48370950420698
+    },
+    {
+      "step": 1820,
+      "train_loss": 0.04158693924546242,
+      "loss_components": {
+        "loss": 0.04158693924546242,
+        "representation": 0.04158693924546242,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1840,
+      "train_loss": 0.03003579191863537,
+      "loss_components": {
+        "loss": 0.03003579191863537,
+        "representation": 0.03003579191863537,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1860,
+      "train_loss": 0.05206625536084175,
+      "loss_components": {
+        "loss": 0.05206625536084175,
+        "representation": 0.05206625536084175,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1880,
+      "train_loss": 0.06438526511192322,
+      "loss_components": {
+        "loss": 0.06438526511192322,
+        "representation": 0.06438526511192322,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1900,
+      "train_loss": 0.05276450142264366,
+      "loss_components": {
+        "loss": 0.05276450142264366,
+        "representation": 0.05276450142264366,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1920,
+      "train_loss": 0.03606545552611351,
+      "loss_components": {
+        "loss": 0.03606545552611351,
+        "representation": 0.03606545552611351,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1940,
+      "train_loss": 0.044718243181705475,
+      "loss_components": {
+        "loss": 0.044718243181705475,
+        "representation": 0.044718243181705475,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1960,
+      "train_loss": 0.04391008988022804,
+      "loss_components": {
+        "loss": 0.04391008988022804,
+        "representation": 0.04391008988022804,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1980,
+      "train_loss": 0.04621252045035362,
+      "loss_components": {
+        "loss": 0.04621252045035362,
+        "representation": 0.04621252045035362,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2000,
+      "train_loss": 0.4141744375228882,
+      "loss_components": {
+        "loss": 0.4141744375228882,
+        "representation": 0.4141744375228882,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2000,
+      "train_loss": 0.4141744375228882,
+      "dev_sample_closed_loop_fk22_mm": 215.0845304131508
+    },
+    {
+      "step": 2020,
+      "train_loss": 0.44624489545822144,
+      "loss_components": {
+        "loss": 0.44624489545822144,
+        "representation": 0.44624489545822144,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2040,
+      "train_loss": 0.047357115894556046,
+      "loss_components": {
+        "loss": 0.047357115894556046,
+        "representation": 0.047357115894556046,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2060,
+      "train_loss": 0.09726431220769882,
+      "loss_components": {
+        "loss": 0.09726431220769882,
+        "representation": 0.09726431220769882,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2080,
+      "train_loss": 0.04320993274450302,
+      "loss_components": {
+        "loss": 0.04320993274450302,
+        "representation": 0.04320993274450302,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2100,
+      "train_loss": 0.04373374581336975,
+      "loss_components": {
+        "loss": 0.04373374581336975,
+        "representation": 0.04373374581336975,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2120,
+      "train_loss": 0.031282905489206314,
+      "loss_components": {
+        "loss": 0.031282905489206314,
+        "representation": 0.031282905489206314,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2140,
+      "train_loss": 0.04051436111330986,
+      "loss_components": {
+        "loss": 0.04051436111330986,
+        "representation": 0.04051436111330986,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2160,
+      "train_loss": 0.06642229110002518,
+      "loss_components": {
+        "loss": 0.06642229110002518,
+        "representation": 0.06642229110002518,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2180,
+      "train_loss": 0.06038852035999298,
+      "loss_components": {
+        "loss": 0.06038852035999298,
+        "representation": 0.06038852035999298,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2200,
+      "train_loss": 0.03486204892396927,
+      "loss_components": {
+        "loss": 0.03486204892396927,
+        "representation": 0.03486204892396927,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2200,
+      "train_loss": 0.03486204892396927,
+      "dev_sample_closed_loop_fk22_mm": 185.46501671274504
+    },
+    {
+      "step": 2220,
+      "train_loss": 0.042168330401182175,
+      "loss_components": {
+        "loss": 0.042168330401182175,
+        "representation": 0.042168330401182175,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2240,
+      "train_loss": 0.05618693307042122,
+      "loss_components": {
+        "loss": 0.05618693307042122,
+        "representation": 0.05618693307042122,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2260,
+      "train_loss": 0.04214279726147652,
+      "loss_components": {
+        "loss": 0.04214279726147652,
+        "representation": 0.04214279726147652,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2280,
+      "train_loss": 0.04346497729420662,
+      "loss_components": {
+        "loss": 0.04346497729420662,
+        "representation": 0.04346497729420662,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2300,
+      "train_loss": 0.05300161615014076,
+      "loss_components": {
+        "loss": 0.05300161615014076,
+        "representation": 0.05300161615014076,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2320,
+      "train_loss": 0.16416077315807343,
+      "loss_components": {
+        "loss": 0.16416077315807343,
+        "representation": 0.16416077315807343,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2340,
+      "train_loss": 0.04297417774796486,
+      "loss_components": {
+        "loss": 0.04297417774796486,
+        "representation": 0.04297417774796486,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2360,
+      "train_loss": 0.04132158309221268,
+      "loss_components": {
+        "loss": 0.04132158309221268,
+        "representation": 0.04132158309221268,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2380,
+      "train_loss": 0.048341054469347,
+      "loss_components": {
+        "loss": 0.048341054469347,
+        "representation": 0.048341054469347,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2400,
+      "train_loss": 0.03651469945907593,
+      "loss_components": {
+        "loss": 0.03651469945907593,
+        "representation": 0.03651469945907593,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2400,
+      "train_loss": 0.03651469945907593,
+      "dev_sample_closed_loop_fk22_mm": 215.98806170125803
+    }
+  ],
+  "dense22_mm_per_action": {
+    "a11": 50.52391815185547,
+    "a10": 53.273990631103516,
+    "a01": 50.68733215332031,
+    "a00": 53.53075408935547
+  },
+  "dense22_oracle_gap_mm": 0.7532247304916382,
+  "oracle_action_counts": [
+    23,
+    13,
+    17,
+    11
+  ],
+  "checkpoint_sha256": "60905dfd350cddd938f05a7591cc398ce5915335cf722de7366ebdf24e6f32ca"
+}
+Saved pilot to exp/egorecover_loss_ablation/g00_g11_v1/train/g0f0_gaussian; G selection=closed_loop_fk; independent validation remains separate.

@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.train_prior_same_shape",
+    "--data",
+    "exp/egorecover_prior_two_forward/v1/data",
+    "--output",
+    "exp/egorecover_prior_same_shape/v1/train/control_s62",
+    "--same-shape-weight",
+    "0.0",
+    "--seed",
+    "62",
+    "--baselines"
+  ],
+  "gpu": 4,
+  "pid": 2144634,
+  "started_at": "2026-09-29T07:12:05.267908+00:00",
+  "exit_code": 0,
+  "child_pid": 2144717,
+  "ended_at": "2026-09-29T07:13:44.639372+00:00"
+}

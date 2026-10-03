@@ -1,0 +1,16 @@
+{
+  "pid": 1865814,
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.loss_ablation",
+    "--output",
+    "exp/egorecover_loss_ablation/g00_g11_v1",
+    "--gpus",
+    "4",
+    "5",
+    "6",
+    "7"
+  ]
+}

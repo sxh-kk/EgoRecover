@@ -1,0 +1,35 @@
+{
+  "cases": {
+    "H0_hold_dense": [
+      "hold",
+      0
+    ],
+    "V0_cv_dense": [
+      "constant_velocity",
+      0
+    ],
+    "H1_hold_fk": [
+      "hold",
+      1
+    ],
+    "V1_cv_fk": [
+      "constant_velocity",
+      1
+    ]
+  },
+  "seeds": [
+    62,
+    63,
+    64
+  ],
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "data": "exp/egorecover_prior_two_forward/v1/data",
+  "steps": 2400,
+  "minimum_free_gib": 32,
+  "method": "docs/experiments/p-cv-residual.md"
+}

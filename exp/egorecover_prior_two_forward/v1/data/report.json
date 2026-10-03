@@ -1,0 +1,595 @@
+{
+  "identity": {
+    "scope": "audited_prior_train_dev_sequences",
+    "splits": {
+      "train": [
+        "cmu_soccer07_1",
+        "cmu_soccer11_2",
+        "fair_bike_01_14",
+        "fair_bike_08_10",
+        "georgiatech_bike_04_8",
+        "georgiatech_bike_08_14",
+        "georgiatech_bike_09_8",
+        "georgiatech_covid_03_14",
+        "georgiatech_covid_03_2",
+        "georgiatech_covid_09_8",
+        "georgiatech_covid_12_13",
+        "iiith_cooking_146_2",
+        "iiith_piano_001_8",
+        "iiith_soccer_020_3",
+        "iiith_soccer_020_6",
+        "iiith_soccer_035_3",
+        "indiana_bike_04_7",
+        "indiana_cooking_03_2",
+        "indiana_cooking_10_4",
+        "minnesota_cooking_023_2",
+        "nus_cpr_09_2",
+        "nus_cpr_48_1",
+        "sfu_basketball_02_26",
+        "sfu_cooking_005_2",
+        "unc_basketball_03-09-23_02_5",
+        "unc_basketball_03-31-23_02_23",
+        "uniandes_basketball_003_35",
+        "uniandes_basketball_003_36",
+        "uniandes_basketball_004_6",
+        "uniandes_cooking_009_4",
+        "uniandes_cooking_009_6",
+        "uniandes_dance_008_22",
+        "uniandes_dance_013_19",
+        "uniandes_dance_017_57",
+        "uniandes_dance_019_36",
+        "uniandes_dance_020_13",
+        "uniandes_dance_020_50",
+        "uniandes_dance_022_22",
+        "upenn_0407_Violin_1_3",
+        "upenn_0407_Violin_2_3",
+        "upenn_0719_Piano_2_3",
+        "upenn_0725_Duet_Violin_1_2_9",
+        "upenn_0726_Piano_1_3",
+        "upenn_0726_Piano_1_4",
+        "upenn_0727_Partner_Dance_2_1_4",
+        "utokyo_omelet_12_1001_2",
+        "utokyo_omelet_6_1001_4",
+        "utokyo_pcr_2001_33_6"
+      ],
+      "dev": [
+        "fair_bike_01_12",
+        "georgiatech_bike_05_2",
+        "iiith_cooking_109_4",
+        "iiith_soccer_004_5",
+        "indiana_music_13_5",
+        "nus_cpr_52_1",
+        "sfu_basketball_03_44",
+        "sfu_basketball_08_15",
+        "unc_basketball_03-16-23_01_18",
+        "uniandes_dance_011_27",
+        "uniandes_dance_012_15",
+        "upenn_0725_Duet_Violin_1_2_8"
+      ],
+      "holdout": [
+        "fair_bike_01_15",
+        "georgiatech_bike_01_11",
+        "iiith_soccer_032_4",
+        "iiith_soccer_033_6",
+        "iiith_soccer_053_4",
+        "indiana_music_09_3",
+        "minnesota_cooking_050_2",
+        "sfu_basketball014_15",
+        "sfu_covid_001_12",
+        "unc_soccer_09-21-23_01_49",
+        "uniandes_dance_002_14",
+        "utokyo_cpr_2005_33_2"
+      ]
+    },
+    "holdout_used": false,
+    "dataset_spec_sha256": "13ca5f22e713353a121282a365af735f8086b8ca3dae714742e116d0d5df14dd",
+    "split_manifest_sha256": "fdddd32b47282bfece00215ef2652cbc361afdc655b6516bb5ab0740403481fc",
+    "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+    "bootstrap_cache_sha256": "3dec71f200f5d5d445d45f2f878a18cd73950365c402e16cb3404e3651018f56",
+    "bootstrap_identity": {
+      "scope": "model_generated_clean_prefix_bootstraps",
+      "groups": [
+        "train",
+        "dev",
+        "holdout"
+      ],
+      "reference_mode": "planar",
+      "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+      "e7_weight_source": "ema",
+      "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+      "split_manifest_sha256": "fdddd32b47282bfece00215ef2652cbc361afdc655b6516bb5ab0740403481fc",
+      "dataset_spec_sha256": "13ca5f22e713353a121282a365af735f8086b8ca3dae714742e116d0d5df14dd",
+      "sampling_seed": 1062,
+      "prefix_frames": 20,
+      "sampler": "FlowMatching Euler10"
+    },
+    "reference_mode": "planar",
+    "smplx_asset_sha256": "43d8f3a1375d7c5baae207870a5d51def0f7e6b507df709b4937598b5e7d965d",
+    "preparation_code_sha256": "224f2abad14b3eceb42e46acce839697c239fb52b62b38781593825fd640c4cf"
+  },
+  "audits": {
+    "cmu_soccer07_1": {
+      "mean_mm": 0.24258407950401306,
+      "max_mm": 0.7459839582443237,
+      "body_mean_mm": 0.13065586984157562,
+      "body_max_mm": 0.5966799855232239,
+      "hands_mean_mm": 0.3178999722003937,
+      "hands_max_mm": 0.3987765312194824
+    },
+    "cmu_soccer11_2": {
+      "mean_mm": 0.1382497251033783,
+      "max_mm": 0.811913013458252,
+      "body_mean_mm": 0.08416029065847397,
+      "body_max_mm": 0.6404387950897217,
+      "hands_mean_mm": 0.1608533263206482,
+      "hands_max_mm": 0.2812122106552124
+    },
+    "fair_bike_01_12": {
+      "mean_mm": 0.680729329586029,
+      "max_mm": 1.1450554132461548,
+      "body_mean_mm": 0.359525203704834,
+      "body_max_mm": 0.8792009353637695,
+      "hands_mean_mm": 0.945122480392456,
+      "hands_max_mm": 1.1450554132461548
+    },
+    "fair_bike_01_14": {
+      "mean_mm": 0.8964442610740662,
+      "max_mm": 1.49603271484375,
+      "body_mean_mm": 0.47698989510536194,
+      "body_max_mm": 1.1389566659927368,
+      "hands_mean_mm": 1.2476396560668945,
+      "hands_max_mm": 1.49603271484375
+    },
+    "fair_bike_08_10": {
+      "mean_mm": 0.33405250310897827,
+      "max_mm": 0.828068733215332,
+      "body_mean_mm": 0.18338389694690704,
+      "body_max_mm": 0.82570481300354,
+      "hands_mean_mm": 0.44187554717063904,
+      "hands_max_mm": 0.5703171491622925
+    },
+    "georgiatech_bike_04_8": {
+      "mean_mm": 0.5311550498008728,
+      "max_mm": 0.9958662390708923,
+      "body_mean_mm": 0.29490360617637634,
+      "body_max_mm": 0.8005555868148804,
+      "hands_mean_mm": 0.7178287506103516,
+      "hands_max_mm": 0.9958662390708923
+    },
+    "georgiatech_bike_05_2": {
+      "mean_mm": 0.8650996685028076,
+      "max_mm": 1.4666602611541748,
+      "body_mean_mm": 0.4433779716491699,
+      "body_max_mm": 1.1382960081100464,
+      "hands_mean_mm": 1.2222304344177246,
+      "hands_max_mm": 1.4666602611541748
+    },
+    "georgiatech_bike_08_14": {
+      "mean_mm": 0.9270615577697754,
+      "max_mm": 1.5534093379974365,
+      "body_mean_mm": 0.49196282029151917,
+      "body_max_mm": 1.2052174806594849,
+      "hands_mean_mm": 1.2997323274612427,
+      "hands_max_mm": 1.5534093379974365
+    },
+    "georgiatech_bike_09_8": {
+      "mean_mm": 0.9505575299263,
+      "max_mm": 1.7587671279907227,
+      "body_mean_mm": 0.519781231880188,
+      "body_max_mm": 1.345291018486023,
+      "hands_mean_mm": 1.319980502128601,
+      "hands_max_mm": 1.7587671279907227
+    },
+    "georgiatech_covid_03_14": {
+      "mean_mm": 0.48985400795936584,
+      "max_mm": 0.7710096836090088,
+      "body_mean_mm": 0.2679293751716614,
+      "body_max_mm": 0.6313858032226562,
+      "hands_mean_mm": 0.6699767112731934,
+      "hands_max_mm": 0.7710096836090088
+    },
+    "georgiatech_covid_03_2": {
+      "mean_mm": 0.536870539188385,
+      "max_mm": 0.8276069760322571,
+      "body_mean_mm": 0.28455257415771484,
+      "body_max_mm": 0.6590843796730042,
+      "hands_mean_mm": 0.7462771534919739,
+      "hands_max_mm": 0.8276069760322571
+    },
+    "georgiatech_covid_09_8": {
+      "mean_mm": 0.39879170060157776,
+      "max_mm": 0.6673150062561035,
+      "body_mean_mm": 0.21574212610721588,
+      "body_max_mm": 0.54860520362854,
+      "hands_mean_mm": 0.5490572452545166,
+      "hands_max_mm": 0.6673150062561035
+    },
+    "georgiatech_covid_12_13": {
+      "mean_mm": 0.426662802696228,
+      "max_mm": 0.6781482696533203,
+      "body_mean_mm": 0.21929654479026794,
+      "body_max_mm": 0.5563325881958008,
+      "hands_mean_mm": 0.5973617434501648,
+      "hands_max_mm": 0.6781482696533203
+    },
+    "iiith_cooking_109_4": {
+      "mean_mm": 0.5813029408454895,
+      "max_mm": 0.9281201362609863,
+      "body_mean_mm": 0.31577759981155396,
+      "body_max_mm": 0.7581252455711365,
+      "hands_mean_mm": 0.8021602034568787,
+      "hands_max_mm": 0.9281201362609863
+    },
+    "iiith_cooking_146_2": {
+      "mean_mm": 0.5351962447166443,
+      "max_mm": 0.9615492820739746,
+      "body_mean_mm": 0.2712651491165161,
+      "body_max_mm": 0.7489633560180664,
+      "hands_mean_mm": 0.7522347569465637,
+      "hands_max_mm": 0.9615492820739746
+    },
+    "iiith_piano_001_8": {
+      "mean_mm": 0.6887825131416321,
+      "max_mm": 1.068028211593628,
+      "body_mean_mm": 0.37583309412002563,
+      "body_max_mm": 0.8340964913368225,
+      "hands_mean_mm": 0.9529539942741394,
+      "hands_max_mm": 1.068028211593628
+    },
+    "iiith_soccer_004_5": {
+      "mean_mm": 0.20927123725414276,
+      "max_mm": 0.7218363285064697,
+      "body_mean_mm": 0.12111816555261612,
+      "body_max_mm": 0.5963811874389648,
+      "hands_mean_mm": 0.26839831471443176,
+      "hands_max_mm": 0.3736487925052643
+    },
+    "iiith_soccer_020_3": {
+      "mean_mm": 0.43391674757003784,
+      "max_mm": 0.8276051878929138,
+      "body_mean_mm": 0.23214538395404816,
+      "body_max_mm": 0.6960018277168274,
+      "hands_mean_mm": 0.5892521142959595,
+      "hands_max_mm": 0.7121657133102417
+    },
+    "iiith_soccer_020_6": {
+      "mean_mm": 0.4043339788913727,
+      "max_mm": 0.807043194770813,
+      "body_mean_mm": 0.21608509123325348,
+      "body_max_mm": 0.6967951655387878,
+      "hands_mean_mm": 0.5470681190490723,
+      "hands_max_mm": 0.6437401175498962
+    },
+    "iiith_soccer_035_3": {
+      "mean_mm": 0.3179829716682434,
+      "max_mm": 0.7390814423561096,
+      "body_mean_mm": 0.17259164154529572,
+      "body_max_mm": 0.6138620972633362,
+      "hands_mean_mm": 0.4277736246585846,
+      "hands_max_mm": 0.5502313375473022
+    },
+    "indiana_bike_04_7": {
+      "mean_mm": 0.49961015582084656,
+      "max_mm": 1.0030384063720703,
+      "body_mean_mm": 0.31881362199783325,
+      "body_max_mm": 0.8193893432617188,
+      "hands_mean_mm": 0.6404088139533997,
+      "hands_max_mm": 0.8384311199188232
+    },
+    "indiana_cooking_03_2": {
+      "mean_mm": 0.547884464263916,
+      "max_mm": 0.8994421362876892,
+      "body_mean_mm": 0.2832809090614319,
+      "body_max_mm": 0.6965311765670776,
+      "hands_mean_mm": 0.7634440660476685,
+      "hands_max_mm": 0.8994421362876892
+    },
+    "indiana_cooking_10_4": {
+      "mean_mm": 0.41648662090301514,
+      "max_mm": 0.7778042554855347,
+      "body_mean_mm": 0.222388356924057,
+      "body_max_mm": 0.6501460671424866,
+      "hands_mean_mm": 0.5665052533149719,
+      "hands_max_mm": 0.6290557980537415
+    },
+    "indiana_music_13_5": {
+      "mean_mm": 0.38862714171409607,
+      "max_mm": 0.8470109105110168,
+      "body_mean_mm": 0.24627915024757385,
+      "body_max_mm": 0.6866543292999268,
+      "hands_mean_mm": 0.49248045682907104,
+      "hands_max_mm": 0.6698204874992371
+    },
+    "minnesota_cooking_023_2": {
+      "mean_mm": 0.7201220989227295,
+      "max_mm": 1.2387524843215942,
+      "body_mean_mm": 0.3744353950023651,
+      "body_max_mm": 0.9579387307167053,
+      "hands_mean_mm": 1.0113887786865234,
+      "hands_max_mm": 1.2387524843215942
+    },
+    "nus_cpr_09_2": {
+      "mean_mm": 0.44915771484375,
+      "max_mm": 0.7972328662872314,
+      "body_mean_mm": 0.24308277666568756,
+      "body_max_mm": 0.6997520327568054,
+      "hands_mean_mm": 0.6151537299156189,
+      "hands_max_mm": 0.7321860790252686
+    },
+    "nus_cpr_48_1": {
+      "mean_mm": 0.45201629400253296,
+      "max_mm": 0.822253406047821,
+      "body_mean_mm": 0.2449488341808319,
+      "body_max_mm": 0.7150818109512329,
+      "hands_mean_mm": 0.6145081520080566,
+      "hands_max_mm": 0.7263401746749878
+    },
+    "nus_cpr_52_1": {
+      "mean_mm": 0.6246148943901062,
+      "max_mm": 1.0161776542663574,
+      "body_mean_mm": 0.3313838541507721,
+      "body_max_mm": 0.8030135631561279,
+      "hands_mean_mm": 0.8586756587028503,
+      "hands_max_mm": 1.0161776542663574
+    },
+    "sfu_basketball_02_26": {
+      "mean_mm": 0.4877021014690399,
+      "max_mm": 0.9047847390174866,
+      "body_mean_mm": 0.27590858936309814,
+      "body_max_mm": 0.8371943235397339,
+      "hands_mean_mm": 0.6545530557632446,
+      "hands_max_mm": 0.7942386269569397
+    },
+    "sfu_basketball_03_44": {
+      "mean_mm": 0.35508349537849426,
+      "max_mm": 0.8794339895248413,
+      "body_mean_mm": 0.21218273043632507,
+      "body_max_mm": 0.7732396721839905,
+      "hands_mean_mm": 0.4591623544692993,
+      "hands_max_mm": 0.596828043460846
+    },
+    "sfu_basketball_08_15": {
+      "mean_mm": 0.11697754263877869,
+      "max_mm": 0.7142443656921387,
+      "body_mean_mm": 0.07386158406734467,
+      "body_max_mm": 0.5759180188179016,
+      "hands_mean_mm": 0.13341400027275085,
+      "hands_max_mm": 0.24390695989131927
+    },
+    "sfu_cooking_005_2": {
+      "mean_mm": 0.4888222813606262,
+      "max_mm": 0.7768052816390991,
+      "body_mean_mm": 0.25698140263557434,
+      "body_max_mm": 0.65573650598526,
+      "hands_mean_mm": 0.6795399785041809,
+      "hands_max_mm": 0.7768052816390991
+    },
+    "unc_basketball_03-09-23_02_5": {
+      "mean_mm": 0.10146468132734299,
+      "max_mm": 0.7626039385795593,
+      "body_mean_mm": 0.0644816905260086,
+      "body_max_mm": 0.5804944038391113,
+      "hands_mean_mm": 0.10775276273488998,
+      "hands_max_mm": 0.22891350090503693
+    },
+    "unc_basketball_03-16-23_01_18": {
+      "mean_mm": 0.10552655160427094,
+      "max_mm": 0.6888751983642578,
+      "body_mean_mm": 0.06813398003578186,
+      "body_max_mm": 0.5526455640792847,
+      "hands_mean_mm": 0.1125725507736206,
+      "hands_max_mm": 0.21343132853507996
+    },
+    "unc_basketball_03-31-23_02_23": {
+      "mean_mm": 0.14468351006507874,
+      "max_mm": 0.7120254635810852,
+      "body_mean_mm": 0.08733430504798889,
+      "body_max_mm": 0.5713179707527161,
+      "hands_mean_mm": 0.17316971719264984,
+      "hands_max_mm": 0.231088325381279
+    },
+    "uniandes_basketball_003_35": {
+      "mean_mm": 0.1300261914730072,
+      "max_mm": 0.8798542022705078,
+      "body_mean_mm": 0.0847800225019455,
+      "body_max_mm": 0.6881599426269531,
+      "hands_mean_mm": 0.1436672955751419,
+      "hands_max_mm": 0.2469424456357956
+    },
+    "uniandes_basketball_003_36": {
+      "mean_mm": 0.14698366820812225,
+      "max_mm": 0.8680850863456726,
+      "body_mean_mm": 0.09309121966362,
+      "body_max_mm": 0.6918306946754456,
+      "hands_mean_mm": 0.16824564337730408,
+      "hands_max_mm": 0.25311774015426636
+    },
+    "uniandes_basketball_004_6": {
+      "mean_mm": 0.08195293694734573,
+      "max_mm": 0.6949752569198608,
+      "body_mean_mm": 0.05514402315020561,
+      "body_max_mm": 0.5548982620239258,
+      "hands_mean_mm": 0.08157949149608612,
+      "hands_max_mm": 0.17319698631763458
+    },
+    "uniandes_cooking_009_4": {
+      "mean_mm": 0.4680039882659912,
+      "max_mm": 0.7764660716056824,
+      "body_mean_mm": 0.24611258506774902,
+      "body_max_mm": 0.5911087393760681,
+      "hands_mean_mm": 0.6521565914154053,
+      "hands_max_mm": 0.7764660716056824
+    },
+    "uniandes_cooking_009_6": {
+      "mean_mm": 0.3649264872074127,
+      "max_mm": 0.7847595810890198,
+      "body_mean_mm": 0.19654282927513123,
+      "body_max_mm": 0.6064408421516418,
+      "hands_mean_mm": 0.49681612849235535,
+      "hands_max_mm": 0.5980026721954346
+    },
+    "uniandes_dance_008_22": {
+      "mean_mm": 0.743802011013031,
+      "max_mm": 1.1957497596740723,
+      "body_mean_mm": 0.38584285974502563,
+      "body_max_mm": 0.9470348954200745,
+      "hands_mean_mm": 1.0380973815917969,
+      "hands_max_mm": 1.1957497596740723
+    },
+    "uniandes_dance_011_27": {
+      "mean_mm": 0.6049827337265015,
+      "max_mm": 0.9715842604637146,
+      "body_mean_mm": 0.3264409303665161,
+      "body_max_mm": 0.7909762859344482,
+      "hands_mean_mm": 0.8346081376075745,
+      "hands_max_mm": 0.9715842604637146
+    },
+    "uniandes_dance_012_15": {
+      "mean_mm": 0.7159317135810852,
+      "max_mm": 1.1864713430404663,
+      "body_mean_mm": 0.39212021231651306,
+      "body_max_mm": 0.9122332334518433,
+      "hands_mean_mm": 0.986927330493927,
+      "hands_max_mm": 1.1864713430404663
+    },
+    "uniandes_dance_013_19": {
+      "mean_mm": 0.4110822379589081,
+      "max_mm": 0.8239675760269165,
+      "body_mean_mm": 0.22353878617286682,
+      "body_max_mm": 0.6822397112846375,
+      "hands_mean_mm": 0.5597787499427795,
+      "hands_max_mm": 0.6507251858711243
+    },
+    "uniandes_dance_017_57": {
+      "mean_mm": 0.610715389251709,
+      "max_mm": 1.0651130676269531,
+      "body_mean_mm": 0.3362426161766052,
+      "body_max_mm": 0.8132394552230835,
+      "hands_mean_mm": 0.8374701142311096,
+      "hands_max_mm": 1.0651130676269531
+    },
+    "uniandes_dance_019_36": {
+      "mean_mm": 0.5738431811332703,
+      "max_mm": 0.9253928661346436,
+      "body_mean_mm": 0.29938289523124695,
+      "body_max_mm": 0.7065680623054504,
+      "hands_mean_mm": 0.8038032650947571,
+      "hands_max_mm": 0.9253928661346436
+    },
+    "uniandes_dance_020_13": {
+      "mean_mm": 0.6268719434738159,
+      "max_mm": 1.165090560913086,
+      "body_mean_mm": 0.35475385189056396,
+      "body_max_mm": 0.8889484405517578,
+      "hands_mean_mm": 0.8518967628479004,
+      "hands_max_mm": 1.165090560913086
+    },
+    "uniandes_dance_020_50": {
+      "mean_mm": 0.5213548541069031,
+      "max_mm": 0.9851895570755005,
+      "body_mean_mm": 0.3100947141647339,
+      "body_max_mm": 0.8447254300117493,
+      "hands_mean_mm": 0.6893832683563232,
+      "hands_max_mm": 0.9669656753540039
+    },
+    "uniandes_dance_022_22": {
+      "mean_mm": 0.5525780916213989,
+      "max_mm": 1.0013558864593506,
+      "body_mean_mm": 0.3124670088291168,
+      "body_max_mm": 0.9060776829719543,
+      "hands_mean_mm": 0.7456897497177124,
+      "hands_max_mm": 0.9807096719741821
+    },
+    "upenn_0407_Violin_1_3": {
+      "mean_mm": 0.649135947227478,
+      "max_mm": 1.2543280124664307,
+      "body_mean_mm": 0.39645886421203613,
+      "body_max_mm": 0.9507215023040771,
+      "hands_mean_mm": 0.8617960810661316,
+      "hands_max_mm": 1.2543280124664307
+    },
+    "upenn_0407_Violin_2_3": {
+      "mean_mm": 0.5888935327529907,
+      "max_mm": 1.0541046857833862,
+      "body_mean_mm": 0.35208019614219666,
+      "body_max_mm": 0.8666380643844604,
+      "hands_mean_mm": 0.7806196808815002,
+      "hands_max_mm": 1.0541046857833862
+    },
+    "upenn_0719_Piano_2_3": {
+      "mean_mm": 0.39222297072410583,
+      "max_mm": 0.6572476625442505,
+      "body_mean_mm": 0.2081959843635559,
+      "body_max_mm": 0.5810014009475708,
+      "hands_mean_mm": 0.5380988121032715,
+      "hands_max_mm": 0.6524937152862549
+    },
+    "upenn_0725_Duet_Violin_1_2_8": {
+      "mean_mm": 0.8545782566070557,
+      "max_mm": 1.5929322242736816,
+      "body_mean_mm": 0.5141592621803284,
+      "body_max_mm": 1.2159041166305542,
+      "hands_mean_mm": 1.140885829925537,
+      "hands_max_mm": 1.5929322242736816
+    },
+    "upenn_0725_Duet_Violin_1_2_9": {
+      "mean_mm": 0.8643767833709717,
+      "max_mm": 1.5503069162368774,
+      "body_mean_mm": 0.5134233236312866,
+      "body_max_mm": 1.1921526193618774,
+      "hands_mean_mm": 1.1592364311218262,
+      "hands_max_mm": 1.5503069162368774
+    },
+    "upenn_0726_Piano_1_3": {
+      "mean_mm": 1.0329796075820923,
+      "max_mm": 1.6407544612884521,
+      "body_mean_mm": 0.5178996324539185,
+      "body_max_mm": 1.3119500875473022,
+      "hands_mean_mm": 1.4723010063171387,
+      "hands_max_mm": 1.6407544612884521
+    },
+    "upenn_0726_Piano_1_4": {
+      "mean_mm": 0.9076555371284485,
+      "max_mm": 1.4717575311660767,
+      "body_mean_mm": 0.46309569478034973,
+      "body_max_mm": 1.1582099199295044,
+      "hands_mean_mm": 1.2893505096435547,
+      "hands_max_mm": 1.4717575311660767
+    },
+    "upenn_0727_Partner_Dance_2_1_4": {
+      "mean_mm": 0.2385292947292328,
+      "max_mm": 0.8243585228919983,
+      "body_mean_mm": 0.13344818353652954,
+      "body_max_mm": 0.6531575322151184,
+      "hands_mean_mm": 0.30788183212280273,
+      "hands_max_mm": 0.36313503980636597
+    },
+    "utokyo_omelet_12_1001_2": {
+      "mean_mm": 0.27454522252082825,
+      "max_mm": 0.7712181210517883,
+      "body_mean_mm": 0.1519218236207962,
+      "body_max_mm": 0.6466512084007263,
+      "hands_mean_mm": 0.35627591609954834,
+      "hands_max_mm": 0.41379931569099426
+    },
+    "utokyo_omelet_6_1001_4": {
+      "mean_mm": 0.22213999927043915,
+      "max_mm": 0.8170533776283264,
+      "body_mean_mm": 0.12486319243907928,
+      "body_max_mm": 0.6267623901367188,
+      "hands_mean_mm": 0.2854262888431549,
+      "hands_max_mm": 0.3282710015773773
+    },
+    "utokyo_pcr_2001_33_6": {
+      "mean_mm": 0.5497170686721802,
+      "max_mm": 0.8611538410186768,
+      "body_mean_mm": 0.30288729071617126,
+      "body_max_mm": 0.7238569259643555,
+      "hands_mean_mm": 0.7490300536155701,
+      "hands_max_mm": 0.8611538410186768
+    }
+  },
+  "sequences": 60,
+  "cache_sha256": "e3920d6ae0ef0b34a641cfff6f4a2e07dfe0c452d70a2f2902de0d6c825496ff",
+  "completed": true
+}

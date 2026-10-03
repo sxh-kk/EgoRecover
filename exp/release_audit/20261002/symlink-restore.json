@@ -1,0 +1,29 @@
+{
+  "status": "proposed_restore_map_no_links_changed",
+  "aliases": [
+    {
+      "path": "exp/egorecover_observation_reference/v1/data",
+      "canonical_target": "exp/egorecover_g_pretraining/v1/data",
+      "relative_link_target": "../../egorecover_g_pretraining/v1/data",
+      "exists": true
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/prior",
+      "canonical_target": "exp/egorecover_g_pretraining/v1/prior",
+      "relative_link_target": "../../egorecover_g_pretraining/v1/prior",
+      "exists": true
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/data",
+      "canonical_target": "exp/egorecover_g_pretraining/v1/data",
+      "relative_link_target": "../../egorecover_g_pretraining/v1/data",
+      "exists": true
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/prior",
+      "canonical_target": "exp/egorecover_g_pretraining/v1/prior",
+      "relative_link_target": "../../egorecover_g_pretraining/v1/prior",
+      "exists": true
+    }
+  ]
+}

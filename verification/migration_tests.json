@@ -1,0 +1,9 @@
+{
+  "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest tests data_pipeline/tests -q",
+  "date": "2026-10-02",
+  "passed": 183,
+  "failed": 0,
+  "warnings": 5,
+  "seconds": 63.65,
+  "environment": "egorecover Python3.11, existing CUDA-compatible torch; tests ran on CPU"
+}

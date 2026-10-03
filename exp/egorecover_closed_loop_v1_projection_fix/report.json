@@ -1,0 +1,18 @@
+{
+  "scope": "closed_loop_stability_only",
+  "initialization": "random E7; not pretrained",
+  "bootstrap_is_trained": false,
+  "history_source": "model_predictions_only; no resets",
+  "take": "iiith_soccer_002_2",
+  "metric": "dense22_world_position_error_mm; not SMPL FK",
+  "results": [
+    {
+      "source_mode": "history",
+      "variant": "clean",
+      "completed": false,
+      "error": "prior_mu has NaN/Inf at an unmasked position.",
+      "last_requested_frame": 98
+    }
+  ],
+  "completed": false
+}

@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "unit_tests": 27,
+  "groups": {
+    "T0": {
+      "report_sha256": "f2688893e33036eb34149f6933767d363a560862e07ca2cc88b93b8f0facfb84",
+      "passed": true
+    },
+    "T1": {
+      "report_sha256": "8131fcafcd97f2dec4176d794047dc5867d56fe575d8a1fd683bc7b35fd37efb",
+      "passed": true
+    },
+    "T2": {
+      "report_sha256": "9db4ce775c21dc0f6ad406f2b3a2e447c853cf1e3fe7a824f59d3c87af3f3541",
+      "passed": true
+    },
+    "T3": {
+      "report_sha256": "ac38636ade0accc224f5d037bb84b9c1df75e553e8e9d74976ce2f324d1d7a9a",
+      "passed": true
+    }
+  },
+  "real_episodes": 3,
+  "code_sha256": {
+    "run/g_pretraining_experiment.py": "a070c5ea568a9cc9b89a28f4e27f6383b4e613c1ea3ccf0f2205b16c904b3190",
+    "run/g_pretraining_data.py": "25e6b39ea0713299a3102e32beb4210022cd310ecc416fa09314b523ee485212",
+    "run/train_g_pretraining.py": "9ff095d5a61ae44be16624366e8c7d46fff312ba7ce5b38712fa8e63e120e8c9",
+    "egorecover/g_pretraining.py": "353c56c253390e14bda823e894585431e1b2387306064ff0205a065ad937d23a",
+    "egorecover/conditioning.py": "e325258cd60f62a8c3bb05cfe9f9ef437c24b2cf3b21357f6b3992beeb7d9432",
+    "model/history_uniegomotion.py": "4fe5c530e8e255b1d9982ddcd509e2e2a87566cae9160dede3546a1d707b0189",
+    "model/uniegomotion.py": "a2bf0fcb08ea401335711440d76cc9d18e267d54970a24884b2b2f1dc4f30f5c",
+    "egorecover/history_flow.py": "9b9cc6d62c55b0f569fbe14bfd5449d82ddf83d7cdd89af745f6c5acb00ee86f",
+    "egorecover/codec.py": "109517b8ac9d3288d8bafb6d44b6b98632cefebaa4139d80d62f4f0a25d05443",
+    "egorecover/losses.py": "047adb771c123306ac8f5974877c55c03c21d29c12c68215627a44b44c0e8ab3",
+    "egorecover/fk.py": "37e10adb2c07db8baaf4ccf9fce60429c35d059d943d6b06f33a668adf58521b",
+    "egorecover/e7_ablation.py": "78e806aa7258e3125bcfb04043954fa09d7bafb1a07f239d75a451858b08b6e5",
+    "egorecover/annotations.py": "e36e552b7aab6ba65ac02387c19b60f36c6deeb3343a688ba1f01e802667ffa5",
+    "egorecover/prior.py": "00918a4c1477207fb773af8b9cab1ae1466b90e47fe4c17da6c99ddb5e55eae7",
+    "egorecover/prior_cv_residual.py": "242e62713c216f4545fa9a45776d261a320a2c1060c22c3bff0badfdd12a25b1",
+    "egorecover/prior_two_forward.py": "9b77f022049f45ce5ac429b6611bd77a04e4f104674a1a11c71ff816ff086e0b",
+    "mydiffusion/flow_matching.py": "18bcf9b45ccf4cb2c7b50a943b1704c4400ff0c38a0ae9aa7d2f05aca6ad4009",
+    "config/egorecover_g_pretraining_v1.json": "8f98fb0d602cf1e299717c2e2d53ecebfba1f723640ef6ffd1c32a3e58f169c5"
+  },
+  "max_native_decode_abs_m": 1.1920928955078125e-07,
+  "max_smpl_audit_mm": 1.715378999710083,
+  "meaning": "Execution and numerical checks only; two optimizer steps are not an accuracy experiment."
+}

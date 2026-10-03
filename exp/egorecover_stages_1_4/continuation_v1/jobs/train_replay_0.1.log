@@ -1,0 +1,289 @@
+2026-09-29 02:38:49.673 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+Preparing take-disjoint teacher-forced engineering batches
+P 20/400: train=0.199871 dev_mse=0.098679 dev_mm=26.387
+P 40/400: train=0.125722 dev_mse=0.094950 dev_mm=25.554
+P 60/400: train=0.165816 dev_mse=0.092433 dev_mm=26.052
+P 80/400: train=0.171616 dev_mse=0.091130 dev_mm=25.909
+P 100/400: train=0.133377 dev_mse=0.090129 dev_mm=25.711
+P 120/400: train=0.177192 dev_mse=0.089910 dev_mm=26.061
+P 140/400: train=0.106193 dev_mse=0.092119 dev_mm=25.805
+P 160/400: train=0.179506 dev_mse=0.091124 dev_mm=26.250
+P 180/400: train=0.119786 dev_mse=0.094473 dev_mm=26.220
+P 200/400: train=0.129348 dev_mse=0.091039 dev_mm=25.574
+P 220/400: train=0.103714 dev_mse=0.091897 dev_mm=26.108
+P 240/400: train=0.072333 dev_mse=0.090704 dev_mm=26.274
+P 260/400: train=0.129755 dev_mse=0.091006 dev_mm=26.190
+P 280/400: train=0.248389 dev_mse=0.091804 dev_mm=27.008
+P 300/400: train=0.157502 dev_mse=0.091594 dev_mm=25.817
+P 320/400: train=0.118935 dev_mse=0.102827 dev_mm=26.186
+P 340/400: train=0.136616 dev_mse=0.092775 dev_mm=26.049
+P 360/400: train=0.106845 dev_mse=0.093279 dev_mm=25.482
+P 380/400: train=0.128979 dev_mse=0.096252 dev_mm=25.311
+P 400/400: train=0.353491 dev_mse=0.098079 dev_mm=25.602
+G/gaussian 20/400: train=0.296730
+G/gaussian 40/400: train=0.710696
+G/gaussian 60/400: train=0.269110
+G/gaussian 80/400: train=0.222964
+G/gaussian 100/400: train=0.194073
+G/gaussian 120/400: train=0.229190
+G/gaussian 140/400: train=0.205974
+G/gaussian 160/400: train=0.214659
+G/gaussian 180/400: train=0.170519
+G/gaussian 200/400: train=0.206736
+G/gaussian dev sample 200: 213.188 mm (closed_loop_fk)
+G/gaussian 220/400: train=0.228727
+G/gaussian 240/400: train=0.173727
+G/gaussian 260/400: train=0.158918
+G/gaussian 280/400: train=0.194856
+G/gaussian 300/400: train=0.238558
+G/gaussian 320/400: train=0.146307
+G/gaussian 340/400: train=0.232584
+G/gaussian 360/400: train=0.182682
+G/gaussian 380/400: train=0.154214
+G/gaussian 400/400: train=0.179421
+G/gaussian dev sample 400: 236.851 mm (closed_loop_fk)
+{
+  "dev_loss_before": 0.06840648502111435,
+  "dev_loss_after": 0.06427360326051712,
+  "selected_step": 200,
+  "curve": [
+    {
+      "step": 20,
+      "train_loss": 0.29673004150390625
+    },
+    {
+      "step": 40,
+      "train_loss": 0.7106955051422119
+    },
+    {
+      "step": 60,
+      "train_loss": 0.2691100537776947
+    },
+    {
+      "step": 80,
+      "train_loss": 0.2229640930891037
+    },
+    {
+      "step": 100,
+      "train_loss": 0.1940731704235077
+    },
+    {
+      "step": 120,
+      "train_loss": 0.22918981313705444
+    },
+    {
+      "step": 140,
+      "train_loss": 0.2059735357761383
+    },
+    {
+      "step": 160,
+      "train_loss": 0.21465903520584106
+    },
+    {
+      "step": 180,
+      "train_loss": 0.17051857709884644
+    },
+    {
+      "step": 200,
+      "train_loss": 0.20673586428165436
+    },
+    {
+      "step": 200,
+      "train_loss": 0.20673586428165436,
+      "dev_sample_closed_loop_fk22_mm": 213.1875529885292
+    },
+    {
+      "step": 220,
+      "train_loss": 0.22872695326805115
+    },
+    {
+      "step": 240,
+      "train_loss": 0.17372721433639526
+    },
+    {
+      "step": 260,
+      "train_loss": 0.15891754627227783
+    },
+    {
+      "step": 280,
+      "train_loss": 0.1948564052581787
+    },
+    {
+      "step": 300,
+      "train_loss": 0.2385575771331787
+    },
+    {
+      "step": 320,
+      "train_loss": 0.14630675315856934
+    },
+    {
+      "step": 340,
+      "train_loss": 0.23258399963378906
+    },
+    {
+      "step": 360,
+      "train_loss": 0.18268239498138428
+    },
+    {
+      "step": 380,
+      "train_loss": 0.15421408414840698
+    },
+    {
+      "step": 400,
+      "train_loss": 0.17942143976688385
+    },
+    {
+      "step": 400,
+      "train_loss": 0.17942143976688385,
+      "dev_sample_closed_loop_fk22_mm": 236.85065160195032
+    }
+  ],
+  "dense22_mm_per_action": {
+    "a11": 49.67107391357422,
+    "a10": 51.778106689453125,
+    "a01": 49.55217361450195,
+    "a00": 51.738853454589844
+  },
+  "dense22_oracle_gap_mm": 1.2294150590896606,
+  "oracle_action_counts": [
+    23,
+    11,
+    19,
+    11
+  ],
+  "checkpoint_sha256": "41a3d296ff402a4b9f56f37dea669ddf97d7d7c130e83930c3ffb9df0b3286a9"
+}
+G/history 20/400: train=0.205035
+G/history 40/400: train=0.328268
+G/history 60/400: train=0.229150
+G/history 80/400: train=0.194637
+G/history 100/400: train=0.141369
+G/history 120/400: train=0.170927
+G/history 140/400: train=0.139665
+G/history 160/400: train=0.160465
+G/history 180/400: train=0.108591
+G/history 200/400: train=0.164975
+G/history dev sample 200: 180.407 mm (closed_loop_fk)
+G/history 220/400: train=0.138259
+G/history 240/400: train=0.127170
+G/history 260/400: train=0.132613
+G/history 280/400: train=0.132166
+G/history 300/400: train=0.174105
+G/history 320/400: train=0.097998
+G/history 340/400: train=0.166926
+G/history 360/400: train=0.130924
+G/history 380/400: train=0.118797
+G/history 400/400: train=0.108368
+G/history dev sample 400: 189.287 mm (closed_loop_fk)
+{
+  "dev_loss_before": 0.07090361416339874,
+  "dev_loss_after": 0.06490141898393631,
+  "selected_step": 200,
+  "curve": [
+    {
+      "step": 20,
+      "train_loss": 0.2050350308418274
+    },
+    {
+      "step": 40,
+      "train_loss": 0.32826849818229675
+    },
+    {
+      "step": 60,
+      "train_loss": 0.22915023565292358
+    },
+    {
+      "step": 80,
+      "train_loss": 0.1946372389793396
+    },
+    {
+      "step": 100,
+      "train_loss": 0.1413690745830536
+    },
+    {
+      "step": 120,
+      "train_loss": 0.1709272563457489
+    },
+    {
+      "step": 140,
+      "train_loss": 0.13966524600982666
+    },
+    {
+      "step": 160,
+      "train_loss": 0.16046495735645294
+    },
+    {
+      "step": 180,
+      "train_loss": 0.10859134793281555
+    },
+    {
+      "step": 200,
+      "train_loss": 0.1649748980998993
+    },
+    {
+      "step": 200,
+      "train_loss": 0.1649748980998993,
+      "dev_sample_closed_loop_fk22_mm": 180.4072018712759
+    },
+    {
+      "step": 220,
+      "train_loss": 0.13825877010822296
+    },
+    {
+      "step": 240,
+      "train_loss": 0.12717045843601227
+    },
+    {
+      "step": 260,
+      "train_loss": 0.1326126903295517
+    },
+    {
+      "step": 280,
+      "train_loss": 0.13216592371463776
+    },
+    {
+      "step": 300,
+      "train_loss": 0.17410464584827423
+    },
+    {
+      "step": 320,
+      "train_loss": 0.09799832850694656
+    },
+    {
+      "step": 340,
+      "train_loss": 0.1669263243675232
+    },
+    {
+      "step": 360,
+      "train_loss": 0.13092383742332458
+    },
+    {
+      "step": 380,
+      "train_loss": 0.11879737675189972
+    },
+    {
+      "step": 400,
+      "train_loss": 0.10836811363697052
+    },
+    {
+      "step": 400,
+      "train_loss": 0.10836811363697052,
+      "dev_sample_closed_loop_fk22_mm": 189.2866094907125
+    }
+  ],
+  "dense22_mm_per_action": {
+    "a11": 47.568626403808594,
+    "a10": 50.31175231933594,
+    "a01": 47.56489944458008,
+    "a00": 50.31964111328125
+  },
+  "dense22_oracle_gap_mm": 0.7027370929718018,
+  "oracle_action_counts": [
+    25,
+    5,
+    26,
+    8
+  ],
+  "checkpoint_sha256": "7cef11eb646929f74f76e2267bf72cb41698ac1eae69d73eeaa910aabe4c620a"
+}
+Saved pilot to exp/egorecover_stages_1_4/continuation_v1/stage3_train/replay_0; G selection=closed_loop_fk; independent validation remains separate.

@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.prepare_prior_sequences",
+    "--output",
+    "exp/egorecover_prior_two_forward/v1/data"
+  ],
+  "gpu": 4
+}

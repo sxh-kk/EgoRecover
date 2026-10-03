@@ -1,0 +1,1536 @@
+2026-09-29 00:00:48.704 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+Preparing take-disjoint teacher-forced engineering batches
+G/history 20/2400: train=0.081709
+G/history components: {'loss': 0.08170881122350693, 'representation': 0.08170881122350693, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 40/2400: train=0.075760
+G/history components: {'loss': 0.0757596492767334, 'representation': 0.0757596492767334, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 60/2400: train=0.066897
+G/history components: {'loss': 0.06689652800559998, 'representation': 0.06689652800559998, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 80/2400: train=0.070586
+G/history components: {'loss': 0.07058603316545486, 'representation': 0.07058603316545486, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 100/2400: train=0.060967
+G/history components: {'loss': 0.060967277735471725, 'representation': 0.060967277735471725, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 120/2400: train=0.070825
+G/history components: {'loss': 0.0708254873752594, 'representation': 0.0708254873752594, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 140/2400: train=0.046971
+G/history components: {'loss': 0.04697053134441376, 'representation': 0.04697053134441376, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 160/2400: train=0.065617
+G/history components: {'loss': 0.06561705470085144, 'representation': 0.06561705470085144, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 180/2400: train=0.105683
+G/history components: {'loss': 0.10568299889564514, 'representation': 0.10568299889564514, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 200/2400: train=0.057717
+G/history components: {'loss': 0.05771724134683609, 'representation': 0.05771724134683609, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 200: 207.259 mm (closed_loop_fk)
+G/history 220/2400: train=0.053990
+G/history components: {'loss': 0.053989578038454056, 'representation': 0.053989578038454056, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 240/2400: train=0.064067
+G/history components: {'loss': 0.0640665590763092, 'representation': 0.0640665590763092, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 260/2400: train=0.057875
+G/history components: {'loss': 0.05787520483136177, 'representation': 0.05787520483136177, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 280/2400: train=0.063318
+G/history components: {'loss': 0.06331827491521835, 'representation': 0.06331827491521835, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 300/2400: train=0.064022
+G/history components: {'loss': 0.06402178853750229, 'representation': 0.06402178853750229, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 320/2400: train=0.046333
+G/history components: {'loss': 0.0463334321975708, 'representation': 0.0463334321975708, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 340/2400: train=0.075062
+G/history components: {'loss': 0.07506164163351059, 'representation': 0.07506164163351059, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 360/2400: train=0.072765
+G/history components: {'loss': 0.07276464998722076, 'representation': 0.07276464998722076, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 380/2400: train=0.054100
+G/history components: {'loss': 0.054099760949611664, 'representation': 0.054099760949611664, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 400/2400: train=0.060105
+G/history components: {'loss': 0.06010498106479645, 'representation': 0.06010498106479645, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 400: 232.125 mm (closed_loop_fk)
+G/history 420/2400: train=0.088394
+G/history components: {'loss': 0.08839379996061325, 'representation': 0.08839379996061325, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 440/2400: train=0.042331
+G/history components: {'loss': 0.04233139753341675, 'representation': 0.04233139753341675, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 460/2400: train=0.059626
+G/history components: {'loss': 0.05962565541267395, 'representation': 0.05962565541267395, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 480/2400: train=0.051773
+G/history components: {'loss': 0.05177280306816101, 'representation': 0.05177280306816101, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 500/2400: train=0.049908
+G/history components: {'loss': 0.049908120185136795, 'representation': 0.049908120185136795, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 520/2400: train=0.037845
+G/history components: {'loss': 0.03784482553601265, 'representation': 0.03784482553601265, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 540/2400: train=0.049651
+G/history components: {'loss': 0.04965094104409218, 'representation': 0.04965094104409218, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 560/2400: train=0.047348
+G/history components: {'loss': 0.04734751209616661, 'representation': 0.04734751209616661, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 580/2400: train=0.052135
+G/history components: {'loss': 0.05213485658168793, 'representation': 0.05213485658168793, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 600/2400: train=0.055219
+G/history components: {'loss': 0.05521872639656067, 'representation': 0.05521872639656067, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 600: 271.904 mm (closed_loop_fk)
+G/history 620/2400: train=0.057727
+G/history components: {'loss': 0.057726748287677765, 'representation': 0.057726748287677765, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 640/2400: train=0.053331
+G/history components: {'loss': 0.053330522030591965, 'representation': 0.053330522030591965, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 660/2400: train=0.056245
+G/history components: {'loss': 0.05624491721391678, 'representation': 0.05624491721391678, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 680/2400: train=0.050008
+G/history components: {'loss': 0.05000767111778259, 'representation': 0.05000767111778259, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 700/2400: train=0.050550
+G/history components: {'loss': 0.05054992437362671, 'representation': 0.05054992437362671, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 720/2400: train=0.049645
+G/history components: {'loss': 0.04964450001716614, 'representation': 0.04964450001716614, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 740/2400: train=0.051145
+G/history components: {'loss': 0.05114496871829033, 'representation': 0.05114496871829033, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 760/2400: train=0.047769
+G/history components: {'loss': 0.047768644988536835, 'representation': 0.047768644988536835, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 780/2400: train=0.061048
+G/history components: {'loss': 0.06104796379804611, 'representation': 0.06104796379804611, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 800/2400: train=0.057286
+G/history components: {'loss': 0.05728568136692047, 'representation': 0.05728568136692047, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 800: 220.560 mm (closed_loop_fk)
+G/history 820/2400: train=0.059989
+G/history components: {'loss': 0.05998928099870682, 'representation': 0.05998928099870682, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 840/2400: train=0.049890
+G/history components: {'loss': 0.04989026114344597, 'representation': 0.04989026114344597, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 860/2400: train=0.056559
+G/history components: {'loss': 0.05655853450298309, 'representation': 0.05655853450298309, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 880/2400: train=0.061462
+G/history components: {'loss': 0.06146218255162239, 'representation': 0.06146218255162239, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 900/2400: train=0.052078
+G/history components: {'loss': 0.052077703177928925, 'representation': 0.052077703177928925, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 920/2400: train=0.045354
+G/history components: {'loss': 0.04535366967320442, 'representation': 0.04535366967320442, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 940/2400: train=0.051796
+G/history components: {'loss': 0.051796406507492065, 'representation': 0.051796406507492065, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 960/2400: train=0.055293
+G/history components: {'loss': 0.055293112993240356, 'representation': 0.055293112993240356, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 980/2400: train=0.030642
+G/history components: {'loss': 0.030641749501228333, 'representation': 0.030641749501228333, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1000/2400: train=0.041599
+G/history components: {'loss': 0.04159868508577347, 'representation': 0.04159868508577347, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 1000: 254.981 mm (closed_loop_fk)
+G/history 1020/2400: train=0.054941
+G/history components: {'loss': 0.05494053661823273, 'representation': 0.05494053661823273, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1040/2400: train=0.053593
+G/history components: {'loss': 0.053593434393405914, 'representation': 0.053593434393405914, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1060/2400: train=0.038630
+G/history components: {'loss': 0.038629788905382156, 'representation': 0.038629788905382156, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1080/2400: train=0.043323
+G/history components: {'loss': 0.043322738260030746, 'representation': 0.043322738260030746, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1100/2400: train=0.050864
+G/history components: {'loss': 0.050863996148109436, 'representation': 0.050863996148109436, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1120/2400: train=0.042575
+G/history components: {'loss': 0.04257543757557869, 'representation': 0.04257543757557869, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1140/2400: train=0.047599
+G/history components: {'loss': 0.047598883509635925, 'representation': 0.047598883509635925, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1160/2400: train=0.039953
+G/history components: {'loss': 0.03995298221707344, 'representation': 0.03995298221707344, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1180/2400: train=0.038067
+G/history components: {'loss': 0.03806683421134949, 'representation': 0.03806683421134949, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1200/2400: train=0.051167
+G/history components: {'loss': 0.051166534423828125, 'representation': 0.051166534423828125, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 1200: 198.855 mm (closed_loop_fk)
+G/history 1220/2400: train=0.065693
+G/history components: {'loss': 0.06569317728281021, 'representation': 0.06569317728281021, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1240/2400: train=0.047094
+G/history components: {'loss': 0.04709369316697121, 'representation': 0.04709369316697121, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1260/2400: train=0.144217
+G/history components: {'loss': 0.144217386841774, 'representation': 0.144217386841774, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1280/2400: train=0.040092
+G/history components: {'loss': 0.04009152948856354, 'representation': 0.04009152948856354, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1300/2400: train=0.038418
+G/history components: {'loss': 0.03841779753565788, 'representation': 0.03841779753565788, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1320/2400: train=0.041689
+G/history components: {'loss': 0.041689399629831314, 'representation': 0.041689399629831314, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1340/2400: train=0.047864
+G/history components: {'loss': 0.04786374792456627, 'representation': 0.04786374792456627, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1360/2400: train=0.084853
+G/history components: {'loss': 0.08485335111618042, 'representation': 0.08485335111618042, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1380/2400: train=0.118490
+G/history components: {'loss': 0.11849047988653183, 'representation': 0.11849047988653183, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1400/2400: train=0.030552
+G/history components: {'loss': 0.030551735311746597, 'representation': 0.030551735311746597, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 1400: 186.283 mm (closed_loop_fk)
+G/history 1420/2400: train=0.050716
+G/history components: {'loss': 0.05071647837758064, 'representation': 0.05071647837758064, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1440/2400: train=0.049734
+G/history components: {'loss': 0.049733515828847885, 'representation': 0.049733515828847885, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1460/2400: train=0.054302
+G/history components: {'loss': 0.05430165305733681, 'representation': 0.05430165305733681, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1480/2400: train=0.040074
+G/history components: {'loss': 0.04007359594106674, 'representation': 0.04007359594106674, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1500/2400: train=0.042935
+G/history components: {'loss': 0.042934518307447433, 'representation': 0.042934518307447433, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1520/2400: train=0.065001
+G/history components: {'loss': 0.06500101834535599, 'representation': 0.06500101834535599, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1540/2400: train=0.040065
+G/history components: {'loss': 0.04006452485918999, 'representation': 0.04006452485918999, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1560/2400: train=0.042728
+G/history components: {'loss': 0.04272845387458801, 'representation': 0.04272845387458801, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1580/2400: train=0.053001
+G/history components: {'loss': 0.05300143361091614, 'representation': 0.05300143361091614, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1600/2400: train=0.030958
+G/history components: {'loss': 0.030958181247115135, 'representation': 0.030958181247115135, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 1600: 236.542 mm (closed_loop_fk)
+G/history 1620/2400: train=0.055228
+G/history components: {'loss': 0.05522764101624489, 'representation': 0.05522764101624489, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1640/2400: train=0.031150
+G/history components: {'loss': 0.031149517744779587, 'representation': 0.031149517744779587, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1660/2400: train=0.057875
+G/history components: {'loss': 0.057875052094459534, 'representation': 0.057875052094459534, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1680/2400: train=0.036017
+G/history components: {'loss': 0.03601684421300888, 'representation': 0.03601684421300888, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1700/2400: train=0.037172
+G/history components: {'loss': 0.03717204928398132, 'representation': 0.03717204928398132, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1720/2400: train=0.042238
+G/history components: {'loss': 0.042238302528858185, 'representation': 0.042238302528858185, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1740/2400: train=0.043250
+G/history components: {'loss': 0.043249666690826416, 'representation': 0.043249666690826416, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1760/2400: train=0.048447
+G/history components: {'loss': 0.04844734072685242, 'representation': 0.04844734072685242, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1780/2400: train=0.049638
+G/history components: {'loss': 0.04963827505707741, 'representation': 0.04963827505707741, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1800/2400: train=0.052224
+G/history components: {'loss': 0.052224237471818924, 'representation': 0.052224237471818924, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 1800: 208.348 mm (closed_loop_fk)
+G/history 1820/2400: train=0.037325
+G/history components: {'loss': 0.037324730306863785, 'representation': 0.037324730306863785, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1840/2400: train=0.028906
+G/history components: {'loss': 0.028905855491757393, 'representation': 0.028905855491757393, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1860/2400: train=0.047075
+G/history components: {'loss': 0.04707502946257591, 'representation': 0.04707502946257591, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1880/2400: train=0.065081
+G/history components: {'loss': 0.06508064270019531, 'representation': 0.06508064270019531, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1900/2400: train=0.087237
+G/history components: {'loss': 0.08723707497119904, 'representation': 0.08723707497119904, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1920/2400: train=0.032565
+G/history components: {'loss': 0.03256528079509735, 'representation': 0.03256528079509735, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1940/2400: train=0.045264
+G/history components: {'loss': 0.04526442661881447, 'representation': 0.04526442661881447, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1960/2400: train=0.045432
+G/history components: {'loss': 0.04543200135231018, 'representation': 0.04543200135231018, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 1980/2400: train=0.042547
+G/history components: {'loss': 0.04254709556698799, 'representation': 0.04254709556698799, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2000/2400: train=0.080953
+G/history components: {'loss': 0.08095304667949677, 'representation': 0.08095304667949677, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 2000: 198.828 mm (closed_loop_fk)
+G/history 2020/2400: train=0.459127
+G/history components: {'loss': 0.459127277135849, 'representation': 0.459127277135849, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2040/2400: train=0.039191
+G/history components: {'loss': 0.03919071704149246, 'representation': 0.03919071704149246, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2060/2400: train=0.040349
+G/history components: {'loss': 0.04034940153360367, 'representation': 0.04034940153360367, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2080/2400: train=0.047504
+G/history components: {'loss': 0.04750418663024902, 'representation': 0.04750418663024902, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2100/2400: train=0.037346
+G/history components: {'loss': 0.037346091121435165, 'representation': 0.037346091121435165, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2120/2400: train=0.028423
+G/history components: {'loss': 0.028422517701983452, 'representation': 0.028422517701983452, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2140/2400: train=0.031725
+G/history components: {'loss': 0.031725406646728516, 'representation': 0.031725406646728516, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2160/2400: train=0.052714
+G/history components: {'loss': 0.052713505923748016, 'representation': 0.052713505923748016, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2180/2400: train=0.057387
+G/history components: {'loss': 0.05738675221800804, 'representation': 0.05738675221800804, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2200/2400: train=0.035806
+G/history components: {'loss': 0.03580600023269653, 'representation': 0.03580600023269653, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 2200: 234.632 mm (closed_loop_fk)
+G/history 2220/2400: train=0.037473
+G/history components: {'loss': 0.037473004311323166, 'representation': 0.037473004311323166, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2240/2400: train=0.052752
+G/history components: {'loss': 0.05275232717394829, 'representation': 0.05275232717394829, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2260/2400: train=0.044220
+G/history components: {'loss': 0.04422006383538246, 'representation': 0.04422006383538246, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2280/2400: train=0.040488
+G/history components: {'loss': 0.040487948805093765, 'representation': 0.040487948805093765, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2300/2400: train=0.065400
+G/history components: {'loss': 0.06540048122406006, 'representation': 0.06540048122406006, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2320/2400: train=0.115314
+G/history components: {'loss': 0.11531355232000351, 'representation': 0.11531355232000351, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2340/2400: train=0.041433
+G/history components: {'loss': 0.0414329431951046, 'representation': 0.0414329431951046, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2360/2400: train=0.040932
+G/history components: {'loss': 0.04093151167035103, 'representation': 0.04093151167035103, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2380/2400: train=0.050822
+G/history components: {'loss': 0.05082212761044502, 'representation': 0.05082212761044502, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history 2400/2400: train=0.031550
+G/history components: {'loss': 0.03155045583844185, 'representation': 0.03155045583844185, 'weighted_dense': 0.0, 'weighted_fk': 0.0}
+G/history dev sample 2400: 192.558 mm (closed_loop_fk)
+{
+  "dev_loss_before": 0.31224191188812256,
+  "dev_loss_after": 0.06590917706489563,
+  "selected_step": 1400,
+  "curve": [
+    {
+      "step": 20,
+      "train_loss": 0.08170881122350693,
+      "loss_components": {
+        "loss": 0.08170881122350693,
+        "representation": 0.08170881122350693,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 40,
+      "train_loss": 0.0757596492767334,
+      "loss_components": {
+        "loss": 0.0757596492767334,
+        "representation": 0.0757596492767334,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 60,
+      "train_loss": 0.06689652800559998,
+      "loss_components": {
+        "loss": 0.06689652800559998,
+        "representation": 0.06689652800559998,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 80,
+      "train_loss": 0.07058603316545486,
+      "loss_components": {
+        "loss": 0.07058603316545486,
+        "representation": 0.07058603316545486,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 100,
+      "train_loss": 0.060967277735471725,
+      "loss_components": {
+        "loss": 0.060967277735471725,
+        "representation": 0.060967277735471725,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 120,
+      "train_loss": 0.0708254873752594,
+      "loss_components": {
+        "loss": 0.0708254873752594,
+        "representation": 0.0708254873752594,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 140,
+      "train_loss": 0.04697053134441376,
+      "loss_components": {
+        "loss": 0.04697053134441376,
+        "representation": 0.04697053134441376,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 160,
+      "train_loss": 0.06561705470085144,
+      "loss_components": {
+        "loss": 0.06561705470085144,
+        "representation": 0.06561705470085144,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 180,
+      "train_loss": 0.10568299889564514,
+      "loss_components": {
+        "loss": 0.10568299889564514,
+        "representation": 0.10568299889564514,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 200,
+      "train_loss": 0.05771724134683609,
+      "loss_components": {
+        "loss": 0.05771724134683609,
+        "representation": 0.05771724134683609,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 200,
+      "train_loss": 0.05771724134683609,
+      "dev_sample_closed_loop_fk22_mm": 207.25884474813938
+    },
+    {
+      "step": 220,
+      "train_loss": 0.053989578038454056,
+      "loss_components": {
+        "loss": 0.053989578038454056,
+        "representation": 0.053989578038454056,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 240,
+      "train_loss": 0.0640665590763092,
+      "loss_components": {
+        "loss": 0.0640665590763092,
+        "representation": 0.0640665590763092,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 260,
+      "train_loss": 0.05787520483136177,
+      "loss_components": {
+        "loss": 0.05787520483136177,
+        "representation": 0.05787520483136177,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 280,
+      "train_loss": 0.06331827491521835,
+      "loss_components": {
+        "loss": 0.06331827491521835,
+        "representation": 0.06331827491521835,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 300,
+      "train_loss": 0.06402178853750229,
+      "loss_components": {
+        "loss": 0.06402178853750229,
+        "representation": 0.06402178853750229,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 320,
+      "train_loss": 0.0463334321975708,
+      "loss_components": {
+        "loss": 0.0463334321975708,
+        "representation": 0.0463334321975708,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 340,
+      "train_loss": 0.07506164163351059,
+      "loss_components": {
+        "loss": 0.07506164163351059,
+        "representation": 0.07506164163351059,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 360,
+      "train_loss": 0.07276464998722076,
+      "loss_components": {
+        "loss": 0.07276464998722076,
+        "representation": 0.07276464998722076,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 380,
+      "train_loss": 0.054099760949611664,
+      "loss_components": {
+        "loss": 0.054099760949611664,
+        "representation": 0.054099760949611664,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 400,
+      "train_loss": 0.06010498106479645,
+      "loss_components": {
+        "loss": 0.06010498106479645,
+        "representation": 0.06010498106479645,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 400,
+      "train_loss": 0.06010498106479645,
+      "dev_sample_closed_loop_fk22_mm": 232.12486878037453
+    },
+    {
+      "step": 420,
+      "train_loss": 0.08839379996061325,
+      "loss_components": {
+        "loss": 0.08839379996061325,
+        "representation": 0.08839379996061325,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 440,
+      "train_loss": 0.04233139753341675,
+      "loss_components": {
+        "loss": 0.04233139753341675,
+        "representation": 0.04233139753341675,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 460,
+      "train_loss": 0.05962565541267395,
+      "loss_components": {
+        "loss": 0.05962565541267395,
+        "representation": 0.05962565541267395,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 480,
+      "train_loss": 0.05177280306816101,
+      "loss_components": {
+        "loss": 0.05177280306816101,
+        "representation": 0.05177280306816101,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 500,
+      "train_loss": 0.049908120185136795,
+      "loss_components": {
+        "loss": 0.049908120185136795,
+        "representation": 0.049908120185136795,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 520,
+      "train_loss": 0.03784482553601265,
+      "loss_components": {
+        "loss": 0.03784482553601265,
+        "representation": 0.03784482553601265,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 540,
+      "train_loss": 0.04965094104409218,
+      "loss_components": {
+        "loss": 0.04965094104409218,
+        "representation": 0.04965094104409218,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 560,
+      "train_loss": 0.04734751209616661,
+      "loss_components": {
+        "loss": 0.04734751209616661,
+        "representation": 0.04734751209616661,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 580,
+      "train_loss": 0.05213485658168793,
+      "loss_components": {
+        "loss": 0.05213485658168793,
+        "representation": 0.05213485658168793,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 600,
+      "train_loss": 0.05521872639656067,
+      "loss_components": {
+        "loss": 0.05521872639656067,
+        "representation": 0.05521872639656067,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 600,
+      "train_loss": 0.05521872639656067,
+      "dev_sample_closed_loop_fk22_mm": 271.90405999620754
+    },
+    {
+      "step": 620,
+      "train_loss": 0.057726748287677765,
+      "loss_components": {
+        "loss": 0.057726748287677765,
+        "representation": 0.057726748287677765,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 640,
+      "train_loss": 0.053330522030591965,
+      "loss_components": {
+        "loss": 0.053330522030591965,
+        "representation": 0.053330522030591965,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 660,
+      "train_loss": 0.05624491721391678,
+      "loss_components": {
+        "loss": 0.05624491721391678,
+        "representation": 0.05624491721391678,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 680,
+      "train_loss": 0.05000767111778259,
+      "loss_components": {
+        "loss": 0.05000767111778259,
+        "representation": 0.05000767111778259,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 700,
+      "train_loss": 0.05054992437362671,
+      "loss_components": {
+        "loss": 0.05054992437362671,
+        "representation": 0.05054992437362671,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 720,
+      "train_loss": 0.04964450001716614,
+      "loss_components": {
+        "loss": 0.04964450001716614,
+        "representation": 0.04964450001716614,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 740,
+      "train_loss": 0.05114496871829033,
+      "loss_components": {
+        "loss": 0.05114496871829033,
+        "representation": 0.05114496871829033,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 760,
+      "train_loss": 0.047768644988536835,
+      "loss_components": {
+        "loss": 0.047768644988536835,
+        "representation": 0.047768644988536835,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 780,
+      "train_loss": 0.06104796379804611,
+      "loss_components": {
+        "loss": 0.06104796379804611,
+        "representation": 0.06104796379804611,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 800,
+      "train_loss": 0.05728568136692047,
+      "loss_components": {
+        "loss": 0.05728568136692047,
+        "representation": 0.05728568136692047,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 800,
+      "train_loss": 0.05728568136692047,
+      "dev_sample_closed_loop_fk22_mm": 220.56042030453682
+    },
+    {
+      "step": 820,
+      "train_loss": 0.05998928099870682,
+      "loss_components": {
+        "loss": 0.05998928099870682,
+        "representation": 0.05998928099870682,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 840,
+      "train_loss": 0.04989026114344597,
+      "loss_components": {
+        "loss": 0.04989026114344597,
+        "representation": 0.04989026114344597,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 860,
+      "train_loss": 0.05655853450298309,
+      "loss_components": {
+        "loss": 0.05655853450298309,
+        "representation": 0.05655853450298309,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 880,
+      "train_loss": 0.06146218255162239,
+      "loss_components": {
+        "loss": 0.06146218255162239,
+        "representation": 0.06146218255162239,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 900,
+      "train_loss": 0.052077703177928925,
+      "loss_components": {
+        "loss": 0.052077703177928925,
+        "representation": 0.052077703177928925,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 920,
+      "train_loss": 0.04535366967320442,
+      "loss_components": {
+        "loss": 0.04535366967320442,
+        "representation": 0.04535366967320442,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 940,
+      "train_loss": 0.051796406507492065,
+      "loss_components": {
+        "loss": 0.051796406507492065,
+        "representation": 0.051796406507492065,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 960,
+      "train_loss": 0.055293112993240356,
+      "loss_components": {
+        "loss": 0.055293112993240356,
+        "representation": 0.055293112993240356,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 980,
+      "train_loss": 0.030641749501228333,
+      "loss_components": {
+        "loss": 0.030641749501228333,
+        "representation": 0.030641749501228333,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1000,
+      "train_loss": 0.04159868508577347,
+      "loss_components": {
+        "loss": 0.04159868508577347,
+        "representation": 0.04159868508577347,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1000,
+      "train_loss": 0.04159868508577347,
+      "dev_sample_closed_loop_fk22_mm": 254.98100121816
+    },
+    {
+      "step": 1020,
+      "train_loss": 0.05494053661823273,
+      "loss_components": {
+        "loss": 0.05494053661823273,
+        "representation": 0.05494053661823273,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1040,
+      "train_loss": 0.053593434393405914,
+      "loss_components": {
+        "loss": 0.053593434393405914,
+        "representation": 0.053593434393405914,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1060,
+      "train_loss": 0.038629788905382156,
+      "loss_components": {
+        "loss": 0.038629788905382156,
+        "representation": 0.038629788905382156,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1080,
+      "train_loss": 0.043322738260030746,
+      "loss_components": {
+        "loss": 0.043322738260030746,
+        "representation": 0.043322738260030746,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1100,
+      "train_loss": 0.050863996148109436,
+      "loss_components": {
+        "loss": 0.050863996148109436,
+        "representation": 0.050863996148109436,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1120,
+      "train_loss": 0.04257543757557869,
+      "loss_components": {
+        "loss": 0.04257543757557869,
+        "representation": 0.04257543757557869,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1140,
+      "train_loss": 0.047598883509635925,
+      "loss_components": {
+        "loss": 0.047598883509635925,
+        "representation": 0.047598883509635925,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1160,
+      "train_loss": 0.03995298221707344,
+      "loss_components": {
+        "loss": 0.03995298221707344,
+        "representation": 0.03995298221707344,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1180,
+      "train_loss": 0.03806683421134949,
+      "loss_components": {
+        "loss": 0.03806683421134949,
+        "representation": 0.03806683421134949,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1200,
+      "train_loss": 0.051166534423828125,
+      "loss_components": {
+        "loss": 0.051166534423828125,
+        "representation": 0.051166534423828125,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1200,
+      "train_loss": 0.051166534423828125,
+      "dev_sample_closed_loop_fk22_mm": 198.8553317884604
+    },
+    {
+      "step": 1220,
+      "train_loss": 0.06569317728281021,
+      "loss_components": {
+        "loss": 0.06569317728281021,
+        "representation": 0.06569317728281021,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1240,
+      "train_loss": 0.04709369316697121,
+      "loss_components": {
+        "loss": 0.04709369316697121,
+        "representation": 0.04709369316697121,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1260,
+      "train_loss": 0.144217386841774,
+      "loss_components": {
+        "loss": 0.144217386841774,
+        "representation": 0.144217386841774,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1280,
+      "train_loss": 0.04009152948856354,
+      "loss_components": {
+        "loss": 0.04009152948856354,
+        "representation": 0.04009152948856354,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1300,
+      "train_loss": 0.03841779753565788,
+      "loss_components": {
+        "loss": 0.03841779753565788,
+        "representation": 0.03841779753565788,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1320,
+      "train_loss": 0.041689399629831314,
+      "loss_components": {
+        "loss": 0.041689399629831314,
+        "representation": 0.041689399629831314,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1340,
+      "train_loss": 0.04786374792456627,
+      "loss_components": {
+        "loss": 0.04786374792456627,
+        "representation": 0.04786374792456627,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1360,
+      "train_loss": 0.08485335111618042,
+      "loss_components": {
+        "loss": 0.08485335111618042,
+        "representation": 0.08485335111618042,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1380,
+      "train_loss": 0.11849047988653183,
+      "loss_components": {
+        "loss": 0.11849047988653183,
+        "representation": 0.11849047988653183,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1400,
+      "train_loss": 0.030551735311746597,
+      "loss_components": {
+        "loss": 0.030551735311746597,
+        "representation": 0.030551735311746597,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1400,
+      "train_loss": 0.030551735311746597,
+      "dev_sample_closed_loop_fk22_mm": 186.28316248456636
+    },
+    {
+      "step": 1420,
+      "train_loss": 0.05071647837758064,
+      "loss_components": {
+        "loss": 0.05071647837758064,
+        "representation": 0.05071647837758064,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1440,
+      "train_loss": 0.049733515828847885,
+      "loss_components": {
+        "loss": 0.049733515828847885,
+        "representation": 0.049733515828847885,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1460,
+      "train_loss": 0.05430165305733681,
+      "loss_components": {
+        "loss": 0.05430165305733681,
+        "representation": 0.05430165305733681,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1480,
+      "train_loss": 0.04007359594106674,
+      "loss_components": {
+        "loss": 0.04007359594106674,
+        "representation": 0.04007359594106674,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1500,
+      "train_loss": 0.042934518307447433,
+      "loss_components": {
+        "loss": 0.042934518307447433,
+        "representation": 0.042934518307447433,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1520,
+      "train_loss": 0.06500101834535599,
+      "loss_components": {
+        "loss": 0.06500101834535599,
+        "representation": 0.06500101834535599,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1540,
+      "train_loss": 0.04006452485918999,
+      "loss_components": {
+        "loss": 0.04006452485918999,
+        "representation": 0.04006452485918999,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1560,
+      "train_loss": 0.04272845387458801,
+      "loss_components": {
+        "loss": 0.04272845387458801,
+        "representation": 0.04272845387458801,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1580,
+      "train_loss": 0.05300143361091614,
+      "loss_components": {
+        "loss": 0.05300143361091614,
+        "representation": 0.05300143361091614,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1600,
+      "train_loss": 0.030958181247115135,
+      "loss_components": {
+        "loss": 0.030958181247115135,
+        "representation": 0.030958181247115135,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1600,
+      "train_loss": 0.030958181247115135,
+      "dev_sample_closed_loop_fk22_mm": 236.54156054059663
+    },
+    {
+      "step": 1620,
+      "train_loss": 0.05522764101624489,
+      "loss_components": {
+        "loss": 0.05522764101624489,
+        "representation": 0.05522764101624489,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1640,
+      "train_loss": 0.031149517744779587,
+      "loss_components": {
+        "loss": 0.031149517744779587,
+        "representation": 0.031149517744779587,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1660,
+      "train_loss": 0.057875052094459534,
+      "loss_components": {
+        "loss": 0.057875052094459534,
+        "representation": 0.057875052094459534,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1680,
+      "train_loss": 0.03601684421300888,
+      "loss_components": {
+        "loss": 0.03601684421300888,
+        "representation": 0.03601684421300888,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1700,
+      "train_loss": 0.03717204928398132,
+      "loss_components": {
+        "loss": 0.03717204928398132,
+        "representation": 0.03717204928398132,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1720,
+      "train_loss": 0.042238302528858185,
+      "loss_components": {
+        "loss": 0.042238302528858185,
+        "representation": 0.042238302528858185,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1740,
+      "train_loss": 0.043249666690826416,
+      "loss_components": {
+        "loss": 0.043249666690826416,
+        "representation": 0.043249666690826416,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1760,
+      "train_loss": 0.04844734072685242,
+      "loss_components": {
+        "loss": 0.04844734072685242,
+        "representation": 0.04844734072685242,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1780,
+      "train_loss": 0.04963827505707741,
+      "loss_components": {
+        "loss": 0.04963827505707741,
+        "representation": 0.04963827505707741,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1800,
+      "train_loss": 0.052224237471818924,
+      "loss_components": {
+        "loss": 0.052224237471818924,
+        "representation": 0.052224237471818924,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1800,
+      "train_loss": 0.052224237471818924,
+      "dev_sample_closed_loop_fk22_mm": 208.34817302723727
+    },
+    {
+      "step": 1820,
+      "train_loss": 0.037324730306863785,
+      "loss_components": {
+        "loss": 0.037324730306863785,
+        "representation": 0.037324730306863785,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1840,
+      "train_loss": 0.028905855491757393,
+      "loss_components": {
+        "loss": 0.028905855491757393,
+        "representation": 0.028905855491757393,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1860,
+      "train_loss": 0.04707502946257591,
+      "loss_components": {
+        "loss": 0.04707502946257591,
+        "representation": 0.04707502946257591,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1880,
+      "train_loss": 0.06508064270019531,
+      "loss_components": {
+        "loss": 0.06508064270019531,
+        "representation": 0.06508064270019531,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1900,
+      "train_loss": 0.08723707497119904,
+      "loss_components": {
+        "loss": 0.08723707497119904,
+        "representation": 0.08723707497119904,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1920,
+      "train_loss": 0.03256528079509735,
+      "loss_components": {
+        "loss": 0.03256528079509735,
+        "representation": 0.03256528079509735,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1940,
+      "train_loss": 0.04526442661881447,
+      "loss_components": {
+        "loss": 0.04526442661881447,
+        "representation": 0.04526442661881447,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1960,
+      "train_loss": 0.04543200135231018,
+      "loss_components": {
+        "loss": 0.04543200135231018,
+        "representation": 0.04543200135231018,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 1980,
+      "train_loss": 0.04254709556698799,
+      "loss_components": {
+        "loss": 0.04254709556698799,
+        "representation": 0.04254709556698799,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2000,
+      "train_loss": 0.08095304667949677,
+      "loss_components": {
+        "loss": 0.08095304667949677,
+        "representation": 0.08095304667949677,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2000,
+      "train_loss": 0.08095304667949677,
+      "dev_sample_closed_loop_fk22_mm": 198.82803224027157
+    },
+    {
+      "step": 2020,
+      "train_loss": 0.459127277135849,
+      "loss_components": {
+        "loss": 0.459127277135849,
+        "representation": 0.459127277135849,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2040,
+      "train_loss": 0.03919071704149246,
+      "loss_components": {
+        "loss": 0.03919071704149246,
+        "representation": 0.03919071704149246,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2060,
+      "train_loss": 0.04034940153360367,
+      "loss_components": {
+        "loss": 0.04034940153360367,
+        "representation": 0.04034940153360367,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2080,
+      "train_loss": 0.04750418663024902,
+      "loss_components": {
+        "loss": 0.04750418663024902,
+        "representation": 0.04750418663024902,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2100,
+      "train_loss": 0.037346091121435165,
+      "loss_components": {
+        "loss": 0.037346091121435165,
+        "representation": 0.037346091121435165,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2120,
+      "train_loss": 0.028422517701983452,
+      "loss_components": {
+        "loss": 0.028422517701983452,
+        "representation": 0.028422517701983452,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2140,
+      "train_loss": 0.031725406646728516,
+      "loss_components": {
+        "loss": 0.031725406646728516,
+        "representation": 0.031725406646728516,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2160,
+      "train_loss": 0.052713505923748016,
+      "loss_components": {
+        "loss": 0.052713505923748016,
+        "representation": 0.052713505923748016,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2180,
+      "train_loss": 0.05738675221800804,
+      "loss_components": {
+        "loss": 0.05738675221800804,
+        "representation": 0.05738675221800804,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2200,
+      "train_loss": 0.03580600023269653,
+      "loss_components": {
+        "loss": 0.03580600023269653,
+        "representation": 0.03580600023269653,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2200,
+      "train_loss": 0.03580600023269653,
+      "dev_sample_closed_loop_fk22_mm": 234.63222881158194
+    },
+    {
+      "step": 2220,
+      "train_loss": 0.037473004311323166,
+      "loss_components": {
+        "loss": 0.037473004311323166,
+        "representation": 0.037473004311323166,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2240,
+      "train_loss": 0.05275232717394829,
+      "loss_components": {
+        "loss": 0.05275232717394829,
+        "representation": 0.05275232717394829,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2260,
+      "train_loss": 0.04422006383538246,
+      "loss_components": {
+        "loss": 0.04422006383538246,
+        "representation": 0.04422006383538246,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2280,
+      "train_loss": 0.040487948805093765,
+      "loss_components": {
+        "loss": 0.040487948805093765,
+        "representation": 0.040487948805093765,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2300,
+      "train_loss": 0.06540048122406006,
+      "loss_components": {
+        "loss": 0.06540048122406006,
+        "representation": 0.06540048122406006,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2320,
+      "train_loss": 0.11531355232000351,
+      "loss_components": {
+        "loss": 0.11531355232000351,
+        "representation": 0.11531355232000351,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2340,
+      "train_loss": 0.0414329431951046,
+      "loss_components": {
+        "loss": 0.0414329431951046,
+        "representation": 0.0414329431951046,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2360,
+      "train_loss": 0.04093151167035103,
+      "loss_components": {
+        "loss": 0.04093151167035103,
+        "representation": 0.04093151167035103,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2380,
+      "train_loss": 0.05082212761044502,
+      "loss_components": {
+        "loss": 0.05082212761044502,
+        "representation": 0.05082212761044502,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2400,
+      "train_loss": 0.03155045583844185,
+      "loss_components": {
+        "loss": 0.03155045583844185,
+        "representation": 0.03155045583844185,
+        "weighted_dense": 0.0,
+        "weighted_fk": 0.0
+      }
+    },
+    {
+      "step": 2400,
+      "train_loss": 0.03155045583844185,
+      "dev_sample_closed_loop_fk22_mm": 192.55771239598593
+    }
+  ],
+  "dense22_mm_per_action": {
+    "a11": 52.56428527832031,
+    "a10": 55.87094497680664,
+    "a01": 52.62651443481445,
+    "a00": 55.92706298828125
+  },
+  "dense22_oracle_gap_mm": 0.9195387363433838,
+  "oracle_action_counts": [
+    27,
+    7,
+    17,
+    13
+  ],
+  "checkpoint_sha256": "8e1c481dbd71a6b1e851ae272c9ac9849537743337c8c5b3c0481069962bffd9"
+}
+Saved pilot to exp/egorecover_loss_ablation/g00_g11_v1/train/g0f0_history; G selection=closed_loop_fk; independent validation remains separate.

@@ -1,0 +1,47 @@
+{
+  "at": "2026-09-28T19:59:39",
+  "status": "running",
+  "controller_alive": true,
+  "jobs": {
+    "train_12take_2400": {
+      "status": "running",
+      "gpu": 4,
+      "last": "G/gaussian 1800/2400: train=0.074795",
+      "log_age_s": 127
+    },
+    "train_72take_2400": {
+      "status": "running",
+      "gpu": 5,
+      "last": "G/history 1600/2400: train=0.119916",
+      "log_age_s": 488
+    },
+    "eval_12take_400": {
+      "status": "complete",
+      "gpu": 6,
+      "last": "12take_400/prior_only/upenn_0725_Duet_Violin_1_2_8/drift_0p03mps: 272.773 mm",
+      "traces": 108,
+      "log_age_s": 1207
+    },
+    "eval_12take_1200": {
+      "status": "complete",
+      "gpu": 7,
+      "last": "12take_1200/prior_only/upenn_0725_Duet_Violin_1_2_8/drift_0p03mps: 272.773 mm",
+      "traces": 108,
+      "log_age_s": 1109
+    },
+    "eval_72take_400": {
+      "status": "running",
+      "gpu": 6,
+      "last": "Saved 72take_400/gaussian/iiith_soccer_004_5/drift_0p03mps",
+      "traces": 12,
+      "log_age_s": 31
+    },
+    "eval_72take_1200": {
+      "status": "running",
+      "gpu": 7,
+      "last": "Saved 72take_1200/gaussian/iiith_soccer_004_5/drift_0p03mps",
+      "traces": 12,
+      "log_age_s": 2
+    }
+  }
+}

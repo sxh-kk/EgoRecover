@@ -1,0 +1,65 @@
+{
+  "cases": [
+    {
+      "label": "g0f0_gaussian",
+      "gpu": 4,
+      "geometry_weight": 0,
+      "fk_weight": 0,
+      "mode": "gaussian",
+      "train": "exp/egorecover_loss_ablation/g00_g11_v1/train/g0f0_gaussian",
+      "evaluation": "exp/egorecover_loss_ablation/g00_g11_v1/eval/g0f0_gaussian"
+    },
+    {
+      "label": "g0f0_history",
+      "gpu": 5,
+      "geometry_weight": 0,
+      "fk_weight": 0,
+      "mode": "history",
+      "train": "exp/egorecover_loss_ablation/g00_g11_v1/train/g0f0_history",
+      "evaluation": "exp/egorecover_loss_ablation/g00_g11_v1/eval/g0f0_history"
+    },
+    {
+      "label": "g1f1_gaussian",
+      "gpu": 6,
+      "geometry_weight": 1,
+      "fk_weight": 1,
+      "mode": "gaussian",
+      "train": "exp/egorecover_loss_ablation/g00_g11_v1/train/g1f1_gaussian",
+      "evaluation": "exp/egorecover_loss_ablation/g00_g11_v1/eval/g1f1_gaussian"
+    },
+    {
+      "label": "g1f1_history",
+      "gpu": 7,
+      "geometry_weight": 1,
+      "fk_weight": 1,
+      "mode": "history",
+      "train": "exp/egorecover_loss_ablation/g00_g11_v1/train/g1f1_history",
+      "evaluation": "exp/egorecover_loss_ablation/g00_g11_v1/eval/g1f1_history"
+    }
+  ],
+  "steps": 2400,
+  "loss_scope": "G only; shared frozen P",
+  "prior_experiment": "exp/egorecover_stages_1_4/continuation_v1/stage2_budget/72take_2400",
+  "prior_sha256": "628f412f95fb0a0caf18b7f5ebde4115b972f87925155a847596839734764a5d",
+  "baseline_evaluation": "exp/egorecover_stages_1_4/continuation_v1/stage2_eval/72take_2400/report.json",
+  "baseline_evaluation_sha256": "c46869d1217cd8893f356afaf39d55cdd75b5aa7b849afdd3e79459f16373a16",
+  "checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+  "bootstrap_sha256": "3dec71f200f5d5d445d45f2f878a18cd73950365c402e16cb3404e3651018f56",
+  "split_sha256": "fdddd32b47282bfece00215ef2652cbc361afdc655b6516bb5ab0740403481fc",
+  "primary": "clean world SMPL22 take-macro MPJPE",
+  "secondary": "three-variant macro MPJPE",
+  "code_sha256": {
+    "run/engineering_pilot.py": "79c5814446c23571e3a8ce9b641e98a8da319cfdd8a1e7d5e58176f04a5d9149",
+    "run/loss_ablation.py": "3aba0ac1f56eadc43322b0fb03b1864b56af9bc1b7a031e2b29531542b1efe58",
+    "egorecover/losses.py": "047adb771c123306ac8f5974877c55c03c21d29c12c68215627a44b44c0e8ab3",
+    "egorecover/fixed_prior.py": "d09cadd57fd4b29326fad1c47b78558a45a7ee6a771fbc7f9ccb36263bbf9589",
+    "model/history_uniegomotion.py": "103bd36421ebdc1085b9980f59605c90b3a219808fdb108f6a7540f1035c1db8",
+    "egorecover/history_flow.py": "9b9cc6d62c55b0f569fbe14bfd5449d82ddf83d7cdd89af745f6c5acb00ee86f"
+  },
+  "train_seed": 62,
+  "selection_seed": 1062,
+  "evaluation_seed": 62,
+  "replay": false,
+  "holdout_used": false,
+  "created_at": "2026-09-28T15:56:31.533549+00:00"
+}

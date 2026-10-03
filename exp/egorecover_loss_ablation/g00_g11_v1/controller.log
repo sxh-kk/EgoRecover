@@ -1,0 +1,25 @@
+2026-09-28T15:56:46.826928+00:00 Started train_g0f0_gaussian on GPU4, PID 1865904, log exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g0f0_gaussian.1.log
+2026-09-28T15:56:46.835680+00:00 Started train_g0f0_history on GPU5, PID 1865905, log exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g0f0_history.1.log
+2026-09-28T15:56:46.844190+00:00 Started train_g1f1_gaussian on GPU6, PID 1865906, log exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g1f1_gaussian.1.log
+2026-09-28T15:56:46.853761+00:00 Started train_g1f1_history on GPU7, PID 1865907, log exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g1f1_history.1.log
+2026-09-28T19:13:02.362124+00:00 train_g0f0_history: complete
+2026-09-28T19:13:02.474787+00:00 Started eval_g0f0_history on GPU5, PID 1932006, log exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g0f0_history.1.log
+2026-09-28T19:17:04.268237+00:00 eval_g0f0_history: failed
+2026-09-28T19:24:35.105955+00:00 train_g0f0_gaussian: complete
+2026-09-28T19:26:05.813339+00:00 train_g1f1_history: complete
+2026-09-28T19:30:36.615976+00:00 train_g1f1_gaussian: complete
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/gaozt-test1/sxh/EgoRecover/run/loss_ablation.py", line 147, in <module>
+    main()
+  File "/gaozt-test1/sxh/EgoRecover/run/loss_ablation.py", line 122, in main
+    queue.run(tasks)
+  File "/gaozt-test1/sxh/EgoRecover/run/complete_stages.py", line 267, in run
+    except Exception as error:
+                ^^^^^^^^^^^^^^^
+RuntimeError: Experiment failed; dependent stages were not started.
+2026-09-29T04:02:17.097455+00:00 Started eval_g0f0_gaussian on GPU4, PID 2016983, log exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g0f0_gaussian.1.log
+2026-09-29T04:02:17.106655+00:00 Started eval_g0f0_history on GPU5, PID 2016984, log exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g0f0_history.2.log
+2026-09-29T04:02:17.117405+00:00 Started eval_g1f1_gaussian on GPU6, PID 2016985, log exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g1f1_gaussian.1.log
+2026-09-29T04:02:17.126592+00:00 Started eval_g1f1_history on GPU7, PID 2016986, log exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g1f1_history.1.log

@@ -1,0 +1,28 @@
+{
+  "cases": {
+    "control": 0.0,
+    "pose01": 0.1,
+    "pose03": 0.3,
+    "pose10": 1.0
+  },
+  "seeds": [
+    62,
+    63,
+    64
+  ],
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "data": "exp/egorecover_prior_two_forward/v1/data",
+  "steps": 2400,
+  "base_mode": "constant_velocity",
+  "original_fk_weight": 0,
+  "velocity_input": false,
+  "minimum_free_gib": 12.0,
+  "method": "docs/experiments/p-same-shape-fk.md",
+  "selection": "original_GT_world_Body_MPJPE",
+  "rollout_role": "diagnostic_only"
+}

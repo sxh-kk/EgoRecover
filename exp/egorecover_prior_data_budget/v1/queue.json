@@ -1,0 +1,155 @@
+{
+  "tasks": {
+    "prepare_data": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.prepare_prior_expanded",
+        "--output",
+        "exp/egorecover_prior_data_budget/v1/data",
+        "--shards",
+        "exp/egorecover_prior_data_budget/v1/data_shards"
+      ],
+      "output": "exp/egorecover_prior_data_budget/v1/data",
+      "kind": "expanded_data",
+      "expected": 0,
+      "deps": [],
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2165861,
+      "gpu": 4,
+      "spec": "exp/egorecover_prior_data_budget/v1/jobs/prepare_data.1.json",
+      "log": "exp/egorecover_prior_data_budget/v1/jobs/prepare_data.1.log",
+      "started_at": "2026-09-29T07:45:07.625791+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T07:52:27.090110+00:00"
+    },
+    "D_s62": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.train_prior_expanded",
+        "--data",
+        "exp/egorecover_prior_data_budget/v1/data",
+        "--output",
+        "exp/egorecover_prior_data_budget/v1/train/D_s62",
+        "--seed",
+        "62"
+      ],
+      "output": "exp/egorecover_prior_data_budget/v1/train/D_s62",
+      "kind": "prior",
+      "expected": 0,
+      "deps": [
+        "prepare_data"
+      ],
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2179834,
+      "gpu": 4,
+      "spec": "exp/egorecover_prior_data_budget/v1/jobs/D_s62.1.json",
+      "log": "exp/egorecover_prior_data_budget/v1/jobs/D_s62.1.log",
+      "started_at": "2026-09-29T07:52:27.210515+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T08:10:20.924991+00:00"
+    },
+    "D_s63": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.train_prior_expanded",
+        "--data",
+        "exp/egorecover_prior_data_budget/v1/data",
+        "--output",
+        "exp/egorecover_prior_data_budget/v1/train/D_s63",
+        "--seed",
+        "63"
+      ],
+      "output": "exp/egorecover_prior_data_budget/v1/train/D_s63",
+      "kind": "prior",
+      "expected": 0,
+      "deps": [
+        "prepare_data"
+      ],
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2179835,
+      "gpu": 5,
+      "spec": "exp/egorecover_prior_data_budget/v1/jobs/D_s63.1.json",
+      "log": "exp/egorecover_prior_data_budget/v1/jobs/D_s63.1.log",
+      "started_at": "2026-09-29T07:52:27.219338+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T08:09:50.544821+00:00"
+    },
+    "D_s64": {
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python",
+        "-u",
+        "-m",
+        "run.train_prior_expanded",
+        "--data",
+        "exp/egorecover_prior_data_budget/v1/data",
+        "--output",
+        "exp/egorecover_prior_data_budget/v1/train/D_s64",
+        "--seed",
+        "64"
+      ],
+      "output": "exp/egorecover_prior_data_budget/v1/train/D_s64",
+      "kind": "prior",
+      "expected": 0,
+      "deps": [
+        "prepare_data"
+      ],
+      "status": "complete",
+      "attempt": 1,
+      "pid": 2179836,
+      "gpu": 6,
+      "spec": "exp/egorecover_prior_data_budget/v1/jobs/D_s64.1.json",
+      "log": "exp/egorecover_prior_data_budget/v1/jobs/D_s64.1.log",
+      "started_at": "2026-09-29T07:52:27.229028+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-09-29T08:14:38.117632+00:00"
+    }
+  },
+  "created_at": "2026-09-29T07:44:52.386448+00:00",
+  "policy_changes": [
+    {
+      "at": "2026-09-29T07:44:52.386469+00:00",
+      "from": {
+        "gpus": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "allow_shared": false,
+        "minimum_free_gib": 32
+      },
+      "to": {
+        "gpus": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "allow_shared": true,
+        "minimum_free_gib": 12
+      }
+    }
+  ],
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "allow_shared": true,
+  "minimum_free_gib": 12,
+  "controller_pid": 2165723,
+  "status": "complete",
+  "updated_at": "2026-09-29T08:14:38.777973+00:00",
+  "start_logged": true,
+  "completed_at": "2026-09-29T08:14:38.777966+00:00"
+}

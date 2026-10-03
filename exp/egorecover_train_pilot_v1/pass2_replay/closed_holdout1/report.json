@@ -1,0 +1,292 @@
+{
+  "scope": "closed_loop_stability_only",
+  "reference_mode": "planar",
+  "completion_semantics": "execution and finite metrics only; inspect magnitude separately",
+  "initialization": "exp/e7/last.ckpt",
+  "bootstrap_is_trained": true,
+  "history_source": "model_predictions_only; no resets",
+  "take": "sfu_covid_001_12",
+  "group": "holdout",
+  "base_split": "train",
+  "metric": "dense22_world_position_error_mm; not SMPL FK",
+  "sampling_seed": 1062,
+  "generator_sampling_seed": 1062,
+  "bootstrap_sampling_seed": 1062,
+  "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+  "dataset_spec_sha256": "fe78379e17e2d05e854440aaf46134c9ff378600c3fea8f0d8bdad1cb020d263",
+  "split_manifest_sha256": "ccca72e5c7446e1b03be8a650cc7bf2b5406b041cecb7d86f37066ccec6a3ae3",
+  "dataset_handoff_status": "complete",
+  "bootstrap_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+  "bootstrap_weight_source": "ema",
+  "bootstrap_cache_sha256": "324de02053dbcdb084c8c22bf05c7a999b7caec7dfd1c382bb005824dc616e8d",
+  "bootstrap_cache_identity": {
+    "scope": "model_generated_clean_prefix_bootstraps",
+    "groups": [
+      "train",
+      "dev",
+      "holdout"
+    ],
+    "reference_mode": "planar",
+    "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+    "e7_weight_source": "ema",
+    "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+    "split_manifest_sha256": "ccca72e5c7446e1b03be8a650cc7bf2b5406b041cecb7d86f37066ccec6a3ae3",
+    "dataset_spec_sha256": "fe78379e17e2d05e854440aaf46134c9ff378600c3fea8f0d8bdad1cb020d263",
+    "sampling_seed": 1062,
+    "prefix_frames": 20,
+    "sampler": "FlowMatching Euler10"
+  },
+  "prior_checkpoint_sha256": "db35975236fb4c6e883aee9b98926a2ff131bf70ce4f0ddc9bba0667a95b3ad9",
+  "prior_checkpoint_step": 0,
+  "generator_checkpoints": {
+    "gaussian": {
+      "sha256": "0daed794221d5cf5a82aaa959f6e47ee227b18725f45d6dc1affaf64a3bb5ee1",
+      "selected_step": 200,
+      "sigma": 1.0,
+      "weight_source": "ema",
+      "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+      "reference_mode": "planar",
+      "stats_identity_verified": true,
+      "generator_used": true
+    },
+    "history": {
+      "sha256": "8c79b7e18b13e870693f2183c79d97f6746d07230c8a9216d822945a3976d245",
+      "selected_step": 400,
+      "sigma": 1.0,
+      "weight_source": "ema",
+      "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+      "reference_mode": "planar",
+      "stats_identity_verified": true,
+      "generator_used": true
+    },
+    "prior_only": {
+      "sha256": "0daed794221d5cf5a82aaa959f6e47ee227b18725f45d6dc1affaf64a3bb5ee1",
+      "selected_step": 200,
+      "sigma": 1.0,
+      "weight_source": "ema",
+      "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+      "reference_mode": "planar",
+      "stats_identity_verified": true,
+      "generator_used": false
+    }
+  },
+  "results": [
+    {
+      "source_mode": "gaussian",
+      "variant": "clean",
+      "finite": true,
+      "trace_sha256": "0192183c417b5107e4e59b92dba0697b686911de5a6d1c43e77bbd4dccfc4e15",
+      "fault_window": [
+        56,
+        86
+      ],
+      "mean_dense22_mm": 374.7657470703125,
+      "last_frame_dense22_mm": 402.0947570800781,
+      "first_frame_dense22_mm": 120.02409362792969,
+      "peak_dense22_mm": 483.33160400390625,
+      "phase_dense22_mm": {
+        "pre_fault": 221.34539794921875,
+        "fault": 388.4458923339844,
+        "recovery": 419.6142883300781
+      },
+      "latency_median_ms": 107.47797880321741,
+      "latency_p95_ms": 115.59677110053599,
+      "floor_estimate_m": -1.432523250579834,
+      "frames": 180,
+      "bootstrap_dense22_mm": 127.76265716552734
+    },
+    {
+      "source_mode": "gaussian",
+      "variant": "freeze_3s",
+      "finite": true,
+      "trace_sha256": "b19b1c27ed64fc60cebfd27028b3695af17c1abfaaf290aff15bfd7880002b80",
+      "fault_window": [
+        56,
+        86
+      ],
+      "mean_dense22_mm": 376.9390563964844,
+      "last_frame_dense22_mm": 402.04949951171875,
+      "first_frame_dense22_mm": 120.02409362792969,
+      "peak_dense22_mm": 483.29571533203125,
+      "phase_dense22_mm": {
+        "pre_fault": 221.34539794921875,
+        "fault": 397.92108154296875,
+        "recovery": 420.5523376464844
+      },
+      "latency_median_ms": 106.39192443341017,
+      "latency_p95_ms": 114.71365955658256,
+      "floor_estimate_m": -1.432523250579834,
+      "frames": 180,
+      "bootstrap_dense22_mm": 127.76265716552734
+    },
+    {
+      "source_mode": "gaussian",
+      "variant": "drift_0p03mps",
+      "finite": true,
+      "trace_sha256": "abd7d50ea8f00eb854bceb43c61a2adf98a8c2a7dc2e0e805bd12a5c63295154",
+      "fault_window": [
+        56,
+        86
+      ],
+      "mean_dense22_mm": 378.9183654785156,
+      "last_frame_dense22_mm": 402.09600830078125,
+      "first_frame_dense22_mm": 120.02409362792969,
+      "peak_dense22_mm": 490.16552734375,
+      "phase_dense22_mm": {
+        "pre_fault": 221.34539794921875,
+        "fault": 412.2998352050781,
+        "recovery": 419.8936462402344
+      },
+      "latency_median_ms": 108.00314601510763,
+      "latency_p95_ms": 114.90118624642491,
+      "floor_estimate_m": -1.432523250579834,
+      "frames": 180,
+      "bootstrap_dense22_mm": 127.76265716552734
+    },
+    {
+      "source_mode": "history",
+      "variant": "clean",
+      "finite": true,
+      "trace_sha256": "42bc9eaf1610b7281da463d234b3d3c7b1effdb0098fceea2d4f7f213e1fbe73",
+      "fault_window": [
+        56,
+        86
+      ],
+      "mean_dense22_mm": 237.18821716308594,
+      "last_frame_dense22_mm": 220.85446166992188,
+      "first_frame_dense22_mm": 157.39764404296875,
+      "peak_dense22_mm": 333.1498107910156,
+      "phase_dense22_mm": {
+        "pre_fault": 224.7726593017578,
+        "fault": 230.88543701171875,
+        "recovery": 242.76751708984375
+      },
+      "latency_median_ms": 108.33225538954139,
+      "latency_p95_ms": 114.22931901179254,
+      "floor_estimate_m": -1.432523250579834,
+      "frames": 180,
+      "bootstrap_dense22_mm": 127.76265716552734
+    },
+    {
+      "source_mode": "history",
+      "variant": "freeze_3s",
+      "finite": true,
+      "trace_sha256": "83ef9d0aaab50a9b6718587ef4ca6863400a61011b3b80f0a2baa96619feb3e9",
+      "fault_window": [
+        56,
+        86
+      ],
+      "mean_dense22_mm": 236.24754333496094,
+      "last_frame_dense22_mm": 217.60748291015625,
+      "first_frame_dense22_mm": 157.39764404296875,
+      "peak_dense22_mm": 335.9947509765625,
+      "phase_dense22_mm": {
+        "pre_fault": 224.7726593017578,
+        "fault": 228.92979431152344,
+        "recovery": 241.7969207763672
+      },
+      "latency_median_ms": 105.12792505323887,
+      "latency_p95_ms": 114.6260508801788,
+      "floor_estimate_m": -1.432523250579834,
+      "frames": 180,
+      "bootstrap_dense22_mm": 127.76265716552734
+    },
+    {
+      "source_mode": "history",
+      "variant": "drift_0p03mps",
+      "finite": true,
+      "trace_sha256": "94ded3e1b2f631fa871d48225bb90371595cae9973edfbf7b513edb54cdcc57b",
+      "fault_window": [
+        56,
+        86
+      ],
+      "mean_dense22_mm": 237.695068359375,
+      "last_frame_dense22_mm": 223.45346069335938,
+      "first_frame_dense22_mm": 157.39764404296875,
+      "peak_dense22_mm": 336.2149963378906,
+      "phase_dense22_mm": {
+        "pre_fault": 224.7726593017578,
+        "fault": 233.3251495361328,
+        "recovery": 242.92578125
+      },
+      "latency_median_ms": 109.07274996861815,
+      "latency_p95_ms": 113.94228274002671,
+      "floor_estimate_m": -1.432523250579834,
+      "frames": 180,
+      "bootstrap_dense22_mm": 127.76265716552734
+    },
+    {
+      "source_mode": "prior_only",
+      "variant": "clean",
+      "finite": true,
+      "trace_sha256": "f08fbf0b5c4f1c5bcb98d5cb9fbd2a5748ae9b15726fafb7c8d5befa75427f77",
+      "fault_window": [
+        56,
+        86
+      ],
+      "mean_dense22_mm": 144.8104248046875,
+      "last_frame_dense22_mm": 171.88455200195312,
+      "first_frame_dense22_mm": 117.60323333740234,
+      "peak_dense22_mm": 171.88455200195312,
+      "phase_dense22_mm": {
+        "pre_fault": 130.4146270751953,
+        "fault": 147.34951782226562,
+        "recovery": 148.68829345703125
+      },
+      "latency_median_ms": 9.840921498835087,
+      "latency_p95_ms": 10.091307386755943,
+      "floor_estimate_m": -1.432523250579834,
+      "frames": 180,
+      "bootstrap_dense22_mm": 127.76265716552734
+    },
+    {
+      "source_mode": "prior_only",
+      "variant": "freeze_3s",
+      "finite": true,
+      "trace_sha256": "ca4c550eccdfec5872c1cc165e2e499b0fe697172ba63767c2e109bcf8d14d16",
+      "fault_window": [
+        56,
+        86
+      ],
+      "mean_dense22_mm": 144.8104248046875,
+      "last_frame_dense22_mm": 171.88455200195312,
+      "first_frame_dense22_mm": 117.60323333740234,
+      "peak_dense22_mm": 171.88455200195312,
+      "phase_dense22_mm": {
+        "pre_fault": 130.4146270751953,
+        "fault": 147.34951782226562,
+        "recovery": 148.68829345703125
+      },
+      "latency_median_ms": 9.838635567575693,
+      "latency_p95_ms": 9.962336160242558,
+      "floor_estimate_m": -1.432523250579834,
+      "frames": 180,
+      "bootstrap_dense22_mm": 127.76265716552734
+    },
+    {
+      "source_mode": "prior_only",
+      "variant": "drift_0p03mps",
+      "finite": true,
+      "trace_sha256": "3e93aec29a2db365ba6c2fc5e75443d61cfcc3287fcb25acac22f0b6dd02ec6d",
+      "fault_window": [
+        56,
+        86
+      ],
+      "mean_dense22_mm": 144.8104248046875,
+      "last_frame_dense22_mm": 171.88455200195312,
+      "first_frame_dense22_mm": 117.60323333740234,
+      "peak_dense22_mm": 171.88455200195312,
+      "phase_dense22_mm": {
+        "pre_fault": 130.4146270751953,
+        "fault": 147.34951782226562,
+        "recovery": 148.68829345703125
+      },
+      "latency_median_ms": 9.873809292912483,
+      "latency_p95_ms": 10.478245606645942,
+      "floor_estimate_m": -1.432523250579834,
+      "frames": 180,
+      "bootstrap_dense22_mm": 127.76265716552734
+    }
+  ],
+  "completed": true
+}

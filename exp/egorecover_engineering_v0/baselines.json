@@ -1,0 +1,25 @@
+{
+  "scope": "teacher_forced_engineering_only",
+  "metric": "dense22_position_error_mm (not SMPL22 FK MPJPE)",
+  "num_frames": 64,
+  "results": {
+    "physical_hold": {
+      "weighted_mse": 0.07873941212892532,
+      "dense22_mm": 25.200260162353516
+    },
+    "constant_velocity": {
+      "weighted_mse": 0.05132944881916046,
+      "dense22_mm": 15.172332763671875
+    },
+    "P": {
+      "weighted_mse": 0.07713276147842407,
+      "dense22_mm": 38.043418884277344
+    },
+    "G_gaussian_a11": {
+      "dense22_mm": 400.819091796875
+    },
+    "G_history_a11": {
+      "dense22_mm": 288.32720947265625
+    }
+  }
+}

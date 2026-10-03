@@ -1,0 +1,27 @@
+2026-09-29 22:20:23.629 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+{"step": 1, "total": 2, "loss": 2.07414647936821, "mixture_probability": 0.5, "actual_mixture": 0.484375, "gradient_norm": 48.20095443725586, "pid": 3890635, "elapsed_this_session_seconds": 0.7131379991769791, "steps_this_session": 1, "phase": "training", "gpu": "7"}
+{"step": 2, "total": 2, "loss": 2.179591625928879, "mixture_probability": 0.5, "actual_mixture": 0.484375, "gradient_norm": 54.85881423950195, "pid": 3890635, "elapsed_this_session_seconds": 0.9314066655933857, "steps_this_session": 2, "phase": "training", "gpu": "7"}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/gaozt-test1/sxh/EgoRecover/run/train_g_pretraining.py", line 338, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/train_g_pretraining.py", line 335, in main
+    {'prior':calibrate,'train':train,'evaluate':final_eval,'baseline':baseline}[args.stage](args,cfg)
+  File "/gaozt-test1/sxh/EgoRecover/run/train_g_pretraining.py", line 235, in train
+    score,rows=evaluate(inference,prior,dev,codec,smpl,device,mode=GROUPS[args.group][0],max_frames=24 if args.smoke else 200)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/egorecover/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/train_g_pretraining.py", line 123, in evaluate
+    scores={k:macro(torch.tensor([r[k] for r in rows]),names) for k in rows[0] if k.endswith(('_mm','_mmps','_deg'))}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/train_g_pretraining.py", line 123, in <dictcomp>
+    scores={k:macro(torch.tensor([r[k] for r in rows]),names) for k in rows[0] if k.endswith(('_mm','_mmps','_deg'))}
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: only one element tensors can be converted to Python scalars
+2026-09-29 22:21:37.477 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+{"step": 1, "total": 2, "loss": 2.07414647936821, "mixture_probability": 0.5, "actual_mixture": 0.484375, "gradient_norm": 48.20095443725586, "pid": 3891961, "elapsed_this_session_seconds": 0.7248504934832454, "steps_this_session": 1, "phase": "training", "gpu": "7"}
+{"step": 2, "total": 2, "loss": 2.179591625928879, "mixture_probability": 0.5, "actual_mixture": 0.484375, "gradient_norm": 54.85881423950195, "pid": 3891961, "elapsed_this_session_seconds": 0.9481139639392495, "steps_this_session": 2, "phase": "training", "gpu": "7"}

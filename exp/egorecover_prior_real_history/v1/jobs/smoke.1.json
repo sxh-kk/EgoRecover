@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.evaluate_prior_real_history",
+    "--plan",
+    "exp/egorecover_prior_real_history/v1/plan.json",
+    "--data",
+    "exp/egorecover_prior_real_history/v1/data",
+    "--output",
+    "exp/egorecover_prior_real_history/v1/smoke",
+    "--work",
+    "exp/egorecover_prior_real_history/v1/work/smoke",
+    "--smoke"
+  ],
+  "gpu": 4
+}

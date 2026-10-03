@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.train_prior_cv_residual",
+    "--data",
+    "exp/egorecover_prior_two_forward/v1/data",
+    "--output",
+    "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63",
+    "--base-mode",
+    "hold",
+    "--fk-weight",
+    "1",
+    "--seed",
+    "63"
+  ],
+  "gpu": 6
+}

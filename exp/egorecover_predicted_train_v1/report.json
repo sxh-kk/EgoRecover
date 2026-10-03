@@ -1,0 +1,80 @@
+{
+  "identity": {
+    "scope": "training_only_predicted_histories",
+    "reference_mode": "planar",
+    "bootstrap": "GT first 20 frames on TRAINING takes only; no resets afterwards",
+    "policy": "a11 frozen P/G; pooled gaussian/history policies",
+    "generator_experiment": "exp/egorecover_engineering_v1",
+    "g_sha256": {
+      "gaussian": "d66ee8b511b0e4f63bd0ed124f43191a3bed6d3aea27e816079fc782fb2ed5e6",
+      "history": "3e9754586121e961cc0f351851ec76213d97b972f9075467dd50e04f77785df2"
+    },
+    "p_sha256": "d8b01b7aeb67d9c254a77c5acf5c5e1ea71b8e0ed21a2041e92275564c973eed",
+    "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+    "train_takes": [
+      "uniandes_dance_024_45",
+      "georgiatech_bike_15_8",
+      "indiana_bike_10_12",
+      "utokyo_omelet_11_1001_4",
+      "uniandes_basketball_001_28",
+      "unc_basketball_03-09-23_01_10",
+      "upenn_0726_Violin_1_3",
+      "uniandes_dance_002_10"
+    ],
+    "variants": [
+      "clean",
+      "freeze_3s",
+      "drift_0p03mps"
+    ],
+    "seed": 62,
+    "sigma": 0.3,
+    "nfe": 10
+  },
+  "frames": 8640,
+  "episodes": [
+    {
+      "mode": "gaussian",
+      "variant": "clean",
+      "episodes": 8,
+      "mean_dense22_mm": 109.23438258564019,
+      "max_dense22_mm": 349.9939480627015
+    },
+    {
+      "mode": "gaussian",
+      "variant": "freeze_3s",
+      "episodes": 8,
+      "mean_dense22_mm": 109.57233892901651,
+      "max_dense22_mm": 346.56059983746445
+    },
+    {
+      "mode": "gaussian",
+      "variant": "drift_0p03mps",
+      "episodes": 8,
+      "mean_dense22_mm": 112.264721163023,
+      "max_dense22_mm": 364.96358427289863
+    },
+    {
+      "mode": "history",
+      "variant": "clean",
+      "episodes": 8,
+      "mean_dense22_mm": 111.12421896948902,
+      "max_dense22_mm": 448.60992327144544
+    },
+    {
+      "mode": "history",
+      "variant": "freeze_3s",
+      "episodes": 8,
+      "mean_dense22_mm": 112.06635136735301,
+      "max_dense22_mm": 451.54945488452614
+    },
+    {
+      "mode": "history",
+      "variant": "drift_0p03mps",
+      "episodes": 8,
+      "mean_dense22_mm": 114.68359229900054,
+      "max_dense22_mm": 456.4574773682125
+    }
+  ],
+  "cache_sha256": "d7d00cc3020af8151228f1b1654f719decd3593785b95f228a39791d0015ca9d",
+  "completed": true
+}

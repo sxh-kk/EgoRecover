@@ -1,0 +1,72 @@
+{
+  "criterion": "mean of Gaussian and History take-macro SMPL22 MPJPE over three dev variants; lower wins",
+  "cases": {
+    "12take_400": {
+      "label": "12take_400",
+      "group": "12take",
+      "steps": 400,
+      "gaussian_mm": 232.66521558820463,
+      "history_mm": 239.98898065178483,
+      "two_source_mean_mm": 236.32709811999473
+    },
+    "12take_1200": {
+      "label": "12take_1200",
+      "group": "12take",
+      "steps": 1200,
+      "gaussian_mm": 229.47373752005308,
+      "history_mm": 229.69500108589364,
+      "two_source_mean_mm": 229.58436930297336
+    },
+    "72take_400": {
+      "label": "72take_400",
+      "group": "72take",
+      "steps": 400,
+      "gaussian_mm": 306.7201723699216,
+      "history_mm": 313.64278528778647,
+      "two_source_mean_mm": 310.18147882885404
+    },
+    "72take_1200": {
+      "label": "72take_1200",
+      "group": "72take",
+      "steps": 1200,
+      "gaussian_mm": 221.04479568269517,
+      "history_mm": 226.54147398089182,
+      "two_source_mean_mm": 223.7931348317935
+    },
+    "12take_2400": {
+      "label": "12take_2400",
+      "group": "12take",
+      "steps": 2400,
+      "gaussian_mm": 229.47373752005308,
+      "history_mm": 229.69500108589364,
+      "two_source_mean_mm": 229.58436930297336
+    },
+    "72take_2400": {
+      "label": "72take_2400",
+      "group": "72take",
+      "steps": 2400,
+      "gaussian_mm": 201.3473737210403,
+      "history_mm": 213.30490606331526,
+      "two_source_mean_mm": 207.32613989217776
+    }
+  },
+  "winners": {
+    "12take": {
+      "label": "12take_1200",
+      "group": "12take",
+      "steps": 1200,
+      "gaussian_mm": 229.47373752005308,
+      "history_mm": 229.69500108589364,
+      "two_source_mean_mm": 229.58436930297336
+    },
+    "72take": {
+      "label": "72take_2400",
+      "group": "72take",
+      "steps": 2400,
+      "gaussian_mm": 201.3473737210403,
+      "history_mm": 213.30490606331526,
+      "two_source_mean_mm": 207.32613989217776
+    }
+  },
+  "holdout_used": false
+}

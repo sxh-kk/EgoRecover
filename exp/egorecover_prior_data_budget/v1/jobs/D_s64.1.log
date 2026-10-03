@@ -1,0 +1,577 @@
+2026-09-29 15:52:34.675 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+P 20/9600 p=0.0000 replaced=0.0000 {'loss': 0.10773482173681259, 'representation': 0.05038025230169296, 'weighted_dense': 0.05735456943511963, 'weighted_fk': 0.0}
+P 40/9600 p=0.0000 replaced=0.0000 {'loss': 0.13420921564102173, 'representation': 0.048194341361522675, 'weighted_dense': 0.08601486682891846, 'weighted_fk': 0.0}
+P 60/9600 p=0.0000 replaced=0.0000 {'loss': 0.1309581696987152, 'representation': 0.05852922424674034, 'weighted_dense': 0.07242894917726517, 'weighted_fk': 0.0}
+P 80/9600 p=0.0000 replaced=0.0000 {'loss': 0.19344687461853027, 'representation': 0.06877774745225906, 'weighted_dense': 0.1246691346168518, 'weighted_fk': 0.0}
+P 100/9600 p=0.0000 replaced=0.0000 {'loss': 0.36978450417518616, 'representation': 0.13575971126556396, 'weighted_dense': 0.2340247929096222, 'weighted_fk': 0.0}
+DEV 100: FK=36.997 mm; best=36.750 @0
+P 120/9600 p=0.0000 replaced=0.0000 {'loss': 0.1477423906326294, 'representation': 0.054050177335739136, 'weighted_dense': 0.09369221329689026, 'weighted_fk': 0.0}
+P 140/9600 p=0.0000 replaced=0.0000 {'loss': 0.06902862340211868, 'representation': 0.032542988657951355, 'weighted_dense': 0.03648563474416733, 'weighted_fk': 0.0}
+P 160/9600 p=0.0000 replaced=0.0000 {'loss': 0.1668483316898346, 'representation': 0.07196838408708572, 'weighted_dense': 0.09487994015216827, 'weighted_fk': 0.0}
+P 180/9600 p=0.0000 replaced=0.0000 {'loss': 0.10473905503749847, 'representation': 0.04045291244983673, 'weighted_dense': 0.06428614258766174, 'weighted_fk': 0.0}
+P 200/9600 p=0.0000 replaced=0.0000 {'loss': 0.5978448390960693, 'representation': 0.24863466620445251, 'weighted_dense': 0.3492102026939392, 'weighted_fk': 0.0}
+DEV 200: FK=36.789 mm; best=36.750 @0
+P 220/9600 p=0.0000 replaced=0.0000 {'loss': 0.12528657913208008, 'representation': 0.0676889568567276, 'weighted_dense': 0.057597626000642776, 'weighted_fk': 0.0}
+P 240/9600 p=0.0000 replaced=0.0000 {'loss': 1.136693000793457, 'representation': 0.538341224193573, 'weighted_dense': 0.598351776599884, 'weighted_fk': 0.0}
+P 260/9600 p=0.0000 replaced=0.0000 {'loss': 0.09582813084125519, 'representation': 0.04405258595943451, 'weighted_dense': 0.05177554488182068, 'weighted_fk': 0.0}
+P 280/9600 p=0.0000 replaced=0.0000 {'loss': 0.14027850329875946, 'representation': 0.05006420984864235, 'weighted_dense': 0.09021428972482681, 'weighted_fk': 0.0}
+P 300/9600 p=0.0000 replaced=0.0000 {'loss': 0.3719930648803711, 'representation': 0.19907131791114807, 'weighted_dense': 0.17292173206806183, 'weighted_fk': 0.0}
+DEV 300: FK=36.587 mm; best=36.587 @300
+P 320/9600 p=0.0000 replaced=0.0000 {'loss': 0.6135901212692261, 'representation': 0.2817728519439697, 'weighted_dense': 0.33181723952293396, 'weighted_fk': 0.0}
+P 340/9600 p=0.0000 replaced=0.0000 {'loss': 0.21211490035057068, 'representation': 0.0803663358092308, 'weighted_dense': 0.13174857199192047, 'weighted_fk': 0.0}
+P 360/9600 p=0.0000 replaced=0.0000 {'loss': 0.2049647867679596, 'representation': 0.06658239662647247, 'weighted_dense': 0.13838239014148712, 'weighted_fk': 0.0}
+P 380/9600 p=0.0000 replaced=0.0000 {'loss': 0.10895773023366928, 'representation': 0.04748642444610596, 'weighted_dense': 0.061471305787563324, 'weighted_fk': 0.0}
+P 400/9600 p=0.0000 replaced=0.0000 {'loss': 0.8537946343421936, 'representation': 0.42069554328918457, 'weighted_dense': 0.43309909105300903, 'weighted_fk': 0.0}
+DEV 400: FK=36.364 mm; best=36.364 @400
+P 420/9600 p=0.0000 replaced=0.0000 {'loss': 0.3878020942211151, 'representation': 0.22876305878162384, 'weighted_dense': 0.15903903543949127, 'weighted_fk': 0.0}
+P 440/9600 p=0.0000 replaced=0.0000 {'loss': 0.1218026876449585, 'representation': 0.04969291761517525, 'weighted_dense': 0.07210976630449295, 'weighted_fk': 0.0}
+P 460/9600 p=0.0000 replaced=0.0000 {'loss': 0.0860188901424408, 'representation': 0.03271099179983139, 'weighted_dense': 0.053307898342609406, 'weighted_fk': 0.0}
+P 480/9600 p=0.0000 replaced=0.0000 {'loss': 0.11483973264694214, 'representation': 0.04691578820347786, 'weighted_dense': 0.06792394071817398, 'weighted_fk': 0.0}
+P 500/9600 p=0.0000 replaced=0.0000 {'loss': 0.13606183230876923, 'representation': 0.05322523042559624, 'weighted_dense': 0.08283659815788269, 'weighted_fk': 0.0}
+DEV 500: FK=35.976 mm; best=35.976 @500
+P 520/9600 p=0.0000 replaced=0.0000 {'loss': 0.17552068829536438, 'representation': 0.06312558799982071, 'weighted_dense': 0.11239509284496307, 'weighted_fk': 0.0}
+P 540/9600 p=0.0000 replaced=0.0000 {'loss': 0.3531523644924164, 'representation': 0.1522332727909088, 'weighted_dense': 0.20091909170150757, 'weighted_fk': 0.0}
+P 560/9600 p=0.0000 replaced=0.0000 {'loss': 0.11309736967086792, 'representation': 0.061173513531684875, 'weighted_dense': 0.051923852413892746, 'weighted_fk': 0.0}
+P 580/9600 p=0.0000 replaced=0.0000 {'loss': 0.4357781410217285, 'representation': 0.202591672539711, 'weighted_dense': 0.23318645358085632, 'weighted_fk': 0.0}
+P 600/9600 p=0.0000 replaced=0.0000 {'loss': 0.05202944949269295, 'representation': 0.024415278807282448, 'weighted_dense': 0.0276141706854105, 'weighted_fk': 0.0}
+DEV 600: FK=36.648 mm; best=35.976 @500
+P 620/9600 p=0.0000 replaced=0.0000 {'loss': 0.23714682459831238, 'representation': 0.11803488433361053, 'weighted_dense': 0.11911193281412125, 'weighted_fk': 0.0}
+P 640/9600 p=0.0000 replaced=0.0000 {'loss': 0.12168541550636292, 'representation': 0.04119683429598808, 'weighted_dense': 0.08048858493566513, 'weighted_fk': 0.0}
+P 660/9600 p=0.0000 replaced=0.0000 {'loss': 0.14402104914188385, 'representation': 0.06048272177577019, 'weighted_dense': 0.08353833109140396, 'weighted_fk': 0.0}
+P 680/9600 p=0.0000 replaced=0.0000 {'loss': 0.5004161596298218, 'representation': 0.12621593475341797, 'weighted_dense': 0.3742002546787262, 'weighted_fk': 0.0}
+P 700/9600 p=0.0000 replaced=0.0000 {'loss': 0.11336450278759003, 'representation': 0.047140058130025864, 'weighted_dense': 0.06622444838285446, 'weighted_fk': 0.0}
+DEV 700: FK=35.921 mm; best=35.921 @700
+P 720/9600 p=0.0000 replaced=0.0000 {'loss': 0.15027615427970886, 'representation': 0.05551118776202202, 'weighted_dense': 0.09476496279239655, 'weighted_fk': 0.0}
+P 740/9600 p=0.0000 replaced=0.0000 {'loss': 0.13699808716773987, 'representation': 0.06103602796792984, 'weighted_dense': 0.07596205919981003, 'weighted_fk': 0.0}
+P 760/9600 p=0.0000 replaced=0.0000 {'loss': 0.12327243387699127, 'representation': 0.04888299107551575, 'weighted_dense': 0.07438944280147552, 'weighted_fk': 0.0}
+P 780/9600 p=0.0000 replaced=0.0000 {'loss': 0.15572835505008698, 'representation': 0.06254646182060242, 'weighted_dense': 0.09318189322948456, 'weighted_fk': 0.0}
+P 800/9600 p=0.0000 replaced=0.0000 {'loss': 0.29705938696861267, 'representation': 0.14083707332611084, 'weighted_dense': 0.15622231364250183, 'weighted_fk': 0.0}
+DEV 800: FK=35.970 mm; best=35.921 @700
+P 820/9600 p=0.0000 replaced=0.0000 {'loss': 0.21669790148735046, 'representation': 0.10836542397737503, 'weighted_dense': 0.10833247005939484, 'weighted_fk': 0.0}
+P 840/9600 p=0.0000 replaced=0.0000 {'loss': 0.07338729500770569, 'representation': 0.033357176929712296, 'weighted_dense': 0.040030114352703094, 'weighted_fk': 0.0}
+P 860/9600 p=0.0000 replaced=0.0000 {'loss': 0.07451517134904861, 'representation': 0.03082709200680256, 'weighted_dense': 0.043688081204891205, 'weighted_fk': 0.0}
+P 880/9600 p=0.0000 replaced=0.0000 {'loss': 0.158438578248024, 'representation': 0.07558201253414154, 'weighted_dense': 0.08285656571388245, 'weighted_fk': 0.0}
+P 900/9600 p=0.0000 replaced=0.0000 {'loss': 0.1262778788805008, 'representation': 0.059188757091760635, 'weighted_dense': 0.06708911806344986, 'weighted_fk': 0.0}
+DEV 900: FK=36.414 mm; best=35.921 @700
+P 920/9600 p=0.0000 replaced=0.0000 {'loss': 0.30263030529022217, 'representation': 0.18226779997348785, 'weighted_dense': 0.12036251276731491, 'weighted_fk': 0.0}
+P 940/9600 p=0.0000 replaced=0.0000 {'loss': 0.13821357488632202, 'representation': 0.06817963719367981, 'weighted_dense': 0.07003393024206161, 'weighted_fk': 0.0}
+P 960/9600 p=0.0000 replaced=0.0000 {'loss': 0.5270241498947144, 'representation': 0.2728734314441681, 'weighted_dense': 0.25415074825286865, 'weighted_fk': 0.0}
+P 980/9600 p=0.0000 replaced=0.0000 {'loss': 0.1146915853023529, 'representation': 0.05950380489230156, 'weighted_dense': 0.055187784135341644, 'weighted_fk': 0.0}
+P 1000/9600 p=0.0000 replaced=0.0000 {'loss': 0.08535626530647278, 'representation': 0.03634004667401314, 'weighted_dense': 0.04901621863245964, 'weighted_fk': 0.0}
+DEV 1000: FK=35.479 mm; best=35.479 @1000
+P 1020/9600 p=0.0000 replaced=0.0000 {'loss': 0.08822284638881683, 'representation': 0.035254985094070435, 'weighted_dense': 0.0529678650200367, 'weighted_fk': 0.0}
+P 1040/9600 p=0.0000 replaced=0.0000 {'loss': 0.2009202539920807, 'representation': 0.12127448618412018, 'weighted_dense': 0.07964577525854111, 'weighted_fk': 0.0}
+P 1060/9600 p=0.0000 replaced=0.0000 {'loss': 0.1409815549850464, 'representation': 0.058333154767751694, 'weighted_dense': 0.0826483964920044, 'weighted_fk': 0.0}
+P 1080/9600 p=0.0000 replaced=0.0000 {'loss': 0.1524696797132492, 'representation': 0.06493981927633286, 'weighted_dense': 0.08752986043691635, 'weighted_fk': 0.0}
+P 1100/9600 p=0.0000 replaced=0.0000 {'loss': 0.45154303312301636, 'representation': 0.1700548529624939, 'weighted_dense': 0.28148818016052246, 'weighted_fk': 0.0}
+DEV 1100: FK=36.164 mm; best=35.479 @1000
+P 1120/9600 p=0.0000 replaced=0.0000 {'loss': 0.132400780916214, 'representation': 0.057657938450574875, 'weighted_dense': 0.07474284619092941, 'weighted_fk': 0.0}
+P 1140/9600 p=0.0000 replaced=0.0000 {'loss': 0.11106522381305695, 'representation': 0.04981386289000511, 'weighted_dense': 0.06125136464834213, 'weighted_fk': 0.0}
+P 1160/9600 p=0.0000 replaced=0.0000 {'loss': 0.17641589045524597, 'representation': 0.09422574937343597, 'weighted_dense': 0.0821901336312294, 'weighted_fk': 0.0}
+P 1180/9600 p=0.0000 replaced=0.0000 {'loss': 0.9570454359054565, 'representation': 0.3181278109550476, 'weighted_dense': 0.6389176249504089, 'weighted_fk': 0.0}
+P 1200/9600 p=0.0000 replaced=0.0000 {'loss': 0.19747301936149597, 'representation': 0.06753634661436081, 'weighted_dense': 0.12993666529655457, 'weighted_fk': 0.0}
+DEV 1200: FK=36.341 mm; best=35.479 @1000
+P 1220/9600 p=0.0000 replaced=0.0000 {'loss': 0.7858072519302368, 'representation': 0.7463605999946594, 'weighted_dense': 0.03944665566086769, 'weighted_fk': 0.0}
+P 1240/9600 p=0.0000 replaced=0.0000 {'loss': 0.16040641069412231, 'representation': 0.06753821671009064, 'weighted_dense': 0.09286820143461227, 'weighted_fk': 0.0}
+P 1260/9600 p=0.0000 replaced=0.0000 {'loss': 0.06733714789152145, 'representation': 0.037412162870168686, 'weighted_dense': 0.02992498315870762, 'weighted_fk': 0.0}
+P 1280/9600 p=0.0000 replaced=0.0000 {'loss': 0.07735034078359604, 'representation': 0.033997535705566406, 'weighted_dense': 0.04335280507802963, 'weighted_fk': 0.0}
+P 1300/9600 p=0.0000 replaced=0.0000 {'loss': 0.19079545140266418, 'representation': 0.12517070770263672, 'weighted_dense': 0.06562475115060806, 'weighted_fk': 0.0}
+DEV 1300: FK=35.861 mm; best=35.479 @1000
+P 1320/9600 p=0.0000 replaced=0.0000 {'loss': 0.06391046196222305, 'representation': 0.02877132222056389, 'weighted_dense': 0.035139139741659164, 'weighted_fk': 0.0}
+P 1340/9600 p=0.0000 replaced=0.0000 {'loss': 0.1166587695479393, 'representation': 0.045655928552150726, 'weighted_dense': 0.07100284099578857, 'weighted_fk': 0.0}
+P 1360/9600 p=0.0000 replaced=0.0000 {'loss': 0.06571080535650253, 'representation': 0.03291976824402809, 'weighted_dense': 0.03279103711247444, 'weighted_fk': 0.0}
+P 1380/9600 p=0.0000 replaced=0.0000 {'loss': 0.22371700406074524, 'representation': 0.08546105772256851, 'weighted_dense': 0.13825595378875732, 'weighted_fk': 0.0}
+P 1400/9600 p=0.0000 replaced=0.0000 {'loss': 0.2997387647628784, 'representation': 0.11536507308483124, 'weighted_dense': 0.18437369167804718, 'weighted_fk': 0.0}
+DEV 1400: FK=35.747 mm; best=35.479 @1000
+P 1420/9600 p=0.0000 replaced=0.0000 {'loss': 0.1864798367023468, 'representation': 0.10131601989269257, 'weighted_dense': 0.08516381680965424, 'weighted_fk': 0.0}
+P 1440/9600 p=0.0000 replaced=0.0000 {'loss': 0.10729722678661346, 'representation': 0.05275717005133629, 'weighted_dense': 0.054540060460567474, 'weighted_fk': 0.0}
+P 1460/9600 p=0.0000 replaced=0.0000 {'loss': 0.08120718598365784, 'representation': 0.039004601538181305, 'weighted_dense': 0.042202580720186234, 'weighted_fk': 0.0}
+P 1480/9600 p=0.0000 replaced=0.0000 {'loss': 0.16004550457000732, 'representation': 0.09327825158834457, 'weighted_dense': 0.06676724553108215, 'weighted_fk': 0.0}
+P 1500/9600 p=0.0000 replaced=0.0000 {'loss': 0.2166450321674347, 'representation': 0.07210277765989304, 'weighted_dense': 0.14454224705696106, 'weighted_fk': 0.0}
+DEV 1500: FK=35.830 mm; best=35.479 @1000
+P 1520/9600 p=0.0000 replaced=0.0000 {'loss': 2.228389263153076, 'representation': 1.911498785018921, 'weighted_dense': 0.3168903887271881, 'weighted_fk': 0.0}
+P 1540/9600 p=0.0000 replaced=0.0000 {'loss': 0.11418820172548294, 'representation': 0.04712890088558197, 'weighted_dense': 0.06705930083990097, 'weighted_fk': 0.0}
+P 1560/9600 p=0.0000 replaced=0.0000 {'loss': 0.2981102764606476, 'representation': 0.07529851794242859, 'weighted_dense': 0.222811758518219, 'weighted_fk': 0.0}
+P 1580/9600 p=0.0000 replaced=0.0000 {'loss': 0.13378813862800598, 'representation': 0.05900471657514572, 'weighted_dense': 0.07478341460227966, 'weighted_fk': 0.0}
+P 1600/9600 p=0.0000 replaced=0.0000 {'loss': 0.15085238218307495, 'representation': 0.07550711929798126, 'weighted_dense': 0.07534527033567429, 'weighted_fk': 0.0}
+DEV 1600: FK=36.025 mm; best=35.479 @1000
+P 1620/9600 p=0.0000 replaced=0.0000 {'loss': 0.3859938085079193, 'representation': 0.19521905481815338, 'weighted_dense': 0.19077475368976593, 'weighted_fk': 0.0}
+P 1640/9600 p=0.0000 replaced=0.0000 {'loss': 0.175466388463974, 'representation': 0.11249613016843796, 'weighted_dense': 0.06297026574611664, 'weighted_fk': 0.0}
+P 1660/9600 p=0.0000 replaced=0.0000 {'loss': 0.21934571862220764, 'representation': 0.09859909862279892, 'weighted_dense': 0.12074662744998932, 'weighted_fk': 0.0}
+P 1680/9600 p=0.0000 replaced=0.0000 {'loss': 0.5207356810569763, 'representation': 0.4586130678653717, 'weighted_dense': 0.062122613191604614, 'weighted_fk': 0.0}
+P 1700/9600 p=0.0000 replaced=0.0000 {'loss': 0.08271859586238861, 'representation': 0.03739140182733536, 'weighted_dense': 0.045327190309762955, 'weighted_fk': 0.0}
+DEV 1700: FK=35.740 mm; best=35.479 @1000
+P 1720/9600 p=0.0000 replaced=0.0000 {'loss': 0.14722558856010437, 'representation': 0.08202183246612549, 'weighted_dense': 0.06520374864339828, 'weighted_fk': 0.0}
+P 1740/9600 p=0.0000 replaced=0.0000 {'loss': 0.25520220398902893, 'representation': 0.20085816085338593, 'weighted_dense': 0.0543440505862236, 'weighted_fk': 0.0}
+P 1760/9600 p=0.0000 replaced=0.0000 {'loss': 0.20786547660827637, 'representation': 0.08251851052045822, 'weighted_dense': 0.12534697353839874, 'weighted_fk': 0.0}
+P 1780/9600 p=0.0000 replaced=0.0000 {'loss': 0.24996508657932281, 'representation': 0.13753429055213928, 'weighted_dense': 0.11243079602718353, 'weighted_fk': 0.0}
+P 1800/9600 p=0.0000 replaced=0.0000 {'loss': 0.20171646773815155, 'representation': 0.1439632773399353, 'weighted_dense': 0.05775318667292595, 'weighted_fk': 0.0}
+DEV 1800: FK=35.550 mm; best=35.479 @1000
+P 1820/9600 p=0.0000 replaced=0.0000 {'loss': 0.1476602852344513, 'representation': 0.08679119497537613, 'weighted_dense': 0.06086909398436546, 'weighted_fk': 0.0}
+P 1840/9600 p=0.0000 replaced=0.0000 {'loss': 0.08530426025390625, 'representation': 0.03641851618885994, 'weighted_dense': 0.04888574033975601, 'weighted_fk': 0.0}
+P 1860/9600 p=0.0000 replaced=0.0000 {'loss': 0.1595180481672287, 'representation': 0.0801016092300415, 'weighted_dense': 0.0794164389371872, 'weighted_fk': 0.0}
+P 1880/9600 p=0.0000 replaced=0.0000 {'loss': 0.5453188419342041, 'representation': 0.23861050605773926, 'weighted_dense': 0.30670836567878723, 'weighted_fk': 0.0}
+P 1900/9600 p=0.0000 replaced=0.0000 {'loss': 0.08913761377334595, 'representation': 0.04598812013864517, 'weighted_dense': 0.043149497359991074, 'weighted_fk': 0.0}
+DEV 1900: FK=35.261 mm; best=35.261 @1900
+P 1920/9600 p=0.0000 replaced=0.0000 {'loss': 0.10606706142425537, 'representation': 0.0473104827105999, 'weighted_dense': 0.05875657498836517, 'weighted_fk': 0.0}
+P 1940/9600 p=0.0000 replaced=0.0000 {'loss': 0.09456989169120789, 'representation': 0.045301295816898346, 'weighted_dense': 0.04926859587430954, 'weighted_fk': 0.0}
+P 1960/9600 p=0.0000 replaced=0.0000 {'loss': 0.22229436039924622, 'representation': 0.09004377573728561, 'weighted_dense': 0.13225057721138, 'weighted_fk': 0.0}
+P 1980/9600 p=0.0000 replaced=0.0000 {'loss': 0.11459758132696152, 'representation': 0.055396031588315964, 'weighted_dense': 0.059201549738645554, 'weighted_fk': 0.0}
+P 2000/9600 p=0.0000 replaced=0.0000 {'loss': 0.09591814875602722, 'representation': 0.06136862561106682, 'weighted_dense': 0.0345495231449604, 'weighted_fk': 0.0}
+DEV 2000: FK=35.214 mm; best=35.214 @2000
+P 2020/9600 p=0.0000 replaced=0.0000 {'loss': 0.11392469704151154, 'representation': 0.05423419922590256, 'weighted_dense': 0.05969049409031868, 'weighted_fk': 0.0}
+P 2040/9600 p=0.0000 replaced=0.0000 {'loss': 0.14886721968650818, 'representation': 0.07391490787267685, 'weighted_dense': 0.07495231926441193, 'weighted_fk': 0.0}
+P 2060/9600 p=0.0000 replaced=0.0000 {'loss': 0.0761808231472969, 'representation': 0.05179796740412712, 'weighted_dense': 0.024382855743169785, 'weighted_fk': 0.0}
+P 2080/9600 p=0.0000 replaced=0.0000 {'loss': 0.09570660442113876, 'representation': 0.04781424626708031, 'weighted_dense': 0.047892358154058456, 'weighted_fk': 0.0}
+P 2100/9600 p=0.0000 replaced=0.0000 {'loss': 0.20815308392047882, 'representation': 0.0781932920217514, 'weighted_dense': 0.12995979189872742, 'weighted_fk': 0.0}
+DEV 2100: FK=35.333 mm; best=35.214 @2000
+P 2120/9600 p=0.0000 replaced=0.0000 {'loss': 0.13991978764533997, 'representation': 0.057240478694438934, 'weighted_dense': 0.08267930895090103, 'weighted_fk': 0.0}
+P 2140/9600 p=0.0000 replaced=0.0000 {'loss': 0.17106668651103973, 'representation': 0.07872407883405685, 'weighted_dense': 0.09234260767698288, 'weighted_fk': 0.0}
+P 2160/9600 p=0.0000 replaced=0.0000 {'loss': 0.09249144047498703, 'representation': 0.04167700931429863, 'weighted_dense': 0.0508144311606884, 'weighted_fk': 0.0}
+P 2180/9600 p=0.0000 replaced=0.0000 {'loss': 0.11358046531677246, 'representation': 0.057317327708005905, 'weighted_dense': 0.056263141334056854, 'weighted_fk': 0.0}
+P 2200/9600 p=0.0000 replaced=0.0000 {'loss': 0.15430918335914612, 'representation': 0.04573576897382736, 'weighted_dense': 0.10857342183589935, 'weighted_fk': 0.0}
+DEV 2200: FK=35.807 mm; best=35.214 @2000
+P 2220/9600 p=0.0000 replaced=0.0000 {'loss': 0.14563718438148499, 'representation': 0.07207729667425156, 'weighted_dense': 0.07355988025665283, 'weighted_fk': 0.0}
+P 2240/9600 p=0.0000 replaced=0.0000 {'loss': 0.0836748331785202, 'representation': 0.040577057749032974, 'weighted_dense': 0.04309777542948723, 'weighted_fk': 0.0}
+P 2260/9600 p=0.0000 replaced=0.0000 {'loss': 0.4911861717700958, 'representation': 0.22312209010124207, 'weighted_dense': 0.26806408166885376, 'weighted_fk': 0.0}
+P 2280/9600 p=0.0000 replaced=0.0000 {'loss': 0.19643425941467285, 'representation': 0.12085603177547455, 'weighted_dense': 0.0755782201886177, 'weighted_fk': 0.0}
+P 2300/9600 p=0.0000 replaced=0.0000 {'loss': 0.08896920084953308, 'representation': 0.03727725148200989, 'weighted_dense': 0.05169194936752319, 'weighted_fk': 0.0}
+DEV 2300: FK=35.763 mm; best=35.214 @2000
+P 2320/9600 p=0.0000 replaced=0.0000 {'loss': 0.08975021541118622, 'representation': 0.03387076035141945, 'weighted_dense': 0.05587945505976677, 'weighted_fk': 0.0}
+P 2340/9600 p=0.0000 replaced=0.0000 {'loss': 0.1576862931251526, 'representation': 0.06862381100654602, 'weighted_dense': 0.08906248956918716, 'weighted_fk': 0.0}
+P 2360/9600 p=0.0000 replaced=0.0000 {'loss': 2.201833724975586, 'representation': 0.6002576351165771, 'weighted_dense': 1.6015760898590088, 'weighted_fk': 0.0}
+P 2380/9600 p=0.0000 replaced=0.0000 {'loss': 0.19261305034160614, 'representation': 0.10328350216150284, 'weighted_dense': 0.0893295481801033, 'weighted_fk': 0.0}
+P 2400/9600 p=0.0000 replaced=0.0000 {'loss': 0.1584327518939972, 'representation': 0.08764148503541946, 'weighted_dense': 0.07079125940799713, 'weighted_fk': 0.0}
+DEV 2400: FK=35.579 mm; best=35.214 @2000
+P 2420/9600 p=0.0000 replaced=0.0000 {'loss': 0.07734236866235733, 'representation': 0.036732085049152374, 'weighted_dense': 0.040610283613204956, 'weighted_fk': 0.0}
+P 2440/9600 p=0.0000 replaced=0.0000 {'loss': 0.07977014780044556, 'representation': 0.0356493778526783, 'weighted_dense': 0.04412076994776726, 'weighted_fk': 0.0}
+P 2460/9600 p=0.0000 replaced=0.0000 {'loss': 0.08498993515968323, 'representation': 0.03890609368681908, 'weighted_dense': 0.04608384147286415, 'weighted_fk': 0.0}
+P 2480/9600 p=0.0000 replaced=0.0000 {'loss': 0.5027294158935547, 'representation': 0.38568443059921265, 'weighted_dense': 0.11704500019550323, 'weighted_fk': 0.0}
+P 2500/9600 p=0.0000 replaced=0.0000 {'loss': 0.4319562017917633, 'representation': 0.2849810719490051, 'weighted_dense': 0.14697512984275818, 'weighted_fk': 0.0}
+DEV 2500: FK=34.758 mm; best=34.758 @2500
+P 2520/9600 p=0.0000 replaced=0.0000 {'loss': 0.831584632396698, 'representation': 0.3589968681335449, 'weighted_dense': 0.4725877642631531, 'weighted_fk': 0.0}
+P 2540/9600 p=0.0000 replaced=0.0000 {'loss': 0.07798244059085846, 'representation': 0.04044425114989281, 'weighted_dense': 0.03753819316625595, 'weighted_fk': 0.0}
+P 2560/9600 p=0.0000 replaced=0.0000 {'loss': 0.13220535218715668, 'representation': 0.06077411025762558, 'weighted_dense': 0.0714312419295311, 'weighted_fk': 0.0}
+P 2580/9600 p=0.0000 replaced=0.0000 {'loss': 0.12747447192668915, 'representation': 0.07094617933034897, 'weighted_dense': 0.05652829259634018, 'weighted_fk': 0.0}
+P 2600/9600 p=0.0000 replaced=0.0000 {'loss': 0.09460639953613281, 'representation': 0.04428911581635475, 'weighted_dense': 0.05031728744506836, 'weighted_fk': 0.0}
+DEV 2600: FK=35.453 mm; best=34.758 @2500
+P 2620/9600 p=0.0000 replaced=0.0000 {'loss': 0.2528814971446991, 'representation': 0.1724586933851242, 'weighted_dense': 0.08042280375957489, 'weighted_fk': 0.0}
+P 2640/9600 p=0.0000 replaced=0.0000 {'loss': 0.08244678378105164, 'representation': 0.03510601073503494, 'weighted_dense': 0.047340769320726395, 'weighted_fk': 0.0}
+P 2660/9600 p=0.0000 replaced=0.0000 {'loss': 0.09075368195772171, 'representation': 0.041290536522865295, 'weighted_dense': 0.049463145434856415, 'weighted_fk': 0.0}
+P 2680/9600 p=0.0000 replaced=0.0000 {'loss': 0.10070568323135376, 'representation': 0.04276032745838165, 'weighted_dense': 0.05794535577297211, 'weighted_fk': 0.0}
+P 2700/9600 p=0.0000 replaced=0.0000 {'loss': 0.45444443821907043, 'representation': 0.27792656421661377, 'weighted_dense': 0.17651787400245667, 'weighted_fk': 0.0}
+DEV 2700: FK=35.269 mm; best=34.758 @2500
+P 2720/9600 p=0.0000 replaced=0.0000 {'loss': 0.4350287914276123, 'representation': 0.27651217579841614, 'weighted_dense': 0.15851661562919617, 'weighted_fk': 0.0}
+P 2740/9600 p=0.0000 replaced=0.0000 {'loss': 0.07537287473678589, 'representation': 0.041702527552843094, 'weighted_dense': 0.033670347183942795, 'weighted_fk': 0.0}
+P 2760/9600 p=0.0000 replaced=0.0000 {'loss': 0.1317010372877121, 'representation': 0.06021170690655708, 'weighted_dense': 0.07148932665586472, 'weighted_fk': 0.0}
+P 2780/9600 p=0.0000 replaced=0.0000 {'loss': 0.0969158262014389, 'representation': 0.04207020252943039, 'weighted_dense': 0.054845619946718216, 'weighted_fk': 0.0}
+P 2800/9600 p=0.0000 replaced=0.0000 {'loss': 0.08564802259206772, 'representation': 0.04056791588664055, 'weighted_dense': 0.04508010670542717, 'weighted_fk': 0.0}
+DEV 2800: FK=35.192 mm; best=34.758 @2500
+P 2820/9600 p=0.0000 replaced=0.0000 {'loss': 0.12724536657333374, 'representation': 0.06059853732585907, 'weighted_dense': 0.06664683669805527, 'weighted_fk': 0.0}
+P 2840/9600 p=0.0000 replaced=0.0000 {'loss': 0.08622241020202637, 'representation': 0.037004757672548294, 'weighted_dense': 0.049217648804187775, 'weighted_fk': 0.0}
+P 2860/9600 p=0.0000 replaced=0.0000 {'loss': 0.08143013715744019, 'representation': 0.04323716089129448, 'weighted_dense': 0.038192979991436005, 'weighted_fk': 0.0}
+P 2880/9600 p=0.0000 replaced=0.0000 {'loss': 1.1145998239517212, 'representation': 1.0096192359924316, 'weighted_dense': 0.10498060286045074, 'weighted_fk': 0.0}
+P 2900/9600 p=0.0000 replaced=0.0000 {'loss': 0.14076495170593262, 'representation': 0.059850893914699554, 'weighted_dense': 0.08091405034065247, 'weighted_fk': 0.0}
+DEV 2900: FK=35.432 mm; best=34.758 @2500
+P 2920/9600 p=0.0000 replaced=0.0000 {'loss': 0.1364029496908188, 'representation': 0.05962632969021797, 'weighted_dense': 0.07677662372589111, 'weighted_fk': 0.0}
+P 2940/9600 p=0.0000 replaced=0.0000 {'loss': 0.0741538554430008, 'representation': 0.03793999180197716, 'weighted_dense': 0.03621385991573334, 'weighted_fk': 0.0}
+P 2960/9600 p=0.0000 replaced=0.0000 {'loss': 0.15008848905563354, 'representation': 0.06885367631912231, 'weighted_dense': 0.08123481273651123, 'weighted_fk': 0.0}
+P 2980/9600 p=0.0000 replaced=0.0000 {'loss': 0.334923654794693, 'representation': 0.18108206987380981, 'weighted_dense': 0.15384158492088318, 'weighted_fk': 0.0}
+P 3000/9600 p=0.0000 replaced=0.0000 {'loss': 0.16718825697898865, 'representation': 0.09789466857910156, 'weighted_dense': 0.06929358839988708, 'weighted_fk': 0.0}
+DEV 3000: FK=34.610 mm; best=34.610 @3000
+P 3020/9600 p=0.0000 replaced=0.0000 {'loss': 0.15833953022956848, 'representation': 0.06645286083221436, 'weighted_dense': 0.09188667684793472, 'weighted_fk': 0.0}
+P 3040/9600 p=0.0000 replaced=0.0000 {'loss': 0.2538883686065674, 'representation': 0.14991433918476105, 'weighted_dense': 0.10397402942180634, 'weighted_fk': 0.0}
+P 3060/9600 p=0.0000 replaced=0.0000 {'loss': 0.22512876987457275, 'representation': 0.10683953762054443, 'weighted_dense': 0.11828923225402832, 'weighted_fk': 0.0}
+P 3080/9600 p=0.0000 replaced=0.0000 {'loss': 0.24860462546348572, 'representation': 0.12543144822120667, 'weighted_dense': 0.12317318469285965, 'weighted_fk': 0.0}
+P 3100/9600 p=0.0000 replaced=0.0000 {'loss': 0.1400495171546936, 'representation': 0.06928097456693649, 'weighted_dense': 0.07076853513717651, 'weighted_fk': 0.0}
+DEV 3100: FK=35.331 mm; best=34.610 @3000
+P 3120/9600 p=0.0000 replaced=0.0000 {'loss': 0.7976241111755371, 'representation': 0.6993970274925232, 'weighted_dense': 0.0982271134853363, 'weighted_fk': 0.0}
+P 3140/9600 p=0.0000 replaced=0.0000 {'loss': 0.12698125839233398, 'representation': 0.07305333763360977, 'weighted_dense': 0.05392792075872421, 'weighted_fk': 0.0}
+P 3160/9600 p=0.0000 replaced=0.0000 {'loss': 0.24376508593559265, 'representation': 0.11636713892221451, 'weighted_dense': 0.12739795446395874, 'weighted_fk': 0.0}
+P 3180/9600 p=0.0000 replaced=0.0000 {'loss': 0.29041430354118347, 'representation': 0.13958047330379486, 'weighted_dense': 0.1508338302373886, 'weighted_fk': 0.0}
+P 3200/9600 p=0.0000 replaced=0.0000 {'loss': 0.08139792829751968, 'representation': 0.03766388073563576, 'weighted_dense': 0.043734047561883926, 'weighted_fk': 0.0}
+DEV 3200: FK=35.202 mm; best=34.610 @3000
+P 3220/9600 p=0.0000 replaced=0.0000 {'loss': 0.4382457137107849, 'representation': 0.23855745792388916, 'weighted_dense': 0.19968827068805695, 'weighted_fk': 0.0}
+P 3240/9600 p=0.0000 replaced=0.0000 {'loss': 0.3471662104129791, 'representation': 0.2919638454914093, 'weighted_dense': 0.05520235747098923, 'weighted_fk': 0.0}
+P 3260/9600 p=0.0000 replaced=0.0000 {'loss': 0.07588806748390198, 'representation': 0.0377427339553833, 'weighted_dense': 0.03814532980322838, 'weighted_fk': 0.0}
+P 3280/9600 p=0.0000 replaced=0.0000 {'loss': 0.08446159958839417, 'representation': 0.03652605041861534, 'weighted_dense': 0.047935545444488525, 'weighted_fk': 0.0}
+P 3300/9600 p=0.0000 replaced=0.0000 {'loss': 0.1557413637638092, 'representation': 0.06814411282539368, 'weighted_dense': 0.08759725838899612, 'weighted_fk': 0.0}
+DEV 3300: FK=35.377 mm; best=34.610 @3000
+P 3320/9600 p=0.0000 replaced=0.0000 {'loss': 0.17355471849441528, 'representation': 0.11932487785816193, 'weighted_dense': 0.054229848086833954, 'weighted_fk': 0.0}
+P 3340/9600 p=0.0000 replaced=0.0000 {'loss': 0.1446230560541153, 'representation': 0.1059628427028656, 'weighted_dense': 0.03866021707653999, 'weighted_fk': 0.0}
+P 3360/9600 p=0.0000 replaced=0.0000 {'loss': 0.17792555689811707, 'representation': 0.1117950901389122, 'weighted_dense': 0.06613046675920486, 'weighted_fk': 0.0}
+P 3380/9600 p=0.0000 replaced=0.0000 {'loss': 0.07583233714103699, 'representation': 0.03661821037530899, 'weighted_dense': 0.039214126765728, 'weighted_fk': 0.0}
+P 3400/9600 p=0.0000 replaced=0.0000 {'loss': 0.09952232241630554, 'representation': 0.047469813376665115, 'weighted_dense': 0.05205250903964043, 'weighted_fk': 0.0}
+DEV 3400: FK=34.549 mm; best=34.549 @3400
+P 3420/9600 p=0.0000 replaced=0.0000 {'loss': 0.13750675320625305, 'representation': 0.0644921213388443, 'weighted_dense': 0.07301463931798935, 'weighted_fk': 0.0}
+P 3440/9600 p=0.0000 replaced=0.0000 {'loss': 0.17036989331245422, 'representation': 0.0893571525812149, 'weighted_dense': 0.08101274818181992, 'weighted_fk': 0.0}
+P 3460/9600 p=0.0000 replaced=0.0000 {'loss': 0.1319696307182312, 'representation': 0.061715997755527496, 'weighted_dense': 0.0702536404132843, 'weighted_fk': 0.0}
+P 3480/9600 p=0.0000 replaced=0.0000 {'loss': 0.5427665710449219, 'representation': 0.26225075125694275, 'weighted_dense': 0.2805158495903015, 'weighted_fk': 0.0}
+P 3500/9600 p=0.0000 replaced=0.0000 {'loss': 0.5189822912216187, 'representation': 0.37208351492881775, 'weighted_dense': 0.1468987613916397, 'weighted_fk': 0.0}
+DEV 3500: FK=35.244 mm; best=34.549 @3400
+P 3520/9600 p=0.0000 replaced=0.0000 {'loss': 0.15335237979888916, 'representation': 0.12310474365949631, 'weighted_dense': 0.03024763986468315, 'weighted_fk': 0.0}
+P 3540/9600 p=0.0000 replaced=0.0000 {'loss': 0.08299148082733154, 'representation': 0.05556216090917587, 'weighted_dense': 0.02742931619286537, 'weighted_fk': 0.0}
+P 3560/9600 p=0.0000 replaced=0.0000 {'loss': 0.09340763092041016, 'representation': 0.03746344521641731, 'weighted_dense': 0.055944185703992844, 'weighted_fk': 0.0}
+P 3580/9600 p=0.0000 replaced=0.0000 {'loss': 0.21094870567321777, 'representation': 0.12160616368055344, 'weighted_dense': 0.08934254944324493, 'weighted_fk': 0.0}
+P 3600/9600 p=0.0000 replaced=0.0000 {'loss': 0.21387970447540283, 'representation': 0.08921030163764954, 'weighted_dense': 0.12466941028833389, 'weighted_fk': 0.0}
+DEV 3600: FK=34.966 mm; best=34.549 @3400
+P 3620/9600 p=0.0000 replaced=0.0000 {'loss': 0.07494080066680908, 'representation': 0.04037454351782799, 'weighted_dense': 0.03456626087427139, 'weighted_fk': 0.0}
+P 3640/9600 p=0.0000 replaced=0.0000 {'loss': 0.09253738820552826, 'representation': 0.04054875299334526, 'weighted_dense': 0.0519886389374733, 'weighted_fk': 0.0}
+P 3660/9600 p=0.0000 replaced=0.0000 {'loss': 0.10493640601634979, 'representation': 0.05100855976343155, 'weighted_dense': 0.053927842527627945, 'weighted_fk': 0.0}
+P 3680/9600 p=0.0000 replaced=0.0000 {'loss': 0.19485707581043243, 'representation': 0.09197473526000977, 'weighted_dense': 0.10288234055042267, 'weighted_fk': 0.0}
+P 3700/9600 p=0.0000 replaced=0.0000 {'loss': 0.4488333463668823, 'representation': 0.21307021379470825, 'weighted_dense': 0.23576311767101288, 'weighted_fk': 0.0}
+DEV 3700: FK=35.315 mm; best=34.549 @3400
+P 3720/9600 p=0.0000 replaced=0.0000 {'loss': 0.14961668848991394, 'representation': 0.09441129863262177, 'weighted_dense': 0.05520538613200188, 'weighted_fk': 0.0}
+P 3740/9600 p=0.0000 replaced=0.0000 {'loss': 0.14869491755962372, 'representation': 0.0593220517039299, 'weighted_dense': 0.08937286585569382, 'weighted_fk': 0.0}
+P 3760/9600 p=0.0000 replaced=0.0000 {'loss': 0.18184320628643036, 'representation': 0.08644046634435654, 'weighted_dense': 0.09540273994207382, 'weighted_fk': 0.0}
+P 3780/9600 p=0.0000 replaced=0.0000 {'loss': 0.3629235029220581, 'representation': 0.19022442400455475, 'weighted_dense': 0.17269906401634216, 'weighted_fk': 0.0}
+P 3800/9600 p=0.0000 replaced=0.0000 {'loss': 0.18481910228729248, 'representation': 0.09425806999206543, 'weighted_dense': 0.09056103229522705, 'weighted_fk': 0.0}
+DEV 3800: FK=35.008 mm; best=34.549 @3400
+P 3820/9600 p=0.0000 replaced=0.0000 {'loss': 0.07507937401533127, 'representation': 0.040443211793899536, 'weighted_dense': 0.03463616222143173, 'weighted_fk': 0.0}
+P 3840/9600 p=0.0000 replaced=0.0000 {'loss': 0.10703183710575104, 'representation': 0.0682777687907219, 'weighted_dense': 0.03875407204031944, 'weighted_fk': 0.0}
+P 3860/9600 p=0.0000 replaced=0.0000 {'loss': 0.07720613479614258, 'representation': 0.04007216542959213, 'weighted_dense': 0.037133969366550446, 'weighted_fk': 0.0}
+P 3880/9600 p=0.0000 replaced=0.0000 {'loss': 0.10483962297439575, 'representation': 0.07786298543214798, 'weighted_dense': 0.02697663940489292, 'weighted_fk': 0.0}
+P 3900/9600 p=0.0000 replaced=0.0000 {'loss': 0.37735188007354736, 'representation': 0.20062527060508728, 'weighted_dense': 0.1767265945672989, 'weighted_fk': 0.0}
+DEV 3900: FK=35.084 mm; best=34.549 @3400
+P 3920/9600 p=0.0000 replaced=0.0000 {'loss': 0.23187634348869324, 'representation': 0.18539494276046753, 'weighted_dense': 0.04648139327764511, 'weighted_fk': 0.0}
+P 3940/9600 p=0.0000 replaced=0.0000 {'loss': 0.08525900542736053, 'representation': 0.030164694413542747, 'weighted_dense': 0.05509430915117264, 'weighted_fk': 0.0}
+P 3960/9600 p=0.0000 replaced=0.0000 {'loss': 0.06915149837732315, 'representation': 0.03292442858219147, 'weighted_dense': 0.03622706979513168, 'weighted_fk': 0.0}
+P 3980/9600 p=0.0000 replaced=0.0000 {'loss': 0.20597794651985168, 'representation': 0.08916988223791122, 'weighted_dense': 0.11680805683135986, 'weighted_fk': 0.0}
+P 4000/9600 p=0.0000 replaced=0.0000 {'loss': 0.0979728251695633, 'representation': 0.0395660400390625, 'weighted_dense': 0.05840678885579109, 'weighted_fk': 0.0}
+DEV 4000: FK=35.361 mm; best=34.549 @3400
+P 4020/9600 p=0.0000 replaced=0.0000 {'loss': 0.1010526791214943, 'representation': 0.047569915652275085, 'weighted_dense': 0.05348276346921921, 'weighted_fk': 0.0}
+P 4040/9600 p=0.0000 replaced=0.0000 {'loss': 0.0855584591627121, 'representation': 0.03925730660557747, 'weighted_dense': 0.04630115255713463, 'weighted_fk': 0.0}
+P 4060/9600 p=0.0000 replaced=0.0000 {'loss': 0.46915966272354126, 'representation': 0.3270033895969391, 'weighted_dense': 0.14215627312660217, 'weighted_fk': 0.0}
+P 4080/9600 p=0.0000 replaced=0.0000 {'loss': 0.09803514927625656, 'representation': 0.03657841682434082, 'weighted_dense': 0.06145673245191574, 'weighted_fk': 0.0}
+P 4100/9600 p=0.0000 replaced=0.0000 {'loss': 0.13897478580474854, 'representation': 0.08213210850954056, 'weighted_dense': 0.056842681020498276, 'weighted_fk': 0.0}
+DEV 4100: FK=35.130 mm; best=34.549 @3400
+P 4120/9600 p=0.0000 replaced=0.0000 {'loss': 0.10538502037525177, 'representation': 0.043651033192873, 'weighted_dense': 0.06173398718237877, 'weighted_fk': 0.0}
+P 4140/9600 p=0.0000 replaced=0.0000 {'loss': 0.13669216632843018, 'representation': 0.06236589327454567, 'weighted_dense': 0.0743262767791748, 'weighted_fk': 0.0}
+P 4160/9600 p=0.0000 replaced=0.0000 {'loss': 0.7455641031265259, 'representation': 0.5611204504966736, 'weighted_dense': 0.1844436228275299, 'weighted_fk': 0.0}
+P 4180/9600 p=0.0000 replaced=0.0000 {'loss': 0.12125685065984726, 'representation': 0.057677581906318665, 'weighted_dense': 0.0635792687535286, 'weighted_fk': 0.0}
+P 4200/9600 p=0.0000 replaced=0.0000 {'loss': 0.42194950580596924, 'representation': 0.15877114236354828, 'weighted_dense': 0.26317834854125977, 'weighted_fk': 0.0}
+DEV 4200: FK=35.270 mm; best=34.549 @3400
+P 4220/9600 p=0.0000 replaced=0.0000 {'loss': 0.11844108998775482, 'representation': 0.07582888007164001, 'weighted_dense': 0.04261220619082451, 'weighted_fk': 0.0}
+P 4240/9600 p=0.0000 replaced=0.0000 {'loss': 0.08703984320163727, 'representation': 0.04711176082491875, 'weighted_dense': 0.03992807865142822, 'weighted_fk': 0.0}
+P 4260/9600 p=0.0000 replaced=0.0000 {'loss': 0.11838211864233017, 'representation': 0.0508284792304039, 'weighted_dense': 0.06755363941192627, 'weighted_fk': 0.0}
+P 4280/9600 p=0.0000 replaced=0.0000 {'loss': 0.18778976798057556, 'representation': 0.08462043851613998, 'weighted_dense': 0.10316932946443558, 'weighted_fk': 0.0}
+P 4300/9600 p=0.0000 replaced=0.0000 {'loss': 0.21807369589805603, 'representation': 0.10418101400136948, 'weighted_dense': 0.11389267444610596, 'weighted_fk': 0.0}
+DEV 4300: FK=34.841 mm; best=34.549 @3400
+P 4320/9600 p=0.0000 replaced=0.0000 {'loss': 0.0931992456316948, 'representation': 0.039044637233018875, 'weighted_dense': 0.05415460839867592, 'weighted_fk': 0.0}
+P 4340/9600 p=0.0000 replaced=0.0000 {'loss': 0.11249776184558868, 'representation': 0.07249622792005539, 'weighted_dense': 0.040001533925533295, 'weighted_fk': 0.0}
+P 4360/9600 p=0.0000 replaced=0.0000 {'loss': 0.12400898337364197, 'representation': 0.05573071911931038, 'weighted_dense': 0.06827826797962189, 'weighted_fk': 0.0}
+P 4380/9600 p=0.0000 replaced=0.0000 {'loss': 0.9330083727836609, 'representation': 0.5256949663162231, 'weighted_dense': 0.40731340646743774, 'weighted_fk': 0.0}
+P 4400/9600 p=0.0000 replaced=0.0000 {'loss': 0.0800195187330246, 'representation': 0.03310077264904976, 'weighted_dense': 0.04691874608397484, 'weighted_fk': 0.0}
+DEV 4400: FK=35.085 mm; best=34.549 @3400
+P 4420/9600 p=0.0000 replaced=0.0000 {'loss': 0.4509233832359314, 'representation': 0.23125894367694855, 'weighted_dense': 0.21966443955898285, 'weighted_fk': 0.0}
+P 4440/9600 p=0.0000 replaced=0.0000 {'loss': 0.20853932201862335, 'representation': 0.10101877152919769, 'weighted_dense': 0.10752055048942566, 'weighted_fk': 0.0}
+P 4460/9600 p=0.0000 replaced=0.0000 {'loss': 0.10814319550991058, 'representation': 0.050526056438684464, 'weighted_dense': 0.05761713907122612, 'weighted_fk': 0.0}
+P 4480/9600 p=0.0000 replaced=0.0000 {'loss': 0.07498999685049057, 'representation': 0.038819797337055206, 'weighted_dense': 0.036170199513435364, 'weighted_fk': 0.0}
+P 4500/9600 p=0.0000 replaced=0.0000 {'loss': 0.1924608051776886, 'representation': 0.11701808124780655, 'weighted_dense': 0.07544273138046265, 'weighted_fk': 0.0}
+DEV 4500: FK=34.630 mm; best=34.549 @3400
+P 4520/9600 p=0.0000 replaced=0.0000 {'loss': 0.23947972059249878, 'representation': 0.11667871475219727, 'weighted_dense': 0.12280100584030151, 'weighted_fk': 0.0}
+P 4540/9600 p=0.0000 replaced=0.0000 {'loss': 0.09414441883563995, 'representation': 0.055448468774557114, 'weighted_dense': 0.03869595378637314, 'weighted_fk': 0.0}
+P 4560/9600 p=0.0000 replaced=0.0000 {'loss': 0.26671871542930603, 'representation': 0.17127636075019836, 'weighted_dense': 0.09544236212968826, 'weighted_fk': 0.0}
+P 4580/9600 p=0.0000 replaced=0.0000 {'loss': 0.0797063484787941, 'representation': 0.036593079566955566, 'weighted_dense': 0.04311326891183853, 'weighted_fk': 0.0}
+P 4600/9600 p=0.0000 replaced=0.0000 {'loss': 0.07954177260398865, 'representation': 0.03780295327305794, 'weighted_dense': 0.04173881933093071, 'weighted_fk': 0.0}
+DEV 4600: FK=34.864 mm; best=34.549 @3400
+P 4620/9600 p=0.0000 replaced=0.0000 {'loss': 0.07103107124567032, 'representation': 0.033973999321460724, 'weighted_dense': 0.037057071924209595, 'weighted_fk': 0.0}
+P 4640/9600 p=0.0000 replaced=0.0000 {'loss': 0.2653675079345703, 'representation': 0.08029037714004517, 'weighted_dense': 0.18507711589336395, 'weighted_fk': 0.0}
+P 4660/9600 p=0.0000 replaced=0.0000 {'loss': 0.3990561366081238, 'representation': 0.16688884794712067, 'weighted_dense': 0.2321673035621643, 'weighted_fk': 0.0}
+P 4680/9600 p=0.0000 replaced=0.0000 {'loss': 0.11612236499786377, 'representation': 0.059229083359241486, 'weighted_dense': 0.05689328536391258, 'weighted_fk': 0.0}
+P 4700/9600 p=0.0000 replaced=0.0000 {'loss': 0.11650896072387695, 'representation': 0.06707841157913208, 'weighted_dense': 0.04943054914474487, 'weighted_fk': 0.0}
+DEV 4700: FK=34.936 mm; best=34.549 @3400
+P 4720/9600 p=0.0000 replaced=0.0000 {'loss': 1.0356580018997192, 'representation': 0.6043728590011597, 'weighted_dense': 0.43128514289855957, 'weighted_fk': 0.0}
+P 4740/9600 p=0.0000 replaced=0.0000 {'loss': 0.19530893862247467, 'representation': 0.09346475452184677, 'weighted_dense': 0.1018441841006279, 'weighted_fk': 0.0}
+P 4760/9600 p=0.0000 replaced=0.0000 {'loss': 0.084786556661129, 'representation': 0.038029853254556656, 'weighted_dense': 0.04675670340657234, 'weighted_fk': 0.0}
+P 4780/9600 p=0.0000 replaced=0.0000 {'loss': 0.09121641516685486, 'representation': 0.044896528124809265, 'weighted_dense': 0.04631988704204559, 'weighted_fk': 0.0}
+P 4800/9600 p=0.0000 replaced=0.0000 {'loss': 0.1590859740972519, 'representation': 0.05116723105311394, 'weighted_dense': 0.10791874676942825, 'weighted_fk': 0.0}
+DEV 4800: FK=35.191 mm; best=34.549 @3400
+P 4820/9600 p=0.0000 replaced=0.0000 {'loss': 0.10670698434114456, 'representation': 0.05517827346920967, 'weighted_dense': 0.05152871087193489, 'weighted_fk': 0.0}
+P 4840/9600 p=0.0000 replaced=0.0000 {'loss': 0.18204186856746674, 'representation': 0.07721126824617386, 'weighted_dense': 0.10483060032129288, 'weighted_fk': 0.0}
+P 4860/9600 p=0.0000 replaced=0.0000 {'loss': 0.08339372277259827, 'representation': 0.048922888934612274, 'weighted_dense': 0.03447083383798599, 'weighted_fk': 0.0}
+P 4880/9600 p=0.0000 replaced=0.0000 {'loss': 0.5614097118377686, 'representation': 0.19269339740276337, 'weighted_dense': 0.368716299533844, 'weighted_fk': 0.0}
+P 4900/9600 p=0.0000 replaced=0.0000 {'loss': 0.08860788494348526, 'representation': 0.0427277497947216, 'weighted_dense': 0.04588013514876366, 'weighted_fk': 0.0}
+DEV 4900: FK=35.214 mm; best=34.549 @3400
+P 4920/9600 p=0.0000 replaced=0.0000 {'loss': 0.13456973433494568, 'representation': 0.05702299252152443, 'weighted_dense': 0.07754673808813095, 'weighted_fk': 0.0}
+P 4940/9600 p=0.0000 replaced=0.0000 {'loss': 0.07131072133779526, 'representation': 0.03675288334488869, 'weighted_dense': 0.03455783799290657, 'weighted_fk': 0.0}
+P 4960/9600 p=0.0000 replaced=0.0000 {'loss': 0.10245790332555771, 'representation': 0.06227998808026314, 'weighted_dense': 0.04017791524529457, 'weighted_fk': 0.0}
+P 4980/9600 p=0.0000 replaced=0.0000 {'loss': 0.155668243765831, 'representation': 0.060263197869062424, 'weighted_dense': 0.09540504217147827, 'weighted_fk': 0.0}
+P 5000/9600 p=0.0000 replaced=0.0000 {'loss': 0.13752833008766174, 'representation': 0.06565125286579132, 'weighted_dense': 0.07187706977128983, 'weighted_fk': 0.0}
+DEV 5000: FK=34.858 mm; best=34.549 @3400
+P 5020/9600 p=0.0000 replaced=0.0000 {'loss': 0.17180612683296204, 'representation': 0.0722101628780365, 'weighted_dense': 0.09959597140550613, 'weighted_fk': 0.0}
+P 5040/9600 p=0.0000 replaced=0.0000 {'loss': 0.09211364388465881, 'representation': 0.04214520379900932, 'weighted_dense': 0.04996843636035919, 'weighted_fk': 0.0}
+P 5060/9600 p=0.0000 replaced=0.0000 {'loss': 0.12722304463386536, 'representation': 0.05110131576657295, 'weighted_dense': 0.0761217251420021, 'weighted_fk': 0.0}
+P 5080/9600 p=0.0000 replaced=0.0000 {'loss': 0.09795646369457245, 'representation': 0.04211648926138878, 'weighted_dense': 0.05583997070789337, 'weighted_fk': 0.0}
+P 5100/9600 p=0.0000 replaced=0.0000 {'loss': 0.08728271722793579, 'representation': 0.046115461736917496, 'weighted_dense': 0.041167259216308594, 'weighted_fk': 0.0}
+DEV 5100: FK=35.200 mm; best=34.549 @3400
+P 5120/9600 p=0.0000 replaced=0.0000 {'loss': 0.07615694403648376, 'representation': 0.03176891803741455, 'weighted_dense': 0.044388022273778915, 'weighted_fk': 0.0}
+P 5140/9600 p=0.0000 replaced=0.0000 {'loss': 0.3050979971885681, 'representation': 0.15513785183429718, 'weighted_dense': 0.14996014535427094, 'weighted_fk': 0.0}
+P 5160/9600 p=0.0000 replaced=0.0000 {'loss': 0.5920276045799255, 'representation': 0.3725467324256897, 'weighted_dense': 0.21948087215423584, 'weighted_fk': 0.0}
+P 5180/9600 p=0.0000 replaced=0.0000 {'loss': 0.06880812346935272, 'representation': 0.03051428683102131, 'weighted_dense': 0.038293834775686264, 'weighted_fk': 0.0}
+P 5200/9600 p=0.0000 replaced=0.0000 {'loss': 0.8742784261703491, 'representation': 0.5914347171783447, 'weighted_dense': 0.282843679189682, 'weighted_fk': 0.0}
+DEV 5200: FK=34.604 mm; best=34.549 @3400
+P 5220/9600 p=0.0000 replaced=0.0000 {'loss': 0.09341207146644592, 'representation': 0.04915173724293709, 'weighted_dense': 0.044260330498218536, 'weighted_fk': 0.0}
+P 5240/9600 p=0.0000 replaced=0.0000 {'loss': 0.2582882344722748, 'representation': 0.17550607025623322, 'weighted_dense': 0.08278216421604156, 'weighted_fk': 0.0}
+P 5260/9600 p=0.0000 replaced=0.0000 {'loss': 0.07913234829902649, 'representation': 0.03615161031484604, 'weighted_dense': 0.04298074170947075, 'weighted_fk': 0.0}
+P 5280/9600 p=0.0000 replaced=0.0000 {'loss': 1.1087440252304077, 'representation': 0.9589775800704956, 'weighted_dense': 0.1497664898633957, 'weighted_fk': 0.0}
+P 5300/9600 p=0.0000 replaced=0.0000 {'loss': 0.11078212410211563, 'representation': 0.04343488812446594, 'weighted_dense': 0.06734723597764969, 'weighted_fk': 0.0}
+DEV 5300: FK=34.622 mm; best=34.549 @3400
+P 5320/9600 p=0.0000 replaced=0.0000 {'loss': 0.09130731225013733, 'representation': 0.04439464956521988, 'weighted_dense': 0.04691266641020775, 'weighted_fk': 0.0}
+P 5340/9600 p=0.0000 replaced=0.0000 {'loss': 0.34309521317481995, 'representation': 0.2474929392337799, 'weighted_dense': 0.09560228139162064, 'weighted_fk': 0.0}
+P 5360/9600 p=0.0000 replaced=0.0000 {'loss': 0.17243671417236328, 'representation': 0.1016911044716835, 'weighted_dense': 0.07074560970067978, 'weighted_fk': 0.0}
+P 5380/9600 p=0.0000 replaced=0.0000 {'loss': 0.3192813992500305, 'representation': 0.13519077003002167, 'weighted_dense': 0.18409064412117004, 'weighted_fk': 0.0}
+P 5400/9600 p=0.0000 replaced=0.0000 {'loss': 0.06054641306400299, 'representation': 0.028839142993092537, 'weighted_dense': 0.0317072719335556, 'weighted_fk': 0.0}
+DEV 5400: FK=34.855 mm; best=34.549 @3400
+P 5420/9600 p=0.0000 replaced=0.0000 {'loss': 0.12492311000823975, 'representation': 0.06444574147462845, 'weighted_dense': 0.0604773685336113, 'weighted_fk': 0.0}
+P 5440/9600 p=0.0000 replaced=0.0000 {'loss': 0.14328014850616455, 'representation': 0.05875491350889206, 'weighted_dense': 0.0845252275466919, 'weighted_fk': 0.0}
+P 5460/9600 p=0.0000 replaced=0.0000 {'loss': 0.07963180541992188, 'representation': 0.031818896532058716, 'weighted_dense': 0.04781290888786316, 'weighted_fk': 0.0}
+P 5480/9600 p=0.0000 replaced=0.0000 {'loss': 0.1679650992155075, 'representation': 0.07613477855920792, 'weighted_dense': 0.09183032065629959, 'weighted_fk': 0.0}
+P 5500/9600 p=0.0000 replaced=0.0000 {'loss': 0.06937633454799652, 'representation': 0.03785699978470802, 'weighted_dense': 0.0315193310379982, 'weighted_fk': 0.0}
+DEV 5500: FK=34.545 mm; best=34.545 @5500
+P 5520/9600 p=0.0000 replaced=0.0000 {'loss': 0.29344242811203003, 'representation': 0.19929690659046173, 'weighted_dense': 0.0941455066204071, 'weighted_fk': 0.0}
+P 5540/9600 p=0.0000 replaced=0.0000 {'loss': 0.1013801097869873, 'representation': 0.05269872769713402, 'weighted_dense': 0.04868138208985329, 'weighted_fk': 0.0}
+P 5560/9600 p=0.0000 replaced=0.0000 {'loss': 0.17882001399993896, 'representation': 0.08369603008031845, 'weighted_dense': 0.09512397646903992, 'weighted_fk': 0.0}
+P 5580/9600 p=0.0000 replaced=0.0000 {'loss': 0.10913845151662827, 'representation': 0.07750209420919418, 'weighted_dense': 0.03163635730743408, 'weighted_fk': 0.0}
+P 5600/9600 p=0.0000 replaced=0.0000 {'loss': 0.06997309625148773, 'representation': 0.03223058581352234, 'weighted_dense': 0.037742506712675095, 'weighted_fk': 0.0}
+DEV 5600: FK=35.025 mm; best=34.545 @5500
+P 5620/9600 p=0.0000 replaced=0.0000 {'loss': 0.25869378447532654, 'representation': 0.16172879934310913, 'weighted_dense': 0.096964992582798, 'weighted_fk': 0.0}
+P 5640/9600 p=0.0000 replaced=0.0000 {'loss': 0.1333291232585907, 'representation': 0.06467310339212418, 'weighted_dense': 0.06865601241588593, 'weighted_fk': 0.0}
+P 5660/9600 p=0.0000 replaced=0.0000 {'loss': 0.19788147509098053, 'representation': 0.09896717965602875, 'weighted_dense': 0.09891429543495178, 'weighted_fk': 0.0}
+P 5680/9600 p=0.0000 replaced=0.0000 {'loss': 0.29715031385421753, 'representation': 0.07262174785137177, 'weighted_dense': 0.22452858090400696, 'weighted_fk': 0.0}
+P 5700/9600 p=0.0000 replaced=0.0000 {'loss': 0.09265107661485672, 'representation': 0.043780285865068436, 'weighted_dense': 0.048870790749788284, 'weighted_fk': 0.0}
+DEV 5700: FK=35.131 mm; best=34.545 @5500
+P 5720/9600 p=0.0000 replaced=0.0000 {'loss': 0.6498402953147888, 'representation': 0.45463797450065613, 'weighted_dense': 0.19520233571529388, 'weighted_fk': 0.0}
+P 5740/9600 p=0.0000 replaced=0.0000 {'loss': 0.4127635359764099, 'representation': 0.13485661149024963, 'weighted_dense': 0.2779069244861603, 'weighted_fk': 0.0}
+P 5760/9600 p=0.0000 replaced=0.0000 {'loss': 0.062005024403333664, 'representation': 0.03479599580168724, 'weighted_dense': 0.027209028601646423, 'weighted_fk': 0.0}
+P 5780/9600 p=0.0000 replaced=0.0000 {'loss': 0.08118245005607605, 'representation': 0.04512999579310417, 'weighted_dense': 0.03605245426297188, 'weighted_fk': 0.0}
+P 5800/9600 p=0.0000 replaced=0.0000 {'loss': 0.2910052239894867, 'representation': 0.11021939665079117, 'weighted_dense': 0.18078581988811493, 'weighted_fk': 0.0}
+DEV 5800: FK=35.387 mm; best=34.545 @5500
+P 5820/9600 p=0.0000 replaced=0.0000 {'loss': 0.22222456336021423, 'representation': 0.10623051971197128, 'weighted_dense': 0.11599405109882355, 'weighted_fk': 0.0}
+P 5840/9600 p=0.0000 replaced=0.0000 {'loss': 0.1183156818151474, 'representation': 0.07008905708789825, 'weighted_dense': 0.048226628452539444, 'weighted_fk': 0.0}
+P 5860/9600 p=0.0000 replaced=0.0000 {'loss': 0.19835902750492096, 'representation': 0.11041044443845749, 'weighted_dense': 0.08794858306646347, 'weighted_fk': 0.0}
+P 5880/9600 p=0.0000 replaced=0.0000 {'loss': 0.26681768894195557, 'representation': 0.17598660290241241, 'weighted_dense': 0.09083107113838196, 'weighted_fk': 0.0}
+P 5900/9600 p=0.0000 replaced=0.0000 {'loss': 0.060873739421367645, 'representation': 0.030174996703863144, 'weighted_dense': 0.0306987427175045, 'weighted_fk': 0.0}
+DEV 5900: FK=34.573 mm; best=34.545 @5500
+P 5920/9600 p=0.0000 replaced=0.0000 {'loss': 0.08214439451694489, 'representation': 0.034512102603912354, 'weighted_dense': 0.04763228818774223, 'weighted_fk': 0.0}
+P 5940/9600 p=0.0000 replaced=0.0000 {'loss': 0.09418536722660065, 'representation': 0.045159388333559036, 'weighted_dense': 0.04902598261833191, 'weighted_fk': 0.0}
+P 5960/9600 p=0.0000 replaced=0.0000 {'loss': 0.3914163112640381, 'representation': 0.3095247745513916, 'weighted_dense': 0.08189155161380768, 'weighted_fk': 0.0}
+P 5980/9600 p=0.0000 replaced=0.0000 {'loss': 0.3548394441604614, 'representation': 0.11411992460489273, 'weighted_dense': 0.2407195270061493, 'weighted_fk': 0.0}
+P 6000/9600 p=0.0000 replaced=0.0000 {'loss': 0.06887641549110413, 'representation': 0.03779539465904236, 'weighted_dense': 0.031081024557352066, 'weighted_fk': 0.0}
+DEV 6000: FK=34.859 mm; best=34.545 @5500
+P 6020/9600 p=0.0000 replaced=0.0000 {'loss': 0.13442471623420715, 'representation': 0.07005557417869568, 'weighted_dense': 0.06436914205551147, 'weighted_fk': 0.0}
+P 6040/9600 p=0.0000 replaced=0.0000 {'loss': 0.06728250533342361, 'representation': 0.03814868628978729, 'weighted_dense': 0.029133819043636322, 'weighted_fk': 0.0}
+P 6060/9600 p=0.0000 replaced=0.0000 {'loss': 0.11713650077581406, 'representation': 0.05995825305581093, 'weighted_dense': 0.05717824772000313, 'weighted_fk': 0.0}
+P 6080/9600 p=0.0000 replaced=0.0000 {'loss': 0.12305338680744171, 'representation': 0.08243725448846817, 'weighted_dense': 0.04061613604426384, 'weighted_fk': 0.0}
+P 6100/9600 p=0.0000 replaced=0.0000 {'loss': 0.14356647431850433, 'representation': 0.05909505859017372, 'weighted_dense': 0.08447141945362091, 'weighted_fk': 0.0}
+DEV 6100: FK=34.772 mm; best=34.545 @5500
+P 6120/9600 p=0.0000 replaced=0.0000 {'loss': 0.3259642720222473, 'representation': 0.1933247298002243, 'weighted_dense': 0.13263952732086182, 'weighted_fk': 0.0}
+P 6140/9600 p=0.0000 replaced=0.0000 {'loss': 0.16521358489990234, 'representation': 0.06156804785132408, 'weighted_dense': 0.10364554077386856, 'weighted_fk': 0.0}
+P 6160/9600 p=0.0000 replaced=0.0000 {'loss': 0.10260836035013199, 'representation': 0.05300493165850639, 'weighted_dense': 0.049603428691625595, 'weighted_fk': 0.0}
+P 6180/9600 p=0.0000 replaced=0.0000 {'loss': 0.1477731168270111, 'representation': 0.06317879259586334, 'weighted_dense': 0.08459433168172836, 'weighted_fk': 0.0}
+P 6200/9600 p=0.0000 replaced=0.0000 {'loss': 0.16388945281505585, 'representation': 0.06883035600185394, 'weighted_dense': 0.0950590968132019, 'weighted_fk': 0.0}
+DEV 6200: FK=34.666 mm; best=34.545 @5500
+P 6220/9600 p=0.0000 replaced=0.0000 {'loss': 0.09991587698459625, 'representation': 0.06008056551218033, 'weighted_dense': 0.039835307747125626, 'weighted_fk': 0.0}
+P 6240/9600 p=0.0000 replaced=0.0000 {'loss': 0.15199486911296844, 'representation': 0.12141533195972443, 'weighted_dense': 0.03057953715324402, 'weighted_fk': 0.0}
+P 6260/9600 p=0.0000 replaced=0.0000 {'loss': 1.2069127559661865, 'representation': 1.0974332094192505, 'weighted_dense': 0.10947956144809723, 'weighted_fk': 0.0}
+P 6280/9600 p=0.0000 replaced=0.0000 {'loss': 0.1128653958439827, 'representation': 0.04752175509929657, 'weighted_dense': 0.06534364074468613, 'weighted_fk': 0.0}
+P 6300/9600 p=0.0000 replaced=0.0000 {'loss': 0.09088411182165146, 'representation': 0.039260972291231155, 'weighted_dense': 0.0516231395304203, 'weighted_fk': 0.0}
+DEV 6300: FK=34.636 mm; best=34.545 @5500
+P 6320/9600 p=0.0000 replaced=0.0000 {'loss': 0.08395988494157791, 'representation': 0.046155527234077454, 'weighted_dense': 0.03780435770750046, 'weighted_fk': 0.0}
+P 6340/9600 p=0.0000 replaced=0.0000 {'loss': 0.08907908201217651, 'representation': 0.03966541588306427, 'weighted_dense': 0.049413666129112244, 'weighted_fk': 0.0}
+P 6360/9600 p=0.0000 replaced=0.0000 {'loss': 0.0811103880405426, 'representation': 0.03484521061182022, 'weighted_dense': 0.04626518115401268, 'weighted_fk': 0.0}
+P 6380/9600 p=0.0000 replaced=0.0000 {'loss': 0.1551956683397293, 'representation': 0.08059126138687134, 'weighted_dense': 0.07460440695285797, 'weighted_fk': 0.0}
+P 6400/9600 p=0.0000 replaced=0.0000 {'loss': 0.1114736795425415, 'representation': 0.04421549290418625, 'weighted_dense': 0.06725818663835526, 'weighted_fk': 0.0}
+DEV 6400: FK=35.163 mm; best=34.545 @5500
+P 6420/9600 p=0.0000 replaced=0.0000 {'loss': 0.3924352526664734, 'representation': 0.1451517939567566, 'weighted_dense': 0.2472834587097168, 'weighted_fk': 0.0}
+P 6440/9600 p=0.0000 replaced=0.0000 {'loss': 0.06060989201068878, 'representation': 0.03196309134364128, 'weighted_dense': 0.0286468006670475, 'weighted_fk': 0.0}
+P 6460/9600 p=0.0000 replaced=0.0000 {'loss': 0.10787925124168396, 'representation': 0.04821986332535744, 'weighted_dense': 0.059659384191036224, 'weighted_fk': 0.0}
+P 6480/9600 p=0.0000 replaced=0.0000 {'loss': 0.051987044513225555, 'representation': 0.023413976654410362, 'weighted_dense': 0.028573069721460342, 'weighted_fk': 0.0}
+P 6500/9600 p=0.0000 replaced=0.0000 {'loss': 0.3698575794696808, 'representation': 0.12313222140073776, 'weighted_dense': 0.24672536551952362, 'weighted_fk': 0.0}
+DEV 6500: FK=34.671 mm; best=34.545 @5500
+P 6520/9600 p=0.0000 replaced=0.0000 {'loss': 0.0870438665151596, 'representation': 0.0361139215528965, 'weighted_dense': 0.05092994496226311, 'weighted_fk': 0.0}
+P 6540/9600 p=0.0000 replaced=0.0000 {'loss': 0.1646510362625122, 'representation': 0.08370282500982285, 'weighted_dense': 0.08094820380210876, 'weighted_fk': 0.0}
+P 6560/9600 p=0.0000 replaced=0.0000 {'loss': 0.14986476302146912, 'representation': 0.07298711687326431, 'weighted_dense': 0.0768776535987854, 'weighted_fk': 0.0}
+P 6580/9600 p=0.0000 replaced=0.0000 {'loss': 0.11375588178634644, 'representation': 0.0802471786737442, 'weighted_dense': 0.033508699387311935, 'weighted_fk': 0.0}
+P 6600/9600 p=0.0000 replaced=0.0000 {'loss': 0.2976284325122833, 'representation': 0.18697459995746613, 'weighted_dense': 0.1106538325548172, 'weighted_fk': 0.0}
+DEV 6600: FK=34.568 mm; best=34.545 @5500
+P 6620/9600 p=0.0000 replaced=0.0000 {'loss': 0.3037446439266205, 'representation': 0.14244212210178375, 'weighted_dense': 0.16130252182483673, 'weighted_fk': 0.0}
+P 6640/9600 p=0.0000 replaced=0.0000 {'loss': 0.061300426721572876, 'representation': 0.028626488521695137, 'weighted_dense': 0.03267394006252289, 'weighted_fk': 0.0}
+P 6660/9600 p=0.0000 replaced=0.0000 {'loss': 0.16879290342330933, 'representation': 0.11129716038703918, 'weighted_dense': 0.05749573931097984, 'weighted_fk': 0.0}
+P 6680/9600 p=0.0000 replaced=0.0000 {'loss': 0.09155416488647461, 'representation': 0.05050690099596977, 'weighted_dense': 0.04104726389050484, 'weighted_fk': 0.0}
+P 6700/9600 p=0.0000 replaced=0.0000 {'loss': 0.08216321468353271, 'representation': 0.03837397322058678, 'weighted_dense': 0.04378923773765564, 'weighted_fk': 0.0}
+DEV 6700: FK=34.905 mm; best=34.545 @5500
+P 6720/9600 p=0.0000 replaced=0.0000 {'loss': 0.05463076010346413, 'representation': 0.025111082941293716, 'weighted_dense': 0.02951967716217041, 'weighted_fk': 0.0}
+P 6740/9600 p=0.0000 replaced=0.0000 {'loss': 0.16291368007659912, 'representation': 0.08051536232233047, 'weighted_dense': 0.08239832520484924, 'weighted_fk': 0.0}
+P 6760/9600 p=0.0000 replaced=0.0000 {'loss': 0.1017974317073822, 'representation': 0.055500272661447525, 'weighted_dense': 0.04629715532064438, 'weighted_fk': 0.0}
+P 6780/9600 p=0.0000 replaced=0.0000 {'loss': 0.25015878677368164, 'representation': 0.1971844881772995, 'weighted_dense': 0.052974291145801544, 'weighted_fk': 0.0}
+P 6800/9600 p=0.0000 replaced=0.0000 {'loss': 0.4541553854942322, 'representation': 0.18475376069545746, 'weighted_dense': 0.2694016396999359, 'weighted_fk': 0.0}
+DEV 6800: FK=35.071 mm; best=34.545 @5500
+P 6820/9600 p=0.0000 replaced=0.0000 {'loss': 1.1278307437896729, 'representation': 0.691163957118988, 'weighted_dense': 0.4366668462753296, 'weighted_fk': 0.0}
+P 6840/9600 p=0.0000 replaced=0.0000 {'loss': 0.12499134242534637, 'representation': 0.05661298707127571, 'weighted_dense': 0.06837835907936096, 'weighted_fk': 0.0}
+P 6860/9600 p=0.0000 replaced=0.0000 {'loss': 0.14810536801815033, 'representation': 0.0978621244430542, 'weighted_dense': 0.05024324730038643, 'weighted_fk': 0.0}
+P 6880/9600 p=0.0000 replaced=0.0000 {'loss': 0.1146479994058609, 'representation': 0.04001553729176521, 'weighted_dense': 0.07463246583938599, 'weighted_fk': 0.0}
+P 6900/9600 p=0.0000 replaced=0.0000 {'loss': 0.06134408712387085, 'representation': 0.03638396039605141, 'weighted_dense': 0.024960126727819443, 'weighted_fk': 0.0}
+DEV 6900: FK=34.962 mm; best=34.545 @5500
+P 6920/9600 p=0.0000 replaced=0.0000 {'loss': 0.048854485154151917, 'representation': 0.02330661565065384, 'weighted_dense': 0.025547869503498077, 'weighted_fk': 0.0}
+P 6940/9600 p=0.0000 replaced=0.0000 {'loss': 0.06636034697294235, 'representation': 0.02740504778921604, 'weighted_dense': 0.03895530104637146, 'weighted_fk': 0.0}
+P 6960/9600 p=0.0000 replaced=0.0000 {'loss': 0.15203486382961273, 'representation': 0.05755055323243141, 'weighted_dense': 0.09448430687189102, 'weighted_fk': 0.0}
+P 6980/9600 p=0.0000 replaced=0.0000 {'loss': 0.07386656105518341, 'representation': 0.03255075588822365, 'weighted_dense': 0.04131580516695976, 'weighted_fk': 0.0}
+P 7000/9600 p=0.0000 replaced=0.0000 {'loss': 0.1016959398984909, 'representation': 0.04447702690958977, 'weighted_dense': 0.05721890926361084, 'weighted_fk': 0.0}
+DEV 7000: FK=34.882 mm; best=34.545 @5500
+P 7020/9600 p=0.0000 replaced=0.0000 {'loss': 0.07370404899120331, 'representation': 0.04144374653697014, 'weighted_dense': 0.03226030245423317, 'weighted_fk': 0.0}
+P 7040/9600 p=0.0000 replaced=0.0000 {'loss': 0.08359639346599579, 'representation': 0.05334402993321419, 'weighted_dense': 0.030252359807491302, 'weighted_fk': 0.0}
+P 7060/9600 p=0.0000 replaced=0.0000 {'loss': 0.1196269765496254, 'representation': 0.05555857717990875, 'weighted_dense': 0.06406839936971664, 'weighted_fk': 0.0}
+P 7080/9600 p=0.0000 replaced=0.0000 {'loss': 0.25346022844314575, 'representation': 0.12902800738811493, 'weighted_dense': 0.12443223595619202, 'weighted_fk': 0.0}
+P 7100/9600 p=0.0000 replaced=0.0000 {'loss': 0.0738111138343811, 'representation': 0.03507506474852562, 'weighted_dense': 0.03873605281114578, 'weighted_fk': 0.0}
+DEV 7100: FK=34.657 mm; best=34.545 @5500
+P 7120/9600 p=0.0000 replaced=0.0000 {'loss': 0.18528610467910767, 'representation': 0.1365843117237091, 'weighted_dense': 0.04870179295539856, 'weighted_fk': 0.0}
+P 7140/9600 p=0.0000 replaced=0.0000 {'loss': 0.1205192431807518, 'representation': 0.05740153789520264, 'weighted_dense': 0.06311770528554916, 'weighted_fk': 0.0}
+P 7160/9600 p=0.0000 replaced=0.0000 {'loss': 0.09297817945480347, 'representation': 0.03772382065653801, 'weighted_dense': 0.05525435507297516, 'weighted_fk': 0.0}
+P 7180/9600 p=0.0000 replaced=0.0000 {'loss': 0.1059093028306961, 'representation': 0.05221094936132431, 'weighted_dense': 0.0536983497440815, 'weighted_fk': 0.0}
+P 7200/9600 p=0.0000 replaced=0.0000 {'loss': 0.18306711316108704, 'representation': 0.12574082612991333, 'weighted_dense': 0.057326287031173706, 'weighted_fk': 0.0}
+DEV 7200: FK=34.907 mm; best=34.545 @5500
+P 7220/9600 p=0.0000 replaced=0.0000 {'loss': 0.14592429995536804, 'representation': 0.053362853825092316, 'weighted_dense': 0.09256144613027573, 'weighted_fk': 0.0}
+P 7240/9600 p=0.0000 replaced=0.0000 {'loss': 0.13426974415779114, 'representation': 0.06953993439674377, 'weighted_dense': 0.06472981721162796, 'weighted_fk': 0.0}
+P 7260/9600 p=0.0000 replaced=0.0000 {'loss': 1.1070027351379395, 'representation': 0.9501030445098877, 'weighted_dense': 0.15689972043037415, 'weighted_fk': 0.0}
+P 7280/9600 p=0.0000 replaced=0.0000 {'loss': 0.09084036201238632, 'representation': 0.04169227555394173, 'weighted_dense': 0.049148086458444595, 'weighted_fk': 0.0}
+P 7300/9600 p=0.0000 replaced=0.0000 {'loss': 0.09189426898956299, 'representation': 0.03810768574476242, 'weighted_dense': 0.053786586970090866, 'weighted_fk': 0.0}
+DEV 7300: FK=34.833 mm; best=34.545 @5500
+P 7320/9600 p=0.0000 replaced=0.0000 {'loss': 0.10236278921365738, 'representation': 0.04671940207481384, 'weighted_dense': 0.055643387138843536, 'weighted_fk': 0.0}
+P 7340/9600 p=0.0000 replaced=0.0000 {'loss': 0.09290753304958344, 'representation': 0.05718585103750229, 'weighted_dense': 0.035721682012081146, 'weighted_fk': 0.0}
+P 7360/9600 p=0.0000 replaced=0.0000 {'loss': 0.13743028044700623, 'representation': 0.09812775254249573, 'weighted_dense': 0.039302535355091095, 'weighted_fk': 0.0}
+P 7380/9600 p=0.0000 replaced=0.0000 {'loss': 0.1925772875547409, 'representation': 0.10284831374883652, 'weighted_dense': 0.08972897380590439, 'weighted_fk': 0.0}
+P 7400/9600 p=0.0000 replaced=0.0000 {'loss': 0.07499855756759644, 'representation': 0.03484472259879112, 'weighted_dense': 0.04015383869409561, 'weighted_fk': 0.0}
+DEV 7400: FK=34.989 mm; best=34.545 @5500
+P 7420/9600 p=0.0000 replaced=0.0000 {'loss': 0.34075039625167847, 'representation': 0.19808708131313324, 'weighted_dense': 0.14266330003738403, 'weighted_fk': 0.0}
+P 7440/9600 p=0.0000 replaced=0.0000 {'loss': 0.14497828483581543, 'representation': 0.05476752668619156, 'weighted_dense': 0.09021076560020447, 'weighted_fk': 0.0}
+P 7460/9600 p=0.0000 replaced=0.0000 {'loss': 0.2047407329082489, 'representation': 0.09567049890756607, 'weighted_dense': 0.10907022655010223, 'weighted_fk': 0.0}
+P 7480/9600 p=0.0000 replaced=0.0000 {'loss': 0.24040693044662476, 'representation': 0.1402372270822525, 'weighted_dense': 0.10016970336437225, 'weighted_fk': 0.0}
+P 7500/9600 p=0.0000 replaced=0.0000 {'loss': 0.5450058579444885, 'representation': 0.4846934974193573, 'weighted_dense': 0.060312386602163315, 'weighted_fk': 0.0}
+DEV 7500: FK=34.557 mm; best=34.545 @5500
+P 7520/9600 p=0.0000 replaced=0.0000 {'loss': 0.2462553083896637, 'representation': 0.15344145894050598, 'weighted_dense': 0.09281384944915771, 'weighted_fk': 0.0}
+P 7540/9600 p=0.0000 replaced=0.0000 {'loss': 0.352396160364151, 'representation': 0.22813208401203156, 'weighted_dense': 0.12426406890153885, 'weighted_fk': 0.0}
+P 7560/9600 p=0.0000 replaced=0.0000 {'loss': 0.045571938157081604, 'representation': 0.02325526624917984, 'weighted_dense': 0.022316670045256615, 'weighted_fk': 0.0}
+P 7580/9600 p=0.0000 replaced=0.0000 {'loss': 0.05785159021615982, 'representation': 0.028006168082356453, 'weighted_dense': 0.029845422133803368, 'weighted_fk': 0.0}
+P 7600/9600 p=0.0000 replaced=0.0000 {'loss': 0.3588712215423584, 'representation': 0.2546350955963135, 'weighted_dense': 0.10423614084720612, 'weighted_fk': 0.0}
+DEV 7600: FK=34.785 mm; best=34.545 @5500
+P 7620/9600 p=0.0000 replaced=0.0000 {'loss': 0.14987656474113464, 'representation': 0.09001131355762482, 'weighted_dense': 0.05986525118350983, 'weighted_fk': 0.0}
+P 7640/9600 p=0.0000 replaced=0.0000 {'loss': 0.2085629403591156, 'representation': 0.11629378795623779, 'weighted_dense': 0.09226914495229721, 'weighted_fk': 0.0}
+P 7660/9600 p=0.0000 replaced=0.0000 {'loss': 0.3616149425506592, 'representation': 0.12646543979644775, 'weighted_dense': 0.23514950275421143, 'weighted_fk': 0.0}
+P 7680/9600 p=0.0000 replaced=0.0000 {'loss': 0.16991624236106873, 'representation': 0.08173629641532898, 'weighted_dense': 0.08817993849515915, 'weighted_fk': 0.0}
+P 7700/9600 p=0.0000 replaced=0.0000 {'loss': 0.05346553027629852, 'representation': 0.028673509135842323, 'weighted_dense': 0.02479201927781105, 'weighted_fk': 0.0}
+DEV 7700: FK=34.905 mm; best=34.545 @5500
+P 7720/9600 p=0.0000 replaced=0.0000 {'loss': 0.197792649269104, 'representation': 0.1508527249097824, 'weighted_dense': 0.04693992808461189, 'weighted_fk': 0.0}
+P 7740/9600 p=0.0000 replaced=0.0000 {'loss': 0.1632867157459259, 'representation': 0.07984863221645355, 'weighted_dense': 0.08343809098005295, 'weighted_fk': 0.0}
+P 7760/9600 p=0.0000 replaced=0.0000 {'loss': 0.24035243690013885, 'representation': 0.11393076181411743, 'weighted_dense': 0.12642167508602142, 'weighted_fk': 0.0}
+P 7780/9600 p=0.0000 replaced=0.0000 {'loss': 0.8100172877311707, 'representation': 0.6616142392158508, 'weighted_dense': 0.14840303361415863, 'weighted_fk': 0.0}
+P 7800/9600 p=0.0000 replaced=0.0000 {'loss': 0.08903012424707413, 'representation': 0.04920976981520653, 'weighted_dense': 0.0398203544318676, 'weighted_fk': 0.0}
+DEV 7800: FK=34.846 mm; best=34.545 @5500
+P 7820/9600 p=0.0000 replaced=0.0000 {'loss': 0.0878506600856781, 'representation': 0.05021440610289574, 'weighted_dense': 0.03763625770807266, 'weighted_fk': 0.0}
+P 7840/9600 p=0.0000 replaced=0.0000 {'loss': 0.2987484931945801, 'representation': 0.1296297013759613, 'weighted_dense': 0.16911880671977997, 'weighted_fk': 0.0}
+P 7860/9600 p=0.0000 replaced=0.0000 {'loss': 0.4581119120121002, 'representation': 0.19808724522590637, 'weighted_dense': 0.26002466678619385, 'weighted_fk': 0.0}
+P 7880/9600 p=0.0000 replaced=0.0000 {'loss': 0.10672387480735779, 'representation': 0.05051340162754059, 'weighted_dense': 0.0562104731798172, 'weighted_fk': 0.0}
+P 7900/9600 p=0.0000 replaced=0.0000 {'loss': 0.08529749512672424, 'representation': 0.04061274230480194, 'weighted_dense': 0.0446847565472126, 'weighted_fk': 0.0}
+DEV 7900: FK=34.633 mm; best=34.545 @5500
+P 7920/9600 p=0.0000 replaced=0.0000 {'loss': 0.11267508566379547, 'representation': 0.06426934152841568, 'weighted_dense': 0.04840574041008949, 'weighted_fk': 0.0}
+P 7940/9600 p=0.0000 replaced=0.0000 {'loss': 0.28878116607666016, 'representation': 0.11106666922569275, 'weighted_dense': 0.1777145117521286, 'weighted_fk': 0.0}
+P 7960/9600 p=0.0000 replaced=0.0000 {'loss': 0.0725761353969574, 'representation': 0.042570821940898895, 'weighted_dense': 0.030005313456058502, 'weighted_fk': 0.0}
+P 7980/9600 p=0.0000 replaced=0.0000 {'loss': 0.07623368501663208, 'representation': 0.03906061872839928, 'weighted_dense': 0.0371730662882328, 'weighted_fk': 0.0}
+P 8000/9600 p=0.0000 replaced=0.0000 {'loss': 0.12020052969455719, 'representation': 0.054868947714567184, 'weighted_dense': 0.0653315857052803, 'weighted_fk': 0.0}
+DEV 8000: FK=34.907 mm; best=34.545 @5500
+P 8020/9600 p=0.0000 replaced=0.0000 {'loss': 0.15947291254997253, 'representation': 0.06937237083911896, 'weighted_dense': 0.09010053426027298, 'weighted_fk': 0.0}
+P 8040/9600 p=0.0000 replaced=0.0000 {'loss': 0.16579553484916687, 'representation': 0.10913686454296112, 'weighted_dense': 0.05665866285562515, 'weighted_fk': 0.0}
+P 8060/9600 p=0.0000 replaced=0.0000 {'loss': 0.06662502884864807, 'representation': 0.0363503135740757, 'weighted_dense': 0.030274715274572372, 'weighted_fk': 0.0}
+P 8080/9600 p=0.0000 replaced=0.0000 {'loss': 0.1466207057237625, 'representation': 0.0898749977350235, 'weighted_dense': 0.056745704263448715, 'weighted_fk': 0.0}
+P 8100/9600 p=0.0000 replaced=0.0000 {'loss': 0.10197284817695618, 'representation': 0.04951091110706329, 'weighted_dense': 0.05246193706989288, 'weighted_fk': 0.0}
+DEV 8100: FK=34.501 mm; best=34.501 @8100
+P 8120/9600 p=0.0000 replaced=0.0000 {'loss': 0.07955846190452576, 'representation': 0.0354464016854763, 'weighted_dense': 0.044112060219049454, 'weighted_fk': 0.0}
+P 8140/9600 p=0.0000 replaced=0.0000 {'loss': 0.4720812439918518, 'representation': 0.1899786740541458, 'weighted_dense': 0.2821025550365448, 'weighted_fk': 0.0}
+P 8160/9600 p=0.0000 replaced=0.0000 {'loss': 0.12673990428447723, 'representation': 0.0694856271147728, 'weighted_dense': 0.05725427344441414, 'weighted_fk': 0.0}
+P 8180/9600 p=0.0000 replaced=0.0000 {'loss': 0.0826844573020935, 'representation': 0.03705470263957977, 'weighted_dense': 0.04562975466251373, 'weighted_fk': 0.0}
+P 8200/9600 p=0.0000 replaced=0.0000 {'loss': 0.10426734387874603, 'representation': 0.04953484982252121, 'weighted_dense': 0.054732490330934525, 'weighted_fk': 0.0}
+DEV 8200: FK=34.572 mm; best=34.501 @8100
+P 8220/9600 p=0.0000 replaced=0.0000 {'loss': 0.12195585668087006, 'representation': 0.06231242045760155, 'weighted_dense': 0.05964343994855881, 'weighted_fk': 0.0}
+P 8240/9600 p=0.0000 replaced=0.0000 {'loss': 0.13334974646568298, 'representation': 0.07277168333530426, 'weighted_dense': 0.06057806313037872, 'weighted_fk': 0.0}
+P 8260/9600 p=0.0000 replaced=0.0000 {'loss': 0.11957903206348419, 'representation': 0.05754031240940094, 'weighted_dense': 0.062038715928792953, 'weighted_fk': 0.0}
+P 8280/9600 p=0.0000 replaced=0.0000 {'loss': 0.08622203767299652, 'representation': 0.03832833468914032, 'weighted_dense': 0.0478937067091465, 'weighted_fk': 0.0}
+P 8300/9600 p=0.0000 replaced=0.0000 {'loss': 0.08755084872245789, 'representation': 0.03803536668419838, 'weighted_dense': 0.049515485763549805, 'weighted_fk': 0.0}
+DEV 8300: FK=34.204 mm; best=34.204 @8300
+P 8320/9600 p=0.0000 replaced=0.0000 {'loss': 0.4406140148639679, 'representation': 0.3199778199195862, 'weighted_dense': 0.12063619494438171, 'weighted_fk': 0.0}
+P 8340/9600 p=0.0000 replaced=0.0000 {'loss': 0.3845401704311371, 'representation': 0.3217807412147522, 'weighted_dense': 0.06275943666696548, 'weighted_fk': 0.0}
+P 8360/9600 p=0.0000 replaced=0.0000 {'loss': 0.06004743278026581, 'representation': 0.03352612257003784, 'weighted_dense': 0.026521308347582817, 'weighted_fk': 0.0}
+P 8380/9600 p=0.0000 replaced=0.0000 {'loss': 0.19494688510894775, 'representation': 0.09017852693796158, 'weighted_dense': 0.10476836562156677, 'weighted_fk': 0.0}
+P 8400/9600 p=0.0000 replaced=0.0000 {'loss': 0.11084239184856415, 'representation': 0.0572025440633297, 'weighted_dense': 0.05363985151052475, 'weighted_fk': 0.0}
+DEV 8400: FK=34.122 mm; best=34.122 @8400
+P 8420/9600 p=0.0000 replaced=0.0000 {'loss': 0.08732824772596359, 'representation': 0.0382734052836895, 'weighted_dense': 0.049054842442274094, 'weighted_fk': 0.0}
+P 8440/9600 p=0.0000 replaced=0.0000 {'loss': 0.08004772663116455, 'representation': 0.041281089186668396, 'weighted_dense': 0.038766633719205856, 'weighted_fk': 0.0}
+P 8460/9600 p=0.0000 replaced=0.0000 {'loss': 0.27470386028289795, 'representation': 0.2129184752702713, 'weighted_dense': 0.06178538501262665, 'weighted_fk': 0.0}
+P 8480/9600 p=0.0000 replaced=0.0000 {'loss': 0.09109587967395782, 'representation': 0.05079904943704605, 'weighted_dense': 0.040296826511621475, 'weighted_fk': 0.0}
+P 8500/9600 p=0.0000 replaced=0.0000 {'loss': 0.21433719992637634, 'representation': 0.1222817525267601, 'weighted_dense': 0.09205544739961624, 'weighted_fk': 0.0}
+DEV 8500: FK=34.453 mm; best=34.122 @8400
+P 8520/9600 p=0.0000 replaced=0.0000 {'loss': 0.1309768110513687, 'representation': 0.053617924451828, 'weighted_dense': 0.07735888659954071, 'weighted_fk': 0.0}
+P 8540/9600 p=0.0000 replaced=0.0000 {'loss': 0.1027311384677887, 'representation': 0.05136928707361221, 'weighted_dense': 0.05136185139417648, 'weighted_fk': 0.0}
+P 8560/9600 p=0.0000 replaced=0.0000 {'loss': 0.07635560631752014, 'representation': 0.0376303568482399, 'weighted_dense': 0.03872525319457054, 'weighted_fk': 0.0}
+P 8580/9600 p=0.0000 replaced=0.0000 {'loss': 0.1069754809141159, 'representation': 0.049404725432395935, 'weighted_dense': 0.05757075920701027, 'weighted_fk': 0.0}
+P 8600/9600 p=0.0000 replaced=0.0000 {'loss': 0.11810652911663055, 'representation': 0.051650095731019974, 'weighted_dense': 0.06645642966032028, 'weighted_fk': 0.0}
+DEV 8600: FK=34.612 mm; best=34.122 @8400
+P 8620/9600 p=0.0000 replaced=0.0000 {'loss': 0.22387094795703888, 'representation': 0.1063280701637268, 'weighted_dense': 0.11754287779331207, 'weighted_fk': 0.0}
+P 8640/9600 p=0.0000 replaced=0.0000 {'loss': 0.05995779484510422, 'representation': 0.03425450995564461, 'weighted_dense': 0.02570328675210476, 'weighted_fk': 0.0}
+P 8660/9600 p=0.0000 replaced=0.0000 {'loss': 0.17414917051792145, 'representation': 0.11089971661567688, 'weighted_dense': 0.06324945390224457, 'weighted_fk': 0.0}
+P 8680/9600 p=0.0000 replaced=0.0000 {'loss': 0.10357798635959625, 'representation': 0.062182407826185226, 'weighted_dense': 0.041395578533411026, 'weighted_fk': 0.0}
+P 8700/9600 p=0.0000 replaced=0.0000 {'loss': 0.13186120986938477, 'representation': 0.06218365952372551, 'weighted_dense': 0.06967754662036896, 'weighted_fk': 0.0}
+DEV 8700: FK=35.088 mm; best=34.122 @8400
+P 8720/9600 p=0.0000 replaced=0.0000 {'loss': 0.1142178475856781, 'representation': 0.050942882895469666, 'weighted_dense': 0.06327496469020844, 'weighted_fk': 0.0}
+P 8740/9600 p=0.0000 replaced=0.0000 {'loss': 0.2223081886768341, 'representation': 0.114835225045681, 'weighted_dense': 0.1074729710817337, 'weighted_fk': 0.0}
+P 8760/9600 p=0.0000 replaced=0.0000 {'loss': 0.06962548196315765, 'representation': 0.0310659222304821, 'weighted_dense': 0.038559556007385254, 'weighted_fk': 0.0}
+P 8780/9600 p=0.0000 replaced=0.0000 {'loss': 0.15097659826278687, 'representation': 0.06851308792829514, 'weighted_dense': 0.08246351033449173, 'weighted_fk': 0.0}
+P 8800/9600 p=0.0000 replaced=0.0000 {'loss': 0.1692076176404953, 'representation': 0.11907694488763809, 'weighted_dense': 0.05013067275285721, 'weighted_fk': 0.0}
+DEV 8800: FK=35.352 mm; best=34.122 @8400
+P 8820/9600 p=0.0000 replaced=0.0000 {'loss': 0.08075444400310516, 'representation': 0.03402350842952728, 'weighted_dense': 0.04673093929886818, 'weighted_fk': 0.0}
+P 8840/9600 p=0.0000 replaced=0.0000 {'loss': 0.1224057674407959, 'representation': 0.06184720620512962, 'weighted_dense': 0.06055855751037598, 'weighted_fk': 0.0}
+P 8860/9600 p=0.0000 replaced=0.0000 {'loss': 0.28948459029197693, 'representation': 0.11359906941652298, 'weighted_dense': 0.17588551342487335, 'weighted_fk': 0.0}
+P 8880/9600 p=0.0000 replaced=0.0000 {'loss': 0.19754570722579956, 'representation': 0.11241932958364487, 'weighted_dense': 0.0851263776421547, 'weighted_fk': 0.0}
+P 8900/9600 p=0.0000 replaced=0.0000 {'loss': 0.15053033828735352, 'representation': 0.0791398212313652, 'weighted_dense': 0.07139050960540771, 'weighted_fk': 0.0}
+DEV 8900: FK=34.292 mm; best=34.122 @8400
+P 8920/9600 p=0.0000 replaced=0.0000 {'loss': 0.18124018609523773, 'representation': 0.058308158069849014, 'weighted_dense': 0.12293203175067902, 'weighted_fk': 0.0}
+P 8940/9600 p=0.0000 replaced=0.0000 {'loss': 0.09452939033508301, 'representation': 0.05726534500718117, 'weighted_dense': 0.03726404160261154, 'weighted_fk': 0.0}
+P 8960/9600 p=0.0000 replaced=0.0000 {'loss': 0.36165565252304077, 'representation': 0.173975870013237, 'weighted_dense': 0.18767978250980377, 'weighted_fk': 0.0}
+P 8980/9600 p=0.0000 replaced=0.0000 {'loss': 0.18925607204437256, 'representation': 0.09883831441402435, 'weighted_dense': 0.09041775017976761, 'weighted_fk': 0.0}
+P 9000/9600 p=0.0000 replaced=0.0000 {'loss': 0.09261852502822876, 'representation': 0.03515421971678734, 'weighted_dense': 0.05746430158615112, 'weighted_fk': 0.0}
+DEV 9000: FK=34.756 mm; best=34.122 @8400
+P 9020/9600 p=0.0000 replaced=0.0000 {'loss': 0.12034504115581512, 'representation': 0.05760504677891731, 'weighted_dense': 0.06273999065160751, 'weighted_fk': 0.0}
+P 9040/9600 p=0.0000 replaced=0.0000 {'loss': 0.07837552577257156, 'representation': 0.03293636441230774, 'weighted_dense': 0.045439161360263824, 'weighted_fk': 0.0}
+P 9060/9600 p=0.0000 replaced=0.0000 {'loss': 0.22577890753746033, 'representation': 0.08824924379587173, 'weighted_dense': 0.137529656291008, 'weighted_fk': 0.0}
+P 9080/9600 p=0.0000 replaced=0.0000 {'loss': 0.1566222757101059, 'representation': 0.08299519866704941, 'weighted_dense': 0.07362707704305649, 'weighted_fk': 0.0}
+P 9100/9600 p=0.0000 replaced=0.0000 {'loss': 0.06398332118988037, 'representation': 0.027647586539387703, 'weighted_dense': 0.03633573651313782, 'weighted_fk': 0.0}
+DEV 9100: FK=34.607 mm; best=34.122 @8400
+P 9120/9600 p=0.0000 replaced=0.0000 {'loss': 0.04395248740911484, 'representation': 0.02388043887913227, 'weighted_dense': 0.020072046667337418, 'weighted_fk': 0.0}
+P 9140/9600 p=0.0000 replaced=0.0000 {'loss': 0.10157659649848938, 'representation': 0.05341741815209389, 'weighted_dense': 0.04815918207168579, 'weighted_fk': 0.0}
+P 9160/9600 p=0.0000 replaced=0.0000 {'loss': 0.1259833574295044, 'representation': 0.06100933253765106, 'weighted_dense': 0.06497401744127274, 'weighted_fk': 0.0}
+P 9180/9600 p=0.0000 replaced=0.0000 {'loss': 0.1716228425502777, 'representation': 0.10076697170734406, 'weighted_dense': 0.07085587084293365, 'weighted_fk': 0.0}
+P 9200/9600 p=0.0000 replaced=0.0000 {'loss': 0.21028664708137512, 'representation': 0.08881941437721252, 'weighted_dense': 0.1214672327041626, 'weighted_fk': 0.0}
+DEV 9200: FK=34.806 mm; best=34.122 @8400
+P 9220/9600 p=0.0000 replaced=0.0000 {'loss': 0.10745134949684143, 'representation': 0.05154329165816307, 'weighted_dense': 0.05590806156396866, 'weighted_fk': 0.0}
+P 9240/9600 p=0.0000 replaced=0.0000 {'loss': 0.061911389231681824, 'representation': 0.02801060490310192, 'weighted_dense': 0.03390078619122505, 'weighted_fk': 0.0}
+P 9260/9600 p=0.0000 replaced=0.0000 {'loss': 0.17447064816951752, 'representation': 0.05278948321938515, 'weighted_dense': 0.12168116122484207, 'weighted_fk': 0.0}
+P 9280/9600 p=0.0000 replaced=0.0000 {'loss': 0.223984956741333, 'representation': 0.11581707745790482, 'weighted_dense': 0.10816788673400879, 'weighted_fk': 0.0}
+P 9300/9600 p=0.0000 replaced=0.0000 {'loss': 0.3065190315246582, 'representation': 0.18699070811271667, 'weighted_dense': 0.11952831596136093, 'weighted_fk': 0.0}
+DEV 9300: FK=34.358 mm; best=34.122 @8400
+P 9320/9600 p=0.0000 replaced=0.0000 {'loss': 0.11895857751369476, 'representation': 0.07440748810768127, 'weighted_dense': 0.04455108568072319, 'weighted_fk': 0.0}
+P 9340/9600 p=0.0000 replaced=0.0000 {'loss': 0.132955402135849, 'representation': 0.05572737753391266, 'weighted_dense': 0.07722803205251694, 'weighted_fk': 0.0}
+P 9360/9600 p=0.0000 replaced=0.0000 {'loss': 0.12404835224151611, 'representation': 0.05921996384859085, 'weighted_dense': 0.06482838839292526, 'weighted_fk': 0.0}
+P 9380/9600 p=0.0000 replaced=0.0000 {'loss': 0.07840579748153687, 'representation': 0.036914434283971786, 'weighted_dense': 0.04149135947227478, 'weighted_fk': 0.0}
+P 9400/9600 p=0.0000 replaced=0.0000 {'loss': 0.04455534368753433, 'representation': 0.021288221701979637, 'weighted_dense': 0.023267123848199844, 'weighted_fk': 0.0}
+DEV 9400: FK=34.678 mm; best=34.122 @8400
+P 9420/9600 p=0.0000 replaced=0.0000 {'loss': 0.06650950014591217, 'representation': 0.030329810455441475, 'weighted_dense': 0.036179691553115845, 'weighted_fk': 0.0}
+P 9440/9600 p=0.0000 replaced=0.0000 {'loss': 0.10337276756763458, 'representation': 0.052803631871938705, 'weighted_dense': 0.050569139420986176, 'weighted_fk': 0.0}
+P 9460/9600 p=0.0000 replaced=0.0000 {'loss': 0.0958617702126503, 'representation': 0.04020743444561958, 'weighted_dense': 0.055654335767030716, 'weighted_fk': 0.0}
+P 9480/9600 p=0.0000 replaced=0.0000 {'loss': 0.6409415006637573, 'representation': 0.3926764726638794, 'weighted_dense': 0.24826501309871674, 'weighted_fk': 0.0}
+P 9500/9600 p=0.0000 replaced=0.0000 {'loss': 0.1076098382472992, 'representation': 0.04960765689611435, 'weighted_dense': 0.058002181351184845, 'weighted_fk': 0.0}
+DEV 9500: FK=34.531 mm; best=34.122 @8400
+P 9520/9600 p=0.0000 replaced=0.0000 {'loss': 0.4543558359146118, 'representation': 0.2579467296600342, 'weighted_dense': 0.19640909135341644, 'weighted_fk': 0.0}
+P 9540/9600 p=0.0000 replaced=0.0000 {'loss': 0.07628343254327774, 'representation': 0.035734500735998154, 'weighted_dense': 0.04054893180727959, 'weighted_fk': 0.0}
+P 9560/9600 p=0.0000 replaced=0.0000 {'loss': 0.04792546480894089, 'representation': 0.026086198166012764, 'weighted_dense': 0.021839264780282974, 'weighted_fk': 0.0}
+P 9580/9600 p=0.0000 replaced=0.0000 {'loss': 0.8756129741668701, 'representation': 0.7994548082351685, 'weighted_dense': 0.07615814357995987, 'weighted_fk': 0.0}
+P 9600/9600 p=0.0000 replaced=0.0000 {'loss': 0.15429994463920593, 'representation': 0.07663941383361816, 'weighted_dense': 0.07766053080558777, 'weighted_fk': 0.0}
+DEV 9600: FK=34.630 mm; best=34.122 @8400

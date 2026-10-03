@@ -1,0 +1,53 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/gaozt-test1/sxh/EgoRecover/run/e7_ablation.py", line 352, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/e7_ablation.py", line 348, in main
+    elif args.command=='evaluate': evaluate(args,plan,output,ident)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/e7_ablation.py", line 180, in evaluate
+    model, flow = load_model(plan, device)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/e7_ablation.py", line 149, in load_model
+    from model.uniegomotion import UniEgoMotion
+  File "/gaozt-test1/sxh/UEM-update-original/model/uniegomotion.py", line 6, in <module>
+    from model.core import DecoderBlock
+  File "/gaozt-test1/sxh/UEM-update-original/model/core.py", line 5, in <module>
+    import ipdb
+ModuleNotFoundError: No module named 'ipdb'
+/root/miniconda3/envs/egorecover/lib/python3.11/site-packages/torch/cuda/__init__.py:1007: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/gaozt-test1/sxh/EgoRecover/run/e7_ablation.py", line 352, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/e7_ablation.py", line 348, in main
+    elif args.command=='evaluate': evaluate(args,plan,output,ident)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/e7_ablation.py", line 180, in evaluate
+    model, flow = load_model(plan, device)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/run/e7_ablation.py", line 158, in load_model
+    if not apply_ema_weights_from_checkpoint(model, saved):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/egorecover/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/UEM-update-original/module/ema.py", line 175, in apply_ema_weights_from_checkpoint
+    raise ValueError(
+ValueError: EMA checkpoint has 230 tensors, but the model has 0 trainable parameters.
+/root/miniconda3/envs/egorecover/lib/python3.11/site-packages/torch/cuda/__init__.py:1007: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+2026-09-29 21:08:33.708 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+smoke cmu_soccer07_1 1062 1/4 cells
+smoke cmu_soccer07_1 1062 2/4 cells
+smoke cmu_soccer07_1 1062 3/4 cells
+smoke cmu_soccer07_1 1062 4/4 cells
+smoke cmu_soccer11_2 1062 1/4 cells
+smoke cmu_soccer11_2 1062 2/4 cells
+smoke cmu_soccer11_2 1062 3/4 cells
+smoke cmu_soccer11_2 1062 4/4 cells

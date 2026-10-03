@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "geometry_max_abs_m": {
+    "R0": 5.960464477539063e-08,
+    "R1": 5.960464477539063e-08,
+    "R2": 5.960464477539063e-08,
+    "R3": 5.960464477539063e-08
+  },
+  "code_sha256": {
+    "run/train_observation_reference.py": "3955c28acf7591c475e4e8ab717e660c4411fef0a6445b2510f03529eabdcf2b",
+    "egorecover/observation_reference.py": "ce90cba46bd4eac05729e0f32816e0cc109d02da3c5c4dc98c45f28605da4a1b",
+    "model/observation_reference_g.py": "92bd1f86b5317628df09aa67d5c08bd125b89e7216fc43818d355d3c7476318d",
+    "run/observation_reference_experiment.py": "1ac7d89794aa8c6d46f330f6259cafcbcf3cdec83d2d19332634e101e93b10da"
+  },
+  "smoke_optimizer_steps": 2,
+  "smoke_frames": 96
+}

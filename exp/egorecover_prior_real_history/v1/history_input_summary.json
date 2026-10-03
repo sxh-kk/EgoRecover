@@ -1,0 +1,48 @@
+{
+  "scope": "offline_input_quality_diagnostic",
+  "definition": "Mean metric of 20 historical E7 states against their own timestamp GT, averaged over matched takes/draws/target windows; not a next-frame baseline.",
+  "metrics": {
+    "clean": {
+      "fk22_mm": 187.2045933511522,
+      "root_mm": 173.1059056888392,
+      "root_relative_mm": 70.13982665038404,
+      "dense22_mm": 187.31337363690506,
+      "rotation_deg": 15.4130054526123,
+      "body_mpjpe_mm": 187.2045933511522,
+      "pa_mpjpe_mm": 46.413276295603055,
+      "same_shape_mpjpe_mm": 185.09731022104805,
+      "local_rotation_deg": 9.975378326574962,
+      "root_rotation_deg": 9.383603543098326,
+      "last_velocity_error_mmps": 612.6262050599228,
+      "last_angular_velocity_error_degps": 123.61246295740575
+    },
+    "freeze_3s": {
+      "fk22_mm": 187.9433010896047,
+      "root_mm": 172.98926975550475,
+      "root_relative_mm": 71.97626692660062,
+      "dense22_mm": 188.1572911315494,
+      "rotation_deg": 15.949941915420839,
+      "body_mpjpe_mm": 187.9433010896047,
+      "pa_mpjpe_mm": 48.49140813762759,
+      "same_shape_mpjpe_mm": 185.62211445702448,
+      "local_rotation_deg": 10.256760013177072,
+      "root_rotation_deg": 9.556583441849108,
+      "last_velocity_error_mmps": 623.622660159476,
+      "last_angular_velocity_error_degps": 125.66016976244656
+    },
+    "drift_0p03mps": {
+      "fk22_mm": 188.73153205388857,
+      "root_mm": 174.78921299069017,
+      "root_relative_mm": 70.33160404923521,
+      "dense22_mm": 188.8510637830805,
+      "rotation_deg": 15.443396768010693,
+      "body_mpjpe_mm": 188.73153205388857,
+      "pa_mpjpe_mm": 46.7191625824681,
+      "same_shape_mpjpe_mm": 186.59080550464583,
+      "local_rotation_deg": 10.007795671916302,
+      "root_rotation_deg": 9.355175248689857,
+      "last_velocity_error_mmps": 619.0606004167486,
+      "last_angular_velocity_error_degps": 124.28452131100643
+    }
+  }
+}

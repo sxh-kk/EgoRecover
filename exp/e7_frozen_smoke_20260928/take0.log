@@ -1,0 +1,30 @@
+START iiith_cooking_89_2: shared E7 EMA startup ready
+ROLLOUT iiith_cooking_89_2/a11/clean
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0/a11_clean.pt: 180 predicted frames
+ROLLOUT iiith_cooking_89_2/a11/freeze_3s
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0/a11_freeze_3s.pt: 180 predicted frames
+ROLLOUT iiith_cooking_89_2/a11/drift_0p03mps
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0/a11_drift_0p03mps.pt: 180 predicted frames
+ROLLOUT iiith_cooking_89_2/a10/clean
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0/a10_clean.pt: 180 predicted frames
+ROLLOUT iiith_cooking_89_2/a10/freeze_3s
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0/a10_freeze_3s.pt: 180 predicted frames
+ROLLOUT iiith_cooking_89_2/a10/drift_0p03mps
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0/a10_drift_0p03mps.pt: 180 predicted frames
+ROLLOUT iiith_cooking_89_2/a01/clean
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0/a01_clean.pt: 180 predicted frames
+ROLLOUT iiith_cooking_89_2/a01/freeze_3s
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0/a01_freeze_3s.pt: 180 predicted frames
+ROLLOUT iiith_cooking_89_2/a01/drift_0p03mps
+SAVED /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0/a01_drift_0p03mps.pt: 180 predicted frames
+2026-09-28 01:08:18.675 | WARNING  | dataset.smpl_utils:get_smpl:10 - Loading SMPL model: smplx
+FK a11/clean: 344.66 mm
+FK a11/freeze_3s: 405.60 mm
+FK a11/drift_0p03mps: 351.98 mm
+FK a10/clean: 683.08 mm
+FK a10/freeze_3s: 709.96 mm
+FK a10/drift_0p03mps: 683.08 mm
+FK a01/clean: 477.30 mm
+FK a01/freeze_3s: 477.30 mm
+FK a01/drift_0p03mps: 480.40 mm
+COMPLETE /gaozt-test1/guanzerong/EgoRecover/exp/e7_frozen_smoke_20260928/take0/report.json

@@ -1,0 +1,81 @@
+{
+  "best_step": 2,
+  "best_body_mm": 4150351104.0,
+  "curve": [
+    {
+      "step": 2,
+      "scores": {
+        "body_mm": {
+          "mean": 4150351104.0,
+          "per_take": {
+            "georgiatech_bike_06_6": 4150351104.0
+          }
+        },
+        "all_body_mm": {
+          "mean": 3058178560.0,
+          "per_take": {
+            "georgiatech_bike_06_6": 3058178560.0
+          }
+        },
+        "startup_body_mm": {
+          "mean": 96706.3671875,
+          "per_take": {
+            "georgiatech_bike_06_6": 96706.3671875
+          }
+        },
+        "pa_mm": {
+          "mean": 299.52471923828125,
+          "per_take": {
+            "georgiatech_bike_06_6": 299.52471923828125
+          }
+        },
+        "root_mm": {
+          "mean": 4150350592.0,
+          "per_take": {
+            "georgiatech_bike_06_6": 4150350592.0
+          }
+        },
+        "root_relative_mm": {
+          "mean": 374.10150146484375,
+          "per_take": {
+            "georgiatech_bike_06_6": 374.10150146484375
+          }
+        },
+        "head_mm": {
+          "mean": 4150351104.0,
+          "per_take": {
+            "georgiatech_bike_06_6": 4150351104.0
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 117.42342376708984,
+          "per_take": {
+            "georgiatech_bike_06_6": 117.42342376708984
+          }
+        },
+        "velocity_mmps": {
+          "mean": 29483925504.0,
+          "per_take": {
+            "georgiatech_bike_06_6": 29483925504.0
+          }
+        },
+        "prior_body_mm": {
+          "mean": 5204756992.0,
+          "per_take": {
+            "georgiatech_bike_06_6": 5204756992.0
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 1054406080.0,
+          "per_take": {
+            "georgiatech_bike_06_6": 1054406080.0
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 22.247070090845227,
+      "frames": 76
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.evaluate_paired_development",
+    "--signal",
+    "data/EE4D_MISMATCH_TRAIN_72TAKE_READY.json",
+    "--split-manifest",
+    "config/egorecover_train_72take_split_v1.json",
+    "--bootstrap-cache",
+    "exp/egorecover_train_72take_v1/bootstrap.pt",
+    "--checkpoint",
+    "exp/e7/last.ckpt",
+    "--experiment",
+    "replay_0p25=exp/egorecover_stages_1_4/continuation_v1/stage3_train/replay_0p25",
+    "--group",
+    "dev",
+    "--seed",
+    "62",
+    "--output",
+    "exp/egorecover_stages_1_4/continuation_v1/stage3_eval/replay_0p25"
+  ],
+  "gpu": 5
+}

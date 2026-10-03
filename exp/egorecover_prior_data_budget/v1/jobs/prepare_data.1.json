@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.prepare_prior_expanded",
+    "--output",
+    "exp/egorecover_prior_data_budget/v1/data",
+    "--shards",
+    "exp/egorecover_prior_data_budget/v1/data_shards"
+  ],
+  "gpu": 4
+}

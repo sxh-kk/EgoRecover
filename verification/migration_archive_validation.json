@@ -1,0 +1,58 @@
+{
+  "source_repo": "chaitanya100100/uniegomotion",
+  "source_revision": "2686aa6a5042c6003c4de8f6fb17602b2b171cb2",
+  "source_path": "ee4d_motion_uniegomotion.zip",
+  "archive_sha256": "7ace125830e92dac0db9c3afeca8b04c956eb387db2070c0ef8d260c778da634",
+  "archive_bytes": 35067467786,
+  "verified_members": [
+    {
+      "path": "data/ee4d_motion_uniegomotion/annotations/splits.json",
+      "archive_member": "ee4d_motion_uniegomotion/annotations/splits.json",
+      "crc32": 590186821,
+      "size_bytes": 2001999
+    },
+    {
+      "path": "data/ee4d_motion_uniegomotion/takes.json",
+      "archive_member": "ee4d_motion_uniegomotion/takes.json",
+      "crc32": 1228463537,
+      "size_bytes": 43160564
+    },
+    {
+      "path": "data/ee4d_motion_uniegomotion/uniegomotion/ee_train.pt",
+      "archive_member": "ee4d_motion_uniegomotion/uniegomotion/ee_train.pt",
+      "crc32": 4177165915,
+      "size_bytes": 6833936016
+    },
+    {
+      "path": "data/ee4d_motion_uniegomotion/uniegomotion/ee_val.pt",
+      "archive_member": "ee4d_motion_uniegomotion/uniegomotion/ee_val.pt",
+      "crc32": 3637438017,
+      "size_bytes": 2097615842
+    },
+    {
+      "path": "data/ee4d_motion_uniegomotion/uniegomotion/ee_val_gt_for_evaluation.pkl",
+      "archive_member": "ee4d_motion_uniegomotion/uniegomotion/ee_val_gt_for_evaluation.pkl",
+      "crc32": 1447776997,
+      "size_bytes": 878152049
+    },
+    {
+      "path": "data/ee4d_motion_uniegomotion/uniegomotion/egoview_dinov2_train.pt",
+      "archive_member": "ee4d_motion_uniegomotion/uniegomotion/egoview_dinov2_train.pt",
+      "crc32": 1798134390,
+      "size_bytes": 21824737142
+    },
+    {
+      "path": "data/ee4d_motion_uniegomotion/uniegomotion/egoview_dinov2_val.pt",
+      "archive_member": "ee4d_motion_uniegomotion/uniegomotion/egoview_dinov2_val.pt",
+      "crc32": 2357971140,
+      "size_bytes": 6471944981
+    },
+    {
+      "path": "data/ee4d_motion_uniegomotion/uniegomotion/v4_beta_ee_train_stats.pt",
+      "archive_member": "ee4d_motion_uniegomotion/uniegomotion/v4_beta_ee_train_stats.pt",
+      "crc32": 1308726128,
+      "size_bytes": 7348
+    }
+  ],
+  "validation": "Official fixed-version ZIP size and source directory CRC agree with all 8 local source files; local files also have full SHA256 in artifacts.json."
+}

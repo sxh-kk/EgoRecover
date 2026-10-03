@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/gaozt-test1/sxh/EgoRecover/run/engineering_pilot.py", line 620, in <module>
+    main()
+  File "/gaozt-test1/sxh/EgoRecover/run/engineering_pilot.py", line 138, in main
+    dataset, handoff = open_dataset(signal=args.signal, spec_sha256=expected_spec)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/egorecover/data.py", line 43, in open_dataset
+    handoff = read_handoff(signal)
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/gaozt-test1/sxh/EgoRecover/egorecover/data.py", line 21, in read_handoff
+    audit = json.loads((root / "audit/validation.json").read_text())
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/egorecover/lib/python3.11/pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/envs/egorecover/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/gaozt-test1/guanzerong/EgoRecover/data/ee4d_mismatch_train_pilot_v1/audit/validation.json'

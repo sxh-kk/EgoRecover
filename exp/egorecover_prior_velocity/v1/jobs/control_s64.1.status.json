@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.train_prior_velocity",
+    "--data",
+    "exp/egorecover_prior_two_forward/v1/data",
+    "--output",
+    "exp/egorecover_prior_velocity/v1/train/control_s64",
+    "--seed",
+    "64"
+  ],
+  "gpu": 4,
+  "pid": 2101371,
+  "started_at": "2026-09-29T06:49:54.987082+00:00",
+  "exit_code": 0,
+  "child_pid": 2101420,
+  "ended_at": "2026-09-29T06:52:33.308187+00:00"
+}

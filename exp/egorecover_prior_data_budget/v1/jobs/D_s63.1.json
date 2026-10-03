@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/root/miniconda3/envs/egorecover/bin/python",
+    "-u",
+    "-m",
+    "run.train_prior_expanded",
+    "--data",
+    "exp/egorecover_prior_data_budget/v1/data",
+    "--output",
+    "exp/egorecover_prior_data_budget/v1/train/D_s63",
+    "--seed",
+    "63"
+  ],
+  "gpu": 5
+}

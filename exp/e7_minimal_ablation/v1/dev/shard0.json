@@ -1,0 +1,27 @@
+{
+  "completed": true,
+  "identity": {
+    "plan_sha256": "331c3bac257dacd1d8cd6e242b74a1b1da5ea33e80c64be793a1f561cf61bd24",
+    "upstream_commit": "156ab79d5f692a6e8db3c3eb769abf1e4cb1fc08",
+    "code_sha256": {
+      "run/e7_ablation.py": "4ebc9487b7b4511ffb6bfd8e54f52700de5141bc7330edffec9a2938dae08126",
+      "egorecover/e7_ablation.py": "78e806aa7258e3125bcfb04043954fa09d7bafb1a07f239d75a451858b08b6e5",
+      "egorecover/codec.py": "109517b8ac9d3288d8bafb6d44b6b98632cefebaa4139d80d62f4f0a25d05443",
+      "egorecover/fk.py": "37e10adb2c07db8baaf4ccf9fce60429c35d059d943d6b06f33a668adf58521b"
+    },
+    "checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+    "smplx_sha256": "43d8f3a1375d7c5baae207870a5d51def0f7e6b507df709b4937598b5e7d965d"
+  },
+  "takes": [
+    "fair_bike_01_12",
+    "indiana_music_13_5",
+    "unc_basketball_03-16-23_01_18"
+  ],
+  "draws": [
+    1062,
+    1063,
+    1064
+  ],
+  "cells": 4,
+  "smoke": false
+}

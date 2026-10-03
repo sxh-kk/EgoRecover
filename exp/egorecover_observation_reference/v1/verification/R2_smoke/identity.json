@@ -1,0 +1,65 @@
+{
+  "group": "R2",
+  "seed": 62,
+  "manifest_sha256": "0b4b381cbcbaf0049f5799f160e9e2b67aaf0fc14392d494ad2be86acb7a1151",
+  "prior_sha256": "c2e55e5d6a858ce05aebaacb504b2afa5695f6cf7dfc7d370776c9cbfb74dc64",
+  "config": {
+    "protocol": "g-observation-reference-v1",
+    "source_root": "data/ee4d_motion_uniegomotion",
+    "e7_checkpoint": "exp/e7/last.ckpt",
+    "prior_checkpoint": "exp/egorecover_prior_data_budget/v1/train/D_s62/prior.pt",
+    "groups": [
+      "R0",
+      "R1",
+      "R2",
+      "R3"
+    ],
+    "seeds": [
+      62,
+      63,
+      64
+    ],
+    "gpus": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "steps": 24000,
+    "batch_size": 64,
+    "microbatch": 16,
+    "learning_rate": 8.5e-05,
+    "weight_decay": 0.01,
+    "ema_decay": 0.992028,
+    "warmup_steps": 1000,
+    "eval_every": 2000,
+    "dev_monitor_takes": 16,
+    "sigma": 1.0,
+    "geometry_weight": 1.0,
+    "fk_weight": 0.0,
+    "draws": [
+      1062
+    ],
+    "nfe": [
+      10
+    ],
+    "split_seed": 20260929,
+    "clips_per_train_take": 4,
+    "prior_calibration_steps": 2400,
+    "prior_calibration_lr": 0.0001,
+    "parent_run": "/gaozt-test1/sxh/EgoRecover/exp/egorecover_g_pretraining/v1",
+    "reference_modes": [
+      "predicted",
+      "observed_planar"
+    ],
+    "observation_lengths": [
+      21,
+      80
+    ]
+  },
+  "code": {
+    "run/train_observation_reference.py": "3955c28acf7591c475e4e8ab717e660c4411fef0a6445b2510f03529eabdcf2b",
+    "egorecover/observation_reference.py": "ce90cba46bd4eac05729e0f32816e0cc109d02da3c5c4dc98c45f28605da4a1b",
+    "model/observation_reference_g.py": "92bd1f86b5317628df09aa67d5c08bd125b89e7216fc43818d355d3c7476318d"
+  }
+}

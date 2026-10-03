@@ -1,0 +1,1650 @@
+{
+  "findings": [
+    {
+      "path": "LOG.md",
+      "type": "absolute_paths",
+      "occurrences": 16
+    },
+    {
+      "path": "README.md",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "config/e7_minimal_ablation_v1.json",
+      "type": "absolute_paths",
+      "occurrences": 2
+    },
+    {
+      "path": "config/egorecover_g_residual_history_v1.json",
+      "type": "absolute_paths",
+      "occurrences": 3
+    },
+    {
+      "path": "config/egorecover_observation_reference_v1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "config/egorecover_observation_reference_v2.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "cv.md",
+      "type": "absolute_paths",
+      "occurrences": 2
+    },
+    {
+      "path": "data/EE4D_MISMATCH_READY.json",
+      "type": "absolute_paths",
+      "occurrences": 8
+    },
+    {
+      "path": "data/EE4D_MISMATCH_TRAIN_72TAKE_READY.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "data/EE4D_MISMATCH_TRAIN_PILOT_READY.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "data/ee4d_mismatch_pilot_e7_v0/spec.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "data/ee4d_mismatch_smoke_e7_v0/spec.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "data/ee4d_mismatch_train_72take_v1/spec.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "data/ee4d_mismatch_train_72take_v1/split_manifest.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "data/ee4d_mismatch_train_pilot_v1/spec.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "data_pipeline/BUILD_REPORT.md",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "data_pipeline/FULL_BUILD_REPORT.md",
+      "type": "absolute_paths",
+      "occurrences": 6
+    },
+    {
+      "path": "data_pipeline/HANDOFF.md",
+      "type": "absolute_paths",
+      "occurrences": 7
+    },
+    {
+      "path": "data_pipeline/README.md",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "docs/archive/engineering-experiments.md",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "docs/design/interfaces.md",
+      "type": "absolute_paths",
+      "occurrences": 2
+    },
+    {
+      "path": "docs/experiments/e7-minimal-ablation.md",
+      "type": "absolute_paths",
+      "occurrences": 2
+    },
+    {
+      "path": "docs/experiments/g-observation-reference.md",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "docs/experiments/g-pretraining-four-way.md",
+      "type": "absolute_paths",
+      "occurrences": 3
+    },
+    {
+      "path": "docs/experiments/p-cv-residual.md",
+      "type": "absolute_paths",
+      "occurrences": 2
+    },
+    {
+      "path": "docs/experiments/p-data-budget.md",
+      "type": "absolute_paths",
+      "occurrences": 4
+    },
+    {
+      "path": "docs/experiments/p-explicit-velocity.md",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "docs/experiments/p-real-history.md",
+      "type": "absolute_paths",
+      "occurrences": 2
+    },
+    {
+      "path": "docs/experiments/p-same-shape-fk.md",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "docs/experiments/p-two-forward-runbook.md",
+      "type": "absolute_paths",
+      "occurrences": 4
+    },
+    {
+      "path": "docs/reference/e7.md",
+      "type": "absolute_paths",
+      "occurrences": 2
+    },
+    {
+      "path": "docs/release/github-huggingface-plan.md",
+      "type": "absolute_paths",
+      "occurrences": 4
+    },
+    {
+      "path": "eval/compute_3d_metrics.py",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "eval/compute_semantic_metrics.py",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "eval/save_gt_for_eval.py",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "eval/vis_uem_preds.py",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/e7/hparams.yaml",
+      "type": "absolute_paths",
+      "occurrences": 2
+    },
+    {
+      "path": "exp/e7_frozen_smoke_20260928/launch.json",
+      "type": "absolute_paths",
+      "occurrences": 10
+    },
+    {
+      "path": "exp/e7_frozen_smoke_20260928/take0/report.json",
+      "type": "absolute_paths",
+      "occurrences": 10
+    },
+    {
+      "path": "exp/e7_frozen_smoke_20260928/take1/report.json",
+      "type": "absolute_paths",
+      "occurrences": 10
+    },
+    {
+      "path": "exp/egorecover_engineering_v0/report.json",
+      "type": "absolute_paths",
+      "occurrences": 12
+    },
+    {
+      "path": "exp/egorecover_engineering_v1/report.json",
+      "type": "absolute_paths",
+      "occurrences": 12
+    },
+    {
+      "path": "exp/egorecover_engineering_v2/report.json",
+      "type": "absolute_paths",
+      "occurrences": 12
+    },
+    {
+      "path": "exp/egorecover_engineering_v3/report.json",
+      "type": "absolute_paths",
+      "occurrences": 12
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/run/g_pretraining_data.py",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/data/manifest.json",
+      "type": "absolute_paths",
+      "occurrences": 4
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/PLAN.md",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g0f0_gaussian.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g0f0_gaussian.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g0f0_history.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g0f0_history.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g0f0_history.2.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g0f0_history.2.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g1f1_gaussian.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g1f1_gaussian.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g1f1_history.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/eval_g1f1_history.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g0f0_gaussian.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g0f0_gaussian.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g0f0_history.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g0f0_history.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g1f1_gaussian.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g1f1_gaussian.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g1f1_history.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/jobs/train_g1f1_history.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/launch.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/queue.before_eval_repair_20260929.json",
+      "type": "absolute_paths",
+      "occurrences": 8
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/queue.before_user_stop_20260929.json",
+      "type": "absolute_paths",
+      "occurrences": 8
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/queue.json",
+      "type": "absolute_paths",
+      "occurrences": 8
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/train/g0f0_gaussian/report.json",
+      "type": "absolute_paths",
+      "occurrences": 15
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/train/g0f0_history/report.json",
+      "type": "absolute_paths",
+      "occurrences": 15
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/train/g1f1_gaussian/report.json",
+      "type": "absolute_paths",
+      "occurrences": 15
+    },
+    {
+      "path": "exp/egorecover_loss_ablation/g00_g11_v1/train/g1f1_history/report.json",
+      "type": "absolute_paths",
+      "occurrences": 15
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/R0/seed62/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/R1/seed62/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/R2/seed62/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/R3/seed62/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/plan.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/run/g_pretraining_data.py",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/verification/R0_smoke/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/verification/R0_smoke/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/verification/R1_smoke/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/verification/R1_smoke/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/verification/R2_smoke/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/verification/R2_smoke/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/verification/R3_smoke/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/verification/R3_smoke/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R0/seed62/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R0/seed62/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R0/seed63/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R0/seed63/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R0/seed64/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R0/seed64/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R1/seed62/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R1/seed62/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R1/seed63/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R1/seed63/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R1/seed64/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R1/seed64/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R2/seed62/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R2/seed62/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R2/seed63/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R2/seed63/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R2/seed64/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R2/seed64/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R3/seed62/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R3/seed62/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R3/seed63/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R3/seed63/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R3/seed64/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/R3/seed64/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/plan.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/run/g_pretraining_data.py",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R0_smoke/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R0_smoke/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R1_smoke/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R1_smoke/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R2_smoke/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R2_smoke/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R3_smoke/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/R3_smoke/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H0_hold_dense_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H0_hold_dense_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H0_hold_dense_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H0_hold_dense_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H0_hold_dense_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H0_hold_dense_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H1_hold_fk_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H1_hold_fk_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H1_hold_fk_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H1_hold_fk_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H1_hold_fk_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/H1_hold_fk_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V0_cv_dense_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V0_cv_dense_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V0_cv_dense_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V0_cv_dense_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V0_cv_dense_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V0_cv_dense_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V1_cv_fk_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V1_cv_fk_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V1_cv_fk_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V1_cv_fk_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V1_cv_fk_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/jobs/V1_cv_fk_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_cv_residual/v1/queue.json",
+      "type": "absolute_paths",
+      "occurrences": 12
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/data/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/jobs/D_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/jobs/D_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/jobs/D_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/jobs/D_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/jobs/D_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/jobs/D_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/jobs/prepare_data.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/jobs/prepare_data.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/queue.json",
+      "type": "absolute_paths",
+      "occurrences": 4
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/train/D_s62/experiment.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/train/D_s62/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/train/D_s63/experiment.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/train/D_s63/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/train/D_s64/experiment.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_data_budget/v1/train/D_s64/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/eval_shard0.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/eval_shard0.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/eval_shard1.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/eval_shard1.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/eval_shard2.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/eval_shard2.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/eval_shard3.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/eval_shard3.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/prepare_data.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/prepare_data.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/smoke.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/jobs/smoke.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/queue.json",
+      "type": "absolute_paths",
+      "occurrences": 6
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/shards/shard0/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/shards/shard0/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/shards/shard1/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/shards/shard1/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/shards/shard2/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/shards/shard2/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/shards/shard3/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/shards/shard3/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/smoke/identity.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/smoke/report.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/work/shard0/histories.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/work/shard1/histories.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/work/shard2/histories.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/work/shard3/histories.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_real_history/v1/work/smoke/histories.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/control_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/control_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/control_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/control_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/control_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/control_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose01_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose01_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose01_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose01_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose01_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose01_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose03_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose03_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose03_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose03_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose03_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose03_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose10_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose10_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose10_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose10_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose10_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/jobs/pose10_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_same_shape/v1/queue.json",
+      "type": "absolute_paths",
+      "occurrences": 12
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/A_gt_dense_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/B_two_forward_dense_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/B_two_forward_dense_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/C_gt_fk_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/D_two_forward_fk_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/D_two_forward_fk_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/prepare_data.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/jobs/prepare_data.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/queue.json",
+      "type": "absolute_paths",
+      "occurrences": 9
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/control_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/control_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/control_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/control_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/control_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/control_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/velocity_s62.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/velocity_s62.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/velocity_s63.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/velocity_s63.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/velocity_s64.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/jobs/velocity_s64.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_prior_velocity/v1/queue.json",
+      "type": "absolute_paths",
+      "occurrences": 6
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_0.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_0.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_1.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_1.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_2.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_2.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_3.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_dev_3.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_0.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_0.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_1.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_1.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_2.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_2.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_3.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/cache_train_3.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/diagnose_dev.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/diagnose_dev.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/diagnose_train.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/diagnose_train.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_1200.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_1200.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_1200.2.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_1200.2.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_2400.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_2400.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_400.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_400.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_400.2.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_12take_400.2.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_72take_1200.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_72take_1200.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_72take_2400.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_72take_2400.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_72take_400.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_72take_400.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_replay_0.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_replay_0.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_replay_0p25.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_replay_0p25.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_replay_0p5.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/eval_replay_0p5.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_12take_2400.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_12take_2400.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_12take_2400.2.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_12take_2400.2.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_72take_2400.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_72take_2400.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_72take_2400.2.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_72take_2400.2.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_replay_0.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_replay_0.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_replay_0p25.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_replay_0p25.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_replay_0p5.1.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/jobs/train_replay_0p5.1.status.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/queue.json",
+      "type": "absolute_paths",
+      "occurrences": 24
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/sharing_baseline.json",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/stage2_budget/12take_2400/report.json",
+      "type": "absolute_paths",
+      "occurrences": 15
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/stage2_budget/72take_2400/report.json",
+      "type": "absolute_paths",
+      "occurrences": 15
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/stage3_train/replay_0/report.json",
+      "type": "absolute_paths",
+      "occurrences": 15
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/stage3_train/replay_0p25/report.json",
+      "type": "absolute_paths",
+      "occurrences": 15
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/continuation_v1/stage3_train/replay_0p5/report.json",
+      "type": "absolute_paths",
+      "occurrences": 15
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/stage2_budget/12take_1200/report.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/stage2_budget/12take_2400/report.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/stage2_budget/12take_400/report.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/stage2_budget/72take_1200/report.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/stage2_budget/72take_2400/report.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/stage2_budget/72take_2400_interrupted/report.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "exp/egorecover_stages_1_4/stage2_budget/72take_2400_restart_interrupted/report.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "exp/egorecover_train_72take_v1/pass1/report.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "exp/egorecover_train_pilot_v1/e7_baseline_dev0/report.json",
+      "type": "absolute_paths",
+      "occurrences": 4
+    },
+    {
+      "path": "exp/egorecover_train_pilot_v1/e7_baseline_dev1/report.json",
+      "type": "absolute_paths",
+      "occurrences": 4
+    },
+    {
+      "path": "exp/egorecover_train_pilot_v1/e7_baseline_holdout0/report.json",
+      "type": "absolute_paths",
+      "occurrences": 4
+    },
+    {
+      "path": "exp/egorecover_train_pilot_v1/e7_baseline_holdout1/report.json",
+      "type": "absolute_paths",
+      "occurrences": 4
+    },
+    {
+      "path": "exp/egorecover_train_pilot_v1/pass1/report.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "exp/egorecover_train_pilot_v1/pass2_replay/report.json",
+      "type": "absolute_paths",
+      "occurrences": 5
+    },
+    {
+      "path": "run/g_pretraining_data.py",
+      "type": "absolute_paths",
+      "occurrences": 1
+    },
+    {
+      "path": "verification/egorecover_engineering_summary.json",
+      "type": "absolute_paths",
+      "occurrences": 24
+    },
+    {
+      "path": "verification/egorecover_repair_summary.json",
+      "type": "absolute_paths",
+      "occurrences": 36
+    }
+  ],
+  "note": "Credential values are never recorded. Pattern scan of UTF-8 text <=16MiB, not a security guarantee. Binary payloads and Git object histories were not inspected."
+}

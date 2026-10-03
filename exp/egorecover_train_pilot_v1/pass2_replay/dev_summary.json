@@ -1,0 +1,325 @@
+{
+  "group": "dev",
+  "take_count": 2,
+  "takes": [
+    "indiana_music_13_5",
+    "upenn_0725_Duet_Violin_1_2_8"
+  ],
+  "per_take": [
+    {
+      "take": "indiana_music_13_5",
+      "method": "gaussian",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 187.62294948101044,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "indiana_music_13_5",
+      "method": "gaussian",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 188.88700008392334,
+      "fault_signed_mean_delta_mm": 5.829308573404948,
+      "fault_positive_auc_mm_s": 17.487925720214843,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "indiana_music_13_5",
+      "method": "gaussian",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 184.72474813461304,
+      "fault_signed_mean_delta_mm": -15.805225118001301,
+      "fault_positive_auc_mm_s": 0.0,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "indiana_music_13_5",
+      "method": "history",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 198.8568753004074,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "indiana_music_13_5",
+      "method": "history",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 189.5451545715332,
+      "fault_signed_mean_delta_mm": 21.666090393066405,
+      "fault_positive_auc_mm_s": 91.0627685546875,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "indiana_music_13_5",
+      "method": "history",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 190.61364233493805,
+      "fault_signed_mean_delta_mm": -31.657714335123696,
+      "fault_positive_auc_mm_s": 0.0,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "indiana_music_13_5",
+      "method": "prior_only",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 117.23332107067108,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "indiana_music_13_5",
+      "method": "prior_only",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 117.23332107067108,
+      "fault_signed_mean_delta_mm": 0.0,
+      "fault_positive_auc_mm_s": 0.0,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "indiana_music_13_5",
+      "method": "prior_only",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 117.23332107067108,
+      "fault_signed_mean_delta_mm": 0.0,
+      "fault_positive_auc_mm_s": 0.0,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "gaussian",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 381.79704546928406,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "gaussian",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 382.4617564678192,
+      "fault_signed_mean_delta_mm": -0.40530497233072915,
+      "fault_positive_auc_mm_s": 7.8046112060546875,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "gaussian",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 375.72699785232544,
+      "fault_signed_mean_delta_mm": -30.129047648111978,
+      "fault_positive_auc_mm_s": 0.0,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "history",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 321.2192952632904,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "history",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 321.9347894191742,
+      "fault_signed_mean_delta_mm": 2.3679656982421875,
+      "fault_positive_auc_mm_s": 13.710421752929687,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "history",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 324.0310549736023,
+      "fault_signed_mean_delta_mm": 13.168948364257812,
+      "fault_positive_auc_mm_s": 39.50684509277344,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "prior_only",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 272.7488875389099,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "prior_only",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 272.7488875389099,
+      "fault_signed_mean_delta_mm": 0.0,
+      "fault_positive_auc_mm_s": 0.0,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "prior_only",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 272.7488875389099,
+      "fault_signed_mean_delta_mm": 0.0,
+      "fault_positive_auc_mm_s": 0.0,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "indiana_music_13_5",
+      "method": "frozen_e7",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 162.84878551959991,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "indiana_music_13_5",
+      "method": "frozen_e7",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 164.46217894554138,
+      "fault_signed_mean_delta_mm": 7.713975016276041,
+      "fault_positive_auc_mm_s": 23.305635070800783,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "indiana_music_13_5",
+      "method": "frozen_e7",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 167.69258677959442,
+      "fault_signed_mean_delta_mm": 28.032305908203124,
+      "fault_positive_auc_mm_s": 84.09691772460937,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "frozen_e7",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 351.8962562084198,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "frozen_e7",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 343.64208579063416,
+      "fault_signed_mean_delta_mm": -0.08567708333333333,
+      "fault_positive_auc_mm_s": 0.4264129638671875,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "upenn_0725_Duet_Violin_1_2_8",
+      "method": "frozen_e7",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 346.18130326271057,
+      "fault_signed_mean_delta_mm": 0.8507364908854167,
+      "fault_positive_auc_mm_s": 2.7949859619140627,
+      "recovery_time_status": "tolerance_not_predeclared"
+    }
+  ],
+  "macro_by_take": [
+    {
+      "method": "frozen_e7",
+      "variant": "clean",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 257.37252086400986,
+      "mean_fault_signed_delta_mm": null,
+      "mean_fault_positive_auc_mm_s": null
+    },
+    {
+      "method": "frozen_e7",
+      "variant": "drift_0p03mps",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 256.9369450211525,
+      "mean_fault_signed_delta_mm": 14.44152119954427,
+      "mean_fault_positive_auc_mm_s": 43.44595184326172
+    },
+    {
+      "method": "frozen_e7",
+      "variant": "freeze_3s",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 254.05213236808777,
+      "mean_fault_signed_delta_mm": 3.814148966471354,
+      "mean_fault_positive_auc_mm_s": 11.866024017333984
+    },
+    {
+      "method": "gaussian",
+      "variant": "clean",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 284.70999747514725,
+      "mean_fault_signed_delta_mm": null,
+      "mean_fault_positive_auc_mm_s": null
+    },
+    {
+      "method": "gaussian",
+      "variant": "drift_0p03mps",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 280.22587299346924,
+      "mean_fault_signed_delta_mm": -22.96713638305664,
+      "mean_fault_positive_auc_mm_s": 0.0
+    },
+    {
+      "method": "gaussian",
+      "variant": "freeze_3s",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 285.6743782758713,
+      "mean_fault_signed_delta_mm": 2.7120018005371094,
+      "mean_fault_positive_auc_mm_s": 12.646268463134765
+    },
+    {
+      "method": "history",
+      "variant": "clean",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 260.0380852818489,
+      "mean_fault_signed_delta_mm": null,
+      "mean_fault_positive_auc_mm_s": null
+    },
+    {
+      "method": "history",
+      "variant": "drift_0p03mps",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 257.3223486542702,
+      "mean_fault_signed_delta_mm": -9.244382985432942,
+      "mean_fault_positive_auc_mm_s": 19.75342254638672
+    },
+    {
+      "method": "history",
+      "variant": "freeze_3s",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 255.7399719953537,
+      "mean_fault_signed_delta_mm": 12.017028045654296,
+      "mean_fault_positive_auc_mm_s": 52.38659515380859
+    },
+    {
+      "method": "prior_only",
+      "variant": "clean",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 194.9911043047905,
+      "mean_fault_signed_delta_mm": null,
+      "mean_fault_positive_auc_mm_s": null
+    },
+    {
+      "method": "prior_only",
+      "variant": "drift_0p03mps",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 194.9911043047905,
+      "mean_fault_signed_delta_mm": 0.0,
+      "mean_fault_positive_auc_mm_s": 0.0
+    },
+    {
+      "method": "prior_only",
+      "variant": "freeze_3s",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 194.9911043047905,
+      "mean_fault_signed_delta_mm": 0.0,
+      "mean_fault_positive_auc_mm_s": 0.0
+    }
+  ],
+  "scope": "small_pilot_development_only; no independent official-val claim"
+}

@@ -1,0 +1,24 @@
+{
+  "group": "D",
+  "train_takes": 192,
+  "max_nonoverlapping_clips_per_take": 4,
+  "steps": 9600,
+  "seeds": [
+    62,
+    63,
+    64
+  ],
+  "gpus": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "geometry_weight": 1,
+  "fk_weight": 0,
+  "velocity_input": false,
+  "base_mode": "constant_velocity",
+  "dev": "exact original 12 takes and cached tensors",
+  "holdout_used": false,
+  "method": "docs/experiments/p-data-budget.md"
+}

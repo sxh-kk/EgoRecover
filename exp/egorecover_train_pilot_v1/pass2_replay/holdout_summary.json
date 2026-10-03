@@ -1,0 +1,325 @@
+{
+  "group": "holdout",
+  "take_count": 2,
+  "takes": [
+    "sfu_basketball014_15",
+    "sfu_covid_001_12"
+  ],
+  "per_take": [
+    {
+      "take": "sfu_basketball014_15",
+      "method": "gaussian",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 195.6329345703125,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "sfu_basketball014_15",
+      "method": "gaussian",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 200.89764893054962,
+      "fault_signed_mean_delta_mm": 23.491190592447918,
+      "fault_positive_auc_mm_s": 81.61444702148438,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_basketball014_15",
+      "method": "gaussian",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 197.57893681526184,
+      "fault_signed_mean_delta_mm": 13.27986094156901,
+      "fault_positive_auc_mm_s": 47.64305877685547,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_basketball014_15",
+      "method": "history",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 207.8924924135208,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "sfu_basketball014_15",
+      "method": "history",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 207.10216462612152,
+      "fault_signed_mean_delta_mm": -5.323133087158203,
+      "fault_positive_auc_mm_s": 5.447489166259766,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_basketball014_15",
+      "method": "history",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 211.43241226673126,
+      "fault_signed_mean_delta_mm": 19.97028986612956,
+      "fault_positive_auc_mm_s": 59.97701797485352,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_basketball014_15",
+      "method": "prior_only",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 2012.1533870697021,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "sfu_basketball014_15",
+      "method": "prior_only",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 2012.1533870697021,
+      "fault_signed_mean_delta_mm": 0.0,
+      "fault_positive_auc_mm_s": 0.0,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_basketball014_15",
+      "method": "prior_only",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 2012.1533870697021,
+      "fault_signed_mean_delta_mm": 0.0,
+      "fault_positive_auc_mm_s": 0.0,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "gaussian",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 370.87246775627136,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "gaussian",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 372.77066707611084,
+      "fault_signed_mean_delta_mm": 8.358650716145833,
+      "fault_positive_auc_mm_s": 25.0759521484375,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "gaussian",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 375.078022480011,
+      "fault_signed_mean_delta_mm": 24.157956949869792,
+      "fault_positive_auc_mm_s": 72.47387084960937,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "history",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 254.1573941707611,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "history",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 253.38828563690186,
+      "fault_signed_mean_delta_mm": -1.9384689331054688,
+      "fault_positive_auc_mm_s": 1.1455947875976562,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "history",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 254.17760014533997,
+      "fault_signed_mean_delta_mm": -0.46500752766927084,
+      "fault_positive_auc_mm_s": 7.850413513183594,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "prior_only",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 143.1577205657959,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "prior_only",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 143.1577205657959,
+      "fault_signed_mean_delta_mm": 0.0,
+      "fault_positive_auc_mm_s": 0.0,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "prior_only",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 143.1577205657959,
+      "fault_signed_mean_delta_mm": 0.0,
+      "fault_positive_auc_mm_s": 0.0,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_basketball014_15",
+      "method": "frozen_e7",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 282.9367220401764,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "sfu_basketball014_15",
+      "method": "frozen_e7",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 263.01175355911255,
+      "fault_signed_mean_delta_mm": 6.268047078450521,
+      "fault_positive_auc_mm_s": 32.953721618652345,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_basketball014_15",
+      "method": "frozen_e7",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 284.8438024520874,
+      "fault_signed_mean_delta_mm": 2.8325215657552083,
+      "fault_positive_auc_mm_s": 27.189920043945314,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "frozen_e7",
+      "variant": "clean",
+      "smpl22_mpjpe_mm": 338.89973163604736,
+      "fault_signed_mean_delta_mm": null,
+      "fault_positive_auc_mm_s": null,
+      "recovery_time_status": null
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "frozen_e7",
+      "variant": "freeze_3s",
+      "smpl22_mpjpe_mm": 360.11025309562683,
+      "fault_signed_mean_delta_mm": 1.3990509033203125,
+      "fault_positive_auc_mm_s": 4.212493896484375,
+      "recovery_time_status": "tolerance_not_predeclared"
+    },
+    {
+      "take": "sfu_covid_001_12",
+      "method": "frozen_e7",
+      "variant": "drift_0p03mps",
+      "smpl22_mpjpe_mm": 343.36259961128235,
+      "fault_signed_mean_delta_mm": 7.771501668294271,
+      "fault_positive_auc_mm_s": 23.31450500488281,
+      "recovery_time_status": "tolerance_not_predeclared"
+    }
+  ],
+  "macro_by_take": [
+    {
+      "method": "frozen_e7",
+      "variant": "clean",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 310.9182268381119,
+      "mean_fault_signed_delta_mm": null,
+      "mean_fault_positive_auc_mm_s": null
+    },
+    {
+      "method": "frozen_e7",
+      "variant": "drift_0p03mps",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 314.1032010316849,
+      "mean_fault_signed_delta_mm": 5.30201161702474,
+      "mean_fault_positive_auc_mm_s": 25.252212524414062
+    },
+    {
+      "method": "frozen_e7",
+      "variant": "freeze_3s",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 311.5610033273697,
+      "mean_fault_signed_delta_mm": 3.833548990885417,
+      "mean_fault_positive_auc_mm_s": 18.58310775756836
+    },
+    {
+      "method": "gaussian",
+      "variant": "clean",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 283.25270116329193,
+      "mean_fault_signed_delta_mm": null,
+      "mean_fault_positive_auc_mm_s": null
+    },
+    {
+      "method": "gaussian",
+      "variant": "drift_0p03mps",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 286.3284796476364,
+      "mean_fault_signed_delta_mm": 18.718908945719402,
+      "mean_fault_positive_auc_mm_s": 60.05846481323242
+    },
+    {
+      "method": "gaussian",
+      "variant": "freeze_3s",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 286.83415800333023,
+      "mean_fault_signed_delta_mm": 15.924920654296876,
+      "mean_fault_positive_auc_mm_s": 53.34519958496094
+    },
+    {
+      "method": "history",
+      "variant": "clean",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 231.02494329214096,
+      "mean_fault_signed_delta_mm": null,
+      "mean_fault_positive_auc_mm_s": null
+    },
+    {
+      "method": "history",
+      "variant": "drift_0p03mps",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 232.8050062060356,
+      "mean_fault_signed_delta_mm": 9.752641169230143,
+      "mean_fault_positive_auc_mm_s": 33.91371574401855
+    },
+    {
+      "method": "history",
+      "variant": "freeze_3s",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 230.2452251315117,
+      "mean_fault_signed_delta_mm": -3.6308010101318358,
+      "mean_fault_positive_auc_mm_s": 3.296541976928711
+    },
+    {
+      "method": "prior_only",
+      "variant": "clean",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 1077.655553817749,
+      "mean_fault_signed_delta_mm": null,
+      "mean_fault_positive_auc_mm_s": null
+    },
+    {
+      "method": "prior_only",
+      "variant": "drift_0p03mps",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 1077.655553817749,
+      "mean_fault_signed_delta_mm": 0.0,
+      "mean_fault_positive_auc_mm_s": 0.0
+    },
+    {
+      "method": "prior_only",
+      "variant": "freeze_3s",
+      "takes": 2,
+      "mean_smpl22_mpjpe_mm": 1077.655553817749,
+      "mean_fault_signed_delta_mm": 0.0,
+      "mean_fault_positive_auc_mm_s": 0.0
+    }
+  ],
+  "scope": "small_pilot_development_only; no independent official-val claim"
+}

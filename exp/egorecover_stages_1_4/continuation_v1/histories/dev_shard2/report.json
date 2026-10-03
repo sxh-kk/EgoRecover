@@ -1,0 +1,163 @@
+{
+  "identity": {
+    "scope": "development_diagnostic_predicted_histories",
+    "reference_mode": "planar",
+    "bootstrap": "frozen E7 clean first 20 frames on TRAINING takes; no resets",
+    "bootstrap_is_model": true,
+    "bootstrap_cache_sha256": "3dec71f200f5d5d445d45f2f878a18cd73950365c402e16cb3404e3651018f56",
+    "bootstrap_identity": {
+      "scope": "model_generated_clean_prefix_bootstraps",
+      "groups": [
+        "train",
+        "dev",
+        "holdout"
+      ],
+      "reference_mode": "planar",
+      "e7_checkpoint_sha256": "00ca4f00515f8db4c7c5788c410575a40cd3d306a87f2001a5e4f296283bdf8f",
+      "e7_weight_source": "ema",
+      "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+      "split_manifest_sha256": "fdddd32b47282bfece00215ef2652cbc361afdc655b6516bb5ab0740403481fc",
+      "dataset_spec_sha256": "13ca5f22e713353a121282a365af735f8086b8ca3dae714742e116d0d5df14dd",
+      "sampling_seed": 1062,
+      "prefix_frames": 20,
+      "sampler": "FlowMatching Euler10"
+    },
+    "policy": "a11 frozen P/G; pooled gaussian/history policies",
+    "generator_experiment": "exp/egorecover_stages_1_4/continuation_v1/stage2_budget/72take_2400",
+    "g_sha256": {
+      "gaussian": "c2eb9e400d864c8daee5272449250a61fe88b1dca4686a273ddb79784fb0d5fc",
+      "history": "5fa80afaeea92785b1496a76275ccf9c02cc03177ebb588bfe7570840738834a"
+    },
+    "p_sha256": "628f412f95fb0a0caf18b7f5ebde4115b972f87925155a847596839734764a5d",
+    "stats_sha256": "a862cd807c7c3629dcb56fba005d1987aa9e1d04e40c3ca208e59b5e72591793",
+    "dataset_spec_sha256": "13ca5f22e713353a121282a365af735f8086b8ca3dae714742e116d0d5df14dd",
+    "split_manifest_sha256": "fdddd32b47282bfece00215ef2652cbc361afdc655b6516bb5ab0740403481fc",
+    "train_takes": [
+      "cmu_soccer07_1",
+      "cmu_soccer11_2",
+      "fair_bike_01_14",
+      "fair_bike_08_10",
+      "georgiatech_bike_04_8",
+      "georgiatech_bike_08_14",
+      "georgiatech_bike_09_8",
+      "georgiatech_covid_03_14",
+      "georgiatech_covid_03_2",
+      "georgiatech_covid_09_8",
+      "georgiatech_covid_12_13",
+      "iiith_cooking_146_2",
+      "iiith_piano_001_8",
+      "iiith_soccer_020_3",
+      "iiith_soccer_020_6",
+      "iiith_soccer_035_3",
+      "indiana_bike_04_7",
+      "indiana_cooking_03_2",
+      "indiana_cooking_10_4",
+      "minnesota_cooking_023_2",
+      "nus_cpr_09_2",
+      "nus_cpr_48_1",
+      "sfu_basketball_02_26",
+      "sfu_cooking_005_2",
+      "unc_basketball_03-09-23_02_5",
+      "unc_basketball_03-31-23_02_23",
+      "uniandes_basketball_003_35",
+      "uniandes_basketball_003_36",
+      "uniandes_basketball_004_6",
+      "uniandes_cooking_009_4",
+      "uniandes_cooking_009_6",
+      "uniandes_dance_008_22",
+      "uniandes_dance_013_19",
+      "uniandes_dance_017_57",
+      "uniandes_dance_019_36",
+      "uniandes_dance_020_13",
+      "uniandes_dance_020_50",
+      "uniandes_dance_022_22",
+      "upenn_0407_Violin_1_3",
+      "upenn_0407_Violin_2_3",
+      "upenn_0719_Piano_2_3",
+      "upenn_0725_Duet_Violin_1_2_9",
+      "upenn_0726_Piano_1_3",
+      "upenn_0726_Piano_1_4",
+      "upenn_0727_Partner_Dance_2_1_4",
+      "utokyo_omelet_12_1001_2",
+      "utokyo_omelet_6_1001_4",
+      "utokyo_pcr_2001_33_6"
+    ],
+    "group": "dev",
+    "group_takes": [
+      "fair_bike_01_12",
+      "georgiatech_bike_05_2",
+      "iiith_cooking_109_4",
+      "iiith_soccer_004_5",
+      "indiana_music_13_5",
+      "nus_cpr_52_1",
+      "sfu_basketball_03_44",
+      "sfu_basketball_08_15",
+      "unc_basketball_03-16-23_01_18",
+      "uniandes_dance_011_27",
+      "uniandes_dance_012_15",
+      "upenn_0725_Duet_Violin_1_2_8"
+    ],
+    "selected_takes": [
+      "iiith_cooking_109_4",
+      "sfu_basketball_03_44",
+      "uniandes_dance_012_15"
+    ],
+    "shard_index": 2,
+    "shard_count": 4,
+    "variants": [
+      "clean",
+      "freeze_3s",
+      "drift_0p03mps"
+    ],
+    "seed": 62,
+    "sigma": 1.0,
+    "nfe": 10
+  },
+  "frames": 3240,
+  "episodes": [
+    {
+      "mode": "gaussian",
+      "variant": "clean",
+      "episodes": 3,
+      "mean_dense22_mm": 166.46629588132754,
+      "max_dense22_mm": 326.8419439740344
+    },
+    {
+      "mode": "gaussian",
+      "variant": "freeze_3s",
+      "episodes": 3,
+      "mean_dense22_mm": 166.08652328063442,
+      "max_dense22_mm": 328.1212152218913
+    },
+    {
+      "mode": "gaussian",
+      "variant": "drift_0p03mps",
+      "episodes": 3,
+      "mean_dense22_mm": 170.16289099619422,
+      "max_dense22_mm": 369.0481808033925
+    },
+    {
+      "mode": "history",
+      "variant": "clean",
+      "episodes": 3,
+      "mean_dense22_mm": 169.8913881463369,
+      "max_dense22_mm": 373.8098803633143
+    },
+    {
+      "mode": "history",
+      "variant": "freeze_3s",
+      "episodes": 3,
+      "mean_dense22_mm": 168.69571101770703,
+      "max_dense22_mm": 368.4519830725722
+    },
+    {
+      "mode": "history",
+      "variant": "drift_0p03mps",
+      "episodes": 3,
+      "mean_dense22_mm": 169.49781397197768,
+      "max_dense22_mm": 345.9709398193478
+    }
+  ],
+  "cache_sha256": "6e12d079728a32b70d12e2ab1ba82caa02a0f4aa01a3ca4d71cf31b4f6dda8fd",
+  "completed": true
+}

@@ -1,0 +1,2886 @@
+{
+  "best_step": 18000,
+  "best_body_mm": 131.5099596977234,
+  "curve": [
+    {
+      "step": 2000,
+      "scores": {
+        "body_mm": {
+          "mean": 220.88805675506592,
+          "per_take": {
+            "georgiatech_bike_06_6": 197.10293579101562,
+            "georgiatech_bike_07_2": 174.8300323486328,
+            "georgiatech_bike_07_4": 254.095458984375,
+            "georgiatech_cooking_02_01_2": 71.60975646972656,
+            "georgiatech_cooking_02_02_6": 120.44230651855469,
+            "georgiatech_cooking_06_01_2": 198.97500610351562,
+            "georgiatech_covid_02_10": 103.1620864868164,
+            "georgiatech_covid_02_4": 92.26204681396484,
+            "iiith_soccer_002_6": 206.4397735595703,
+            "iiith_soccer_015_2": 402.3160400390625,
+            "indiana_music_03_2": 141.8416748046875,
+            "indiana_music_03_3": 120.82481384277344,
+            "sfu_basketball012_12": 728.5204467773438,
+            "sfu_basketball_04_17": 285.656005859375,
+            "uniandes_dance_002_11": 264.66131591796875,
+            "uniandes_dance_002_2": 171.46920776367188
+          }
+        },
+        "all_body_mm": {
+          "mean": 210.68251180648804,
+          "per_take": {
+            "georgiatech_bike_06_6": 192.19110107421875,
+            "georgiatech_bike_07_2": 174.39625549316406,
+            "georgiatech_bike_07_4": 248.14712524414062,
+            "georgiatech_cooking_02_01_2": 72.25711059570312,
+            "georgiatech_cooking_02_02_6": 116.03121185302734,
+            "georgiatech_cooking_06_01_2": 187.4674530029297,
+            "georgiatech_covid_02_10": 103.79634094238281,
+            "georgiatech_covid_02_4": 90.23355865478516,
+            "iiith_soccer_002_6": 201.65338134765625,
+            "iiith_soccer_015_2": 373.30877685546875,
+            "indiana_music_03_2": 134.63507080078125,
+            "indiana_music_03_3": 118.48139190673828,
+            "sfu_basketball012_12": 655.2952270507812,
+            "sfu_basketball_04_17": 282.8052978515625,
+            "uniandes_dance_002_11": 258.491455078125,
+            "uniandes_dance_002_2": 161.72943115234375
+          }
+        },
+        "startup_body_mm": {
+          "mean": 129.03818893432617,
+          "per_take": {
+            "georgiatech_bike_06_6": 152.8964080810547,
+            "georgiatech_bike_07_2": 170.92599487304688,
+            "georgiatech_bike_07_4": 200.56053161621094,
+            "georgiatech_cooking_02_01_2": 77.43603515625,
+            "georgiatech_cooking_02_02_6": 80.74240112304688,
+            "georgiatech_cooking_06_01_2": 95.40696716308594,
+            "georgiatech_covid_02_10": 108.87049865722656,
+            "georgiatech_covid_02_4": 74.00567626953125,
+            "iiith_soccer_002_6": 163.36196899414062,
+            "iiith_soccer_015_2": 141.25051879882812,
+            "indiana_music_03_2": 76.98216247558594,
+            "indiana_music_03_3": 99.73404693603516,
+            "sfu_basketball012_12": 69.49414825439453,
+            "sfu_basketball_04_17": 259.9997253417969,
+            "uniandes_dance_002_11": 209.13267517089844,
+            "uniandes_dance_002_2": 83.81126403808594
+          }
+        },
+        "pa_mm": {
+          "mean": 85.6629638671875,
+          "per_take": {
+            "georgiatech_bike_06_6": 81.73453521728516,
+            "georgiatech_bike_07_2": 109.8156509399414,
+            "georgiatech_bike_07_4": 90.26811218261719,
+            "georgiatech_cooking_02_01_2": 34.045814514160156,
+            "georgiatech_cooking_02_02_6": 56.8696403503418,
+            "georgiatech_cooking_06_01_2": 89.88197326660156,
+            "georgiatech_covid_02_10": 60.76993942260742,
+            "georgiatech_covid_02_4": 36.482460021972656,
+            "iiith_soccer_002_6": 76.04144287109375,
+            "iiith_soccer_015_2": 103.46360778808594,
+            "indiana_music_03_2": 68.00291442871094,
+            "indiana_music_03_3": 38.363670349121094,
+            "sfu_basketball012_12": 155.9432830810547,
+            "sfu_basketball_04_17": 153.8244171142578,
+            "uniandes_dance_002_11": 125.89884948730469,
+            "uniandes_dance_002_2": 89.20111083984375
+          }
+        },
+        "root_mm": {
+          "mean": 197.76188278198242,
+          "per_take": {
+            "georgiatech_bike_06_6": 192.61265563964844,
+            "georgiatech_bike_07_2": 104.49564361572266,
+            "georgiatech_bike_07_4": 282.90576171875,
+            "georgiatech_cooking_02_01_2": 65.64424133300781,
+            "georgiatech_cooking_02_02_6": 104.23779296875,
+            "georgiatech_cooking_06_01_2": 114.5376205444336,
+            "georgiatech_covid_02_10": 100.95829772949219,
+            "georgiatech_covid_02_4": 81.47128295898438,
+            "iiith_soccer_002_6": 209.9005584716797,
+            "iiith_soccer_015_2": 381.77178955078125,
+            "indiana_music_03_2": 118.9582290649414,
+            "indiana_music_03_3": 122.11173248291016,
+            "sfu_basketball012_12": 725.7445678710938,
+            "sfu_basketball_04_17": 215.5729522705078,
+            "uniandes_dance_002_11": 210.20797729492188,
+            "uniandes_dance_002_2": 133.05902099609375
+          }
+        },
+        "root_relative_mm": {
+          "mean": 132.2234296798706,
+          "per_take": {
+            "georgiatech_bike_06_6": 139.96826171875,
+            "georgiatech_bike_07_2": 149.67115783691406,
+            "georgiatech_bike_07_4": 200.56838989257812,
+            "georgiatech_cooking_02_01_2": 46.87873077392578,
+            "georgiatech_cooking_02_02_6": 79.86305236816406,
+            "georgiatech_cooking_06_01_2": 166.6285400390625,
+            "georgiatech_covid_02_10": 95.70631408691406,
+            "georgiatech_covid_02_4": 77.79386901855469,
+            "iiith_soccer_002_6": 130.61293029785156,
+            "iiith_soccer_015_2": 147.83367919921875,
+            "indiana_music_03_2": 110.85758972167969,
+            "indiana_music_03_3": 65.25532531738281,
+            "sfu_basketball012_12": 219.6116485595703,
+            "sfu_basketball_04_17": 182.5790252685547,
+            "uniandes_dance_002_11": 179.9072265625,
+            "uniandes_dance_002_2": 121.8391342163086
+          }
+        },
+        "head_mm": {
+          "mean": 112.96087193489075,
+          "per_take": {
+            "georgiatech_bike_06_6": 43.39140319824219,
+            "georgiatech_bike_07_2": 74.35424041748047,
+            "georgiatech_bike_07_4": 162.70938110351562,
+            "georgiatech_cooking_02_01_2": 23.733993530273438,
+            "georgiatech_cooking_02_02_6": 37.475074768066406,
+            "georgiatech_cooking_06_01_2": 44.527061462402344,
+            "georgiatech_covid_02_10": 22.970556259155273,
+            "georgiatech_covid_02_4": 27.6921329498291,
+            "iiith_soccer_002_6": 76.85075378417969,
+            "iiith_soccer_015_2": 255.5072479248047,
+            "indiana_music_03_2": 55.4931640625,
+            "indiana_music_03_3": 45.29769515991211,
+            "sfu_basketball012_12": 651.2964477539062,
+            "sfu_basketball_04_17": 110.32487487792969,
+            "uniandes_dance_002_11": 105.40767669677734,
+            "uniandes_dance_002_2": 70.34224700927734
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 40.21008259057999,
+          "per_take": {
+            "georgiatech_bike_06_6": 57.12827682495117,
+            "georgiatech_bike_07_2": 47.71197509765625,
+            "georgiatech_bike_07_4": 43.352622985839844,
+            "georgiatech_cooking_02_01_2": 15.895360946655273,
+            "georgiatech_cooking_02_02_6": 21.50738525390625,
+            "georgiatech_cooking_06_01_2": 87.73798370361328,
+            "georgiatech_covid_02_10": 27.927898406982422,
+            "georgiatech_covid_02_4": 23.632606506347656,
+            "iiith_soccer_002_6": 36.28257369995117,
+            "iiith_soccer_015_2": 35.808067321777344,
+            "indiana_music_03_2": 23.41551399230957,
+            "indiana_music_03_3": 15.381817817687988,
+            "sfu_basketball012_12": 58.34197235107422,
+            "sfu_basketball_04_17": 40.92756652832031,
+            "uniandes_dance_002_11": 61.09979248046875,
+            "uniandes_dance_002_2": 47.20990753173828
+          }
+        },
+        "velocity_mmps": {
+          "mean": 312.2232413291931,
+          "per_take": {
+            "georgiatech_bike_06_6": 173.3079376220703,
+            "georgiatech_bike_07_2": 152.86399841308594,
+            "georgiatech_bike_07_4": 98.83963775634766,
+            "georgiatech_cooking_02_01_2": 73.19307708740234,
+            "georgiatech_cooking_02_02_6": 94.58451080322266,
+            "georgiatech_cooking_06_01_2": 186.79547119140625,
+            "georgiatech_covid_02_10": 66.76184844970703,
+            "georgiatech_covid_02_4": 77.08146667480469,
+            "iiith_soccer_002_6": 439.4369201660156,
+            "iiith_soccer_015_2": 711.6863403320312,
+            "indiana_music_03_2": 64.24361419677734,
+            "indiana_music_03_3": 83.57180786132812,
+            "sfu_basketball012_12": 825.3922119140625,
+            "sfu_basketball_04_17": 801.6586303710938,
+            "uniandes_dance_002_11": 739.7416381835938,
+            "uniandes_dance_002_2": 406.4127502441406
+          }
+        },
+        "prior_body_mm": {
+          "mean": 219.8745255470276,
+          "per_take": {
+            "georgiatech_bike_06_6": 197.12384033203125,
+            "georgiatech_bike_07_2": 175.44729614257812,
+            "georgiatech_bike_07_4": 253.7984619140625,
+            "georgiatech_cooking_02_01_2": 71.58443450927734,
+            "georgiatech_cooking_02_02_6": 120.48197937011719,
+            "georgiatech_cooking_06_01_2": 199.4835662841797,
+            "georgiatech_covid_02_10": 103.2471694946289,
+            "georgiatech_covid_02_4": 92.55210876464844,
+            "iiith_soccer_002_6": 206.6258544921875,
+            "iiith_soccer_015_2": 392.315673828125,
+            "indiana_music_03_2": 141.87022399902344,
+            "indiana_music_03_3": 121.6232681274414,
+            "sfu_basketball012_12": 706.7000732421875,
+            "sfu_basketball_04_17": 288.89520263671875,
+            "uniandes_dance_002_11": 271.447509765625,
+            "uniandes_dance_002_2": 174.79574584960938
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": -1.013521095388569,
+          "per_take": {
+            "georgiatech_bike_06_6": 0.02091965638101101,
+            "georgiatech_bike_07_2": 0.6172585487365723,
+            "georgiatech_bike_07_4": -0.296970933675766,
+            "georgiatech_cooking_02_01_2": -0.025313138961791992,
+            "georgiatech_cooking_02_02_6": 0.039693452417850494,
+            "georgiatech_cooking_06_01_2": 0.5085862874984741,
+            "georgiatech_covid_02_10": 0.0850897803902626,
+            "georgiatech_covid_02_4": 0.29006385803222656,
+            "iiith_soccer_002_6": 0.18604512512683868,
+            "iiith_soccer_015_2": -10.000383377075195,
+            "indiana_music_03_2": 0.028536081314086914,
+            "indiana_music_03_3": 0.7984634637832642,
+            "sfu_basketball012_12": -21.820323944091797,
+            "sfu_basketball_04_17": 3.2392356395721436,
+            "uniandes_dance_002_11": 6.786210060119629,
+            "uniandes_dance_002_2": 3.326551914215088
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 122.9300713725388,
+      "frames": 2880
+    },
+    {
+      "step": 4000,
+      "scores": {
+        "body_mm": {
+          "mean": 175.1124711036682,
+          "per_take": {
+            "georgiatech_bike_06_6": 229.2007293701172,
+            "georgiatech_bike_07_2": 208.73263549804688,
+            "georgiatech_bike_07_4": 212.72549438476562,
+            "georgiatech_cooking_02_01_2": 98.23249053955078,
+            "georgiatech_cooking_02_02_6": 142.505615234375,
+            "georgiatech_cooking_06_01_2": 178.05088806152344,
+            "georgiatech_covid_02_10": 89.16030883789062,
+            "georgiatech_covid_02_4": 103.47978210449219,
+            "iiith_soccer_002_6": 246.25381469726562,
+            "iiith_soccer_015_2": 206.56370544433594,
+            "indiana_music_03_2": 150.66293334960938,
+            "indiana_music_03_3": 155.612548828125,
+            "sfu_basketball012_12": 182.48338317871094,
+            "sfu_basketball_04_17": 243.8432159423828,
+            "uniandes_dance_002_11": 222.9026336669922,
+            "uniandes_dance_002_2": 131.3893585205078
+          }
+        },
+        "all_body_mm": {
+          "mean": 169.53131437301636,
+          "per_take": {
+            "georgiatech_bike_06_6": 225.83316040039062,
+            "georgiatech_bike_07_2": 201.31956481933594,
+            "georgiatech_bike_07_4": 209.48960876464844,
+            "georgiatech_cooking_02_01_2": 95.12834167480469,
+            "georgiatech_cooking_02_02_6": 135.95150756835938,
+            "georgiatech_cooking_06_01_2": 167.94947814941406,
+            "georgiatech_covid_02_10": 91.24166870117188,
+            "georgiatech_covid_02_4": 99.6833267211914,
+            "iiith_soccer_002_6": 234.06100463867188,
+            "iiith_soccer_015_2": 197.4245147705078,
+            "indiana_music_03_2": 142.6036834716797,
+            "indiana_music_03_3": 150.73727416992188,
+            "sfu_basketball012_12": 171.8903045654297,
+            "sfu_basketball_04_17": 245.89154052734375,
+            "uniandes_dance_002_11": 217.20675659179688,
+            "uniandes_dance_002_2": 126.08929443359375
+          }
+        },
+        "startup_body_mm": {
+          "mean": 124.88202857971191,
+          "per_take": {
+            "georgiatech_bike_06_6": 198.89248657226562,
+            "georgiatech_bike_07_2": 142.0149383544922,
+            "georgiatech_bike_07_4": 183.60244750976562,
+            "georgiatech_cooking_02_01_2": 70.29517364501953,
+            "georgiatech_cooking_02_02_6": 83.51873016357422,
+            "georgiatech_cooking_06_01_2": 87.13805389404297,
+            "georgiatech_covid_02_10": 107.89269256591797,
+            "georgiatech_covid_02_4": 69.31163787841797,
+            "iiith_soccer_002_6": 136.5185089111328,
+            "iiith_soccer_015_2": 124.31075286865234,
+            "indiana_music_03_2": 78.1297607421875,
+            "indiana_music_03_3": 111.73501586914062,
+            "sfu_basketball012_12": 87.14572143554688,
+            "sfu_basketball_04_17": 262.2779235839844,
+            "uniandes_dance_002_11": 171.63987731933594,
+            "uniandes_dance_002_2": 83.68873596191406
+          }
+        },
+        "pa_mm": {
+          "mean": 102.51995277404785,
+          "per_take": {
+            "georgiatech_bike_06_6": 167.4896240234375,
+            "georgiatech_bike_07_2": 115.026123046875,
+            "georgiatech_bike_07_4": 135.1091766357422,
+            "georgiatech_cooking_02_01_2": 69.4095687866211,
+            "georgiatech_cooking_02_02_6": 85.14529418945312,
+            "georgiatech_cooking_06_01_2": 95.87469482421875,
+            "georgiatech_covid_02_10": 51.783103942871094,
+            "georgiatech_covid_02_4": 39.91874694824219,
+            "iiith_soccer_002_6": 95.5110092163086,
+            "iiith_soccer_015_2": 128.12442016601562,
+            "indiana_music_03_2": 81.7073974609375,
+            "indiana_music_03_3": 60.69249725341797,
+            "sfu_basketball012_12": 126.85465240478516,
+            "sfu_basketball_04_17": 156.13845825195312,
+            "uniandes_dance_002_11": 138.65090942382812,
+            "uniandes_dance_002_2": 92.8835678100586
+          }
+        },
+        "root_mm": {
+          "mean": 131.22508788108826,
+          "per_take": {
+            "georgiatech_bike_06_6": 140.4655303955078,
+            "georgiatech_bike_07_2": 138.57382202148438,
+            "georgiatech_bike_07_4": 202.28619384765625,
+            "georgiatech_cooking_02_01_2": 43.817054748535156,
+            "georgiatech_cooking_02_02_6": 98.87384796142578,
+            "georgiatech_cooking_06_01_2": 149.69302368164062,
+            "georgiatech_covid_02_10": 56.08195877075195,
+            "georgiatech_covid_02_4": 99.36498260498047,
+            "iiith_soccer_002_6": 239.4690399169922,
+            "iiith_soccer_015_2": 164.88308715820312,
+            "indiana_music_03_2": 171.26210021972656,
+            "indiana_music_03_3": 116.38981628417969,
+            "sfu_basketball012_12": 121.33487701416016,
+            "sfu_basketball_04_17": 170.90269470214844,
+            "uniandes_dance_002_11": 105.58663177490234,
+            "uniandes_dance_002_2": 80.61674499511719
+          }
+        },
+        "root_relative_mm": {
+          "mean": 146.34355306625366,
+          "per_take": {
+            "georgiatech_bike_06_6": 199.1355438232422,
+            "georgiatech_bike_07_2": 186.92037963867188,
+            "georgiatech_bike_07_4": 212.3809356689453,
+            "georgiatech_cooking_02_01_2": 92.66020965576172,
+            "georgiatech_cooking_02_02_6": 115.73538970947266,
+            "georgiatech_cooking_06_01_2": 130.560791015625,
+            "georgiatech_covid_02_10": 81.2061996459961,
+            "georgiatech_covid_02_4": 80.7206802368164,
+            "iiith_soccer_002_6": 163.99671936035156,
+            "iiith_soccer_015_2": 175.77670288085938,
+            "indiana_music_03_2": 123.5243911743164,
+            "indiana_music_03_3": 102.67387390136719,
+            "sfu_basketball012_12": 161.19192504882812,
+            "sfu_basketball_04_17": 197.0685577392578,
+            "uniandes_dance_002_11": 202.9953155517578,
+            "uniandes_dance_002_2": 114.94923400878906
+          }
+        },
+        "head_mm": {
+          "mean": 46.018630623817444,
+          "per_take": {
+            "georgiatech_bike_06_6": 34.565773010253906,
+            "georgiatech_bike_07_2": 64.6728744506836,
+            "georgiatech_bike_07_4": 63.61981964111328,
+            "georgiatech_cooking_02_01_2": 18.296390533447266,
+            "georgiatech_cooking_02_02_6": 23.017765045166016,
+            "georgiatech_cooking_06_01_2": 38.1818962097168,
+            "georgiatech_covid_02_10": 32.03894805908203,
+            "georgiatech_covid_02_4": 26.6680850982666,
+            "iiith_soccer_002_6": 55.7303466796875,
+            "iiith_soccer_015_2": 63.418174743652344,
+            "indiana_music_03_2": 44.90504837036133,
+            "indiana_music_03_3": 40.085105895996094,
+            "sfu_basketball012_12": 53.45469284057617,
+            "sfu_basketball_04_17": 66.45458221435547,
+            "uniandes_dance_002_11": 72.75607299804688,
+            "uniandes_dance_002_2": 38.43251419067383
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 40.49104046821594,
+          "per_take": {
+            "georgiatech_bike_06_6": 48.509132385253906,
+            "georgiatech_bike_07_2": 65.9207992553711,
+            "georgiatech_bike_07_4": 47.44435501098633,
+            "georgiatech_cooking_02_01_2": 25.71066665649414,
+            "georgiatech_cooking_02_02_6": 32.26067352294922,
+            "georgiatech_cooking_06_01_2": 39.326995849609375,
+            "georgiatech_covid_02_10": 26.53973388671875,
+            "georgiatech_covid_02_4": 24.087125778198242,
+            "iiith_soccer_002_6": 40.778770446777344,
+            "iiith_soccer_015_2": 45.533935546875,
+            "indiana_music_03_2": 29.30893898010254,
+            "indiana_music_03_3": 28.510498046875,
+            "sfu_basketball012_12": 43.773895263671875,
+            "sfu_basketball_04_17": 42.16057586669922,
+            "uniandes_dance_002_11": 66.9303970336914,
+            "uniandes_dance_002_2": 41.06015396118164
+          }
+        },
+        "velocity_mmps": {
+          "mean": 298.40923404693604,
+          "per_take": {
+            "georgiatech_bike_06_6": 193.24887084960938,
+            "georgiatech_bike_07_2": 205.83944702148438,
+            "georgiatech_bike_07_4": 126.06543731689453,
+            "georgiatech_cooking_02_01_2": 108.18212890625,
+            "georgiatech_cooking_02_02_6": 133.32545471191406,
+            "georgiatech_cooking_06_01_2": 202.99288940429688,
+            "georgiatech_covid_02_10": 82.8761215209961,
+            "georgiatech_covid_02_4": 92.81016540527344,
+            "iiith_soccer_002_6": 507.414794921875,
+            "iiith_soccer_015_2": 615.7991333007812,
+            "indiana_music_03_2": 76.9001693725586,
+            "indiana_music_03_3": 97.35350799560547,
+            "sfu_basketball012_12": 538.36767578125,
+            "sfu_basketball_04_17": 754.4563598632812,
+            "uniandes_dance_002_11": 639.693115234375,
+            "uniandes_dance_002_2": 399.22247314453125
+          }
+        },
+        "prior_body_mm": {
+          "mean": 177.02544975280762,
+          "per_take": {
+            "georgiatech_bike_06_6": 229.0182647705078,
+            "georgiatech_bike_07_2": 208.9297332763672,
+            "georgiatech_bike_07_4": 212.9502410888672,
+            "georgiatech_cooking_02_01_2": 98.1796875,
+            "georgiatech_cooking_02_02_6": 142.0641326904297,
+            "georgiatech_cooking_06_01_2": 178.5224609375,
+            "georgiatech_covid_02_10": 89.8066177368164,
+            "georgiatech_covid_02_4": 104.27169036865234,
+            "iiith_soccer_002_6": 246.9374237060547,
+            "iiith_soccer_015_2": 211.93759155273438,
+            "indiana_music_03_2": 150.36253356933594,
+            "indiana_music_03_3": 156.16505432128906,
+            "sfu_basketball012_12": 189.20736694335938,
+            "sfu_basketball_04_17": 248.0050506591797,
+            "uniandes_dance_002_11": 228.99996948242188,
+            "uniandes_dance_002_2": 137.04937744140625
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 1.912976749241352,
+          "per_take": {
+            "georgiatech_bike_06_6": -0.1824726164340973,
+            "georgiatech_bike_07_2": 0.19708800315856934,
+            "georgiatech_bike_07_4": 0.2247333526611328,
+            "georgiatech_cooking_02_01_2": -0.0528033971786499,
+            "georgiatech_cooking_02_02_6": -0.4414815902709961,
+            "georgiatech_cooking_06_01_2": 0.4715611934661865,
+            "georgiatech_covid_02_10": 0.646307110786438,
+            "georgiatech_covid_02_4": 0.7919048070907593,
+            "iiith_soccer_002_6": 0.683624804019928,
+            "iiith_soccer_015_2": 5.373859405517578,
+            "indiana_music_03_2": -0.3003867566585541,
+            "indiana_music_03_3": 0.5524942278862,
+            "sfu_basketball012_12": 6.723989009857178,
+            "sfu_basketball_04_17": 4.161833763122559,
+            "uniandes_dance_002_11": 6.097346305847168,
+            "uniandes_dance_002_2": 5.660030364990234
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 212.28529780171812,
+      "frames": 2880
+    },
+    {
+      "step": 6000,
+      "scores": {
+        "body_mm": {
+          "mean": 177.428786277771,
+          "per_take": {
+            "georgiatech_bike_06_6": 204.70799255371094,
+            "georgiatech_bike_07_2": 147.7020263671875,
+            "georgiatech_bike_07_4": 149.76979064941406,
+            "georgiatech_cooking_02_01_2": 118.11182403564453,
+            "georgiatech_cooking_02_02_6": 203.7064666748047,
+            "georgiatech_cooking_06_01_2": 197.71548461914062,
+            "georgiatech_covid_02_10": 167.39817810058594,
+            "georgiatech_covid_02_4": 100.47432708740234,
+            "iiith_soccer_002_6": 186.14666748046875,
+            "iiith_soccer_015_2": 147.01943969726562,
+            "indiana_music_03_2": 106.26750183105469,
+            "indiana_music_03_3": 177.5991668701172,
+            "sfu_basketball012_12": 227.43931579589844,
+            "sfu_basketball_04_17": 296.11126708984375,
+            "uniandes_dance_002_11": 185.48313903808594,
+            "uniandes_dance_002_2": 223.20799255371094
+          }
+        },
+        "all_body_mm": {
+          "mean": 171.16595697402954,
+          "per_take": {
+            "georgiatech_bike_06_6": 204.46102905273438,
+            "georgiatech_bike_07_2": 147.65423583984375,
+            "georgiatech_bike_07_4": 152.3486785888672,
+            "georgiatech_cooking_02_01_2": 113.16839599609375,
+            "georgiatech_cooking_02_02_6": 193.135986328125,
+            "georgiatech_cooking_06_01_2": 185.05352783203125,
+            "georgiatech_covid_02_10": 157.1344757080078,
+            "georgiatech_covid_02_4": 97.82073974609375,
+            "iiith_soccer_002_6": 179.54685974121094,
+            "iiith_soccer_015_2": 144.5584259033203,
+            "indiana_music_03_2": 102.7696304321289,
+            "indiana_music_03_3": 169.38951110839844,
+            "sfu_basketball012_12": 212.15745544433594,
+            "sfu_basketball_04_17": 289.7921142578125,
+            "uniandes_dance_002_11": 180.6300811767578,
+            "uniandes_dance_002_2": 209.03416442871094
+          }
+        },
+        "startup_body_mm": {
+          "mean": 121.06332874298096,
+          "per_take": {
+            "georgiatech_bike_06_6": 202.4854278564453,
+            "georgiatech_bike_07_2": 147.27171325683594,
+            "georgiatech_bike_07_4": 172.9795379638672,
+            "georgiatech_cooking_02_01_2": 73.6209945678711,
+            "georgiatech_cooking_02_02_6": 108.57237243652344,
+            "georgiatech_cooking_06_01_2": 83.75777435302734,
+            "georgiatech_covid_02_10": 75.0251235961914,
+            "georgiatech_covid_02_4": 76.59207916259766,
+            "iiith_soccer_002_6": 126.74857330322266,
+            "iiith_soccer_015_2": 124.87033081054688,
+            "indiana_music_03_2": 74.7866439819336,
+            "indiana_music_03_3": 103.7122802734375,
+            "sfu_basketball012_12": 89.90243530273438,
+            "sfu_basketball_04_17": 239.23880004882812,
+            "uniandes_dance_002_11": 141.80563354492188,
+            "uniandes_dance_002_2": 95.64353942871094
+          }
+        },
+        "pa_mm": {
+          "mean": 98.74412608146667,
+          "per_take": {
+            "georgiatech_bike_06_6": 111.83345031738281,
+            "georgiatech_bike_07_2": 72.9677734375,
+            "georgiatech_bike_07_4": 69.65147399902344,
+            "georgiatech_cooking_02_01_2": 68.8673324584961,
+            "georgiatech_cooking_02_02_6": 85.08451843261719,
+            "georgiatech_cooking_06_01_2": 104.7611083984375,
+            "georgiatech_covid_02_10": 81.70783233642578,
+            "georgiatech_covid_02_4": 48.78806686401367,
+            "iiith_soccer_002_6": 108.95052337646484,
+            "iiith_soccer_015_2": 91.4339370727539,
+            "indiana_music_03_2": 70.29747009277344,
+            "indiana_music_03_3": 96.77932739257812,
+            "sfu_basketball012_12": 139.4231719970703,
+            "sfu_basketball_04_17": 179.35287475585938,
+            "uniandes_dance_002_11": 124.0074234008789,
+            "uniandes_dance_002_2": 125.9997329711914
+          }
+        },
+        "root_mm": {
+          "mean": 142.50006484985352,
+          "per_take": {
+            "georgiatech_bike_06_6": 199.4767303466797,
+            "georgiatech_bike_07_2": 135.17123413085938,
+            "georgiatech_bike_07_4": 178.09158325195312,
+            "georgiatech_cooking_02_01_2": 87.98297119140625,
+            "georgiatech_cooking_02_02_6": 225.7659149169922,
+            "georgiatech_cooking_06_01_2": 147.50555419921875,
+            "georgiatech_covid_02_10": 119.72103118896484,
+            "georgiatech_covid_02_4": 80.53501892089844,
+            "iiith_soccer_002_6": 166.02479553222656,
+            "iiith_soccer_015_2": 102.39737701416016,
+            "indiana_music_03_2": 70.38703918457031,
+            "indiana_music_03_3": 79.62907409667969,
+            "sfu_basketball012_12": 175.92691040039062,
+            "sfu_basketball_04_17": 213.19857788085938,
+            "uniandes_dance_002_11": 134.7191162109375,
+            "uniandes_dance_002_2": 163.46810913085938
+          }
+        },
+        "root_relative_mm": {
+          "mean": 141.05459547042847,
+          "per_take": {
+            "georgiatech_bike_06_6": 123.9880599975586,
+            "georgiatech_bike_07_2": 108.80131530761719,
+            "georgiatech_bike_07_4": 119.31497955322266,
+            "georgiatech_cooking_02_01_2": 98.84043884277344,
+            "georgiatech_cooking_02_02_6": 128.05828857421875,
+            "georgiatech_cooking_06_01_2": 158.68637084960938,
+            "georgiatech_covid_02_10": 140.2766876220703,
+            "georgiatech_covid_02_4": 92.94956970214844,
+            "iiith_soccer_002_6": 163.0494842529297,
+            "iiith_soccer_015_2": 123.73832702636719,
+            "indiana_music_03_2": 98.99010467529297,
+            "indiana_music_03_3": 163.4478302001953,
+            "sfu_basketball012_12": 192.9932861328125,
+            "sfu_basketball_04_17": 235.802978515625,
+            "uniandes_dance_002_11": 153.03358459472656,
+            "uniandes_dance_002_2": 154.9022216796875
+          }
+        },
+        "head_mm": {
+          "mean": 54.128952383995056,
+          "per_take": {
+            "georgiatech_bike_06_6": 40.806556701660156,
+            "georgiatech_bike_07_2": 47.14813995361328,
+            "georgiatech_bike_07_4": 76.92752075195312,
+            "georgiatech_cooking_02_01_2": 40.815673828125,
+            "georgiatech_cooking_02_02_6": 27.6015682220459,
+            "georgiatech_cooking_06_01_2": 69.95025634765625,
+            "georgiatech_covid_02_10": 29.209659576416016,
+            "georgiatech_covid_02_4": 36.312198638916016,
+            "iiith_soccer_002_6": 40.18170166015625,
+            "iiith_soccer_015_2": 42.3067512512207,
+            "indiana_music_03_2": 45.411991119384766,
+            "indiana_music_03_3": 39.331119537353516,
+            "sfu_basketball012_12": 61.8505973815918,
+            "sfu_basketball_04_17": 68.90213775634766,
+            "uniandes_dance_002_11": 56.485801696777344,
+            "uniandes_dance_002_2": 142.82156372070312
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 36.9840874671936,
+          "per_take": {
+            "georgiatech_bike_06_6": 37.91756057739258,
+            "georgiatech_bike_07_2": 27.4538631439209,
+            "georgiatech_bike_07_4": 33.27199172973633,
+            "georgiatech_cooking_02_01_2": 29.20123863220215,
+            "georgiatech_cooking_02_02_6": 34.80574035644531,
+            "georgiatech_cooking_06_01_2": 45.23346710205078,
+            "georgiatech_covid_02_10": 44.03501510620117,
+            "georgiatech_covid_02_4": 27.968530654907227,
+            "iiith_soccer_002_6": 36.91883850097656,
+            "iiith_soccer_015_2": 27.059804916381836,
+            "indiana_music_03_2": 20.874412536621094,
+            "indiana_music_03_3": 34.52180862426758,
+            "sfu_basketball012_12": 49.95771408081055,
+            "sfu_basketball_04_17": 53.83367156982422,
+            "uniandes_dance_002_11": 42.03986358642578,
+            "uniandes_dance_002_2": 46.651878356933594
+          }
+        },
+        "velocity_mmps": {
+          "mean": 311.88211011886597,
+          "per_take": {
+            "georgiatech_bike_06_6": 197.16366577148438,
+            "georgiatech_bike_07_2": 191.75820922851562,
+            "georgiatech_bike_07_4": 125.48564910888672,
+            "georgiatech_cooking_02_01_2": 105.13772583007812,
+            "georgiatech_cooking_02_02_6": 144.1068878173828,
+            "georgiatech_cooking_06_01_2": 177.7893524169922,
+            "georgiatech_covid_02_10": 116.99679565429688,
+            "georgiatech_covid_02_4": 114.4432601928711,
+            "iiith_soccer_002_6": 468.3683776855469,
+            "iiith_soccer_015_2": 576.92529296875,
+            "indiana_music_03_2": 109.2094497680664,
+            "indiana_music_03_3": 165.807373046875,
+            "sfu_basketball012_12": 532.79345703125,
+            "sfu_basketball_04_17": 802.1566162109375,
+            "uniandes_dance_002_11": 677.2350463867188,
+            "uniandes_dance_002_2": 484.7366027832031
+          }
+        },
+        "prior_body_mm": {
+          "mean": 178.9225344657898,
+          "per_take": {
+            "georgiatech_bike_06_6": 205.6927490234375,
+            "georgiatech_bike_07_2": 149.2069549560547,
+            "georgiatech_bike_07_4": 150.8546142578125,
+            "georgiatech_cooking_02_01_2": 117.9371109008789,
+            "georgiatech_cooking_02_02_6": 204.31015014648438,
+            "georgiatech_cooking_06_01_2": 197.49436950683594,
+            "georgiatech_covid_02_10": 167.5992431640625,
+            "georgiatech_covid_02_4": 101.47509002685547,
+            "iiith_soccer_002_6": 186.12753295898438,
+            "iiith_soccer_015_2": 152.38937377929688,
+            "indiana_music_03_2": 106.06099700927734,
+            "indiana_music_03_3": 177.61282348632812,
+            "sfu_basketball012_12": 232.213134765625,
+            "sfu_basketball_04_17": 299.0559387207031,
+            "uniandes_dance_002_11": 194.95263671875,
+            "uniandes_dance_002_2": 219.77783203125
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 1.493749455024954,
+          "per_take": {
+            "georgiatech_bike_06_6": 0.984761118888855,
+            "georgiatech_bike_07_2": 1.504921793937683,
+            "georgiatech_bike_07_4": 1.0848095417022705,
+            "georgiatech_cooking_02_01_2": -0.1747230589389801,
+            "georgiatech_cooking_02_02_6": 0.6037307977676392,
+            "georgiatech_cooking_06_01_2": -0.22113275527954102,
+            "georgiatech_covid_02_10": 0.20109179615974426,
+            "georgiatech_covid_02_4": 1.0007727146148682,
+            "iiith_soccer_002_6": -0.019138287752866745,
+            "iiith_soccer_015_2": 5.369934558868408,
+            "indiana_music_03_2": -0.20650729537010193,
+            "indiana_music_03_3": 0.013660955242812634,
+            "sfu_basketball012_12": 4.773831844329834,
+            "sfu_basketball_04_17": 2.9446399211883545,
+            "uniandes_dance_002_11": 9.469503402709961,
+            "uniandes_dance_002_2": -3.4301657676696777
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 127.59955904819071,
+      "frames": 2880
+    },
+    {
+      "step": 8000,
+      "scores": {
+        "body_mm": {
+          "mean": 162.570170879364,
+          "per_take": {
+            "georgiatech_bike_06_6": 228.15817260742188,
+            "georgiatech_bike_07_2": 210.1019287109375,
+            "georgiatech_bike_07_4": 293.48876953125,
+            "georgiatech_cooking_02_01_2": 138.7118682861328,
+            "georgiatech_cooking_02_02_6": 100.27603149414062,
+            "georgiatech_cooking_06_01_2": 123.49700164794922,
+            "georgiatech_covid_02_10": 92.93898010253906,
+            "georgiatech_covid_02_4": 105.54037475585938,
+            "iiith_soccer_002_6": 206.61056518554688,
+            "iiith_soccer_015_2": 186.83004760742188,
+            "indiana_music_03_2": 99.79757690429688,
+            "indiana_music_03_3": 127.05106353759766,
+            "sfu_basketball012_12": 237.40969848632812,
+            "sfu_basketball_04_17": 205.87271118164062,
+            "uniandes_dance_002_11": 163.8786163330078,
+            "uniandes_dance_002_2": 80.9593276977539
+          }
+        },
+        "all_body_mm": {
+          "mean": 157.63540077209473,
+          "per_take": {
+            "georgiatech_bike_06_6": 226.8928680419922,
+            "georgiatech_bike_07_2": 199.84767150878906,
+            "georgiatech_bike_07_4": 283.2027282714844,
+            "georgiatech_cooking_02_01_2": 134.0649871826172,
+            "georgiatech_cooking_02_02_6": 98.20916748046875,
+            "georgiatech_cooking_06_01_2": 119.29634094238281,
+            "georgiatech_covid_02_10": 92.19456481933594,
+            "georgiatech_covid_02_4": 103.0572280883789,
+            "iiith_soccer_002_6": 202.0550537109375,
+            "iiith_soccer_015_2": 176.70318603515625,
+            "indiana_music_03_2": 96.20838165283203,
+            "indiana_music_03_3": 122.9787826538086,
+            "sfu_basketball012_12": 220.73387145996094,
+            "sfu_basketball_04_17": 203.05624389648438,
+            "uniandes_dance_002_11": 162.71408081054688,
+            "uniandes_dance_002_2": 80.95125579833984
+          }
+        },
+        "startup_body_mm": {
+          "mean": 118.15719032287598,
+          "per_take": {
+            "georgiatech_bike_06_6": 216.7705841064453,
+            "georgiatech_bike_07_2": 117.81346130371094,
+            "georgiatech_bike_07_4": 200.91419982910156,
+            "georgiatech_cooking_02_01_2": 96.88993835449219,
+            "georgiatech_cooking_02_02_6": 81.67420196533203,
+            "georgiatech_cooking_06_01_2": 85.69085693359375,
+            "georgiatech_covid_02_10": 86.23921966552734,
+            "georgiatech_covid_02_4": 83.19202423095703,
+            "iiith_soccer_002_6": 165.61085510253906,
+            "iiith_soccer_015_2": 95.6883773803711,
+            "indiana_music_03_2": 67.49476623535156,
+            "indiana_music_03_3": 90.40056610107422,
+            "sfu_basketball012_12": 87.32714080810547,
+            "sfu_basketball_04_17": 180.5245361328125,
+            "uniandes_dance_002_11": 153.39767456054688,
+            "uniandes_dance_002_2": 80.88664245605469
+          }
+        },
+        "pa_mm": {
+          "mean": 89.69206070899963,
+          "per_take": {
+            "georgiatech_bike_06_6": 121.17095947265625,
+            "georgiatech_bike_07_2": 102.71077728271484,
+            "georgiatech_bike_07_4": 158.31234741210938,
+            "georgiatech_cooking_02_01_2": 62.008148193359375,
+            "georgiatech_cooking_02_02_6": 53.494415283203125,
+            "georgiatech_cooking_06_01_2": 86.29621124267578,
+            "georgiatech_covid_02_10": 53.77162551879883,
+            "georgiatech_covid_02_4": 47.99097442626953,
+            "iiith_soccer_002_6": 75.40436553955078,
+            "iiith_soccer_015_2": 100.25020599365234,
+            "indiana_music_03_2": 61.454429626464844,
+            "indiana_music_03_3": 76.21498107910156,
+            "sfu_basketball012_12": 112.0564193725586,
+            "sfu_basketball_04_17": 150.8193359375,
+            "uniandes_dance_002_11": 120.7164306640625,
+            "uniandes_dance_002_2": 52.401344299316406
+          }
+        },
+        "root_mm": {
+          "mean": 139.0132806301117,
+          "per_take": {
+            "georgiatech_bike_06_6": 251.7655029296875,
+            "georgiatech_bike_07_2": 191.20602416992188,
+            "georgiatech_bike_07_4": 350.37127685546875,
+            "georgiatech_cooking_02_01_2": 144.95751953125,
+            "georgiatech_cooking_02_02_6": 67.692626953125,
+            "georgiatech_cooking_06_01_2": 78.26136779785156,
+            "georgiatech_covid_02_10": 50.951416015625,
+            "georgiatech_covid_02_4": 74.55487060546875,
+            "iiith_soccer_002_6": 208.5937957763672,
+            "iiith_soccer_015_2": 160.0804901123047,
+            "indiana_music_03_2": 102.25163269042969,
+            "indiana_music_03_3": 84.86195373535156,
+            "sfu_basketball012_12": 185.14480590820312,
+            "sfu_basketball_04_17": 122.20204162597656,
+            "uniandes_dance_002_11": 94.33741760253906,
+            "uniandes_dance_002_2": 56.9797477722168
+          }
+        },
+        "root_relative_mm": {
+          "mean": 127.65958905220032,
+          "per_take": {
+            "georgiatech_bike_06_6": 181.85955810546875,
+            "georgiatech_bike_07_2": 173.6868133544922,
+            "georgiatech_bike_07_4": 282.8094482421875,
+            "georgiatech_cooking_02_01_2": 77.1186752319336,
+            "georgiatech_cooking_02_02_6": 76.87791442871094,
+            "georgiatech_cooking_06_01_2": 103.21629333496094,
+            "georgiatech_covid_02_10": 82.68666076660156,
+            "georgiatech_covid_02_4": 96.13753509521484,
+            "iiith_soccer_002_6": 128.67684936523438,
+            "iiith_soccer_015_2": 122.41961669921875,
+            "indiana_music_03_2": 80.91526794433594,
+            "indiana_music_03_3": 121.5227279663086,
+            "sfu_basketball012_12": 138.9607696533203,
+            "sfu_basketball_04_17": 167.63043212890625,
+            "uniandes_dance_002_11": 145.47830200195312,
+            "uniandes_dance_002_2": 62.55656051635742
+          }
+        },
+        "head_mm": {
+          "mean": 50.456444919109344,
+          "per_take": {
+            "georgiatech_bike_06_6": 50.18388748168945,
+            "georgiatech_bike_07_2": 52.47139358520508,
+            "georgiatech_bike_07_4": 58.380271911621094,
+            "georgiatech_cooking_02_01_2": 52.326560974121094,
+            "georgiatech_cooking_02_02_6": 26.254596710205078,
+            "georgiatech_cooking_06_01_2": 32.5546989440918,
+            "georgiatech_covid_02_10": 12.224518775939941,
+            "georgiatech_covid_02_4": 36.309120178222656,
+            "iiith_soccer_002_6": 56.9608039855957,
+            "iiith_soccer_015_2": 82.2266616821289,
+            "indiana_music_03_2": 36.32694625854492,
+            "indiana_music_03_3": 29.967992782592773,
+            "sfu_basketball012_12": 132.61703491210938,
+            "sfu_basketball_04_17": 60.707374572753906,
+            "uniandes_dance_002_11": 49.33182144165039,
+            "uniandes_dance_002_2": 38.459434509277344
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 33.027496218681335,
+          "per_take": {
+            "georgiatech_bike_06_6": 40.84877014160156,
+            "georgiatech_bike_07_2": 42.82490158081055,
+            "georgiatech_bike_07_4": 60.83489990234375,
+            "georgiatech_cooking_02_01_2": 33.12006378173828,
+            "georgiatech_cooking_02_02_6": 22.113338470458984,
+            "georgiatech_cooking_06_01_2": 34.673240661621094,
+            "georgiatech_covid_02_10": 22.26641273498535,
+            "georgiatech_covid_02_4": 30.688274383544922,
+            "iiith_soccer_002_6": 30.58052635192871,
+            "iiith_soccer_015_2": 27.72625732421875,
+            "indiana_music_03_2": 17.786272048950195,
+            "indiana_music_03_3": 31.813465118408203,
+            "sfu_basketball012_12": 35.6370849609375,
+            "sfu_basketball_04_17": 39.22230911254883,
+            "uniandes_dance_002_11": 40.39841079711914,
+            "uniandes_dance_002_2": 17.905712127685547
+          }
+        },
+        "velocity_mmps": {
+          "mean": 307.36534881591797,
+          "per_take": {
+            "georgiatech_bike_06_6": 275.01763916015625,
+            "georgiatech_bike_07_2": 246.07369995117188,
+            "georgiatech_bike_07_4": 182.12440490722656,
+            "georgiatech_cooking_02_01_2": 108.97425079345703,
+            "georgiatech_cooking_02_02_6": 117.3386001586914,
+            "georgiatech_cooking_06_01_2": 174.66567993164062,
+            "georgiatech_covid_02_10": 117.4301986694336,
+            "georgiatech_covid_02_4": 116.0131607055664,
+            "iiith_soccer_002_6": 445.0186462402344,
+            "iiith_soccer_015_2": 577.5316162109375,
+            "indiana_music_03_2": 101.24380493164062,
+            "indiana_music_03_3": 131.66030883789062,
+            "sfu_basketball012_12": 513.3097534179688,
+            "sfu_basketball_04_17": 734.3587646484375,
+            "uniandes_dance_002_11": 670.8511962890625,
+            "uniandes_dance_002_2": 406.2338562011719
+          }
+        },
+        "prior_body_mm": {
+          "mean": 165.53451538085938,
+          "per_take": {
+            "georgiatech_bike_06_6": 229.99508666992188,
+            "georgiatech_bike_07_2": 210.2703094482422,
+            "georgiatech_bike_07_4": 293.8791809082031,
+            "georgiatech_cooking_02_01_2": 137.71353149414062,
+            "georgiatech_cooking_02_02_6": 101.64610290527344,
+            "georgiatech_cooking_06_01_2": 124.1788558959961,
+            "georgiatech_covid_02_10": 94.07487487792969,
+            "georgiatech_covid_02_4": 106.27999114990234,
+            "iiith_soccer_002_6": 206.19369506835938,
+            "iiith_soccer_015_2": 191.69174194335938,
+            "indiana_music_03_2": 100.75699615478516,
+            "indiana_music_03_3": 127.6021728515625,
+            "sfu_basketball012_12": 243.2943878173828,
+            "sfu_basketball_04_17": 216.1411895751953,
+            "uniandes_dance_002_11": 173.05184936523438,
+            "uniandes_dance_002_2": 91.78227996826172
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 2.9643470253795385,
+          "per_take": {
+            "georgiatech_bike_06_6": 1.836920142173767,
+            "georgiatech_bike_07_2": 0.1684035360813141,
+            "georgiatech_bike_07_4": 0.39040184020996094,
+            "georgiatech_cooking_02_01_2": -0.9983198046684265,
+            "georgiatech_cooking_02_02_6": 1.3700743913650513,
+            "georgiatech_cooking_06_01_2": 0.6818472743034363,
+            "georgiatech_covid_02_10": 1.1358897686004639,
+            "georgiatech_covid_02_4": 0.7396217584609985,
+            "iiith_soccer_002_6": -0.4168599247932434,
+            "iiith_soccer_015_2": 4.861716270446777,
+            "indiana_music_03_2": 0.9594072103500366,
+            "indiana_music_03_3": 0.5510969161987305,
+            "sfu_basketball012_12": 5.8846940994262695,
+            "sfu_basketball_04_17": 10.268464088439941,
+            "uniandes_dance_002_11": 9.173227310180664,
+            "uniandes_dance_002_2": 10.822967529296875
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 52.72987302206457,
+      "frames": 2880
+    },
+    {
+      "step": 10000,
+      "scores": {
+        "body_mm": {
+          "mean": 142.01139450073242,
+          "per_take": {
+            "georgiatech_bike_06_6": 113.78623962402344,
+            "georgiatech_bike_07_2": 160.05967712402344,
+            "georgiatech_bike_07_4": 176.29977416992188,
+            "georgiatech_cooking_02_01_2": 123.47635650634766,
+            "georgiatech_cooking_02_02_6": 166.59669494628906,
+            "georgiatech_cooking_06_01_2": 128.9853973388672,
+            "georgiatech_covid_02_10": 103.0324478149414,
+            "georgiatech_covid_02_4": 86.74543762207031,
+            "iiith_soccer_002_6": 199.4286651611328,
+            "iiith_soccer_015_2": 167.26512145996094,
+            "indiana_music_03_2": 95.69811248779297,
+            "indiana_music_03_3": 99.57141876220703,
+            "sfu_basketball012_12": 119.021484375,
+            "sfu_basketball_04_17": 206.53506469726562,
+            "uniandes_dance_002_11": 174.01504516601562,
+            "uniandes_dance_002_2": 151.66537475585938
+          }
+        },
+        "all_body_mm": {
+          "mean": 138.59017992019653,
+          "per_take": {
+            "georgiatech_bike_06_6": 120.64582824707031,
+            "georgiatech_bike_07_2": 156.97207641601562,
+            "georgiatech_bike_07_4": 173.30972290039062,
+            "georgiatech_cooking_02_01_2": 119.1103286743164,
+            "georgiatech_cooking_02_02_6": 156.6340789794922,
+            "georgiatech_cooking_06_01_2": 124.47842407226562,
+            "georgiatech_covid_02_10": 100.34603118896484,
+            "georgiatech_covid_02_4": 85.12285614013672,
+            "iiith_soccer_002_6": 192.25100708007812,
+            "iiith_soccer_015_2": 163.27911376953125,
+            "indiana_music_03_2": 91.6257553100586,
+            "indiana_music_03_3": 96.50589752197266,
+            "sfu_basketball012_12": 112.28260803222656,
+            "sfu_basketball_04_17": 203.71058654785156,
+            "uniandes_dance_002_11": 175.40887451171875,
+            "uniandes_dance_002_2": 145.7596893310547
+          }
+        },
+        "startup_body_mm": {
+          "mean": 111.22042393684387,
+          "per_take": {
+            "georgiatech_bike_06_6": 175.5225372314453,
+            "georgiatech_bike_07_2": 132.27113342285156,
+            "georgiatech_bike_07_4": 149.38931274414062,
+            "georgiatech_cooking_02_01_2": 84.18212127685547,
+            "georgiatech_cooking_02_02_6": 76.93285369873047,
+            "georgiatech_cooking_06_01_2": 88.42259979248047,
+            "georgiatech_covid_02_10": 78.85464477539062,
+            "georgiatech_covid_02_4": 72.14217376708984,
+            "iiith_soccer_002_6": 134.82974243164062,
+            "iiith_soccer_015_2": 131.3911590576172,
+            "indiana_music_03_2": 59.04692077636719,
+            "indiana_music_03_3": 71.98162078857422,
+            "sfu_basketball012_12": 58.3715934753418,
+            "sfu_basketball_04_17": 181.1147003173828,
+            "uniandes_dance_002_11": 186.5595245361328,
+            "uniandes_dance_002_2": 98.51414489746094
+          }
+        },
+        "pa_mm": {
+          "mean": 84.49878001213074,
+          "per_take": {
+            "georgiatech_bike_06_6": 74.80833435058594,
+            "georgiatech_bike_07_2": 80.51482391357422,
+            "georgiatech_bike_07_4": 84.55337524414062,
+            "georgiatech_cooking_02_01_2": 59.6766242980957,
+            "georgiatech_cooking_02_02_6": 88.83082580566406,
+            "georgiatech_cooking_06_01_2": 86.55104064941406,
+            "georgiatech_covid_02_10": 62.974082946777344,
+            "georgiatech_covid_02_4": 40.054931640625,
+            "iiith_soccer_002_6": 87.71742248535156,
+            "iiith_soccer_015_2": 119.88497161865234,
+            "indiana_music_03_2": 53.63161087036133,
+            "indiana_music_03_3": 63.36488723754883,
+            "sfu_basketball012_12": 79.70652770996094,
+            "sfu_basketball_04_17": 146.01988220214844,
+            "uniandes_dance_002_11": 124.0748062133789,
+            "uniandes_dance_002_2": 99.6163330078125
+          }
+        },
+        "root_mm": {
+          "mean": 120.42187309265137,
+          "per_take": {
+            "georgiatech_bike_06_6": 102.37749481201172,
+            "georgiatech_bike_07_2": 143.8770751953125,
+            "georgiatech_bike_07_4": 236.1156005859375,
+            "georgiatech_cooking_02_01_2": 117.43284606933594,
+            "georgiatech_cooking_02_02_6": 117.29466247558594,
+            "georgiatech_cooking_06_01_2": 97.33262634277344,
+            "georgiatech_covid_02_10": 80.94917297363281,
+            "georgiatech_covid_02_4": 67.62992858886719,
+            "iiith_soccer_002_6": 220.2084503173828,
+            "iiith_soccer_015_2": 133.316650390625,
+            "indiana_music_03_2": 82.83658599853516,
+            "indiana_music_03_3": 105.1689682006836,
+            "sfu_basketball012_12": 75.5562744140625,
+            "sfu_basketball_04_17": 136.2703857421875,
+            "uniandes_dance_002_11": 96.78982543945312,
+            "uniandes_dance_002_2": 113.59342193603516
+          }
+        },
+        "root_relative_mm": {
+          "mean": 115.06790924072266,
+          "per_take": {
+            "georgiatech_bike_06_6": 95.73381805419922,
+            "georgiatech_bike_07_2": 130.54232788085938,
+            "georgiatech_bike_07_4": 140.3978271484375,
+            "georgiatech_cooking_02_01_2": 89.10304260253906,
+            "georgiatech_cooking_02_02_6": 139.37657165527344,
+            "georgiatech_cooking_06_01_2": 98.6314697265625,
+            "georgiatech_covid_02_10": 87.13973236083984,
+            "georgiatech_covid_02_4": 71.95042419433594,
+            "iiith_soccer_002_6": 133.01437377929688,
+            "iiith_soccer_015_2": 146.70086669921875,
+            "indiana_music_03_2": 82.3326644897461,
+            "indiana_music_03_3": 94.32574462890625,
+            "sfu_basketball012_12": 99.11726379394531,
+            "sfu_basketball_04_17": 173.8240966796875,
+            "uniandes_dance_002_11": 145.63243103027344,
+            "uniandes_dance_002_2": 113.2638931274414
+          }
+        },
+        "head_mm": {
+          "mean": 45.58110570907593,
+          "per_take": {
+            "georgiatech_bike_06_6": 26.912384033203125,
+            "georgiatech_bike_07_2": 36.45873260498047,
+            "georgiatech_bike_07_4": 108.22904205322266,
+            "georgiatech_cooking_02_01_2": 22.806072235107422,
+            "georgiatech_cooking_02_02_6": 43.12142562866211,
+            "georgiatech_cooking_06_01_2": 26.43484878540039,
+            "georgiatech_covid_02_10": 27.751758575439453,
+            "georgiatech_covid_02_4": 46.50214767456055,
+            "iiith_soccer_002_6": 44.248435974121094,
+            "iiith_soccer_015_2": 46.00946044921875,
+            "indiana_music_03_2": 43.74664306640625,
+            "indiana_music_03_3": 32.36736297607422,
+            "sfu_basketball012_12": 52.21490478515625,
+            "sfu_basketball_04_17": 50.10985565185547,
+            "uniandes_dance_002_11": 69.58927917480469,
+            "uniandes_dance_002_2": 52.79533767700195
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 31.764403700828552,
+          "per_take": {
+            "georgiatech_bike_06_6": 29.87026596069336,
+            "georgiatech_bike_07_2": 32.55754470825195,
+            "georgiatech_bike_07_4": 32.75743865966797,
+            "georgiatech_cooking_02_01_2": 24.510032653808594,
+            "georgiatech_cooking_02_02_6": 54.98230743408203,
+            "georgiatech_cooking_06_01_2": 30.326745986938477,
+            "georgiatech_covid_02_10": 30.749042510986328,
+            "georgiatech_covid_02_4": 21.756282806396484,
+            "iiith_soccer_002_6": 36.16195297241211,
+            "iiith_soccer_015_2": 34.66524124145508,
+            "indiana_music_03_2": 17.02267837524414,
+            "indiana_music_03_3": 23.064653396606445,
+            "sfu_basketball012_12": 24.497167587280273,
+            "sfu_basketball_04_17": 39.862606048583984,
+            "uniandes_dance_002_11": 39.99835968017578,
+            "uniandes_dance_002_2": 35.44813919067383
+          }
+        },
+        "velocity_mmps": {
+          "mean": 298.50863885879517,
+          "per_take": {
+            "georgiatech_bike_06_6": 198.31387329101562,
+            "georgiatech_bike_07_2": 206.83285522460938,
+            "georgiatech_bike_07_4": 136.77896118164062,
+            "georgiatech_cooking_02_01_2": 113.19762420654297,
+            "georgiatech_cooking_02_02_6": 208.2550048828125,
+            "georgiatech_cooking_06_01_2": 169.468994140625,
+            "georgiatech_covid_02_10": 111.62802124023438,
+            "georgiatech_covid_02_4": 102.81999969482422,
+            "iiith_soccer_002_6": 466.9523010253906,
+            "iiith_soccer_015_2": 618.6952514648438,
+            "indiana_music_03_2": 94.307373046875,
+            "indiana_music_03_3": 118.88463592529297,
+            "sfu_basketball012_12": 434.2447509765625,
+            "sfu_basketball_04_17": 749.9652709960938,
+            "uniandes_dance_002_11": 635.0225830078125,
+            "uniandes_dance_002_2": 410.7707214355469
+          }
+        },
+        "prior_body_mm": {
+          "mean": 145.07255220413208,
+          "per_take": {
+            "georgiatech_bike_06_6": 114.8990478515625,
+            "georgiatech_bike_07_2": 161.4588623046875,
+            "georgiatech_bike_07_4": 177.03746032714844,
+            "georgiatech_cooking_02_01_2": 123.6529312133789,
+            "georgiatech_cooking_02_02_6": 167.82736206054688,
+            "georgiatech_cooking_06_01_2": 129.45310974121094,
+            "georgiatech_covid_02_10": 103.49650573730469,
+            "georgiatech_covid_02_4": 87.2518081665039,
+            "iiith_soccer_002_6": 202.87615966796875,
+            "iiith_soccer_015_2": 174.41781616210938,
+            "indiana_music_03_2": 95.37432098388672,
+            "indiana_music_03_3": 100.24378967285156,
+            "sfu_basketball012_12": 127.46501159667969,
+            "sfu_basketball_04_17": 216.11453247070312,
+            "uniandes_dance_002_11": 182.7812042236328,
+            "uniandes_dance_002_2": 156.8109130859375
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 3.0611578468233347,
+          "per_take": {
+            "georgiatech_bike_06_6": 1.1128158569335938,
+            "georgiatech_bike_07_2": 1.3991864919662476,
+            "georgiatech_bike_07_4": 0.7377039790153503,
+            "georgiatech_cooking_02_01_2": 0.17658591270446777,
+            "georgiatech_cooking_02_02_6": 1.2306432723999023,
+            "georgiatech_cooking_06_01_2": 0.46771135926246643,
+            "georgiatech_covid_02_10": 0.464059054851532,
+            "georgiatech_covid_02_4": 0.5063660144805908,
+            "iiith_soccer_002_6": 3.4475045204162598,
+            "iiith_soccer_015_2": 7.152678489685059,
+            "indiana_music_03_2": -0.32379311323165894,
+            "indiana_music_03_3": 0.6723632216453552,
+            "sfu_basketball012_12": 8.443531036376953,
+            "sfu_basketball_04_17": 9.579472541809082,
+            "uniandes_dance_002_11": 8.76616096496582,
+            "uniandes_dance_002_2": 5.145535945892334
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 53.41257621534169,
+      "frames": 2880
+    },
+    {
+      "step": 12000,
+      "scores": {
+        "body_mm": {
+          "mean": 134.69084072113037,
+          "per_take": {
+            "georgiatech_bike_06_6": 164.2683563232422,
+            "georgiatech_bike_07_2": 200.615478515625,
+            "georgiatech_bike_07_4": 141.1927947998047,
+            "georgiatech_cooking_02_01_2": 66.72554016113281,
+            "georgiatech_cooking_02_02_6": 156.91278076171875,
+            "georgiatech_cooking_06_01_2": 88.4992446899414,
+            "georgiatech_covid_02_10": 113.85901641845703,
+            "georgiatech_covid_02_4": 103.7713851928711,
+            "iiith_soccer_002_6": 171.64004516601562,
+            "iiith_soccer_015_2": 150.05438232421875,
+            "indiana_music_03_2": 88.75563049316406,
+            "indiana_music_03_3": 97.56509399414062,
+            "sfu_basketball012_12": 139.3481903076172,
+            "sfu_basketball_04_17": 176.12449645996094,
+            "uniandes_dance_002_11": 167.7868194580078,
+            "uniandes_dance_002_2": 127.93419647216797
+          }
+        },
+        "all_body_mm": {
+          "mean": 131.66277694702148,
+          "per_take": {
+            "georgiatech_bike_06_6": 165.1163787841797,
+            "georgiatech_bike_07_2": 191.7779998779297,
+            "georgiatech_bike_07_4": 142.79844665527344,
+            "georgiatech_cooking_02_01_2": 66.81961822509766,
+            "georgiatech_cooking_02_02_6": 148.9795379638672,
+            "georgiatech_cooking_06_01_2": 87.6593246459961,
+            "georgiatech_covid_02_10": 112.2070541381836,
+            "georgiatech_covid_02_4": 101.07523345947266,
+            "iiith_soccer_002_6": 167.13133239746094,
+            "iiith_soccer_015_2": 144.84295654296875,
+            "indiana_music_03_2": 86.57276153564453,
+            "indiana_music_03_3": 96.38497161865234,
+            "sfu_basketball012_12": 131.1234130859375,
+            "sfu_basketball_04_17": 176.15577697753906,
+            "uniandes_dance_002_11": 163.70263671875,
+            "uniandes_dance_002_2": 124.25698852539062
+          }
+        },
+        "startup_body_mm": {
+          "mean": 107.43825435638428,
+          "per_take": {
+            "georgiatech_bike_06_6": 171.90057373046875,
+            "georgiatech_bike_07_2": 121.078125,
+            "georgiatech_bike_07_4": 155.6436004638672,
+            "georgiatech_cooking_02_01_2": 67.57220458984375,
+            "georgiatech_cooking_02_02_6": 85.51371765136719,
+            "georgiatech_cooking_06_01_2": 80.9399185180664,
+            "georgiatech_covid_02_10": 98.99138641357422,
+            "georgiatech_covid_02_4": 79.50619506835938,
+            "iiith_soccer_002_6": 131.06161499023438,
+            "iiith_soccer_015_2": 103.15148162841797,
+            "indiana_music_03_2": 69.10968017578125,
+            "indiana_music_03_3": 86.94397735595703,
+            "sfu_basketball012_12": 65.32520294189453,
+            "sfu_basketball_04_17": 176.4058380126953,
+            "uniandes_dance_002_11": 131.0292205810547,
+            "uniandes_dance_002_2": 94.8393325805664
+          }
+        },
+        "pa_mm": {
+          "mean": 82.91925263404846,
+          "per_take": {
+            "georgiatech_bike_06_6": 82.18440246582031,
+            "georgiatech_bike_07_2": 107.7268295288086,
+            "georgiatech_bike_07_4": 94.7118911743164,
+            "georgiatech_cooking_02_01_2": 47.5872917175293,
+            "georgiatech_cooking_02_02_6": 107.9205322265625,
+            "georgiatech_cooking_06_01_2": 65.70391082763672,
+            "georgiatech_covid_02_10": 56.02805709838867,
+            "georgiatech_covid_02_4": 40.936927795410156,
+            "iiith_soccer_002_6": 78.6559066772461,
+            "iiith_soccer_015_2": 95.67505645751953,
+            "indiana_music_03_2": 59.151153564453125,
+            "indiana_music_03_3": 61.02034378051758,
+            "sfu_basketball012_12": 91.25582122802734,
+            "sfu_basketball_04_17": 130.7427215576172,
+            "uniandes_dance_002_11": 118.24913024902344,
+            "uniandes_dance_002_2": 89.15806579589844
+          }
+        },
+        "root_mm": {
+          "mean": 103.06517601013184,
+          "per_take": {
+            "georgiatech_bike_06_6": 187.3902130126953,
+            "georgiatech_bike_07_2": 187.8280029296875,
+            "georgiatech_bike_07_4": 97.0041732788086,
+            "georgiatech_cooking_02_01_2": 32.39486312866211,
+            "georgiatech_cooking_02_02_6": 85.74360656738281,
+            "georgiatech_cooking_06_01_2": 58.3948860168457,
+            "georgiatech_covid_02_10": 76.13258361816406,
+            "georgiatech_covid_02_4": 87.18437194824219,
+            "iiith_soccer_002_6": 163.935791015625,
+            "iiith_soccer_015_2": 115.00538635253906,
+            "indiana_music_03_2": 90.953369140625,
+            "indiana_music_03_3": 58.800392150878906,
+            "sfu_basketball012_12": 98.11665344238281,
+            "sfu_basketball_04_17": 104.45747375488281,
+            "uniandes_dance_002_11": 115.29154205322266,
+            "uniandes_dance_002_2": 90.40950775146484
+          }
+        },
+        "root_relative_mm": {
+          "mean": 110.69477772712708,
+          "per_take": {
+            "georgiatech_bike_06_6": 99.42027282714844,
+            "georgiatech_bike_07_2": 171.27346801757812,
+            "georgiatech_bike_07_4": 120.98291015625,
+            "georgiatech_cooking_02_01_2": 63.5916633605957,
+            "georgiatech_cooking_02_02_6": 152.03201293945312,
+            "georgiatech_cooking_06_01_2": 78.37712860107422,
+            "georgiatech_covid_02_10": 86.0929946899414,
+            "georgiatech_covid_02_4": 87.96194458007812,
+            "iiith_soccer_002_6": 125.61198425292969,
+            "iiith_soccer_015_2": 114.69441223144531,
+            "indiana_music_03_2": 71.92434692382812,
+            "indiana_music_03_3": 87.89036560058594,
+            "sfu_basketball012_12": 116.49162292480469,
+            "sfu_basketball_04_17": 146.13858032226562,
+            "uniandes_dance_002_11": 144.3181610107422,
+            "uniandes_dance_002_2": 104.3145751953125
+          }
+        },
+        "head_mm": {
+          "mean": 37.802847266197205,
+          "per_take": {
+            "georgiatech_bike_06_6": 27.432931900024414,
+            "georgiatech_bike_07_2": 30.581012725830078,
+            "georgiatech_bike_07_4": 73.71256256103516,
+            "georgiatech_cooking_02_01_2": 13.308853149414062,
+            "georgiatech_cooking_02_02_6": 35.994327545166016,
+            "georgiatech_cooking_06_01_2": 27.824615478515625,
+            "georgiatech_covid_02_10": 17.807437896728516,
+            "georgiatech_covid_02_4": 35.021636962890625,
+            "iiith_soccer_002_6": 57.64434051513672,
+            "iiith_soccer_015_2": 34.361183166503906,
+            "indiana_music_03_2": 38.67171096801758,
+            "indiana_music_03_3": 32.66838836669922,
+            "sfu_basketball012_12": 36.974639892578125,
+            "sfu_basketball_04_17": 66.3962631225586,
+            "uniandes_dance_002_11": 46.653480529785156,
+            "uniandes_dance_002_2": 29.792171478271484
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 29.206687331199646,
+          "per_take": {
+            "georgiatech_bike_06_6": 28.5023136138916,
+            "georgiatech_bike_07_2": 35.28590774536133,
+            "georgiatech_bike_07_4": 30.228872299194336,
+            "georgiatech_cooking_02_01_2": 19.924776077270508,
+            "georgiatech_cooking_02_02_6": 35.55461502075195,
+            "georgiatech_cooking_06_01_2": 24.364538192749023,
+            "georgiatech_covid_02_10": 28.027624130249023,
+            "georgiatech_covid_02_4": 28.113866806030273,
+            "iiith_soccer_002_6": 31.241352081298828,
+            "iiith_soccer_015_2": 27.73089027404785,
+            "indiana_music_03_2": 17.722919464111328,
+            "indiana_music_03_3": 24.081768035888672,
+            "sfu_basketball012_12": 29.017608642578125,
+            "sfu_basketball_04_17": 39.94367980957031,
+            "uniandes_dance_002_11": 40.743370056152344,
+            "uniandes_dance_002_2": 26.822895050048828
+          }
+        },
+        "velocity_mmps": {
+          "mean": 288.1780138015747,
+          "per_take": {
+            "georgiatech_bike_06_6": 201.9530792236328,
+            "georgiatech_bike_07_2": 219.1775665283203,
+            "georgiatech_bike_07_4": 131.15550231933594,
+            "georgiatech_cooking_02_01_2": 99.99964904785156,
+            "georgiatech_cooking_02_02_6": 153.77952575683594,
+            "georgiatech_cooking_06_01_2": 139.66543579101562,
+            "georgiatech_covid_02_10": 106.6955337524414,
+            "georgiatech_covid_02_4": 112.45220947265625,
+            "iiith_soccer_002_6": 450.03594970703125,
+            "iiith_soccer_015_2": 578.0316162109375,
+            "indiana_music_03_2": 97.14429473876953,
+            "indiana_music_03_3": 110.35029602050781,
+            "sfu_basketball012_12": 463.3756408691406,
+            "sfu_basketball_04_17": 668.869873046875,
+            "uniandes_dance_002_11": 661.5479125976562,
+            "uniandes_dance_002_2": 416.6141357421875
+          }
+        },
+        "prior_body_mm": {
+          "mean": 137.77758693695068,
+          "per_take": {
+            "georgiatech_bike_06_6": 165.64796447753906,
+            "georgiatech_bike_07_2": 201.42068481445312,
+            "georgiatech_bike_07_4": 142.2467498779297,
+            "georgiatech_cooking_02_01_2": 67.09162902832031,
+            "georgiatech_cooking_02_02_6": 157.24020385742188,
+            "georgiatech_cooking_06_01_2": 89.56303405761719,
+            "georgiatech_covid_02_10": 113.94755554199219,
+            "georgiatech_covid_02_4": 104.45158386230469,
+            "iiith_soccer_002_6": 172.63796997070312,
+            "iiith_soccer_015_2": 155.8538360595703,
+            "indiana_music_03_2": 89.4766845703125,
+            "indiana_music_03_3": 98.17259216308594,
+            "sfu_basketball012_12": 147.3488311767578,
+            "sfu_basketball_04_17": 188.77755737304688,
+            "uniandes_dance_002_11": 177.01620483398438,
+            "uniandes_dance_002_2": 133.54830932617188
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 3.086745006032288,
+          "per_take": {
+            "georgiatech_bike_06_6": 1.3796072006225586,
+            "georgiatech_bike_07_2": 0.8052156567573547,
+            "georgiatech_bike_07_4": 1.053963303565979,
+            "georgiatech_cooking_02_01_2": 0.36609092354774475,
+            "georgiatech_cooking_02_02_6": 0.32742080092430115,
+            "georgiatech_cooking_06_01_2": 1.0637832880020142,
+            "georgiatech_covid_02_10": 0.08853335678577423,
+            "georgiatech_covid_02_4": 0.6802050471305847,
+            "iiith_soccer_002_6": 0.9979251623153687,
+            "iiith_soccer_015_2": 5.799437522888184,
+            "indiana_music_03_2": 0.7210525274276733,
+            "indiana_music_03_3": 0.6074953079223633,
+            "sfu_basketball012_12": 8.00063705444336,
+            "sfu_basketball_04_17": 12.653047561645508,
+            "uniandes_dance_002_11": 9.229406356811523,
+            "uniandes_dance_002_2": 5.614099025726318
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 52.624757188372314,
+      "frames": 2880
+    },
+    {
+      "step": 14000,
+      "scores": {
+        "body_mm": {
+          "mean": 132.5632815361023,
+          "per_take": {
+            "georgiatech_bike_06_6": 186.000244140625,
+            "georgiatech_bike_07_2": 148.3434295654297,
+            "georgiatech_bike_07_4": 137.02125549316406,
+            "georgiatech_cooking_02_01_2": 87.0122299194336,
+            "georgiatech_cooking_02_02_6": 134.31773376464844,
+            "georgiatech_cooking_06_01_2": 98.18590545654297,
+            "georgiatech_covid_02_10": 79.98751831054688,
+            "georgiatech_covid_02_4": 86.74358367919922,
+            "iiith_soccer_002_6": 177.30783081054688,
+            "iiith_soccer_015_2": 203.87823486328125,
+            "indiana_music_03_2": 92.88037109375,
+            "indiana_music_03_3": 105.5718002319336,
+            "sfu_basketball012_12": 132.8001708984375,
+            "sfu_basketball_04_17": 206.40740966796875,
+            "uniandes_dance_002_11": 165.43174743652344,
+            "uniandes_dance_002_2": 79.12303924560547
+          }
+        },
+        "all_body_mm": {
+          "mean": 130.36043977737427,
+          "per_take": {
+            "georgiatech_bike_06_6": 183.4071044921875,
+            "georgiatech_bike_07_2": 145.14437866210938,
+            "georgiatech_bike_07_4": 139.98529052734375,
+            "georgiatech_cooking_02_01_2": 86.10802459716797,
+            "georgiatech_cooking_02_02_6": 128.47177124023438,
+            "georgiatech_cooking_06_01_2": 98.8065185546875,
+            "georgiatech_covid_02_10": 80.02398681640625,
+            "georgiatech_covid_02_4": 85.47793579101562,
+            "iiith_soccer_002_6": 173.3087158203125,
+            "iiith_soccer_015_2": 193.89463806152344,
+            "indiana_music_03_2": 90.5631332397461,
+            "indiana_music_03_3": 102.72856903076172,
+            "sfu_basketball012_12": 127.45297241210938,
+            "sfu_basketball_04_17": 205.0120391845703,
+            "uniandes_dance_002_11": 167.45046997070312,
+            "uniandes_dance_002_2": 77.93148803710938
+          }
+        },
+        "startup_body_mm": {
+          "mean": 112.7377142906189,
+          "per_take": {
+            "georgiatech_bike_06_6": 162.6618194580078,
+            "georgiatech_bike_07_2": 119.55206298828125,
+            "georgiatech_bike_07_4": 163.69760131835938,
+            "georgiatech_cooking_02_01_2": 78.8743667602539,
+            "georgiatech_cooking_02_02_6": 81.7039566040039,
+            "georgiatech_cooking_06_01_2": 103.77144622802734,
+            "georgiatech_covid_02_10": 80.31580352783203,
+            "georgiatech_covid_02_4": 75.35279846191406,
+            "iiith_soccer_002_6": 141.31593322753906,
+            "iiith_soccer_015_2": 114.0259017944336,
+            "indiana_music_03_2": 72.0252685546875,
+            "indiana_music_03_3": 79.98275756835938,
+            "sfu_basketball012_12": 84.67524719238281,
+            "sfu_basketball_04_17": 193.8489990234375,
+            "uniandes_dance_002_11": 183.60040283203125,
+            "uniandes_dance_002_2": 68.39906311035156
+          }
+        },
+        "pa_mm": {
+          "mean": 79.34503960609436,
+          "per_take": {
+            "georgiatech_bike_06_6": 115.76539611816406,
+            "georgiatech_bike_07_2": 83.03389739990234,
+            "georgiatech_bike_07_4": 94.56724548339844,
+            "georgiatech_cooking_02_01_2": 35.89836502075195,
+            "georgiatech_cooking_02_02_6": 60.9717903137207,
+            "georgiatech_cooking_06_01_2": 64.1320571899414,
+            "georgiatech_covid_02_10": 55.08565139770508,
+            "georgiatech_covid_02_4": 43.794273376464844,
+            "iiith_soccer_002_6": 86.52349853515625,
+            "iiith_soccer_015_2": 98.50511169433594,
+            "indiana_music_03_2": 61.0670280456543,
+            "indiana_music_03_3": 71.0572280883789,
+            "sfu_basketball012_12": 85.92018127441406,
+            "sfu_basketball_04_17": 143.2467041015625,
+            "uniandes_dance_002_11": 121.90519714355469,
+            "uniandes_dance_002_2": 48.0470085144043
+          }
+        },
+        "root_mm": {
+          "mean": 101.61178922653198,
+          "per_take": {
+            "georgiatech_bike_06_6": 164.4213409423828,
+            "georgiatech_bike_07_2": 129.24148559570312,
+            "georgiatech_bike_07_4": 63.45204544067383,
+            "georgiatech_cooking_02_01_2": 80.16780090332031,
+            "georgiatech_cooking_02_02_6": 140.75872802734375,
+            "georgiatech_cooking_06_01_2": 66.8955078125,
+            "georgiatech_covid_02_10": 39.232032775878906,
+            "georgiatech_covid_02_4": 45.29402542114258,
+            "iiith_soccer_002_6": 147.00535583496094,
+            "iiith_soccer_015_2": 179.0484161376953,
+            "indiana_music_03_2": 104.24898529052734,
+            "indiana_music_03_3": 82.91145324707031,
+            "sfu_basketball012_12": 93.5323486328125,
+            "sfu_basketball_04_17": 143.5207977294922,
+            "uniandes_dance_002_11": 96.0610122680664,
+            "uniandes_dance_002_2": 49.997291564941406
+          }
+        },
+        "root_relative_mm": {
+          "mean": 105.70668387413025,
+          "per_take": {
+            "georgiatech_bike_06_6": 143.72305297851562,
+            "georgiatech_bike_07_2": 110.2746810913086,
+            "georgiatech_bike_07_4": 124.02900695800781,
+            "georgiatech_cooking_02_01_2": 64.43595123291016,
+            "georgiatech_cooking_02_02_6": 93.34428405761719,
+            "georgiatech_cooking_06_01_2": 79.09088897705078,
+            "georgiatech_covid_02_10": 68.08246612548828,
+            "georgiatech_covid_02_4": 80.06185913085938,
+            "iiith_soccer_002_6": 137.07644653320312,
+            "iiith_soccer_015_2": 128.95135498046875,
+            "indiana_music_03_2": 83.43492126464844,
+            "indiana_music_03_3": 97.62403869628906,
+            "sfu_basketball012_12": 112.35563659667969,
+            "sfu_basketball_04_17": 160.1939697265625,
+            "uniandes_dance_002_11": 145.85438537597656,
+            "uniandes_dance_002_2": 62.77399826049805
+          }
+        },
+        "head_mm": {
+          "mean": 50.55028712749481,
+          "per_take": {
+            "georgiatech_bike_06_6": 39.177425384521484,
+            "georgiatech_bike_07_2": 31.897939682006836,
+            "georgiatech_bike_07_4": 77.72572326660156,
+            "georgiatech_cooking_02_01_2": 28.127685546875,
+            "georgiatech_cooking_02_02_6": 35.67908477783203,
+            "georgiatech_cooking_06_01_2": 21.650386810302734,
+            "georgiatech_covid_02_10": 38.357120513916016,
+            "georgiatech_covid_02_4": 58.26190948486328,
+            "iiith_soccer_002_6": 37.51024627685547,
+            "iiith_soccer_015_2": 138.785888671875,
+            "indiana_music_03_2": 39.85171890258789,
+            "indiana_music_03_3": 44.022178649902344,
+            "sfu_basketball012_12": 36.046791076660156,
+            "sfu_basketball_04_17": 82.66287994384766,
+            "uniandes_dance_002_11": 56.2633056640625,
+            "uniandes_dance_002_2": 42.78430938720703
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 29.42465603351593,
+          "per_take": {
+            "georgiatech_bike_06_6": 40.621788024902344,
+            "georgiatech_bike_07_2": 30.575862884521484,
+            "georgiatech_bike_07_4": 27.0361385345459,
+            "georgiatech_cooking_02_01_2": 20.942035675048828,
+            "georgiatech_cooking_02_02_6": 26.042062759399414,
+            "georgiatech_cooking_06_01_2": 26.349502563476562,
+            "georgiatech_covid_02_10": 20.808612823486328,
+            "georgiatech_covid_02_4": 25.636526107788086,
+            "iiith_soccer_002_6": 33.1192741394043,
+            "iiith_soccer_015_2": 31.229572296142578,
+            "indiana_music_03_2": 21.125463485717773,
+            "indiana_music_03_3": 31.50335121154785,
+            "sfu_basketball012_12": 28.7286376953125,
+            "sfu_basketball_04_17": 45.423423767089844,
+            "uniandes_dance_002_11": 42.09455871582031,
+            "uniandes_dance_002_2": 19.55768585205078
+          }
+        },
+        "velocity_mmps": {
+          "mean": 275.0899362564087,
+          "per_take": {
+            "georgiatech_bike_06_6": 204.04067993164062,
+            "georgiatech_bike_07_2": 175.31304931640625,
+            "georgiatech_bike_07_4": 114.99665069580078,
+            "georgiatech_cooking_02_01_2": 103.76583099365234,
+            "georgiatech_cooking_02_02_6": 124.07907104492188,
+            "georgiatech_cooking_06_01_2": 143.08998107910156,
+            "georgiatech_covid_02_10": 99.99422454833984,
+            "georgiatech_covid_02_4": 100.95741271972656,
+            "iiith_soccer_002_6": 445.94183349609375,
+            "iiith_soccer_015_2": 575.6453857421875,
+            "indiana_music_03_2": 82.44422912597656,
+            "indiana_music_03_3": 106.09803009033203,
+            "sfu_basketball012_12": 426.160888671875,
+            "sfu_basketball_04_17": 671.6770629882812,
+            "uniandes_dance_002_11": 670.903564453125,
+            "uniandes_dance_002_2": 356.3310852050781
+          }
+        },
+        "prior_body_mm": {
+          "mean": 135.2121353149414,
+          "per_take": {
+            "georgiatech_bike_06_6": 186.69664001464844,
+            "georgiatech_bike_07_2": 149.0500030517578,
+            "georgiatech_bike_07_4": 137.67608642578125,
+            "georgiatech_cooking_02_01_2": 87.16082000732422,
+            "georgiatech_cooking_02_02_6": 134.68728637695312,
+            "georgiatech_cooking_06_01_2": 99.4211196899414,
+            "georgiatech_covid_02_10": 80.19088745117188,
+            "georgiatech_covid_02_4": 86.8674545288086,
+            "iiith_soccer_002_6": 175.18936157226562,
+            "iiith_soccer_015_2": 206.7388916015625,
+            "indiana_music_03_2": 93.1794204711914,
+            "indiana_music_03_3": 106.22406005859375,
+            "sfu_basketball012_12": 139.71180725097656,
+            "sfu_basketball_04_17": 214.9577178955078,
+            "uniandes_dance_002_11": 178.07278442382812,
+            "uniandes_dance_002_2": 87.56982421875
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 2.648853011894971,
+          "per_take": {
+            "georgiatech_bike_06_6": 0.6963817477226257,
+            "georgiatech_bike_07_2": 0.7065594792366028,
+            "georgiatech_bike_07_4": 0.6548222899436951,
+            "georgiatech_cooking_02_01_2": 0.14859649538993835,
+            "georgiatech_cooking_02_02_6": 0.3695640563964844,
+            "georgiatech_cooking_06_01_2": 1.2352181673049927,
+            "georgiatech_covid_02_10": 0.20336444675922394,
+            "georgiatech_covid_02_4": 0.1238715872168541,
+            "iiith_soccer_002_6": -2.1184592247009277,
+            "iiith_soccer_015_2": 2.86065673828125,
+            "indiana_music_03_2": 0.2990557551383972,
+            "indiana_music_03_3": 0.6522553563117981,
+            "sfu_basketball012_12": 6.911618709564209,
+            "sfu_basketball_04_17": 8.550293922424316,
+            "uniandes_dance_002_11": 12.641064643859863,
+            "uniandes_dance_002_2": 8.446784019470215
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 52.438316768966615,
+      "frames": 2880
+    },
+    {
+      "step": 16000,
+      "scores": {
+        "body_mm": {
+          "mean": 144.53665590286255,
+          "per_take": {
+            "georgiatech_bike_06_6": 118.8100357055664,
+            "georgiatech_bike_07_2": 118.49101257324219,
+            "georgiatech_bike_07_4": 162.2607879638672,
+            "georgiatech_cooking_02_01_2": 162.0384063720703,
+            "georgiatech_cooking_02_02_6": 90.58464813232422,
+            "georgiatech_cooking_06_01_2": 115.91847229003906,
+            "georgiatech_covid_02_10": 109.27349090576172,
+            "georgiatech_covid_02_4": 95.30646514892578,
+            "iiith_soccer_002_6": 236.636474609375,
+            "iiith_soccer_015_2": 183.95045471191406,
+            "indiana_music_03_2": 129.18902587890625,
+            "indiana_music_03_3": 165.70932006835938,
+            "sfu_basketball012_12": 128.4915771484375,
+            "sfu_basketball_04_17": 233.42269897460938,
+            "uniandes_dance_002_11": 166.26345825195312,
+            "uniandes_dance_002_2": 96.24016571044922
+          }
+        },
+        "all_body_mm": {
+          "mean": 140.80100011825562,
+          "per_take": {
+            "georgiatech_bike_06_6": 124.74009704589844,
+            "georgiatech_bike_07_2": 117.4413833618164,
+            "georgiatech_bike_07_4": 162.15834045410156,
+            "georgiatech_cooking_02_01_2": 152.34974670410156,
+            "georgiatech_cooking_02_02_6": 89.12077331542969,
+            "georgiatech_cooking_06_01_2": 114.8172836303711,
+            "georgiatech_covid_02_10": 107.43567657470703,
+            "georgiatech_covid_02_4": 93.46209716796875,
+            "iiith_soccer_002_6": 223.37548828125,
+            "iiith_soccer_015_2": 175.25401306152344,
+            "indiana_music_03_2": 123.4803695678711,
+            "indiana_music_03_3": 157.63592529296875,
+            "sfu_basketball012_12": 122.1553726196289,
+            "sfu_basketball_04_17": 227.6195526123047,
+            "uniandes_dance_002_11": 164.69976806640625,
+            "uniandes_dance_002_2": 97.07011413574219
+          }
+        },
+        "startup_body_mm": {
+          "mean": 110.91572904586792,
+          "per_take": {
+            "georgiatech_bike_06_6": 172.18055725097656,
+            "georgiatech_bike_07_2": 109.04427337646484,
+            "georgiatech_bike_07_4": 161.3384552001953,
+            "georgiatech_cooking_02_01_2": 74.84050750732422,
+            "georgiatech_cooking_02_02_6": 77.40970611572266,
+            "georgiatech_cooking_06_01_2": 106.00775909423828,
+            "georgiatech_covid_02_10": 92.73320007324219,
+            "georgiatech_covid_02_4": 78.70709228515625,
+            "iiith_soccer_002_6": 117.2876205444336,
+            "iiith_soccer_015_2": 105.68245697021484,
+            "indiana_music_03_2": 77.8111572265625,
+            "indiana_music_03_3": 93.04883575439453,
+            "sfu_basketball012_12": 71.46561431884766,
+            "sfu_basketball_04_17": 181.19459533691406,
+            "uniandes_dance_002_11": 152.19007873535156,
+            "uniandes_dance_002_2": 103.70975494384766
+          }
+        },
+        "pa_mm": {
+          "mean": 80.76091265678406,
+          "per_take": {
+            "georgiatech_bike_06_6": 73.8853759765625,
+            "georgiatech_bike_07_2": 65.71110534667969,
+            "georgiatech_bike_07_4": 83.7795181274414,
+            "georgiatech_cooking_02_01_2": 72.22235870361328,
+            "georgiatech_cooking_02_02_6": 55.65033721923828,
+            "georgiatech_cooking_06_01_2": 79.3030014038086,
+            "georgiatech_covid_02_10": 60.55501174926758,
+            "georgiatech_covid_02_4": 39.36549758911133,
+            "iiith_soccer_002_6": 87.09093475341797,
+            "iiith_soccer_015_2": 98.85053253173828,
+            "indiana_music_03_2": 64.29048156738281,
+            "indiana_music_03_3": 84.6408920288086,
+            "sfu_basketball012_12": 84.3382797241211,
+            "sfu_basketball_04_17": 163.45938110351562,
+            "uniandes_dance_002_11": 117.24067687988281,
+            "uniandes_dance_002_2": 61.79121780395508
+          }
+        },
+        "root_mm": {
+          "mean": 119.24722671508789,
+          "per_take": {
+            "georgiatech_bike_06_6": 118.50813293457031,
+            "georgiatech_bike_07_2": 78.42852783203125,
+            "georgiatech_bike_07_4": 143.8045196533203,
+            "georgiatech_cooking_02_01_2": 207.853515625,
+            "georgiatech_cooking_02_02_6": 62.133026123046875,
+            "georgiatech_cooking_06_01_2": 63.64055252075195,
+            "georgiatech_covid_02_10": 58.4431037902832,
+            "georgiatech_covid_02_4": 62.85261154174805,
+            "iiith_soccer_002_6": 241.088623046875,
+            "iiith_soccer_015_2": 172.912353515625,
+            "indiana_music_03_2": 142.78369140625,
+            "indiana_music_03_3": 157.5432586669922,
+            "sfu_basketball012_12": 90.24388122558594,
+            "sfu_basketball_04_17": 146.54946899414062,
+            "uniandes_dance_002_11": 105.9658203125,
+            "uniandes_dance_002_2": 55.20454025268555
+          }
+        },
+        "root_relative_mm": {
+          "mean": 117.70822238922119,
+          "per_take": {
+            "georgiatech_bike_06_6": 107.3077163696289,
+            "georgiatech_bike_07_2": 108.51994323730469,
+            "georgiatech_bike_07_4": 144.07901000976562,
+            "georgiatech_cooking_02_01_2": 99.34086608886719,
+            "georgiatech_cooking_02_02_6": 84.99032592773438,
+            "georgiatech_cooking_06_01_2": 108.07768249511719,
+            "georgiatech_covid_02_10": 102.11277770996094,
+            "georgiatech_covid_02_4": 84.67027282714844,
+            "iiith_soccer_002_6": 158.0980987548828,
+            "iiith_soccer_015_2": 125.83390808105469,
+            "indiana_music_03_2": 99.51930236816406,
+            "indiana_music_03_3": 138.54409790039062,
+            "sfu_basketball012_12": 106.10603332519531,
+            "sfu_basketball_04_17": 191.18862915039062,
+            "uniandes_dance_002_11": 142.93228149414062,
+            "uniandes_dance_002_2": 82.01061248779297
+          }
+        },
+        "head_mm": {
+          "mean": 43.088791608810425,
+          "per_take": {
+            "georgiatech_bike_06_6": 30.1649227142334,
+            "georgiatech_bike_07_2": 44.766197204589844,
+            "georgiatech_bike_07_4": 99.32295227050781,
+            "georgiatech_cooking_02_01_2": 30.94692039489746,
+            "georgiatech_cooking_02_02_6": 28.535058975219727,
+            "georgiatech_cooking_06_01_2": 21.91644287109375,
+            "georgiatech_covid_02_10": 19.324342727661133,
+            "georgiatech_covid_02_4": 56.41227340698242,
+            "iiith_soccer_002_6": 63.71282196044922,
+            "iiith_soccer_015_2": 37.582584381103516,
+            "indiana_music_03_2": 39.45903396606445,
+            "indiana_music_03_3": 49.936119079589844,
+            "sfu_basketball012_12": 37.5805778503418,
+            "sfu_basketball_04_17": 58.312286376953125,
+            "uniandes_dance_002_11": 43.51929473876953,
+            "uniandes_dance_002_2": 27.928836822509766
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 32.28753316402435,
+          "per_take": {
+            "georgiatech_bike_06_6": 35.16893005371094,
+            "georgiatech_bike_07_2": 31.75692367553711,
+            "georgiatech_bike_07_4": 38.265323638916016,
+            "georgiatech_cooking_02_01_2": 24.653858184814453,
+            "georgiatech_cooking_02_02_6": 26.400203704833984,
+            "georgiatech_cooking_06_01_2": 41.33216857910156,
+            "georgiatech_covid_02_10": 36.1431884765625,
+            "georgiatech_covid_02_4": 26.359655380249023,
+            "iiith_soccer_002_6": 33.982852935791016,
+            "iiith_soccer_015_2": 28.505422592163086,
+            "indiana_music_03_2": 19.831186294555664,
+            "indiana_music_03_3": 27.443355560302734,
+            "sfu_basketball012_12": 27.279932022094727,
+            "sfu_basketball_04_17": 48.932106018066406,
+            "uniandes_dance_002_11": 42.116539001464844,
+            "uniandes_dance_002_2": 28.428884506225586
+          }
+        },
+        "velocity_mmps": {
+          "mean": 269.37271881103516,
+          "per_take": {
+            "georgiatech_bike_06_6": 173.54075622558594,
+            "georgiatech_bike_07_2": 147.04208374023438,
+            "georgiatech_bike_07_4": 106.28921508789062,
+            "georgiatech_cooking_02_01_2": 116.27277374267578,
+            "georgiatech_cooking_02_02_6": 120.81468200683594,
+            "georgiatech_cooking_06_01_2": 130.3922576904297,
+            "georgiatech_covid_02_10": 88.87413024902344,
+            "georgiatech_covid_02_4": 94.85208892822266,
+            "iiith_soccer_002_6": 429.1141662597656,
+            "iiith_soccer_015_2": 527.3101806640625,
+            "indiana_music_03_2": 91.74658203125,
+            "indiana_music_03_3": 129.9523162841797,
+            "sfu_basketball012_12": 405.1426696777344,
+            "sfu_basketball_04_17": 736.0691528320312,
+            "uniandes_dance_002_11": 633.9843139648438,
+            "uniandes_dance_002_2": 378.5661315917969
+          }
+        },
+        "prior_body_mm": {
+          "mean": 146.98897171020508,
+          "per_take": {
+            "georgiatech_bike_06_6": 119.10618591308594,
+            "georgiatech_bike_07_2": 119.60794830322266,
+            "georgiatech_bike_07_4": 162.60556030273438,
+            "georgiatech_cooking_02_01_2": 161.68283081054688,
+            "georgiatech_cooking_02_02_6": 91.67404174804688,
+            "georgiatech_cooking_06_01_2": 116.26091003417969,
+            "georgiatech_covid_02_10": 109.29258728027344,
+            "georgiatech_covid_02_4": 95.80952453613281,
+            "iiith_soccer_002_6": 237.8999481201172,
+            "iiith_soccer_015_2": 188.11782836914062,
+            "indiana_music_03_2": 129.65658569335938,
+            "indiana_music_03_3": 165.60452270507812,
+            "sfu_basketball012_12": 135.06101989746094,
+            "sfu_basketball_04_17": 239.47525024414062,
+            "uniandes_dance_002_11": 174.60000610351562,
+            "uniandes_dance_002_2": 105.3687973022461
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 2.452312328503467,
+          "per_take": {
+            "georgiatech_bike_06_6": 0.29615941643714905,
+            "georgiatech_bike_07_2": 1.1169278621673584,
+            "georgiatech_bike_07_4": 0.34475141763687134,
+            "georgiatech_cooking_02_01_2": -0.35559386014938354,
+            "georgiatech_cooking_02_02_6": 1.0893967151641846,
+            "georgiatech_cooking_06_01_2": 0.3424298167228699,
+            "georgiatech_covid_02_10": 0.019106054678559303,
+            "georgiatech_covid_02_4": 0.5030498504638672,
+            "iiith_soccer_002_6": 1.2634618282318115,
+            "iiith_soccer_015_2": 4.167374134063721,
+            "indiana_music_03_2": 0.4675827622413635,
+            "indiana_music_03_3": -0.10480217635631561,
+            "sfu_basketball012_12": 6.569441318511963,
+            "sfu_basketball_04_17": 6.052541255950928,
+            "uniandes_dance_002_11": 8.336533546447754,
+            "uniandes_dance_002_2": 9.128637313842773
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 53.76253502070904,
+      "frames": 2880
+    },
+    {
+      "step": 18000,
+      "scores": {
+        "body_mm": {
+          "mean": 131.5099596977234,
+          "per_take": {
+            "georgiatech_bike_06_6": 112.55021667480469,
+            "georgiatech_bike_07_2": 113.06599426269531,
+            "georgiatech_bike_07_4": 124.16475677490234,
+            "georgiatech_cooking_02_01_2": 78.58462524414062,
+            "georgiatech_cooking_02_02_6": 98.40596771240234,
+            "georgiatech_cooking_06_01_2": 192.48233032226562,
+            "georgiatech_covid_02_10": 113.49372863769531,
+            "georgiatech_covid_02_4": 98.3057632446289,
+            "iiith_soccer_002_6": 148.6914825439453,
+            "iiith_soccer_015_2": 188.1019744873047,
+            "indiana_music_03_2": 155.35955810546875,
+            "indiana_music_03_3": 124.69343566894531,
+            "sfu_basketball012_12": 137.20358276367188,
+            "sfu_basketball_04_17": 162.55174255371094,
+            "uniandes_dance_002_11": 176.59481811523438,
+            "uniandes_dance_002_2": 79.90937805175781
+          }
+        },
+        "all_body_mm": {
+          "mean": 128.95890092849731,
+          "per_take": {
+            "georgiatech_bike_06_6": 118.57952117919922,
+            "georgiatech_bike_07_2": 112.52200317382812,
+            "georgiatech_bike_07_4": 128.3323974609375,
+            "georgiatech_cooking_02_01_2": 76.76998138427734,
+            "georgiatech_cooking_02_02_6": 95.66311645507812,
+            "georgiatech_cooking_06_01_2": 181.88584899902344,
+            "georgiatech_covid_02_10": 112.92449188232422,
+            "georgiatech_covid_02_4": 95.9571304321289,
+            "iiith_soccer_002_6": 145.28260803222656,
+            "iiith_soccer_015_2": 179.4640350341797,
+            "indiana_music_03_2": 147.30978393554688,
+            "indiana_music_03_3": 121.18739318847656,
+            "sfu_basketball012_12": 131.07766723632812,
+            "sfu_basketball_04_17": 164.09332275390625,
+            "uniandes_dance_002_11": 173.67660522460938,
+            "uniandes_dance_002_2": 78.61650848388672
+          }
+        },
+        "startup_body_mm": {
+          "mean": 108.55042862892151,
+          "per_take": {
+            "georgiatech_bike_06_6": 166.81399536132812,
+            "georgiatech_bike_07_2": 108.17009735107422,
+            "georgiatech_bike_07_4": 161.67347717285156,
+            "georgiatech_cooking_02_01_2": 62.252864837646484,
+            "georgiatech_cooking_02_02_6": 73.7203598022461,
+            "georgiatech_cooking_06_01_2": 97.11395263671875,
+            "georgiatech_covid_02_10": 108.37049865722656,
+            "georgiatech_covid_02_4": 77.16809844970703,
+            "iiith_soccer_002_6": 118.0115966796875,
+            "iiith_soccer_015_2": 110.36060333251953,
+            "indiana_music_03_2": 82.9116439819336,
+            "indiana_music_03_3": 93.13904571533203,
+            "sfu_basketball012_12": 82.07035064697266,
+            "sfu_basketball_04_17": 176.4258575439453,
+            "uniandes_dance_002_11": 150.33090209960938,
+            "uniandes_dance_002_2": 68.27351379394531
+          }
+        },
+        "pa_mm": {
+          "mean": 78.67274308204651,
+          "per_take": {
+            "georgiatech_bike_06_6": 78.51697540283203,
+            "georgiatech_bike_07_2": 71.33546447753906,
+            "georgiatech_bike_07_4": 82.93693542480469,
+            "georgiatech_cooking_02_01_2": 45.41179656982422,
+            "georgiatech_cooking_02_02_6": 54.22273635864258,
+            "georgiatech_cooking_06_01_2": 109.58262634277344,
+            "georgiatech_covid_02_10": 66.11577606201172,
+            "georgiatech_covid_02_4": 42.98014831542969,
+            "iiith_soccer_002_6": 74.18147277832031,
+            "iiith_soccer_015_2": 107.50416564941406,
+            "indiana_music_03_2": 78.3615493774414,
+            "indiana_music_03_3": 59.620025634765625,
+            "sfu_basketball012_12": 98.8750228881836,
+            "sfu_basketball_04_17": 116.03663635253906,
+            "uniandes_dance_002_11": 120.79905700683594,
+            "uniandes_dance_002_2": 52.28350067138672
+          }
+        },
+        "root_mm": {
+          "mean": 98.17408275604248,
+          "per_take": {
+            "georgiatech_bike_06_6": 72.8185806274414,
+            "georgiatech_bike_07_2": 108.5452880859375,
+            "georgiatech_bike_07_4": 94.45417785644531,
+            "georgiatech_cooking_02_01_2": 63.05126190185547,
+            "georgiatech_cooking_02_02_6": 84.81773376464844,
+            "georgiatech_cooking_06_01_2": 97.12586975097656,
+            "georgiatech_covid_02_10": 72.52035522460938,
+            "georgiatech_covid_02_4": 66.73347473144531,
+            "iiith_soccer_002_6": 138.8676300048828,
+            "iiith_soccer_015_2": 168.13623046875,
+            "indiana_music_03_2": 143.80972290039062,
+            "indiana_music_03_3": 91.05703735351562,
+            "sfu_basketball012_12": 89.28226470947266,
+            "sfu_basketball_04_17": 100.73560333251953,
+            "uniandes_dance_002_11": 120.81083679199219,
+            "uniandes_dance_002_2": 58.019256591796875
+          }
+        },
+        "root_relative_mm": {
+          "mean": 109.81572961807251,
+          "per_take": {
+            "georgiatech_bike_06_6": 94.52194213867188,
+            "georgiatech_bike_07_2": 103.50608825683594,
+            "georgiatech_bike_07_4": 111.29544830322266,
+            "georgiatech_cooking_02_01_2": 64.22940063476562,
+            "georgiatech_cooking_02_02_6": 80.12480926513672,
+            "georgiatech_cooking_06_01_2": 169.0758056640625,
+            "georgiatech_covid_02_10": 99.73408508300781,
+            "georgiatech_covid_02_4": 100.12030792236328,
+            "iiith_soccer_002_6": 107.53587341308594,
+            "iiith_soccer_015_2": 139.65353393554688,
+            "indiana_music_03_2": 135.71633911132812,
+            "indiana_music_03_3": 91.68708801269531,
+            "sfu_basketball012_12": 118.0971450805664,
+            "sfu_basketball_04_17": 129.23779296875,
+            "uniandes_dance_002_11": 151.06173706054688,
+            "uniandes_dance_002_2": 61.45427703857422
+          }
+        },
+        "head_mm": {
+          "mean": 40.001873195171356,
+          "per_take": {
+            "georgiatech_bike_06_6": 30.30459976196289,
+            "georgiatech_bike_07_2": 39.06816864013672,
+            "georgiatech_bike_07_4": 39.516136169433594,
+            "georgiatech_cooking_02_01_2": 12.970126152038574,
+            "georgiatech_cooking_02_02_6": 30.149728775024414,
+            "georgiatech_cooking_06_01_2": 58.47356414794922,
+            "georgiatech_covid_02_10": 20.320335388183594,
+            "georgiatech_covid_02_4": 49.60029220581055,
+            "iiith_soccer_002_6": 38.28241729736328,
+            "iiith_soccer_015_2": 69.3850326538086,
+            "indiana_music_03_2": 36.729007720947266,
+            "indiana_music_03_3": 31.9910945892334,
+            "sfu_basketball012_12": 38.861724853515625,
+            "sfu_basketball_04_17": 65.61128997802734,
+            "uniandes_dance_002_11": 45.58173751831055,
+            "uniandes_dance_002_2": 33.184715270996094
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 31.990376710891724,
+          "per_take": {
+            "georgiatech_bike_06_6": 29.125173568725586,
+            "georgiatech_bike_07_2": 28.240703582763672,
+            "georgiatech_bike_07_4": 34.32309341430664,
+            "georgiatech_cooking_02_01_2": 22.599437713623047,
+            "georgiatech_cooking_02_02_6": 24.998836517333984,
+            "georgiatech_cooking_06_01_2": 68.49766540527344,
+            "georgiatech_covid_02_10": 28.081851959228516,
+            "georgiatech_covid_02_4": 31.577911376953125,
+            "iiith_soccer_002_6": 28.395055770874023,
+            "iiith_soccer_015_2": 33.11795425415039,
+            "indiana_music_03_2": 28.0306339263916,
+            "indiana_music_03_3": 27.104419708251953,
+            "sfu_basketball012_12": 29.50591468811035,
+            "sfu_basketball_04_17": 36.485687255859375,
+            "uniandes_dance_002_11": 43.81850814819336,
+            "uniandes_dance_002_2": 17.943180084228516
+          }
+        },
+        "velocity_mmps": {
+          "mean": 271.6491937637329,
+          "per_take": {
+            "georgiatech_bike_06_6": 208.7688751220703,
+            "georgiatech_bike_07_2": 149.34066772460938,
+            "georgiatech_bike_07_4": 115.60832977294922,
+            "georgiatech_cooking_02_01_2": 88.40911102294922,
+            "georgiatech_cooking_02_02_6": 121.49601745605469,
+            "georgiatech_cooking_06_01_2": 174.72023010253906,
+            "georgiatech_covid_02_10": 91.1098403930664,
+            "georgiatech_covid_02_4": 100.94303131103516,
+            "iiith_soccer_002_6": 431.0270690917969,
+            "iiith_soccer_015_2": 563.2704467773438,
+            "indiana_music_03_2": 94.88542938232422,
+            "indiana_music_03_3": 110.9750747680664,
+            "sfu_basketball012_12": 472.6866760253906,
+            "sfu_basketball_04_17": 612.4213256835938,
+            "uniandes_dance_002_11": 662.8413696289062,
+            "uniandes_dance_002_2": 347.88360595703125
+          }
+        },
+        "prior_body_mm": {
+          "mean": 134.34570693969727,
+          "per_take": {
+            "georgiatech_bike_06_6": 113.70858001708984,
+            "georgiatech_bike_07_2": 114.56986999511719,
+            "georgiatech_bike_07_4": 124.36651611328125,
+            "georgiatech_cooking_02_01_2": 79.01580810546875,
+            "georgiatech_cooking_02_02_6": 99.37750244140625,
+            "georgiatech_cooking_06_01_2": 191.68203735351562,
+            "georgiatech_covid_02_10": 113.60638427734375,
+            "georgiatech_covid_02_4": 98.7775650024414,
+            "iiith_soccer_002_6": 149.1636199951172,
+            "iiith_soccer_015_2": 191.801025390625,
+            "indiana_music_03_2": 154.92617797851562,
+            "indiana_music_03_3": 125.7376480102539,
+            "sfu_basketball012_12": 146.1233367919922,
+            "sfu_basketball_04_17": 172.7189483642578,
+            "uniandes_dance_002_11": 185.22506713867188,
+            "uniandes_dance_002_2": 88.7312240600586
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 2.8357469332404435,
+          "per_take": {
+            "georgiatech_bike_06_6": 1.1583693027496338,
+            "georgiatech_bike_07_2": 1.5038766860961914,
+            "georgiatech_bike_07_4": 0.20174765586853027,
+            "georgiatech_cooking_02_01_2": 0.431182861328125,
+            "georgiatech_cooking_02_02_6": 0.9715327024459839,
+            "georgiatech_cooking_06_01_2": -0.800304114818573,
+            "georgiatech_covid_02_10": 0.11263976246118546,
+            "georgiatech_covid_02_4": 0.471802294254303,
+            "iiith_soccer_002_6": 0.4721420705318451,
+            "iiith_soccer_015_2": 3.6990551948547363,
+            "indiana_music_03_2": -0.4333670139312744,
+            "indiana_music_03_3": 1.04421865940094,
+            "sfu_basketball012_12": 8.919758796691895,
+            "sfu_basketball_04_17": 10.167208671569824,
+            "uniandes_dance_002_11": 8.630233764648438,
+            "uniandes_dance_002_2": 8.821853637695312
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 52.21683114673942,
+      "frames": 2880
+    },
+    {
+      "step": 20000,
+      "scores": {
+        "body_mm": {
+          "mean": 142.296217918396,
+          "per_take": {
+            "georgiatech_bike_06_6": 173.04559326171875,
+            "georgiatech_bike_07_2": 145.52223205566406,
+            "georgiatech_bike_07_4": 200.19357299804688,
+            "georgiatech_cooking_02_01_2": 145.092529296875,
+            "georgiatech_cooking_02_02_6": 95.23709869384766,
+            "georgiatech_cooking_06_01_2": 139.12112426757812,
+            "georgiatech_covid_02_10": 95.06109619140625,
+            "georgiatech_covid_02_4": 85.3304214477539,
+            "iiith_soccer_002_6": 218.2119598388672,
+            "iiith_soccer_015_2": 161.98460388183594,
+            "indiana_music_03_2": 153.7678680419922,
+            "indiana_music_03_3": 114.03783416748047,
+            "sfu_basketball012_12": 112.99073028564453,
+            "sfu_basketball_04_17": 176.2060546875,
+            "uniandes_dance_002_11": 183.23764038085938,
+            "uniandes_dance_002_2": 77.69912719726562
+          }
+        },
+        "all_body_mm": {
+          "mean": 138.82616186141968,
+          "per_take": {
+            "georgiatech_bike_06_6": 173.6522216796875,
+            "georgiatech_bike_07_2": 142.50643920898438,
+            "georgiatech_bike_07_4": 199.72450256347656,
+            "georgiatech_cooking_02_01_2": 136.4982452392578,
+            "georgiatech_cooking_02_02_6": 94.07893371582031,
+            "georgiatech_cooking_06_01_2": 133.40818786621094,
+            "georgiatech_covid_02_10": 95.39459228515625,
+            "georgiatech_covid_02_4": 84.33187866210938,
+            "iiith_soccer_002_6": 206.64036560058594,
+            "iiith_soccer_015_2": 155.79226684570312,
+            "indiana_music_03_2": 145.23777770996094,
+            "indiana_music_03_3": 111.32359313964844,
+            "sfu_basketball012_12": 108.41763305664062,
+            "sfu_basketball_04_17": 179.21177673339844,
+            "uniandes_dance_002_11": 177.85873413085938,
+            "uniandes_dance_002_2": 77.14144134521484
+          }
+        },
+        "startup_body_mm": {
+          "mean": 111.06572818756104,
+          "per_take": {
+            "georgiatech_bike_06_6": 178.50521850585938,
+            "georgiatech_bike_07_2": 118.38014221191406,
+            "georgiatech_bike_07_4": 195.97210693359375,
+            "georgiatech_cooking_02_01_2": 67.74403381347656,
+            "georgiatech_cooking_02_02_6": 84.81352233886719,
+            "georgiatech_cooking_06_01_2": 87.70466613769531,
+            "georgiatech_covid_02_10": 98.06272888183594,
+            "georgiatech_covid_02_4": 76.34356689453125,
+            "iiith_soccer_002_6": 114.06749725341797,
+            "iiith_soccer_015_2": 106.25353240966797,
+            "indiana_music_03_2": 76.99701690673828,
+            "indiana_music_03_3": 89.60973358154297,
+            "sfu_basketball012_12": 71.83283996582031,
+            "sfu_basketball_04_17": 203.257568359375,
+            "uniandes_dance_002_11": 134.8275909423828,
+            "uniandes_dance_002_2": 72.67988586425781
+          }
+        },
+        "pa_mm": {
+          "mean": 83.59017491340637,
+          "per_take": {
+            "georgiatech_bike_06_6": 114.14369201660156,
+            "georgiatech_bike_07_2": 85.33012390136719,
+            "georgiatech_bike_07_4": 123.4774169921875,
+            "georgiatech_cooking_02_01_2": 79.79234313964844,
+            "georgiatech_cooking_02_02_6": 61.26381301879883,
+            "georgiatech_cooking_06_01_2": 88.11412811279297,
+            "georgiatech_covid_02_10": 55.22661209106445,
+            "georgiatech_covid_02_4": 38.246429443359375,
+            "iiith_soccer_002_6": 92.02403259277344,
+            "iiith_soccer_015_2": 90.68672943115234,
+            "indiana_music_03_2": 84.89143371582031,
+            "indiana_music_03_3": 62.358612060546875,
+            "sfu_basketball012_12": 81.60678100585938,
+            "sfu_basketball_04_17": 111.90860748291016,
+            "uniandes_dance_002_11": 120.47496032714844,
+            "uniandes_dance_002_2": 47.8970832824707
+          }
+        },
+        "root_mm": {
+          "mean": 120.9366762638092,
+          "per_take": {
+            "georgiatech_bike_06_6": 149.1584014892578,
+            "georgiatech_bike_07_2": 137.61695861816406,
+            "georgiatech_bike_07_4": 214.62088012695312,
+            "georgiatech_cooking_02_01_2": 155.4214324951172,
+            "georgiatech_cooking_02_02_6": 66.1775131225586,
+            "georgiatech_cooking_06_01_2": 73.12296295166016,
+            "georgiatech_covid_02_10": 63.34981155395508,
+            "georgiatech_covid_02_4": 55.39872360229492,
+            "iiith_soccer_002_6": 199.78857421875,
+            "iiith_soccer_015_2": 145.53167724609375,
+            "indiana_music_03_2": 218.93173217773438,
+            "indiana_music_03_3": 90.76335144042969,
+            "sfu_basketball012_12": 68.74932861328125,
+            "sfu_basketball_04_17": 114.6689682006836,
+            "uniandes_dance_002_11": 132.88278198242188,
+            "uniandes_dance_002_2": 48.8037223815918
+          }
+        },
+        "root_relative_mm": {
+          "mean": 118.4102246761322,
+          "per_take": {
+            "georgiatech_bike_06_6": 152.77255249023438,
+            "georgiatech_bike_07_2": 123.78377532958984,
+            "georgiatech_bike_07_4": 190.99020385742188,
+            "georgiatech_cooking_02_01_2": 123.63816833496094,
+            "georgiatech_cooking_02_02_6": 81.06480407714844,
+            "georgiatech_cooking_06_01_2": 121.9683609008789,
+            "georgiatech_covid_02_10": 86.0982437133789,
+            "georgiatech_covid_02_4": 74.77728271484375,
+            "iiith_soccer_002_6": 141.30160522460938,
+            "iiith_soccer_015_2": 116.08009338378906,
+            "indiana_music_03_2": 138.42115783691406,
+            "indiana_music_03_3": 97.29264831542969,
+            "sfu_basketball012_12": 102.05724334716797,
+            "sfu_basketball_04_17": 130.35435485839844,
+            "uniandes_dance_002_11": 151.5789031982422,
+            "uniandes_dance_002_2": 62.38419723510742
+          }
+        },
+        "head_mm": {
+          "mean": 41.5479621887207,
+          "per_take": {
+            "georgiatech_bike_06_6": 41.39736557006836,
+            "georgiatech_bike_07_2": 41.032997131347656,
+            "georgiatech_bike_07_4": 44.651763916015625,
+            "georgiatech_cooking_02_01_2": 17.834028244018555,
+            "georgiatech_cooking_02_02_6": 34.3572998046875,
+            "georgiatech_cooking_06_01_2": 27.098819732666016,
+            "georgiatech_covid_02_10": 17.197446823120117,
+            "georgiatech_covid_02_4": 53.717613220214844,
+            "iiith_soccer_002_6": 97.0811767578125,
+            "iiith_soccer_015_2": 26.31705093383789,
+            "indiana_music_03_2": 39.90782928466797,
+            "indiana_music_03_3": 32.425621032714844,
+            "sfu_basketball012_12": 31.17081069946289,
+            "sfu_basketball_04_17": 84.91001892089844,
+            "uniandes_dance_002_11": 42.64992141723633,
+            "uniandes_dance_002_2": 33.01763153076172
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 33.24756979942322,
+          "per_take": {
+            "georgiatech_bike_06_6": 44.592613220214844,
+            "georgiatech_bike_07_2": 34.972137451171875,
+            "georgiatech_bike_07_4": 45.920562744140625,
+            "georgiatech_cooking_02_01_2": 36.94302749633789,
+            "georgiatech_cooking_02_02_6": 25.48709487915039,
+            "georgiatech_cooking_06_01_2": 55.980072021484375,
+            "georgiatech_covid_02_10": 23.88125228881836,
+            "georgiatech_covid_02_4": 24.635059356689453,
+            "iiith_soccer_002_6": 33.453529357910156,
+            "iiith_soccer_015_2": 27.586856842041016,
+            "indiana_music_03_2": 26.8450984954834,
+            "indiana_music_03_3": 26.489337921142578,
+            "sfu_basketball012_12": 27.006145477294922,
+            "sfu_basketball_04_17": 36.51053237915039,
+            "uniandes_dance_002_11": 42.578697204589844,
+            "uniandes_dance_002_2": 19.079099655151367
+          }
+        },
+        "velocity_mmps": {
+          "mean": 267.5956783294678,
+          "per_take": {
+            "georgiatech_bike_06_6": 199.95413208007812,
+            "georgiatech_bike_07_2": 161.39996337890625,
+            "georgiatech_bike_07_4": 143.0472412109375,
+            "georgiatech_cooking_02_01_2": 101.11763763427734,
+            "georgiatech_cooking_02_02_6": 118.65262603759766,
+            "georgiatech_cooking_06_01_2": 151.92845153808594,
+            "georgiatech_covid_02_10": 91.33206176757812,
+            "georgiatech_covid_02_4": 102.20437622070312,
+            "iiith_soccer_002_6": 466.37664794921875,
+            "iiith_soccer_015_2": 537.1200561523438,
+            "indiana_music_03_2": 88.1686782836914,
+            "indiana_music_03_3": 106.37796783447266,
+            "sfu_basketball012_12": 413.9296875,
+            "sfu_basketball_04_17": 630.5620727539062,
+            "uniandes_dance_002_11": 629.6693115234375,
+            "uniandes_dance_002_2": 339.68994140625
+          }
+        },
+        "prior_body_mm": {
+          "mean": 145.1368842124939,
+          "per_take": {
+            "georgiatech_bike_06_6": 173.43911743164062,
+            "georgiatech_bike_07_2": 145.99282836914062,
+            "georgiatech_bike_07_4": 200.52920532226562,
+            "georgiatech_cooking_02_01_2": 144.60885620117188,
+            "georgiatech_cooking_02_02_6": 95.85935974121094,
+            "georgiatech_cooking_06_01_2": 139.51803588867188,
+            "georgiatech_covid_02_10": 95.46739196777344,
+            "georgiatech_covid_02_4": 86.01688385009766,
+            "iiith_soccer_002_6": 218.16152954101562,
+            "iiith_soccer_015_2": 168.0005340576172,
+            "indiana_music_03_2": 153.41375732421875,
+            "indiana_music_03_3": 115.37913513183594,
+            "sfu_basketball012_12": 121.84242248535156,
+            "sfu_basketball_04_17": 185.0620574951172,
+            "uniandes_dance_002_11": 191.22903442382812,
+            "uniandes_dance_002_2": 87.66999816894531
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 2.840664823073894,
+          "per_take": {
+            "georgiatech_bike_06_6": 0.3935176730155945,
+            "georgiatech_bike_07_2": 0.47056490182876587,
+            "georgiatech_bike_07_4": 0.3356412947177887,
+            "georgiatech_cooking_02_01_2": -0.4836587905883789,
+            "georgiatech_cooking_02_02_6": 0.6222602128982544,
+            "georgiatech_cooking_06_01_2": 0.3968997597694397,
+            "georgiatech_covid_02_10": 0.40629810094833374,
+            "georgiatech_covid_02_4": 0.6864560842514038,
+            "iiith_soccer_002_6": -0.05045332759618759,
+            "iiith_soccer_015_2": 6.015933990478516,
+            "indiana_music_03_2": -0.3541111350059509,
+            "indiana_music_03_3": 1.3413159847259521,
+            "sfu_basketball012_12": 8.851702690124512,
+            "sfu_basketball_04_17": 8.85600471496582,
+            "uniandes_dance_002_11": 7.99139404296875,
+            "uniandes_dance_002_2": 9.970870971679688
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 52.45633143745363,
+      "frames": 2880
+    },
+    {
+      "step": 22000,
+      "scores": {
+        "body_mm": {
+          "mean": 141.40077018737793,
+          "per_take": {
+            "georgiatech_bike_06_6": 138.701904296875,
+            "georgiatech_bike_07_2": 172.818115234375,
+            "georgiatech_bike_07_4": 253.56649780273438,
+            "georgiatech_cooking_02_01_2": 76.09477996826172,
+            "georgiatech_cooking_02_02_6": 107.1452407836914,
+            "georgiatech_cooking_06_01_2": 143.19662475585938,
+            "georgiatech_covid_02_10": 124.28557586669922,
+            "georgiatech_covid_02_4": 93.62712097167969,
+            "iiith_soccer_002_6": 195.0335693359375,
+            "iiith_soccer_015_2": 167.9717254638672,
+            "indiana_music_03_2": 120.93012237548828,
+            "indiana_music_03_3": 125.38233947753906,
+            "sfu_basketball012_12": 125.17926788330078,
+            "sfu_basketball_04_17": 160.12879943847656,
+            "uniandes_dance_002_11": 162.56210327148438,
+            "uniandes_dance_002_2": 95.78853607177734
+          }
+        },
+        "all_body_mm": {
+          "mean": 137.83075952529907,
+          "per_take": {
+            "georgiatech_bike_06_6": 145.04586791992188,
+            "georgiatech_bike_07_2": 166.10643005371094,
+            "georgiatech_bike_07_4": 245.6195526123047,
+            "georgiatech_cooking_02_01_2": 75.66777801513672,
+            "georgiatech_cooking_02_02_6": 104.37446594238281,
+            "georgiatech_cooking_06_01_2": 136.8168182373047,
+            "georgiatech_covid_02_10": 120.44657135009766,
+            "georgiatech_covid_02_4": 91.90027618408203,
+            "iiith_soccer_002_6": 185.48377990722656,
+            "iiith_soccer_015_2": 160.7452392578125,
+            "indiana_music_03_2": 116.17830657958984,
+            "indiana_music_03_3": 120.69659423828125,
+            "sfu_basketball012_12": 119.33562469482422,
+            "sfu_basketball_04_17": 163.61241149902344,
+            "uniandes_dance_002_11": 160.6425323486328,
+            "uniandes_dance_002_2": 92.61990356445312
+          }
+        },
+        "startup_body_mm": {
+          "mean": 109.2706503868103,
+          "per_take": {
+            "georgiatech_bike_06_6": 195.79737854003906,
+            "georgiatech_bike_07_2": 112.41297149658203,
+            "georgiatech_bike_07_4": 182.0441436767578,
+            "georgiatech_cooking_02_01_2": 72.25177764892578,
+            "georgiatech_cooking_02_02_6": 82.20824432373047,
+            "georgiatech_cooking_06_01_2": 85.77833557128906,
+            "georgiatech_covid_02_10": 89.73462677001953,
+            "georgiatech_covid_02_4": 78.0855484008789,
+            "iiith_soccer_002_6": 109.08521270751953,
+            "iiith_soccer_015_2": 102.9332504272461,
+            "indiana_music_03_2": 78.16377258300781,
+            "indiana_music_03_3": 83.21060180664062,
+            "sfu_basketball012_12": 72.58650970458984,
+            "sfu_basketball_04_17": 191.48126220703125,
+            "uniandes_dance_002_11": 145.2860107421875,
+            "uniandes_dance_002_2": 67.27075958251953
+          }
+        },
+        "pa_mm": {
+          "mean": 81.4147720336914,
+          "per_take": {
+            "georgiatech_bike_06_6": 78.72383117675781,
+            "georgiatech_bike_07_2": 122.23787689208984,
+            "georgiatech_bike_07_4": 114.06477355957031,
+            "georgiatech_cooking_02_01_2": 44.424652099609375,
+            "georgiatech_cooking_02_02_6": 63.83910369873047,
+            "georgiatech_cooking_06_01_2": 77.36430358886719,
+            "georgiatech_covid_02_10": 61.51494598388672,
+            "georgiatech_covid_02_4": 36.15980911254883,
+            "iiith_soccer_002_6": 92.39764404296875,
+            "iiith_soccer_015_2": 92.64908599853516,
+            "indiana_music_03_2": 74.23294067382812,
+            "indiana_music_03_3": 71.0068588256836,
+            "sfu_basketball012_12": 85.95590209960938,
+            "sfu_basketball_04_17": 111.8204116821289,
+            "uniandes_dance_002_11": 118.88704681396484,
+            "uniandes_dance_002_2": 57.3571662902832
+          }
+        },
+        "root_mm": {
+          "mean": 109.91523861885071,
+          "per_take": {
+            "georgiatech_bike_06_6": 135.87710571289062,
+            "georgiatech_bike_07_2": 112.27205657958984,
+            "georgiatech_bike_07_4": 297.40716552734375,
+            "georgiatech_cooking_02_01_2": 75.91203308105469,
+            "georgiatech_cooking_02_02_6": 87.9161148071289,
+            "georgiatech_cooking_06_01_2": 49.2358512878418,
+            "georgiatech_covid_02_10": 52.82758712768555,
+            "georgiatech_covid_02_4": 66.7199478149414,
+            "iiith_soccer_002_6": 178.4873809814453,
+            "iiith_soccer_015_2": 152.3083038330078,
+            "indiana_music_03_2": 108.63352966308594,
+            "indiana_music_03_3": 96.82653045654297,
+            "sfu_basketball012_12": 84.2021713256836,
+            "sfu_basketball_04_17": 93.20653533935547,
+            "uniandes_dance_002_11": 105.3331298828125,
+            "uniandes_dance_002_2": 61.47837448120117
+          }
+        },
+        "root_relative_mm": {
+          "mean": 121.30001640319824,
+          "per_take": {
+            "georgiatech_bike_06_6": 113.8586654663086,
+            "georgiatech_bike_07_2": 156.3711700439453,
+            "georgiatech_bike_07_4": 235.5888671875,
+            "georgiatech_cooking_02_01_2": 64.42375946044922,
+            "georgiatech_cooking_02_02_6": 87.40039825439453,
+            "georgiatech_cooking_06_01_2": 128.35475158691406,
+            "georgiatech_covid_02_10": 116.2093734741211,
+            "georgiatech_covid_02_4": 88.49869537353516,
+            "iiith_soccer_002_6": 156.79844665527344,
+            "iiith_soccer_015_2": 117.42225646972656,
+            "indiana_music_03_2": 113.75669860839844,
+            "indiana_music_03_3": 108.1769027709961,
+            "sfu_basketball012_12": 109.98201751708984,
+            "sfu_basketball_04_17": 128.8282470703125,
+            "uniandes_dance_002_11": 143.69677734375,
+            "uniandes_dance_002_2": 71.43323516845703
+          }
+        },
+        "head_mm": {
+          "mean": 43.01381742954254,
+          "per_take": {
+            "georgiatech_bike_06_6": 35.58815383911133,
+            "georgiatech_bike_07_2": 26.8695068359375,
+            "georgiatech_bike_07_4": 68.82878112792969,
+            "georgiatech_cooking_02_01_2": 23.111942291259766,
+            "georgiatech_cooking_02_02_6": 44.142295837402344,
+            "georgiatech_cooking_06_01_2": 44.48894500732422,
+            "georgiatech_covid_02_10": 29.5169620513916,
+            "georgiatech_covid_02_4": 47.10444641113281,
+            "iiith_soccer_002_6": 60.144813537597656,
+            "iiith_soccer_015_2": 32.74190902709961,
+            "indiana_music_03_2": 38.285301208496094,
+            "indiana_music_03_3": 34.90687942504883,
+            "sfu_basketball012_12": 34.56279754638672,
+            "sfu_basketball_04_17": 63.73835372924805,
+            "uniandes_dance_002_11": 41.36899948120117,
+            "uniandes_dance_002_2": 62.82099151611328
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 35.34154009819031,
+          "per_take": {
+            "georgiatech_bike_06_6": 37.13127899169922,
+            "georgiatech_bike_07_2": 44.046852111816406,
+            "georgiatech_bike_07_4": 60.98273849487305,
+            "georgiatech_cooking_02_01_2": 22.131813049316406,
+            "georgiatech_cooking_02_02_6": 28.152088165283203,
+            "georgiatech_cooking_06_01_2": 63.975341796875,
+            "georgiatech_covid_02_10": 38.85523223876953,
+            "georgiatech_covid_02_4": 29.24888038635254,
+            "iiith_soccer_002_6": 40.578338623046875,
+            "iiith_soccer_015_2": 27.4527587890625,
+            "indiana_music_03_2": 20.26740264892578,
+            "indiana_music_03_3": 25.02831268310547,
+            "sfu_basketball012_12": 29.07573890686035,
+            "sfu_basketball_04_17": 36.614585876464844,
+            "uniandes_dance_002_11": 40.615169525146484,
+            "uniandes_dance_002_2": 21.308109283447266
+          }
+        },
+        "velocity_mmps": {
+          "mean": 271.98169898986816,
+          "per_take": {
+            "georgiatech_bike_06_6": 188.32777404785156,
+            "georgiatech_bike_07_2": 188.64439392089844,
+            "georgiatech_bike_07_4": 146.27371215820312,
+            "georgiatech_cooking_02_01_2": 93.780029296875,
+            "georgiatech_cooking_02_02_6": 129.93246459960938,
+            "georgiatech_cooking_06_01_2": 152.24899291992188,
+            "georgiatech_covid_02_10": 100.24516296386719,
+            "georgiatech_covid_02_4": 99.8104476928711,
+            "iiith_soccer_002_6": 458.5940856933594,
+            "iiith_soccer_015_2": 564.6116333007812,
+            "indiana_music_03_2": 83.22148895263672,
+            "indiana_music_03_3": 106.19125366210938,
+            "sfu_basketball012_12": 422.0143127441406,
+            "sfu_basketball_04_17": 618.9862060546875,
+            "uniandes_dance_002_11": 640.9446411132812,
+            "uniandes_dance_002_2": 357.8805847167969
+          }
+        },
+        "prior_body_mm": {
+          "mean": 144.04606103897095,
+          "per_take": {
+            "georgiatech_bike_06_6": 139.5050048828125,
+            "georgiatech_bike_07_2": 173.78524780273438,
+            "georgiatech_bike_07_4": 252.97152709960938,
+            "georgiatech_cooking_02_01_2": 76.30218505859375,
+            "georgiatech_cooking_02_02_6": 108.04725646972656,
+            "georgiatech_cooking_06_01_2": 144.4129180908203,
+            "georgiatech_covid_02_10": 123.54461669921875,
+            "georgiatech_covid_02_4": 94.0447769165039,
+            "iiith_soccer_002_6": 195.70272827148438,
+            "iiith_soccer_015_2": 174.78359985351562,
+            "indiana_music_03_2": 120.59367370605469,
+            "indiana_music_03_3": 126.09710693359375,
+            "sfu_basketball012_12": 132.59115600585938,
+            "sfu_basketball_04_17": 169.91749572753906,
+            "uniandes_dance_002_11": 169.8235321044922,
+            "uniandes_dance_002_2": 102.61415100097656
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 2.6452923212200403,
+          "per_take": {
+            "georgiatech_bike_06_6": 0.803104043006897,
+            "georgiatech_bike_07_2": 0.9671546220779419,
+            "georgiatech_bike_07_4": -0.5949686765670776,
+            "georgiatech_cooking_02_01_2": 0.20740258693695068,
+            "georgiatech_cooking_02_02_6": 0.9020025134086609,
+            "georgiatech_cooking_06_01_2": 1.2163052558898926,
+            "georgiatech_covid_02_10": -0.7409645318984985,
+            "georgiatech_covid_02_4": 0.41765516996383667,
+            "iiith_soccer_002_6": 0.669135332107544,
+            "iiith_soccer_015_2": 6.811883449554443,
+            "indiana_music_03_2": -0.33644428849220276,
+            "indiana_music_03_3": 0.7147682309150696,
+            "sfu_basketball012_12": 7.4118971824646,
+            "sfu_basketball_04_17": 9.788694381713867,
+            "uniandes_dance_002_11": 7.261437892913818,
+            "uniandes_dance_002_2": 6.825613975524902
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 52.44411815516651,
+      "frames": 2880
+    },
+    {
+      "step": 24000,
+      "scores": {
+        "body_mm": {
+          "mean": 135.62145709991455,
+          "per_take": {
+            "georgiatech_bike_06_6": 175.6939697265625,
+            "georgiatech_bike_07_2": 137.47158813476562,
+            "georgiatech_bike_07_4": 101.61988067626953,
+            "georgiatech_cooking_02_01_2": 141.75865173339844,
+            "georgiatech_cooking_02_02_6": 126.12722778320312,
+            "georgiatech_cooking_06_01_2": 182.89358520507812,
+            "georgiatech_covid_02_10": 102.7354507446289,
+            "georgiatech_covid_02_4": 100.6989517211914,
+            "iiith_soccer_002_6": 175.54730224609375,
+            "iiith_soccer_015_2": 154.07504272460938,
+            "indiana_music_03_2": 117.31835174560547,
+            "indiana_music_03_3": 111.39093780517578,
+            "sfu_basketball012_12": 138.19651794433594,
+            "sfu_basketball_04_17": 168.78421020507812,
+            "uniandes_dance_002_11": 158.83665466308594,
+            "uniandes_dance_002_2": 76.79499053955078
+          }
+        },
+        "all_body_mm": {
+          "mean": 132.72550201416016,
+          "per_take": {
+            "georgiatech_bike_06_6": 176.25057983398438,
+            "georgiatech_bike_07_2": 135.4830780029297,
+            "georgiatech_bike_07_4": 108.39681243896484,
+            "georgiatech_cooking_02_01_2": 133.97000122070312,
+            "georgiatech_cooking_02_02_6": 121.43942260742188,
+            "georgiatech_cooking_06_01_2": 173.9812469482422,
+            "georgiatech_covid_02_10": 102.42385864257812,
+            "georgiatech_covid_02_4": 98.08502960205078,
+            "iiith_soccer_002_6": 167.9007568359375,
+            "iiith_soccer_015_2": 148.5961456298828,
+            "indiana_music_03_2": 113.08369445800781,
+            "indiana_music_03_3": 108.88434600830078,
+            "sfu_basketball012_12": 130.7078094482422,
+            "sfu_basketball_04_17": 172.78225708007812,
+            "uniandes_dance_002_11": 155.54689025878906,
+            "uniandes_dance_002_2": 76.07610321044922
+          }
+        },
+        "startup_body_mm": {
+          "mean": 109.5578966140747,
+          "per_take": {
+            "georgiatech_bike_06_6": 180.70367431640625,
+            "georgiatech_bike_07_2": 119.57501220703125,
+            "georgiatech_bike_07_4": 162.61233520507812,
+            "georgiatech_cooking_02_01_2": 71.66065979003906,
+            "georgiatech_cooking_02_02_6": 83.93694305419922,
+            "georgiatech_cooking_06_01_2": 102.6826171875,
+            "georgiatech_covid_02_10": 99.93110656738281,
+            "georgiatech_covid_02_4": 77.1738052368164,
+            "iiith_soccer_002_6": 106.72842407226562,
+            "iiith_soccer_015_2": 104.76507568359375,
+            "indiana_music_03_2": 79.2065200805664,
+            "indiana_music_03_3": 88.83158874511719,
+            "sfu_basketball012_12": 70.79811096191406,
+            "sfu_basketball_04_17": 204.7666473388672,
+            "uniandes_dance_002_11": 129.2288818359375,
+            "uniandes_dance_002_2": 70.32494354248047
+          }
+        },
+        "pa_mm": {
+          "mean": 76.58627462387085,
+          "per_take": {
+            "georgiatech_bike_06_6": 82.0626220703125,
+            "georgiatech_bike_07_2": 76.1343994140625,
+            "georgiatech_bike_07_4": 61.9156608581543,
+            "georgiatech_cooking_02_01_2": 72.7088851928711,
+            "georgiatech_cooking_02_02_6": 65.94889068603516,
+            "georgiatech_cooking_06_01_2": 92.5539321899414,
+            "georgiatech_covid_02_10": 57.87782669067383,
+            "georgiatech_covid_02_4": 36.171173095703125,
+            "iiith_soccer_002_6": 91.99092102050781,
+            "iiith_soccer_015_2": 96.3825454711914,
+            "indiana_music_03_2": 66.29366302490234,
+            "indiana_music_03_3": 62.43558883666992,
+            "sfu_basketball012_12": 82.7677230834961,
+            "sfu_basketball_04_17": 109.95706939697266,
+            "uniandes_dance_002_11": 119.53495025634766,
+            "uniandes_dance_002_2": 50.6445426940918
+          }
+        },
+        "root_mm": {
+          "mean": 113.30298900604248,
+          "per_take": {
+            "georgiatech_bike_06_6": 195.79783630371094,
+            "georgiatech_bike_07_2": 131.70201110839844,
+            "georgiatech_bike_07_4": 106.85693359375,
+            "georgiatech_cooking_02_01_2": 147.82350158691406,
+            "georgiatech_cooking_02_02_6": 130.72860717773438,
+            "georgiatech_cooking_06_01_2": 106.06962585449219,
+            "georgiatech_covid_02_10": 59.869224548339844,
+            "georgiatech_covid_02_4": 62.552703857421875,
+            "iiith_soccer_002_6": 166.63705444335938,
+            "iiith_soccer_015_2": 126.90950775146484,
+            "indiana_music_03_2": 124.06864929199219,
+            "indiana_music_03_3": 86.51686096191406,
+            "sfu_basketball012_12": 91.59367370605469,
+            "sfu_basketball_04_17": 119.1077880859375,
+            "uniandes_dance_002_11": 106.08802795410156,
+            "uniandes_dance_002_2": 50.52581787109375
+          }
+        },
+        "root_relative_mm": {
+          "mean": 108.91593790054321,
+          "per_take": {
+            "georgiatech_bike_06_6": 131.37322998046875,
+            "georgiatech_bike_07_2": 115.41092681884766,
+            "georgiatech_bike_07_4": 91.11845397949219,
+            "georgiatech_cooking_02_01_2": 105.8878402709961,
+            "georgiatech_cooking_02_02_6": 96.60987854003906,
+            "georgiatech_cooking_06_01_2": 149.93148803710938,
+            "georgiatech_covid_02_10": 84.55211639404297,
+            "georgiatech_covid_02_4": 98.2734146118164,
+            "iiith_soccer_002_6": 124.0174789428711,
+            "iiith_soccer_015_2": 114.08614349365234,
+            "indiana_music_03_2": 102.597412109375,
+            "indiana_music_03_3": 93.75212097167969,
+            "sfu_basketball012_12": 108.2043685913086,
+            "sfu_basketball_04_17": 125.22505950927734,
+            "uniandes_dance_002_11": 141.23826599121094,
+            "uniandes_dance_002_2": 60.376808166503906
+          }
+        },
+        "head_mm": {
+          "mean": 42.50971484184265,
+          "per_take": {
+            "georgiatech_bike_06_6": 53.52734375,
+            "georgiatech_bike_07_2": 28.600574493408203,
+            "georgiatech_bike_07_4": 65.73184204101562,
+            "georgiatech_cooking_02_01_2": 23.343292236328125,
+            "georgiatech_cooking_02_02_6": 18.087162017822266,
+            "georgiatech_cooking_06_01_2": 60.891944885253906,
+            "georgiatech_covid_02_10": 22.447635650634766,
+            "georgiatech_covid_02_4": 40.691017150878906,
+            "iiith_soccer_002_6": 52.96453857421875,
+            "iiith_soccer_015_2": 46.73047637939453,
+            "indiana_music_03_2": 36.336151123046875,
+            "indiana_music_03_3": 29.458871841430664,
+            "sfu_basketball012_12": 61.27558135986328,
+            "sfu_basketball_04_17": 71.1517333984375,
+            "uniandes_dance_002_11": 37.62563705444336,
+            "uniandes_dance_002_2": 31.291635513305664
+          }
+        },
+        "global_joint_rotation_deg": {
+          "mean": 32.26250100135803,
+          "per_take": {
+            "georgiatech_bike_06_6": 39.83336639404297,
+            "georgiatech_bike_07_2": 32.21121597290039,
+            "georgiatech_bike_07_4": 27.588306427001953,
+            "georgiatech_cooking_02_01_2": 33.357398986816406,
+            "georgiatech_cooking_02_02_6": 26.5096492767334,
+            "georgiatech_cooking_06_01_2": 74.74600982666016,
+            "georgiatech_covid_02_10": 24.815937042236328,
+            "georgiatech_covid_02_4": 33.46908187866211,
+            "iiith_soccer_002_6": 29.991146087646484,
+            "iiith_soccer_015_2": 28.028972625732422,
+            "indiana_music_03_2": 18.01544761657715,
+            "indiana_music_03_3": 25.293161392211914,
+            "sfu_basketball012_12": 28.922109603881836,
+            "sfu_basketball_04_17": 35.08478927612305,
+            "uniandes_dance_002_11": 40.82616424560547,
+            "uniandes_dance_002_2": 17.507259368896484
+          }
+        },
+        "velocity_mmps": {
+          "mean": 261.72100162506104,
+          "per_take": {
+            "georgiatech_bike_06_6": 212.0945281982422,
+            "georgiatech_bike_07_2": 179.98243713378906,
+            "georgiatech_bike_07_4": 101.82746887207031,
+            "georgiatech_cooking_02_01_2": 101.45471954345703,
+            "georgiatech_cooking_02_02_6": 113.82687377929688,
+            "georgiatech_cooking_06_01_2": 133.68118286132812,
+            "georgiatech_covid_02_10": 87.84820556640625,
+            "georgiatech_covid_02_4": 90.65251159667969,
+            "iiith_soccer_002_6": 424.46661376953125,
+            "iiith_soccer_015_2": 536.471923828125,
+            "indiana_music_03_2": 80.01409912109375,
+            "indiana_music_03_3": 104.21662139892578,
+            "sfu_basketball012_12": 418.91314697265625,
+            "sfu_basketball_04_17": 647.857177734375,
+            "uniandes_dance_002_11": 624.4158325195312,
+            "uniandes_dance_002_2": 329.81268310546875
+          }
+        },
+        "prior_body_mm": {
+          "mean": 138.52486658096313,
+          "per_take": {
+            "georgiatech_bike_06_6": 175.7603302001953,
+            "georgiatech_bike_07_2": 138.00689697265625,
+            "georgiatech_bike_07_4": 102.20274353027344,
+            "georgiatech_cooking_02_01_2": 141.727783203125,
+            "georgiatech_cooking_02_02_6": 126.5235366821289,
+            "georgiatech_cooking_06_01_2": 181.67184448242188,
+            "georgiatech_covid_02_10": 102.83160400390625,
+            "georgiatech_covid_02_4": 101.26054382324219,
+            "iiith_soccer_002_6": 176.9204559326172,
+            "iiith_soccer_015_2": 160.18942260742188,
+            "indiana_music_03_2": 117.16871643066406,
+            "indiana_music_03_3": 112.50492095947266,
+            "sfu_basketball012_12": 146.08859252929688,
+            "sfu_basketball_04_17": 180.14198303222656,
+            "uniandes_dance_002_11": 169.32383728027344,
+            "uniandes_dance_002_2": 84.07465362548828
+          }
+        },
+        "p_to_g_improvement_mm": {
+          "mean": 2.9034097243566066,
+          "per_take": {
+            "georgiatech_bike_06_6": 0.06638393551111221,
+            "georgiatech_bike_07_2": 0.5353208184242249,
+            "georgiatech_bike_07_4": 0.5828624963760376,
+            "georgiatech_cooking_02_01_2": -0.03087775781750679,
+            "georgiatech_cooking_02_02_6": 0.39630627632141113,
+            "georgiatech_cooking_06_01_2": -1.2217328548431396,
+            "georgiatech_covid_02_10": 0.09614753723144531,
+            "georgiatech_covid_02_4": 0.561610996723175,
+            "iiith_soccer_002_6": 1.3731396198272705,
+            "iiith_soccer_015_2": 6.114358901977539,
+            "indiana_music_03_2": -0.14962586760520935,
+            "indiana_music_03_3": 1.113983154296875,
+            "sfu_basketball012_12": 7.892073154449463,
+            "sfu_basketball_04_17": 11.357768058776855,
+            "uniandes_dance_002_11": 10.487180709838867,
+            "uniandes_dance_002_2": 7.279656410217285
+          }
+        }
+      },
+      "nfe": 10,
+      "draw": 1062,
+      "seconds": 52.99029775895178,
+      "frames": 2880
+    }
+  ]
+}

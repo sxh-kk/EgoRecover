@@ -1,0 +1,33 @@
+{
+  "comparisons": {
+    "R0-T2": {
+      "mean_mm": -4.272509039343299,
+      "seed_deltas_mm": [
+        -13.718614097114083,
+        2.071367057594093,
+        -1.1702800785099063
+      ],
+      "take_bootstrap95_mm": [
+        -6.516900110387946,
+        -2.0710580801462632
+      ],
+      "better_takes": 139,
+      "takes": 222
+    },
+    "R0-T3": {
+      "mean_mm": -1.9429952489721167,
+      "seed_deltas_mm": [
+        -1.6077937048834723,
+        -2.836613268465609,
+        -1.3845787735672686
+      ],
+      "take_bootstrap95_mm": [
+        -4.159500886871292,
+        0.2314783036171847
+      ],
+      "better_takes": 115,
+      "takes": 222
+    }
+  },
+  "note": "Same repeated benchmark, seeds and scoring; network/interface/source differ across rounds. Conditional take bootstrap after seed averaging, one draw; no correction for multiple comparisons."
+}

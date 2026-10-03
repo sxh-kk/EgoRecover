@@ -1,0 +1,73 @@
+{
+  "completed": true,
+  "smoke": true,
+  "identity": {
+    "group": "T1",
+    "seed": 62,
+    "manifest_sha256": "0b4b381cbcbaf0049f5799f160e9e2b67aaf0fc14392d494ad2be86acb7a1151",
+    "prior_sha256": "d0ed828468ea1b885932c3649e5b8a37240545921e540748f65f1bd5ec5d82ac",
+    "config": {
+      "protocol": "g-four-way-v1",
+      "source_root": "data/ee4d_motion_uniegomotion",
+      "e7_checkpoint": "exp/e7/last.ckpt",
+      "prior_checkpoint": "exp/egorecover_prior_data_budget/v1/train/D_s62/prior.pt",
+      "groups": [
+        "T0",
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "seeds": [
+        62,
+        63,
+        64
+      ],
+      "gpus": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "steps": 24000,
+      "batch_size": 64,
+      "microbatch": 16,
+      "learning_rate": 8.5e-05,
+      "weight_decay": 0.01,
+      "ema_decay": 0.992028,
+      "warmup_steps": 1000,
+      "eval_every": 2000,
+      "dev_monitor_takes": 16,
+      "sigma": 1.0,
+      "geometry_weight": 1.0,
+      "fk_weight": 0.0,
+      "draws": [
+        1062,
+        1063,
+        1064
+      ],
+      "nfe": [
+        10,
+        1,
+        3,
+        5
+      ],
+      "split_seed": 20260929,
+      "clips_per_train_take": 4,
+      "prior_calibration_steps": 2400,
+      "prior_calibration_lr": 0.0001
+    },
+    "code": {
+      "run/train_g_pretraining.py": "9ff095d5a61ae44be16624366e8c7d46fff312ba7ce5b38712fa8e63e120e8c9",
+      "egorecover/g_pretraining.py": "353c56c253390e14bda823e894585431e1b2387306064ff0205a065ad937d23a",
+      "model/history_uniegomotion.py": "4fe5c530e8e255b1d9982ddcd509e2e2a87566cae9160dede3546a1d707b0189",
+      "egorecover/conditioning.py": "e325258cd60f62a8c3bb05cfe9f9ef437c24b2cf3b21357f6b3992beeb7d9432",
+      "egorecover/history_flow.py": "9b9cc6d62c55b0f569fbe14bfd5449d82ddf83d7cdd89af745f6c5acb00ee86f",
+      "egorecover/losses.py": "047adb771c123306ac8f5974877c55c03c21d29c12c68215627a44b44c0e8ab3"
+    }
+  },
+  "best_step": 2,
+  "best_dev_body_mm": 731.9013061523438,
+  "steps": 2,
+  "last_sha256": "f2e5f2e40b5100627e8a968fcc809eb7ec1b1b1944f2e90b58a9413a0ecb2e50",
+  "best_sha256": "a6c3e8c51bdf7bb667f22e55c2ee27cce8bc4516901b3cb13f92f3b06167ab01"
+}

@@ -1,0 +1,902 @@
+{
+  "source_files": 1552,
+  "source_bytes_before_link_rewrite": 92819860,
+  "artifact_link_replacements": [
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/control_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_velocity/v1/train/velocity_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/control_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose01_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose10_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_same_shape/v1/train/pose03_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/data/progress.json",
+      "new": "https://huggingface.co/datasets/sxhkk/EgoRecover-data/resolve/f395c5d72ec125bb3b020b723eed3288ed6ea447/exp/egorecover_prior_data_budget/v1/data/progress.json"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s62/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s62/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s64/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s64/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s63/initial.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s63/initial.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s63",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s63/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s63/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s62",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s62/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s62/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s64",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/egorecover_prior_data_budget/v1/train/D_s64/prior.pt",
+      "new": "https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s64/prior.pt"
+    },
+    {
+      "document": "LOG.md",
+      "old": "../UEM-update-original/result_400M.md#4-完整-22-关节论文指标",
+      "new": "https://github.com/sxh-kk/UEM-update/blob/156ab79d5f692a6e8db3c3eb769abf1e4cb1fc08/result_400M.md#4-完整-22-关节论文指标"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/e7_minimal_ablation/v1/jobs",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "LOG.md",
+      "old": "exp/e7_minimal_ablation/v1/jobs",
+      "new": "docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "data_pipeline/FULL_BUILD_REPORT.md",
+      "old": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_val_full_v1",
+      "new": "../docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "data_pipeline/FULL_BUILD_REPORT.md",
+      "old": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_val_full_v1/audit/validation.json",
+      "new": "../docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "data_pipeline/FULL_BUILD_REPORT.md",
+      "old": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_val_full_v1/spec.json",
+      "new": "../docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "data_pipeline/FULL_BUILD_REPORT.md",
+      "old": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_val_full_build.log",
+      "new": "../docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "data_pipeline/FULL_BUILD_REPORT.md",
+      "old": "/home/ld666/projects/EgoRecover/data_pipeline/test_results_full.xml",
+      "new": "test_results_full.xml"
+    },
+    {
+      "document": "data_pipeline/FULL_BUILD_REPORT.md",
+      "old": "/home/ld666/projects/EgoRecover/data/ee4d_mismatch_val_full_v1/HANDOFF.md",
+      "new": "../docs/release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "docs/experiments/g-observation-reference.md",
+      "old": "../../exp/egorecover_observation_reference/v1/source/",
+      "new": "../release/migration.md#为什么选择这些checkpoint"
+    },
+    {
+      "document": "docs/reference/e7.md",
+      "old": "../../../UEM-update-original/ablation/configs/e7_x0_global_w8_u84k.yaml",
+      "new": "https://github.com/sxh-kk/UEM-update/blob/156ab79d5f692a6e8db3c3eb769abf1e4cb1fc08/ablation/configs/e7_x0_global_w8_u84k.yaml"
+    },
+    {
+      "document": "docs/reference/e7.md",
+      "old": "../../../UEM-update-original/ablation/scripts/train_e7_x0_global_w8.sh",
+      "new": "https://github.com/sxh-kk/UEM-update/blob/156ab79d5f692a6e8db3c3eb769abf1e4cb1fc08/ablation/scripts/train_e7_x0_global_w8.sh"
+    },
+    {
+      "document": "docs/reference/e7.md",
+      "old": "../../../UEM-update-original/eval/eval_exp.py",
+      "new": "https://github.com/sxh-kk/UEM-update/blob/156ab79d5f692a6e8db3c3eb769abf1e4cb1fc08/eval/eval_exp.py"
+    },
+    {
+      "document": "docs/reference/e7.md",
+      "old": "../../../UEM-update-original/result_400M.md#4-完整-22-关节论文指标",
+      "new": "https://github.com/sxh-kk/UEM-update/blob/156ab79d5f692a6e8db3c3eb769abf1e4cb1fc08/result_400M.md#4-完整-22-关节论文指标"
+    }
+  ],
+  "remaining_missing_links": []
+}

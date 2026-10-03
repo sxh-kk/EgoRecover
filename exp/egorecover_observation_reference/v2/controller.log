@@ -1,0 +1,57 @@
+REUSE e7_context_diagnostic
+START smoke_R0 gpu 4 pid 1149803
+START smoke_R1 gpu 5 pid 1149825
+START smoke_R2 gpu 6 pid 1149827
+START smoke_R3 gpu 7 pid 1149829
+DONE smoke_R0
+DONE smoke_R1
+DONE smoke_R2
+DONE smoke_R3
+START R0_seed62 gpu 4 pid 1151377
+START R1_seed62 gpu 5 pid 1151379
+START R2_seed62 gpu 6 pid 1151381
+START R3_seed62 gpu 7 pid 1151383
+DONE R0_seed62
+DONE R3_seed62
+DONE R2_seed62
+DONE R1_seed62
+START R0_seed63 gpu 4 pid 1237357
+START R1_seed63 gpu 5 pid 1237359
+START R2_seed63 gpu 6 pid 1237361
+START R3_seed63 gpu 7 pid 1237363
+DONE R2_seed63
+DONE R1_seed63
+DONE R0_seed63
+DONE R3_seed63
+START R0_seed64 gpu 4 pid 1289692
+START R1_seed64 gpu 5 pid 1289698
+START R2_seed64 gpu 6 pid 1289700
+START R3_seed64 gpu 7 pid 1289702
+DONE R2_seed64
+DONE R0_seed64
+DONE R1_seed64
+DONE R3_seed64
+START eval_R0_seed62 gpu 4 pid 1322986
+START eval_R1_seed62 gpu 5 pid 1322988
+START eval_R2_seed62 gpu 6 pid 1322990
+START eval_R3_seed62 gpu 7 pid 1322992
+DONE eval_R1_seed62
+DONE eval_R2_seed62
+DONE eval_R0_seed62
+DONE eval_R3_seed62
+START eval_R0_seed63 gpu 4 pid 1324447
+START eval_R1_seed63 gpu 5 pid 1324449
+START eval_R2_seed63 gpu 6 pid 1324451
+START eval_R3_seed63 gpu 7 pid 1324453
+DONE eval_R3_seed63
+DONE eval_R1_seed63
+DONE eval_R2_seed63
+DONE eval_R0_seed63
+START eval_R0_seed64 gpu 4 pid 1325696
+START eval_R1_seed64 gpu 5 pid 1325701
+START eval_R2_seed64 gpu 6 pid 1325703
+START eval_R3_seed64 gpu 7 pid 1325707
+DONE eval_R3_seed64
+DONE eval_R0_seed64
+DONE eval_R1_seed64
+DONE eval_R2_seed64

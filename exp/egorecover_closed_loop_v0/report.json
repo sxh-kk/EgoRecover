@@ -1,0 +1,47 @@
+{
+  "scope": "closed_loop_stability_only",
+  "initialization": "random E7; not pretrained",
+  "bootstrap_is_trained": false,
+  "history_source": "model_predictions_only; no resets",
+  "take": "iiith_soccer_002_2",
+  "metric": "dense22_world_position_error_mm; not SMPL FK",
+  "results": [
+    {
+      "source_mode": "gaussian",
+      "variant": "clean",
+      "completed": false,
+      "error": "Degenerate 6D rotation cannot define a physical transform."
+    },
+    {
+      "source_mode": "gaussian",
+      "variant": "freeze_3s",
+      "completed": false,
+      "error": "Degenerate 6D rotation cannot define a physical transform."
+    },
+    {
+      "source_mode": "gaussian",
+      "variant": "drift_0p03mps",
+      "completed": false,
+      "error": "Degenerate 6D rotation cannot define a physical transform."
+    },
+    {
+      "source_mode": "history",
+      "variant": "clean",
+      "completed": false,
+      "error": "Degenerate 6D rotation cannot define a physical transform."
+    },
+    {
+      "source_mode": "history",
+      "variant": "freeze_3s",
+      "completed": false,
+      "error": "Degenerate 6D rotation cannot define a physical transform."
+    },
+    {
+      "source_mode": "history",
+      "variant": "drift_0p03mps",
+      "completed": false,
+      "error": "Degenerate 6D rotation cannot define a physical transform."
+    }
+  ],
+  "completed": false
+}
