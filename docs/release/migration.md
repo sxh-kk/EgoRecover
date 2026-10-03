@@ -44,10 +44,11 @@ git clone https://github.com/sxh-kk/EgoRecover.git
 cd EgoRecover
 conda env create -f environment.yml
 conda activate egorecover
+pip install -r requirements-reproduction-lock.txt
 pip install -r requirements-release.txt
 ```
 
-环境文件固定Python3.11、PyTorch2.10/CUDA12.8；CUDA不同则安装兼容PyTorch并记录版本。仅查看文档无需训练环境。
+环境文件固定Python3.11、PyTorch2.10/CUDA12.8；CUDA不同则安装兼容PyTorch并记录版本。已记录本次验证环境的全部101个已安装分发包，运行/测试依赖的精确版本见根目录 `requirements-reproduction-lock.txt`；[环境快照](../../verification/migration_environment.json)保留Python及完整版本表。新机器从零完整安装尚未执行。仅查看文档无需训练环境。
 
 | preset | 下载范围 |
 |---|---|
@@ -110,7 +111,7 @@ python -m run.reproduce_release --model P --seed 62 --device cuda \
 
 基础测试：`tests`和`data_pipeline/tests`共183项通过，63.65秒；5条框架/硬件提示。完整结果见 [迁移测试](../../verification/migration_tests.json)。新增恢复工具还检查了下载路径、分组和哈希；移位目录下的模型加载与P原dev指针验证见发布状态。
 
-移位目录实际核验：G strict加载及两帧CPU推理通过；D组P seed62在完整原12take dev上为34.071924941mm，相对原报告−0.000001659mm。真实G缓存从无损分片解压后逐字节哈希一致，错误SHA256被拒绝并未留下目标文件。[G检查](../../verification/migration_g_smoke.json)、[P完整dev](../../verification/migration_p_dev.json)、[分片恢复](../../verification/migration_bundle_restore.json)、[源归档核对](../../verification/migration_archive_validation.json)、[字节分片恢复](../../verification/migration_parts_restore.json)。这是加载/评价/内容恢复核验，尚未验证另一台机器上的完整训练轨迹。
+移位目录实际核验：G strict加载及两帧CPU推理通过；D组P seed62在完整原12take dev上为34.071924941mm，相对原报告−0.000001659mm。真实G缓存从无损分片解压后逐字节哈希一致，错误SHA256被拒绝并未留下目标文件。[G检查](../../verification/migration_g_smoke.json)、[P完整dev](../../verification/migration_p_dev.json)、[分片恢复](../../verification/migration_bundle_restore.json)、[源归档核对](../../verification/migration_archive_validation.json)、[字节分片恢复](../../verification/migration_parts_restore.json)。另外从固定公开HF revision实际下载5个原始文件、9个传输分片，在干净目录还原后校验全部SHA256，并完成G两帧CPU推理（4.65秒）：[远端下载复现](../../verification/migration_remote_g_smoke.json)。这是加载/评价/内容恢复核验，尚未验证另一台机器上的完整训练轨迹。
 
 GitHub原有main历史保留，通过独立clone准备提交，不强推，不改训练模型源文件或运行中的进程。源码和轻量实验文件按白名单暂存，即使 `exp/` 被.gitignore忽略，也保留原相对路径，使LOG结论链接可点击。引用大文件的链接改为对应HF文件或分片索引；未选产物注明排除原因，不伪装成已上传。
 

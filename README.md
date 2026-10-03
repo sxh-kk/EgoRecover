@@ -48,6 +48,7 @@ git clone https://github.com/sxh-kk/EgoRecover.git
 cd EgoRecover
 conda env create -f environment.yml
 conda activate egorecover
+pip install -r requirements-reproduction-lock.txt
 pip install -r requirements-release.txt
 
 # 最小检查先恢复一个固定test episode与R0 seed62；另需授权SMPL-X

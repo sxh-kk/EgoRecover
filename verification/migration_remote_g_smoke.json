@@ -1,0 +1,105 @@
+{
+  "model": "G",
+  "group": "R0",
+  "seed": 62,
+  "smoke": true,
+  "summary": {
+    "scores": {
+      "body_mm": {
+        "mean": 77.21646118164062,
+        "per_take": {
+          "cmu_soccer06_2": 77.21646118164062
+        }
+      },
+      "all_body_mm": {
+        "mean": 77.21646118164062,
+        "per_take": {
+          "cmu_soccer06_2": 77.21646118164062
+        }
+      },
+      "startup_body_mm": {
+        "mean": 77.21646118164062,
+        "per_take": {
+          "cmu_soccer06_2": 77.21646118164062
+        }
+      },
+      "pa_mm": {
+        "mean": 51.8734130859375,
+        "per_take": {
+          "cmu_soccer06_2": 51.8734130859375
+        }
+      },
+      "root_mm": {
+        "mean": 59.18138122558594,
+        "per_take": {
+          "cmu_soccer06_2": 59.18138122558594
+        }
+      },
+      "root_relative_mm": {
+        "mean": 64.23363494873047,
+        "per_take": {
+          "cmu_soccer06_2": 64.23363494873047
+        }
+      },
+      "head_mm": {
+        "mean": 35.46860885620117,
+        "per_take": {
+          "cmu_soccer06_2": 35.46860885620117
+        }
+      },
+      "global_joint_rotation_deg": {
+        "mean": 18.429006576538086,
+        "per_take": {
+          "cmu_soccer06_2": 18.429006576538086
+        }
+      },
+      "velocity_mmps": {
+        "mean": 439.93756103515625,
+        "per_take": {
+          "cmu_soccer06_2": 439.93756103515625
+        }
+      },
+      "prior_body_mm": {
+        "mean": 112.72858428955078,
+        "per_take": {
+          "cmu_soccer06_2": 112.72858428955078
+        }
+      },
+      "p_to_g_improvement_mm": {
+        "mean": 35.512115478515625,
+        "per_take": {
+          "cmu_soccer06_2": 35.512115478515625
+        }
+      }
+    },
+    "nfe": 10,
+    "draw": 1062,
+    "seconds": 0.8370658429339528,
+    "frames": 2
+  },
+  "recorded_full_body_mm": 133.11958072421788,
+  "full_body_difference_mm": null,
+  "checkpoint_sha256": "a0dd984de0c57066860e9f119929b57e215f65e5c035f29dd9da813a33f8413d",
+  "seconds": 4.646004099398851,
+  "torch_version": "2.10.0+cu128",
+  "device": "cpu",
+  "migration_verification": {
+    "restored_from_public_hf": true,
+    "original_artifact_count": 5,
+    "transport_part_count": 9,
+    "source_hardlinks_used": false,
+    "model_assets_external_authorized": true,
+    "hf_revisions": {
+      "model": {
+        "repo_id": "sxhkk/EgoRecover",
+        "revision": "f58988fe13f92a9237db743f0951495cb241860a",
+        "public": true
+      },
+      "dataset": {
+        "repo_id": "sxhkk/EgoRecover-data",
+        "revision": "f395c5d72ec125bb3b020b723eed3288ed6ea447",
+        "public": true
+      }
+    }
+  }
+}

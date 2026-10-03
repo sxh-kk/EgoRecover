@@ -4,5 +4,8 @@
   "all_part_hashes_verified": true,
   "actual_R0_seed62_assembly_sha256": "a0dd984de0c57066860e9f119929b57e215f65e5c035f29dd9da813a33f8413d",
   "real_g_episode_extraction_sha256": "e2dc72833cb80eac62000dc5bcea9f24e168e97dce4ea838e28e882481662b1c",
-  "corrupt_part_rejected_without_destination": true
+  "corrupt_part_rejected_without_destination": true,
+  "corrupt_whole_hash_rejected_without_destination": true,
+  "unsafe_paths_rejected": true,
+  "existing_destination_preserved": true
 }

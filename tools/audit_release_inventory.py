@@ -51,7 +51,7 @@ def category(rel):
   if ext in TEXT:return 'github_experiment_metadata'
   return 'hf_other_artifacts_review'
  if top=='verification':return 'github_verification' if ext in TEXT else 'local_verification_binary'
- if top in SOURCE_DIRS or top in {'README.md','SOURCE.md','LOG.md','.gitignore','environment.yml','requirements.txt','requirements-dev.txt','requirements-vis.txt','pyproject.toml'}:return 'github_source'
+ if top in SOURCE_DIRS or top in {'README.md','SOURCE.md','LOG.md','.gitignore','environment.yml','requirements.txt','requirements-dev.txt','requirements-vis.txt','requirements-release.txt','requirements-reproduction-lock.txt','pyproject.toml'}:return 'github_source'
  return 'manual_review'
 
 
