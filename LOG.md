@@ -513,22 +513,22 @@
 ## 2026-09-29--12：19：独立 P Two-Forward 对照开始/恢复
 
 - [exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62](docs/release/migration.md#为什么选择这些checkpoint)；Two-Forward=True，geometry=1/fk=0，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/experiment.json](exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/experiment.json](exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/initial.pt)。
 
 ## 2026-09-29--12：19：独立 P Two-Forward 对照开始/恢复
 
 - [exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62](docs/release/migration.md#为什么选择这些checkpoint)；Two-Forward=False，geometry=1/fk=1，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/experiment.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/experiment.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/initial.pt)。
 
 ## 2026-09-29--12：19：独立 P Two-Forward 对照开始/恢复
 
 - [exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62](docs/release/migration.md#为什么选择这些checkpoint)；Two-Forward=False，geometry=1/fk=0，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/experiment.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/experiment.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/initial.pt)。
 
 ## 2026-09-29--12：19：独立 P Two-Forward 对照开始/恢复
 
 - [exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62](docs/release/migration.md#为什么选择这些checkpoint)；Two-Forward=True，geometry=1/fk=1，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/experiment.json](exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/experiment.json](exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/initial.pt)。
 
 ## 2026-09-29--12：20：P 四组训练运行确认与文件入口
 
@@ -541,19 +541,19 @@
 ## 2026-09-29--12：22：独立 P 对照完成
 
 - [exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=42.246 mm。
-- 1秒自反馈 FK=265.880 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/report.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/selection.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/prior.pt)。
+- 1秒自反馈 FK=265.880 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/report.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/selection.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--12：25：独立 P 对照完成
 
 - [exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1900；dev next-frame FK=40.321 mm。
-- 1秒自反馈 FK=300.967 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/report.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/selection.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/prior.pt)。
+- 1秒自反馈 FK=300.967 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/report.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/selection.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--12：26：独立 P 对照完成
 
 - [exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1900；dev next-frame FK=43.276 mm。
-- 1秒自反馈 FK=267.015 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/report.json](exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/selection.json](exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/prior.pt)。
+- 1秒自反馈 FK=267.015 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/report.json](exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/selection.json](exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/B_two_forward_dense_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 
@@ -571,39 +571,39 @@
 ## 2026-09-29--12：29：独立 P 对照完成
 
 - [exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1100；dev next-frame FK=41.771 mm。
-- 1秒自反馈 FK=281.364 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/report.json](exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/selection.json](exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/prior.pt)。
+- 1秒自反馈 FK=281.364 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/report.json](exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/selection.json](exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/D_two_forward_fk_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--12：30：独立 P Two-Forward 对照开始/恢复
 
 - [exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64](docs/release/migration.md#为什么选择这些checkpoint)；Two-Forward=False，geometry=1/fk=0，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/experiment.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/experiment.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/initial.pt)。
 
 ## 2026-09-29--12：30：独立 P Two-Forward 对照开始/恢复
 
 - [exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64](docs/release/migration.md#为什么选择这些checkpoint)；Two-Forward=False，geometry=1/fk=1，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/experiment.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/experiment.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/initial.pt)。
 
 ## 2026-09-29--12：30：独立 P Two-Forward 对照开始/恢复
 
 - [exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63](docs/release/migration.md#为什么选择这些checkpoint)；Two-Forward=False，geometry=1/fk=0，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/experiment.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/experiment.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/initial.pt)。
 
 ## 2026-09-29--12：30：独立 P Two-Forward 对照开始/恢复
 
 - [exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63](docs/release/migration.md#为什么选择这些checkpoint)；Two-Forward=False，geometry=1/fk=1，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/experiment.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/experiment.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/experiment.json)；初始权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/initial.pt)。
 
 ## 2026-09-29--12：33：独立 P 对照完成
 
 - [exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2100；dev next-frame FK=41.707 mm。
-- 1秒自反馈 FK=237.220 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/report.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/selection.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/prior.pt)。
+- 1秒自反馈 FK=237.220 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/report.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/selection.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--12：33：独立 P 对照完成
 
 - [exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2100；dev next-frame FK=42.353 mm。
-- 1秒自反馈 FK=255.818 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/report.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/selection.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/prior.pt)。
+- 1秒自反馈 FK=255.818 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/report.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/selection.json](exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/A_gt_dense_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--12：33：P 改进首轮结论（seed62，待种子复核）
@@ -618,13 +618,13 @@
 ## 2026-09-29--12：36：独立 P 对照完成
 
 - [exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=39.721 mm。
-- 1秒自反馈 FK=263.057 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/report.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/selection.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/prior.pt)。
+- 1秒自反馈 FK=263.057 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/report.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/selection.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--12：36：独立 P 对照完成
 
 - [exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=39.634 mm。
-- 1秒自反馈 FK=262.359 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/report.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/selection.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/prior.pt)。
+- 1秒自反馈 FK=262.359 mm；完整指标/逐take结果：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/report.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/report.json)；选点曲线：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/selection.json](exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/selection.json)；所选权重：[exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_two_forward/v1/train/C_gt_fk_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--12：36：独立 P 改进实验结论
@@ -665,77 +665,77 @@
 ## 2026-09-29--14：21：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62](docs/release/migration.md#为什么选择这些checkpoint)；base=hold，geometry=1/fk=0，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/initial.pt)。
 
 ## 2026-09-29--14：21：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62](docs/release/migration.md#为什么选择这些checkpoint)；base=hold，geometry=1/fk=1，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/initial.pt)。
 
 ## 2026-09-29--14：21：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/fk=0，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/initial.pt)。
 
 ## 2026-09-29--14：21：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/fk=1，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/initial.pt)。
 
 ## 2026-09-29--14：23：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=42.246 mm。
-- 1秒自反馈 FK=265.880 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/report.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/selection.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/prior.pt)。
+- 1秒自反馈 FK=265.880 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/report.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/selection.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：25：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1700；dev next-frame FK=36.000 mm。
-- 1秒自反馈 FK=346.027 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/report.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/selection.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/prior.pt)。
+- 1秒自反馈 FK=346.027 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/report.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/selection.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：25：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1900；dev next-frame FK=40.321 mm。
-- 1秒自反馈 FK=300.967 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/report.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/selection.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/prior.pt)。
+- 1秒自反馈 FK=300.967 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/report.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/selection.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：25：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1700；dev next-frame FK=33.369 mm。
-- 1秒自反馈 FK=484.691 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/report.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/selection.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/prior.pt)。
+- 1秒自反馈 FK=484.691 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/report.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/selection.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：26：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63](docs/release/migration.md#为什么选择这些checkpoint)；base=hold，geometry=1/fk=1，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/initial.pt)。
 
 ## 2026-09-29--14：26：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63](docs/release/migration.md#为什么选择这些checkpoint)；base=hold，geometry=1/fk=0，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/initial.pt)。
 
 ## 2026-09-29--14：26：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/fk=1，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/initial.pt)。
 
 ## 2026-09-29--14：26：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/fk=0，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/initial.pt)。
 
 ## 2026-09-29--14：27：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2100；dev next-frame FK=41.707 mm。
-- 1秒自反馈 FK=237.220 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/report.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/selection.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/prior.pt)。
+- 1秒自反馈 FK=237.220 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/report.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/selection.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：27：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2300；dev next-frame FK=35.749 mm。
-- 1秒自反馈 FK=370.270 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/report.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/selection.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/prior.pt)。
+- 1秒自反馈 FK=370.270 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/report.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/selection.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：28：P 常速度残差首轮结论（seed62，非最终）
@@ -750,57 +750,57 @@
 ## 2026-09-29--14：28：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2200；dev next-frame FK=33.471 mm。
-- 1秒自反馈 FK=488.621 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/report.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/selection.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/prior.pt)。
+- 1秒自反馈 FK=488.621 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/report.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/selection.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：28：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=39.634 mm。
-- 1秒自反馈 FK=262.359 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/report.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/selection.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/prior.pt)。
+- 1秒自反馈 FK=262.359 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/report.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/selection.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：29：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/fk=1，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/initial.pt)。
 
 ## 2026-09-29--14：29：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64](docs/release/migration.md#为什么选择这些checkpoint)；base=hold，geometry=1/fk=0，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/initial.pt)。
 
 ## 2026-09-29--14：29：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/fk=0，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/experiment.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/initial.pt)。
 
 ## 2026-09-29--14：29：P 常速度残差对照开始/恢复
 
 - [exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64](docs/release/migration.md#为什么选择这些checkpoint)；base=hold，geometry=1/fk=1，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/experiment.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/experiment.json)；初始权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/initial.pt)。
 
 ## 2026-09-29--14：30：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2100；dev next-frame FK=42.353 mm。
-- 1秒自反馈 FK=255.818 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/report.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/selection.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/prior.pt)。
+- 1秒自反馈 FK=255.818 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/report.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/selection.json](exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H0_hold_dense_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：30：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=36.069 mm。
-- 1秒自反馈 FK=352.340 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/report.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/selection.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/prior.pt)。
+- 1秒自反馈 FK=352.340 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/report.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/selection.json](exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V0_cv_dense_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：31：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1900；dev next-frame FK=33.110 mm。
-- 1秒自反馈 FK=504.955 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/report.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/selection.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/prior.pt)。
+- 1秒自反馈 FK=504.955 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/report.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/selection.json](exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/V1_cv_fk_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：31：P 常速度残差单组完成
 
 - [exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=39.721 mm。
-- 1秒自反馈 FK=263.057 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/report.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/selection.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/prior.pt)。
+- 1秒自反馈 FK=263.057 mm；完整指标/逐take结果：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/report.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/report.json)；选点曲线：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/selection.json](exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/selection.json)；所选权重：[exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_cv_residual/v1/train/H1_hold_fk_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：31：P 常速度残差实验结论
@@ -831,67 +831,67 @@
 ## 2026-09-29--14：44：P 显式速度对照开始/恢复
 
 - [exp/egorecover_prior_velocity/v1/train/control_s62](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，velocity_input=False，geometry=1/fk=0，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_velocity/v1/train/control_s62/experiment.json](exp/egorecover_prior_velocity/v1/train/control_s62/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/control_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_velocity/v1/train/control_s62/experiment.json](exp/egorecover_prior_velocity/v1/train/control_s62/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/control_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/control_s62/initial.pt)。
 
 ## 2026-09-29--14：44：P 显式速度对照开始/恢复
 
 - [exp/egorecover_prior_velocity/v1/train/control_s63](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，velocity_input=False，geometry=1/fk=0，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_velocity/v1/train/control_s63/experiment.json](exp/egorecover_prior_velocity/v1/train/control_s63/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/control_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_velocity/v1/train/control_s63/experiment.json](exp/egorecover_prior_velocity/v1/train/control_s63/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/control_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/control_s63/initial.pt)。
 
 ## 2026-09-29--14：44：P 显式速度对照开始/恢复
 
 - [exp/egorecover_prior_velocity/v1/train/velocity_s62](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，velocity_input=True，geometry=1/fk=0，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_velocity/v1/train/velocity_s62/experiment.json](exp/egorecover_prior_velocity/v1/train/velocity_s62/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/velocity_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_velocity/v1/train/velocity_s62/experiment.json](exp/egorecover_prior_velocity/v1/train/velocity_s62/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/velocity_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/velocity_s62/initial.pt)。
 
 ## 2026-09-29--14：44：P 显式速度对照开始/恢复
 
 - [exp/egorecover_prior_velocity/v1/train/velocity_s63](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，velocity_input=True，geometry=1/fk=0，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_velocity/v1/train/velocity_s63/experiment.json](exp/egorecover_prior_velocity/v1/train/velocity_s63/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/velocity_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_velocity/v1/train/velocity_s63/experiment.json](exp/egorecover_prior_velocity/v1/train/velocity_s63/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/velocity_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/velocity_s63/initial.pt)。
 
 ## 2026-09-29--14：46：P 显式速度单组完成
 
 - [exp/egorecover_prior_velocity/v1/train/control_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2300；dev next-frame FK=35.749 mm。
-- 1秒自反馈 FK=370.270 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/control_s63/report.json](exp/egorecover_prior_velocity/v1/train/control_s63/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/control_s63/selection.json](exp/egorecover_prior_velocity/v1/train/control_s63/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/control_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s63/prior.pt)。
+- 1秒自反馈 FK=370.270 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/control_s63/report.json](exp/egorecover_prior_velocity/v1/train/control_s63/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/control_s63/selection.json](exp/egorecover_prior_velocity/v1/train/control_s63/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/control_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/control_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：48：P 显式速度单组完成
 
 - [exp/egorecover_prior_velocity/v1/train/velocity_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2300；dev next-frame FK=35.703 mm。
-- 1秒自反馈 FK=365.333 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/velocity_s63/report.json](exp/egorecover_prior_velocity/v1/train/velocity_s63/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/velocity_s63/selection.json](exp/egorecover_prior_velocity/v1/train/velocity_s63/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/velocity_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s63/prior.pt)。
+- 1秒自反馈 FK=365.333 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/velocity_s63/report.json](exp/egorecover_prior_velocity/v1/train/velocity_s63/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/velocity_s63/selection.json](exp/egorecover_prior_velocity/v1/train/velocity_s63/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/velocity_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/velocity_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：49：P 显式速度单组完成
 
 - [exp/egorecover_prior_velocity/v1/train/control_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1700；dev next-frame FK=36.000 mm。
-- 1秒自反馈 FK=346.027 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/control_s62/report.json](exp/egorecover_prior_velocity/v1/train/control_s62/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/control_s62/selection.json](exp/egorecover_prior_velocity/v1/train/control_s62/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/control_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s62/prior.pt)。
+- 1秒自反馈 FK=346.027 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/control_s62/report.json](exp/egorecover_prior_velocity/v1/train/control_s62/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/control_s62/selection.json](exp/egorecover_prior_velocity/v1/train/control_s62/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/control_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/control_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：50：P 显式速度单组完成
 
 - [exp/egorecover_prior_velocity/v1/train/velocity_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1700；dev next-frame FK=35.883 mm。
-- 1秒自反馈 FK=359.662 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/velocity_s62/report.json](exp/egorecover_prior_velocity/v1/train/velocity_s62/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/velocity_s62/selection.json](exp/egorecover_prior_velocity/v1/train/velocity_s62/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/velocity_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s62/prior.pt)。
+- 1秒自反馈 FK=359.662 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/velocity_s62/report.json](exp/egorecover_prior_velocity/v1/train/velocity_s62/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/velocity_s62/selection.json](exp/egorecover_prior_velocity/v1/train/velocity_s62/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/velocity_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/velocity_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：50：P 显式速度对照开始/恢复
 
 - [exp/egorecover_prior_velocity/v1/train/control_s64](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，velocity_input=False，geometry=1/fk=0，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_velocity/v1/train/control_s64/experiment.json](exp/egorecover_prior_velocity/v1/train/control_s64/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/control_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_velocity/v1/train/control_s64/experiment.json](exp/egorecover_prior_velocity/v1/train/control_s64/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/control_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/control_s64/initial.pt)。
 
 ## 2026-09-29--14：50：P 显式速度对照开始/恢复
 
 - [exp/egorecover_prior_velocity/v1/train/velocity_s64](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，velocity_input=True，geometry=1/fk=0，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_velocity/v1/train/velocity_s64/experiment.json](exp/egorecover_prior_velocity/v1/train/velocity_s64/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/velocity_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_velocity/v1/train/velocity_s64/experiment.json](exp/egorecover_prior_velocity/v1/train/velocity_s64/experiment.json)；初始权重：[exp/egorecover_prior_velocity/v1/train/velocity_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/velocity_s64/initial.pt)。
 
 ## 2026-09-29--14：52：P 显式速度单组完成
 
 - [exp/egorecover_prior_velocity/v1/train/control_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=36.069 mm。
-- 1秒自反馈 FK=352.340 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/control_s64/report.json](exp/egorecover_prior_velocity/v1/train/control_s64/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/control_s64/selection.json](exp/egorecover_prior_velocity/v1/train/control_s64/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/control_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/control_s64/prior.pt)。
+- 1秒自反馈 FK=352.340 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/control_s64/report.json](exp/egorecover_prior_velocity/v1/train/control_s64/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/control_s64/selection.json](exp/egorecover_prior_velocity/v1/train/control_s64/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/control_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/control_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：53：P 显式速度单组完成
 
 - [exp/egorecover_prior_velocity/v1/train/velocity_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=35.613 mm。
-- 1秒自反馈 FK=345.192 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/velocity_s64/report.json](exp/egorecover_prior_velocity/v1/train/velocity_s64/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/velocity_s64/selection.json](exp/egorecover_prior_velocity/v1/train/velocity_s64/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/velocity_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_velocity/v1/train/velocity_s64/prior.pt)。
+- 1秒自反馈 FK=345.192 mm；完整指标/逐take结果：[exp/egorecover_prior_velocity/v1/train/velocity_s64/report.json](exp/egorecover_prior_velocity/v1/train/velocity_s64/report.json)；选点曲线：[exp/egorecover_prior_velocity/v1/train/velocity_s64/selection.json](exp/egorecover_prior_velocity/v1/train/velocity_s64/selection.json)；所选权重：[exp/egorecover_prior_velocity/v1/train/velocity_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_velocity/v1/train/velocity_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--14：53：P 显式速度输入实验结论
@@ -920,133 +920,133 @@
 ## 2026-09-29--15：12：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/control_s62](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=0，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/control_s62/experiment.json](exp/egorecover_prior_same_shape/v1/train/control_s62/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/control_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/control_s62/experiment.json](exp/egorecover_prior_same_shape/v1/train/control_s62/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/control_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/control_s62/initial.pt)。
 
 ## 2026-09-29--15：12：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/pose10_s62](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=1，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose10_s62/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose10_s62/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose10_s62/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose10_s62/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose10_s62/initial.pt)。
 
 ## 2026-09-29--15：12：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/pose01_s62](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=0.1，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose01_s62/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose01_s62/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose01_s62/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose01_s62/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose01_s62/initial.pt)。
 
 ## 2026-09-29--15：12：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/pose03_s62](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=0.3，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose03_s62/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose03_s62/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose03_s62/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose03_s62/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose03_s62/initial.pt)。
 
 ## 2026-09-29--15：13：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/control_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1700；dev next-frame FK=36.000 mm。
-- 1秒自反馈 FK=346.027 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/control_s62/report.json](exp/egorecover_prior_same_shape/v1/train/control_s62/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/control_s62/selection.json](exp/egorecover_prior_same_shape/v1/train/control_s62/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/control_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s62/prior.pt)。
+- 1秒自反馈 FK=346.027 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/control_s62/report.json](exp/egorecover_prior_same_shape/v1/train/control_s62/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/control_s62/selection.json](exp/egorecover_prior_same_shape/v1/train/control_s62/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/control_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/control_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：13：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/control_s63](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=0，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/control_s63/experiment.json](exp/egorecover_prior_same_shape/v1/train/control_s63/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/control_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/control_s63/experiment.json](exp/egorecover_prior_same_shape/v1/train/control_s63/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/control_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/control_s63/initial.pt)。
 
 ## 2026-09-29--15：15：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/pose10_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1700；dev next-frame FK=35.771 mm。
-- 1秒自反馈 FK=356.080 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose10_s62/report.json](exp/egorecover_prior_same_shape/v1/train/pose10_s62/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose10_s62/selection.json](exp/egorecover_prior_same_shape/v1/train/pose10_s62/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s62/prior.pt)。
+- 1秒自反馈 FK=356.080 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose10_s62/report.json](exp/egorecover_prior_same_shape/v1/train/pose10_s62/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose10_s62/selection.json](exp/egorecover_prior_same_shape/v1/train/pose10_s62/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose10_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：15：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/pose01_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=36.383 mm。
-- 1秒自反馈 FK=364.120 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose01_s62/report.json](exp/egorecover_prior_same_shape/v1/train/pose01_s62/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose01_s62/selection.json](exp/egorecover_prior_same_shape/v1/train/pose01_s62/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s62/prior.pt)。
+- 1秒自反馈 FK=364.120 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose01_s62/report.json](exp/egorecover_prior_same_shape/v1/train/pose01_s62/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose01_s62/selection.json](exp/egorecover_prior_same_shape/v1/train/pose01_s62/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose01_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：15：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/pose03_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=35.905 mm。
-- 1秒自反馈 FK=358.387 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose03_s62/report.json](exp/egorecover_prior_same_shape/v1/train/pose03_s62/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose03_s62/selection.json](exp/egorecover_prior_same_shape/v1/train/pose03_s62/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s62/prior.pt)。
+- 1秒自反馈 FK=358.387 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose03_s62/report.json](exp/egorecover_prior_same_shape/v1/train/pose03_s62/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose03_s62/selection.json](exp/egorecover_prior_same_shape/v1/train/pose03_s62/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose03_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：15：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/pose10_s63](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=1，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose10_s63/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose10_s63/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose10_s63/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose10_s63/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose10_s63/initial.pt)。
 
 ## 2026-09-29--15：15：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/pose01_s63](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=0.1，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose01_s63/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose01_s63/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose01_s63/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose01_s63/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose01_s63/initial.pt)。
 
 ## 2026-09-29--15：15：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/control_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2300；dev next-frame FK=35.749 mm。
-- 1秒自反馈 FK=370.270 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/control_s63/report.json](exp/egorecover_prior_same_shape/v1/train/control_s63/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/control_s63/selection.json](exp/egorecover_prior_same_shape/v1/train/control_s63/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/control_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s63/prior.pt)。
+- 1秒自反馈 FK=370.270 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/control_s63/report.json](exp/egorecover_prior_same_shape/v1/train/control_s63/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/control_s63/selection.json](exp/egorecover_prior_same_shape/v1/train/control_s63/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/control_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/control_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：15：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/pose03_s63](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=0.3，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose03_s63/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose03_s63/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose03_s63/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose03_s63/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose03_s63/initial.pt)。
 
 ## 2026-09-29--15：15：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/control_s64](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=0，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/control_s64/experiment.json](exp/egorecover_prior_same_shape/v1/train/control_s64/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/control_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/control_s64/experiment.json](exp/egorecover_prior_same_shape/v1/train/control_s64/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/control_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/control_s64/initial.pt)。
 
 ## 2026-09-29--15：17：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/control_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=36.069 mm。
-- 1秒自反馈 FK=352.340 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/control_s64/report.json](exp/egorecover_prior_same_shape/v1/train/control_s64/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/control_s64/selection.json](exp/egorecover_prior_same_shape/v1/train/control_s64/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/control_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/control_s64/prior.pt)。
+- 1秒自反馈 FK=352.340 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/control_s64/report.json](exp/egorecover_prior_same_shape/v1/train/control_s64/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/control_s64/selection.json](exp/egorecover_prior_same_shape/v1/train/control_s64/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/control_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/control_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：17：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/pose01_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1500；dev next-frame FK=35.881 mm。
-- 1秒自反馈 FK=356.104 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose01_s63/report.json](exp/egorecover_prior_same_shape/v1/train/pose01_s63/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose01_s63/selection.json](exp/egorecover_prior_same_shape/v1/train/pose01_s63/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s63/prior.pt)。
+- 1秒自反馈 FK=356.104 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose01_s63/report.json](exp/egorecover_prior_same_shape/v1/train/pose01_s63/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose01_s63/selection.json](exp/egorecover_prior_same_shape/v1/train/pose01_s63/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose01_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：17：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/pose10_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=35.874 mm。
-- 1秒自反馈 FK=345.877 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose10_s63/report.json](exp/egorecover_prior_same_shape/v1/train/pose10_s63/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose10_s63/selection.json](exp/egorecover_prior_same_shape/v1/train/pose10_s63/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s63/prior.pt)。
+- 1秒自反馈 FK=345.877 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose10_s63/report.json](exp/egorecover_prior_same_shape/v1/train/pose10_s63/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose10_s63/selection.json](exp/egorecover_prior_same_shape/v1/train/pose10_s63/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose10_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：18：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/pose01_s64](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=0.1，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose01_s64/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose01_s64/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose01_s64/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose01_s64/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose01_s64/initial.pt)。
 
 ## 2026-09-29--15：18：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/pose03_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1500；dev next-frame FK=35.934 mm。
-- 1秒自反馈 FK=366.213 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose03_s63/report.json](exp/egorecover_prior_same_shape/v1/train/pose03_s63/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose03_s63/selection.json](exp/egorecover_prior_same_shape/v1/train/pose03_s63/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s63/prior.pt)。
+- 1秒自反馈 FK=366.213 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose03_s63/report.json](exp/egorecover_prior_same_shape/v1/train/pose03_s63/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose03_s63/selection.json](exp/egorecover_prior_same_shape/v1/train/pose03_s63/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose03_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：18：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/pose10_s64](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=1，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose10_s64/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose10_s64/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose10_s64/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose10_s64/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose10_s64/initial.pt)。
 
 ## 2026-09-29--15：18：P 统一体型监督对照开始/恢复
 
 - [exp/egorecover_prior_same_shape/v1/train/pose03_s64](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/original_fk=0/same_shape=0.3，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose03_s64/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose03_s64/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_same_shape/v1/train/pose03_s64/experiment.json](exp/egorecover_prior_same_shape/v1/train/pose03_s64/experiment.json)；初始权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose03_s64/initial.pt)。
 
 ## 2026-09-29--15：20：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/pose01_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1600；dev next-frame FK=35.866 mm。
-- 1秒自反馈 FK=361.816 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose01_s64/report.json](exp/egorecover_prior_same_shape/v1/train/pose01_s64/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose01_s64/selection.json](exp/egorecover_prior_same_shape/v1/train/pose01_s64/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose01_s64/prior.pt)。
+- 1秒自反馈 FK=361.816 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose01_s64/report.json](exp/egorecover_prior_same_shape/v1/train/pose01_s64/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose01_s64/selection.json](exp/egorecover_prior_same_shape/v1/train/pose01_s64/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose01_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose01_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：20：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/pose10_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step2400；dev next-frame FK=35.749 mm。
-- 1秒自反馈 FK=345.314 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose10_s64/report.json](exp/egorecover_prior_same_shape/v1/train/pose10_s64/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose10_s64/selection.json](exp/egorecover_prior_same_shape/v1/train/pose10_s64/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose10_s64/prior.pt)。
+- 1秒自反馈 FK=345.314 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose10_s64/report.json](exp/egorecover_prior_same_shape/v1/train/pose10_s64/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose10_s64/selection.json](exp/egorecover_prior_same_shape/v1/train/pose10_s64/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose10_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose10_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：20：P 统一体型监督单组完成
 
 - [exp/egorecover_prior_same_shape/v1/train/pose03_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step1600；dev next-frame FK=35.697 mm。
-- 1秒自反馈 FK=347.099 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose03_s64/report.json](exp/egorecover_prior_same_shape/v1/train/pose03_s64/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose03_s64/selection.json](exp/egorecover_prior_same_shape/v1/train/pose03_s64/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_same_shape/v1/train/pose03_s64/prior.pt)。
+- 1秒自反馈 FK=347.099 mm；完整指标/逐take结果：[exp/egorecover_prior_same_shape/v1/train/pose03_s64/report.json](exp/egorecover_prior_same_shape/v1/train/pose03_s64/report.json)；选点曲线：[exp/egorecover_prior_same_shape/v1/train/pose03_s64/selection.json](exp/egorecover_prior_same_shape/v1/train/pose03_s64/selection.json)；所选权重：[exp/egorecover_prior_same_shape/v1/train/pose03_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_same_shape/v1/train/pose03_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--15：21：P 统一体型监督实验结论
@@ -1080,7 +1080,7 @@
 
 - 已选择192个train take（保留48、新增144）、562个互不重叠20秒片段，共187.33分钟，是原16分钟的11.71倍。原dev与holdout保持不变。当前正在逐take审计，尚无新训练效果结论。
 - 6项扩量测试及原7项常速度测试通过，覆盖划分隔离、跨源时间去重、take均衡采样、dev逐张量固定、断点恢复和配对结果汇总；新take的真实E7启动与SMPL审计已开始通过。
-- 方案：[P D组](docs/experiments/p-data-budget.md)；冻结清单：[exp/egorecover_prior_data_budget/v1/data/manifest.json](exp/egorecover_prior_data_budget/v1/data/manifest.json)；数据进度：[exp/egorecover_prior_data_budget/v1/data/progress.json](https://huggingface.co/datasets/sxhkk/EgoRecover-data/resolve/f395c5d72ec125bb3b020b723eed3288ed6ea447/exp/egorecover_prior_data_budget/v1/data/progress.json)；队列：[exp/egorecover_prior_data_budget/v1/queue.json](exp/egorecover_prior_data_budget/v1/queue.json)。
+- 方案：[P D组](docs/experiments/p-data-budget.md)；冻结清单：[exp/egorecover_prior_data_budget/v1/data/manifest.json](exp/egorecover_prior_data_budget/v1/data/manifest.json)；数据进度：[exp/egorecover_prior_data_budget/v1/data/progress.json](https://huggingface.co/datasets/sxhkk/EgoRecover-data/resolve/fdbff9f6a9856ff5b13e9818edf8677e395c6ee2/exp/egorecover_prior_data_budget/v1/data/progress.json)；队列：[exp/egorecover_prior_data_budget/v1/queue.json](exp/egorecover_prior_data_budget/v1/queue.json)。
 
 ## 2026-09-29--15：52：P D组扩量数据审计完成
 
@@ -1090,17 +1090,17 @@
 ## 2026-09-29--15：52：P D组扩量训练开始/恢复
 
 - [exp/egorecover_prior_data_budget/v1/train/D_s62](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/fk=0，seed=62，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_data_budget/v1/train/D_s62/experiment.json](exp/egorecover_prior_data_budget/v1/train/D_s62/experiment.json)；初始权重：[exp/egorecover_prior_data_budget/v1/train/D_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s62/initial.pt)。
+- 运行配置：[exp/egorecover_prior_data_budget/v1/train/D_s62/experiment.json](exp/egorecover_prior_data_budget/v1/train/D_s62/experiment.json)；初始权重：[exp/egorecover_prior_data_budget/v1/train/D_s62/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_data_budget/v1/train/D_s62/initial.pt)。
 
 ## 2026-09-29--15：52：P D组扩量训练开始/恢复
 
 - [exp/egorecover_prior_data_budget/v1/train/D_s64](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/fk=0，seed=64，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_data_budget/v1/train/D_s64/experiment.json](exp/egorecover_prior_data_budget/v1/train/D_s64/experiment.json)；初始权重：[exp/egorecover_prior_data_budget/v1/train/D_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s64/initial.pt)。
+- 运行配置：[exp/egorecover_prior_data_budget/v1/train/D_s64/experiment.json](exp/egorecover_prior_data_budget/v1/train/D_s64/experiment.json)；初始权重：[exp/egorecover_prior_data_budget/v1/train/D_s64/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_data_budget/v1/train/D_s64/initial.pt)。
 
 ## 2026-09-29--15：52：P D组扩量训练开始/恢复
 
 - [exp/egorecover_prior_data_budget/v1/train/D_s63](docs/release/migration.md#为什么选择这些checkpoint)；base=constant_velocity，geometry=1/fk=0，seed=63，从 step0 开始。仅使用 train 身体状态训练。
-- 运行配置：[exp/egorecover_prior_data_budget/v1/train/D_s63/experiment.json](exp/egorecover_prior_data_budget/v1/train/D_s63/experiment.json)；初始权重：[exp/egorecover_prior_data_budget/v1/train/D_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s63/initial.pt)。
+- 运行配置：[exp/egorecover_prior_data_budget/v1/train/D_s63/experiment.json](exp/egorecover_prior_data_budget/v1/train/D_s63/experiment.json)；初始权重：[exp/egorecover_prior_data_budget/v1/train/D_s63/initial.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_data_budget/v1/train/D_s63/initial.pt)。
 
 ## 2026-09-29--16：06：P D组扩量阶段性结论（训练未结束）
 
@@ -1111,19 +1111,19 @@
 ## 2026-09-29--16：09：P D组扩量单组完成
 
 - [exp/egorecover_prior_data_budget/v1/train/D_s63](docs/release/migration.md#为什么选择这些checkpoint)；选中 step7500；dev next-frame FK=34.102 mm。
-- 1秒自反馈 FK=273.794 mm；完整指标/逐take结果：[exp/egorecover_prior_data_budget/v1/train/D_s63/report.json](exp/egorecover_prior_data_budget/v1/train/D_s63/report.json)；选点曲线：[exp/egorecover_prior_data_budget/v1/train/D_s63/selection.json](exp/egorecover_prior_data_budget/v1/train/D_s63/selection.json)；所选权重：[exp/egorecover_prior_data_budget/v1/train/D_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s63/prior.pt)。
+- 1秒自反馈 FK=273.794 mm；完整指标/逐take结果：[exp/egorecover_prior_data_budget/v1/train/D_s63/report.json](exp/egorecover_prior_data_budget/v1/train/D_s63/report.json)；选点曲线：[exp/egorecover_prior_data_budget/v1/train/D_s63/selection.json](exp/egorecover_prior_data_budget/v1/train/D_s63/selection.json)；所选权重：[exp/egorecover_prior_data_budget/v1/train/D_s63/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_data_budget/v1/train/D_s63/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--16：10：P D组扩量单组完成
 
 - [exp/egorecover_prior_data_budget/v1/train/D_s62](docs/release/migration.md#为什么选择这些checkpoint)；选中 step9400；dev next-frame FK=34.072 mm。
-- 1秒自反馈 FK=305.149 mm；完整指标/逐take结果：[exp/egorecover_prior_data_budget/v1/train/D_s62/report.json](exp/egorecover_prior_data_budget/v1/train/D_s62/report.json)；选点曲线：[exp/egorecover_prior_data_budget/v1/train/D_s62/selection.json](exp/egorecover_prior_data_budget/v1/train/D_s62/selection.json)；所选权重：[exp/egorecover_prior_data_budget/v1/train/D_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s62/prior.pt)。
+- 1秒自反馈 FK=305.149 mm；完整指标/逐take结果：[exp/egorecover_prior_data_budget/v1/train/D_s62/report.json](exp/egorecover_prior_data_budget/v1/train/D_s62/report.json)；选点曲线：[exp/egorecover_prior_data_budget/v1/train/D_s62/selection.json](exp/egorecover_prior_data_budget/v1/train/D_s62/selection.json)；所选权重：[exp/egorecover_prior_data_budget/v1/train/D_s62/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_data_budget/v1/train/D_s62/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--16：14：P D组扩量单组完成
 
 - [exp/egorecover_prior_data_budget/v1/train/D_s64](docs/release/migration.md#为什么选择这些checkpoint)；选中 step8400；dev next-frame FK=34.122 mm。
-- 1秒自反馈 FK=267.374 mm；完整指标/逐take结果：[exp/egorecover_prior_data_budget/v1/train/D_s64/report.json](exp/egorecover_prior_data_budget/v1/train/D_s64/report.json)；选点曲线：[exp/egorecover_prior_data_budget/v1/train/D_s64/selection.json](exp/egorecover_prior_data_budget/v1/train/D_s64/selection.json)；所选权重：[exp/egorecover_prior_data_budget/v1/train/D_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/f58988fe13f92a9237db743f0951495cb241860a/exp/egorecover_prior_data_budget/v1/train/D_s64/prior.pt)。
+- 1秒自反馈 FK=267.374 mm；完整指标/逐take结果：[exp/egorecover_prior_data_budget/v1/train/D_s64/report.json](exp/egorecover_prior_data_budget/v1/train/D_s64/report.json)；选点曲线：[exp/egorecover_prior_data_budget/v1/train/D_s64/selection.json](exp/egorecover_prior_data_budget/v1/train/D_s64/selection.json)；所选权重：[exp/egorecover_prior_data_budget/v1/train/D_s64/prior.pt](https://huggingface.co/sxhkk/EgoRecover/resolve/8b8190b6964f7c257346cbd65d31010a48007f28/exp/egorecover_prior_data_budget/v1/train/D_s64/prior.pt)。
 - dev 用于选模，holdout 未使用；计算量与训练耗时记录在 report.json 的 compute 字段。
 
 ## 2026-09-29--16：14：P D组扩量实验结论
@@ -1433,5 +1433,14 @@
 - 本地183项测试通过。移位目录中G strict加载及两帧CPU推理通过；D组P完整原dev复现34.071924941mm，与原报告差约0.000002mm，支持保存模型与评估路径的正确迁移；没有新增训练结论。
 - 原始数据ZIP已在HF服务端复制，8个本地成员与固定官方归档目录核对一致。大权重/缓存改为64 MiB字节分片；510个唯一分片SHA256全部核对，真实R0权重合并与G缓存解压均验证原SHA，错误分片拒绝且不写入目标文件。
 - [G核验](verification/migration_g_smoke.json)、[P完整dev核验](verification/migration_p_dev.json)、[分片恢复核验](verification/migration_parts_restore.json)、[迁移入口](docs/release/migration.md)。人体模型资产需要单独授权获取；跨机器完整训练轨迹与严格resume尚未验证。
+
+## 2026-10-03--09：55：GitHub main与公有HF全量迁移完成
+
+- [GitHub main](https://github.com/sxh-kk/EgoRecover/tree/main)保留当前代码、配置、测试、文档、CV及轻量实验记录；旧main历史保留，没有强推。
+- [HF模型](https://huggingface.co/sxhkk/EgoRecover)保存158个选中模型产物，逻辑大小25.625 GiB；[HF数据](https://huggingface.co/datasets/sxhkk/EgoRecover-data)保存原processed数据、必要缓存与最终评估证据，恢复10,424个原文件、47.686 GiB。模型与数据均公有。
+- 全部分片/直接文件已经提交。远端逐对象核对大小及LFS SHA256或Git blob ID通过；固定model revision为 `8b8190b6964f7c257346cbd65d31010a48007f28`，dataset revision为 `fdbff9f6a9856ff5b13e9818edf8677e395c6ee2`。
+- 183项原有测试通过；移位目录的独立P完整dev复现34.071924941mm，与原报告差约0.000002mm。进一步从公开HF实际下载5个原文件、9个字节分片，SHA256全部一致，并在干净目录完成G strict加载与两帧CPU推理。错误分片/整文件哈希、危险路径和已有文件冲突检查通过。
+- 结论：代码、已选权重、冻结输入、协议与实验结论可迁移保存；没有新增训练成绩。SMPL-X需另行授权获取，跨机器完整训练/精确续训轨迹仍未验证，未选71个旧resume等产物保留在原机器。
+- [迁移与恢复命令](docs/release/migration.md)、[发布状态](docs/release/publication.json)、[文件/SHA256索引](docs/release/artifacts.json)、[远端对象核验](verification/migration_remote_objects.json)、[公开HF下载复现](verification/migration_remote_g_smoke.json)、[排除清单](docs/release/excluded-files.csv)。
 
 > 迁移说明：本文部分原产物未选入发布包，相应链接指向迁移范围说明；具体原路径和原因见发布排除清单。

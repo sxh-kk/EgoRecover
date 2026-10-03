@@ -39,7 +39,7 @@ conda activate egorecover
 
 ## 迁移与复现
 
-发布状态见[发布状态](docs/release/publication.json)。当前最小 `g-smoke` 已上传，其余分组正在传输，完整分组请等状态标记完成后恢复。
+代码和选中资产已完成公开迁移，固定revision及核验记录见[发布状态](docs/release/publication.json)。
 
 从新机器克隆main并恢复相应数据，精确HF revision和每个文件SHA256见 [artifact索引](docs/release/artifacts.json)：
 
