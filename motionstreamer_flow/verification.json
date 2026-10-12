@@ -1,0 +1,33 @@
+{
+  "scope": "Code functionality and causal properties; not a real-data accuracy result",
+  "environment": {
+    "python": "3.11",
+    "torch": "2.10.0+cpu",
+    "cuda_available": false
+  },
+  "new_package_tests": {
+    "command": "python -m pytest motionstreamer_flow/tests -q",
+    "passed": 26,
+    "skipped": 1,
+    "skip_reason": "CUDA hardware unavailable for bf16 training test"
+  },
+  "existing_related_regressions": {
+    "command": "python -m pytest tests/test_causal_rollout.py tests/test_fixed_shape_fk.py tests/test_four_action_sampling.py tests/test_history_interfaces.py tests/test_observation_reference.py tests/test_planar_reference_and_loss.py tests/test_g_pretraining.py tests/test_smplx_evaluation.py -q",
+    "passed": 46
+  },
+  "additional_checks": [
+    "black --check motionstreamer_flow",
+    "python -m compileall -q motionstreamer_flow",
+    "git diff --check",
+    "Training and exporter CLI help",
+    "Synthetic TAE -> Flow -> four-action closed-loop evaluation",
+    "Standalone package copied outside the legacy repository and run successfully",
+    "TAE and Flow resumed checkpoints match uninterrupted CPU training exactly"
+  ],
+  "pending": [
+    "CUDA/BF16 execution on actual GPU hardware",
+    "GPU memory and throughput measurement with default large model",
+    "Real prepared-cache conversion and licensed SMPL-X FK parity",
+    "Real-data training and comparison against existing P+G"
+  ]
+}

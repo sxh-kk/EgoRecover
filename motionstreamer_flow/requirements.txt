@@ -1,0 +1,7 @@
+# Install the CUDA PyTorch wheel matching your GPU environment separately (see README).
+torch>=2.5
+# Offline conversion only: licensed SMPL-X assets are supplied separately.
+smplx>=0.1.28
+numpy>=1.24
+# Verification only.
+pytest>=8

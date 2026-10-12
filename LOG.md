@@ -1444,3 +1444,12 @@
 - [迁移与恢复命令](docs/release/migration.md)、[发布状态](docs/release/publication.json)、[文件/SHA256索引](docs/release/artifacts.json)、[远端对象核验](verification/migration_remote_objects.json)、[公开HF下载复现](verification/migration_remote_g_smoke.json)、[排除清单](docs/release/excluded-files.csv)。
 
 > 迁移说明：本文部分原产物未选入发布包，相应链接指向迁移范围说明；具体原路径和原因见发布排除清单。
+
+## 2026-10-08--16：26：记录P连续预测历史＋GT引导渐进增强改进方向
+
+- 用户确认作为改进方向写入文档。本次仅更新文档与索引，未修改训练代码、生成新缓存或启动训练；现有 P/G 权重与队列未调整。
+- 从当前校准后的常速度残差 P 续训：第一阶段无梯度生成连续预测尾段，整段完成后在物理状态上用历史帧 GT 调节误差强度；第二阶段用增强历史预测下一帧并反传，当前目标 GT 只用于损失。
+- 初始建议保留 50% 完整 GT 窗口；预测长度考虑 2→4→8 帧，误差强度逐渐增加至完整预测。新 A/B/C 分别检验 GT 续训、连续反馈历史、GT 引导的额外作用；具体预算和调度尚未冻结。
+- 主验收使用同一份冻结 G dev 历史，约束 GT 精度退化，辅以短程自反馈；候选需多种子及固定 G 配对闭环验证。P 自反馈误差不能假定覆盖 G 误差，当前没有新收益结论。
+- 补核官方调度：`cosine_decay` 默认返回式实际为 0.5×(1−cos)，替换比例 0→1，与论文一致；此前对函数名的反向解读已纠正，不作为 v1 退化原因。官方两遍是带噪 GT latent 的去噪训练，本方案是网络外的 GT 引导历史增强。
+- [完整设计及v1证据](docs/experiments/p-motionstreamer.md#9-新改进方向连续预测历史gt-引导的渐进增强2026-10-08)；[文档索引](docs/README.md)；[历史运行说明](docs/experiments/p-two-forward-runbook.md)。新方向尚无运行入口或实验产物。

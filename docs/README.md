@@ -1,6 +1,6 @@
 # 文档索引
 
-更新时间：2026-10-02。最新实验事实与运行状态统一记录在 [LOG.md](../LOG.md)。
+更新时间：2026-10-08。最新实验事实与运行状态统一记录在 [LOG.md](../LOG.md)。
 
 ## 当前实验
 
@@ -15,7 +15,7 @@
 | [P 统一体型FK监督](experiments/p-same-shape-fk.md) | 已完成：统一体型监督四权重×三个种子；[结果](../exp/egorecover_prior_same_shape/v1/RESULTS.md)；主线采用权重0 |
 | [P 显式速度输入](experiments/p-explicit-velocity.md) | 已完成：常速度/FK=0，显式速度三种子配对；[结果](../exp/egorecover_prior_velocity/v1/RESULTS.md) |
 | [P 常速度残差实验](experiments/p-cv-residual.md) | 已完成保持/常速度×FK四组、三种子对照；[结果](../exp/egorecover_prior_cv_residual/v1/RESULTS.md) |
-| [P 的 MotionStreamer 改进](experiments/p-motionstreamer.md) | 上一轮方法：Two-Forward与FK四组对照；[已完成结果](../exp/egorecover_prior_two_forward/v1/RESULTS.md) |
+| [P 的 MotionStreamer 改进](experiments/p-motionstreamer.md) | v1 Two-Forward与FK对照已完成；第9节新增“连续预测历史＋GT引导渐进增强”，仅设计、未实现/训练；[v1结果](../exp/egorecover_prior_two_forward/v1/RESULTS.md) |
 | [P 实验运行说明](experiments/p-two-forward-runbook.md) | 上一轮入口、任务矩阵、输出与恢复；文内启动状态为历史记录 |
 | [P 先独立验证的总顺序](experiments/p-first.md) | 独立验证 P，再决定是否接入 G |
 

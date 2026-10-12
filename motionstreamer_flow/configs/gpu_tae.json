@@ -1,0 +1,11 @@
+{
+  "tae_width": 512,
+  "latent_dim": 16,
+  "batch_size": 8,
+  "target_frames": 32,
+  "learning_rate": 0.0001,
+  "total_steps": 12000,
+  "eval_every": 500,
+  "precision": "bf16",
+  "seed": 62
+}
