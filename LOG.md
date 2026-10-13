@@ -1453,3 +1453,10 @@
 - 主验收使用同一份冻结 G dev 历史，约束 GT 精度退化，辅以短程自反馈；候选需多种子及固定 G 配对闭环验证。P 自反馈误差不能假定覆盖 G 误差，当前没有新收益结论。
 - 补核官方调度：`cosine_decay` 默认返回式实际为 0.5×(1−cos)，替换比例 0→1，与论文一致；此前对函数名的反向解读已纠正，不作为 v1 退化原因。官方两遍是带噪 GT latent 的去噪训练，本方案是网络外的 GT 引导历史增强。
 - [完整设计及v1证据](docs/experiments/p-motionstreamer.md#9-新改进方向连续预测历史gt-引导的渐进增强2026-10-08)；[文档索引](docs/README.md)；[历史运行说明](docs/experiments/p-two-forward-runbook.md)。新方向尚无运行入口或实验产物。
+
+## 2026-10-13：MotionStreamer修正1——恢复原始世界坐标
+
+- 确认源缓存已减去地面高度，而原 `*_world` 输出只还原启动锚点，未恢复原始世界高度。
+- 数据schema v2保存 `original_world_from_anchor`，由已存 `record.floor_height` 与原锚点复合得到。`root_world/joints_world` 使用完整还原；新增 `root_floor_world/joints_floor_world` 明确保留地面归零输出。预测文件保存变换和坐标空间说明。
+- 内部模型条件与训练/评价坐标不变。缺失高度、无效刚体变换、旧v1数据明确拒绝，README记录重新导出要求；不默认为零高度。
+- CPU验证：原核心/全流程及新增坐标测试35 passed、1项CUDA测试跳过；非零地面、旋转/平移锚点往返通过，修改还原元数据不改变内部生成，只改变原始世界输出。没有新训练或真实数据精度结论。

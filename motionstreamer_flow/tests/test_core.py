@@ -335,6 +335,7 @@ def test_converter_uses_predicted_anchor_not_gt_reference(setup):
         "beta_boot": p["beta"],
         "images": torch.nan_to_num(p["images"]),
         "head": p["root"],
+        "record": {"floor_height": 0.0},
     }
     converted = convert_packet(packet, cfg, p["offsets"])
     torch.testing.assert_close(converted["pose"], p["pose"], atol=1e-6, rtol=1e-5)

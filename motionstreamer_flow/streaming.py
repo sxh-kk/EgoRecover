@@ -1,6 +1,6 @@
 import torch
 
-from .geometry import fk, root_to_world, to_world
+from .geometry import fk, root_to_world, to_world, validate_rigid_transform
 from .objective import temporarily_eval
 
 ACTION_BITS = {"a11": (True, True), "a10": (True, False), "a01": (False, True), "a00": (False, False)}
@@ -24,12 +24,16 @@ class StreamingSession:
         head_valid,
         beta,
         offsets,
-        anchor
+        anchor,
+        original_world_from_anchor,
     ):
         self.flow, self.tae, self.norm = flow, tae, normalizer
         self.cfg = flow.cfg
         device = next(flow.parameters()).device
         self.beta, self.offsets, self.anchor = (x.to(device).float() for x in (beta, offsets, anchor))
+        validate_rigid_transform(self.anchor, "anchor")
+        validate_rigid_transform(original_world_from_anchor, "original_world_from_anchor")
+        self.original_world_from_anchor = original_world_from_anchor.to(device).float()
         n = len(startup_pose)
         if (
             n != self.cfg.bootstrap
@@ -106,8 +110,10 @@ class StreamingSession:
             "root": root,
             "joints": joints,
             "rotations": rotations,
-            "root_world": root_to_world(root, self.anchor),
-            "joints_world": to_world(joints, self.anchor),
+            "root_floor_world": root_to_world(root, self.anchor),
+            "joints_floor_world": to_world(joints, self.anchor),
+            "root_world": root_to_world(root, self.original_world_from_anchor),
+            "joints_world": to_world(joints, self.original_world_from_anchor),
         }
 
 
@@ -122,7 +128,7 @@ def rollout(flow, tae, normalizer, inputs, *, action="a11", seed=62):
         **{
             key: value[:n] if key in ("images", "head", "image_valid", "head_valid") else value
             for key, value in inputs.items()
-        }
+        },
     )
     generator = torch.Generator(device=session.states.device).manual_seed(seed)
     outputs = []

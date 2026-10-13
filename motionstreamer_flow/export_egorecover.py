@@ -2,13 +2,14 @@
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 import torch
 
 from .config import Config
 from .data import save_json, save_torch, sha256, validate_episode
-from .geometry import PARENTS, fk, head_features, matrix_to_rotation_6d, rotation_6d_to_matrix
+from .geometry import PARENTS, fk, head_features, matrix_to_rotation_6d, rotation_6d_to_matrix, validate_rigid_transform
 from .train import resolve_device
 
 
@@ -62,6 +63,15 @@ def audit_fk(layer, beta, offsets, rest_pelvis, pose, root):
 def convert_packet(packet, cfg, offsets, anchor=None):
     # Only the predicted startup defines the anchor. GT reference fields are never read.
     anchor = packet["teacher"]["reference"][0].float().clone() if anchor is None else anchor
+    validate_rigid_transform(anchor, "anchor")
+    try:
+        floor_height = float(packet["record"]["floor_height"])
+    except (KeyError, TypeError, ValueError) as error:
+        raise ValueError("Source episode must declare its removed floor_height for world restoration.") from error
+    if not math.isfinite(floor_height):
+        raise ValueError("Source floor_height must be finite.")
+    original_world_from_floor_world = torch.eye(4, dtype=anchor.dtype, device=anchor.device)
+    original_world_from_floor_world[2, 3] = floor_height
     pose, root, joints = body_to_pose_root(packet["truth"], anchor)
     startup_pose, startup_root, _ = body_to_pose_root(packet["teacher"], anchor)
     t = len(pose)
@@ -81,6 +91,7 @@ def convert_packet(packet, cfg, offsets, anchor=None):
         "beta": packet["beta_boot"].float(),
         "offsets": offsets.cpu().float(),
         "anchor": anchor,
+        "original_world_from_anchor": original_world_from_floor_world @ anchor,
         "startup_pose": startup_pose[: cfg.bootstrap],
         "startup_root": startup_root[: cfg.bootstrap],
         "startup_source": "predicted",
@@ -169,7 +180,7 @@ def main():
     save_json(
         output / "manifest.json",
         {
-            "version": 1,
+            "version": 2,
             "fps": cfg.fps,
             "backend": "smplx",
             "records": records,
@@ -177,7 +188,11 @@ def main():
             "smplx_asset_sha256": sha256(model_path),
             "fk_parity_max_abs_m": maximum_error,
             "limited": args.limit_per_split is not None,
-            "coordinates": "fixed predicted startup heading/XY anchor; Z is supplied source floor",
+            "coordinates": {
+                "pose_root_joints": "fixed predicted startup anchor",
+                "anchor": "floor-normalized-world-from-anchor",
+                "original_world_from_anchor": "original-annotation-world-from-anchor; removed floor restored once",
+            },
             "floor_source": "inherited offline cache floor; not estimated from future frames by this exporter",
         },
     )

@@ -5,6 +5,8 @@ from pathlib import Path
 import torch
 from torch import nn
 
+from .geometry import validate_rigid_transform
+
 
 def sha256(path):
     digest = hashlib.sha256()
@@ -77,8 +79,10 @@ class Episodes:
         self.cfg = cfg
         self.digest = sha256(self.path)
         self.manifest = json.loads(self.path.read_text())
-        if self.manifest.get("version") != 1 or self.manifest.get("fps") != cfg.fps:
-            raise ValueError("Unsupported manifest version or FPS mismatch.")
+        if self.manifest.get("version") != 2:
+            raise ValueError("Dataset schema v2 required; re-export v1 data with explicit original-world restoration.")
+        if self.manifest.get("fps") != cfg.fps:
+            raise ValueError("Manifest FPS mismatch.")
         self.records = self.manifest["records"]
         takes, ids = {}, set()
         for record in self.records:
@@ -157,6 +161,7 @@ def validate_episode(p, cfg):
         "beta": (10,),
         "offsets": (22, 3),
         "anchor": (4, 4),
+        "original_world_from_anchor": (4, 4),
         "startup_pose": (cfg.bootstrap, 152),
         "startup_root": (cfg.bootstrap, 9),
     }
@@ -175,9 +180,22 @@ def validate_episode(p, cfg):
         raise ValueError("Startup body prefix must be valid.")
     if p.get("startup_source") not in ("predicted", "synthetic_predicted"):
         raise ValueError("Startup must be supplied by a predictor, not ground truth.")
+    for key in ("anchor", "original_world_from_anchor"):
+        validate_rigid_transform(p[key], key)
 
 
 def online_inputs(packet):
     """Whitelist only legal online inputs. Never return pose/root/joints truth."""
-    keys = ("images", "head", "image_valid", "head_valid", "startup_pose", "startup_root", "beta", "offsets", "anchor")
+    keys = (
+        "images",
+        "head",
+        "image_valid",
+        "head_valid",
+        "startup_pose",
+        "startup_root",
+        "beta",
+        "offsets",
+        "anchor",
+        "original_world_from_anchor",
+    )
     return {key: packet[key] for key in keys}

@@ -123,7 +123,11 @@ TAE 为单独阶段，默认 12000 次更新，batch=8，窗口 52 帧全部参�
 
 `/path/to/smplx` 下应有 `SMPLX_NEUTRAL.npz`。转换检查源 manifest hash、完成标记及 episode hash，复制原 train/dev/test 的 take 划分，保存新缓存与资产来源记录。输出目录需为空，且不能包含源目录或位于源目录中。
 
-源缓存已减去协议声明的 floor；转换器沿用该 floor，不重新从全序列找地面。它忽略 truth 的 reference，使用预测启动 reference，固定 `beta_boot`。GT 关节仅作为离线评价目标保存；FK 训练目标在同一个启动体型上重建，避免把体型误差混入旋转重建损失。正式比较前应确认原缓存 floor 与启动模型来源符合既定协议。
+源缓存已减去协议声明的 floor；转换器沿用每个 episode 的 `record.floor_height`，不重新从全序列找地面。它忽略 truth 的 reference，使用预测启动 reference，固定 `beta_boot`。GT 关节仅作为离线评价目标保存；FK 训练目标在同一个启动体型上重建，避免把体型误差混入旋转重建损失。正式比较前应确认原缓存 floor 与启动模型来源符合既定协议。
+
+数据 schema v2 明确保存两份完整坐标变换：`anchor` 将模型锚点坐标还原到地面归零世界；`original_world_from_anchor` 再包含源缓存减去的地面高度。`root/joints` 输出在模型锚点中，`root_floor_world/joints_floor_world` 在地面归零世界中，`root_world/joints_world` 在原始标注世界中。高度只恢复一次，旋转与 XY 保持相同。还原变换仅用于输出，不参与模型条件。
+
+旧 schema v1 未保存地面还原信息，需重新导出；不能把未知高度默认为零。模型内部坐标与训练目标不变，但数据 manifest/hash 更新，旧 checkpoint 绑定的 v1 数据不能直接当成 v2 数据继续运行。自行生产的数据也须显式声明完整还原矩阵；若其世界坐标没有去地面，可让两份矩阵相同。
 
 ### 独立数据格式
 
@@ -131,7 +135,7 @@ TAE 为单独阶段，默认 12000 次更新，batch=8，窗口 52 帧全部参�
 
 ```json
 {
-  "version": 1,
+  "version": 2,
   "fps": 10,
   "backend": "smplx",
   "records": [
@@ -153,6 +157,8 @@ TAE 为单独阶段，默认 12000 次更新，batch=8，窗口 52 帧全部参�
 | `image_valid`, `head_valid` | `[T]` bool | 观测是否实际可用 |
 | `startup_pose`, `startup_root` | `[20,152]`, `[20,9]` | 上游启动预测，不得用 GT 启动正式评估 |
 | `beta`, `offsets` | `[10]`, `[22,3]` | 固定启动体型与父子骨架偏移；root offset 为零 |
+| `anchor` | `[4,4]` | 地面归零世界坐标 ← 模型锚点坐标 |
+| `original_world_from_anchor` | `[4,4]` | 原始标注世界坐标 ← 模型锚点坐标；必须显式提供有限的合法刚体变换 |
 | `anchor` | `[4,4]` | world-from-fixed-startup-anchor |
 | `startup_source` | string | 正式数据为 `predicted`，合成测试为 `synthetic_predicted` |
 

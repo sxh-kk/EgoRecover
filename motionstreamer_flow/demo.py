@@ -112,6 +112,7 @@ def make_dataset(output, cfg, frames=24):
             "beta": torch.zeros(10),
             "offsets": offsets,
             "anchor": torch.eye(4),
+            "original_world_from_anchor": torch.eye(4),
             "startup_pose": pose[: cfg.bootstrap] + torch.randn(cfg.bootstrap, 152, generator=generator) * 0.01,
             "startup_root": startup_root,
             "startup_source": "synthetic_predicted",
@@ -123,7 +124,7 @@ def make_dataset(output, cfg, frames=24):
     save_json(
         output / "manifest.json",
         {
-            "version": 1,
+            "version": 2,
             "fps": cfg.fps,
             "backend": "synthetic_demo",
             "records": records,

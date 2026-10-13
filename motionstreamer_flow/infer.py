@@ -48,6 +48,18 @@ def main():
                 "action": args.action,
                 "seed": args.seed,
                 "checkpoint_sha256": sha256(args.checkpoint),
+                "coordinate_transforms": {
+                    "floor_world_from_anchor": packet["anchor"],
+                    "original_world_from_anchor": packet["original_world_from_anchor"],
+                },
+                "coordinate_spaces": {
+                    "root": "anchor",
+                    "joints": "anchor",
+                    "root_floor_world": "floor-normalized world",
+                    "joints_floor_world": "floor-normalized world",
+                    "root_world": "original annotation world",
+                    "joints_world": "original annotation world",
+                },
             },
         )
     else:

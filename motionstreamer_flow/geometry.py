@@ -6,6 +6,24 @@ import torch.nn.functional as F
 PARENTS = (-1, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 12, 13, 14, 16, 17, 18, 19)
 
 
+def validate_rigid_transform(transform, name):
+    """Validate an explicit destination-from-source coordinate transform."""
+    if not isinstance(transform, torch.Tensor) or transform.shape != (4, 4) or not transform.is_floating_point():
+        raise ValueError(f"{name} must be a floating [4,4] rigid transform.")
+    if not torch.isfinite(transform).all():
+        raise ValueError(f"{name} must be finite.")
+    value = transform.detach().double()
+    rotation = value[:3, :3]
+    if (
+        not torch.allclose(value[3], value.new_tensor([0, 0, 0, 1]), atol=1e-6, rtol=0)
+        or not torch.allclose(
+            rotation.T @ rotation, torch.eye(3, device=value.device, dtype=value.dtype), atol=1e-5, rtol=0
+        )
+        or not torch.isclose(torch.linalg.det(rotation), value.new_tensor(1), atol=1e-5, rtol=0)
+    ):
+        raise ValueError(f"{name} must be a proper homogeneous rigid transform.")
+
+
 def matrix_to_rotation_6d(matrix):
     return matrix[..., :2, :].clone().reshape(*matrix.shape[:-2], 6)
 
