@@ -123,10 +123,19 @@ def test_offline_gains_use_one_shared_source_and_leave_inputs_unchanged():
     flow = HistoryFlow(sigma=0.3, flow=FlowMatching(num_steps=3))
     epsilon = torch.randn(1, 1, 243)
     result = generate_utility_labels(
-        model, flow, y, epsilon, lambda value: (value - 2).abs().mean((1, 2)), checkpoint_id="test-only"
+        model, flow, y, epsilon, lambda value: (value - 2).abs().mean((1, 2)), checkpoint_id="test-only",
+        metric_id="synthetic_l1"
     )
     torch.testing.assert_close(result["errors"], torch.tensor([[3.0, 0, 1, 2]]), atol=1e-6, rtol=0)
     torch.testing.assert_close(result["gains"], torch.tensor([[3.0, 2, 1]]), atol=1e-6, rtol=0)
     assert len(model.first_sources) == 4
     assert all(torch.equal(value, model.first_sources[0]) for value in model.first_sources)
     assert all(torch.equal(y[name], saved[name]) for name in y)
+    assert result["identity"]["metric_id"] == "synthetic_l1"
+
+
+@pytest.mark.parametrize('threshold', [float('nan'), float('inf'), -1, True])
+def test_action_selection_rejects_invalid_gain_threshold(threshold):
+    with pytest.raises(ValueError, match='min_gain'):
+        choose_action(torch.ones(1, 3), img_available=torch.ones(1, 1, dtype=torch.bool),
+                      traj_available=torch.ones(1, 1, dtype=torch.bool), min_gain=threshold)

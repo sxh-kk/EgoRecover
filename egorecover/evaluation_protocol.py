@@ -3,6 +3,7 @@
 import hashlib
 import json
 import math
+from numbers import Integral, Real
 from pathlib import Path
 
 DEFAULT_SPLIT_MANIFEST = Path(__file__).resolve().parents[1] / "config/egorecover_pilot_split_v1.json"
@@ -85,15 +86,27 @@ def phase_indices(frame_indices, window):
     }
 
 
-def paired_fault_delta(fault_error_mm, clean_error_mm, frame_indices, window, *, fps=30, recovery_tolerance_mm=None):
-    """Pair identical frames from one policy/seed/take, in physical millimetres."""
+def paired_fault_delta(fault_error_mm, clean_error_mm, frame_indices, window, *, fps=30,
+                       recovery_tolerance_mm=None, recovery_hold_frames=None):
+    """Pair identical frames; recovery requires consecutive per-frame tolerance.
+
+    Negative excess is an improvement and satisfies the one-sided tolerance.
+    Report the first recovered frame separately from the end of confirmation.
+    """
     if (
         window is None
-        or fps <= 0
+        or isinstance(fps, bool) or not isinstance(fps, Real) or not math.isfinite(fps) or fps <= 0
         or len(fault_error_mm) != len(clean_error_mm)
         or len(frame_indices) != len(fault_error_mm)
     ):
         raise ValueError("Paired fault analysis needs matching frames, an event window and positive FPS.")
+    if any(isinstance(frame, bool) or not isinstance(frame, Integral) or frame < 0 for frame in frame_indices):
+        raise ValueError('Physical frame indices must be nonnegative integers.')
+    if any(right <= left for left, right in zip(frame_indices, frame_indices[1:])):
+        raise ValueError('Physical frame indices must be strictly increasing.')
+    width = math.ceil(fps) if recovery_hold_frames is None else recovery_hold_frames
+    if isinstance(width, bool) or not isinstance(width, Integral) or width < 1:
+        raise ValueError('recovery_hold_frames must be a positive integer.')
     delta = [float(fault) - float(clean) for fault, clean in zip(fault_error_mm, clean_error_mm)]
     if not all(math.isfinite(value) for value in delta):
         raise ValueError("Nonfinite paired fault delta.")
@@ -101,18 +114,25 @@ def paired_fault_delta(fault_error_mm, clean_error_mm, frame_indices, window, *,
     fault = [delta[index] for index in sections["fault"]]
     if not fault:
         raise ValueError("Selected rollout does not overlap the fault interval.")
-    if recovery_tolerance_mm is not None and (not math.isfinite(recovery_tolerance_mm) or recovery_tolerance_mm < 0):
+    if recovery_tolerance_mm is not None and (isinstance(recovery_tolerance_mm, bool)
+            or not isinstance(recovery_tolerance_mm, Real)
+            or not math.isfinite(recovery_tolerance_mm) or recovery_tolerance_mm < 0):
         raise ValueError("Recovery tolerance must be finite and nonnegative.")
     recovery_seconds = None
+    confirmation_seconds = None
     recovery_status = "tolerance_not_predeclared"
     if recovery_tolerance_mm is not None:
         recovery_status = "right_censored"
-        width = round(fps)
         recovered = sections["recovery"]
+        if not recovered:
+            recovery_status = 'no_observed_recovery_frames'
         for offset in range(0, len(recovered) - width + 1):
             items = recovered[offset : offset + width]
-            if sum(delta[index] for index in items) / width <= recovery_tolerance_mm:
-                recovery_seconds = (frame_indices[items[-1]] - window[1] + 1) / fps
+            consecutive = all(frame_indices[right] == frame_indices[left] + 1
+                              for left, right in zip(items, items[1:]))
+            if consecutive and all(delta[index] <= recovery_tolerance_mm for index in items):
+                recovery_seconds = (frame_indices[items[0]] - window[1]) / fps
+                confirmation_seconds = (frame_indices[items[-1]] - window[1] + 1) / fps
                 recovery_status = "observed"
                 break
     return {
@@ -123,6 +143,9 @@ def paired_fault_delta(fault_error_mm, clean_error_mm, frame_indices, window, *,
         "fault_peak_increase_mm": max(fault),
         "per_frame_delta_mm": delta,
         "recovery_time_s": recovery_seconds,
+        "recovery_confirmation_time_s": confirmation_seconds,
         "recovery_time_status": recovery_status,
         "recovery_tolerance_mm": recovery_tolerance_mm,
+        "recovery_hold_frames": int(width),
+        "recovery_protocol": "consecutive_frames_v2",
     }

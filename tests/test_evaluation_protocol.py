@@ -82,4 +82,44 @@ def test_paired_fault_delta_uses_actual_event_and_preserves_signed_change():
         [0, 4, 6, 1, 1], [0] * 5, [20, 21, 22, 23, 24], (21, 23), fps=2, recovery_tolerance_mm=2
     )
     assert recovered["recovery_time_status"] == "observed"
-    assert recovered["recovery_time_s"] == 1.0
+    assert recovered["recovery_time_s"] == 0.0
+    assert recovered["recovery_confirmation_time_s"] == 1.0
+    assert recovered["recovery_protocol"] == 'consecutive_frames_v2'
+
+
+def test_recovery_rejects_cancelled_oscillations_and_short_observation():
+    summary = paired_fault_delta([110] + [120, 80] * 5, [100] * 11,
+        list(range(20, 31)), (20, 21), fps=10, recovery_tolerance_mm=2)
+    assert summary['recovery_time_status'] == 'right_censored'
+    assert summary['recovery_time_s'] is None
+    assert summary['recovery_confirmation_time_s'] is None
+    short = paired_fault_delta([110, 100], [100, 100], [20, 21], (20, 21),
+        fps=10, recovery_tolerance_mm=2)
+    assert short['recovery_time_status'] == 'right_censored'
+    absent = paired_fault_delta([110], [100], [20], (20, 21), fps=10, recovery_tolerance_mm=2)
+    assert absent['recovery_time_status'] == 'no_observed_recovery_frames'
+
+
+def test_recovery_reports_entry_and_confirmation_and_cannot_bridge_frame_gaps():
+    summary = paired_fault_delta([110, 110, 101, 101, 101, 110], [100] * 6,
+        list(range(20, 26)), (20, 21), fps=10, recovery_tolerance_mm=2, recovery_hold_frames=3)
+    assert summary['recovery_time_s'] == pytest.approx(.1)
+    assert summary['recovery_confirmation_time_s'] == pytest.approx(.4)
+    gap = paired_fault_delta([110, 100, 100, 100], [100] * 4, [20, 21, 23, 24], (20, 21),
+        fps=10, recovery_tolerance_mm=2, recovery_hold_frames=3)
+    assert gap['recovery_time_status'] == 'right_censored'
+    later = paired_fault_delta([110, 100, 100, 100, 100], [100] * 5, [20, 21, 23, 24, 25], (20, 21),
+        fps=10, recovery_tolerance_mm=2, recovery_hold_frames=3)
+    assert later['recovery_time_s'] == pytest.approx(.2)
+
+
+@pytest.mark.parametrize('fps', [float('nan'), float('inf'), 0, -1, True])
+def test_recovery_rejects_invalid_fps(fps):
+    with pytest.raises(ValueError, match='positive FPS'):
+        paired_fault_delta([110], [100], [20], (20, 21), fps=fps)
+
+
+@pytest.mark.parametrize('hold', [0, -1, True, 1.5])
+def test_recovery_rejects_invalid_hold_length(hold):
+    with pytest.raises(ValueError, match='positive integer'):
+        paired_fault_delta([110], [100], [20], (20, 21), recovery_hold_frames=hold)

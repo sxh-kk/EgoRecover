@@ -4,11 +4,14 @@ import math
 
 import torch
 
+from egorecover.actions import action_masks
 from egorecover.conditioning import finite_payload, floating_tensor, prepare_conditioning
 from mydiffusion.flow_matching import FlowMatching
 
 
 class HistoryFlow:
+    conditioning_protocol = 'history-current-v1'
+
     def __init__(self, *, source_mode="history", sigma=1.0, flow=None):
         if source_mode not in ("history", "gaussian"):
             raise ValueError("source_mode must be 'history' or 'gaussian'.")
@@ -18,6 +21,22 @@ class HistoryFlow:
         self.flow = FlowMatching() if flow is None else flow
         if self.flow.repaint_enabled:
             raise ValueError("History is external to Flow; repaint must be disabled.")
+
+    def prepare_conditioning(self, y):
+        return prepare_conditioning(y)
+
+    def action_availability(self, y):
+        """Availability within this flow's action scope, for equivalent actions."""
+        y = self.prepare_conditioning(y)
+        return ~y["img_mask"], ~y["traj_mask"]
+
+    def apply_action(self, y, action):
+        """Apply a current-frame action to an a11 packet; never modify its caller."""
+        y = self.prepare_conditioning(y)
+        y["img_mask"], y["traj_mask"] = action_masks(
+            action, img_available=~y["img_mask"], traj_available=~y["traj_mask"]
+        )
+        return self.prepare_conditioning(y)
 
     def build_source(self, prior_mu, *, epsilon=None, generator=None):
         """epsilon is standard noise, never an already shifted/scaled source.

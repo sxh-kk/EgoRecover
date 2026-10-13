@@ -66,7 +66,10 @@ class StreamingSession:
         iv = torch.cat((self.image_valid[-keep:], torch.tensor([image_valid], device=device, dtype=torch.bool)))
         hv = torch.cat((self.head_valid[-keep:], torch.tensor([head_valid], device=device, dtype=torch.bool)))
         actions = torch.tensor(ACTION_BITS[action], device=device).expand(1, len(images), 2)
-        if (image_valid and not torch.isfinite(image).all()) or (head_valid and not torch.isfinite(head).all()):
+        keep_image, keep_head = ACTION_BITS[action]
+        if (image_valid and keep_image and not torch.isfinite(image).all()) or (
+            head_valid and keep_head and not torch.isfinite(head).all()
+        ):
             raise ValueError("Non-finite available observation.")
         amp = device.type == "cuda" and cfg.precision != "fp32"
         dtype = torch.bfloat16 if cfg.precision == "bf16" else torch.float16

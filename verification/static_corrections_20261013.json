@@ -1,0 +1,98 @@
+{
+  "scope": "CPU synthetic correctness, negative controls and regression tests; no real-data accuracy claim",
+  "date": "2026-10-13",
+  "base_commit": "8ff27223082446190800831e80dbaac8d3f6849c",
+  "environment": {
+    "torch": "2.10.0+cpu",
+    "cuda_available": false,
+    "device": "cpu"
+  },
+  "code_sha256": {
+    "egorecover/evaluation_protocol.py": "1cec9705ecdae92f58aef138f1f86efd9b4975958dc9a7c37e3ceb1eeae6617f",
+    "egorecover/history_flow.py": "2a961923620711c95ca0301316288335083c51d948ed8b490c3882fdeb2d8dc5",
+    "egorecover/observation_reference.py": "0bcec00783de80d21149905b38e9b5c658c2f311da83d05f3d289fa8a6ecb851",
+    "egorecover/rollout.py": "3184359023457478a500092e349b6fc3f04eed46d327a3be11fb2d68e7d47ef3",
+    "egorecover/utility.py": "e7b608996e4741f2d4052a748e49e2982187083c6b2e4dd062b5b1bc7a922094",
+    "model/observation_reference_g.py": "a7f875046e0d254df02f4bdd8a587b28809d3eafedb9c7fd82a94c65a76a7aaf",
+    "tests/test_causal_rollout.py": "d6200286cc6ceaac3f484766ce8c6b0c271535e4ba3fa74def2a040d47fa2c95",
+    "tests/test_evaluation_protocol.py": "8a7c5bcc9d6661044b1171dbeca98958b64fd21fc73c8b6d0da885456072f87d",
+    "tests/test_history_state_and_policy.py": "c42768d0f3d5a0aaa82c1ec5247573ba26127cab2d11ddf764211fc30942a5ba",
+    "tests/test_observation_reference.py": "61ab2fa8ba004b410907a52ef61242049d543d19608a38975318a78ff381e0be"
+  },
+  "tests": [
+    {
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest tests data_pipeline/tests -q",
+      "passed": 206,
+      "failed": 0
+    },
+    {
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest motionstreamer_flow/tests -q",
+      "passed": 97,
+      "failed": 0,
+      "skipped": 1,
+      "skip_reason": "CUDA hardware unavailable"
+    }
+  ],
+  "clean_a11_parity": {
+    "reference": "frozen v2 source, shared synthetic state_dict, nonzero trajectory-memory adapter, dropout=0, one decoder layer",
+    "reference_sha256": {
+      "exp/egorecover_observation_reference/v2/source/egorecover/observation_reference.py": "ba81aab85ac5b8294a1c85a81b12652fec2d51c1e7879807241016c66890e08a",
+      "exp/egorecover_observation_reference/v2/source/model/observation_reference_g.py": "77c73622a30f2e76bc92019df84c19f28d78df324b4a6c15156213205d690530"
+    },
+    "cases": [
+      {
+        "observation_length": 21,
+        "frame": 20,
+        "max_abs_error": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "observation_length": 21,
+        "frame": 90,
+        "max_abs_error": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "observation_length": 80,
+        "frame": 20,
+        "max_abs_error": 0.0,
+        "bitwise_equal": true
+      },
+      {
+        "observation_length": 80,
+        "frame": 90,
+        "max_abs_error": 0.0,
+        "bitwise_equal": true
+      }
+    ],
+    "trained_weights_used": false,
+    "real_data_used": false
+  },
+  "verified_properties": [
+    "Current masks affect motion trajectory, image memory and trajectory-memory adapter",
+    "Masked NaN payload cannot change output and has zero gradient at masked positions",
+    "Window action masks observations before sensor geometry and feature projection",
+    "Actual unavailability does not clear physical-frame validity",
+    "Equivalent actions reflect the selected current/window availability scope",
+    "Utility candidates share epsilon and leave input tensors unchanged; identity records actual NFE, scope and conditioning protocol",
+    "Observed-reference model rejects masking its current reference-producing trajectory and four-action utility labeling",
+    "Legacy current-frame rollout applies calibrated utility threshold before single-branch sampling",
+    "Recovery requires consecutive per-frame tolerance; oscillations, missing frame gaps and short observations cannot produce false recovery"
+  ],
+  "protocol_changes": {
+    "observation_conditioning": "observation-memory-masks-v2",
+    "action_scopes": [
+      "current",
+      "window"
+    ],
+    "default_action_scope": "current",
+    "recovery": "consecutive_frames_v2"
+  },
+  "pending": [
+    "Real-model four-action gains and noise variance",
+    "Training on actual G histories and independent Q closed-loop gains",
+    "Complete R0/Q memory rollout entry point",
+    "TAE accuracy and physical-loss gradient scale experiments",
+    "CUDA mixed precision and deployment latency"
+  ]
+}

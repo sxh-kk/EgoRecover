@@ -318,6 +318,31 @@ def test_rollout_ignores_truth_and_failed_step_is_atomic(setup):
     assert session.frames == frames
 
 
+def test_streaming_action_masks_nonfinite_payload_before_rejecting_it(setup):
+    cfg, episodes, norm, tae, flow = setup
+    p = episodes.load(episodes.split("test")[0])
+    inputs = online_inputs(p)
+    inputs = {key: value[:cfg.bootstrap] if key in ("images", "head", "image_valid", "head_valid") else value
+              for key, value in inputs.items()}
+    with torch.no_grad():
+        flow.output[-1].weight.normal_(std=.01)
+    first = StreamingSession(flow, tae, norm, **inputs)
+    second = StreamingSession(flow, tae, norm, **inputs)
+    noise = torch.randn(cfg.state_dim)
+    clean = first.step(torch.zeros(cfg.image_dim), torch.zeros(18), action="a00", noise=noise)
+    masked = second.step(torch.full((cfg.image_dim,), float("nan")), torch.full((18,), float("inf")),
+                         action="a00", noise=noise)
+    for key in clean:
+        torch.testing.assert_close(clean[key], masked[key], rtol=0, atol=0)
+    # Availability records the actual sensor state, not the policy's suppression.
+    assert second.image_valid[-1] and second.head_valid[-1]
+    before, frames = second.states.clone(), second.frames
+    with pytest.raises(FloatingPointError):
+        second.step(torch.zeros(cfg.image_dim), torch.zeros(18), action="a11", noise=noise)
+    torch.testing.assert_close(second.states, before, rtol=0, atol=0)
+    assert second.frames == frames
+
+
 def test_converter_uses_predicted_anchor_not_gt_reference(setup):
     cfg, episodes, _, _, _ = setup
     p = episodes.load(episodes.split("train")[0])

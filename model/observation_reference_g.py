@@ -32,6 +32,8 @@ class ObservationReferenceG(HistoryUniEgoMotion):
         if cond_scale is not None:
             raise ValueError('CFG not supported.')
         y = prepare(y); history = y['history_motion']; b, h, _ = history.shape
+        if self.anchored and bool(y['traj_mask'].any()):
+            raise ValueError('Observed-reference G requires the current trajectory to be retained and available.')
         m = y['memory_img'].shape[1]
         if m != self.observation_length:
             raise ValueError('Observation length differs from model configuration.')
@@ -44,8 +46,15 @@ class ObservationReferenceG(HistoryUniEgoMotion):
         ft = torch.cat((timesteps.new_zeros(b, h), timesteps[:, None]), 1)
         motion = motion + self.frame_time_proj(self.embed_timestep(ft.reshape(-1)).reshape(b, h+1, -1))
         motion = motion + torch.cat((motion.new_zeros(b, h, self.latent_dim), self.mu_proj(y['prior_mu'])), 1)
-        motion = motion + self.embed_traj_cond(y['memory_traj'][:, -h-1:])
-        memory = self.embed_clip_cond(y['memory_img']) + self.memory_traj_adapter(y['memory_traj'])
+        trajectory = self.embed_traj_cond(y['memory_traj'][:, -h-1:])
+        trajectory = torch.where(y['memory_traj_mask'][:, -h-1:, None], self.mask_tokens['traj'], trajectory)
+        motion = motion + trajectory
+        image = self.embed_clip_cond(y['memory_img'])
+        image = torch.where(y['memory_img_mask'][..., None], self.mask_tokens['clip'], image)
+        trajectory_memory = self.memory_traj_adapter(y['memory_traj'])
+        trajectory_memory = torch.where(y['memory_traj_mask'][..., None],
+                                        torch.zeros_like(trajectory_memory), trajectory_memory)
+        memory = image + trajectory_memory
         # Final 21 positions remain 0..20, matching E7 and previous G. Extend
         # the same sinusoid to negative positions for additional older tokens.
         positions = torch.arange(h+1-m, h+1, device=x.device)

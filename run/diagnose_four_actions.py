@@ -184,6 +184,7 @@ def diagnose(args):
                 labels = generate_utility_labels(
                     model, flow, conditions, epsilon, fk_error,
                     checkpoint_id=identity["g_sha256"][mode],
+                    metric_id="world_smpl22_fk_mpjpe_mm_fixed_bootstrap_beta",
                 )
                 for offset, index in enumerate(indices):
                     record = records[payload["record_ids"][index]]

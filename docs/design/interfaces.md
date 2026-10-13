@@ -6,7 +6,7 @@
 
 ## Conda 环境
 
-只使用 WSL `zyc111` 中的 `egorecover`：
+以下为早期实验使用的 WSL `zyc111` / `egorecover` 环境记录；异机安装以主 README 为准：
 
 ```bash
 conda activate egorecover
@@ -14,9 +14,9 @@ cd /home/ld666/projects/EgoRecover/UEM-E7
 python -c 'import torch; print(torch.__version__, torch.cuda.is_available())'
 ```
 
-当前实际环境：Python 3.11，PyTorch 2.10.0+cu128，Lightning 2.4.0，NumPy 1.26.4；RTX PRO 6000 Blackwell。
+当时实际环境：Python 3.11，PyTorch 2.10.0+cu128，Lightning 2.4.0，NumPy 1.26.4；RTX PRO 6000 Blackwell。
 
-从仓库根目录重建环境：`conda env create -f environment.yml`。完整安装版本记录在 `verification/egorecover_pip_freeze.txt`。CUDA wheel 对应 [PyTorch 官方安装命令](https://pytorch.org/get-started/previous-versions/)。`.venv` 是此前临时环境，后续命令不使用它。
+从仓库根目录重建训练环境：`conda env create -f environment.yml`。完整安装版本记录在 `verification/egorecover_pip_freeze.txt`。CUDA wheel 对应 [PyTorch 官方安装命令](https://pytorch.org/get-started/previous-versions/)。无 GPU 时可使用独立 CPU 环境检查接口与因果属性；2026-10-13 静态修正使用本机 `.venv` 的 PyTorch 2.10.0+cpu。
 
 环境局部设置 `PYTHONNOUSERSITE=1`、空 `PYTHONPATH`、`PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`，避免系统 ROS Python 3.10 的路径/pytest 插件污染。系统 ROS 未修改。`conda run` 提示覆盖 PYTHONPATH 属于预期隔离行为。
 
@@ -193,3 +193,85 @@ python -m run.report_diagnosis
 ```
 
 `--eval-split train|dev` 控制单步取样；`--rollout-noise-seed` 控制启动后的采样噪声；`--probe-set none` 只做单步诊断。细节见 [原因排查 JSON](../../verification/egorecover_cause_analysis.json)、[图](../../verification/egorecover_cause_analysis.png) 和上层 LOG。
+
+## 无 GPU 的接口与指标修正（2026-10-13）
+
+本轮修正采用 CPU 合成输入、负控、梯度与回放测试。训练策略、现有权重和冻结实验快照保留；这里只建立接口正确性，不新增真实数据精度或鲁棒性结论。
+
+### R0/R1 的观测屏蔽
+
+`conditions` 支持 `[B,M]` 的 `img_available/traj_available`，实际缺失和动作屏蔽与物理时间有效性分开。新增 `memory_img_mask/memory_traj_mask`；省略二者时沿用旧 clean 输入，提供时必须成对。当前 `img_mask/traj_mask` 同时作用于对应 memory 的最后一帧，缺失 payload 在几何变换和特征投影前清除。G 的身体 trajectory 支路、图像 memory 和额外 trajectory adapter 均服从 mask。
+
+动作作用范围显式登记，不能混用收益标签：
+
+| `action_scope` | 动作作用范围 | `a00` 的输入语义 |
+|---|---|---|
+| `current`（默认） | 当前帧，保留过去原始观测 | 无当前观测，仍可读取过去原始观测；这是扩展后的 G 接口 |
+| `window` | 当前查询的整段观测缓存 | 所有原始观测均屏蔽，仅依赖预测身体历史和 P |
+
+调用 `apply_action(y, action, scope=...)` 时传入 a11 的实际可用性 packet。调用者 tensors 不被修改，已缺失的观测不会被重新启用；被屏蔽的物理帧仍保持 `valid_frames=True`。整窗等价动作根据窗口内是否还有可用观测计算：当前模态缺失但过去可用时，保留过去与删除整窗仍是不同动作。
+
+R2/R3 的 observed reference 依赖当前设备轨迹。当前轨迹缺失或请求屏蔽时明确拒绝，四动作收益标签也拒绝这类模型；不能在使用设备坐标的同时声称设备输入已屏蔽。clean 的观测参考消融仍可运行。
+
+### 收益标签与 Q 阈值
+
+`HistoryFlow` 和 `ObservationFlow` 提供统一的 `prepare_conditioning/action_availability/apply_action` 接口；标签生成器由对应 flow 执行动作，保留共享 H/μ/epsilon。示例：
+
+```python
+flow = ObservationFlow(action_scope="window")
+labels = generate_utility_labels(
+    model.eval(), flow, y_a11, epsilon, world_fk_error,
+    checkpoint_id=g_sha256, num_steps=10,
+    metric_id="world_smpl22_fk_mpjpe_mm_fixed_bootstrap_beta",
+)
+```
+
+标签 identity 记录实际 `num_steps`、`action_scope`、`conditioning_protocol` 和 `metric_id`；R0/R1 当前协议为 `observation-memory-masks-v2`。未指定指标时登记为 `unspecified_diagnostic`，不视为正式收益标签。调用者仍须补全 P、统计、数据、解码和采样身份，正式标签仍需合法的 world SMPL22 FK 误差与训练 take 可达状态。合成标签不能作为正式 Q 训练集。
+
+因果回放 `run_episode(..., utility=q, min_gain=gamma)` 接通开发集固定阈值；gamma 使用收益标签的单位，必须有限且非负。R0/R1 的 memory 与校准 P 已接入同一回放接口，见下节；正式 Q 的训练、资产加载入口和真实闭环验证仍待完成。
+
+### 恢复时间 v2
+
+`paired_fault_delta` 返回 `recovery_protocol="consecutive_frames_v2"`。恢复要求连续的物理帧逐帧满足 `fault_error-clean_error <= tolerance`；负退化量表示改善，不与正大误差平均抵消。默认保持 `ceil(fps)` 帧，可显式设置 `recovery_hold_frames`。不跨缺帧确认恢复。
+
+- `recovery_time_s`：成功稳定区间的首帧相对 `t_off` 的时间，可以为 0。
+- `recovery_confirmation_time_s`：完整保持区间结束后的确认时间。
+- `right_censored`：有恢复观察，但未观察到足够长的连续稳定区间。
+- `no_observed_recovery_frames`：没有故障结束后的观察帧，不纳入已观察恢复事件的分母。
+
+旧指标使用窗口平均及窗口结束时刻，与 v2 不直接比较；使用旧预测轨迹重算时写入新报告并保留协议版本。`t_clear_obs` 仍需实际缓存依赖时间映射，不能由固定历史长度伪造。
+
+### CPU 验证与后续边界
+
+```bash
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest tests data_pipeline/tests -q
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest motionstreamer_flow/tests -q
+```
+
+两套目录分别运行，避免同名测试模块导入冲突。验证包括当前/整窗屏蔽、masked NaN 输出与梯度隔离、真实缺失、动作等价性、共享噪声/NFE、Q 阈值单分支回放和恢复振荡/缺帧负控。另用冻结 v2 源码、相同合成参数、单个 decoder 层比较 21/80 帧与启动/后期四种 clean a11 输入；输出逐值一致。该核验不使用已训练权重或真实精度指标。
+
+仍需算力或实际资产验证：四动作真实收益空间、实际 G 历史训练、Q 学习与独立闭环收益、TAE 压缩误差、损失梯度份额、CUDA 混合精度及部署延迟。当前静态修正不据此改变损失权重、替换比例或论文性能主张。
+
+## CCFA 迭代后的 P/Q/G 回放接口（2026-10-13）
+
+`run_episode` 根据 G 的 `observation_length` 接入 R0/R1。身体历史仍为本策略生成的 20 帧，原始观测缓存为 21/80 帧；80 帧不足时左填充并保留物理有效性，不等待未来输入。需要 eval 模式的校准 P、R0/R1 G、`ObservationFlow` 和 planar codec。R2/R3 的当前设备参考不进入这条预测参考回放。
+
+```python
+from egorecover.observation_reference import ObservationFlow
+from egorecover.rollout import run_episode
+
+saved = run_episode(
+    g.eval(), ObservationFlow(action_scope="window"),
+    initializer.eval(), initializer_flow, codec, observations,
+    num_frames=num_frames, prior=calibrated_p.eval(), utility=q.eval(),
+    min_gain=gamma_mm, seed=1062, episode_id=shared_take_clip_id,
+)
+```
+
+`observations(as_of=..., history_frames=...)` 只返回文档规定的在线字段。启动请求为 `(19,20)`，之后每个物理帧仅请求当前一帧；源码帧号须遵循 30 Hz 原网格、10 Hz 每三帧一步。返回未来或重复物理帧时，在执行 P/Q/G 前拒绝。可用性标记只描述实际缺失，动作屏蔽不改写缓存中的实际可用性。
+
+每帧 P 只调用一次，并按 `base_mode` 使用保持或物理常速度基线；旧当前帧回放也遵循该配置。Q 读取动作之前的观测与身体状态；依据对应 flow 的当前/整窗可用性合并等价动作，执行阈值选择后只采样一个 G 分支。提交后重新编码本策略的身体历史，不共享其他策略的缓存。
+
+`episode_id` 应使用 clean/fault 配对共享的原始 take/片段标识，不能包含故障变体后缀；相同标识、seed 和帧号生成配对噪声。省略它时保留旧 `seed+frame+1` 调度。输出 `protocol` 记录实际动作范围、观测长度、P 基线、阈值、源分布、NFE、噪声设备和地面估计来源。不同设备的随机数生成不保证逐值一致。
+
+该回放使用干净前缀头高估计地面，与历史已知地面评价属于不同协议。返回值是完整 dense 物理状态轨迹；正式指标仍需在推理后通过固定启动体型 SMPL22 FK 评价。CPU 合成集成测试确认调用次数、常速度输入、屏蔽隔离、独立历史和时间边界，未验证真实 checkpoint 或 Q 收益。

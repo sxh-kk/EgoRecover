@@ -4,6 +4,8 @@
 
 更新说明：前半部分保留10:24阶段分析；四组最小评估已于14:05完成。以下末节“最小评估完成后的修改优先级”根据最终结果更新建议，后续决策以该节为准。
 
+2026-10-13更新：无GPU的CCFA代码迭代、已修复问题与后续证据路径见末节；前面的训练建议和数值保留其历史协议。
+
 ## 判断与目标
 
 当前阶段结果支持History源和预测历史训练有帮助，但还不足以证明改进后的G优于原E7。建议把闭环Body MPJPE低于100mm作为第一阶段目标，80–90mm作为主要目标，70–80mm作为进阶目标。这些是项目建议，不是论文规定的合格线，也不是预期收益保证。
@@ -143,3 +145,47 @@
 最新实测R0 131.913mm最佳，80帧观测和设备参考未带来全身收益。下一轮固定21帧/预测参考，设计“完整输出或P几何残差 × E7历史或加入固定R0历史”S0–S3。上述旧R0–R3建议已完成，不作为待启动工作。
 
 [相关工作、几何定义、缓存来源、预算与评价](g-residual-history-four-way.md)；[计划配置](../../config/egorecover_g_residual_history_v1.json)。状态：完成设计，尚未实现/运行。
+
+## 2026-10-13：CCFA代码迭代与证据路径
+
+本轮采用[CCFA-Skills](https://github.com/mikubaka88/CCFA-Skills)的Humanization/Common前置规则及Integrity Auditor、Idea Optimizer、Experiment Designer、Literature Searcher流程。技能来源固定在提交`5969e6b20a3bbcef9118fa00796d1417d48fcbf3`，按“主张—实现—证据”审查P/Q/G；没有安装全局技能、启动GPU训练或替换已有权重。
+
+### 检查范围与实现修正
+
+全仓库261个Python文件完成AST语法及本地导入定位检查，1038个JSON完成解析检查。核心P/Q/G、codec、观测动作、回放、恢复指标和独立Flow执行路径进行了针对性语义审查。冻结实验快照和第三方工具只做静态扫描；这不代表逐行人工核验了全部文件，或所有运行入口都已实际执行。[逐文件覆盖、源码哈希与验证记录](../../verification/ccfa_code_iteration.json)。
+
+| 问题 | 修改后的行为 | 当前证据 |
+|---|---|---|
+| 旧回放器缺少R0/R1观测memory | 同一`run_episode`接入21/80帧记忆，P→Q→单分支G；窗口不足因果左填充 | CPU集成：P/Q调用次数、实际NFE、当前/整窗等价动作、独立策略历史 |
+| 旧回放始终给P保持基线 | 遵循校准P的`base_mode`，物理常速度重编码后输入P | 非零启动速度负控；P入口第一次基线不再被保持值替换 |
+| 在线packet缺少时间一致性核验 | 校验字段、shape、可用性及30 Hz帧号；未来/重复帧在P/G前拒绝 | 未来帧packet负控 |
+| 标签指标身份不明确 | identity记录`metric_id`；正式四动作诊断声明world SMPL22 FK/mm/固定启动体型 | 指标元数据回归；未新增真实收益标签 |
+| 独立Flow过早拒绝被屏蔽NaN | 当前有限性检查服从动作，保留实际缓存可用性；重新启用异常历史时失败且不提交 | 非零Flow输出头、共享噪声下的屏蔽等值与失败原子性 |
+| 独立Flow续训未绑定源码 | checkpoint/provenance登记9个运行时源码哈希，恢复时拒绝变更或缺失身份 | CPU精确恢复及源码变化拒绝 |
+
+开始本轮前的观测mask与连续恢复判据修正也已复核，随本轮提交保留。两套CPU回归分别为214 passed和98 passed，1项CUDA测试跳过。测试包含小规模合成前后向及恢复训练验证，不形成新准确率或鲁棒性成绩。
+
+### 主张与剩余缺口
+
+| BLUEPRINT主张 | 实现状态 | 下一项决定性证据 |
+|---|---|---|
+| 身体历史能提供运动先验 | P及保持/常速度接口已有；对G实际历史的泛化仍有已知退化 | 同一G可达训练/开发历史上的P对照与实际闭环验证 |
+| 历史源改善G修正 | History/Gaussian接口已有；R0当前是Gaussian，历史源优势尚不稳定 | 同条件、相同μ/σ/NFE的源分布配对；不以当前R0代称完整E11 |
+| Q能在采样前选择有利动作 | 接口与回放已连通；正式标签缓存、训练入口、尺度恢复和Q权重尚缺 | 先确认真实四动作oracle空间，再完成收益学习与独立闭环 |
+| 自身生成历史缓解反馈偏移 | 旧replay/独立Two-Forward已有；S0–S3自身R0历史适配仍是设计 | 固定总训练预算，只改变历史来源的配对消融 |
+| 故障后的残留误差可量化 | 连续恢复v2已有；`t_clear_obs`实际依赖追踪尚缺 | 原始到达帧、延迟来源与缓存存活依赖的因果审计 |
+| 独立TAE/Flow可替代P+G | 合成流程已验证，真实训练和压缩评价尚未完成 | 固定启动体型TAE重建上限、Flow闭环及完整计算预算 |
+
+历史R0–R3基准仍是222 take、已知地面、固定启动体型、开发选模、Euler10、单draw1062。新增在线接口采用干净前缀地面估计，不能将旧已知地面成绩直接填入其结果。原R0/G未经过本轮四动作再训练，mask可执行不等于屏蔽后仍有良好精度。
+
+旧`run/train_observation_reference.py`的主位置指标从40帧评分，而速度汇总仍使用20帧后的全部相邻帧；它是历史报告中的不同指标区间。后续统一协议应显式登记速度区间，在新目录重算，保留旧数字。独立Flow已明确区间和有效帧对，不应把两路速度数值直接合并。
+
+### 相关工作核查与改进方向
+
+- [MotionStreamer，ICCV 2025](https://arxiv.org/abs/2503.15451)：核对原论文因果TAE和Two-Forward描述及[官方训练代码](https://github.com/zju3dv/MotionStreamer/blob/main/train_motionstreamer.py#L132)。默认cosine函数实际给出递增替换比例；当前独立路线借鉴训练机制，但将任务、条件、表示、latent粒度和diffusion改为本项目的Flow，不能称官方完整复现。下一步应测自由采样历史与第一遍带噪GT端点预测的分布差距。
+- [Sample-level Modality Valuation，CVPR 2024](https://openaccess.thecvf.com/content/CVPR2024/html/Wei_Enhancing_Multimodal_Cooperation_via_Sample-level_Modality_Valuation_CVPR_2024_paper.html)：核对官方摘要及[作者代码说明](https://github.com/GeWu-Lab/Valuate-and-Enhance-Multimodal-Cooperation)。原工作研究样本级模态贡献和训练重采样；本项目的冻结G动作收益及预采样Q需要独立验证，不能从该文推导在线决策已经有效。
+- [Diffusion Forcing，NeurIPS 2024](https://proceedings.neurips.cc/paper_files/paper/2024/hash/2aee1c4159e48407d68fe16ae8e6e49e-Abstract-Conference.html)：核对独立token噪声和因果预测描述。当前固定干净历史＋一个活动Flow帧的接口不能直接等同完整Diffusion Forcing。优先验证真实反馈历史适配，再决定是否引入历史噪声标记。
+
+BLUEPRINT内13个arXiv引用的标题与标识核对通过；本轮没有重新全文核验这13篇的全部机制与数值。CVF页面直接访问返回403时，使用arXiv原文或作者仓库核对相应机制；覆盖边界记录在验证文件中。
+
+当前可继续静态实施的是正式收益缓存身份、Q训练/推理的单位与checkpoint约定、`t_clear_obs`依赖追踪。后续有算力时，先测真实动作收益空间和TAE上限，再做Q训练及2×2源分布/策略消融。收益空间不足时优先改进G和历史适配，不增加额外门控、分类或平滑模块。

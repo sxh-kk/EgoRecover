@@ -15,6 +15,23 @@ from .model import CausalTAE, MotionFlow
 from .objective import masked_mean, tae_loss, two_forward_loss
 
 
+def runtime_identity():
+    """Bind resume to the code that defines data, objectives and selection."""
+    package = Path(__file__).resolve().parent
+    files = (
+        "config.py",
+        "data.py",
+        "evaluation.py",
+        "geometry.py",
+        "model.py",
+        "objective.py",
+        "streaming.py",
+        "time_protocol.py",
+        "train.py",
+    )
+    return {"protocol": "source-bound-resume-v1", "sha256": {name: sha256(package / name) for name in files}}
+
+
 def resolve_device(name, precision):
     device = torch.device(name)
     if device.type == "cuda":
@@ -123,7 +140,13 @@ def run_training(
         torch.cuda.manual_seed_all(cfg.seed)
     generator = torch.Generator().manual_seed(cfg.seed + 1)
     norm, tae = Normalizer(cfg).to(device), CausalTAE(cfg).to(device)
-    identity = {"stage": stage, "manifest_sha256": episodes.digest, "tae_sha256": None, "device": str(device)}
+    identity = {
+        "stage": stage,
+        "manifest_sha256": episodes.digest,
+        "tae_sha256": None,
+        "device": str(device),
+        "runtime": runtime_identity(),
+    }
     flow = None
     if stage == "flow":
         if tae_path is None:
@@ -155,7 +178,7 @@ def run_training(
         comparison = {**identity, "config": cfg.to_dict(), "dev_limit": dev_limit, "device_type": device.type}
         for key, value in comparison.items():
             # JSON config lists and dataclass tuples represent the same dilation sequence.
-            if json.dumps(previous[key], sort_keys=True) != json.dumps(value, sort_keys=True):
+            if json.dumps(previous.get(key), sort_keys=True) != json.dumps(value, sort_keys=True):
                 raise ValueError(f"Resume identity mismatch: {key}.")
         norm.load_state_dict(previous["normalizer"])
         tae.load_state_dict(previous["tae"])

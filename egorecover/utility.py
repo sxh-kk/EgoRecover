@@ -1,10 +1,13 @@
 """Pre-sampling utility Q and offline-only shared-noise label generation."""
 
+import math
+from numbers import Real
+
 import torch
 from torch import nn
 
-from egorecover.actions import action_equivalence, action_masks, binary_mask
-from egorecover.conditioning import finite_payload, prepare_conditioning
+from egorecover.actions import action_equivalence, binary_mask
+from egorecover.conditioning import finite_payload
 from model.uniegomotion import PositionalEncoding
 
 
@@ -87,8 +90,14 @@ class UtilityPredictor(nn.Module):
         return self.output(joined)
 
 
+def validate_min_gain(min_gain):
+    if isinstance(min_gain, bool) or not isinstance(min_gain, Real) or not math.isfinite(min_gain) or min_gain < 0:
+        raise ValueError("min_gain must be finite and nonnegative, in the utility label metric units.")
+
+
 def choose_action(gains, *, img_available, traj_available, min_gain=0.0):
-    if gains.ndim != 2 or gains.shape[1] != 3 or not bool(torch.isfinite(gains).all()) or min_gain < 0:
+    validate_min_gain(min_gain)
+    if gains.ndim != 2 or gains.shape[1] != 3 or not bool(torch.isfinite(gains).all()):
         raise ValueError("Expected finite [B,3] gains and nonnegative min_gain.")
     canonical = action_equivalence(img_available=img_available, traj_available=traj_available)
     values = torch.cat((torch.zeros_like(gains[:, :1]), gains), dim=1)
@@ -99,7 +108,9 @@ def choose_action(gains, *, img_available, traj_available, min_gain=0.0):
 
 
 @torch.no_grad()
-def generate_utility_labels(model, flow, y, epsilon, error_fn, *, checkpoint_id):
+def generate_utility_labels(
+    model, flow, y, epsilon, error_fn, *, checkpoint_id, num_steps=None, metric_id="unspecified_diagnostic"
+):
     """OFFLINE: error_fn(candidate) -> [B] using fixed external supervision.
 
     y must describe a11 with ONLY actual-unavailability masks; do not pass
@@ -107,20 +118,24 @@ def generate_utility_labels(model, flow, y, epsilon, error_fn, *, checkpoint_id)
     access/commit a HistoryBuffer.
     Caller supplies an explicit metric and stores that metric's identity with
     the returned metadata; production labels require world SMPL22 FK error.
+    The flow owns action scope and availability; num_steps overrides sampling
+    and is recorded so the label cache cannot silently claim a different NFE.
     """
     if not checkpoint_id:
         raise ValueError("Utility labels require a G checkpoint identity.")
-    y = prepare_conditioning(y)
+    if not isinstance(metric_id, str) or not metric_id.strip():
+        raise ValueError("Utility labels require a nonempty metric identity.")
+    if getattr(model, "anchored", False):
+        raise ValueError("Four-action labels require a prediction-defined reference, not an observed reference.")
+    y = flow.prepare_conditioning(y)
     if not bool(y["valid_frames"].all()):
         raise ValueError("Utility labels require valid current physical frames.")
-    img_available, traj_available = ~y["img_mask"], ~y["traj_mask"]
+    img_available, traj_available = flow.action_availability(y)
     errors = []
     for action in range(4):
-        candidate_y = dict(y)
-        candidate_y["img_mask"], candidate_y["traj_mask"] = action_masks(
-            action, img_available=img_available, traj_available=traj_available
-        )
-        prediction = flow.sample(model, candidate_y, epsilon=epsilon)
+        candidate_y = flow.apply_action(y, action)
+        sampling = {} if num_steps is None else {"num_steps": num_steps}
+        prediction = flow.sample(model, candidate_y, epsilon=epsilon, **sampling)
         error = error_fn(prediction)
         if error.shape != (len(epsilon),) or not bool(torch.isfinite(error).all()):
             raise ValueError("error_fn must return one finite scalar per batch item.")
@@ -134,8 +149,11 @@ def generate_utility_labels(model, flow, y, epsilon, error_fn, *, checkpoint_id)
         "canonical_actions": canonical,
         "identity": {
             "checkpoint_id": checkpoint_id,
+            "metric_id": metric_id,
             "source_mode": flow.source_mode,
             "sigma": flow.sigma,
-            "num_steps": flow.flow.num_steps,
+            "num_steps": flow.flow.num_steps if num_steps is None else num_steps,
+            "action_scope": getattr(flow, "action_scope", "current"),
+            "conditioning_protocol": flow.conditioning_protocol,
         },
     }

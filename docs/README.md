@@ -1,6 +1,6 @@
 # 文档索引
 
-更新时间：2026-10-08。最新实验事实与运行状态统一记录在 [LOG.md](../LOG.md)。
+更新时间：2026-10-13。最新实验事实与运行状态统一记录在 [LOG.md](../LOG.md)。
 
 ## 当前实验
 
@@ -23,7 +23,7 @@
 
 | 目录 | 文档 |
 |---|---|
-| `design/` | [整体设计](design/blueprint.md)、[代码接口与坐标约定](design/interfaces.md)、[G重新训练的理论与文献核查](design/g-pretraining-review.md)、[G精度目标与下一步改进](design/g-targets-and-next-steps.md) |
+| `design/` | [整体设计](design/blueprint.md)、[代码接口与坐标约定](design/interfaces.md)、[G重新训练的理论与文献核查](design/g-pretraining-review.md)、[G精度目标与下一步改进，含CCFA代码迭代](design/g-targets-and-next-steps.md) |
 | `data/` | [数据准备](data/dataset.md)；组件操作见 [data_pipeline](../data_pipeline/README.md) |
 | `reference/` | [原始 E7](reference/e7.md) |
 | `archive/` | [早期工程实验](archive/engineering-experiments.md)、[论文构想草稿](archive/iccv2027-draft.md)；保留历史语境，不代表当前结论 |

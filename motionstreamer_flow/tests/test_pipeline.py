@@ -68,7 +68,7 @@ def assert_state_equal(first, second):
         torch.testing.assert_close(first[key], second[key], rtol=0, atol=0)
 
 
-def test_both_training_stages_resume_identically_and_preserve_sources(tmp_path):
+def test_both_training_stages_resume_identically_and_preserve_sources(tmp_path, monkeypatch):
     cfg = tiny_config()
     cfg_path = tmp_path / "config.json"
     cfg.save(cfg_path)
@@ -95,6 +95,13 @@ def test_both_training_stages_resume_identically_and_preserve_sources(tmp_path):
     assert torch.equal(a["cpu_rng"], b["cpu_rng"])
     assert torch.equal(a["data_rng"], b["data_rng"])
     assert original == {path: sha256(path) for path in original}
+    assert len(a["runtime"]["sha256"]) == 9
+    changed_runtime = {**a["runtime"], "sha256": {**a["runtime"]["sha256"], "model.py": "0" * 64}}
+    with monkeypatch.context() as patch:
+        patch.setattr("motionstreamer_flow.train.runtime_identity", lambda: changed_runtime)
+        with pytest.raises(ValueError, match="runtime"):
+            run_training(stage="flow", output=tmp_path / "flow_partial", tae_path=tae_full,
+                         resume=flow_resumed, **common)
     cfg2 = replace(cfg, total_steps=5)
     cfg2.save(tmp_path / "changed.json")
     with pytest.raises(ValueError, match="config"):

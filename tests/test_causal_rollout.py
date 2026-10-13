@@ -119,3 +119,49 @@ def test_causal_rollout_calls_p_once_samples_one_action_and_ignores_masked_paylo
     assert prior_model.calls == 0
     assert torch.isfinite(prior_only["dense_world_joints"]).all()
     torch.testing.assert_close(prior_only["dense_world_joints"], result["dense_world_joints"])
+
+
+def test_rollout_applies_calibrated_utility_threshold_before_one_branch_sampling():
+    codec = MotionCodec({'motion_mean': torch.zeros(243), 'motion_std': torch.ones(243),
+                         'traj_mean': torch.zeros(18), 'traj_std': torch.ones(18)})
+    physical = BodyState(torch.eye(4).expand(22, 4, 4), torch.eye(4), torch.zeros(36))
+    neutral = codec.encode_current(physical, torch.eye(4))
+
+    class Initializer(torch.nn.Module):
+        def forward(self, x, t, y):
+            return neutral.expand_as(x)
+
+    class Current(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.parameter = torch.nn.Parameter(torch.zeros(()))
+            self.masks = []
+
+        def forward(self, x, t, y):
+            self.masks.append((bool(y['img_mask'].item()), bool(y['traj_mask'].item())))
+            return y['prior_mu']
+
+    class Utility(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.calls = 0
+
+        def forward(self, **kwargs):
+            self.calls += 1
+            return torch.tensor([[4., -1., -1.]])
+
+    def observations(*, as_of, history_frames):
+        count = min(as_of + 1, history_frames)
+        return {'aria_traj_obs': torch.tensor([[1., 0, 0, 0, 1, 0, 0, 0, 1.6]]).repeat(count, 1),
+                'img_feats': torch.ones(count, 1024), 'img_available': torch.ones(count, dtype=torch.bool),
+                'traj_available': torch.ones(count, dtype=torch.bool),
+                'frame_id_30fps': torch.arange(as_of-count+1, as_of+1)*3}
+
+    for threshold, selected in ((0., 1), (5., 0)):
+        model, utility = Current().eval(), Utility().eval()
+        result = run_episode(model, HistoryFlow(flow=FlowMatching(num_steps=2)),
+            Initializer().eval(), FlowMatching(num_steps=2), codec, observations,
+            num_frames=23, utility=utility, min_gain=threshold)
+        assert result['actions'] == [selected] * 3
+        assert utility.calls == 3 and len(model.masks) == 6
+        assert model.masks == [(False, selected == 1)] * 6

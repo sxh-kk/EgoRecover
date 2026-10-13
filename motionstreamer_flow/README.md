@@ -195,6 +195,8 @@ TAE 为单独阶段，默认 12000 次更新，batch=8，窗口 52 帧全部参�
 
 非空输出目录必须显式 resume，避免覆盖其他实验。checkpoint 包含模型、标准化、optimizer、GradScaler、随机数状态、数据与 TAE hash、配置和 dev 结果。`latest.pt` 用于恢复；`best.pt` 用于评价。默认每 500 步及最终步保存，突然中断会丢失距上次保存的更新。`--stop-after` 是绝对更新编号，可安全做短运行/恢复验证，不改变总步数或 Two-Forward 的调度长度。`--dev-limit` 仅供调试，正式选模应使用完整 dev。
 
+恢复身份同时记录 `runtime.protocol=source-bound-resume-v1`，以及配置、数据、模型、目标、几何、流式回放、时间和评价入口等9个源码文件的SHA256。源码变化或旧checkpoint缺少runtime记录时，拒绝作为同一次运行续训，保留原结果并另建新实验；普通权重加载不宣称等价续训。CPU测试核对相同源码的精确恢复和源码变化拒绝。
+
 Flow配置中的 `selection_start/selection_stop` 显式指定选模区间；正式 `gpu_flow.json` 为 `[40,200)`。省略推理CLI的 `--start/--stop` 时继承checkpoint中的选模区间，可显式覆盖。小型合成配置留空，采用启动结束至episode末尾。改变选模配置会改变恢复身份，旧配置不能静默续训。
 
 ## 6. 闭环预测与比较
@@ -216,6 +218,8 @@ Flow配置中的 `selection_start/selection_stop` 显式指定选模区间；正
 ```
 
 逐帧 API 为 `StreamingSession`：初始化仅接收预测启动姿态/根部、启动观测、体型、骨架和锚点；`step(image, head, image_valid, head_valid, action=..., noise=...)` 生成一帧。输入已是特征，不是原始视频。四个动作共用同一个模型；相同 seed 使用相同逐帧噪声，便于配对比较。`online_inputs` 白名单阻止 GT 姿态、根部与关节流入 rollout。
+
+在线步按实际可用性与动作共同判断当前输入：被动作屏蔽的NaN/Inf不触发保留模态的有限性检查。缓存继续保存实际可用性；后续动作若重新启用含非有限值的历史窗口，生成会明确失败且不提交身体状态。动作不会将已到达的异常观测永久标成传感器缺失。
 
 评价报告 Body/Root/Head/PA Body（mm）与速度误差（mm/s），位置按有效帧加权，速度按有效相邻帧对加权。报告记录请求区间、每episode实际区间及原始take时间、FPS、零基索引与右开边界。速度只使用评分切片内相邻且均有效的帧，不跨缺口，不包含起点前一帧到起点的帧对：`[40,200)` 全有效时为160个位置帧、159个速度帧对。坐标使用固定锚点，刚体变换不改变这些距离指标。推理从 startup 开始闭环，延后评价起点不会改为 GT 历史。
 

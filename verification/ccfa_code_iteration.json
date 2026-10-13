@@ -1,0 +1,1823 @@
+{
+  "schema_version": "egorecover-ccfa-static-iteration-v1",
+  "created_at": "2026-10-13T20:42:25.155632+08:00",
+  "base_commit": "e142492cd4463db6bc0b5b07aae2a2d78c0c4c74",
+  "branch": "work",
+  "skills": {
+    "repository": "https://github.com/mikubaka88/CCFA-Skills",
+    "revision": "5969e6b20a3bbcef9118fa00796d1417d48fcbf3",
+    "entries": {
+      "ccf-humanization/SKILL.md": "e021bced7e76e90e57158778fd6f96507b9f2e44d8557e600bd0f23f5d27caad",
+      "ccf-common/SKILL.md": "26bcc5d5f595cf722becc1b3ecb30a551fdb82fc49cac5f9c0fe28764ad72e37",
+      "ccf-integrity-auditor/SKILL.md": "d81a0c410a33a9d2efe7c8988154a850d5e123c5d9013999b7869f8658f29c30",
+      "ccf-idea-optimizer/SKILL.md": "a1b4ef6a5c80f43fee970e534fb25b8dc0589c67c67da03bbc470be242084d97",
+      "ccf-experiment-designer/SKILL.md": "e31db11cfc19744a0737ce0321fce0ceff250dec763ad8381a7ffcbeafa32747",
+      "ccf-literature-searcher/SKILL.md": "e11f7d2289ddcc2a1f1f17f835f5a5e16337682a17b549c765d97460748eecad"
+    },
+    "application": "核对BLUEPRINT主张、实现及证据，设计独立闭环与负控；不对论文打分或宣称新性能。",
+    "globally_installed": false
+  },
+  "environment": {
+    "python": "3.11.16",
+    "torch": "2.10.0+cpu",
+    "pytest": "9.1.1",
+    "cuda_available": false,
+    "execution": "CPU only"
+  },
+  "scope": {
+    "python_files": 261,
+    "python_by_directory": {
+      "config": 1,
+      "data_pipeline": 14,
+      "dataset": 7,
+      "egorecover": 32,
+      "eval": 10,
+      "exp": 61,
+      "model": 6,
+      "module": 4,
+      "motionstreamer_flow": 18,
+      "mydiffusion": 2,
+      "run": 54,
+      "tests": 32,
+      "tools": 7,
+      "utils": 13
+    },
+    "json_files_parsed_before_this_report": 1038,
+    "syntax_errors": [],
+    "unresolved_local_import_locations": [],
+    "semantic_review": "Targeted call paths, not a claim of full manual line-by-line review.",
+    "frozen_snapshots": "Syntax/hash inventory only; unchanged.",
+    "large_assets": "Not downloaded or used; no real trained-checkpoint accuracy verification."
+  },
+  "verification": [
+    {
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest tests data_pipeline/tests -q",
+      "passed": 214,
+      "skipped": 0,
+      "seconds": 55.08,
+      "warnings": 3,
+      "status": "passed"
+    },
+    {
+      "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest motionstreamer_flow/tests -q",
+      "passed": 98,
+      "skipped": 1,
+      "seconds": 23.73,
+      "skip_reason": "CUDA hardware unavailable",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "fixed_findings": [
+    {
+      "id": "CCFA-01",
+      "problem": "R0/R1 memory and calibrated P were not connected to the common causal rollout.",
+      "evidence": "tests/test_observation_rollout.py: counts P/Q once, one G branch, current/window equivalence, independent histories and paired noise."
+    },
+    {
+      "id": "CCFA-02",
+      "problem": "The current-only rollout always supplied hold baseline to constant-velocity P.",
+      "evidence": "Nonzero startup reference velocity reaches calibrated P in both rollout interfaces."
+    },
+    {
+      "id": "CCFA-03",
+      "problem": "Online packet frame ids and field boundaries were not checked by the rollout.",
+      "evidence": "Future frame packet rejected before P/G; 30 Hz ids advance by three per 10 Hz frame."
+    },
+    {
+      "id": "CCFA-04",
+      "problem": "Utility label metadata omitted the task metric identity.",
+      "evidence": "Metric id persisted; production diagnostic sets world_smpl22_fk_mpjpe_mm_fixed_bootstrap_beta; unspecified calls remain diagnostics."
+    },
+    {
+      "id": "CCFA-05",
+      "problem": "Standalone streaming rejected nonfinite observations even when the action suppressed them.",
+      "evidence": "Nonzero Flow output head/shared noise gives equal masked outputs; reenabling contaminated history fails without body commit."
+    },
+    {
+      "id": "CCFA-06",
+      "problem": "Standalone training resume did not bind runtime source code.",
+      "evidence": "Nine source hashes in checkpoint/provenance; matching runs resume identically, changed source rejected."
+    }
+  ],
+  "remaining_findings": [
+    {
+      "id": "NEXT-01",
+      "status": "not_implemented",
+      "issue": "Formal Q dataset, training/checkpoint/unit contract and trained Q weights remain absent."
+    },
+    {
+      "id": "NEXT-02",
+      "status": "requires_compute",
+      "issue": "R0 was not retrained for this four-action protocol; real oracle gain and closed-loop Q effect remain unknown."
+    },
+    {
+      "id": "NEXT-03",
+      "status": "not_implemented",
+      "issue": "S0-S3 adaptation to actual fixed R0 histories and causal t_clear_obs dependency tracking remain planned."
+    },
+    {
+      "id": "NEXT-04",
+      "status": "requires_compute",
+      "issue": "Standalone TAE compression, real-data Flow training, loss contributions and CUDA latency remain unverified."
+    },
+    {
+      "id": "NEXT-05",
+      "status": "protocol_difference",
+      "issue": "Legacy observation-reference position scores use t>=40 while velocity uses adjacent pairs from t>=20; preserve old results and version future reevaluation."
+    },
+    {
+      "id": "NEXT-06",
+      "status": "protocol_difference",
+      "issue": "The online rollout uses clean-prefix floor estimation; published legacy R0 numbers use known-floor protocol."
+    },
+    {
+      "id": "NEXT-07",
+      "status": "caller_contract",
+      "issue": "Labels still require external P/stats/data/codec/sampling provenance; metric id alone is not a full cache identity."
+    }
+  ],
+  "literature": {
+    "purpose": "Bounded helper retrieval for code-mechanism and evidence alignment, not an exhaustive new literature survey.",
+    "blueprint_metadata_checks": [
+      {
+        "arxiv_id": "2012.00201",
+        "url": "https://arxiv.org/abs/2012.00201",
+        "title": "Detect, Reject, Correct: Crossmodal Compensation of Corrupted Sensors",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2402.11677v2",
+        "url": "https://arxiv.org/abs/2402.11677v2",
+        "title": "MultiCorrupt: A Multi-Modal Robustness Dataset and Benchmark of LiDAR-Camera Fusion for 3D Object Detection",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2403.20254v1",
+        "url": "https://arxiv.org/abs/2403.20254v1",
+        "title": "Benchmarking the Robustness of Temporal Action Detection Models Against Temporal Corruptions",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2409.13426v2",
+        "url": "https://arxiv.org/abs/2409.13426v2",
+        "title": "HMD^2: Environment-aware Motion Generation from Single Egocentric Head-Mounted Device",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2410.03665v1",
+        "url": "https://arxiv.org/abs/2410.03665v1",
+        "title": "Estimating Body and Hand Motion in an Ego-sensed World",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2501.14319v1",
+        "url": "https://arxiv.org/abs/2501.14319v1",
+        "title": "Scalable Benchmarking and Robust Learning for Noise-Free Ego-Motion and 3D Reconstruction from Noisy Video",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2512.03520v2",
+        "url": "https://arxiv.org/abs/2512.03520v2",
+        "title": "FloodDiffusion: Tailored Diffusion Forcing for Streaming Motion Generation",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2512.13903v1",
+        "url": "https://arxiv.org/abs/2512.13903v1",
+        "title": "PrediFlow: A Flow-Based Prediction-Refinement Framework for Real-Time Human Motion Prediction in Human-Robot Collaboration",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2602.05319v1",
+        "url": "https://arxiv.org/abs/2602.05319v1",
+        "title": "Accelerated Sequential Flow Matching: A Bayesian Filtering Perspective",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2605.13041v1",
+        "url": "https://arxiv.org/abs/2605.13041v1",
+        "title": "EgoForce: Robust Online Egocentric Motion Reconstruction via Diffusion Forcing",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2605.13959v1",
+        "url": "https://arxiv.org/abs/2605.13959v1",
+        "title": "WarmPrior: Straightening Flow-Matching Policies with Temporal Priors",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2608.00076v2",
+        "url": "https://arxiv.org/abs/2608.00076v2",
+        "title": "Which Modality Decides? Counterfactual Modality Attribution for Multimodal LLMs",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      },
+      {
+        "arxiv_id": "2608.21093v1",
+        "url": "https://arxiv.org/abs/2608.21093v1",
+        "title": "Gaussian-Mixture Latent Flow for Stochastic 3D Human Motion Prediction",
+        "coverage": "Title/identifier only; not full citation-context audit."
+      }
+    ],
+    "inspected_sources": [
+      {
+        "title": "MotionStreamer",
+        "publication": "ICCV 2025",
+        "url": "https://arxiv.org/html/2503.15451",
+        "coverage": "Causal TAE and Two-Forward mechanism paragraphs; official training scheduler lines 132-147.",
+        "code_url": "https://github.com/zju3dv/MotionStreamer/blob/main/train_motionstreamer.py#L132"
+      },
+      {
+        "title": "Enhancing Multimodal Cooperation via Sample-level Modality Valuation",
+        "publication": "CVPR 2024",
+        "url": "https://openaccess.thecvf.com/content/CVPR2024/html/Wei_Enhancing_Multimodal_Cooperation_via_Sample-level_Modality_Valuation_CVPR_2024_paper.html",
+        "coverage": "Official indexed abstract, arXiv abstract and author repository scope; not full numeric replication.",
+        "alternate": "https://arxiv.org/abs/2309.06255",
+        "code_url": "https://github.com/GeWu-Lab/Valuate-and-Enhance-Multimodal-Cooperation"
+      },
+      {
+        "title": "Diffusion Forcing: Next-token Prediction Meets Full-Sequence Diffusion",
+        "publication": "NeurIPS 2024",
+        "url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/2aee1c4159e48407d68fe16ae8e6e49e-Abstract-Conference.html",
+        "coverage": "Official proceeding identity and arXiv v4 abstract: independent per-token noise levels and causal prediction.",
+        "alternate": "https://arxiv.org/abs/2407.01392v4"
+      }
+    ],
+    "access_limitations": "Direct CVF opens returned HTTP 403; inspected arXiv text/author sources instead. No new numeric paper comparison."
+  },
+  "source_inventory": [
+    {
+      "path": "config/defaults.py",
+      "sha256": "fe2b7a35b7c1722b53b3328a4aae08b7534e54fa385777ec9afde639f9e1f130",
+      "lines": 118,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/__init__.py",
+      "sha256": "ed11f942f7a0a6ec8468d1976fa0082f6226e288bccd988217e5171f81dc0fc8",
+      "lines": 1,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/download_validation.py",
+      "sha256": "7c8e0b099f265e57e01f3a37f650dff18a60797b3667d2f527fb1726ca02c8f5",
+      "lines": 313,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/ee4d_mismatch/__init__.py",
+      "sha256": "eec080c335ef0d46ae0943711ed7f9e25ff70774ba43329d8522fbb7a93069ca",
+      "lines": 1,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/ee4d_mismatch/audit.py",
+      "sha256": "e5e2b7e06a7ab06b298f1655a0493e670f7a2ee4135c4c5eaca3099f8dcd4306",
+      "lines": 138,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/ee4d_mismatch/build.py",
+      "sha256": "605af0ba931a4dec613ca4bf2849e9f07a494f861ebdb5d22b6de3b1221b653e",
+      "lines": 168,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/ee4d_mismatch/corruptions.py",
+      "sha256": "2f804ec1f16cba4bdf0e94421b2b937d6c73dae3fd4dd19adb9386ec99f25cd6",
+      "lines": 256,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "data_pipeline/ee4d_mismatch/dataset.py",
+      "sha256": "beb4d4db951d4128f581bbb35073fd2658096a19fa8cbf1814ca603781ac5cb8",
+      "lines": 78,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "data_pipeline/ee4d_mismatch/preview.py",
+      "sha256": "fe4f2e21657784947ed3764793f6c147f07b100736e0df0a27eb372cdbc2b760",
+      "lines": 57,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/ee4d_mismatch/source.py",
+      "sha256": "ad7c669446d2bd428856340358999e5f56a23c357076e6a7c4eae62086d0e1a3",
+      "lines": 257,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/run_full.py",
+      "sha256": "3e77136e2df58e28b576a4f9fd385c0f94497214ff6419303a61a07d62c5e140",
+      "lines": 138,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/run_pilot.py",
+      "sha256": "d230f25e7c3c5794d24186165f7428b0358dd435977c3a45176ba9d505b9c002",
+      "lines": 65,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/tests/test_download.py",
+      "sha256": "d617092a1754767b7061f17943eb40e7edab758c7ca286edd48eb34cf937f405",
+      "lines": 46,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/tests/test_mismatch.py",
+      "sha256": "0f3957045137b07dd3ac7a5e7fb522db35c6e99837457f9aade7805a76948466",
+      "lines": 266,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "data_pipeline/wait_for_dataset.py",
+      "sha256": "75775b21e203d8a07bc39810807ee1d1bd687e1b488f11c8684f308a4991e193",
+      "lines": 47,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "dataset/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "lines": 0,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "dataset/canonicalization.py",
+      "sha256": "210afe1a7783810816faf96dbcfc893efc5bb20118bfbb6b5a450fabebc396f6",
+      "lines": 193,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "dataset/ee4d_motion_dataset.py",
+      "sha256": "8b977b869832dce9eb6590271f70d8bed8fee4ffc92fb0f6765084ba150505d3",
+      "lines": 291,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "dataset/egoego_utils.py",
+      "sha256": "0e8c87d3efbfd6180fca765a9627b768d24a02a1655dc6805dd9a528f97c4ab7",
+      "lines": 381,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "dataset/feats.py",
+      "sha256": "0c6c49693ddbbc9aa4b65f815a30be4ec77ce37044f89de3513483c0eb4de395",
+      "lines": 133,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "dataset/representation_utils.py",
+      "sha256": "c6209d76d6bc033390af047560e1ff76913a7fbf333f03171e305bbc4d7e43c3",
+      "lines": 273,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "dataset/smpl_utils.py",
+      "sha256": "2d8473ab9d3c4ab003e8ae2e69f994f83ccc9a17a5e577fd3db5246379c539fa",
+      "lines": 77,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/__init__.py",
+      "sha256": "e25219245e6a21bded481cbc6e90ab24b95830de49f2ffd7957f428d42779777",
+      "lines": 5,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/actions.py",
+      "sha256": "3bdb74fd15aaba1eaaa3a41342ba3cdb33405db73d8b1707cb8072ba2ac15bf8",
+      "lines": 76,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/annotations.py",
+      "sha256": "e36e552b7aab6ba65ac02387c19b60f36c6deeb3343a688ba1f01e802667ffa5",
+      "lines": 53,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/bootstrap_shapes.py",
+      "sha256": "51aebe32708883265c56d9c721908f591dfc581a72ce2cbcc674cda531a99312",
+      "lines": 82,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/calibration.py",
+      "sha256": "1cef2cf05902367f512893449279f93bbada21752542b01daf3ee652d8983bb5",
+      "lines": 17,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/checkpoint.py",
+      "sha256": "2a28b0c43a7dddbdacaa561cdac211a632e23eb8bbe48d8692c882f11c8044c0",
+      "lines": 89,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/codec.py",
+      "sha256": "109517b8ac9d3288d8bafb6d44b6b98632cefebaa4139d80d62f4f0a25d05443",
+      "lines": 196,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/conditioning.py",
+      "sha256": "e325258cd60f62a8c3bb05cfe9f9ef437c24b2cf3b21357f6b3992beeb7d9432",
+      "lines": 122,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/data.py",
+      "sha256": "3a4bc4d258ceb639e0d60f9eac79a2a32cfdcce60cd4ca2a384f8f1dc04c738b",
+      "lines": 96,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/e7_ablation.py",
+      "sha256": "78e806aa7258e3125bcfb04043954fa09d7bafb1a07f239d75a451858b08b6e5",
+      "lines": 126,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/engineering.py",
+      "sha256": "64313e6ad540b3b7feb206be411314e43f96ef83eecb2c22e88412c0264dd0bc",
+      "lines": 161,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/evaluation_protocol.py",
+      "sha256": "1cec9705ecdae92f58aef138f1f86efd9b4975958dc9a7c37e3ceb1eeae6617f",
+      "lines": 151,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/evaluation_resume.py",
+      "sha256": "dde0c8e462726eae27e8ba4cc92197eee99edb81c28c579bc6105849e92ee9e0",
+      "lines": 92,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/fixed_prior.py",
+      "sha256": "d09cadd57fd4b29326fad1c47b78558a45a7ee6a771fbc7f9ccb36263bbf9589",
+      "lines": 37,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/fk.py",
+      "sha256": "37e10adb2c07db8baaf4ccf9fce60429c35d059d943d6b06f33a668adf58521b",
+      "lines": 100,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/g_pretraining.py",
+      "sha256": "353c56c253390e14bda823e894585431e1b2387306064ff0205a065ad937d23a",
+      "lines": 141,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/history.py",
+      "sha256": "584f4552ac0a1eb40d7716894484c6ba2634f0443fadfecd80f5d9720d7485f2",
+      "lines": 102,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/history_flow.py",
+      "sha256": "2a961923620711c95ca0301316288335083c51d948ed8b490c3882fdeb2d8dc5",
+      "lines": 98,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/losses.py",
+      "sha256": "047adb771c123306ac8f5974877c55c03c21d29c12c68215627a44b44c0e8ab3",
+      "lines": 84,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/observation_reference.py",
+      "sha256": "f5414940faa7127fa5629409b44edc7fe6c8ab7963212ae982eecee1662f30ac",
+      "lines": 226,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/prior.py",
+      "sha256": "00918a4c1477207fb773af8b9cab1ae1466b90e47fe4c17da6c99ddb5e55eae7",
+      "lines": 48,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/prior_adaptation.py",
+      "sha256": "69dc203b009c9323a8deb41e8fb003e759f27506d9acfd2d2b2fdea74d09a84b",
+      "lines": 127,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/prior_cv_residual.py",
+      "sha256": "242e62713c216f4545fa9a45776d261a320a2c1060c22c3bff0badfdd12a25b1",
+      "lines": 114,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/prior_expanded.py",
+      "sha256": "880b54fa7cff8b8e8bacf20020de2a98ab236e7e9854024673af40ec830dfd5a",
+      "lines": 67,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/prior_real_history.py",
+      "sha256": "da9fc8b9a2f6611dc184823d23110fe8817ce7fce94afef3fea77fde38afb8c0",
+      "lines": 69,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/prior_same_shape.py",
+      "sha256": "0e94e483246ab0e26a111520c2b34f698e1a9382fff712306d7b6aa3e3507179",
+      "lines": 43,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/prior_two_forward.py",
+      "sha256": "9b77f022049f45ce5ac429b6611bd77a04e4f104674a1a11c71ff816ff086e0b",
+      "lines": 209,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/prior_velocity.py",
+      "sha256": "ed6e22fb3a38e239237c591c92b37c8ade252582c38b8b468e28427b9b3c0100",
+      "lines": 104,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/replay.py",
+      "sha256": "6209038b8240cc37572b3b7141c3c97aefcd710e92c0347a610bd58047e47188",
+      "lines": 79,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/rollout.py",
+      "sha256": "23f1035ccf6172d21e3c93f5786d65e1a338c995ecc5b784ea795a097eed195b",
+      "lines": 347,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "egorecover/smpl_evaluation.py",
+      "sha256": "8985e255ea3e1abbe78942e90960add003a42927ff912f4b07a5bb0c7d990d54",
+      "lines": 258,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "egorecover/utility.py",
+      "sha256": "8aad52dabd67532affeab137e21aac05e38a88fd9bafff76c893475679034f25",
+      "lines": 159,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "eval/compute_3d_metrics.py",
+      "sha256": "6b8327a4db2f283546fdf87acb3e717fd79b87d72e1daa620797edd4080ea0b3",
+      "lines": 225,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "eval/compute_paper_joint_metrics.py",
+      "sha256": "2ba80c4824dddabe4a12a4b26362bdf677bb7e1b0d5f336229c968744f1f5bd0",
+      "lines": 101,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "eval/compute_semantic_metrics.py",
+      "sha256": "628cacb1b8b4482fac4204225264f0b88a4dfa33d7f6d74ae5265cead9eee54e",
+      "lines": 123,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "eval/eval_exp.py",
+      "sha256": "e02e8e04c6de0207e4da5fbceb2097ea1e9a363929228d969f06f7a7e4c2d1b6",
+      "lines": 65,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "eval/metrics.py",
+      "sha256": "2b3ae0ec2820699bde17552d453bff8e334e975e8061708a13aab8c2939bff0a",
+      "lines": 343,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "eval/paired_bootstrap_metrics.py",
+      "sha256": "6b6cc2aedc4940cb1443a4e628448e8a28f7c0c72b964f32625e17acf2cd6102",
+      "lines": 263,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "eval/save_gt_for_eval.py",
+      "sha256": "47159f3ee17d578266696a64bb4bf8e9d786d0e226ae5c7223e09959bd77bfeb",
+      "lines": 52,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "eval/save_uem_preds.py",
+      "sha256": "2e5531ee2ed779e25cea1ed0703e2d5333e6da3ee9e1b22375f46c9556ccef39",
+      "lines": 132,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "eval/selected_seqs.py",
+      "sha256": "bb24d423328e3236368f46b957c8bfe8e1f5a3d334eef5b470525f4995913636",
+      "lines": 3,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "eval/vis_uem_preds.py",
+      "sha256": "8b756007b55fc7a6e1b4e11a92e0563e3865859f2ae03aaa1f02ec8edd186b9c",
+      "lines": 94,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/egorecover/annotations.py",
+      "sha256": "e36e552b7aab6ba65ac02387c19b60f36c6deeb3343a688ba1f01e802667ffa5",
+      "lines": 53,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/egorecover/codec.py",
+      "sha256": "109517b8ac9d3288d8bafb6d44b6b98632cefebaa4139d80d62f4f0a25d05443",
+      "lines": 196,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/egorecover/conditioning.py",
+      "sha256": "e325258cd60f62a8c3bb05cfe9f9ef437c24b2cf3b21357f6b3992beeb7d9432",
+      "lines": 122,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/egorecover/e7_ablation.py",
+      "sha256": "78e806aa7258e3125bcfb04043954fa09d7bafb1a07f239d75a451858b08b6e5",
+      "lines": 126,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/egorecover/fk.py",
+      "sha256": "37e10adb2c07db8baaf4ccf9fce60429c35d059d943d6b06f33a668adf58521b",
+      "lines": 100,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/egorecover/g_pretraining.py",
+      "sha256": "353c56c253390e14bda823e894585431e1b2387306064ff0205a065ad937d23a",
+      "lines": 141,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/egorecover/history_flow.py",
+      "sha256": "9b9cc6d62c55b0f569fbe14bfd5449d82ddf83d7cdd89af745f6c5acb00ee86f",
+      "lines": 79,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/egorecover/losses.py",
+      "sha256": "047adb771c123306ac8f5974877c55c03c21d29c12c68215627a44b44c0e8ab3",
+      "lines": 84,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/egorecover/prior.py",
+      "sha256": "00918a4c1477207fb773af8b9cab1ae1466b90e47fe4c17da6c99ddb5e55eae7",
+      "lines": 48,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/egorecover/prior_cv_residual.py",
+      "sha256": "242e62713c216f4545fa9a45776d261a320a2c1060c22c3bff0badfdd12a25b1",
+      "lines": 114,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/egorecover/prior_two_forward.py",
+      "sha256": "9b77f022049f45ce5ac429b6611bd77a04e4f104674a1a11c71ff816ff086e0b",
+      "lines": 209,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/model/history_uniegomotion.py",
+      "sha256": "4fe5c530e8e255b1d9982ddcd509e2e2a87566cae9160dede3546a1d707b0189",
+      "lines": 96,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/model/uniegomotion.py",
+      "sha256": "a2bf0fcb08ea401335711440d76cc9d18e267d54970a24884b2b2f1dc4f30f5c",
+      "lines": 191,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/mydiffusion/flow_matching.py",
+      "sha256": "18bcf9b45ccf4cb2c7b50a943b1704c4400ff0c38a0ae9aa7d2f05aca6ad4009",
+      "lines": 255,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/run/g_pretraining_data.py",
+      "sha256": "25e6b39ea0713299a3102e32beb4210022cd310ecc416fa09314b523ee485212",
+      "lines": 214,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/run/g_pretraining_experiment.py",
+      "sha256": "a070c5ea568a9cc9b89a28f4e27f6383b4e613c1ea3ccf0f2205b16c904b3190",
+      "lines": 190,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_g_pretraining/v1/code_snapshot/run/train_g_pretraining.py",
+      "sha256": "9ff095d5a61ae44be16624366e8c7d46fff312ba7ce5b38712fa8e63e120e8c9",
+      "lines": 344,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/annotations.py",
+      "sha256": "e36e552b7aab6ba65ac02387c19b60f36c6deeb3343a688ba1f01e802667ffa5",
+      "lines": 53,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/codec.py",
+      "sha256": "109517b8ac9d3288d8bafb6d44b6b98632cefebaa4139d80d62f4f0a25d05443",
+      "lines": 196,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/conditioning.py",
+      "sha256": "e325258cd60f62a8c3bb05cfe9f9ef437c24b2cf3b21357f6b3992beeb7d9432",
+      "lines": 122,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/e7_ablation.py",
+      "sha256": "78e806aa7258e3125bcfb04043954fa09d7bafb1a07f239d75a451858b08b6e5",
+      "lines": 126,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/fk.py",
+      "sha256": "37e10adb2c07db8baaf4ccf9fce60429c35d059d943d6b06f33a668adf58521b",
+      "lines": 100,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/g_pretraining.py",
+      "sha256": "353c56c253390e14bda823e894585431e1b2387306064ff0205a065ad937d23a",
+      "lines": 141,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/history_flow.py",
+      "sha256": "9b9cc6d62c55b0f569fbe14bfd5449d82ddf83d7cdd89af745f6c5acb00ee86f",
+      "lines": 79,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/losses.py",
+      "sha256": "047adb771c123306ac8f5974877c55c03c21d29c12c68215627a44b44c0e8ab3",
+      "lines": 84,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/observation_reference.py",
+      "sha256": "ce90cba46bd4eac05729e0f32816e0cc109d02da3c5c4dc98c45f28605da4a1b",
+      "lines": 132,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/prior.py",
+      "sha256": "00918a4c1477207fb773af8b9cab1ae1466b90e47fe4c17da6c99ddb5e55eae7",
+      "lines": 48,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/prior_cv_residual.py",
+      "sha256": "242e62713c216f4545fa9a45776d261a320a2c1060c22c3bff0badfdd12a25b1",
+      "lines": 114,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/egorecover/prior_two_forward.py",
+      "sha256": "9b77f022049f45ce5ac429b6611bd77a04e4f104674a1a11c71ff816ff086e0b",
+      "lines": 209,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/model/history_uniegomotion.py",
+      "sha256": "4fe5c530e8e255b1d9982ddcd509e2e2a87566cae9160dede3546a1d707b0189",
+      "lines": 96,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/model/observation_reference_g.py",
+      "sha256": "92bd1f86b5317628df09aa67d5c08bd125b89e7216fc43818d355d3c7476318d",
+      "lines": 48,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/model/uniegomotion.py",
+      "sha256": "a2bf0fcb08ea401335711440d76cc9d18e267d54970a24884b2b2f1dc4f30f5c",
+      "lines": 191,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/mydiffusion/flow_matching.py",
+      "sha256": "18bcf9b45ccf4cb2c7b50a943b1704c4400ff0c38a0ae9aa7d2f05aca6ad4009",
+      "lines": 255,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/run/g_pretraining_data.py",
+      "sha256": "25e6b39ea0713299a3102e32beb4210022cd310ecc416fa09314b523ee485212",
+      "lines": 214,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/run/g_pretraining_experiment.py",
+      "sha256": "a070c5ea568a9cc9b89a28f4e27f6383b4e613c1ea3ccf0f2205b16c904b3190",
+      "lines": 190,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/run/observation_reference_experiment.py",
+      "sha256": "1ac7d89794aa8c6d46f330f6259cafcbcf3cdec83d2d19332634e101e93b10da",
+      "lines": 166,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/run/train_g_pretraining.py",
+      "sha256": "9ff095d5a61ae44be16624366e8c7d46fff312ba7ce5b38712fa8e63e120e8c9",
+      "lines": 344,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v1/source/run/train_observation_reference.py",
+      "sha256": "3955c28acf7591c475e4e8ab717e660c4411fef0a6445b2510f03529eabdcf2b",
+      "lines": 241,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/annotations.py",
+      "sha256": "e36e552b7aab6ba65ac02387c19b60f36c6deeb3343a688ba1f01e802667ffa5",
+      "lines": 53,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/codec.py",
+      "sha256": "109517b8ac9d3288d8bafb6d44b6b98632cefebaa4139d80d62f4f0a25d05443",
+      "lines": 196,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/conditioning.py",
+      "sha256": "e325258cd60f62a8c3bb05cfe9f9ef437c24b2cf3b21357f6b3992beeb7d9432",
+      "lines": 122,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/e7_ablation.py",
+      "sha256": "78e806aa7258e3125bcfb04043954fa09d7bafb1a07f239d75a451858b08b6e5",
+      "lines": 126,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/fk.py",
+      "sha256": "37e10adb2c07db8baaf4ccf9fce60429c35d059d943d6b06f33a668adf58521b",
+      "lines": 100,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/g_pretraining.py",
+      "sha256": "353c56c253390e14bda823e894585431e1b2387306064ff0205a065ad937d23a",
+      "lines": 141,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/history_flow.py",
+      "sha256": "9b9cc6d62c55b0f569fbe14bfd5449d82ddf83d7cdd89af745f6c5acb00ee86f",
+      "lines": 79,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/losses.py",
+      "sha256": "047adb771c123306ac8f5974877c55c03c21d29c12c68215627a44b44c0e8ab3",
+      "lines": 84,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/observation_reference.py",
+      "sha256": "ba81aab85ac5b8294a1c85a81b12652fec2d51c1e7879807241016c66890e08a",
+      "lines": 136,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/prior.py",
+      "sha256": "00918a4c1477207fb773af8b9cab1ae1466b90e47fe4c17da6c99ddb5e55eae7",
+      "lines": 48,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/prior_cv_residual.py",
+      "sha256": "242e62713c216f4545fa9a45776d261a320a2c1060c22c3bff0badfdd12a25b1",
+      "lines": 114,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/egorecover/prior_two_forward.py",
+      "sha256": "9b77f022049f45ce5ac429b6611bd77a04e4f104674a1a11c71ff816ff086e0b",
+      "lines": 209,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/model/history_uniegomotion.py",
+      "sha256": "4fe5c530e8e255b1d9982ddcd509e2e2a87566cae9160dede3546a1d707b0189",
+      "lines": 96,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/model/observation_reference_g.py",
+      "sha256": "77c73622a30f2e76bc92019df84c19f28d78df324b4a6c15156213205d690530",
+      "lines": 68,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/model/uniegomotion.py",
+      "sha256": "a2bf0fcb08ea401335711440d76cc9d18e267d54970a24884b2b2f1dc4f30f5c",
+      "lines": 191,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/mydiffusion/flow_matching.py",
+      "sha256": "18bcf9b45ccf4cb2c7b50a943b1704c4400ff0c38a0ae9aa7d2f05aca6ad4009",
+      "lines": 255,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/run/g_pretraining_data.py",
+      "sha256": "25e6b39ea0713299a3102e32beb4210022cd310ecc416fa09314b523ee485212",
+      "lines": 214,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/run/g_pretraining_experiment.py",
+      "sha256": "a070c5ea568a9cc9b89a28f4e27f6383b4e613c1ea3ccf0f2205b16c904b3190",
+      "lines": 190,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/run/observation_reference_experiment.py",
+      "sha256": "64b84ae74f1ed3579de810d8bc8b79cb7570317bbe65cef225d0a95b326e984d",
+      "lines": 179,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/run/train_g_pretraining.py",
+      "sha256": "9ff095d5a61ae44be16624366e8c7d46fff312ba7ce5b38712fa8e63e120e8c9",
+      "lines": 344,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/source/run/train_observation_reference.py",
+      "sha256": "8599097b8032564e4d33b29a34961f1d7a2f8a930d24fe7a8727e18b9da00707",
+      "lines": 241,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_observation_reference/v2/verification/interface_diagnostic.py",
+      "sha256": "c8bdfda3293f3ce78945f7681c96d0ffa3cca1414bdf89ca5352080e1f9ca2f4",
+      "lines": 43,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "exp/egorecover_prior_two_forward/v1/diagnostics/shape_reference.py",
+      "sha256": "4187b8d5c3e9cc849b7ef01f701081b38115d19631dcd91fd0309b235b55821e",
+      "lines": 32,
+      "coverage": "frozen_snapshot_syntax_only"
+    },
+    {
+      "path": "model/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "lines": 0,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "model/core.py",
+      "sha256": "ce1bd8d7920cadbe7617fa464c6be969b5fb3065c29a9cd592744c120c054944",
+      "lines": 52,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "model/history_uniegomotion.py",
+      "sha256": "4fe5c530e8e255b1d9982ddcd509e2e2a87566cae9160dede3546a1d707b0189",
+      "lines": 96,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "model/observation_reference_g.py",
+      "sha256": "a7f875046e0d254df02f4bdd8a587b28809d3eafedb9c7fd82a94c65a76a7aaf",
+      "lines": 77,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "model/tmr_eval_model.py",
+      "sha256": "b1d7cd51f2af0a24daf8e9f410de49c6bb221e3884dabc3bc2f278d5301ddae4",
+      "lines": 43,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "model/uniegomotion.py",
+      "sha256": "a2bf0fcb08ea401335711440d76cc9d18e267d54970a24884b2b2f1dc4f30f5c",
+      "lines": 191,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "module/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "lines": 0,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "module/ema.py",
+      "sha256": "915a5e706696fc4ae66fdba1b9485028aa3d9ba6a043fd2593cb8ea50e5dfa26",
+      "lines": 395,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "module/uem_module.py",
+      "sha256": "1b67df16717310960ef172f7fb20bcffd97c90b5761ecdefe1bd5e53f8da5eaf",
+      "lines": 114,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "module/utils.py",
+      "sha256": "88ef667f1e2031ee97bb7218bd5d9ebfdeaceadbe1fcd88bc5ac60a65279cd7f",
+      "lines": 11,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "motionstreamer_flow/__init__.py",
+      "sha256": "f10ffdc9c314f171997a62c866ebb452641979869d16f64aa9f29b4a44bf72c1",
+      "lines": 7,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "motionstreamer_flow/config.py",
+      "sha256": "1d3b96e16f2f2a666bf8b7d753c3b640342018266b76d188f474e0f0b4e290a1",
+      "lines": 95,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "motionstreamer_flow/data.py",
+      "sha256": "14101f94bebbf0684d4e81f96056eae09d8a3811ae75b5881a6c02dd2df13de4",
+      "lines": 217,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "motionstreamer_flow/demo.py",
+      "sha256": "554d5ca566284193f69ff7b57940a8bd5cf269fd4d8e89f734e172ed5ced6938",
+      "lines": 167,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "motionstreamer_flow/evaluation.py",
+      "sha256": "6c24fdc7dfabe27a0f2ada7d30355f9cffcc220abe8005deb56a3a54eac856ae",
+      "lines": 116,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "motionstreamer_flow/export_egorecover.py",
+      "sha256": "014572aecf41ad9bd43121207b16cc1d0d753b1a044a904b828716e3cbf6a5b1",
+      "lines": 210,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "motionstreamer_flow/geometry.py",
+      "sha256": "007c27b3cda3d99559b29113b255f5c959f803eabcf31cb1890e15964d33eca0",
+      "lines": 96,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "motionstreamer_flow/infer.py",
+      "sha256": "7a4990c5572318b5841940d3f2430021351d07d3dd53e64e1cac85770bcc3720",
+      "lines": 80,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "motionstreamer_flow/model.py",
+      "sha256": "7bf14a0c3c466f0886adccc656452c7c0334a75c784e1938e81677346dd6f502",
+      "lines": 268,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "motionstreamer_flow/objective.py",
+      "sha256": "3d979e3538f76c4aa17a86c066e57c3b724ab61338a14f6557e47d390185aba6",
+      "lines": 107,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "motionstreamer_flow/streaming.py",
+      "sha256": "534e4c857851f1f12fa16841b29b83debaf057ce1c0d66f44de9fc0f0e4955af",
+      "lines": 150,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "motionstreamer_flow/tests/test_coordinates.py",
+      "sha256": "abf67ca37423ce3ba962561359a587163a1d72895d6a00f89f799b95032954ec",
+      "lines": 113,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "motionstreamer_flow/tests/test_core.py",
+      "sha256": "36e327128e6768fe3023df31278d4aa0a02e398fd404ad1ff33aab0d60bc8cfa",
+      "lines": 388,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "motionstreamer_flow/tests/test_evaluation_protocol.py",
+      "sha256": "b3d8a158963f27aa8ba1f3829485229f784608a369adee1a1f4efaa85a1046ca",
+      "lines": 105,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "motionstreamer_flow/tests/test_pipeline.py",
+      "sha256": "5cabeeff4fcb921634bc124e11ce5bd9678f9853843909b6c13e0f146fc8941c",
+      "lines": 187,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "motionstreamer_flow/tests/test_time_protocol.py",
+      "sha256": "40e2d01bdc6d75e0201f5d8a1a803b569afadbdbedfcfa109cf79df569161137",
+      "lines": 141,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "motionstreamer_flow/time_protocol.py",
+      "sha256": "76638b54d21952235a12ba2d707a2a3493fd1fbcd93df27e4628e9907d71ae6c",
+      "lines": 123,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "motionstreamer_flow/train.py",
+      "sha256": "197b508dd7aeabaa14dcfdfb5f55ba11fd3a4063e6a1b88676882bd65c636d71",
+      "lines": 353,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "mydiffusion/__init__.py",
+      "sha256": "ec30483aa641d5c1b9cc8910554324949f2288eadd085310d4c312cdda294c73",
+      "lines": 3,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "mydiffusion/flow_matching.py",
+      "sha256": "18bcf9b45ccf4cb2c7b50a943b1704c4400ff0c38a0ae9aa7d2f05aca6ad4009",
+      "lines": 255,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "run/adapt_prior_on_predictions.py",
+      "sha256": "6403f544e7941d73aab7637ee07bbaa00bcfd0b533b89dd3a5102c3f51e2e77c",
+      "lines": 257,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/cache_e7_bootstraps.py",
+      "sha256": "fcf93f94740ffad5466e8b04978754758b6ab24338e6f16397ea0cadf11be506",
+      "lines": 99,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/check_closed_loop.py",
+      "sha256": "c16d75902a269de4ff7f916725cd9d6f5f187d7849c42e180e136f07a1b8fd19",
+      "lines": 248,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/check_frozen_e7_smoke.py",
+      "sha256": "ca85624951aca236d69c811ad01342fb986253eaf3985d0b1eff7861450b1e5d",
+      "lines": 166,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/check_mismatch_adapter.py",
+      "sha256": "f22b36eb06e669b13aeb1a709d93d1ae5176ee2da77d2260feef9be033194301",
+      "lines": 62,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/collect_predicted_histories.py",
+      "sha256": "e23135aa1a6f7d3af9684e7d2df7eeb1fe2409bc0cf07ba72c37b5253635314a",
+      "lines": 291,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/compare_closed_loop_baselines.py",
+      "sha256": "b943b4030a8e6fcdb1cbc8751dd7ce9cdb77acea6be259c86b2a172441a8af85",
+      "lines": 56,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/compare_engineering_baselines.py",
+      "sha256": "40615f26c0451f245c291f6f5dbd372bb1cb5a78469b87d29498c9609ef88322",
+      "lines": 77,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/complete_stages.py",
+      "sha256": "b17e722251a7bfd6b2a9d3eb608532d8704142429f625d1d92cd82b39dbf9cf0",
+      "lines": 564,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/diagnose_engineering.py",
+      "sha256": "687656ed01ee6b567762fd38c4cea305e4361e7a543793450c51247adb35e6e3",
+      "lines": 293,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/diagnose_fk_dense.py",
+      "sha256": "57d31963a13d46c2c021cb8d4849074276b68eea6151ad8c5163ba17d71617e0",
+      "lines": 180,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/diagnose_four_actions.py",
+      "sha256": "6707f63e9513b664e23c7da60acb07ff2fac7cffb789dfb79a0ec70ab46e79c6",
+      "lines": 266,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "run/diagnose_g_observation_length.py",
+      "sha256": "d6584478627f23d173a75136068e5e30b81c6bc6f655f6bc330a0de3c371b7c7",
+      "lines": 105,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/e7_ablation.py",
+      "sha256": "4ebc9487b7b4511ffb6bfd8e54f52700de5141bc7330edffec9a2938dae08126",
+      "lines": 361,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/e7_ablation_queue.py",
+      "sha256": "98cb61b54fb3d70baea29b493c2543cb5c470d302e7a934b83f331bea1393d3d",
+      "lines": 72,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/engineering_pilot.py",
+      "sha256": "79c5814446c23571e3a8ce9b641e98a8da319cfdd8a1e7d5e58176f04a5d9149",
+      "lines": 655,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/evaluate_closed_loop_smplx.py",
+      "sha256": "6e2f3e6501dcc5502708ede67aed79575356ec5446ff49392abfdb2b8d84d5ac",
+      "lines": 177,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/evaluate_paired_development.py",
+      "sha256": "a457e9fd0759257411eba969029ae3a7d14a86bae9ad2e1c4b5e50c274d71982",
+      "lines": 282,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "run/evaluate_prior_real_history.py",
+      "sha256": "93d3d9674b2220b763f5d463cdd6103aadf6c7a780d7e0be7f53e0a65106a577",
+      "lines": 164,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/finalize_train_pilot.py",
+      "sha256": "6670a1c1e0874715affc4f4cf0c66c37cb5ead131162878a76ca67f44c6d4d53",
+      "lines": 89,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/g_pretraining_data.py",
+      "sha256": "25e6b39ea0713299a3102e32beb4210022cd310ecc416fa09314b523ee485212",
+      "lines": 214,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/g_pretraining_experiment.py",
+      "sha256": "a070c5ea568a9cc9b89a28f4e27f6383b4e613c1ea3ccf0f2205b16c904b3190",
+      "lines": 190,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/g_pretraining_minimal_eval.py",
+      "sha256": "89d804ca9209ad5a595265a68a1db3cf43a9d2c33fbfd3f904496825227e43f0",
+      "lines": 181,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/loss_ablation.py",
+      "sha256": "3aba0ac1f56eadc43322b0fb03b1864b56af9bc1b7a031e2b29531542b1efe58",
+      "lines": 147,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/merge_predicted_histories.py",
+      "sha256": "64246226e46a95a01861f085e3efe1f6819978d74203416e780f34af2c83a587",
+      "lines": 89,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/observation_reference_experiment.py",
+      "sha256": "64b84ae74f1ed3579de810d8bc8b79cb7570317bbe65cef225d0a95b326e984d",
+      "lines": 179,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/prepare_prior_expanded.py",
+      "sha256": "071bba25700ef699bfbc4d39c011883558f0158695a65e0b22961ed3491dd6aa",
+      "lines": 185,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/prepare_prior_real_history.py",
+      "sha256": "af84e9f4ba645d51b587b3416faf037ebed5e45f6e25c0d8ec6e462947681841",
+      "lines": 52,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/prepare_prior_sequences.py",
+      "sha256": "224f2abad14b3eceb42e46acce839697c239fb52b62b38781593825fd640c4cf",
+      "lines": 80,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/prior_cv_residual_experiment.py",
+      "sha256": "3506ec09af34bc94d373b9e2b8d78bee411931dd59eeb78251586981a22cfbb7",
+      "lines": 200,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/prior_expanded_experiment.py",
+      "sha256": "99c84aaeb0c29f9e202ff0c8371e9a0a81f6b8f0c2b0d8f8855b4ba5e9af390f",
+      "lines": 92,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/prior_real_history_experiment.py",
+      "sha256": "0c764bbdedcef5eaee02d18cef8b152ba5a9db7a40c547e59fe9cc22a315877e",
+      "lines": 149,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/prior_same_shape_experiment.py",
+      "sha256": "3d14e6e886843fab169d859850f5646c9743c0cfc8cde27a3c9b2952dca6f1a7",
+      "lines": 162,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/prior_two_forward_experiment.py",
+      "sha256": "651f45ed829ed4aade662c98135701eb5f4fc20ded2ca517a3e9a47d52518432",
+      "lines": 226,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/prior_velocity_experiment.py",
+      "sha256": "9d81998760b7e403495688637078d987809595fc237336b84a593b6ef5853bfe",
+      "lines": 178,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/report_diagnosis.py",
+      "sha256": "43f6a26271d2478ce8e2123312953348d6356bc5c64c26edd0286ff85c03201c",
+      "lines": 140,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/report_engineering.py",
+      "sha256": "db943cac02a0b7ed9d7679bf94d74e2b22686433e81f75c63c31dc7fb9cd47ea",
+      "lines": 141,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/report_repairs.py",
+      "sha256": "83a16b567f943320bb01773af186381029f78b8a6c34bd813c8aee34875156d7",
+      "lines": 177,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/reproduce_release.py",
+      "sha256": "501f091eb04de699dc5f188b75375d6e00a60959a7ac8c10e4ae1d2aaf368d8c",
+      "lines": 126,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/sample_e7.py",
+      "sha256": "1153a0db0a390f6b0e0f8ac2186a2203b962b9fbee70c24d2bf996eed6caa837",
+      "lines": 68,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/select_budget.py",
+      "sha256": "33ae35a0d84d1708a10bbea27bb8a4bad12551b39945b89cd9894af302179ca9",
+      "lines": 60,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/smoke_egorecover.py",
+      "sha256": "232b786f8bf93eb0b7f0af54f45e20b378d9f16ae17018a9a6843bafce8d4819",
+      "lines": 99,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/stage_job.py",
+      "sha256": "67882ac2d3354afe969963a30dbddc47b66fd900bed56a6f7e8f615896622b00",
+      "lines": 50,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/summarize_closed_loop_pilot.py",
+      "sha256": "8d93d7cec15dc4e8b8cab4e42833641b9bcb95ccceb35485c616a174e7bb58de",
+      "lines": 85,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/summarize_paired_development.py",
+      "sha256": "2ec64d71dab1b471b5a6fe11dac2612e887f7887bfd698ded96ea4b6ac71cf4d",
+      "lines": 109,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/train_g_pretraining.py",
+      "sha256": "9ff095d5a61ae44be16624366e8c7d46fff312ba7ce5b38712fa8e63e120e8c9",
+      "lines": 344,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/train_observation_reference.py",
+      "sha256": "8599097b8032564e4d33b29a34961f1d7a2f8a930d24fe7a8727e18b9da00707",
+      "lines": 241,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "run/train_prior_cv_residual.py",
+      "sha256": "8948879317be98ee1ffe35385b505db865d6e9b655ffe1e7c80395412bf78bf7",
+      "lines": 190,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/train_prior_expanded.py",
+      "sha256": "610367e023bbab2d00bdcc50157b5019fb6ead96d1825191521751a455c0f5a5",
+      "lines": 192,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/train_prior_same_shape.py",
+      "sha256": "a1302e8f3a0549feb2568e81fa9b9a01a3c915daccfc328201f8a1d972163690",
+      "lines": 192,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/train_prior_two_forward.py",
+      "sha256": "f5ff4b552b70359a4f2da3480282adb9bb0be1b0667b20ef18f20872b9b3beb0",
+      "lines": 185,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/train_prior_velocity.py",
+      "sha256": "c27d18f6dfb85f77ae6d19bb9edc6de1c2d3f50398608b12e1a393a5cc407692",
+      "lines": 195,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/train_uem.py",
+      "sha256": "690053503587d00bb4393053b3f43008bc2457ed9a8152ac10cc3b8c6fc259b1",
+      "lines": 112,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "run/vis_uem.py",
+      "sha256": "b1d2494eaf5a73ebeb1bbe7a2da15de557d5389458b767784a0ed520e9427a17",
+      "lines": 102,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_bootstrap_shapes.py",
+      "sha256": "e185440610b3186a014cf007cdd11b477d249fa8927b4acac4e9a396d82b6abc",
+      "lines": 36,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_budget_selection.py",
+      "sha256": "528dc8d8dc2bc5dfc529cd537653ddaf81efa854c064ae1c0b85de68a67cdc61",
+      "lines": 28,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_causal_rollout.py",
+      "sha256": "d6200286cc6ceaac3f484766ce8c6b0c271535e4ba3fa74def2a040d47fa2c95",
+      "lines": 167,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "tests/test_data_selection.py",
+      "sha256": "40ea2765c8a70be27d63d62e539f71094176f99466024bc174f5fe4d32b68807",
+      "lines": 74,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_e7_ablation.py",
+      "sha256": "3e85d1f6c884c3dfd8aeda5c11c824ce98e95b8a337e7a7291f6212d313b8b24",
+      "lines": 107,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_e7_config.py",
+      "sha256": "8eabed5831316b2e6cebcee14f51114f94b6c1dbb5651e0b3a953fa81b992748",
+      "lines": 21,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_e7_module.py",
+      "sha256": "7d63292aa100bf0356a9fe49690f8a49ad4c900c32ddc881432e712ca8dd40a9",
+      "lines": 70,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_evaluation_protocol.py",
+      "sha256": "8a7c5bcc9d6661044b1171dbeca98958b64fd21fc73c8b6d0da885456072f87d",
+      "lines": 125,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_evaluation_resume.py",
+      "sha256": "a5661475773901a38d3fb70f84622e533b1e511aa5237557135873fbbb901673",
+      "lines": 65,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_fixed_shape_fk.py",
+      "sha256": "4987cabb8c0cde65cdf9080742e12b8fee30c37b64988e737f791b39f7619871",
+      "lines": 112,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_four_action_sampling.py",
+      "sha256": "38508acafd3acef746ab4ff60b455bcf2502ef1710c7be2aa62f02cf5671139b",
+      "lines": 50,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_g_pretraining.py",
+      "sha256": "1ed0dbe6431399240824193fb422a08e44dc731439bd51bc7f43e91b0372ebfc",
+      "lines": 135,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_history_codec.py",
+      "sha256": "cb7447e30a71b58405628654dc51cc37ccb3658ba7848da96226db08f3703522",
+      "lines": 132,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_history_interfaces.py",
+      "sha256": "100868dc0ea4cfc706750fd5da1f3c8352bb6715b2623c86b16e630f805f5776",
+      "lines": 244,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_history_merge.py",
+      "sha256": "1ffc1fac4274cbc738fa0f07586229661dac68ffaaab824f4efe1d3fd85bf076",
+      "lines": 42,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_history_state_and_policy.py",
+      "sha256": "fdbc4fa89be4c33ef96e5e2f8d97f68e87888e8c3e390ad17fa53cf532355b81",
+      "lines": 141,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "tests/test_loss_ablation.py",
+      "sha256": "bb381770cf2b166fac0fecf16780ae93efc1e9cbe5347005377a2237a6171dfe",
+      "lines": 116,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_observation_reference.py",
+      "sha256": "61ab2fa8ba004b410907a52ef61242049d543d19608a38975318a78ff381e0be",
+      "lines": 234,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "tests/test_observation_rollout.py",
+      "sha256": "be0863f9f6f823853d3c6295e8fd67b7ca0fa490bd18f9bfa1829f9dfc6e00b9",
+      "lines": 219,
+      "coverage": "targeted_call_path_review"
+    },
+    {
+      "path": "tests/test_pilot_summary.py",
+      "sha256": "5b310d817340b7dde05e11f30b7a5d945621dc4bd4eb5848006e0608dd8e14ee",
+      "lines": 33,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_planar_reference_and_loss.py",
+      "sha256": "36185d9d02ac38b42200caa1da835cad8644f25a1087c07f01e999e1abecfa04",
+      "lines": 76,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_prior_adaptation.py",
+      "sha256": "0e90686c2f3ed00fc9339d0f33fb0d2bee02a31620ed7f329b86943a64ff9258",
+      "lines": 133,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_prior_cv_residual.py",
+      "sha256": "858b7ca055b37315f39479cfdacf3ec0b01eae89c1acdae21393e8b7d9a88055",
+      "lines": 160,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_prior_expanded.py",
+      "sha256": "e0fcd36eb1be39c311ae584a323935758734ba13d57f58156b54ac3a4a35d26d",
+      "lines": 114,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_prior_real_history.py",
+      "sha256": "d07aff6b5dfecab08a48a3702fe7c6716399f912bd1ca9a6064762d9831cc2b4",
+      "lines": 107,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_prior_same_shape.py",
+      "sha256": "c134e53b601531af9fffdd53e14bae150c49e1c13a5b635dddc344a94e5cbb6d",
+      "lines": 115,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_prior_two_forward.py",
+      "sha256": "7282c65d380f44c1ea5dbd9f688ed7edfa48c156a673a353db3a9cc0d2cee13a",
+      "lines": 198,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_prior_velocity.py",
+      "sha256": "0a9db6ab3734092792c68b5dda9f3c322eeaae43a515380746284eef2788bdf2",
+      "lines": 171,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_repaint.py",
+      "sha256": "62559dfdf29d6107c60bef082a5fa9f5304536df6e6167b48508caf4c943d7ae",
+      "lines": 156,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_replay_training.py",
+      "sha256": "0f5b02c260531f9364676c8964a9f5ba6f0382334aa1cca7a436615584b970cb",
+      "lines": 82,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_smplx_evaluation.py",
+      "sha256": "b6a8e912c8d0e994ff1c72bbc2a67f8adba9b8ab8cfd70e2c20dd89ac8cccfc6",
+      "lines": 122,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tests/test_stage_queue.py",
+      "sha256": "7223fc709ebaf2338eddcadb3e989777a0990cce4df8875295839c6939aa8774",
+      "lines": 96,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tools/audit_release_inventory.py",
+      "sha256": "a81ca13d6ec07b25c5d453a7a3ed2b2e5a84ac81b6c3e98c61876d611237b405",
+      "lines": 175,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tools/bundle_release_data.py",
+      "sha256": "a5878538ae24345a55358a2cb572a412e40f2ce6a684dedcb9b989b1251be9db",
+      "lines": 67,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tools/check_upstream_e7.py",
+      "sha256": "c043c9d47e2acf0977ff3d993c756f6c093b52746c827b4774e094ef9e9329c4",
+      "lines": 137,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tools/package_release.py",
+      "sha256": "a92b1d9f953e82973d3c73537487ff9f0b5a9169130d2aa9ef618001e3275f45",
+      "lines": 122,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tools/restore_release.py",
+      "sha256": "dbe45976bea66dd4982156ad198ab1dbdecd95fb10fb3b7ea7e3ad13aae508d7",
+      "lines": 169,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tools/split_release_payloads.py",
+      "sha256": "4bd39230acca1d7b8ccfbba6cf86c3564db20c5aced1f7fad68f4441e563939f",
+      "lines": 60,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "tools/stage_github_release.py",
+      "sha256": "9a45eb1f8ce88ed8690fe109b49462fec0f58637db831a062f7317e716fd3131",
+      "lines": 121,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "lines": 0,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/guofeats/__init__.py",
+      "sha256": "18422901a145f528d9d6d957e6b2adf397da875e149fb939718bcf403628f5c4",
+      "lines": 1,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/guofeats/common/quaternion.py",
+      "sha256": "637d07520ac308f425d89775319720ad779e7d1500e09195273caf3f9909a724",
+      "lines": 547,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/guofeats/common/skeleton.py",
+      "sha256": "d342c12cb81230af2240a732860eade3009057d0735b72edcf79f5019ec37af9",
+      "lines": 242,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/guofeats/motion_representation.py",
+      "sha256": "6ddcac40cc3f976e90d2768124f83029e489090143d7ed230de8d170ba7c3c83",
+      "lines": 430,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/guofeats/paramUtil.py",
+      "sha256": "9b6bf12163e270ecd7e933bdbd3f8de080a12e4b4f7af32eeb57b9850e4e6121",
+      "lines": 92,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/meshviewer.py",
+      "sha256": "7de8242e234b1ec99ce71a9031a79086b16536cc554be4f8b526fd50732e4c55",
+      "lines": 496,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/pca_conversions.py",
+      "sha256": "015d3f43c967b1b5c0942b5197185bababa3849a2c19872898b5947864f30c7c",
+      "lines": 20,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/renderer.py",
+      "sha256": "9d10d0375cfbd38cd1a4ac8b8dcbb04fa7834496d2314f566e30abfd24976c10",
+      "lines": 155,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/rotation_conversions.py",
+      "sha256": "4dd42ef7227fe93560da284cf200aa93beef19f0ed2241cfed3ea2bf8bbfea46",
+      "lines": 580,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/task_conditioning.py",
+      "sha256": "2ca89c82d5d531b1b8924c2d204a0c5d447a4a2fe1af760f638586a5f9d840b8",
+      "lines": 114,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/torch_utils.py",
+      "sha256": "582bfc0346b9a44ff07c6fed801eecda4a0d75c6a249e09ae12cc5bd0d0b689c",
+      "lines": 119,
+      "coverage": "syntax_and_import_location_scan"
+    },
+    {
+      "path": "utils/vis_utils.py",
+      "sha256": "e70ca748f4b7946e3320b275dafc54884e73490bd486304368d4068d6b7457db",
+      "lines": 378,
+      "coverage": "syntax_and_import_location_scan"
+    }
+  ],
+  "limitations": [
+    "CPU engineering checks do not establish real accuracy, robustness or GPU equivalence.",
+    "This iteration also preserves and revalidates previously uncommitted static corrections."
+  ]
+}
