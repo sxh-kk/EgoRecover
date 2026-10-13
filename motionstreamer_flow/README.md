@@ -44,6 +44,8 @@ TAE 使用 stride=1 的左填充卷积，默认 dilation 为 `[1,2,4]`，encoder
 
 FK 使用离线导出的、由 `beta_boot` 决定的 SMPL-X 前 22 个关节骨架偏移。核心运行时不需要 SMPL-X 资产。导出器逐 episode 对真实 SMPL-X Layer 检查 FK，误差超过 `5e-5 m` 会终止。网格和完整手指关节不在本包输出范围，手部 PCA 参数保留在姿态中。
 
+这个 FK 检查验证的是相同体型、姿态和根部下骨架 FK 与 SMPL-X 的一致性。它不保证启动体型重建的 GT 目标等于原始缓存中的真实体型关节；评价单独报告这两个目标的差异。
+
 ### 观测与未来的 Q
 
 | action | 图像 | 头部 |
@@ -219,6 +221,17 @@ Flow配置中的 `selection_start/selection_stop` 显式指定选模区间；正
 
 评价报告 Body/Root/Head/PA Body（mm）与速度误差（mm/s），位置按有效帧加权，速度按有效相邻帧对加权。报告记录请求区间、每episode实际区间及原始take时间、FPS、零基索引与右开边界。速度只使用评分切片内相邻且均有效的帧，不跨缺口，不包含起点前一帧到起点的帧对：`[40,200)` 全有效时为160个位置帧、159个速度帧对。坐标使用固定锚点，刚体变换不改变这些距离指标。推理从 startup 开始闭环，延后评价起点不会改为 GT 历史。
 
+主报告与每episode另外保存以下诊断；它们共用评分区间、有效帧、FPS和聚合权重，GT只在闭环生成完成后用于评价：
+
+| 字段 | 比较目标及用途 |
+| --- | --- |
+| `metrics` | 预测关节对原始 GT 关节，保留主评价；Flow 仍按其中的 `body_mm` 选模 |
+| `fixed_bootstrap_shape_metrics` | 同一预测对 `FK(GT pose, GT root, offsets_boot)`，观察统一启动骨架后的恢复误差 |
+| `target_geometry_gap_metrics` | 两种 GT 目标之间的几何差异，观察评价目标本身相差多少 |
+| `metric_difference_original_minus_fixed_shape` | 原始 GT 指标减固定启动体型指标，有符号，可能为负 |
+
+目标几何差异可能含体型、标注和 FK 表示差异，不能全部归因于 beta。指标差值也不是可加的“姿态误差＋体型误差”分解；原始 GT 的主指标仍包含体型差异，固定体型指标也可能包含根部和其他恢复误差，不能只称为姿态误差。目前没有真实资产或新实验量化这些差异。
+
 头部18D的相对部分为 `inv(T_head[t-1]) @ T_head[t]`，平移/旋转在前一设备坐标系表达，单位为逐帧增量，没有除以时间间隔；它不是锚点坐标中的速度。前一观测缺失但当前可用时，相对部分用单位增量占位；当前缺失时整个特征置零，可用性由mask表达。
 
 建议比较：原 P+G、现有观测融合 G、新模型；保持 take 划分、20 帧预测启动、`beta_boot`、floor、图像特征、10 Hz 和评价区间相同。分别跑 seed 62/63/64 与四种动作。新增 TAE 训练成本、不同参数量和 Two-Forward 额外前向须单独记录。消融至少包括无 Two-Forward（新配置中设 `two_forward=false`）、仅图像/仅头部/无观测及 latent 16/32；本包没有替你运行这些正式实验。latent 32 需要重新训练相应 TAE。
@@ -237,7 +250,7 @@ Flow配置中的 `selection_start/selection_stop` 显式指定选模区间；正
 python -m motionstreamer_flow.demo --output /tmp/msflow_smoke --device cpu
 ```
 
-测试覆盖因果性、真实窗口与 streaming 一致、缺失/动作屏蔽、QK scale 梯度、x0 Euler、FK 梯度、Two-Forward 停梯度和固定启动前缀、冻结 decoder 的梯度通路、GT 与在线输入隔离、失败帧不提交历史、两阶段恢复一致、缓存 hash/split 检查及脱离旧仓库运行。
+测试覆盖因果性、真实窗口与 streaming 一致、缺失/动作屏蔽、QK scale 梯度、x0 Euler、FK 梯度、Two-Forward 停梯度和固定启动前缀、冻结 decoder 的梯度通路、GT 与在线输入隔离、失败帧不提交历史、两阶段恢复一致、缓存 hash/split 检查及脱离旧仓库运行。另覆盖非零地面与完整坐标还原、评分窗口与有效速度帧对、源时间契约及固定启动体型诊断。
 
 本次开发环境为 `torch 2.10.0+cpu`，无 CUDA 和真实 SMPL-X 资产。已完成 CPU 合成全流程与属性测试；GPU BF16 测试因缺少硬件跳过。真实缓存导出、真实资产 FK parity、GPU 显存/速度和真实精度仍需在 GPU 环境验证。合成指标只证明训练/推理链路可运行。
 

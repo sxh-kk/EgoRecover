@@ -4,7 +4,10 @@ from numbers import Real
 import torch
 
 from .data import online_inputs
+from .geometry import fk
 from .streaming import rollout
+
+_METRIC_KEYS = ("body_mm", "root_mm", "head_mm", "pa_body_mm", "velocity_mm_s")
 
 
 def pa_align(prediction, truth):
@@ -45,6 +48,23 @@ def metrics(prediction, truth, fps, mask=None):
     return result
 
 
+def _aggregate_metrics(results):
+    averaged = {}
+    for key in _METRIC_KEYS:
+        weight = "velocity_pairs" if key == "velocity_mm_s" else "frames"
+        supported = [result for result in results if key in result]
+        if supported:
+            averaged[key] = sum(result[key] * result[weight] for result in supported) / sum(
+                result[weight] for result in supported
+            )
+    return averaged
+
+
+def _metric_difference(original, fixed_shape):
+    # Signed comparison of scoring targets, not an additive error decomposition.
+    return {key: original[key] - fixed_shape[key] for key in _METRIC_KEYS if key in original and key in fixed_shape}
+
+
 @torch.no_grad()
 def evaluate(flow, tae, normalizer, episodes, split="dev", action="a11", seed=62, start=None, stop=None, limit=None):
     # Omitted CLI bounds inherit the checkpoint's explicit selection protocol.
@@ -67,17 +87,22 @@ def evaluate(flow, tae, normalizer, episodes, split="dev", action="a11", seed=62
             raise ValueError(f"Empty scoring window for episode {record['id']}: [{begin},{end}).")
         output = rollout(flow, tae, normalizer, online_inputs(packet), action=action, seed=seed)
         # Predictions are closed-loop from startup, even when evaluation starts later.
-        per_episode = metrics(
-            output["joints"][begin - flow.cfg.bootstrap : end - flow.cfg.bootstrap],
-            packet["joints"][begin:end],
-            flow.cfg.fps,
-            packet["valid"][begin:end],
-        )
+        prediction = output["joints"][begin - flow.cfg.bootstrap : end - flow.cfg.bootstrap]
+        truth = packet["joints"][begin:end]
+        valid = packet["valid"][begin:end]
+        # These GT-derived targets are used only after rollout, never as model inputs.
+        fixed_shape_truth, _ = fk(packet["pose"][begin:end], packet["root"][begin:end], packet["offsets"])
+        per_episode = metrics(prediction, truth, flow.cfg.fps, valid)
+        fixed_shape_metrics = metrics(prediction, fixed_shape_truth, flow.cfg.fps, valid)
+        target_gap_metrics = metrics(fixed_shape_truth, truth, flow.cfg.fps, valid)
         results.append(
             {
                 "id": record["id"],
                 "take": record["take"],
                 **per_episode,
+                "fixed_bootstrap_shape_metrics": fixed_shape_metrics,
+                "target_geometry_gap_metrics": target_gap_metrics,
+                "metric_difference_original_minus_fixed_shape": _metric_difference(per_episode, fixed_shape_metrics),
                 "scoring_window": {"start": begin, "stop": end},
                 "fps": flow.cfg.fps,
                 "scoring_time_s": {
@@ -89,12 +114,9 @@ def evaluate(flow, tae, normalizer, episodes, split="dev", action="a11", seed=62
                 ),
             }
         )
-    averaged = {}
-    for key in ("body_mm", "root_mm", "head_mm", "pa_body_mm", "velocity_mm_s"):
-        weight = "velocity_pairs" if key == "velocity_mm_s" else "frames"
-        supported = [r for r in results if key in r]
-        if supported:
-            averaged[key] = sum(r[key] * r[weight] for r in supported) / sum(r[weight] for r in supported)
+    averaged = _aggregate_metrics(results)
+    fixed_shape_averaged = _aggregate_metrics([result["fixed_bootstrap_shape_metrics"] for result in results])
+    target_gap_averaged = _aggregate_metrics([result["target_geometry_gap_metrics"] for result in results])
     return {
         "split": split,
         "action": action,
@@ -112,5 +134,15 @@ def evaluate(flow, tae, normalizer, episodes, split="dev", action="a11", seed=62
         "velocity_pairs": sum(r.get("velocity_pairs", 0) for r in results),
         "backend": episodes.manifest.get("backend"),
         "metrics": averaged,
+        "fixed_bootstrap_shape_metrics": fixed_shape_averaged,
+        "target_geometry_gap_metrics": target_gap_averaged,
+        "metric_difference_original_minus_fixed_shape": _metric_difference(averaged, fixed_shape_averaged),
+        "metric_targets": {
+            "metrics": "prediction vs original cached GT joints; primary evaluation and Flow selection",
+            "fixed_bootstrap_shape_metrics": "prediction vs GT pose/root FK on fixed bootstrap offsets",
+            "target_geometry_gap_metrics": "fixed-bootstrap-shape GT FK vs original cached GT joints",
+            "metric_difference_original_minus_fixed_shape": "signed primary minus fixed-shape metric; may be negative",
+            "interpretation": "target gap can include shape, annotation and FK differences; not an additive error decomposition",
+        },
         "episodes": results,
     }
