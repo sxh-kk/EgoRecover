@@ -251,7 +251,17 @@ def run_training(
                         entry["dev"] = validate_tae(tae, norm, episodes, device)
                         score = entry["dev"]["normalized_reconstruction_mse"]
                     else:
-                        entry["dev"] = evaluate(flow, tae, norm, episodes, "dev", seed=cfg.seed, limit=dev_limit)
+                        entry["dev"] = evaluate(
+                            flow,
+                            tae,
+                            norm,
+                            episodes,
+                            "dev",
+                            seed=cfg.seed,
+                            limit=dev_limit,
+                            start=cfg.selection_start,
+                            stop=cfg.selection_stop,
+                        )
                         score = entry["dev"]["metrics"]["body_mm"]
                 improved = score < best
                 best = min(best, score)

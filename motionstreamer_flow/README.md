@@ -125,9 +125,11 @@ TAE 为单独阶段，默认 12000 次更新，batch=8，窗口 52 帧全部参�
 
 源缓存已减去协议声明的 floor；转换器沿用每个 episode 的 `record.floor_height`，不重新从全序列找地面。它忽略 truth 的 reference，使用预测启动 reference，固定 `beta_boot`。GT 关节仅作为离线评价目标保存；FK 训练目标在同一个启动体型上重建，避免把体型误差混入旋转重建损失。正式比较前应确认原缓存 floor 与启动模型来源符合既定协议。
 
-数据 schema v2 明确保存两份完整坐标变换：`anchor` 将模型锚点坐标还原到地面归零世界；`original_world_from_anchor` 再包含源缓存减去的地面高度。`root/joints` 输出在模型锚点中，`root_floor_world/joints_floor_world` 在地面归零世界中，`root_world/joints_world` 在原始标注世界中。高度只恢复一次，旋转与 XY 保持相同。还原变换仅用于输出，不参与模型条件。
+数据 schema v3 明确保存两份完整坐标变换：`anchor` 将模型锚点坐标还原到地面归零世界；`original_world_from_anchor` 再包含源缓存减去的地面高度。`root/joints` 输出在模型锚点中，`root_floor_world/joints_floor_world` 在地面归零世界中，`root_world/joints_world` 在原始标注世界中。高度只恢复一次，旋转与 XY 保持相同。还原变换仅用于输出，不参与模型条件。
 
-旧 schema v1 未保存地面还原信息，需重新导出；不能把未知高度默认为零。模型内部坐标与训练目标不变，但数据 manifest/hash 更新，旧 checkpoint 绑定的 v1 数据不能直接当成 v2 数据继续运行。自行生产的数据也须显式声明完整还原矩阵；若其世界坐标没有去地面，可让两份矩阵相同。
+旧 schema v1 未保存地面还原信息，v2尚未保存时间契约，需重新导出；不能把未知高度默认为零。模型内部坐标与训练目标不变，但数据 manifest/hash 更新，旧 checkpoint 绑定的数据不能直接当成 v3 数据继续运行。自行生产的数据也须显式声明完整还原矩阵；若其世界坐标没有去地面，可让两份矩阵相同。
+
+导出器核对源record中的30 Hz序列帧范围、episode起点与长度，验证原始每3帧取1帧的10 Hz契约；若源包保留 `frame_id_30fps`，同时逐帧交叉核对。配置FPS必须与该契约一致，导出器不重采样。保存 `source_frame_id_30fps`、float64 `timestamps_s` 和 `timing_provenance`；旧缓存时间由官方帧网格推导，明确标记并非实测传感器时间戳。载入数据时再次核验时间间隔，避免只改manifest或配置就改变速度单位。
 
 ### 独立数据格式
 
@@ -135,7 +137,7 @@ TAE 为单独阶段，默认 12000 次更新，batch=8，窗口 52 帧全部参�
 
 ```json
 {
-  "version": 2,
+  "version": 3,
   "fps": 10,
   "backend": "smplx",
   "records": [
@@ -159,7 +161,9 @@ TAE 为单独阶段，默认 12000 次更新，batch=8，窗口 52 帧全部参�
 | `beta`, `offsets` | `[10]`, `[22,3]` | 固定启动体型与父子骨架偏移；root offset 为零 |
 | `anchor` | `[4,4]` | 地面归零世界坐标 ← 模型锚点坐标 |
 | `original_world_from_anchor` | `[4,4]` | 原始标注世界坐标 ← 模型锚点坐标；必须显式提供有限的合法刚体变换 |
-| `anchor` | `[4,4]` | world-from-fixed-startup-anchor |
+| `timestamps_s` | `[T]` float64推荐 | 原始take时间；严格递增、均匀采样，与声明FPS一致 |
+| `source_frame_id_30fps` | `[T]` int64，源缓存导出时提供 | 官方30 Hz帧索引，用于核验时间来源 |
+| `timing_provenance` | dict | 时间来源及推导/实测标记；源缓存导出不进行重采样 |
 | `startup_source` | string | 正式数据为 `predicted`，合成测试为 `synthetic_predicted` |
 
 其他图像维度、历史长度、启动长度、latent 维度需要对应配置。身体缺失帧不参与训练/评价，启动身体必须完整。图像/头部不可用位置允许 NaN；可用位置必须有限。标准化统计只在 train 拟合，包括 TAE 冻结后的 latent 统计，不访问 dev/test。
@@ -191,6 +195,8 @@ TAE 为单独阶段，默认 12000 次更新，batch=8，窗口 52 帧全部参�
 
 非空输出目录必须显式 resume，避免覆盖其他实验。checkpoint 包含模型、标准化、optimizer、GradScaler、随机数状态、数据与 TAE hash、配置和 dev 结果。`latest.pt` 用于恢复；`best.pt` 用于评价。默认每 500 步及最终步保存，突然中断会丢失距上次保存的更新。`--stop-after` 是绝对更新编号，可安全做短运行/恢复验证，不改变总步数或 Two-Forward 的调度长度。`--dev-limit` 仅供调试，正式选模应使用完整 dev。
 
+Flow配置中的 `selection_start/selection_stop` 显式指定选模区间；正式 `gpu_flow.json` 为 `[40,200)`。省略推理CLI的 `--start/--stop` 时继承checkpoint中的选模区间，可显式覆盖。小型合成配置留空，采用启动结束至episode末尾。改变选模配置会改变恢复身份，旧配置不能静默续训。
+
 ## 6. 闭环预测与比较
 
 ```bash
@@ -211,7 +217,9 @@ TAE 为单独阶段，默认 12000 次更新，batch=8，窗口 52 帧全部参�
 
 逐帧 API 为 `StreamingSession`：初始化仅接收预测启动姿态/根部、启动观测、体型、骨架和锚点；`step(image, head, image_valid, head_valid, action=..., noise=...)` 生成一帧。输入已是特征，不是原始视频。四个动作共用同一个模型；相同 seed 使用相同逐帧噪声，便于配对比较。`online_inputs` 白名单阻止 GT 姿态、根部与关节流入 rollout。
 
-评价报告 Body/Root/Head/PA Body（mm）与速度误差（mm/s），按有效帧加权，速度按有效相邻帧对加权。坐标使用固定锚点，刚体变换不改变这些距离指标。推理从 startup 开始闭环，延后评价起点不会改为 GT 历史。
+评价报告 Body/Root/Head/PA Body（mm）与速度误差（mm/s），位置按有效帧加权，速度按有效相邻帧对加权。报告记录请求区间、每episode实际区间及原始take时间、FPS、零基索引与右开边界。速度只使用评分切片内相邻且均有效的帧，不跨缺口，不包含起点前一帧到起点的帧对：`[40,200)` 全有效时为160个位置帧、159个速度帧对。坐标使用固定锚点，刚体变换不改变这些距离指标。推理从 startup 开始闭环，延后评价起点不会改为 GT 历史。
+
+头部18D的相对部分为 `inv(T_head[t-1]) @ T_head[t]`，平移/旋转在前一设备坐标系表达，单位为逐帧增量，没有除以时间间隔；它不是锚点坐标中的速度。前一观测缺失但当前可用时，相对部分用单位增量占位；当前缺失时整个特征置零，可用性由mask表达。
 
 建议比较：原 P+G、现有观测融合 G、新模型；保持 take 划分、20 帧预测启动、`beta_boot`、floor、图像特征、10 Hz 和评价区间相同。分别跑 seed 62/63/64 与四种动作。新增 TAE 训练成本、不同参数量和 Two-Forward 额外前向须单独记录。消融至少包括无 Two-Forward（新配置中设 `two_forward=false`）、仅图像/仅头部/无观测及 latent 16/32；本包没有替你运行这些正式实验。latent 32 需要重新训练相应 TAE。
 

@@ -6,6 +6,7 @@ import torch
 from torch import nn
 
 from .geometry import validate_rigid_transform
+from .time_protocol import validate_timing
 
 
 def sha256(path):
@@ -79,8 +80,10 @@ class Episodes:
         self.cfg = cfg
         self.digest = sha256(self.path)
         self.manifest = json.loads(self.path.read_text())
-        if self.manifest.get("version") != 2:
-            raise ValueError("Dataset schema v2 required; re-export v1 data with explicit original-world restoration.")
+        if self.manifest.get("version") != 3:
+            raise ValueError(
+                "Dataset schema v3 required; re-export old data with coordinate restoration and verified timing."
+            )
         if self.manifest.get("fps") != cfg.fps:
             raise ValueError("Manifest FPS mismatch.")
         self.records = self.manifest["records"]
@@ -162,6 +165,7 @@ def validate_episode(p, cfg):
         "offsets": (22, 3),
         "anchor": (4, 4),
         "original_world_from_anchor": (4, 4),
+        "timestamps_s": (t,),
         "startup_pose": (cfg.bootstrap, 152),
         "startup_root": (cfg.bootstrap, 9),
     }
@@ -182,6 +186,18 @@ def validate_episode(p, cfg):
         raise ValueError("Startup must be supplied by a predictor, not ground truth.")
     for key in ("anchor", "original_world_from_anchor"):
         validate_rigid_transform(p[key], key)
+    validate_timing(p["timestamps_s"], cfg.fps, t)
+    if "source_frame_id_30fps" in p:
+        indices = p["source_frame_id_30fps"]
+        if (
+            not isinstance(indices, torch.Tensor)
+            or indices.shape != (t,)
+            or indices.dtype == torch.bool
+            or indices.is_floating_point()
+            or indices.is_complex()
+            or not torch.allclose(indices.double() / 30, p["timestamps_s"].double(), atol=1e-8, rtol=0)
+        ):
+            raise ValueError("Source frame indices and timestamps_s disagree.")
 
 
 def online_inputs(packet):

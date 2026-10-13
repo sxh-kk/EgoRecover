@@ -11,6 +11,7 @@ from .config import Config
 from .data import save_json, save_torch, sha256, validate_episode
 from .geometry import PARENTS, fk, head_features, matrix_to_rotation_6d, rotation_6d_to_matrix, validate_rigid_transform
 from .train import resolve_device
+from .time_protocol import source_timing
 
 
 def body_to_pose_root(body, anchor):
@@ -72,6 +73,7 @@ def convert_packet(packet, cfg, offsets, anchor=None):
         raise ValueError("Source floor_height must be finite.")
     original_world_from_floor_world = torch.eye(4, dtype=anchor.dtype, device=anchor.device)
     original_world_from_floor_world[2, 3] = floor_height
+    frame_ids, timestamps_s, timing_provenance = source_timing(packet, cfg)
     pose, root, joints = body_to_pose_root(packet["truth"], anchor)
     startup_pose, startup_root, _ = body_to_pose_root(packet["teacher"], anchor)
     t = len(pose)
@@ -92,6 +94,9 @@ def convert_packet(packet, cfg, offsets, anchor=None):
         "offsets": offsets.cpu().float(),
         "anchor": anchor,
         "original_world_from_anchor": original_world_from_floor_world @ anchor,
+        "source_frame_id_30fps": frame_ids,
+        "timestamps_s": timestamps_s,
+        "timing_provenance": timing_provenance,
         "startup_pose": startup_pose[: cfg.bootstrap],
         "startup_root": startup_root[: cfg.bootstrap],
         "startup_source": "predicted",
@@ -149,6 +154,8 @@ def main():
         if not marker.get("completed") or marker["manifest_sha256"] != source_digest or marker["sha256"] != digest:
             raise ValueError("Incomplete or changed source cache.")
         packet = torch.load(path, map_location="cpu", weights_only=True)
+        if packet.get("record") != record:
+            raise ValueError("Source episode record differs from its frozen manifest.")
         beta = packet["beta_boot"].to(device).float()
         offsets, rest_pelvis = skeleton_from_smplx(layer, beta)
         result = convert_packet(packet, cfg, offsets)
@@ -180,7 +187,7 @@ def main():
     save_json(
         output / "manifest.json",
         {
-            "version": 2,
+            "version": 3,
             "fps": cfg.fps,
             "backend": "smplx",
             "records": records,
@@ -194,6 +201,7 @@ def main():
                 "original_world_from_anchor": "original-annotation-world-from-anchor; removed floor restored once",
             },
             "floor_source": "inherited offline cache floor; not estimated from future frames by this exporter",
+            "timing": "verified official 30 Hz source frame grid, stride 3; derived times, no exporter resampling",
         },
     )
 

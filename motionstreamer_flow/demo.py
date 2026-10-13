@@ -113,6 +113,8 @@ def make_dataset(output, cfg, frames=24):
             "offsets": offsets,
             "anchor": torch.eye(4),
             "original_world_from_anchor": torch.eye(4),
+            "timestamps_s": torch.arange(frames, dtype=torch.float64) / cfg.fps,
+            "timing_provenance": {"timestamp_source": "synthetic_uniform_grid", "fps": cfg.fps},
             "startup_pose": pose[: cfg.bootstrap] + torch.randn(cfg.bootstrap, 152, generator=generator) * 0.01,
             "startup_root": startup_root,
             "startup_source": "synthetic_predicted",
@@ -124,7 +126,7 @@ def make_dataset(output, cfg, frames=24):
     save_json(
         output / "manifest.json",
         {
-            "version": 2,
+            "version": 3,
             "fps": cfg.fps,
             "backend": "synthetic_demo",
             "records": records,

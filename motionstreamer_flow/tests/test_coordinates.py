@@ -30,7 +30,12 @@ def source_packet(tmp_path):
         "beta_boot": p["beta"],
         "images": torch.nan_to_num(p["images"]),
         "head": p["root"],
-        "record": {"floor_height": 2.75},
+        "record": {
+            "floor_height": 2.75,
+            "base_seq_name": f"take___0___{3*(len(p['pose'])-1)}",
+            "episode_start_motion_idx": 0,
+            "num_frames": len(p["pose"]),
+        },
     }
     return cfg, p, packet
 

@@ -44,6 +44,12 @@ def main():
             {
                 "prediction": prediction,
                 "first_frame": cfg.bootstrap,
+                "stop_frame_exclusive": len(packet["pose"]),
+                "fps": cfg.fps,
+                "timestamps_s": packet["timestamps_s"][cfg.bootstrap :],
+                "timing_provenance": packet.get(
+                    "timing_provenance", {"timestamp_source": "provided_uniform_timestamps"}
+                ),
                 "episode": record["id"],
                 "action": args.action,
                 "seed": args.seed,

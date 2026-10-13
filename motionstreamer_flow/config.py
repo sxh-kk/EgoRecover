@@ -1,5 +1,7 @@
 import json
+import math
 from dataclasses import asdict, dataclass
+from numbers import Real
 from pathlib import Path
 
 
@@ -38,6 +40,8 @@ class Config:
     eval_every: int = 500
     seed: int = 62
     fps: int = 10
+    selection_start: int | None = None
+    selection_stop: int | None = None
     precision: str = "bf16"
 
     def __post_init__(self):
@@ -61,6 +65,13 @@ class Config:
             raise ValueError("Invalid precision or flow time lower bound.")
         if not 0 <= self.modality_drop < 1 or self.dropout < 0 or self.dropout >= 1:
             raise ValueError("Drop probabilities must be in [0,1).")
+        if isinstance(self.fps, bool) or not isinstance(self.fps, Real) or not math.isfinite(self.fps) or self.fps <= 0:
+            raise ValueError("FPS must be finite and positive.")
+        for value in (self.selection_start, self.selection_stop):
+            if value is not None and (isinstance(value, bool) or not isinstance(value, int) or value < 0):
+                raise ValueError("Selection bounds must be nonnegative integer frame indices or null.")
+        if self.selection_stop is not None and self.selection_stop <= max(self.bootstrap, self.selection_start or 0):
+            raise ValueError("Selection stop must follow the effective selection start.")
 
     @property
     def state_dim(self):
