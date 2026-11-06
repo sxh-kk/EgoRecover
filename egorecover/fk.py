@@ -1,6 +1,6 @@
 """Optional SMPL22 FK with fixed bootstrap shape and no GT fallbacks.
 
-The caller provides a licensed SMPL-X layer (dataset.smpl_utils.get_smpl()).
+The caller provides a licensed SMPL-X layer using load_smpl().
 Importing this module alone does not require assets. Actual asset-backed FK
 must be validated before these outputs become formal utility labels.
 """
@@ -47,7 +47,8 @@ def joint_decoder(episode, synthetic, smpl=None):
         return DenseJoints()
     if smpl is None:
         raise ValueError("Production reconstruction requires the licensed SMPL-X asset.")
-    return FixedShapeFK(smpl, episode.beta[None])
+    beta = episode.beta
+    return FixedShapeFK(smpl, beta[None] if beta.ndim == 1 else beta)
 
 
 class FixedShapeFK(nn.Module):

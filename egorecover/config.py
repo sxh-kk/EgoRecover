@@ -98,6 +98,7 @@ class TrainOptions:
     seed: int = 62
     train_steps: int = 2400
     batch_size: int = 4
+    microbatch_size: int = 1
     learning_rate: float = 3e-5
     rollin_frames: int = 4
     eval_every: int = 200

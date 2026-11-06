@@ -9,7 +9,7 @@ import torch
 from egorecover import ModelConfig, WindowConfig, WindowReconstructor
 from egorecover.checkpoint import FORMAT, load_e7_weights, load_predictor
 from egorecover.codec import MotionCodec
-from egorecover.data import PreparedWindowData, keyed_noise
+from egorecover.data import PreparedWindowData, TrainingBatch
 from egorecover.diagnostics import synthetic_episode
 from egorecover.evaluation import evaluate_episode, summarize
 from egorecover.fk import joint_decoder, load_smpl, smpl_identity
@@ -46,7 +46,13 @@ def train(args):
         raise ValueError("Resume and initialization are mutually exclusive.")
     if args.dev_limit is not None and args.dev_limit < 1:
         raise ValueError("dev-limit must be positive.")
-    if args.train_steps < 1 or args.batch_size < 1 or args.eval_every < 1 or args.rollin_frames < 0:
+    if (
+        args.train_steps < 1
+        or args.batch_size < 1
+        or args.microbatch_size < 1
+        or args.eval_every < 1
+        or args.rollin_frames < 0
+    ):
         raise ValueError("Invalid training budget.")
     if args.stop_after is not None and args.stop_after < 1:
         raise ValueError("stop-after must be positive.")
@@ -94,6 +100,7 @@ def train(args):
         "code": code_identity(),
         "train_steps": args.train_steps,
         "batch_size": args.batch_size,
+        "microbatch_size": args.microbatch_size,
         "eval_every": args.eval_every,
         "rollin_frames": args.rollin_frames,
         "learning_rate": args.learning_rate,
@@ -142,61 +149,62 @@ def train(args):
     for step in range(start + 1, final + 1):
         optimizer.zero_grad(set_to_none=True)
         components = {k: 0.0 for k in ("loss", "flow", "current", "feedback")}
-        for sample in range(args.batch_size):
-            episode = fixture if args.synthetic else train_data.sample(generator)
-            frame = int(torch.randint(20, len(episode) - 1, (), generator=generator))
+        for offset in range(0, args.batch_size, args.microbatch_size):
+            count = min(args.microbatch_size, args.batch_size - offset)
+            episodes = tuple(fixture if args.synthetic else train_data.sample(generator) for _ in range(count))
+            batch = TrainingBatch(episodes)
+            frame = int(torch.randint(20, min(len(e) for e in episodes) - 1, (), generator=generator))
             first = max(20, frame - args.rollin_frames)
-            cache = episode.cache(first)
+            cache = batch.cache(first)
             model.eval()
             for t in range(first, frame):
-                noise = keyed_noise(episode.identifier, args.seed + step, t, config.window, device)
-                cache = system.online(model, cache, episode.observations(t), noise).cache.detach()
+                noise = batch.noise(args.seed + step, t, config.window, tag="rollin", offset=offset)
+                cache = system.online(model, cache, batch.observations(t), noise).cache.detach()
             model.train()
             # Stateless streams keep episode/time/endpoint draws identical when
             # W or feedback draw count changes. Terminal slots match across W.
-            epsilon = keyed_noise(
-                f"{episode.identifier}/train/{sample}", args.seed + step, frame, config.window, device
-            )
+            epsilon = batch.noise(args.seed + step, frame, config.window, tag="train", offset=offset)
             future_noise = torch.stack(
                 [
-                    keyed_noise(
-                        f"{episode.identifier}/feedback/{sample}",
-                        args.seed + step,
-                        frame + 1,
-                        config.window,
-                        device,
-                        draw=draw,
-                    )
+                    batch.noise(args.seed + step, frame + 1, config.window, tag="feedback", offset=offset, draw=draw)
                     for draw in range(config.feedback_draws)
                 ]
             )
-            tau = 0.001 + 0.999 * torch.rand(1, generator=generator)
-            if torch.rand((), generator=generator) < config.endpoint_probability:
-                tau.fill_(1.0)
+            tau = 0.001 + 0.999 * torch.rand(count, generator=generator)
+            tau[torch.rand(count, generator=generator) < config.endpoint_probability] = 1.0
             result = training_objective(
                 system,
                 model,
                 feedback_model,
                 cache,
-                episode.observations(frame),
-                episode.target(frame, config.window),
+                batch.observations(frame),
+                batch.target(frame, config.window),
                 epsilon,
                 tau.to(device),
-                joint_decoder(episode, args.synthetic, smpl),
-                next_observations=episode.observations(frame + 1),
+                joint_decoder(batch, args.synthetic, smpl),
+                next_observations=batch.observations(frame + 1),
                 next_epsilon=future_noise,
-                truth_next=state_map(episode.target(frame + 1), lambda x: x[:, -1]),
+                truth_next=state_map(batch.target(frame + 1), lambda x: x[:, -1]),
             )
             if not bool(torch.isfinite(result["loss"])):
                 raise ValueError("Nonfinite training objective.")
-            (result["loss"] / args.batch_size).backward()
+            fraction = count / args.batch_size
+            (result["loss"] * fraction).backward()
             for key in components:
-                components[key] += float(result[key].detach()) / args.batch_size
+                components[key] += float(result[key].detach()) * fraction
             del result
         norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0, error_if_nonfinite=True)
         optimizer.step()
         update_ema(ema, model, config.ema_decay)
-        progress = {"step": step, **components, "gradient_norm": float(norm), "synthetic": args.synthetic}
+        progress = {
+            "step": step,
+            **components,
+            "gradient_norm": float(norm),
+            "synthetic": args.synthetic,
+            "target_queries_seen": step * args.batch_size,
+            "effective_batch_size": args.batch_size,
+            "microbatch_size": args.microbatch_size,
+        }
         print(json.dumps(progress, allow_nan=False), flush=True)
         save_json(args.output / "progress.json", progress)
         if step % args.eval_every == 0 or step == final:

@@ -3,6 +3,7 @@
 import hashlib
 import json
 import math
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 from types import SimpleNamespace
@@ -70,23 +71,94 @@ class Episode:
         return state_map(self.truth, lambda x: x[frame - width + 1 : frame + 1][None])
 
 
+@dataclass(frozen=True)
+class TrainingBatch:
+    """Independent episodes at a common physical index, vectorized on device."""
+
+    episodes: tuple[Episode, ...]
+
+    def __post_init__(self):
+        if not self.episodes:
+            raise ValueError("Training batches must contain at least one episode.")
+
+    def __len__(self):
+        return len(self.episodes)
+
+    @property
+    def beta(self):
+        return torch.stack([e.beta for e in self.episodes])
+
+    def cache(self, frame):
+        caches = [e.cache(frame) for e in self.episodes]
+        body = BodyState(*(torch.cat([getattr(c.body, key) for c in caches]) for key in FIELDS))
+        return WindowCache(body, torch.cat([c.beta for c in caches]), torch.cat([c.anchor for c in caches]), frame - 1)
+
+    def observations(self, frame):
+        observations = [e.observations(frame) for e in self.episodes]
+        return ObservationWindow(
+            *(
+                torch.cat([getattr(o, key) for o in observations])
+                for key in ("head", "images", "head_valid", "image_valid")
+            ),
+            frame,
+        )
+
+    def target(self, frame, width=1):
+        targets = [e.target(frame, width) for e in self.episodes]
+        return BodyState(*(torch.cat([getattr(t, key) for t in targets]) for key in FIELDS))
+
+    def noise(self, seed, frame, width, *, tag, offset=0, draw=0):
+        return torch.cat(
+            [
+                keyed_noise(f"{e.identifier}/{tag}/{offset + i}", seed, frame, width, e.beta.device, draw=draw)
+                for i, e in enumerate(self.episodes)
+            ]
+        )
+
+
+def manifest_inventory(root):
+    """Validate the complete split before any episode payload is opened."""
+    path = Path(root).resolve() / "data/manifest.json"
+    manifest = json.loads(path.read_text())
+    membership, ids = {}, set()
+    for record in manifest["records"]:
+        take, group, identifier = record["base_take_name"], record["group"], record["episode_id"]
+        if group not in ("train", "dev", "test") or identifier in ids:
+            raise ValueError("Invalid split or duplicate episode identifier.")
+        if not isinstance(identifier, str) or not identifier or Path(identifier).name != identifier:
+            raise ValueError("Invalid episode identifier.")
+        ids.add(identifier)
+        if membership.setdefault(take, group) != group:
+            raise ValueError("Take leakage between splits.")
+    splits = {}
+    for group in ("train", "dev", "test"):
+        records = [r for r in manifest["records"] if r["group"] == group]
+        splits[group] = {
+            "episodes": len(records),
+            "takes": len({r["base_take_name"] for r in records}),
+            "frames": sum(r["num_frames"] for r in records),
+        }
+    return manifest, {
+        "sha256": file_sha256(path),
+        "splits": splits,
+        "frame_lengths": dict(Counter(r["num_frames"] for r in manifest["records"])),
+    }
+
+
 class PreparedWindowData:
-    def __init__(self, root, split, *, device="cpu"):
+    def __init__(self, root, split, *, device="cpu", episode_ids=None):
         self.root, self.device = Path(root).resolve(), device
         self.path = self.root / "data/manifest.json"
-        self.digest = file_sha256(self.path)
-        manifest = json.loads(self.path.read_text())
+        manifest, inventory = manifest_inventory(self.root)
+        self.digest = inventory["sha256"]
         if split not in ("train", "dev", "test"):
             raise ValueError("Unknown dataset split.")
-        membership, ids = {}, set()
-        for record in manifest["records"]:
-            take, group = record["base_take_name"], record["group"]
-            if group not in ("train", "dev", "test") or record["episode_id"] in ids:
-                raise ValueError("Invalid split or duplicate episode identifier.")
-            ids.add(record["episode_id"])
-            if membership.setdefault(take, group) != group:
-                raise ValueError("Take leakage between splits.")
         self.records = [r for r in manifest["records"] if r["group"] == split]
+        if episode_ids is not None:
+            allowed = {r["episode_id"] for r in self.records}
+            if not set(episode_ids) <= allowed:
+                raise ValueError("Audit episode selection is outside the requested split.")
+            self.records = [r for r in self.records if r["episode_id"] in episode_ids]
         if not self.records:
             raise ValueError(f"Empty {split} split.")
         self.split, self.cache = split, {}
@@ -102,11 +174,11 @@ class PreparedWindowData:
         if not path.is_relative_to(self.root / "data/episodes"):
             raise ValueError("Episode path escapes dataset directory.")
         marker = json.loads(path.with_suffix(".json").read_text())
-        if not marker.get("completed") or marker["manifest_sha256"] != self.digest:
+        if marker.get("completed") is not True or marker["manifest_sha256"] != self.digest:
             raise ValueError("Unfinished episode or changed manifest.")
         if file_sha256(path) != marker["sha256"]:
             raise ValueError("Episode checksum mismatch.")
-        packet = torch.load(path, map_location="cpu", weights_only=True)
+        packet = torch.load(path, map_location="cpu", weights_only=True, mmap=True)
         if packet["record"] != record:
             raise ValueError("Episode identity mismatch.")
         _, timestamps, _ = source_timing(packet, SimpleNamespace(fps=10.0))

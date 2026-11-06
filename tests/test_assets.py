@@ -4,7 +4,7 @@ import zipfile
 
 import pytest
 
-from egorecover.assets import asset_registry, destination, restore
+from egorecover.assets import asset_plan, asset_registry, destination, restore, select_assets
 
 
 def entry(path, content, **kwargs):
@@ -41,6 +41,18 @@ def test_registry_contains_only_current_assets_with_pinned_revisions():
     assert len(paths) == len(set(paths))
     assert {p for p in paths if p.startswith("pretrained/")} == {"pretrained/e7.ckpt", "pretrained/prior.pt"}
     assert all(p.startswith(("pretrained/", "datasets/paired/data/")) for p in paths)
+
+
+def test_preflight_downloads_train_and_dev_without_test_payloads():
+    data = asset_registry()
+    selected = select_assets(data, "preflight")
+    episodes = [item for item in selected if "archive" in item]
+    assert len(episodes) == 2
+    assert any("g-train" in item["archive"]["path"] for item in episodes)
+    assert any("g-dev" in item["archive"]["path"] for item in episodes)
+    assert not any("g-test" in item["archive"]["path"] for item in episodes)
+    assert len(select_assets(data, "metadata")) == 1
+    assert asset_plan(data, "preflight")["download_bytes"] < 300 * 1024**2
 
 
 def test_dry_run_does_not_create_directories_or_download(tmp_path):

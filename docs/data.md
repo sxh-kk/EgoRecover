@@ -12,12 +12,16 @@ egorecover restore --root assets --preset training --verify-only
 
 | preset | 内容 |
 |---|---|
+| `metadata` | 仅 paired manifest，用于划分及空间统计 |
+| `preflight` | manifest、校准 P、train/dev 各一个 episode 与完成标记；选择传输量较小的归档，不下载 test payload |
 | `models` | E7 checkpoint 与匹配当前 manifest 的校准 P |
 | `data` | paired manifest、全部 episode 与完成标记 |
 | `training` | models + data，共 9,633 个文件，约 8.018 GiB；压缩/去重传输约 4.817 GiB |
 | `smoke` | manifest、校准 P、原发布最小检查所需 episode；用于加载核验，不足以进行完整训练 |
 
 `--dry-run` 不联网，也不创建目标目录。实际恢复在 HF 固定 revision 下读取原始路径，按新路径保存；分片先验证后拼接，归档只读取指定成员。每个目标核对大小和 SHA256，下载失败时不发布半成品，已有不一致文件拒绝覆盖。
+
+空间报告分别列出解包后的逻辑大小、传输量和保留下载缓存的预估占用。完整 training 的逻辑大小约 8.018 GiB，保留下载与归档缓存时预计需要约 16.31 GiB。真实 manifest 含 train 4,369 / dev 224 / test 222 个 episode，每个 200 帧；train/dev/test 的 take 互斥。当前研究阶段只使用 EE4D-Motion，不恢复 Nymeria。
 
 ```text
 assets/

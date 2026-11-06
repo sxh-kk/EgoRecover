@@ -27,6 +27,42 @@ def matches(path, item):
     return path.is_file() and path.stat().st_size == item["bytes"] and file_sha256(path) == item["sha256"]
 
 
+def select_assets(registry, preset):
+    """Metadata and a small train/dev check do not require the full dataset."""
+    if preset == "metadata":
+        return [f for f in registry["files"] if f["path"] == "datasets/paired/data/manifest.json"]
+    if preset == "preflight":
+        wanted = {"datasets/paired/data/manifest.json", "pretrained/prior.pt"}
+        sizes = {a["path"]: a["bytes"] for a in registry["archives"]}
+        for group in ("train", "dev"):
+            candidates = [
+                f
+                for f in registry["files"]
+                if f["path"].endswith(".pt") and f.get("archive", {}).get("path", "").startswith(f"bundles/g-{group}/")
+            ]
+            if not candidates:
+                raise ValueError(f"No {group} episode available for preflight.")
+            chosen = min(candidates, key=lambda f: (sizes[f["archive"]["path"]], f["path"]))
+            wanted.update((chosen["path"], str(Path(chosen["path"]).with_suffix(".json"))))
+        return [f for f in registry["files"] if f["path"] in wanted]
+    return [item for item in registry["files"] if preset in item["presets"]]
+
+
+def asset_plan(registry, preset):
+    selected = select_assets(registry, preset)
+    archive_names = {f["archive"]["path"] for f in selected if "archive" in f}
+    archives = [a for a in registry.get("archives", []) if a["path"] in archive_names]
+    payload = sum(f["bytes"] for f in selected if "archive" not in f) + sum(a["bytes"] for a in archives)
+    logical = sum(f["bytes"] for f in selected)
+    return {
+        "preset": preset,
+        "files": len(selected),
+        "restored_bytes": logical,
+        "download_bytes": payload,
+        "estimated_retained_bytes_with_cache": logical + payload + sum(a["bytes"] for a in archives),
+    }
+
+
 class AssetStore:
     def __init__(self, root, registry, downloader=None):
         self.root = Path(root).resolve()
@@ -111,7 +147,7 @@ class AssetStore:
 
 def restore(root, preset="models", *, dry_run=False, verify_only=False, registry=None, downloader=None):
     registry = asset_registry() if registry is None else registry
-    selected = [item for item in registry["files"] if preset in item["presets"]]
+    selected = select_assets(registry, preset)
     if not selected:
         raise ValueError(f"Empty asset preset: {preset}")
     store = AssetStore(root, registry, downloader)
@@ -123,14 +159,17 @@ def restore(root, preset="models", *, dry_run=False, verify_only=False, registry
     download_bytes += sum(item["bytes"] for item in registry.get("archives", []) if item["path"] in archives)
     print(
         f"{preset}: {len(selected)} files, {logical_bytes / 1024**3:.3f} GiB restored, "
-        f"up to {download_bytes / 1024**3:.3f} GiB download payload"
+        f"up to {download_bytes / 1024**3:.3f} GiB download payload",
+        flush=True,
     )
     if dry_run:
         return
-    for item in selected:
+    for index, item in enumerate(selected, 1):
         path = destination(store.root, item["path"])
         if not matches(path, item):
             if verify_only:
                 raise ValueError(f"Missing or changed asset: {item['path']}")
             store.write(item, path)
+        if index % 100 == 0 or index == len(selected):
+            print(f"Verified {index}/{len(selected)} asset files.", flush=True)
     print("All selected assets match their recorded sizes and SHA256 hashes.")

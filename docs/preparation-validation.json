@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-06",
+  "dataset_scope": "EE4D-Motion only; Nymeria deferred",
+  "environment": {
+    "conda": "egorecover",
+    "python": "3.12.1",
+    "torch": "2.10.0+cu126",
+    "cuda_build": "12.6",
+    "cuda_available": true,
+    "cuda_devices_detected": 8,
+    "checked_gpu": "NVIDIA A800-SXM4-80GB"
+  },
+  "tests": {"passed": 140, "failed": 0, "seconds": 13.76},
+  "real_asset_checks": {
+    "train_episodes": 1,
+    "dev_episodes": 1,
+    "frames_per_episode": 200,
+    "fps": 10,
+    "dense_roundtrip_max_abs_m": 0.000001430511474609375,
+    "smplx_gt_decode_max_error_mm": 0.0011449678568169475,
+    "calibrated_prior_verified": true,
+    "gpu_paired_backward": {
+      "microbatch": 2,
+      "sources": ["gaussian", "prediction"],
+      "finite_model_gradients": true,
+      "frozen_parameter_gradients_absent": true,
+      "optimizer_updates": 0,
+      "model": "untrained compact diagnostic"
+    }
+  },
+  "gpu_synthetic_cli": {
+    "training_steps": 2,
+    "effective_batch": 3,
+    "microbatch": 2,
+    "evaluation_steps": [1, 2, 4, 10],
+    "passed": true
+  },
+  "comparison_metrics": {
+    "scope": "SMPL22 body including wrists; fine hand metrics excluded",
+    "real_dev_first_emissions_checked": 16,
+    "real_smplx_gpu_metrics_finite": true,
+    "world_mpjpe_matches_body_mm": true,
+    "official_foot_slide_random_trajectories_checked": 40,
+    "official_foot_slide_max_abs_difference_mm": 2.665e-15,
+    "csv_export": true,
+    "temporal_metrics_use_physical_dt": true,
+    "tmr_metrics_implemented": false,
+    "egoforce_pj_auj_exact_parity_verified": false
+  },
+  "formal_experiments_started": false,
+  "remaining_training_assets": ["full EE4D-Motion train/dev", "E7 checkpoint"],
+  "accuracy_or_speedup_claims": false
+}

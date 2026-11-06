@@ -1,4 +1,5 @@
 import ast
+import csv
 import json
 import subprocess
 import sys
@@ -69,7 +70,23 @@ def test_end_to_end_public_cli_train_and_evaluate(tmp_path):
     assert set(saved["results"]) == {"1", "2", "4", "10"}
     for group in saved["results"].values():
         assert set(group["summary"]) == {"rollout", "matched"}
-        assert set(group["paired_horizons"][0]["horizons"]) == {"1", "2", "4", "10"}
+        diagnostics = group["paired_horizons"][0]
+        assert diagnostics["cache_source"] == "own_continuous_rollout"
+        assert set(diagnostics["anchors"]["20"]) == {"1", "2", "4", "10"}
+        for mode in ("rollout", "matched"):
+            metrics = group["summary"][mode]["comparison"]
+            assert metrics["mpjpe_world_mm"]["mean"] > 0
+            assert metrics["wrist_pe_mm"]["mean"] > 0
+            assert "pa_mpjpe_mm" in metrics and "foot_slide_uniegomotion_mm" in metrics
+    protocol = saved["identity"]["comparison_protocol"]
+    assert "MPJPE-H" in protocol["paper_boundaries"]["excluded_by_scope"]
+    assert protocol["units"]["mpjpe_world_mm"] == "mm"
+    with (report / "metrics.csv").open() as stream:
+        rows = list(csv.DictReader(stream))
+    assert len(rows) == 16  # four solver budgets x two history modes x two aggregations
+    assert {r["aggregation"] for r in rows} == {"take_mean", "episode_mean"}
+    assert {r["mode"] for r in rows} == {"rollout", "matched"}
+    assert all(r["synthetic"] == "True" and r["mpjpe_world_mm"] for r in rows)
     assert len(list(report.glob("*.pt"))) == 8
 
 

@@ -12,7 +12,7 @@ dependencies = ["torch>=2.6,<2.11"]
 
 [project.optional-dependencies]
 body = ["smplx>=0.1.28", "numpy<2"]
-assets = ["huggingface-hub>=0.27"]
+assets = ["huggingface-hub>=0.27,<1"]
 dev = ["pytest>=8", "black>=24", "ruff>=0.9"]
 
 [project.scripts]

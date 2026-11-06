@@ -1,5 +1,6 @@
 """Evaluate solver cost, matched-cache effects, rollouts and paired horizons."""
 
+import csv
 import json
 
 import torch
@@ -9,10 +10,39 @@ from egorecover.checkpoint import FORMAT, load_predictor
 from egorecover.codec import MotionCodec
 from egorecover.data import PreparedWindowData
 from egorecover.diagnostics import synthetic_episode
-from egorecover.evaluation import evaluate_episode, paired_horizons, summarize
+from egorecover.evaluation import evaluate_episode, paired_anchor_diagnostics, summarize
 from egorecover.fk import joint_decoder, load_smpl, smpl_identity
 from egorecover.io import code_identity, file_sha256, save_checkpoint, save_json
+from egorecover.metrics import comparison_protocol
 from egorecover.models import MotionModel
+
+
+def save_metrics_csv(path, report):
+    """One comparable row per solver/mode/aggregation, with no hidden units."""
+    rows = []
+    for steps, result in report["results"].items():
+        for mode, summary in result["summary"].items():
+            metrics = {k: v for k, v in summary.items() if k != "comparison"}
+            metrics.update(summary.get("comparison", {}))
+            for aggregation, key in (("take_mean", "mean"), ("episode_mean", "episode_mean")):
+                rows.append(
+                    {
+                        "nfe": steps,
+                        "mode": mode,
+                        "aggregation": aggregation,
+                        "timing_aggregation": "pooled_steady_frames",
+                        "synthetic": report["identity"]["synthetic"],
+                        "episodes": len(result["rows"][mode]),
+                        "takes": len({r["take"] for r in result["rows"][mode]}),
+                        **{name: value[key] for name, value in metrics.items()},
+                    }
+                )
+    prefix = ["nfe", "mode", "aggregation", "timing_aggregation", "synthetic", "episodes", "takes"]
+    fields = prefix + sorted({key for row in rows for key in row} - set(prefix))
+    with path.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(rows)
 
 
 def evaluate(args):
@@ -58,10 +88,18 @@ def evaluate(args):
         "synthetic": args.synthetic,
         "mode": args.mode,
         "steps": args.steps,
+        "anchors": args.anchors,
         "draw": args.draw,
         "limit": args.limit,
         "selection": "no model selection; explicit checkpoint",
         "timebase": "verified source frame grid",
+        "comparison_protocol": comparison_protocol(),
+        "latency_scope": "P + source + Flow + cache update + joint decoding; excludes SLAM, image encoding, observation packaging, noise sampling and metrics",
+        "latency_population": "exclude first query; report first query separately; P95 nearest-rank",
+        "latency_aggregation": "pool steady frame timings; FPS = 1000 / pooled mean latency; no averaging FPS or P95",
+        "csv_aggregation": "take_mean/episode_mean apply to quality; timings always use pooled steady frames",
+        "first_query_scope": "first evaluated query at frame 20; excludes startup history construction and model/asset loading; not time to first pose",
+        "frame_budget_exceed_ratio": "fraction of measured core calls exceeding source frame period; excludes queuing; not end-to-end deadline misses",
         "code": code_identity(),
     }
     identity_path = args.output / "identity.json"
@@ -76,9 +114,10 @@ def evaluate(args):
             joints = joint_decoder(episode, args.synthetic, smpl)
             for matched in ((False, True) if args.mode == "both" else (args.mode == "matched",)):
                 row = evaluate_episode(
-                    system, model, episode, joints, seed=args.draw, steps=steps, matched_cache=matched
+                    system, model, episode, joints, seed=args.draw, steps=steps, matched_cache=matched, comparison=True
                 )
                 prediction = row.pop("predictions")
+                rotations = row.pop("body_rotations")
                 label = "matched" if matched else "rollout"
                 groups.setdefault(label, []).append(row)
                 if args.save_predictions:
@@ -87,6 +126,8 @@ def evaluate(args):
                         {
                             "joints_floor_world": prediction,
                             "joints_world": episode.restore_world(prediction),
+                            "body_rotations_world": rotations,
+                            "timestamps": episode.timestamps[20:].cpu(),
                             "original_world_from_floor_world": episode.original_world_from_floor_world.cpu(),
                             "identity": metadata,
                         },
@@ -95,7 +136,10 @@ def evaluate(args):
                 {
                     "episode": episode.identifier,
                     "take": episode.take,
-                    "horizons": paired_horizons(system, model, episode, joints, seed=args.draw, steps=steps),
+                    "cache_source": "own_continuous_rollout",
+                    "anchors": paired_anchor_diagnostics(
+                        system, model, episode, joints, anchors=args.anchors, seed=args.draw, steps=steps
+                    ),
                 }
             )
         report["results"][str(steps)] = {
@@ -104,4 +148,12 @@ def evaluate(args):
             "paired_horizons": diagnostics,
         }
         save_json(args.output / "report.json", report)
-        print(json.dumps({"steps": steps, "summary": report["results"][str(steps)]["summary"]}), flush=True)
+        save_metrics_csv(args.output / "metrics.csv", report)
+        console = {}
+        for mode, scores in report["results"][str(steps)]["summary"].items():
+            compact = {key: scores[key]["mean"] for key in ("latency_ms", "p95_ms", "frame_budget_exceed_ratio")}
+            for key in ("mpjpe_world_mm", "pa_mpjpe_mm", "wrist_pe_mm", "mpjre_f", "foot_slide_uniegomotion_mm"):
+                if key in scores.get("comparison", {}):
+                    compact[key] = scores["comparison"][key]["mean"]
+            console[mode] = compact
+        print(json.dumps({"steps": steps, "summary": console}), flush=True)
