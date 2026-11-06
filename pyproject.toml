@@ -1,6 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "egorecover"
+version = "0.2.0"
+description = "Causal rolling-window body reconstruction with prediction-centered Flow and paired feedback"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["torch>=2.6,<2.11"]
+
+[project.optional-dependencies]
+body = ["smplx>=0.1.28", "numpy<2"]
+assets = ["huggingface-hub>=0.27"]
+dev = ["pytest>=8", "black>=24", "ruff>=0.9"]
+
+[project.scripts]
+egorecover = "egorecover.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["egorecover*"]
+exclude = ["tests*"]
+
+[tool.setuptools.package-data]
+egorecover = ["resources/*.json.gz"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"
+
 [tool.black]
 line-length = 120
 
-[tool.isort]
-profile = "black"
-line_length = 120
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

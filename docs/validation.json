@@ -1,0 +1,108 @@
+{
+  "status": "implementation_and_package_validated",
+  "reviewed_at": "2026-11-06T22:54:08.785445+08:00",
+  "base_commit": "0b9a3b552e72cb6477b095fd4cfbccdafac152d1",
+  "archive_branch": "archive/before-cleanup-20261106",
+  "plan_sha256": "6a5180727c5984c41525493db94108f3fc6360c5e7f4e201f4d9c1ff7a0acab4",
+  "scope": "Only current rolling-window plan retained in main; legacy implementations and reports archived in Git.",
+  "environment": {
+    "python": "3.12.1",
+    "torch": "2.10.0+cpu",
+    "device": "cpu"
+  },
+  "tests": {
+    "command": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 python -m pytest -q",
+    "passed": 118,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 10.31
+  },
+  "checks": {
+    "ruff": "passed",
+    "black": "passed",
+    "compileall": "passed",
+    "exact_resume_vs_continuous": "passed",
+    "fixed_feedback_teacher": "passed",
+    "runtime_obsolete_import_check": "passed",
+    "editable_install": "passed",
+    "wheel_build": "passed",
+    "installed_wheel_outside_checkout": "passed"
+  },
+  "archived_implementation_parity": {
+    "full_size_window": 5,
+    "e7_learned_parameter_order_matches": true,
+    "e7_learned_parameters": 230,
+    "window_output_max_abs_difference": 0.0,
+    "removed_frozen_text_parameters": [
+      "embed_text_cond.weight",
+      "embed_text_cond.bias",
+      "mask_tokens.text"
+    ]
+  },
+  "asset_registry": {
+    "files": 9633,
+    "bytes": 532078,
+    "sha256": "71f7c009fc807b6d024a704acb6408c369db5c274bae1306b041223ec8d2901a",
+    "remote_revisions_unchanged": true,
+    "dry_run_no_network": true
+  },
+  "public_cli_integration": {
+    "paired_training": "passed",
+    "default_training_from_installed_wheel": "passed",
+    "solver_counts": [
+      1,
+      2,
+      4,
+      10
+    ],
+    "cache_protocols": [
+      "matched",
+      "rollout"
+    ],
+    "paired_horizons_frames": [
+      1,
+      2,
+      4,
+      10
+    ],
+    "coordinate_exports": [
+      "joints_floor_world",
+      "joints_world",
+      "original_world_from_floor_world"
+    ]
+  },
+  "code_sha256": {
+    "__init__.py": "975002d51f41e058e4c722ca479b70b3d8d92c05e2e3a3af31e24da63def1354",
+    "__main__.py": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+    "assets.py": "46ecb4bb4974c5dbc84323abad09b8efc16435b22cf7b16ef06d1caeb21560bc",
+    "checkpoint.py": "64040f2687c978bec5e589e2567a5e581e2684cb03eca6684080a28cbe1fd4ca",
+    "cli.py": "3e5c787e49aa6f80c8039e13227a4ba5ca5c0fe623025cbb6bde74f3630f9a79",
+    "codec.py": "a1c195314e6739447e4b99972c7a226922ef4e7d931de86b2dca9d7b03844bdc",
+    "config.py": "d82a3d8542fb26fce51c3bafba84d535f3903be8adb4dd8b84f42fef4382f513",
+    "data.py": "e18c19e56a6d8468a1b6a0975d8725d39cdbeec05ce192511bf9009b8286800f",
+    "diagnostics.py": "8c5d98a2552c5e718484a1e82002108152551b53fe4f119abafaf10816449c99",
+    "evaluate.py": "31162c8720b04e21b06ac5f48bc708e57baf403090843e93896118affcb15b75",
+    "evaluation.py": "253d8aa2b2eed7336215b377792154fab0c90f1c4fd8d790f8bf878b730c91f1",
+    "experiments.py": "12055d787ddd22b12994d706d2d6178100582cc66fd0e47bc027a52349254e47",
+    "fk.py": "481cd3e2f0bd1b88c1623fa18e0b4381b3dfbab9502ea0eba36084ec008635b1",
+    "flow.py": "ada87a365d64d85440a2a2aff6c4d157bafdd96bcf190dc4f25df5c39c86bce3",
+    "io.py": "d87c9a7c6a4b3c06aaeb672c92ada7aeff531d6c6e7f5b238b1c2a978f81a16b",
+    "losses.py": "97b620854976923c49bd2c3fe2483087f9480a07b4cf804654448e3719fb37d3",
+    "models/__init__.py": "abd09eb0fbcede90c0ad04d3a423f2b328128a89a3e7914c97cab5ddc8631c1c",
+    "models/layers.py": "adff51d877c3146d07899f0c181e849031e26662cf8b746b75726a8364b45292",
+    "models/motion.py": "975565596803f0fc1c38205499de2b0db90bdd497c4b93026a73ce0bbd83c05d",
+    "models/prior.py": "63751fb78cf61356c87f53f7c25fdd9d19fb755318bd9365eeb68eaaac396835",
+    "rotations.py": "e30bbbd68cb2a76623da811b6c24f9edc9b48a4263f3827aafdcc3fa08add4f3",
+    "state.py": "f9336e3f7e004892856f9669d73474ba9a82deb84a740990be5e264cb9492b0e",
+    "system.py": "d11173669900818299016d1d3c79965f6da2e6b6b9bf182b42b772baffcb9a03",
+    "timing.py": "76638b54d21952235a12ba2d707a2a3493fd1fbcd93df27e4628e9907d71ae6c",
+    "training.py": "c8cd737ff3333a19b641985b6d9864b73584897cfc9dec7391d50f1e23f7f1fa"
+  },
+  "limitations": {
+    "real_training_assets_downloaded": false,
+    "real_data_training_run": false,
+    "licensed_smplx_asset_validation_run": false,
+    "gpu_benchmark_run": false,
+    "accuracy_improvement_claimed": false
+  }
+}

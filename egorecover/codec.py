@@ -10,7 +10,7 @@ from dataclasses import dataclass
 import torch
 from torch import nn
 
-from utils.rotation_conversions import matrix_to_rotation_6d, rotation_6d_to_matrix
+from egorecover.rotations import matrix_to_rotation_6d, rotation_6d_to_matrix
 
 
 def rigid_transform(rotation, translation):
@@ -80,11 +80,8 @@ class BodyState:
 class MotionCodec(nn.Module):
     """Normalize and re-encode dense states using original E7 training stats."""
 
-    def __init__(self, stats, *, reference_mode="planar"):
+    def __init__(self, stats):
         super().__init__()
-        if reference_mode not in ("planar", "legacy_se3"):
-            raise ValueError("reference_mode must be planar or legacy_se3.")
-        self.reference_mode = reference_mode
         for kind, width in (("motion", 243), ("traj", 18)):
             for suffix in ("mean", "std"):
                 name = f"{kind}_{suffix}"
@@ -106,24 +103,11 @@ class MotionCodec(nn.Module):
     def canonical_reference(self, reference):
         """Enforce the v4 internal heading/xy frame; never flatten body/sensor pose.
 
-        legacy_se3 is only for reproducing unconstrained historical experiments.
         Project the INITIAL frame too: planar deltas cannot repair a tilted base.
         """
         if reference.shape[-2:] != (4, 4) or not bool(torch.isfinite(reference).all()):
             raise ValueError("Expected a finite physical reference transform.")
-        return planar_reference(reference) if self.reference_mode == "planar" else reference
-
-    def project_motion_reference(self, motion):
-        """Project only the reference channels of an x0/P prediction, never noise.
-
-        Continuous Flow states are intentionally unconstrained. This operation
-        is for decoding/inspection and leaves the other 234 channels untouched.
-        """
-        raw = self.denormalize(motion)
-        reference = self.canonical_reference(transform_from_9d(raw[..., 198:207]))
-        result = motion.clone()
-        result[..., 198:207] = (transform_to_9d(reference) - self.motion_mean[198:207]) / self.motion_std[198:207]
-        return result
+        return planar_reference(reference)
 
     def encode_current(self, state, previous_reference):
         """The target delta bridges from the PREVIOUS PREDICTED reference."""
@@ -150,10 +134,6 @@ class MotionCodec(nn.Module):
             raise ValueError("History states require [B,L,4,4] references.")
         previous = torch.cat((outer_reference[:, None], states.reference[:, :-1]), dim=1)
         return self.encode_current(states, previous)
-
-    def continuation_prior(self, last_state):
-        """Repeat physical last state; the current reference delta is identity."""
-        return self.encode_current(last_state, last_state.reference)
 
     def constant_velocity_prior(self, previous_state, last_state):
         """One-step world translation / SO(3) rotation extrapolation.

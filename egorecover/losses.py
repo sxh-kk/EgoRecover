@@ -1,84 +1,110 @@
-"""Offline dense and differentiable SMPL-X objectives in physical world space."""
+"""Current supervision and stop-gradient paired full-response supervision."""
+
+import copy
 
 import torch
 
-from egorecover.fk import FixedShapeFK
+from .flow import build_source, flow_loss
+from .state import state_map
 
 
-def weighted_representation_mse(prediction, target):
-    weights = prediction.new_ones(243, dtype=torch.float32)
-    weights[198:207] = 8
-    return ((prediction.float() - target.float()).square() * weights).sum(-1).mean() / weights.sum()
-
-
-def dense_position_errors(codec, prediction, previous_reference, target_joints):
-    if prediction.ndim != 3 or prediction.shape[1:] != (1, 243):
-        raise ValueError("Expected one [B,1,243] current prediction.")
-    if previous_reference.shape != (len(prediction), 4, 4) or target_joints.shape != (len(prediction), 22, 3):
-        raise ValueError("Expected matching previous references and world target joints.")
-    # Decode outside autocast: 6D Gram-Schmidt and geometry need float32.
-    with torch.autocast(device_type=prediction.device.type, enabled=False):
-        body = codec.decode_current(prediction[:, 0].float(), previous_reference.float())
-        return body.joints[..., :3, 3] - target_joints.float()
-
-
-def fk_position_errors(codec, prediction, batch, smpl):
-    """Differentiable world SMPL22 error with per-sample predicted startup shape."""
-    if prediction.ndim != 3 or prediction.shape[1:] != (1, 243):
-        raise ValueError("Expected one [B,1,243] prediction for FK loss.")
-    betas = batch.get("beta_boot")
-    if betas is None or betas.shape != (len(prediction), 10):
-        raise ValueError("FK loss requires one bootstrap beta vector per training sample.")
-    if (
-        "beta_boot_is_model" not in batch
-        or batch["beta_boot_is_model"].dtype != torch.bool
-        or batch["beta_boot_is_model"].shape != (len(prediction),)
-        or not bool(batch["beta_boot_is_model"].all())
-    ):
-        raise ValueError("Formal FK loss requires a model-generated bootstrap shape for every sample.")
-    if batch["target_joints"].shape != (len(prediction), 22, 3):
-        raise ValueError("FK loss requires matching world GT joints.")
-    with torch.autocast(device_type=prediction.device.type, enabled=False):
-        state = codec.decode_current(prediction[:, 0].float(), batch["previous_reference"].float())
-        body = FixedShapeFK(smpl, betas.float()).project(state)[0]
-        error = body - batch["target_joints"].float()
-    if not bool(torch.isfinite(error).all()):
-        raise ValueError("Nonfinite differentiable FK error.")
-    return error
-
-
-def physical_objective(codec, prediction, batch, *, geometry_weight=1.0, fk_weight=0.0, smpl=None, scale_m=0.1,
-                       return_components=False):
-    if geometry_weight < 0 or fk_weight < 0 or scale_m <= 0:
-        raise ValueError("Invalid physical-loss weight or scale.")
-    representation = weighted_representation_mse(prediction, batch["target"])
-    geometry = representation.new_zeros(())
-    if geometry_weight:
-        error = dense_position_errors(codec, prediction, batch["previous_reference"], batch["target_joints"])
-        geometry = error.square().sum(-1).mean() / (scale_m**2)
-    fk_geometry = representation.new_zeros(())
-    if fk_weight:
-        if smpl is None:
-            raise ValueError("FK loss requires an SMPL-X layer.")
-        fk_error = fk_position_errors(codec, prediction, batch, smpl)
-        fk_geometry = fk_error.square().sum(-1).mean() / (scale_m**2)
-    total = representation + geometry_weight * geometry + fk_weight * fk_geometry
-    if return_components:
-        return {"loss": total, "representation": representation,
-                "weighted_dense": geometry_weight * geometry, "weighted_fk": fk_weight * fk_geometry}
-    return total
+def frozen_ema(model):
+    return copy.deepcopy(model).eval().requires_grad_(False)
 
 
 @torch.no_grad()
-def fk_position_mm(codec, prediction, batch, smpl):
-    return float(fk_position_errors(codec, prediction, batch, smpl).norm(dim=-1).mean() * 1000)
+def update_ema(ema, model, decay):
+    source = model.state_dict()
+    for key, value in ema.state_dict().items():
+        if value.is_floating_point():
+            value.lerp_(source[key], 1 - decay)
+        else:
+            value.copy_(source[key])
+    ema.eval()
 
 
-@torch.no_grad()
-def dense_position_mm(codec, prediction, batch):
-    return float(
-        dense_position_errors(codec, prediction, batch["previous_reference"], batch["target_joints"])
-        .norm(dim=-1)
-        .mean()
-        * 1000
-    )
+def geometry_loss(prediction, target, scale):
+    return (prediction - target).square().sum(-1).mean() / scale**2
+
+
+def paired_feedback(
+    system, ema, current, truth_current, next_observations, next_epsilon, joints, *, mode="paired", truth_next=None
+):
+    """Stop only shared revised past; retain predicted current's entire graph.
+
+    Both branches reuse the raw next observation, standard epsilon and fixed FK.
+    Each branch independently recomputes P, common reference, center and sensors.
+    """
+    if ema.training or any(p.requires_grad for p in ema.parameters()):
+        raise ValueError("The subsequent EMA model must be frozen and in eval mode.")
+    predicted_cache = current.cache.replace_current(current.current)
+    reference_cache = current.cache.replace_current(state_map(truth_current, lambda x: x.detach()))
+    if next_epsilon.ndim != 4 or next_epsilon.shape[0] < 1:
+        raise ValueError("Feedback noise must be [draws,B,W,243].")
+    losses = []
+    for epsilon in next_epsilon:
+        predicted = system.reconstruct(ema, predicted_cache, next_observations, epsilon)
+        predicted_joints = joints(predicted.current)
+        with torch.no_grad():
+            if mode == "paired":
+                reference = system.reconstruct(ema, reference_cache, next_observations, epsilon)
+                target = joints(reference.current)
+            elif mode == "direct" and truth_next is not None:
+                target = joints(truth_next)
+            else:
+                raise ValueError("Feedback requires paired responses or direct next truth.")
+        losses.append(geometry_loss(predicted_joints, target.detach(), system.config.scale_m))
+    return torch.stack(losses).mean()
+
+
+def training_objective(
+    system,
+    model,
+    ema,
+    cache,
+    observations,
+    truth_window,
+    epsilon,
+    tau,
+    joints,
+    *,
+    next_observations=None,
+    next_epsilon=None,
+    truth_next=None,
+):
+    cfg = system.config
+    y, reference = system.prepare(cache.detach(), observations)
+    clean = system.encode(truth_window, reference).detach()
+    source = build_source(y["center"], epsilon, mode=cfg.source, sigma=cfg.sigma)
+    base = flow_loss(model, clean, source, y, tau)
+    zero = base.new_zeros(())
+    current_loss, feedback_loss = zero, zero
+    current = None
+    if cfg.current_weight or (cfg.feedback != "none" and cfg.feedback_weight):
+        current = system.reconstruct(model, cache.detach(), observations, epsilon)
+        truth_current = state_map(truth_window, lambda x: x[:, -1])
+        if cfg.current_weight:
+            current_loss = geometry_loss(joints(current.current), joints(truth_current).detach(), cfg.scale_m)
+        if cfg.feedback != "none" and cfg.feedback_weight:
+            if cfg.feedback in ("paired", "direct"):
+                if next_observations is None or next_epsilon is None:
+                    raise ValueError("Subsequent supervision requires next observations and noise.")
+                if next_epsilon.shape[0] != cfg.feedback_draws:
+                    raise ValueError("Feedback draw count disagrees with configuration.")
+                feedback_loss = paired_feedback(
+                    system,
+                    ema,
+                    current,
+                    truth_current,
+                    next_observations,
+                    next_epsilon,
+                    joints,
+                    mode=cfg.feedback,
+                    truth_next=truth_next,
+                )
+            elif cfg.feedback == "feature":
+                feedback_loss = (current.codes[:, -1] - clean[:, -1]).square().mean()
+            elif cfg.feedback == "geometry":
+                feedback_loss = geometry_loss(joints(current.current), joints(truth_current).detach(), cfg.scale_m)
+    total = base + cfg.current_weight * current_loss + cfg.feedback_weight * feedback_loss
+    return {"loss": total, "flow": base, "current": current_loss, "feedback": feedback_loss, "result": current}

@@ -5,10 +5,49 @@ Importing this module alone does not require assets. Actual asset-backed FK
 must be validated before these outputs become formal utility labels.
 """
 
+import os
+from pathlib import Path
+
 import torch
 from torch import nn
 
-from utils.pca_conversions import pca_to_matrix
+from egorecover.rotations import pca_to_matrix
+
+
+def smpl_path():
+    directory = Path(os.environ.get("SMPLX_MODEL_PATH", Path.cwd() / "body_models/smplx")).expanduser()
+    return directory / "SMPLX_NEUTRAL.npz"
+
+
+def smpl_identity():
+    from .io import file_sha256
+
+    return file_sha256(smpl_path())
+
+
+def load_smpl(device):
+    """Licensed asset is required explicitly; never fall back to a dummy body."""
+    path = smpl_path()
+    if not path.is_file():
+        raise FileNotFoundError(f"SMPL-X neutral model not found: {path}. Set SMPLX_MODEL_PATH to its directory.")
+    import smplx
+
+    return (
+        smplx.SMPLXLayer(str(path.parent), ext="npz", gender="NEUTRAL", use_pca=True, num_pca_comps=12)
+        .to(device)
+        .eval()
+        .requires_grad_(False)
+    )
+
+
+def joint_decoder(episode, synthetic, smpl=None):
+    if synthetic:
+        from .diagnostics import DenseJoints
+
+        return DenseJoints()
+    if smpl is None:
+        raise ValueError("Production reconstruction requires the licensed SMPL-X asset.")
+    return FixedShapeFK(smpl, episode.beta[None])
 
 
 class FixedShapeFK(nn.Module):
@@ -37,17 +76,10 @@ class FixedShapeFK(nn.Module):
         self.smpl.eval()
         return self
 
-    def project(self, state, *, joint_count=22, return_verts=False):
-        """Evaluate the predicted body with fixed startup shape.
-
-        The full 55-joint output supports UniEgoMotion's body, eye/head and
-        hand metrics. Vertices are requested only for its floor-contact metric.
-        This function never reads supervision or adjusts a predicted state.
-        """
+    def forward(self, state):
+        """Decode only the 22 body joints required by the current plan."""
         if state.joints.shape[-3:] != (22, 4, 4) or state.auxiliary.shape[-1] != 36:
             raise ValueError("Expected dense BodyState with 22 transforms and 36 auxiliary channels.")
-        if isinstance(joint_count, bool) or not isinstance(joint_count, int) or joint_count < 1:
-            raise ValueError("joint_count must be a positive integer.")
         prefix = state.joints.shape[:-3]
         if state.auxiliary.shape[:-1] != prefix:
             raise ValueError("Body transforms and auxiliary channels must have identical batch dimensions.")
@@ -81,20 +113,11 @@ class FixedShapeFK(nn.Module):
             transl=joints[:, 0, :3, 3] - root_offset,
             left_hand_pose=pca_to_matrix(auxiliary[:, :12], self.smpl.left_hand_components),
             right_hand_pose=pca_to_matrix(auxiliary[:, 12:24], self.smpl.right_hand_components),
-            return_verts=return_verts,
+            return_verts=False,
         )
-        if output.joints.shape[1] < joint_count:
-            raise ValueError(f"SMPL layer exposes {output.joints.shape[1]} joints; need {joint_count}.")
-        result = output.joints[:, :joint_count].reshape(*prefix, joint_count, 3)
+        if output.joints.shape[1] < 22:
+            raise ValueError("SMPL layer must expose the first 22 body joints.")
+        result = output.joints[:, :22].reshape(*prefix, 22, 3)
         if not bool(torch.isfinite(result).all()):
             raise ValueError("SMPL FK produced nonfinite joints.")
-        vertices = None
-        if return_verts:
-            vertices = getattr(output, "vertices", None)
-            if vertices is None or vertices.shape[0] != count or not bool(torch.isfinite(vertices).all()):
-                raise ValueError("SMPL FK did not produce finite vertices.")
-            vertices = vertices.reshape(*prefix, vertices.shape[1], 3)
-        return result, vertices
-
-    def forward(self, state):
-        return self.project(state)[0]
+        return result

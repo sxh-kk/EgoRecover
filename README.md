@@ -1,131 +1,91 @@
 # EgoRecover
 
-基于 UniEgoMotion / E7 的因果人体运动恢复实验代码。当前主线按 [plan.docx](plan.docx) 实现：20 帧世界坐标身体缓存、滚动窗口联合修正、预测中心 Flow，以及经过完整后续重建映射的成对反馈监督。
+按 [plan.docx](plan.docx) 实现的第一视角在线全身运动重建：20 帧世界坐标身体历史、滚动窗口联合修正、预测中心 Flow 和完整后续响应的成对反馈监督。
 
-新版入口与完整方案映射见 [滚动窗口设计与运行说明](docs/design/rolling-window.md)。旧单帧 G/P 和 MotionStreamer 代码保留供历史复现，下文已有实验数值均来自旧协议。
+当前仓库只维护这一套实现。清理前的代码、实验脚本和结果保留在 [归档分支](https://github.com/sxh-kk/EgoRecover/tree/archive/before-cleanup-20261106)。恢复方法及本次删除范围见 [重构记录](docs/refactor.md)。
 
-```bash
-# 新版 CPU 合成数据集成检查，不代表真实数据精度
-python -m run.train_window --config config/window/paired.json --synthetic --compact \
-  --output exp/window_smoke/v1 --train-steps 2 --batch-size 1 --eval-every 1
-python -m run.evaluate_window --checkpoint exp/window_smoke/v1/best.pt \
-  --synthetic --output exp/window_smoke/evaluation --steps 1 2 4 10
-# 生成四阶段实验配置及公平的预热/续训依赖关系，不启动训练
-python -m run.window_experiments --window 3 --output exp/window_plan/configs
-```
+## 安装
 
-新版真实训练使用已有 paired cache、校准 P、E7 EMA 和授权 SMPL-X。核心实现与协议验证已完成，真实训练与 GPU 精度/效率收益尚未验证。
-
-文档入口：[分类索引](docs/README.md) · [迁移与复现](docs/release/migration.md) · [实验结论](LOG.md)
-
-## 代码内容
-
-- 保留原始 dense E7 骨干和 Euler10 Flow 采样入口。
-- 当前帧生成器 G、历史运动先验 P、Gaussian / History 两种采样源。
-- 因果历史缓存、模型生成的公共启动状态、固定启动体型的 SMPL22 FK。
-- 表示 MSE、世界 dense 关节位置损失及可选 SMPL FK 位置损失。
-- EE4D-Motion 错配数据构建、固定 take 划分、配对评估与可恢复任务队列。
-- 四阶段实验、预测历史 replay、四动作诊断及 G 损失消融。
-
-当前P采用常速度残差、geometry=1/FK=0，不加显式速度；D组192 take、562片段、9600步×三seed的下一帧Body MPJPE为34.099mm，统一体型为14.054mm。接入G时使用适配后的校准P，不能用原D_s62 checkpoint直接替换。
-
-G最新R0–R3观测长度×设备参考对照已完成三seed。21帧/预测参考R0最好：Body 131.913±2.465mm，80帧和设备参考未带来全身精度收益；共同口径原E7为115.018mm。结果来自重复使用的222take因果基准、已知地面、固定启动体型、开发集选中的best、Euler10和单draw1062，不能直接与论文整窗指标比较。新S0–S3几何残差×实际R0历史方案仅设计，尚未实现/训练。
-
-原生E7的整段重建与逐帧闭环评估是不同协议。早期 `frozen_e7` 标签还可能指E7权重迁入历史接口的冻结对照，应按具体实验文档区分。完整数值、结论和限制见 [LOG.md](LOG.md)。
-
-## 环境与外部资产
+Python 3.11+，验证环境为 PyTorch 2.10 CPU。先安装适合机器的 PyTorch，再安装项目：
 
 ```bash
-conda env create -f environment.yml
-conda activate egorecover
+pip install -e '.[dev]'            # 核心代码和测试
+pip install -e '.[body,assets]'    # 正式 SMPL-X 解码及 HF 资产恢复
+# 或使用 environment.yml 建立 Python 3.11 / CUDA 12.8 环境
 ```
 
-`environment.yml` 使用 Python 3.11 和 PyTorch 2.10 / CUDA 12.8。其他 CUDA 环境需安装兼容的 PyTorch，再安装 `requirements.txt`、`requirements-dev.txt`；可视化另需 `requirements-vis.txt`。
+运行入口统一为 `egorecover`，也可使用 `python -m egorecover`。核心运行依赖只有 PyTorch；SMPL-X 和资产下载依赖按需安装。
 
-需要自行准备：
-
-1. EE4D-Motion 处理数据、DINOv2 特征及固定训练统计，见 [DATASET.md](docs/data/dataset.md)。
-2. 获得授权的 SMPL-X 模型资产，放在 `body_models/smplx/`，或配置 `SMPLX_MODEL_PATH`。评估入口会检查模型资产能否重建数据集 GT。
-3. 与 E7 Flow 架构匹配的 checkpoint；当前实验使用 `exp/e7/last.ckpt` 的 EMA。官方 diffusion 权重不能直接代替 E7 权重。
-4. 对应的数据 READY 文件和启动缓存；生成及审计流程见 [数据管线文档](data_pipeline/README.md) 和 [开发接口](docs/design/interfaces.md)。
-
-仓库包含当前代码、配置、文档、轻量验证和原路径下的实验结论/统计。大文件分别放在公有HF仓库：[模型与当前续训状态](https://huggingface.co/sxhkk/EgoRecover)、[处理数据、冻结缓存及最终预测](https://huggingface.co/datasets/sxhkk/EgoRecover-data)。SMPL-X资产未上传，需自行授权下载。
-
-## 迁移与复现
-
-代码和选中资产已完成公开迁移，固定revision及核验记录见[发布状态](docs/release/publication.json)。
-
-从新机器克隆main并恢复相应数据，精确HF revision和每个文件SHA256见 [artifact索引](docs/release/artifacts.json)：
+## 最小验证
 
 ```bash
-git clone https://github.com/sxh-kk/EgoRecover.git
-cd EgoRecover
-conda env create -f environment.yml
-conda activate egorecover
-pip install -r requirements-reproduction-lock.txt
-pip install -r requirements-release.txt
+egorecover train --config configs/paired.json --synthetic --compact \
+  --output exp/smoke --train-steps 2 --batch-size 1 --eval-every 1
 
-# 最小检查先恢复一个固定test episode与R0 seed62；另需授权SMPL-X
-python tools/restore_release.py --preset g-smoke
-python -m run.reproduce_release --model G --group R0 --seed 62 --smoke --device cuda
+egorecover evaluate --checkpoint exp/smoke/best.pt --synthetic \
+  --output exp/smoke-evaluation --steps 1 2 4 10 --save-predictions
 
-# 先查看下载量；不会下载或启动训练
-python tools/restore_release.py --preset g-evaluation --dry-run
-# 恢复24个G对照best、校准P和222take评估缓存，建立共享目录软链接
-python tools/restore_release.py --preset g-evaluation
-# 将自行授权下载的SMPLX_NEUTRAL.npz放到body_models/smplx/，或设置SMPLX_MODEL_PATH
-python -m run.reproduce_release --model G --group R0 --seed 62 --device cuda
-
-# 独立P：恢复原/扩量缓存和各轮P权重，再评价D组
-python tools/restore_release.py --preset p-evaluation
-python -m run.reproduce_release --model P --seed 62 --device cuda
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest -q
 ```
 
-`core`仅下载当前R0三seed、配套校准P和统计量约1.096GiB，不含完整输入数据；`data`下载处理数据与已选缓存/预测；`training`增加原E7、当前续训状态和训练缓存；`all`恢复全部发布大文件。`--verify-only`检查已恢复文件大小和哈希。复现命令输出到新 `exp/reproduction/`，保留原实验报告。完整安装、历史入口及路径适配说明见 [迁移文档](docs/release/migration.md)。
+合成模式显式标记为诊断，用小网络和 dense 关节位置验证流程与梯度，不代表真实人体精度。
 
-## 实验入口
+## 正式训练
 
-从仓库根目录运行：
+先查看恢复所需的空间，再下载选定资产。`--dry-run` 只读取随包提供的索引，不联网、不创建目录。
 
 ```bash
-# P/G 训练及闭环选模
-python -m run.engineering_pilot --help
+egorecover restore --preset training --dry-run
+egorecover restore --preset training --root assets
+# 将自行授权下载的 SMPLX_NEUTRAL.npz 放在 body_models/smplx/
+# 也可设置 SMPLX_MODEL_PATH 为该文件所在目录
 
-# 多模型共同 dev 配对评估
-python -m run.evaluate_paired_development --help
+egorecover experiments --window 3 --output exp/configs
 
-# 阶段 2–4 调度（阶段 1 及已有预算产物见 LOG.md）
-python -m run.complete_stages --help
+egorecover train --config exp/configs/warmup/gaussian.json \
+  --data-root assets/datasets/paired --prior-checkpoint assets/pretrained/prior.pt \
+  --e7-checkpoint assets/pretrained/e7.ckpt --device cuda --seed 62 \
+  --output exp/seed62/warmup-gaussian
 
-# geometry/fk = 0/0 与 1/1 的 G 损失消融
-python -m run.loss_ablation --help
+egorecover train --config exp/configs/feedback/paired.json \
+  --data-root assets/datasets/paired --prior-checkpoint assets/pretrained/prior.pt \
+  --initialize exp/seed62/warmup-gaussian/best.pt --device cuda --seed 62 \
+  --output exp/seed62/paired
 
-# 历史独立P Two-Forward / FK四组入口；仅查看帮助，不自动启动训练
-python -m run.prior_two_forward_experiment --help
-
-# 已完成的G预训练与观测参考四组入口
-python -m run.g_pretraining_experiment --help
-python -m run.observation_reference_experiment --help
+egorecover evaluate --checkpoint exp/seed62/paired/best.pt \
+  --data-root assets/datasets/paired --prior-checkpoint assets/pretrained/prior.pt \
+  --device cuda --output exp/seed62/evaluation --steps 1 2 4 10
 ```
 
-损失消融固定同一个已训练 P，四个 G 从相同 E7 EMA 初始化；默认 GPU4/5 对应 0/0 的 Gaussian/History，GPU6/7 对应 1/1。默认每个 G 2400 步，完成后自动共同评估。该调度入口依赖 `run/loss_ablation.py` 中指定的已完成 72-take/2400 P 和基线评估，请先准备依赖产物。完整实验配置和监控方式见 [LOG.md](LOG.md)。
+`--resume` 用于同一实验的精确恢复；`--initialize` 从共同预热模型开始一轮新实验，两者不能混用。训练只在 dev 选模，test 评估需显式指定 `--split test`。窗口 3 是示例，正式实验应先在开发集完成窗口对照。
 
-早期P Two-Forward实验采用GT预热、在线生成候选历史、渐进替换及第二次前向反传，方法和完成结果见 [历史方案](docs/experiments/p-motionstreamer.md)。后续采用常速度残差/FK=0，并做了显式速度、统一体型监督、扩量和实际历史适应性实验；这些阶段的协议和结论见分类索引。
+## 代码结构
 
-旧队列、GPU分配和等待逻辑对应历史实验状态，不代表克隆仓库后应立即启动的任务。使用新配置、新输出目录重跑；原始冻结配置和身份保持不变，异机精确续训尚未验证。旧100%固定G历史适配代码保留供历史复现。[Two-Forward运行说明](docs/experiments/p-two-forward-runbook.md)记录的是当时状态，最新事实以LOG为准。
-
-原始 E7 的训练、采样与评估方式见 [E7.md](docs/reference/e7.md)。几何指标、历史来源、坐标约定和权重迁移接口见 [EGORECOVER.md](docs/design/interfaces.md)。设计文档见 [BLUE_PRINT.md](docs/design/blueprint.md)；历史论文草稿和报告不代表已完成的独立测试结论。
-
-## 验证
-
-```bash
-PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest tests data_pipeline/tests -q
+```text
+egorecover/
+  models/          窗口重建器、冻结历史预测器、E7 注意力组件
+  codec.py         243维表示及世界/窗口坐标变换
+  state.py         身体缓存与有界观测包
+  system.py        历史→P→中心/源→Flow→缓存更新
+  flow.py          x0训练路径及可微Euler求解
+  losses.py        当前监督、成对/直接后续监督、固定度量对照
+  data.py          固定划分、缓存校验和训练样本
+  timing.py        源帧网格与采样时间核验
+  training.py      训练、开发集选模、恢复
+  evaluation.py    连续运行与配对多步指标
+  evaluate.py      评估任务组织及预测导出
+  checkpoint.py    E7/P导入与新版checkpoint身份
+  assets.py        固定版本资产恢复
+  cli.py           唯一命令行入口
+configs/           基础和成对反馈配置
+tests/             当前方法、几何、时间、恢复和入口测试
+docs/              方法、数据协议、重构与复核说明
 ```
 
-测试覆盖因果读取、坐标编码、FK 梯度、数据划分、缓存一致性、评估恢复、GPU 调度和固定 P 的损失消融。原始 E7 路径的上游数值一致性记录见 [verification/upstream_e7_parity.json](verification/upstream_e7_parity.json)。该验证使用合成输入，不能替代真实数据精度评估。
+方法细节见 [方法与实验设计](docs/method.md)，资产和输入格式见 [数据协议](docs/data.md)，实现边界与验证见 [复核记录](docs/review.md)。
 
-## 来源
+正式框架默认保持 E7 的 768 维、12 层主干，可导入既有 E7 EMA 和校准 P。新原生 checkpoint 为 `egorecover_window_v2`，不直接续训清理前的 v1 诊断 checkpoint。重构前后完整尺寸网络加载相同 E7 权重后的窗口输出已经做数值比对。
 
-原方法为 [UniEgoMotion](https://github.com/chaitanya100100/UniEgoMotion)，Chaitanya Patel 等，ICCV 2025；E7 扩展来自 [sxh-kk/UEM-update](https://github.com/sxh-kk/UEM-update)。提取提交与来源记录见 [SOURCE.md](SOURCE.md)。独立 EgoRecover 仓库从当前代码快照开始，源项目历史仍可通过来源链接追溯。
+当前已验证合成训练、梯度边界、精确恢复、权重迁移和命令行流程；尚未在本环境恢复真实资产并进行训练，不能据此声称已有精度或 GPU 延迟收益。
 
-保留第三方文件中的原许可说明。模型与数据资产需遵守各自的获取及使用条款；本仓库不重新授权这些资产。
+代码来源及保留的第三方声明见 [SOURCE.md](SOURCE.md)。

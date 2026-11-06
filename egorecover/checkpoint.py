@@ -1,4 +1,4 @@
-"""Explicit E7 -> history-G weight initialization, never optimizer resume."""
+"""Load published E7/P weights; native v2 checkpoints use strict loading."""
 
 from collections.abc import Mapping
 from dataclasses import dataclass
@@ -6,8 +6,10 @@ from os import PathLike
 
 import torch
 
-from model.history_uniegomotion import HistoryUniEgoMotion
-from model.uniegomotion import UniEgoMotion
+from .models import HistoryPrior, MotionModel
+
+FORMAT = "egorecover_window_v2"
+LEGACY_TEXT = frozenset({"embed_text_cond.weight", "embed_text_cond.bias", "mask_tokens.text"})
 
 
 @dataclass(frozen=True)
@@ -15,75 +17,67 @@ class MigrationReport:
     weight_source: str
     loaded_tensors: int
     new_parameters: tuple[str, ...]
+    ignored_parameters: tuple[str, ...]
 
 
-def _backbone_state(checkpoint):
-    state = checkpoint.get("state_dict", checkpoint)
-    if not isinstance(state, Mapping) or not state:
-        raise ValueError("Checkpoint requires a nonempty state_dict or raw backbone state.")
-    if any(not isinstance(key, str) or not isinstance(value, torch.Tensor) for key, value in state.items()):
-        raise ValueError("Backbone state must map parameter/buffer names to tensors.")
-    # UEM_Module stores its only learned network under model.; raw
-    # UniEgoMotion state_dicts already have the desired parameter names.
-    if all(key.startswith("model.") for key in state):
-        return {key.removeprefix("model."): value for key, value in state.items()}
-    return dict(state)
+def load_predictor(path, device, manifest=None):
+    if path is None:
+        return None
+    saved = torch.load(path, map_location="cpu", weights_only=True)
+    if manifest is not None and saved.get("manifest_sha256") != manifest:
+        raise ValueError("Use the calibrated P checkpoint for this data manifest.")
+    prior = HistoryPrior().to(device)
+    prior.load_state_dict(saved["state_dict"], strict=True)
+    return prior.freeze()
 
 
 @torch.no_grad()
-def load_e7_weights(model, checkpoint, *, weight_source="model"):
-    """Initialize a HistoryUniEgoMotion from a standard dense E7 checkpoint.
-
-    checkpoint is a path or an already loaded mapping. Paths use weights_only
-    loading on CPU. Choose 'model' or 'ema' explicitly; an unrecognized/missing
-    EMA format raises instead of silently using raw weights. The original E7
-    architecture is strictly loaded before ordered EMA tensors are applied.
-
-    New history branches are reset to zero. Old optimizer/scheduler/EMA state
-    is not restored. Use ordinary strict loading to resume a NEW G checkpoint.
-    """
-    if not isinstance(model, HistoryUniEgoMotion):
-        raise TypeError("Expected a HistoryUniEgoMotion target.")
+def load_e7_weights(model, checkpoint, *, weight_source="ema"):
+    if not isinstance(model, MotionModel):
+        raise TypeError("Expected the window MotionModel.")
     if weight_source not in ("model", "ema"):
-        raise ValueError("weight_source must be 'model' or 'ema'.")
+        raise ValueError("weight_source must be model or ema.")
     if isinstance(checkpoint, (str, PathLike)):
         checkpoint = torch.load(checkpoint, map_location="cpu", weights_only=True)
     if not isinstance(checkpoint, Mapping):
-        raise TypeError("checkpoint must be a path or mapping.")
-    state = _backbone_state(checkpoint)
-
-    # Constructing the temporary model must not change the caller's CPU RNG.
-    with torch.random.fork_rng(devices=[]):
-        original = UniEgoMotion(model.cfg, dropout=model.dropout)
-    original.load_state_dict(state, strict=True)
+        raise TypeError("Checkpoint must be a path or mapping.")
+    state = checkpoint.get("state_dict", checkpoint)
+    if not isinstance(state, Mapping) or not state:
+        raise ValueError("Checkpoint requires a nonempty state_dict.")
+    if all(isinstance(key, str) and key.startswith("model.") for key in state):
+        state = {key.removeprefix("model."): value for key, value in state.items()}
+    destination = model.state_dict()
+    required = set(destination) - model.NEW_PARAMETER_NAMES
+    ignored = set(state) & LEGACY_TEXT
+    missing, extra = required - state.keys(), state.keys() - required - LEGACY_TEXT
+    if missing or extra:
+        raise ValueError(f"Invalid E7 keys: missing={sorted(missing)}, extra={sorted(extra)}.")
+    for name in required:
+        if not isinstance(state[name], torch.Tensor) or state[name].shape != destination[name].shape:
+            raise ValueError(f"E7 tensor shape mismatch at {name}.")
+    parameters = [
+        (name, parameter) for name, parameter in model.named_parameters() if name not in model.NEW_PARAMETER_NAMES
+    ]
+    ema = None
     if weight_source == "ema":
         if checkpoint.get("ema_state_format") != "original_model_with_ema_optimizer_v1":
-            raise ValueError("EMA initialization requires original_model_with_ema_optimizer_v1 format.")
-        optimizer_states = checkpoint.get("optimizer_states", [])
-        if not optimizer_states or "ema" not in optimizer_states[0]:
-            raise ValueError("EMA checkpoint is missing optimizer_states[0]['ema'].")
-        ema = optimizer_states[0]["ema"]
-        parameters = [(name, value) for name, value in original.named_parameters() if value.requires_grad]
+            raise ValueError("E7 EMA requires original_model_with_ema_optimizer_v1 format.")
+        optimizers = checkpoint.get("optimizer_states", [])
+        if not optimizers or "ema" not in optimizers[0]:
+            raise ValueError("Missing optimizer_states[0]['ema'].")
+        ema = optimizers[0]["ema"]
         if len(ema) != len(parameters):
-            raise ValueError(f"EMA has {len(ema)} tensors; original E7 expects {len(parameters)}.")
+            raise ValueError("E7 EMA parameter count mismatch.")
         for (name, parameter), value in zip(parameters, ema):
             if not isinstance(value, torch.Tensor) or value.shape != parameter.shape:
-                raise ValueError(f"EMA tensor shape mismatch at {name}.")
-        # Reuse the repository's format-specific helper only on the OLD model.
-        from module.ema import apply_ema_weights_from_checkpoint
-
-        apply_ema_weights_from_checkpoint(original, checkpoint)
-
-    state = original.state_dict()
-    destination = model.state_dict()
-    missing, extra = destination.keys() - state.keys(), state.keys() - destination.keys()
-    if missing != HistoryUniEgoMotion.NEW_PARAMETER_NAMES or extra:
-        raise ValueError(f"Unexpected migration keys: missing={sorted(missing)}, extra={sorted(extra)}.")
-    for name, value in state.items():
-        if value.shape != destination[name].shape:
-            raise ValueError(f"Backbone tensor shape mismatch at {name}.")
-    incompatible = model.load_state_dict(state, strict=False)
-    if set(incompatible.missing_keys) != missing or incompatible.unexpected_keys:
-        raise RuntimeError("Unexpected state_dict loading result.")
+                raise ValueError(f"E7 EMA tensor shape mismatch at {name}.")
+    incompatible = model.load_state_dict({key: state[key] for key in required}, strict=False)
+    if set(incompatible.missing_keys) != model.NEW_PARAMETER_NAMES or incompatible.unexpected_keys:
+        raise RuntimeError("Unexpected E7 loading result.")
+    if ema is not None:
+        for (_, parameter), value in zip(parameters, ema):
+            parameter.copy_(value.to(parameter))
     model.reset_history_parameters()
-    return MigrationReport(weight_source, len(state), tuple(sorted(missing)))
+    return MigrationReport(
+        weight_source, len(required), tuple(sorted(model.NEW_PARAMETER_NAMES)), tuple(sorted(ignored))
+    )

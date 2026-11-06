@@ -1,5 +1,8 @@
-"""Current-frame interfaces for history-conditioned EgoRecover.
+"""Causal rolling-window full-body reconstruction."""
 
-Coordinate conversion, physical history caches, and learned P/Q live above
-these tensor interfaces; no dataset or SMPL assets are imported here.
-"""
+from .config import ModelConfig, WindowConfig
+from .state import ObservationWindow, WindowCache
+from .system import WindowReconstructor
+
+__version__ = "0.2.0"
+__all__ = ["ModelConfig", "ObservationWindow", "WindowCache", "WindowConfig", "WindowReconstructor"]

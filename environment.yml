@@ -7,10 +7,7 @@ dependencies:
   - pip:
       - --extra-index-url https://download.pytorch.org/whl/cu128
       - torch==2.10.0+cu128
-      - torchvision==0.25.0+cu128
-      - -r requirements.txt
-      - -r requirements-dev.txt
+      - -e .[body,assets,dev]
 variables:
   PYTHONNOUSERSITE: '1'
-  PYTHONPATH: ''
   PYTEST_DISABLE_PLUGIN_AUTOLOAD: '1'
