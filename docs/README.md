@@ -1,11 +1,12 @@
 # 文档索引
 
-更新时间：2026-10-08。最新实验事实与运行状态统一记录在 [LOG.md](../LOG.md)。
+更新时间：2026-11-06。当前主线为 [plan.docx](../plan.docx) 对应的滚动窗口与成对反馈实现；旧实验事实与运行状态保留在 [LOG.md](../LOG.md)。
 
 ## 当前实验
 
 | 文档 | 内容与状态 |
 |---|---|
+| [滚动窗口重建与成对反馈](design/rolling-window.md) | 当前方案：W=1/3/5/10、预测中心起点、冻结后续模型的完整响应监督、四阶段公平对照；实现与协议测试完成，真实实验待运行；[复核记录](design/rolling-window-review.md) |
 | [G几何残差×实际历史四组设计](design/g-residual-history-four-way.md) | 已设计，尚未实现/启动；S0–S3检验G纠错结构及固定R0历史适配 |
 | [G观测长度×设备参考](experiments/g-observation-reference.md) | 四组×三seed及最小评价完成；R0 131.91mm最好，80帧/设备参考未带来全身收益；[最终分析](../exp/egorecover_observation_reference/v2/analysis/final-conclusions.md) |
 | [G重新训练四组对照](experiments/g-pretraining-four-way.md) | 09-30 14:05：12次训练及最小留出评估完成；混合历史有效，History源额外收益不稳定；T3 133.86mm，E7 115.02mm；[最终分析](../exp/egorecover_g_pretraining/v1/analysis/minimal-evaluation-conclusions.md) |

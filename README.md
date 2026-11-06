@@ -1,6 +1,20 @@
 # EgoRecover
 
-基于 UniEgoMotion / E7 的因果人体运动恢复实验代码。模型使用过去 20 帧身体状态和当前视觉、轨迹观测，逐帧生成并提交身体预测，研究观测故障、预测历史适配与损失设计对闭环精度的影响。
+基于 UniEgoMotion / E7 的因果人体运动恢复实验代码。当前主线按 [plan.docx](plan.docx) 实现：20 帧世界坐标身体缓存、滚动窗口联合修正、预测中心 Flow，以及经过完整后续重建映射的成对反馈监督。
+
+新版入口与完整方案映射见 [滚动窗口设计与运行说明](docs/design/rolling-window.md)。旧单帧 G/P 和 MotionStreamer 代码保留供历史复现，下文已有实验数值均来自旧协议。
+
+```bash
+# 新版 CPU 合成数据集成检查，不代表真实数据精度
+python -m run.train_window --config config/window/paired.json --synthetic --compact \
+  --output exp/window_smoke/v1 --train-steps 2 --batch-size 1 --eval-every 1
+python -m run.evaluate_window --checkpoint exp/window_smoke/v1/best.pt \
+  --synthetic --output exp/window_smoke/evaluation --steps 1 2 4 10
+# 生成四阶段实验配置及公平的预热/续训依赖关系，不启动训练
+python -m run.window_experiments --window 3 --output exp/window_plan/configs
+```
+
+新版真实训练使用已有 paired cache、校准 P、E7 EMA 和授权 SMPL-X。核心实现与协议验证已完成，真实训练与 GPU 精度/效率收益尚未验证。
 
 文档入口：[分类索引](docs/README.md) · [迁移与复现](docs/release/migration.md) · [实验结论](LOG.md)
 

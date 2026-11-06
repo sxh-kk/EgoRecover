@@ -1474,3 +1474,11 @@
 - 保留原始GT的 `metrics` 及Flow选模Body指标。主报告和每episode增加 `fixed_bootstrap_shape_metrics`、`target_geometry_gap_metrics`、`metric_difference_original_minus_fixed_shape`，共用评分窗口、有效掩码、FPS及帧/速度帧对权重；GT诊断在闭环生成完成后计算，不进入在线条件。
 - 两套指标差值保留符号，可为负；目标几何差异可能含体型、标注及FK表示差异，不宣称纯beta误差或可加误差分解。README明确 `audit_fk` 只验证相同体型的FK一致性，不能证明两个评价目标相同。
 - 新增6项诊断测试，覆盖目标一致、骨架长度不同、正/负差值、评分切片与缺帧、单有效帧无速度对及跨episode加权。CPU独立模块全套103 passed、1项CUDA测试跳过；格式和diff检查通过。没有新训练或真实数据差异量化结果。
+
+## 2026-11-06--22：27：滚动窗口与成对反馈方案重构（实现与协议验证）
+
+- 按 [plan.docx](plan.docx) 完成 20 帧世界状态缓存、W=1/3/5/10 活动窗口、高斯/预测中心 Flow 和可微 Euler1/2/4/10；保留旧实验复现入口。
+- 实现固定后续 EMA 快照的完整响应成对监督、直接后续真值监督和固定特征/几何对照；修复冻结 P 截断输入梯度的问题，明确共同过去停止梯度与当前写入保留梯度。
+- 四阶段矩阵显式规定共同预热、等预算续训和 A/B/C 复用；恢复身份绑定数据、P、SMPL-X、核心代码、预算和随机状态。预测导出区分地面归零及原始世界坐标。
+- 主项目/数据管线 225 项通过，独立 MotionStreamer 103 项通过、1 项 CUDA 检查跳过；两步合成训练、全部求解步数评估及预测导出通过。完整 E7 参数迁移、梯度边界与精确恢复逐张量一致性通过。
+- 本轮没有恢复真实训练资产或运行真实训练，不产生精度收益/GPU 性能结论。详见 [实现与运行说明](docs/design/rolling-window.md)、[复核记录](docs/design/rolling-window-review.md)、[验证记录](verification/window_refactor.json)。

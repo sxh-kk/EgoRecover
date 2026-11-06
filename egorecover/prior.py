@@ -38,11 +38,10 @@ class HistoryPrior(nn.Module):
             raise ValueError("P requires nonempty histories and a codec-defined [B,1,243] base_mu.")
         if not bool(torch.isfinite(base_mu).all()):
             raise ValueError("base_mu must be finite.")
-        with torch.set_grad_enabled(torch.is_grad_enabled() and not self._frozen):
-            history = finite_payload(history_motion, valid, "history_motion")
-            encoded = self.encoder(self.positions(self.input(history)), src_key_padding_mask=~valid)
-            indices = (
-                torch.arange(length, device=history.device).expand(batch, -1).masked_fill(~valid, -1).max(1).values
-            )
-            correction = self.output(encoded[torch.arange(batch, device=history.device), indices])[:, None]
-            return base_mu + correction
+        # Frozen parameters must still transmit gradients to predicted history:
+        # the paired-window objective differentiates through this complete map.
+        history = finite_payload(history_motion, valid, "history_motion")
+        encoded = self.encoder(self.positions(self.input(history)), src_key_padding_mask=~valid)
+        indices = torch.arange(length, device=history.device).expand(batch, -1).masked_fill(~valid, -1).max(1).values
+        correction = self.output(encoded[torch.arange(batch, device=history.device), indices])[:, None]
+        return base_mu + correction

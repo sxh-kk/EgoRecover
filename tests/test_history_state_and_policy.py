@@ -62,7 +62,10 @@ def test_frozen_prior_stays_deterministic_after_parent_train():
     assert not prior.training and all(not p.requires_grad for p in prior.parameters())
     first = prior(history.requires_grad_(), valid, base)
     second = prior(history, valid, base)
-    assert torch.equal(first, second) and not first.requires_grad
+    assert torch.equal(first, second) and first.requires_grad
+    first.square().mean().backward()
+    assert history.grad is not None and torch.isfinite(history.grad).all()
+    assert all(parameter.grad is None for parameter in prior.parameters())
 
 
 def test_q_missing_payload_isolation_and_action_canonicalization():
