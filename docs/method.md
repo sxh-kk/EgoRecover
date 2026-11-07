@@ -60,7 +60,7 @@ Euler 从 τ=1 积分到 0，第 i 次更新为 x ← x + (x0(x,τ)−x)/(K−i)
 | AdamW betas / eps | `(0.9, 0.999)` / `1e-8` |
 | 梯度裁剪 | L2 全局范数上限 `1.0`，可用 `--grad-clip-norm` 设置 |
 | 移动 EMA | 每次 optimizer 更新后按 `0.999` 更新，供选模使用 |
-| 有效 batch / microbatch | 默认 `64/8`；microbatch 梯度按有效 batch 加权累积 |
+| 有效 batch / microbatch | global 默认 `64`，microbatch 每卡默认 `8`；两卡时各 local batch=32、各累积4次 |
 | 随机种子 | 首轮 `62`，正式重复为 `62/63/64` |
 | 网络 dropout | 完整网络 `0.1`，合成 compact 诊断 `0` |
 | 学习率调度 | 默认 `--lr-schedule uniegomotion`；gamma 默认 `0.1` |
@@ -75,9 +75,9 @@ Euler 从 τ=1 积分到 0，第 i 次更新为 x ← x + (x0(x,τ)−x)/(K−i)
 | 官方每 epoch 的更新次数，末批保留 | 2,244 |
 | 官方 300 epochs 对应的衰减点 | 673,200 updates |
 | 官方 350 epochs 对应的更新次数 | 785,400 updates |
-| 示例 pilot | 2,400 updates / 153,600 online queries |
+| 本轮单种子窗口选择 | 12,000 updates / 768,000 online queries |
 
-在此默认配置下，更新 1…673200 使用 `3e-5`，第 673201 次更新起使用 `3e-6`。`--lr-decay-step` 可显式覆盖衰减点，`--lr-decay-gamma` 设置倍数；固定学习率实验使用 `--lr-schedule constant`。合成诊断没有官方参考片段数，未显式设置衰减点时不自动衰减。短 pilot 不把衰减点按预算比例压缩到末段，因此 2400 更新的试跑处于官方参考调度的初始学习率阶段。
+在此默认配置下，更新 1…673200 使用 `3e-5`，第 673201 次更新起使用 `3e-6`。`--lr-decay-step` 可显式覆盖衰减点，`--lr-decay-gamma` 设置倍数；固定学习率实验使用 `--lr-schedule constant`。合成诊断没有官方参考片段数，未显式设置衰减点时不自动衰减。短预算不把衰减点按比例压缩到末段，因此本轮 12000 更新均处于官方参考调度的初始学习率阶段。
 
 785400 updates 是“相同更新次数”的参考预算，不表示本项目训练了 350 个 epoch，也不表示监督量与上游一致：官方 350 epochs 实际访问 50,246,000 个 clips，末批不足 64；本项目 785400 次满 batch 对应 50,265,600 个 online queries。上游每个 clip 最长 80 帧，本项目每个 query 的目标是 W 帧活动窗口，采样分布和辅助监督也不同。正式报告需同时记录有效 batch、optimizer updates、累计 queries、窗口、roll-in、初始化及总训练成本。
 
@@ -95,7 +95,7 @@ Euler 从 τ=1 积分到 0，第 i 次更新为 x ← x + (x0(x,τ)−x)/(K−i)
 
 `HistoryPrior.freeze()` 冻结参数并锁定 eval 模式，同时保留对输入的梯度。调用方需要无梯度推理时，使用外部 `torch.no_grad()`；冻结参数本身不应截断完整后续映射。
 
-首轮的后续模型使用初始化 EMA 的**固定快照**，训练过程中不更新该快照。成对/直接后续监督的比较使用相同预热 checkpoint，因此后续模型在整个比较中一致。另维护一份移动 EMA 专门用于开发集选模，两者分别保存在 `feedback_model` 和 `ema` 中。P、后续快照和 SMPL 参数均不接收参数梯度。
+首轮的后续模型使用初始化 EMA 的**固定快照**，训练过程中不更新该快照。成对/直接后续监督的比较使用相同预热 checkpoint，因此后续模型在整个比较中一致。另维护一份移动 EMA 专门用于开发集选模；完整 `resume.pt` 中分别保存 `feedback_model` 和 `ema`。P、后续快照和 SMPL 参数均不接收参数梯度。
 
 总目标为基础窗口 Flow 损失 + λcur 当前身体监督 + λfb 后续反馈。几何项使用关节平方欧氏误差的样本/关节均值，并除以 `scale_m²`；这与文档中向量平方范数相差一个固定归一化系数，由辅助权重吸收。后续噪声多次采样取平均。
 
@@ -124,6 +124,25 @@ Euler 从 τ=1 积分到 0，第 i 次更新为 x ← x + (x0(x,τ)−x)/(K−i)
 
 组合交互项为 (A−D)−(A−B)−(A−C) = B+C−A−D；正值表示超过独立收益之和。`interaction()` 返回该项及其他差值。判断稳定性时应先按相同种子、take 配对，再汇总种子间变化。
 
+## 本轮双卡窗口选择
+
+本轮只运行实验一的四个基础窗口组；四组同时启动，每组两张 GPU，共用 seed=62、高斯起点、基础 Flow 目标、一步求解、解析常速度 P 和中性启动历史。运行命令见 [README](../README.md#正式训练)。本文记录命令及协议，不表示四组已启动或完成，也不把短 smoke 检查当作正式结果。
+
+| 组别 | GPU | 每组预算 | 周期验证 |
+|---|---|---|---|
+| W1 | 0,1 | 12000 updates / 768000 queries | 每1000步，同一128片段 minival |
+| W3 | 2,3 | 12000 updates / 768000 queries | 每1000步，同一128片段 minival |
+| W5 | 4,5 | 12000 updates / 768000 queries | 每1000步，同一128片段 minival |
+| W10 | 6,7 | 12000 updates / 768000 queries | 每1000步，同一128片段 minival |
+
+训练由 torchrun 启动并从 `WORLD_SIZE` 自动识别 DDP。`--batch-size 64` 表示 global 有效 batch；world size=2 时每卡 local batch=32，`--microbatch-size 8` 表示每卡 microbatch，因此每卡累积4次后共同更新一次。DDP 对各 rank 梯度取平均，仍对应64个 query 的一次更新；预算及学习率时钟不乘以 rank 数。
+
+周期验证使用 `--dev-limit 128 --dev-seed 1062`。选择器按 take 的稳定 SHA256 顺序、各 take 内 episode 的稳定 SHA256 顺序轮询抽取，使小子集先覆盖不同 take，再补每个 take 的下一条。四组共用固定片段 ID，实验身份记录选择算法、seed、实际数量和 SHA256；`dev-limit` 不再表示官方插入顺序的前 N 条。该子集用于选每组的最佳移动 EMA，不在训练过程中更换子集或依据当前模型表现重新抽样。
+
+`--full-dev-final` 在全部更新结束后，加载 minival 已选出的最佳 EMA，由两 rank 分片评价全部4379个可用官方验证片段，再汇总为 `full-dev.json` 和 `metrics.csv`。末期全量评价不反过来重新挑选该组的训练 checkpoint。这里每段仍以前20帧启动、之后评价首次输出，短片段及未知地面仍遵守相同排除规则；双卡分片用于缩短评估总时间，不能把分片吞吐解释成单条在线流的重建速度。
+
+本轮提供单种子窗口选择依据，不表示模型已经收敛，也不构成多种子显著性证据。选定候选窗口后，再按同预算完成近期状态固定、无身体反馈等架构对照，并在需要时补充种子重复；随后依次开展起点、成对监督和组合实验。
+
 ## 运行与恢复
 
 安装及完整命令见 [README](../README.md)；数据、固定版本资产与坐标协议见 [数据协议](data.md)。新版仅使用统一命令：
@@ -136,7 +155,7 @@ egorecover evaluate --checkpoint exp/smoke/best.pt --synthetic \
 egorecover experiments --window 3 --output exp/configs
 ```
 
-训练输出 `identity.json`、完整 `resume.pt`、开发集选出的 `best.pt`、`selection.json`、`dev.json`。`--resume` 恢复模型、固定后续快照、移动 EMA、优化器、采样/CPU/CUDA 随机状态；需使用相同参数、代码、资产和输出路径。`--stop-after N` 保存后提前结束本次会话，不改变总预算。`--initialize` 是从预热模型开始新实验，与精确恢复互斥。
+训练输出 `identity.json`、完整 `resume.pt`、开发集选出的轻量 `best.pt`、`selection.json`、`dev.json`；启用末期全量验证后另输出 `full-dev.json` 和 `metrics.csv`。`best.pt` 供独立评估及 `--initialize` 使用，不承担完整恢复。`--resume` 从 `resume.pt` 恢复模型、固定后续快照、移动 EMA、优化器、学习率调度及每个 rank 的采样/CPU/CUDA 随机状态，并执行记录的身份和哈希检查；双卡恢复需保持 world size=2，以及相同参数、代码、资产和输出路径。`--stop-after N` 保存后提前结束本次会话，不改变总预算。`--initialize` 从预热 EMA 开始新实验，重置优化器与学习率时钟，与精确恢复互斥。
 
 新版 checkpoint 明确记录 `model_config` 和 `egorecover_window_v2` 格式，导入原 E7/P 与原生恢复分别处理；不自动解释旧的单帧/潜变量模型。默认网络保留完整 E7 尺寸，`ModelConfig.compact()` 只用于合成诊断，两个尺寸共用同一前向实现。
 

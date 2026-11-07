@@ -2,6 +2,7 @@
 
 import json
 import platform
+from contextlib import nullcontext
 
 import torch
 
@@ -10,12 +11,14 @@ from egorecover.checkpoint import FORMAT, load_e7_weights, load_predictor, resol
 from egorecover.codec import MotionCodec
 from egorecover.data import TrainingBatch, open_window_data, resolve_data_format
 from egorecover.diagnostics import synthetic_episode
+from egorecover.distributed import DistributedContext
 from egorecover.evaluation import evaluate_episode, summarize
 from egorecover.fk import joint_decoder, load_smpl, smpl_identity
-from egorecover.io import code_identity, file_sha256, save_checkpoint, save_json
+from egorecover.io import code_identity, file_sha256, save_checkpoint, save_json, state_sha256
 from egorecover.losses import frozen_ema, training_objective, update_ema
 from egorecover.models import MotionModel
 from egorecover.optimization import make_optimizer, make_scheduler, optimization_protocol
+from egorecover.selection import select_dev_records
 from egorecover.state import state_map
 
 
@@ -49,7 +52,38 @@ def compatible_initialization(saved, config, identity):
 
 
 def train(args):
-    device = torch.device(args.device)
+    context = DistributedContext.from_environment(args.device)
+    try:
+        return _train(args, context)
+    finally:
+        context.close()
+
+
+def _rng_state(generator, device):
+    return {
+        "sample_rng": generator.get_state(),
+        "cpu_rng": torch.get_rng_state(),
+        "cuda_rng": torch.cuda.get_rng_state(device) if device.type == "cuda" else None,
+    }
+
+
+def _evaluate_indices(system, model, data, fixture, indices, smpl, args, context, *, comparison=False):
+    rows = []
+    for index in indices[context.rank :: context.world_size]:
+        episode = fixture if args.synthetic else data.load(index)
+        row = evaluate_episode(
+            system, model, episode, joint_decoder(episode, args.synthetic, smpl), comparison=comparison
+        )
+        row.pop("predictions")
+        row.pop("body_rotations", None)
+        baseline = (episode.teacher.joints[20:, :, :3, 3] - episode.truth.joints[20:, :, :3, 3]).norm(dim=-1)
+        row["startup_prior_body_mm"] = float(baseline.mean() * 1000)
+        rows.append(row)
+    return sorted(context.gather_rows(rows), key=lambda row: row["episode"])
+
+
+def _train(args, context):
+    device = context.device
     config = WindowConfig.from_json(args.config)
     if args.resume and args.initialize:
         raise ValueError("Resume and initialization are mutually exclusive.")
@@ -67,6 +101,9 @@ def train(args):
         raise ValueError("Invalid training budget.")
     if args.stop_after is not None and args.stop_after < 1:
         raise ValueError("stop-after must be positive.")
+    if args.batch_size % context.world_size:
+        raise ValueError("Global batch-size must be divisible by the number of DDP ranks.")
+    local_batch_size = args.batch_size // context.world_size
     optimization_protocol(args)
     prior_mode = resolve_prior_mode(args.prior_mode, args.prior_checkpoint)
     smpl = None
@@ -103,12 +140,18 @@ def train(args):
         dataset_protocol = getattr(train_data, "protocol", {"scope": "legacy_paired_cache"})
         if any(not torch.equal(stats[k], dev_data.stats[k]) for k in stats):
             raise ValueError("Train/dev normalization statistics disagree.")
+    records = (
+        [{"episode_id": fixture.identifier, "base_take_name": fixture.take}] if args.synthetic else dev_data.records
+    )
+    dev_indices, dev_selection = select_dev_records(records, args.dev_limit, args.dev_seed)
     torch.manual_seed(args.seed)
     codec = MotionCodec(stats).to(device)
     prior = load_predictor(args.prior_checkpoint, device, None if args.synthetic else manifest)
     system = WindowReconstructor(codec, prior, config)
     model_config = ModelConfig.compact() if args.compact else ModelConfig()
     model = MotionModel(config, model_config).to(device)
+    training_model = context.wrap(model)
+    initial_sha = context.all_gather_object(state_sha256(model.state_dict()) if context.is_primary else None)[0]
     reference_clips = train_data.inventory["selected_clip_candidates"] if dataset_format == "official" else None
     optimization = optimization_protocol(args, reference_clips)
     optimizer = make_optimizer((p for p in model.parameters() if p.requires_grad), optimization)
@@ -127,6 +170,7 @@ def train(args):
         "data_protocol": dataset_protocol,
         "prior_mode": prior_mode,
         "model_config": model_config.to_dict(),
+        "random_initial_model_sha256": initial_sha,
         "smpl_asset": "dense_diagnostic" if args.synthetic else smpl_identity(),
         "feedback_teacher": "fixed_initial_ema",
         "code": code_identity(),
@@ -138,6 +182,15 @@ def train(args):
         "learning_rate": args.learning_rate,
         "optimization": optimization,
         "dev_limit": args.dev_limit,
+        "dev_selection": dev_selection,
+        "full_dev_final": args.full_dev_final,
+        "distributed": {
+            "world_size": context.world_size,
+            "global_batch_size": args.batch_size,
+            "local_batch_size": local_batch_size,
+            "sample_seed": "seed + 1 + rank",
+            "dropout_seed": "seed + 100000 * rank",
+        },
         "python": platform.python_version(),
         "torch": str(torch.__version__),
     }
@@ -169,7 +222,8 @@ def train(args):
     # Keep the response map identical across paired/direct comparisons for the
     # entire continuation. A separate moving EMA is used for model selection.
     feedback_model = frozen_ema(model)
-    generator = torch.Generator().manual_seed(args.seed + 1)
+    torch.manual_seed(args.seed + 100000 * context.rank)
+    generator = torch.Generator().manual_seed(args.seed + 1 + context.rank)
     start, best, curve = 0, float("inf"), []
     if saved:
         ema.load_state_dict(saved["ema"], strict=True)
@@ -177,19 +231,26 @@ def train(args):
         optimizer.load_state_dict(saved["optimizer"])
         if scheduler is not None:
             scheduler.load_state_dict(saved["scheduler"])
-        generator.set_state(saved["sample_rng"].cpu())
-        torch.set_rng_state(saved["cpu_rng"].cpu())
+        rank_rng = saved["rank_rng_states"][context.rank]
+        generator.set_state(rank_rng["sample_rng"].cpu())
+        torch.set_rng_state(rank_rng["cpu_rng"].cpu())
         if device.type == "cuda":
-            torch.cuda.set_rng_state(saved["cuda_rng"].cpu(), device)
+            torch.cuda.set_rng_state(rank_rng["cuda_rng"].cpu(), device)
         start, best, curve = saved["step"], saved["best"], saved["curve"]
         del saved
-    save_json(identity_path, identity)
+    if context.is_primary:
+        save_json(identity_path, identity)
+        save_json(
+            args.output / "status.json", {"status": "training", "start_step": start, "world_size": context.world_size}
+        )
+    context.barrier()
     final = min(args.train_steps, start + args.stop_after) if args.stop_after else args.train_steps
     for step in range(start + 1, final + 1):
         optimizer.zero_grad(set_to_none=True)
         components = {k: 0.0 for k in ("loss", "flow", "current", "feedback")}
-        for offset in range(0, args.batch_size, args.microbatch_size):
-            count = min(args.microbatch_size, args.batch_size - offset)
+        for offset in range(0, local_batch_size, args.microbatch_size):
+            count = min(args.microbatch_size, local_batch_size - offset)
+            global_offset = context.rank * local_batch_size + offset
             if not args.synthetic and hasattr(train_data, "sample_batch"):
                 batch, frame = train_data.sample_batch(generator, count, args.rollin_frames)
             else:
@@ -200,38 +261,46 @@ def train(args):
             cache = batch.cache(first)
             model.eval()
             for t in range(first, frame):
-                noise = batch.noise(args.seed + step, t, config.window, tag="rollin", offset=offset)
+                noise = batch.noise(args.seed + step, t, config.window, tag="rollin", offset=global_offset)
                 cache = system.online(model, cache, batch.observations(t), noise).cache.detach()
-            model.train()
+            training_model.train()
             # Stateless streams keep episode/time/endpoint draws identical when
             # W or feedback draw count changes. Terminal slots match across W.
-            epsilon = batch.noise(args.seed + step, frame, config.window, tag="train", offset=offset)
+            epsilon = batch.noise(args.seed + step, frame, config.window, tag="train", offset=global_offset)
             future_noise = torch.stack(
                 [
-                    batch.noise(args.seed + step, frame + 1, config.window, tag="feedback", offset=offset, draw=draw)
+                    batch.noise(
+                        args.seed + step, frame + 1, config.window, tag="feedback", offset=global_offset, draw=draw
+                    )
                     for draw in range(config.feedback_draws)
                 ]
             )
             tau = 0.001 + 0.999 * torch.rand(count, generator=generator)
             tau[torch.rand(count, generator=generator) < config.endpoint_probability] = 1.0
-            result = training_objective(
-                system,
-                model,
-                feedback_model,
-                cache,
-                batch.observations(frame),
-                batch.target(frame, config.window),
-                epsilon,
-                tau.to(device),
-                joint_decoder(batch, args.synthetic, smpl),
-                next_observations=batch.observations(frame + 1),
-                next_epsilon=future_noise,
-                truth_next=state_map(batch.target(frame + 1), lambda x: x[:, -1]),
+            synchronization = (
+                training_model.no_sync()
+                if context.world_size > 1 and offset + count < local_batch_size
+                else nullcontext()
             )
-            if not bool(torch.isfinite(result["loss"])):
-                raise ValueError("Nonfinite training objective.")
-            fraction = count / args.batch_size
-            (result["loss"] * fraction).backward()
+            with synchronization:
+                result = training_objective(
+                    system,
+                    training_model,
+                    feedback_model,
+                    cache,
+                    batch.observations(frame),
+                    batch.target(frame, config.window),
+                    epsilon,
+                    tau.to(device),
+                    joint_decoder(batch, args.synthetic, smpl),
+                    next_observations=batch.observations(frame + 1),
+                    next_epsilon=future_noise,
+                    truth_next=state_map(batch.target(frame + 1), lambda x: x[:, -1]),
+                )
+                if not bool(torch.isfinite(result["loss"])):
+                    raise ValueError("Nonfinite training objective.")
+                fraction = count / local_batch_size
+                (result["loss"] * fraction).backward()
             for key in components:
                 components[key] += float(result[key].detach()) * fraction
             del result
@@ -241,6 +310,7 @@ def train(args):
         if scheduler is not None:
             scheduler.step()
         update_ema(ema, model, config.ema_decay)
+        components = context.sync_scalar_dict(components)
         progress = {
             "step": step,
             **components,
@@ -251,23 +321,37 @@ def train(args):
             "microbatch_size": args.microbatch_size,
             "learning_rate": used_lr,
             "next_learning_rate": optimizer.param_groups[0]["lr"],
+            "world_size": context.world_size,
+            "local_batch_size": local_batch_size,
         }
-        print(json.dumps(progress, allow_nan=False), flush=True)
-        save_json(args.output / "progress.json", progress)
+        if context.is_primary:
+            print(json.dumps(progress, allow_nan=False), flush=True)
+            save_json(args.output / "progress.json", progress)
+            with (args.output / "train.jsonl").open("a", encoding="utf-8") as stream:
+                stream.write(json.dumps(progress, allow_nan=False) + "\n")
         if step % args.eval_every == 0 or step == final:
-            rows = []
-            count = 1 if args.synthetic else len(dev_data.records)
-            if args.dev_limit is not None:
-                count = min(count, args.dev_limit)
-            for index in range(count):
-                episode = fixture if args.synthetic else dev_data.load(index)
-                row = evaluate_episode(system, ema, episode, joint_decoder(episode, args.synthetic, smpl))
-                row.pop("predictions")
-                rows.append(row)
+            if context.is_primary:
+                save_json(
+                    args.output / "status.json", {"status": "validation", "step": step, "episodes": len(dev_indices)}
+                )
+            rows = _evaluate_indices(
+                system, ema, dev_data, fixture if args.synthetic else None, dev_indices, smpl, args, context
+            )
             score = summarize(rows)
             curve.append({"step": step, "scores": score})
             improved = score["body_mm"]["mean"] < best
             best = min(best, score["body_mm"]["mean"])
+            rank_state = {
+                **_rng_state(generator, device),
+                "model_sha256": state_sha256(model.state_dict()),
+                "ema_sha256": state_sha256(ema.state_dict()),
+            }
+            rank_rng_states = context.all_gather_object(rank_state)
+            if (
+                len({state["model_sha256"] for state in rank_rng_states}) != 1
+                or len({state["ema_sha256"] for state in rank_rng_states}) != 1
+            ):
+                raise ValueError("DDP workers disagree on synchronized model or EMA parameters.")
             checkpoint = {
                 "format": FORMAT,
                 "model_config": model_config.to_dict(),
@@ -282,15 +366,62 @@ def train(args):
                 "step": step,
                 "best": best,
                 "curve": curve,
-                "sample_rng": generator.get_state(),
-                "cpu_rng": torch.get_rng_state(),
-                "cuda_rng": torch.cuda.get_rng_state(device) if device.type == "cuda" else None,
+                **rank_rng_states[0],
+                "rank_rng_states": rank_rng_states,
             }
-            save_checkpoint(checkpoint_path, checkpoint)
-            if improved:
-                save_checkpoint(args.output / "best.pt", checkpoint)
-            save_json(
-                args.output / "selection.json",
-                {"curve": curve, "best_body_mm": best, "synthetic": args.synthetic, "selection_split": "dev"},
-            )
-            save_json(args.output / "dev.json", rows)
+            if context.is_primary:
+                save_checkpoint(checkpoint_path, checkpoint)
+                if improved:
+                    best_checkpoint = {
+                        key: checkpoint[key]
+                        for key in ("format", "model_config", "identity", "protocol", "stats", "ema", "step", "best")
+                    }
+                    best_checkpoint["purpose"] = "evaluation_or_initialization_only"
+                    save_checkpoint(args.output / "best.pt", best_checkpoint)
+                save_json(
+                    args.output / "selection.json",
+                    {"curve": curve, "best_body_mm": best, "synthetic": args.synthetic, "selection_split": "dev"},
+                )
+                save_json(args.output / "dev.json", rows)
+                save_json(args.output / "status.json", {"status": "training", "step": step})
+            context.barrier()
+    if args.full_dev_final and final == args.train_steps:
+        if context.is_primary:
+            save_json(args.output / "status.json", {"status": "full_validation", "training_step": final})
+        chosen = torch.load(args.output / "best.pt", map_location="cpu", weights_only=True, mmap=True)
+        ema.load_state_dict(chosen["ema"], strict=True)
+        chosen_step = chosen["step"]
+        del chosen
+        rows = _evaluate_indices(
+            system,
+            ema,
+            dev_data,
+            fixture if args.synthetic else None,
+            list(range(len(records))),
+            smpl,
+            args,
+            context,
+            comparison=True,
+        )
+        if context.is_primary:
+            report = {
+                "identity": {
+                    "synthetic": args.synthetic,
+                    "training": identity,
+                    "latency_note": "concurrent multi-GPU validation; not an isolated latency benchmark",
+                },
+                "window": config.window,
+                "checkpoint_step": chosen_step,
+                "training_step": final,
+                "results": {str(config.steps): {"rows": {"rollout": rows}, "summary": {"rollout": summarize(rows)}}},
+            }
+            from .evaluate import save_metrics_csv
+
+            save_json(args.output / "full-dev.json", report)
+            save_metrics_csv(args.output / "metrics.csv", report)
+    if context.is_primary:
+        save_json(
+            args.output / "status.json",
+            {"status": "complete" if final == args.train_steps else "stopped_after_checkpoint", "step": final},
+        )
+    context.barrier()

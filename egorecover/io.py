@@ -1,6 +1,7 @@
 """Atomic artifacts and reproducibility identity shared by train/evaluate/restore."""
 
 import hashlib
+import io
 import json
 from pathlib import Path
 
@@ -13,6 +14,13 @@ def file_sha256(path):
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def state_sha256(state):
+    """Hash tensor values independently of their device and shared storage."""
+    stream = io.BytesIO()
+    torch.save({name: value.detach().cpu().clone() for name, value in sorted(state.items())}, stream)
+    return hashlib.sha256(stream.getbuffer()).hexdigest()
 
 
 def save_json(path, value):

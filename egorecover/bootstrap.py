@@ -17,7 +17,9 @@ class HeadAlignedBootstrap:
         rest = torch.as_tensor(rest_joints)
         if rest.shape != (22, 3) or not rest.is_floating_point() or not bool(torch.isfinite(rest).all()):
             raise ValueError("Provide 22 finite floating-point neutral SMPL joint positions in Y-up coordinates.")
-        self.rest_joints = rest.detach().clone()
+        # Official clips are assembled on CPU. Cache this tiny template once,
+        # avoiding a synchronous device-to-host copy for every startup frame.
+        self.rest_joints = rest.detach().cpu().clone()
 
     @classmethod
     @torch.no_grad()

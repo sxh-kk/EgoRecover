@@ -21,9 +21,9 @@
     ]
   },
   "tests": {
-    "passed": 211,
+    "passed": 243,
     "failed": 0,
-    "seconds": 19.52
+    "seconds": 40.93
   },
   "static_checks": {
     "ruff": "passed",
@@ -157,7 +157,7 @@
     "tmr_implemented": false,
     "egoforce_PJ_AUJ_exact_parity_verified": false
   },
-  "formal_experiments_started": false,
+  "formal_experiments_started": true,
   "remaining_training_assets": [],
   "previous_validation": {
     "commit": "b6a7863d1a8ed1d05001b4a46a6c71f29c6e5bc0",
@@ -218,5 +218,50 @@
     },
     "formal_experiments_started": false,
     "schedule_resume_test_scope": "compact synthetic; deterministic equality across LR milestone"
+  },
+  "multi_gpu_window_selection": {
+    "root": "exp/window-selection-20261107",
+    "seed": 62,
+    "optimizer_updates_per_window": 12000,
+    "global_batch": 64,
+    "local_batch_per_rank": 32,
+    "microbatch": 8,
+    "gpus_per_window": 2,
+    "gpu_pairs": {
+      "W1": [
+        0,
+        1
+      ],
+      "W3": [
+        2,
+        3
+      ],
+      "W5": [
+        4,
+        5
+      ],
+      "W10": [
+        6,
+        7
+      ]
+    },
+    "same_random_initial_model_sha256": "455e73dfb7181c99fff554ed9b3e974bb897292ab69880932e9b6f42789d8fb6",
+    "fixed_minival_clips": 128,
+    "fixed_minival_takes": 128,
+    "fixed_minival_sha256": "237f4ea7f80d5b9eb3a0db00820f689a7c119862a9d1cd29eac59f8bf7e6e981",
+    "validate_every": 1000,
+    "final_validation_clips": 4379,
+    "final_validation_checkpoint": "best EMA selected on common minival",
+    "full_cpu_ddp_resume_exact": true,
+    "real_eight_gpu_smoke": {
+      "all_windows_updates": 2,
+      "finite_loss_and_gradients": true,
+      "rank_model_and_ema_hashes_agree": true,
+      "W3_gpu_resume_to_step": 3
+    },
+    "single_seed_selection": true,
+    "isolated_latency_benchmark_done": false,
+    "running": true,
+    "selection_complete": false
   }
 }

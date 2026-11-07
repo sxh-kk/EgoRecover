@@ -57,6 +57,7 @@ conda run -n egorecover --no-capture-output python -m egorecover prepare \
   --data-format official \
   --data-root datasets/ee4d_official/ee4d_motion_uniegomotion \
   --initialization scratch --prior-mode constant_velocity \
+  --batch-size 64 --microbatch-size 8 --train-steps 12000 \
   --output exp/official-preparation --device cuda
 ```
 
@@ -64,32 +65,45 @@ conda run -n egorecover --no-capture-output python -m egorecover prepare \
 
 训练优化参数对齐 UniEgoMotion：AdamW 学习率 `3e-5`、weight decay `0.01`、betas `(0.9, 0.999)`、eps `1e-8`，L2 梯度裁剪 `1.0`，每次优化更新后 EMA `0.999`，有效 batch `64`，seed `62`。完整网络 dropout 为 `0.1`；合成诊断用的 compact 网络保持 dropout `0`。配置及实现来源固定为上游提交 `580c92c6d70a91672c4106bab30ca82cdd80f379`：[配置](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/config/uem.yaml)、[优化器与调度](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/module/uem_module.py)、[训练入口](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/run/train_uem.py)、[网络](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/model/uniegomotion.py)。
 
-下面以 W=3 架构组为例，使用随机 G、一步求解和共同有效 batch；`2400` 次优化更新是 **pilot 预算**，不是官方的 350 epochs，也不表示已收敛。实验顺序为窗口 → 起点 → 成对监督 → 组合。W=1/3/5/10 使用各自配置和同一预算，先在官方 val 上选择窗口：
+本轮先做 W=1/3/5/10 的单种子窗口选择，四组并行、每组两张 GPU，均使用随机 G、高斯起点、基础 Flow 目标和一步求解。每组 seed=62、`12000` 次优化更新、global batch=64，共 `768000` 个 online queries。实验顺序仍为窗口 → 起点 → 成对监督 → 组合；本轮不同时加入起点或成对监督变化。这个预算不表示已收敛，也不能支持多种子显著性结论。
+
+以下是四组启动命令示例，日志和输出分别保存；实际启动、结束状态以对应进程、日志和输出记录为准，文档不表示这些运行已经完成：
 
 ```bash
-conda run -n egorecover --no-capture-output python -m egorecover train \
-  --config exp/official-preparation/configs/architecture/W3.json \
-  --data-format official \
-  --data-root datasets/ee4d_official/ee4d_motion_uniegomotion \
-  --from-scratch --prior-mode constant_velocity --device cuda --seed 62 \
-  --learning-rate 3e-5 --weight-decay 0.01 --grad-clip-norm 1.0 \
-  --lr-schedule uniegomotion --lr-decay-gamma 0.1 \
-  --batch-size 64 --microbatch-size 8 --train-steps 2400 --eval-every 200 \
-  --output exp/official-architecture/W3/seed62
+mkdir -p exp/official-architecture/logs
 
-conda run -n egorecover --no-capture-output python -m egorecover evaluate \
-  --checkpoint exp/official-architecture/W3/seed62/best.pt \
-  --data-format official \
-  --data-root datasets/ee4d_official/ee4d_motion_uniegomotion \
-  --prior-mode constant_velocity --split val --mode rollout --steps 1 \
-  --skip-paired --device cuda --output exp/official-architecture/W3/seed62/evaluation
+run_window() {
+  local window_width="$1"
+  local gpu_pair="$2"
+  CUDA_VISIBLE_DEVICES="$gpu_pair" conda run -n egorecover --no-capture-output \
+    python -m torch.distributed.run --standalone --nproc_per_node=2 --module egorecover train \
+    --config "exp/official-preparation/configs/architecture/W${window_width}.json" \
+    --data-format official \
+    --data-root datasets/ee4d_official/ee4d_motion_uniegomotion \
+    --from-scratch --prior-mode constant_velocity --device cuda --seed 62 \
+    --learning-rate 3e-5 --weight-decay 0.01 --grad-clip-norm 1.0 \
+    --lr-schedule uniegomotion --lr-decay-gamma 0.1 \
+    --batch-size 64 --microbatch-size 8 --rollin-frames 4 --train-steps 12000 \
+    --eval-every 1000 --dev-limit 128 --dev-seed 1062 --full-dev-final \
+    --output "exp/official-architecture/W${window_width}/seed62"
+}
+
+run_window 1 0,1 > exp/official-architecture/logs/W1-seed62.log 2>&1 &
+run_window 3 2,3 > exp/official-architecture/logs/W3-seed62.log 2>&1 &
+run_window 5 4,5 > exp/official-architecture/logs/W5-seed62.log 2>&1 &
+run_window 10 6,7 > exp/official-architecture/logs/W10-seed62.log 2>&1 &
+wait
 ```
 
-`--batch-size` 是每次优化的有效样本数，`--microbatch-size` 通过梯度累积控制单次并行量，默认分别为 `64/8`。`--resume` 保留同一实验的优化器与学习率时钟；后续反馈组使用 `--initialize` 从共同预热模型开始新实验，重置优化器和学习率时钟，两者不能混用。`--skip-paired` 只跳过成对反馈诊断，保留连续重建指标和 CSV；需要反馈诊断时另行选择有足够后续帧的片段与锚点。
+训练从 `WORLD_SIZE` 自动识别 DDP；上述每组 world size=2，`--batch-size 64` 是两卡合计的有效 batch，每卡 local batch=32。`--microbatch-size 8` 是每卡单次并行量，因此每卡累积四次后共同做一次 optimizer 更新，不能把 global batch 再乘以卡数。
+
+`--dev-limit 128 --dev-seed 1062` 选择固定的 take 均衡哈希子集，四组共用相同的片段 ID、种子和选择哈希，已不再取官方顺序的前 128 条。每 1000 步在该 minival 上选 EMA checkpoint。`--full-dev-final` 在训练结束后加载 minival 选出的最佳 EMA，双卡分片评价全部 4379 个可用验证片段，输出 `full-dev.json` 和 `metrics.csv`；全量评价不重新选择训练中的 checkpoint。
+
+`best.pt` 是供 `evaluate` 和 `--initialize` 使用的轻量 checkpoint；`resume.pt` 保留完整训练状态、两 rank 的随机状态、调度状态和恢复身份校验。`--resume` 需使用同一 world size 并保留优化器与学习率时钟；后续反馈组使用 `--initialize` 从共同预热模型开始新实验，重置优化器和学习率时钟，两者不能混用。单独运行 `evaluate` 时，`--skip-paired` 只跳过成对反馈诊断，保留连续重建指标和 CSV；本轮选窗只做重建评价，后续反馈阶段再选取足够长的片段与锚点做配对诊断。
 
 默认 `--lr-schedule uniegomotion` 将官方 epoch 调度换算为 optimizer 更新次数：取官方训练候选数 `N_ref`，在 `ceil(N_ref / effective_batch) × 300` 次更新后把学习率乘以 `--lr-decay-gamma`，默认 `0.1`。当前 `N_ref=143560`、batch=64 时，衰减点为 `673200`，第 `673201` 次更新开始使用 `3e-6`。可用 `--lr-decay-step` 显式覆盖，或用 `--lr-schedule constant` 固定学习率；合成诊断没有官方候选参考，未显式设置衰减点时不自动衰减。
 
-是否使用完整参考预算需单独决定。官方 350 epochs 对应 `2244 × 350 = 785400` 次更新；这里每个样本是 online query，不能把这些更新称为本项目的 350 epochs。示例 `2400 × 64 = 153600` 个 query 只用于预算试跑，学习率不会为了短预算而把官方衰减点压缩到其末段。确认学习曲线与计算成本后，再给各对照组设置共同的正式 query/update 预算；文档及 `prepare` 均不会自动启动大预算训练。详细换算见 [训练参数与预算](docs/method.md#训练参数与预算)。
+是否使用完整参考预算需单独决定。官方 350 epochs 对应 `2244 × 350 = 785400` 次更新；这里每个样本是 online query，不能把这些更新称为本项目的 350 epochs。本轮 `12000 × 64 = 768000` 个 query 是单种子选窗预算，学习率保持 `3e-5`，不会为了短预算而把官方衰减点压缩到其末段。后续根据学习曲线和计算成本确定预算，补充种子验证后再评价稳定收益；`prepare` 不会自动启动上述训练或完整参考预算。详细换算见 [训练参数与预算](docs/method.md#训练参数与预算)。
 
 官方包只有 train/val；`dev` 是 val 的别名，不能把它称为独立 test。默认验证选择当前发布包中的 4,405 个官方参考候选，跳过 26 个只有 21 帧的短尾，实际评价 4,379 个片段。每段前 20 帧只建立启动历史，不评分，因此这些在线结果不能直接与论文整段 80 帧数值相减。当前只输出并评价 SMPL22 身体，不增加手指重建；更多数据与评分边界见 [数据协议](docs/data.md)。旧 `restore` 和 `--data-format paired` 仅保留兼容用途，不是当前主路径。
 
@@ -109,6 +123,7 @@ egorecover/
   timing.py        源帧网格与采样时间核验
   training.py      训练、开发集选模、恢复
   evaluation.py    连续运行与配对多步指标
+  selection.py     固定 take 均衡验证子集及选择身份
   metrics.py       SMPL22 精度、时序、轨迹与脚滑指标
   evaluate.py      评估任务组织及预测导出
   checkpoint.py    E7/P导入与新版checkpoint身份

@@ -182,6 +182,7 @@ def summarize(rows):
     for metric in (
         "body_mm",
         "same_shape_mm",
+        "startup_prior_body_mm",
         "center_mm",
         "first_frame_ms",
         "observation_wait_ms",

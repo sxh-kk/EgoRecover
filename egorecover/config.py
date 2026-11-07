@@ -108,6 +108,8 @@ class TrainOptions:
     rollin_frames: int = 4
     eval_every: int = 200
     dev_limit: int | None = None
+    dev_seed: int = 1062
+    full_dev_final: bool = False
     stop_after: int | None = None
     resume: bool = False
     synthetic: bool = False
