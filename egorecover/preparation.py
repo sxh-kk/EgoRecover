@@ -12,11 +12,30 @@ import torch
 
 from .assets import asset_plan, asset_registry, matches
 from .codec import MotionCodec
+from .config import TrainOptions
 from .data import PreparedWindowData, manifest_inventory, resolve_data_format
 from .experiments import experiment_matrix
 from .fk import FixedShapeFK, load_smpl, smpl_path
 from .io import code_identity, file_sha256, save_json
 from .state import state_map
+
+OPTIMIZATION_FIELDS = (
+    "learning_rate",
+    "weight_decay",
+    "grad_clip_norm",
+    "lr_schedule",
+    "lr_decay_step",
+    "lr_decay_gamma",
+)
+
+
+def optimization_argv(args):
+    result = []
+    for name in OPTIMIZATION_FIELDS:
+        value = getattr(args, name)
+        if value is not None:
+            result += ["--" + name.replace("_", "-"), str(value)]
+    return result
 
 
 def environment_report():
@@ -98,6 +117,9 @@ def audit_available_episodes(root, *, count=1, smpl=None):
 
 
 def prepare(args):
+    for name in OPTIMIZATION_FIELDS:
+        if not hasattr(args, name):
+            setattr(args, name, getattr(TrainOptions, name))
     if args.check_episodes < 0:
         raise ValueError("check-episodes cannot be negative.")
     if resolve_data_format(args.data_root, getattr(args, "data_format", "auto")) == "official":
@@ -146,6 +168,7 @@ def prepare(args):
                 "--train-steps",
                 str(args.train_steps),
             ]
+            command += optimization_argv(args)
             dependency = row["initialize_from"] or row["reuse"]
             if row["initialize_from"]:
                 checkpoint = args.output / "runs" / row["initialize_from"] / f"seed{seed}" / "best.pt"

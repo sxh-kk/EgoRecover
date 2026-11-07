@@ -62,7 +62,9 @@ conda run -n egorecover --no-capture-output python -m egorecover prepare \
 
 报告位于 `exp/official-preparation/preparation.json`，各窗口配置位于其 `configs/architecture/`。当前启动历史是只由当时头轨迹构造的直立中性 SMPL22 先验：使用头部 yaw，固定 `beta=0`，将设备原点近似为头关节 15，不使用 GT 身体或 E7。P 采用解析常速度，当前阶段不需要 E7 或学习型 P checkpoint。图像仍读取官方预计算 DINO 特征；5 Hz 特征向 10 Hz 身体时刻作因果保持，不读取下一帧特征。
 
-下面以 W=3 架构组为例，使用随机 G、一步求解和共同有效 batch；预算是可修改的示例，不表示已收敛。W=1/3/5/10 使用各自配置和同一预算，先在官方 val 上选择窗口：
+训练优化参数对齐 UniEgoMotion：AdamW 学习率 `3e-5`、weight decay `0.01`、betas `(0.9, 0.999)`、eps `1e-8`，L2 梯度裁剪 `1.0`，每次优化更新后 EMA `0.999`，有效 batch `64`，seed `62`。完整网络 dropout 为 `0.1`；合成诊断用的 compact 网络保持 dropout `0`。配置及实现来源固定为上游提交 `580c92c6d70a91672c4106bab30ca82cdd80f379`：[配置](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/config/uem.yaml)、[优化器与调度](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/module/uem_module.py)、[训练入口](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/run/train_uem.py)、[网络](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/model/uniegomotion.py)。
+
+下面以 W=3 架构组为例，使用随机 G、一步求解和共同有效 batch；`2400` 次优化更新是 **pilot 预算**，不是官方的 350 epochs，也不表示已收敛。实验顺序为窗口 → 起点 → 成对监督 → 组合。W=1/3/5/10 使用各自配置和同一预算，先在官方 val 上选择窗口：
 
 ```bash
 conda run -n egorecover --no-capture-output python -m egorecover train \
@@ -70,6 +72,8 @@ conda run -n egorecover --no-capture-output python -m egorecover train \
   --data-format official \
   --data-root datasets/ee4d_official/ee4d_motion_uniegomotion \
   --from-scratch --prior-mode constant_velocity --device cuda --seed 62 \
+  --learning-rate 3e-5 --weight-decay 0.01 --grad-clip-norm 1.0 \
+  --lr-schedule uniegomotion --lr-decay-gamma 0.1 \
   --batch-size 64 --microbatch-size 8 --train-steps 2400 --eval-every 200 \
   --output exp/official-architecture/W3/seed62
 
@@ -81,7 +85,11 @@ conda run -n egorecover --no-capture-output python -m egorecover evaluate \
   --skip-paired --device cuda --output exp/official-architecture/W3/seed62/evaluation
 ```
 
-`--batch-size` 是每次优化的有效样本数，`--microbatch-size` 通过梯度累积控制单次并行量。`--resume` 恢复同一实验；后续反馈组使用 `--initialize` 从共同预热模型继续，两者不能混用。`--skip-paired` 只跳过成对反馈诊断，保留连续重建指标和 CSV；需要反馈诊断时另行选择有足够后续帧的片段与锚点。
+`--batch-size` 是每次优化的有效样本数，`--microbatch-size` 通过梯度累积控制单次并行量，默认分别为 `64/8`。`--resume` 保留同一实验的优化器与学习率时钟；后续反馈组使用 `--initialize` 从共同预热模型开始新实验，重置优化器和学习率时钟，两者不能混用。`--skip-paired` 只跳过成对反馈诊断，保留连续重建指标和 CSV；需要反馈诊断时另行选择有足够后续帧的片段与锚点。
+
+默认 `--lr-schedule uniegomotion` 将官方 epoch 调度换算为 optimizer 更新次数：取官方训练候选数 `N_ref`，在 `ceil(N_ref / effective_batch) × 300` 次更新后把学习率乘以 `--lr-decay-gamma`，默认 `0.1`。当前 `N_ref=143560`、batch=64 时，衰减点为 `673200`，第 `673201` 次更新开始使用 `3e-6`。可用 `--lr-decay-step` 显式覆盖，或用 `--lr-schedule constant` 固定学习率；合成诊断没有官方候选参考，未显式设置衰减点时不自动衰减。
+
+是否使用完整参考预算需单独决定。官方 350 epochs 对应 `2244 × 350 = 785400` 次更新；这里每个样本是 online query，不能把这些更新称为本项目的 350 epochs。示例 `2400 × 64 = 153600` 个 query 只用于预算试跑，学习率不会为了短预算而把官方衰减点压缩到其末段。确认学习曲线与计算成本后，再给各对照组设置共同的正式 query/update 预算；文档及 `prepare` 均不会自动启动大预算训练。详细换算见 [训练参数与预算](docs/method.md#训练参数与预算)。
 
 官方包只有 train/val；`dev` 是 val 的别名，不能把它称为独立 test。默认验证选择当前发布包中的 4,405 个官方参考候选，跳过 26 个只有 21 帧的短尾，实际评价 4,379 个片段。每段前 20 帧只建立启动历史，不评分，因此这些在线结果不能直接与论文整段 80 帧数值相减。当前只输出并评价 SMPL22 身体，不增加手指重建；更多数据与评分边界见 [数据协议](docs/data.md)。旧 `restore` 和 `--data-format paired` 仅保留兼容用途，不是当前主路径。
 

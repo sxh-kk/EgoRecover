@@ -21,9 +21,9 @@
     ]
   },
   "tests": {
-    "passed": 182,
+    "passed": 211,
     "failed": 0,
-    "seconds": 19.06
+    "seconds": 19.52
   },
   "static_checks": {
     "ruff": "passed",
@@ -162,5 +162,61 @@
   "previous_validation": {
     "commit": "b6a7863d1a8ed1d05001b4a46a6c71f29c6e5bc0",
     "scope": "historical paired-cache and comparison-metric checks, superseded as training input"
+  },
+  "optimization_alignment": {
+    "source_commit": "580c92c6d70a91672c4106bab30ca82cdd80f379",
+    "optimization": {
+      "optimizer": "AdamW",
+      "learning_rate": 3e-05,
+      "weight_decay": 0.01,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "grad_clip_norm": 1.0,
+      "scheduler": {
+        "mode": "uniegomotion",
+        "decay_step": 673200,
+        "gamma": 0.1
+      },
+      "reference": {
+        "repository": "chaitanya100100/UniEgoMotion",
+        "commit": "580c92c6d70a91672c4106bab30ca82cdd80f379",
+        "source_links": {
+          "config": "https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/config/uem.yaml",
+          "optimizer_scheduler": "https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/module/uem_module.py",
+          "gradient_clip_ema_seed": "https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/run/train_uem.py"
+        },
+        "train_epochs": 350,
+        "decay_epoch": 300,
+        "source_clips": 143560,
+        "reference_steps_per_epoch": 2244,
+        "full_reference_updates": 785400,
+        "interpretation": "official window-count update reference; not equivalent supervised-body volume"
+      }
+    },
+    "production_model_config": {
+      "width": 768,
+      "layers": 12,
+      "heads": 12,
+      "dropout": 0.1
+    },
+    "preparation_status": "ready_for_training",
+    "prepare_report": "exp/uniegomotion-aligned-preparation/preparation.json",
+    "schedule_crossing_and_exact_native_resume_test": true,
+    "gpu_smoke": {
+      "run": "exp/uniegomotion-alignment-smoke",
+      "production_dropout": 0.1,
+      "optimizer_updates": 2,
+      "resume_after_step": 1,
+      "batch": 2,
+      "microbatch": 2,
+      "learning_rate": 3e-05,
+      "finite_loss_and_gradients": true,
+      "scope": "short diagnostic; batch overridden; not a formal experiment"
+    },
+    "formal_experiments_started": false,
+    "schedule_resume_test_scope": "compact synthetic; deterministic equality across LR milestone"
   }
 }

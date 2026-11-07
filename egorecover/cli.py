@@ -18,7 +18,6 @@ def build_parser():
     train.add_argument("--device", default=TrainOptions.device)
     for name in ("seed", "train-steps", "batch-size", "microbatch-size", "rollin-frames", "eval-every"):
         train.add_argument(f"--{name}", type=int, default=getattr(TrainOptions, name.replace("-", "_")))
-    train.add_argument("--learning-rate", type=float, default=TrainOptions.learning_rate)
     train.add_argument("--dev-limit", type=int)
     train.add_argument("--stop-after", type=int)
     for flag in ("resume", "synthetic", "compact", "from-scratch"):
@@ -76,6 +75,11 @@ def build_parser():
     prepare.add_argument("--microbatch-size", type=int, default=8)
     prepare.add_argument("--train-steps", type=int, default=2400)
     prepare.add_argument("--initialization", choices=("scratch", "e7"), default="scratch")
+    for command in (train, prepare):
+        for name in ("learning-rate", "weight-decay", "grad-clip-norm", "lr-decay-gamma"):
+            command.add_argument(f"--{name}", type=float, default=getattr(TrainOptions, name.replace("-", "_")))
+        command.add_argument("--lr-schedule", choices=("uniegomotion", "constant"), default=TrainOptions.lr_schedule)
+        command.add_argument("--lr-decay-step", type=int)
     return parser
 
 

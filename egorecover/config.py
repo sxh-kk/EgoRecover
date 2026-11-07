@@ -11,7 +11,7 @@ class ModelConfig:
     width: int = 768
     layers: int = 12
     heads: int = 12
-    dropout: float = 0.0
+    dropout: float = 0.1
 
     def __post_init__(self):
         for name in ("width", "layers", "heads"):
@@ -25,7 +25,7 @@ class ModelConfig:
 
     @classmethod
     def compact(cls):
-        return cls(width=48, layers=2, heads=4)
+        return cls(width=48, layers=2, heads=4, dropout=0.0)
 
     def to_dict(self):
         return asdict(self)
@@ -97,9 +97,14 @@ class TrainOptions:
     device: str = "cpu"
     seed: int = 62
     train_steps: int = 2400
-    batch_size: int = 4
-    microbatch_size: int = 1
+    batch_size: int = 64
+    microbatch_size: int = 8
     learning_rate: float = 3e-5
+    weight_decay: float = 0.01
+    grad_clip_norm: float = 1.0
+    lr_schedule: str = "uniegomotion"
+    lr_decay_step: int | None = None
+    lr_decay_gamma: float = 0.1
     rollin_frames: int = 4
     eval_every: int = 200
     dev_limit: int | None = None

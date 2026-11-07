@@ -1,7 +1,6 @@
 """Train the rolling-window model, with full-response paired EMA supervision."""
 
 import json
-import math
 import platform
 
 import torch
@@ -16,6 +15,7 @@ from egorecover.fk import joint_decoder, load_smpl, smpl_identity
 from egorecover.io import code_identity, file_sha256, save_checkpoint, save_json
 from egorecover.losses import frozen_ema, training_objective, update_ema
 from egorecover.models import MotionModel
+from egorecover.optimization import make_optimizer, make_scheduler, optimization_protocol
 from egorecover.state import state_map
 
 
@@ -67,8 +67,7 @@ def train(args):
         raise ValueError("Invalid training budget.")
     if args.stop_after is not None and args.stop_after < 1:
         raise ValueError("stop-after must be positive.")
-    if not math.isfinite(args.learning_rate) or args.learning_rate <= 0:
-        raise ValueError("learning-rate must be finite and positive.")
+    optimization_protocol(args)
     prior_mode = resolve_prior_mode(args.prior_mode, args.prior_checkpoint)
     smpl = None
     dataset_format, dataset_protocol = "synthetic", {"scope": "synthetic_diagnostic"}
@@ -110,9 +109,10 @@ def train(args):
     system = WindowReconstructor(codec, prior, config)
     model_config = ModelConfig.compact() if args.compact else ModelConfig()
     model = MotionModel(config, model_config).to(device)
-    optimizer = torch.optim.AdamW(
-        (p for p in model.parameters() if p.requires_grad), lr=args.learning_rate, weight_decay=0.01
-    )
+    reference_clips = train_data.inventory["selected_clip_candidates"] if dataset_format == "official" else None
+    optimization = optimization_protocol(args, reference_clips)
+    optimizer = make_optimizer((p for p in model.parameters() if p.requires_grad), optimization)
+    scheduler = make_scheduler(optimizer, optimization)
     identity = {
         "protocol": config.to_dict(),
         "seed": args.seed,
@@ -136,6 +136,7 @@ def train(args):
         "eval_every": args.eval_every,
         "rollin_frames": args.rollin_frames,
         "learning_rate": args.learning_rate,
+        "optimization": optimization,
         "dev_limit": args.dev_limit,
         "python": platform.python_version(),
         "torch": str(torch.__version__),
@@ -174,6 +175,8 @@ def train(args):
         ema.load_state_dict(saved["ema"], strict=True)
         feedback_model.load_state_dict(saved["feedback_model"], strict=True)
         optimizer.load_state_dict(saved["optimizer"])
+        if scheduler is not None:
+            scheduler.load_state_dict(saved["scheduler"])
         generator.set_state(saved["sample_rng"].cpu())
         torch.set_rng_state(saved["cpu_rng"].cpu())
         if device.type == "cuda":
@@ -232,8 +235,11 @@ def train(args):
             for key in components:
                 components[key] += float(result[key].detach()) * fraction
             del result
-        norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0, error_if_nonfinite=True)
+        norm = torch.nn.utils.clip_grad_norm_(model.parameters(), args.grad_clip_norm, error_if_nonfinite=True)
+        used_lr = optimizer.param_groups[0]["lr"]
         optimizer.step()
+        if scheduler is not None:
+            scheduler.step()
         update_ema(ema, model, config.ema_decay)
         progress = {
             "step": step,
@@ -243,6 +249,8 @@ def train(args):
             "target_queries_seen": step * args.batch_size,
             "effective_batch_size": args.batch_size,
             "microbatch_size": args.microbatch_size,
+            "learning_rate": used_lr,
+            "next_learning_rate": optimizer.param_groups[0]["lr"],
         }
         print(json.dumps(progress, allow_nan=False), flush=True)
         save_json(args.output / "progress.json", progress)
@@ -270,6 +278,7 @@ def train(args):
                 "ema": ema.state_dict(),
                 "feedback_model": feedback_model.state_dict(),
                 "optimizer": optimizer.state_dict(),
+                "scheduler": scheduler.state_dict() if scheduler is not None else None,
                 "step": step,
                 "best": best,
                 "curve": curve,

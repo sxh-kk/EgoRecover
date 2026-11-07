@@ -46,7 +46,44 @@ flowchart LR
 
 Euler 从 τ=1 积分到 0，第 i 次更新为 x ← x + (x0(x,τ)−x)/(K−i)。因此一步求解严格等于网络在实际起点 S、τ=1 处的端点输出；两步、四步及十步保留完整梯度，不调用旧的 `no_grad` 采样接口。
 
-`MotionModel` 保留源自 E7 的网络结构与必要窗口条件，但官方数据实验明确使用 `--from-scratch` 随机初始化，不载入 E7 权重。旧数据路径的 E7 导入仅为兼容入口，官方训练拒绝该参数。`--compact` 采用相同前向路径与较小网络，只允许配合显式合成数据诊断。
+`MotionModel` 保留源自 E7 的网络结构与必要窗口条件，但官方数据实验明确使用 `--from-scratch` 随机初始化，不载入 E7 权重。完整网络 dropout 为 `0.1`。旧数据路径的 E7 导入仅为兼容入口，官方训练拒绝该参数。`--compact` 采用相同前向路径与较小网络，dropout 为 `0`，只允许配合显式合成数据诊断。
+
+## 训练参数与预算
+
+优化器与训练稳定性参数对齐 UniEgoMotion 的固定提交 `580c92c6d70a91672c4106bab30ca82cdd80f379`，来源为 [config/uem.yaml](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/config/uem.yaml)、[module/uem_module.py](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/module/uem_module.py)、[run/train_uem.py](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/run/train_uem.py) 和 [model/uniegomotion.py](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/model/uniegomotion.py)。
+
+| 参数 | 当前设置与口径 |
+|---|---|
+| 优化器 | AdamW，仅更新可训练 G |
+| 初始学习率 | `3e-5`，可用 `--learning-rate` 设置 |
+| Weight decay | `0.01`，可用 `--weight-decay` 设置 |
+| AdamW betas / eps | `(0.9, 0.999)` / `1e-8` |
+| 梯度裁剪 | L2 全局范数上限 `1.0`，可用 `--grad-clip-norm` 设置 |
+| 移动 EMA | 每次 optimizer 更新后按 `0.999` 更新，供选模使用 |
+| 有效 batch / microbatch | 默认 `64/8`；microbatch 梯度按有效 batch 加权累积 |
+| 随机种子 | 首轮 `62`，正式重复为 `62/63/64` |
+| 网络 dropout | 完整网络 `0.1`，合成 compact 诊断 `0` |
+| 学习率调度 | 默认 `--lr-schedule uniegomotion`；gamma 默认 `0.1` |
+
+官方按 epoch 使用 StepLR：350 epochs 预算，在 300 epochs 后首次把学习率乘以 `0.1`。本项目训练样本是独立采样的 online query，不存在遍历所有训练片段一次的同义 epoch，因此调度和预算统一用 optimizer update 记录。
+
+默认调度使用官方训练清单的 `selected_clip_candidates` 作为 `N_ref`，按 `updates_per_reference_epoch = ceil(N_ref / effective_batch)` 换算，衰减点为 `300 × updates_per_reference_epoch`。这里使用未跳过短尾的官方候选数，不用当前可运行片段数冒充官方训练集大小，也不使用 microbatch 大小计算参考更新次数。
+
+| 参考项 | 当前官方包、有效 batch=64 时的数值 |
+|---|---:|
+| 官方训练候选片段数 `N_ref` | 143,560 |
+| 官方每 epoch 的更新次数，末批保留 | 2,244 |
+| 官方 300 epochs 对应的衰减点 | 673,200 updates |
+| 官方 350 epochs 对应的更新次数 | 785,400 updates |
+| 示例 pilot | 2,400 updates / 153,600 online queries |
+
+在此默认配置下，更新 1…673200 使用 `3e-5`，第 673201 次更新起使用 `3e-6`。`--lr-decay-step` 可显式覆盖衰减点，`--lr-decay-gamma` 设置倍数；固定学习率实验使用 `--lr-schedule constant`。合成诊断没有官方参考片段数，未显式设置衰减点时不自动衰减。短 pilot 不把衰减点按预算比例压缩到末段，因此 2400 更新的试跑处于官方参考调度的初始学习率阶段。
+
+785400 updates 是“相同更新次数”的参考预算，不表示本项目训练了 350 个 epoch，也不表示监督量与上游一致：官方 350 epochs 实际访问 50,246,000 个 clips，末批不足 64；本项目 785400 次满 batch 对应 50,265,600 个 online queries。上游每个 clip 最长 80 帧，本项目每个 query 的目标是 W 帧活动窗口，采样分布和辅助监督也不同。正式报告需同时记录有效 batch、optimizer updates、累计 queries、窗口、roll-in、初始化及总训练成本。
+
+先用标明为 pilot 的共同短预算检查学习曲线与计算成本，再确定正式预算；若选择完整更新次数参考，则显式把 `--train-steps` 设为 `785400`。配置生成与本文说明不会自动启动该训练。20 帧历史、21 帧观测、W=1/3/5/10、默认 4 帧 roll-in、噪声尺度 σ、Flow 端点比例和反馈权重均属于本方案控制项；上游 80 帧片段和 1000 个 diffusion 时步不能机械替代这里的在线窗口或 Euler 求解步数。
+
+`--resume` 继续原优化器与学习率时钟；`--initialize` 从共同预热 EMA 开始一个新实验，优化器和学习率时钟均重置。所有继续训练对照使用同一重置策略及相同新增 query 预算，不把预热成本从总成本中省略。
 
 ## 成对反馈及梯度边界
 
@@ -66,7 +103,7 @@ Euler 从 τ=1 积分到 0，第 i 次更新为 x ← x + (x0(x,τ)−x)/(K−i)
 
 ## 四组实验与公平对照
 
-`egorecover experiments --window 3 --output exp/window_plan/configs` 输出矩阵和每个组的 JSON，不自动启动训练。窗口 3 只是初始示例，实验一完成后应先在开发集选择窗口，再重新生成后续矩阵。
+按“在线窗口 → 预测中心起点 → 成对监督 → 组合”的顺序推进；前一阶段固定结论和控制设置后再开展下一阶段。`egorecover experiments --window 3 --output exp/window_plan/configs` 输出矩阵和每个组的 JSON，不自动启动训练。窗口 3 只是初始示例，实验一完成后应先在开发集选择窗口，再重新生成后续矩阵。
 
 | 实验 | 实现的比较 |
 |---|---|

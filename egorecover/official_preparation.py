@@ -9,15 +9,17 @@ import torch
 from .bootstrap import HeadAlignedBootstrap
 from .checkpoint import load_predictor, resolve_prior_mode
 from .codec import MotionCodec
+from .config import ModelConfig
 from .experiments import experiment_matrix
 from .fk import FixedShapeFK, load_smpl, smpl_identity, smpl_path
 from .io import code_identity, save_json
 from .official import OfficialWindowData
+from .optimization import optimization_protocol
 
 
 @torch.no_grad()
 def prepare_official(args):
-    from .preparation import environment_report
+    from .preparation import environment_report, optimization_argv
 
     if getattr(args, "initialization", "scratch") != "scratch":
         raise ValueError("Official-data preparation uses random G initialization, with no E7 weights.")
@@ -95,6 +97,11 @@ def prepare_official(args):
             report["issues"].append({"kind": "official_data_check_failed", "message": str(error)})
     if args.device == "cuda" and not report["environment"]["cuda_available"]:
         report["issues"].append({"kind": "cuda_unavailable"})
+    train_data = datasets.get("train")
+    reference_clips = train_data.inventory["selected_clip_candidates"] if train_data is not None else None
+    optimization = optimization_protocol(args, reference_clips)
+    report["optimization"] = optimization
+    report["model_config"] = ModelConfig().to_dict()
 
     matrix = experiment_matrix(args.window)
     jobs = []
@@ -133,6 +140,7 @@ def prepare_official(args):
                 "--train-steps",
                 str(args.train_steps),
             ]
+            command += optimization_argv(args)
             if prior_checkpoint is not None:
                 command += ["--prior-checkpoint", str(prior_checkpoint.resolve())]
             if row["initialize_from"]:
@@ -167,11 +175,14 @@ def prepare_official(args):
             "window_selection_finalized": False,
             "selected_window_for_later_experiments": args.window,
             "training_budget": {
+                "units": "optimizer updates and online queries; not official clip epochs",
                 "effective_batch": args.batch_size,
                 "microbatch": args.microbatch_size,
                 "optimizer_steps": args.train_steps,
                 "target_queries": args.batch_size * args.train_steps,
             },
+            "optimization": optimization,
+            "model_config": ModelConfig().to_dict(),
             "official_val_used_for_development": True,
             "unseen_test_claim": False,
         },
