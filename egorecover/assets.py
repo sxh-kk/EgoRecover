@@ -28,9 +28,16 @@ def matches(path, item):
 
 
 def select_assets(registry, preset):
-    """Metadata and a small train/dev check do not require the full dataset."""
+    """Select pinned assets without fetching unrelated models or test payloads."""
     if preset == "metadata":
         return [f for f in registry["files"] if f["path"] == "datasets/paired/data/manifest.json"]
+    if preset == "train-dev":
+        wanted = {"datasets/paired/data/manifest.json", "pretrained/prior.pt"}
+        for item in registry["files"]:
+            archive = item.get("archive", {}).get("path", "")
+            if item["path"].endswith(".pt") and archive.startswith(("bundles/g-train/", "bundles/g-dev/")):
+                wanted.update((item["path"], str(Path(item["path"]).with_suffix(".json"))))
+        return [item for item in registry["files"] if item["path"] in wanted]
     if preset == "preflight":
         wanted = {"datasets/paired/data/manifest.json", "pretrained/prior.pt"}
         sizes = {a["path"]: a["bytes"] for a in registry["archives"]}

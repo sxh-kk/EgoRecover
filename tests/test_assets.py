@@ -55,6 +55,29 @@ def test_preflight_downloads_train_and_dev_without_test_payloads():
     assert asset_plan(data, "preflight")["download_bytes"] < 300 * 1024**2
 
 
+def test_train_dev_selects_all_training_development_pairs_and_prior_without_e7_or_test():
+    data = asset_registry()
+    selected = select_assets(data, "train-dev")
+    paths = {item["path"] for item in selected}
+    assert len(selected) == 9188
+    assert {path for path in paths if path.startswith("pretrained/")} == {"pretrained/prior.pt"}
+    assert "datasets/paired/data/manifest.json" in paths
+    episodes = [item for item in selected if "archive" in item]
+    assert len(episodes) == 4369 + 224
+    for item in episodes:
+        assert item["archive"]["path"].startswith(("bundles/g-train/", "bundles/g-dev/"))
+        assert item["path"].endswith(".pt")
+        assert item["path"].removesuffix(".pt") + ".json" in paths
+    test_paths = {
+        item["path"] for item in data["files"] if item.get("archive", {}).get("path", "").startswith("bundles/g-test/")
+    }
+    assert paths.isdisjoint(test_paths)
+    assert paths.isdisjoint({path.removesuffix(".pt") + ".json" for path in test_paths})
+    assert asset_plan(data, "train-dev")["download_bytes"] < asset_plan(data, "training")["download_bytes"]
+    for preset in ("models", "training", "data", "smoke"):
+        assert select_assets(data, preset) == [item for item in data["files"] if preset in item["presets"]]
+
+
 def test_dry_run_does_not_create_directories_or_download(tmp_path):
     root = tmp_path / "absent"
     restore(

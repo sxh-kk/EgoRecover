@@ -71,6 +71,7 @@ def evaluate_episode(system, model, episode, joints, *, seed=1062, steps=None, m
         "matched_cache": matched_cache,
         "metric": "dense_diagnostic" if getattr(joints, "diagnostic_only", False) else "fixed_shape_smpl22",
         "synthetic": episode.synthetic,
+        "floor_calibrated": episode.floor_calibrated,
         "predictions": torch.stack(predictions, 1),
     }
     if comparison:
@@ -82,6 +83,9 @@ def evaluate_episode(system, model, episode, joints, *, seed=1062, steps=None, m
             predicted_rotations=emitted_rotations,
             truth_rotations=episode.truth.joints[20:, :, :3, :3],
         )
+        if not episode.floor_calibrated:
+            row["comparison"]["foot_slide_uniegomotion_mm"] = None
+            row["comparison"]["gt_foot_slide_uniegomotion_mm"] = None
         row["body_rotations"] = emitted_rotations
     return row
 
@@ -171,6 +175,8 @@ def summarize(rows):
             "mean": sum(per_take.values()) / len(per_take),
             "episode_mean": sum(value for _, value in available) / len(available),
             "per_take": per_take,
+            "available_episodes": len(available),
+            "available_takes": len(per_take),
         }
 
     for metric in (

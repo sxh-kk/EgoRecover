@@ -107,3 +107,6 @@ class TrainOptions:
     resume: bool = False
     synthetic: bool = False
     compact: bool = False
+    from_scratch: bool = False
+    data_format: str = "auto"
+    prior_mode: str = "auto"

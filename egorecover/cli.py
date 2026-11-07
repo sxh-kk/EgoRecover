@@ -7,6 +7,7 @@ from pathlib import Path
 
 def build_parser():
     from .config import TrainOptions
+    from .data import OFFICIAL_DATA_ROOT
 
     parser = argparse.ArgumentParser(prog="egorecover", description="Causal rolling-window body reconstruction")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -20,16 +21,18 @@ def build_parser():
     train.add_argument("--learning-rate", type=float, default=TrainOptions.learning_rate)
     train.add_argument("--dev-limit", type=int)
     train.add_argument("--stop-after", type=int)
-    for flag in ("resume", "synthetic", "compact"):
+    for flag in ("resume", "synthetic", "compact", "from-scratch"):
         train.add_argument(f"--{flag}", action="store_true")
     train.add_argument("--threads", type=int, default=2)
+    train.add_argument("--data-format", choices=("auto", "official", "paired"), default="auto")
+    train.add_argument("--prior-mode", choices=("auto", "constant_velocity", "learned"), default="auto")
 
     evaluation = commands.add_parser("evaluate", help="Matched-cache, continuous and paired-horizon evaluation")
     for name in ("checkpoint", "output"):
         evaluation.add_argument(f"--{name}", type=Path, required=True)
     for name in ("data-root", "prior-checkpoint"):
         evaluation.add_argument(f"--{name}", type=Path)
-    evaluation.add_argument("--split", choices=("dev", "test"), default="dev")
+    evaluation.add_argument("--split", choices=("dev", "val", "test"), default="dev")
     evaluation.add_argument("--steps", type=int, nargs="+", choices=(1, 2, 4, 10), default=[1, 2, 4, 10])
     evaluation.add_argument("--mode", choices=("both", "rollout", "matched"), default="both")
     evaluation.add_argument("--device", default="cpu")
@@ -38,7 +41,12 @@ def build_parser():
     evaluation.add_argument("--limit", type=int)
     evaluation.add_argument("--synthetic", action="store_true")
     evaluation.add_argument("--save-predictions", action="store_true")
+    evaluation.add_argument(
+        "--skip-paired", action="store_true", help="Skip paired diagnostics for reconstruction-only runs"
+    )
     evaluation.add_argument("--threads", type=int, default=2)
+    evaluation.add_argument("--data-format", choices=("auto", "official", "paired"), default="auto")
+    evaluation.add_argument("--prior-mode", choices=("auto", "constant_velocity", "learned"), default="auto")
 
     experiments = commands.add_parser("experiments", help="Generate the four controlled experiment families")
     experiments.add_argument("--window", type=int, choices=(1, 3, 5, 10), default=3)
@@ -47,7 +55,9 @@ def build_parser():
     restore = commands.add_parser("restore", help="Restore only assets used by the current pipeline")
     restore.add_argument("--root", type=Path, default=Path("assets"))
     restore.add_argument(
-        "--preset", choices=("metadata", "preflight", "models", "data", "training", "smoke"), default="models"
+        "--preset",
+        choices=("metadata", "preflight", "train-dev", "models", "data", "training", "smoke"),
+        default="models",
     )
     restore.add_argument("--dry-run", action="store_true")
     restore.add_argument("--verify-only", action="store_true")
@@ -55,13 +65,17 @@ def build_parser():
     prepare = commands.add_parser("prepare", help="Audit data/environment and materialize the current experiment plan")
     prepare.add_argument("--output", type=Path, default=Path("exp/preparation"))
     prepare.add_argument("--assets-root", type=Path, default=Path("assets"))
-    prepare.add_argument("--data-root", type=Path, default=Path("assets/datasets/paired"))
+    prepare.add_argument("--data-root", type=Path, default=OFFICIAL_DATA_ROOT)
+    prepare.add_argument("--data-format", choices=("auto", "official", "paired"), default="auto")
+    prepare.add_argument("--prior-mode", choices=("auto", "constant_velocity", "learned"), default="auto")
+    prepare.add_argument("--prior-checkpoint", type=Path)
     prepare.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
     prepare.add_argument("--window", type=int, choices=(1, 3, 5, 10), default=3)
     prepare.add_argument("--check-episodes", type=int, default=1)
     prepare.add_argument("--batch-size", type=int, default=64)
     prepare.add_argument("--microbatch-size", type=int, default=8)
     prepare.add_argument("--train-steps", type=int, default=2400)
+    prepare.add_argument("--initialization", choices=("scratch", "e7"), default="scratch")
     return parser
 
 

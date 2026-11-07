@@ -7,9 +7,9 @@ import platform
 import torch
 
 from egorecover import ModelConfig, WindowConfig, WindowReconstructor
-from egorecover.checkpoint import FORMAT, load_e7_weights, load_predictor
+from egorecover.checkpoint import FORMAT, load_e7_weights, load_predictor, resolve_prior_mode
 from egorecover.codec import MotionCodec
-from egorecover.data import PreparedWindowData, TrainingBatch
+from egorecover.data import TrainingBatch, open_window_data, resolve_data_format
 from egorecover.diagnostics import synthetic_episode
 from egorecover.evaluation import evaluate_episode, summarize
 from egorecover.fk import joint_decoder, load_smpl, smpl_identity
@@ -34,7 +34,16 @@ def compatible_initialization(saved, config, identity):
     ):
         if saved["protocol"][key] != config.to_dict()[key]:
             raise ValueError(f"Initialization changes controlled setting: {key}.")
-    for key in ("manifest", "prior", "synthetic", "compact", "smpl_asset", "model_config"):
+    for key in (
+        "manifest",
+        "prior",
+        "synthetic",
+        "compact",
+        "smpl_asset",
+        "model_config",
+        "data_format",
+        "data_protocol",
+    ):
         if saved["identity"][key] != identity[key]:
             raise ValueError(f"Initialization identity changed: {key}.")
 
@@ -44,6 +53,8 @@ def train(args):
     config = WindowConfig.from_json(args.config)
     if args.resume and args.initialize:
         raise ValueError("Resume and initialization are mutually exclusive.")
+    if args.from_scratch and (args.e7_checkpoint or args.initialize):
+        raise ValueError("Random G initialization cannot be combined with --e7-checkpoint or --initialize.")
     if args.dev_limit is not None and args.dev_limit < 1:
         raise ValueError("dev-limit must be positive.")
     if (
@@ -58,6 +69,9 @@ def train(args):
         raise ValueError("stop-after must be positive.")
     if not math.isfinite(args.learning_rate) or args.learning_rate <= 0:
         raise ValueError("learning-rate must be finite and positive.")
+    prior_mode = resolve_prior_mode(args.prior_mode, args.prior_checkpoint)
+    smpl = None
+    dataset_format, dataset_protocol = "synthetic", {"scope": "synthetic_diagnostic"}
     if args.synthetic:
         if not args.compact or args.data_root or args.prior_checkpoint or args.e7_checkpoint:
             raise ValueError("Synthetic checks require --compact and no production assets.")
@@ -65,15 +79,29 @@ def train(args):
         train_data = dev_data = None
         stats, manifest = fixture.stats, "synthetic_diagnostic"
     else:
-        if args.data_root is None or args.prior_checkpoint is None:
-            raise ValueError("Provide --data-root and the calibrated --prior-checkpoint.")
+        if args.data_root is None:
+            raise ValueError("Provide --data-root for production training.")
         if args.compact:
             raise ValueError("Compact mode is restricted to explicit synthetic checks.")
-        if args.e7_checkpoint is None and args.initialize is None and not args.resume:
-            raise ValueError("Start with --e7-checkpoint or --initialize.")
-        train_data = PreparedWindowData(args.data_root, "train", device=device)
-        dev_data = PreparedWindowData(args.data_root, "dev", device=device)
+        if args.e7_checkpoint is None and args.initialize is None and not args.resume and not args.from_scratch:
+            raise ValueError("Choose --from-scratch, --e7-checkpoint or --initialize explicitly.")
+        dataset_format = resolve_data_format(args.data_root, args.data_format)
+        if dataset_format == "official" and args.e7_checkpoint is not None:
+            raise ValueError("Official-data runs use random G initialization; omit --e7-checkpoint.")
+        smpl = load_smpl(device)
+        bootstrap = None
+        if dataset_format == "official":
+            from .bootstrap import HeadAlignedBootstrap
+
+            bootstrap = HeadAlignedBootstrap.from_smpl(smpl)
+        train_data = open_window_data(
+            args.data_root, "train", device=device, data_format=dataset_format, bootstrap=bootstrap
+        )
+        dev_data = open_window_data(
+            args.data_root, "dev", device=device, data_format=dataset_format, bootstrap=bootstrap
+        )
         stats, manifest = train_data.stats, train_data.digest
+        dataset_protocol = getattr(train_data, "protocol", {"scope": "legacy_paired_cache"})
         if any(not torch.equal(stats[k], dev_data.stats[k]) for k in stats):
             raise ValueError("Train/dev normalization statistics disagree.")
     torch.manual_seed(args.seed)
@@ -94,6 +122,10 @@ def train(args):
         "initialize": file_sha256(args.initialize) if args.initialize else None,
         "synthetic": args.synthetic,
         "compact": args.compact,
+        "from_scratch": args.from_scratch,
+        "data_format": dataset_format,
+        "data_protocol": dataset_protocol,
+        "prior_mode": prior_mode,
         "model_config": model_config.to_dict(),
         "smpl_asset": "dense_diagnostic" if args.synthetic else smpl_identity(),
         "feedback_teacher": "fixed_initial_ema",
@@ -110,6 +142,11 @@ def train(args):
     }
     args.output.mkdir(parents=True, exist_ok=True)
     identity_path = args.output / "identity.json"
+    # Continuations retain their original initialization provenance on resume;
+    # the native resume checkpoint supplies the live model/optimizer states.
+    if args.resume and identity_path.is_file():
+        original_identity = json.loads(identity_path.read_text())
+        identity["initialize"] = original_identity.get("initialize")
     if identity_path.exists() and json.loads(identity_path.read_text()) != identity:
         raise ValueError("Run identity changed; use a new output directory.")
     checkpoint_path = args.output / "resume.pt"
@@ -131,7 +168,6 @@ def train(args):
     # Keep the response map identical across paired/direct comparisons for the
     # entire continuation. A separate moving EMA is used for model selection.
     feedback_model = frozen_ema(model)
-    smpl = None if args.synthetic else load_smpl(device)
     generator = torch.Generator().manual_seed(args.seed + 1)
     start, best, curve = 0, float("inf"), []
     if saved:
@@ -151,9 +187,12 @@ def train(args):
         components = {k: 0.0 for k in ("loss", "flow", "current", "feedback")}
         for offset in range(0, args.batch_size, args.microbatch_size):
             count = min(args.microbatch_size, args.batch_size - offset)
-            episodes = tuple(fixture if args.synthetic else train_data.sample(generator) for _ in range(count))
-            batch = TrainingBatch(episodes)
-            frame = int(torch.randint(20, min(len(e) for e in episodes) - 1, (), generator=generator))
+            if not args.synthetic and hasattr(train_data, "sample_batch"):
+                batch, frame = train_data.sample_batch(generator, count, args.rollin_frames)
+            else:
+                episodes = tuple(fixture if args.synthetic else train_data.sample(generator) for _ in range(count))
+                batch = TrainingBatch(episodes)
+                frame = int(torch.randint(20, min(len(e) for e in episodes) - 1, (), generator=generator))
             first = max(20, frame - args.rollin_frames)
             cache = batch.cache(first)
             model.eval()

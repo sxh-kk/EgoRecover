@@ -1,5 +1,7 @@
+import hashlib
 import json
 from dataclasses import replace
+from types import SimpleNamespace
 
 import pytest
 import torch
@@ -45,7 +47,79 @@ def test_prepare_produces_plan_and_pending_requirements_without_launching(tmp_pa
     assert all(
         job["argv"][:5] == ["conda", "run", "-n", "egorecover", "--no-capture-output"] for job in jobs if job["argv"]
     )
+    initial_jobs = [job for job in jobs if job["argv"] and "--initialize" not in job["argv"]]
+    assert initial_jobs and all("--from-scratch" in job["argv"] for job in initial_jobs)
+    assert all("--e7-checkpoint" not in job["argv"] for job in jobs if job["argv"])
+    assert protocol["g_initialization"] == "scratch"
+    assert protocol["entire_system_from_scratch"] is False
+    assert "pretrained/e7.ckpt" not in report["models"]
     assert not list(output.rglob("*.pt"))
+
+
+@pytest.mark.parametrize("initialization", ["scratch", "e7"])
+def test_prepare_requires_e7_only_when_selected_and_preserves_continuation_dependencies(
+    tmp_path, monkeypatch, initialization
+):
+    import egorecover.preparation as preparation
+
+    data = preparation.asset_registry()
+    assets = tmp_path / "assets"
+    prior_path = assets / "pretrained/prior.pt"
+    prior_path.parent.mkdir(parents=True)
+    payload = b"checked prior"
+    prior_path.write_bytes(payload)
+    prior_item = next(item for item in data["files"] if item["path"] == "pretrained/prior.pt")
+    prior_item.update(bytes=len(payload), sha256=hashlib.sha256(payload).hexdigest())
+    monkeypatch.setattr(preparation, "asset_registry", lambda: data)
+    smpl = tmp_path / "licensed-model.npz"
+    smpl.write_bytes(b"asset identity; decoding audited separately")
+    monkeypatch.setattr(preparation, "smpl_path", lambda: smpl)
+    monkeypatch.setattr(preparation, "load_smpl", lambda _: object())
+    data_root = tmp_path / "dataset"
+    (data_root / "data").mkdir(parents=True)
+    (data_root / "data/manifest.json").write_text("{}")
+    audits = {split: {"available_episodes": 1, "total_episodes": 1, "audited": []} for split in ("train", "dev")}
+    monkeypatch.setattr(
+        preparation, "audit_available_episodes", lambda *_, **__: ({"sha256": "verified-manifest"}, audits)
+    )
+    args = SimpleNamespace(
+        output=tmp_path / "plan",
+        assets_root=assets,
+        data_root=data_root,
+        device="cpu",
+        window=3,
+        check_episodes=0,
+        batch_size=64,
+        microbatch_size=8,
+        train_steps=2400,
+        initialization=initialization,
+    )
+    report = preparation.prepare(args)
+    assert report["models"]["pretrained/prior.pt"]["verified"] is True
+    assert report["g_initialization"] == initialization
+    assert "train-dev" in report["downloads"]
+    if initialization == "scratch":
+        assert report["status"] == "ready_for_training"
+        assert report["issues"] == []
+        assert set(report["models"]) == {"pretrained/prior.pt"}
+    else:
+        assert report["status"] == "needs_assets_or_environment"
+        assert report["issues"] == [{"kind": "missing_or_changed_model", "path": str(assets / "pretrained/e7.ckpt")}]
+    protocol = json.loads((args.output / "protocol.json").read_text())
+    assert protocol["g_initialization"] == initialization
+    assert protocol["predictor_initialization"] == "published_calibrated_prior"
+    assert protocol["bootstrap_history_source"] == "published_teacher_predictions"
+    assert protocol["bootstrap_shape_source"] == "published_beta_boot"
+    assert protocol["entire_system_from_scratch"] is False
+    jobs = json.loads((args.output / "jobs.json").read_text())
+    continued = [job for job in jobs if job["argv"] and "--initialize" in job["argv"]]
+    initial = [job for job in jobs if job["argv"] and "--initialize" not in job["argv"]]
+    assert continued and initial
+    assert all(job["depends_on"] and "--from-scratch" not in job["argv"] for job in continued)
+    assert all("--e7-checkpoint" not in job["argv"] for job in continued)
+    required_flag = "--from-scratch" if initialization == "scratch" else "--e7-checkpoint"
+    excluded_flag = "--e7-checkpoint" if initialization == "scratch" else "--from-scratch"
+    assert all(required_flag in job["argv"] and excluded_flag not in job["argv"] for job in initial)
 
 
 def test_manifest_inventory_reports_whole_splits_without_episode_reads(tmp_path):

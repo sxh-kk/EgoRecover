@@ -16,6 +16,25 @@ from egorecover.timing import source_timing
 from .io import file_sha256
 from .state import FIELDS, ObservationWindow, WindowCache, state_map
 
+OFFICIAL_DATA_ROOT = Path("datasets/ee4d_official/ee4d_motion_uniegomotion")
+
+
+def resolve_data_format(root, requested="auto"):
+    if requested not in ("auto", "official", "paired"):
+        raise ValueError("Data format must be auto, official or paired.")
+    if requested != "auto":
+        return requested
+    root = Path(root)
+    return "official" if (root / "uniegomotion/ee_train.pt").is_file() else "paired"
+
+
+def open_window_data(root, split, *, device="cpu", data_format="auto", bootstrap=None):
+    if resolve_data_format(root, data_format) == "official":
+        from .official import OfficialWindowData
+
+        return OfficialWindowData(root, split, device=device, bootstrap=bootstrap)
+    return PreparedWindowData(root, split, device=device)
+
 
 def keyed_noise(identifier, seed, frame, width, device, *, draw=0):
     digest = hashlib.sha256(f"{identifier}/{seed}/{frame}/{draw}".encode()).digest()
@@ -39,6 +58,7 @@ class Episode:
     stats: dict
     original_world_from_floor_world: torch.Tensor
     synthetic: bool = False
+    floor_calibrated: bool = True
 
     def __len__(self):
         return self.head.shape[0]
@@ -50,6 +70,8 @@ class Episode:
     def cache(self, frame=20):
         if not 20 <= frame < len(self):
             raise ValueError("Cache requires twenty prior predicted frames.")
+        # Legacy packets store teacher predictions here. Official data supplies
+        # a pointwise head-only neutral prior, never a ground-truth body.
         history = state_map(self.teacher, lambda x: x[frame - 20 : frame][None].detach())
         return WindowCache(history, self.beta[None].detach(), self.teacher.reference[:1].detach(), frame - 1)
 

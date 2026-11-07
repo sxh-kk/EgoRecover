@@ -37,45 +37,53 @@ TMR Semantic/FID 尚未接入；jerk 以明确的诊断名称输出，尚不作�
 
 ## 正式训练
 
-当前只使用 EE4D-Motion，Nymeria 留待后续扩展。先做训练前核验；`preflight` 只恢复 manifest、P 及 train/dev 各一个 episode，不足以正式训练：
+当前只使用 EE4D-Motion，Nymeria 留待后续扩展。2026-11-07 起，按用户要求改用作者官方发布数据；项目自己的 20 秒片段缓存及其下载缓存已经删除，不再自动恢复。G 使用随机初始化，不加载 E7。
+
+使用官方 `ee4d_motion_uniegomotion.zip`（约 35 GB），包含过滤后的 SMPL-X 动作、DINOv2 特征、训练统计与官方划分。另一份 `ee4d_motion.zip`（约 10 GB）是逐 take 原始动作标注，不能代替完整训练包。参见 [作者下载说明](https://github.com/chaitanya100100/UniEgoMotion/blob/main/DATASET.md)。尚未取得官方包时，可以从项目根目录手动下载、解压：
 
 ```bash
-egorecover restore --preset preflight --root assets
-# 将授权的 SMPL-X v1.1 SMPLX_NEUTRAL.npz 放在 body_models/smplx/
-egorecover prepare --output exp/preparation --device cuda
+mkdir -p datasets/ee4d_official
+curl -L --fail --retry 5 -C - -o datasets/ee4d_official/ee4d_motion_uniegomotion.zip \
+  https://downloads.cs.stanford.edu/simurgh/chpatel/ee4d_motion_uniegomotion.zip
+unzip datasets/ee4d_official/ee4d_motion_uniegomotion.zip -d datasets/ee4d_official
 ```
 
-`prepare` 检查划分、时间、坐标往返、真实 SMPL-X 解码、环境和资产身份，生成四轮配置、依赖及 Conda 命令，不启动实验。W=3 和默认训练预算均为待验证配置，窗口仍需在 dev 上选择。报告在 `exp/preparation/preparation.json`，缺少全量 train/dev 或 E7 时会明确列出。
+主站较慢时，可从 [作者 Hugging Face 镜像](https://huggingface.co/datasets/chaitanya100100/uniegomotion/tree/main) 下载同名文件。下载和解压需要分别占用空间。
 
-再查看完整恢复空间并下载资产。`--dry-run` 只读取随包提供的索引，不联网、不创建目录。
+官方读取接口已接入，`--data-root` 指向包含 `uniegomotion/`、`takes.json` 和 `annotations/` 的解压目录。授权 SMPL-X 模型仍放在 `body_models/smplx/SMPLX_NEUTRAL.npz`。先生成配置并做本地训练前检查；`prepare` 不下载数据、不启动实验：
 
 ```bash
-egorecover restore --preset training --dry-run
-egorecover restore --preset training --root assets
-# 将自行授权下载的 SMPLX_NEUTRAL.npz 放在 body_models/smplx/
-# 也可设置 SMPLX_MODEL_PATH 为该文件所在目录
-
-egorecover experiments --window 3 --output exp/configs
-
-egorecover train --config exp/configs/warmup/gaussian.json \
-  --data-root assets/datasets/paired --prior-checkpoint assets/pretrained/prior.pt \
-  --e7-checkpoint assets/pretrained/e7.ckpt --device cuda --seed 62 \
-  --batch-size 64 --microbatch-size 8 \
-  --output exp/seed62/warmup-gaussian
-
-egorecover train --config exp/configs/feedback/paired.json \
-  --data-root assets/datasets/paired --prior-checkpoint assets/pretrained/prior.pt \
-  --initialize exp/seed62/warmup-gaussian/best.pt --device cuda --seed 62 \
-  --output exp/seed62/paired
-
-egorecover evaluate --checkpoint exp/seed62/paired/best.pt \
-  --data-root assets/datasets/paired --prior-checkpoint assets/pretrained/prior.pt \
-  --device cuda --output exp/seed62/evaluation --steps 1 2 4 10
+conda run -n egorecover --no-capture-output python -m egorecover prepare \
+  --data-format official \
+  --data-root datasets/ee4d_official/ee4d_motion_uniegomotion \
+  --initialization scratch --prior-mode constant_velocity \
+  --output exp/official-preparation --device cuda
 ```
 
-`--resume` 用于同一实验的精确恢复；`--initialize` 从共同预热模型开始一轮新实验，两者不能混用。训练只在 dev 选模，test 评估需显式指定 `--split test`。窗口 3 是示例，正式实验应先在开发集完成窗口对照。
+报告位于 `exp/official-preparation/preparation.json`，各窗口配置位于其 `configs/architecture/`。当前启动历史是只由当时头轨迹构造的直立中性 SMPL22 先验：使用头部 yaw，固定 `beta=0`，将设备原点近似为头关节 15，不使用 GT 身体或 E7。P 采用解析常速度，当前阶段不需要 E7 或学习型 P checkpoint。图像仍读取官方预计算 DINO 特征；5 Hz 特征向 10 Hz 身体时刻作因果保持，不读取下一帧特征。
 
-`--batch-size` 表示每次优化的有效样本数，`--microbatch-size` 控制单次并行的样本数，通过梯度累积保持有效预算。后续成对诊断在连续自主运行的缓存上，于多个时刻各写入一次参考标签，再评价后续 1/2/4/10 帧，不在每个时刻重置为 teacher 历史。
+下面以 W=3 架构组为例，使用随机 G、一步求解和共同有效 batch；预算是可修改的示例，不表示已收敛。W=1/3/5/10 使用各自配置和同一预算，先在官方 val 上选择窗口：
+
+```bash
+conda run -n egorecover --no-capture-output python -m egorecover train \
+  --config exp/official-preparation/configs/architecture/W3.json \
+  --data-format official \
+  --data-root datasets/ee4d_official/ee4d_motion_uniegomotion \
+  --from-scratch --prior-mode constant_velocity --device cuda --seed 62 \
+  --batch-size 64 --microbatch-size 8 --train-steps 2400 --eval-every 200 \
+  --output exp/official-architecture/W3/seed62
+
+conda run -n egorecover --no-capture-output python -m egorecover evaluate \
+  --checkpoint exp/official-architecture/W3/seed62/best.pt \
+  --data-format official \
+  --data-root datasets/ee4d_official/ee4d_motion_uniegomotion \
+  --prior-mode constant_velocity --split val --mode rollout --steps 1 \
+  --skip-paired --device cuda --output exp/official-architecture/W3/seed62/evaluation
+```
+
+`--batch-size` 是每次优化的有效样本数，`--microbatch-size` 通过梯度累积控制单次并行量。`--resume` 恢复同一实验；后续反馈组使用 `--initialize` 从共同预热模型继续，两者不能混用。`--skip-paired` 只跳过成对反馈诊断，保留连续重建指标和 CSV；需要反馈诊断时另行选择有足够后续帧的片段与锚点。
+
+官方包只有 train/val；`dev` 是 val 的别名，不能把它称为独立 test。默认验证选择当前发布包中的 4,405 个官方参考候选，跳过 26 个只有 21 帧的短尾，实际评价 4,379 个片段。每段前 20 帧只建立启动历史，不评分，因此这些在线结果不能直接与论文整段 80 帧数值相减。当前只输出并评价 SMPL22 身体，不增加手指重建；更多数据与评分边界见 [数据协议](docs/data.md)。旧 `restore` 和 `--data-format paired` 仅保留兼容用途，不是当前主路径。
 
 ## 代码结构
 
@@ -88,6 +96,8 @@ egorecover/
   flow.py          x0训练路径及可微Euler求解
   losses.py        当前监督、成对/直接后续监督、固定度量对照
   data.py          固定划分、缓存校验和训练样本
+  official.py      官方 EE4D train/val、特征与在线采样
+  bootstrap.py     无 E7/GT 的头部对齐中性启动先验
   timing.py        源帧网格与采样时间核验
   training.py      训练、开发集选模、恢复
   evaluation.py    连续运行与配对多步指标
@@ -96,6 +106,7 @@ egorecover/
   checkpoint.py    E7/P导入与新版checkpoint身份
   assets.py        固定版本资产恢复
   preparation.py   训练前审计、预算与任务生成
+  official_preparation.py 官方数据检查及随机初始化任务生成
   cli.py           唯一命令行入口
 configs/           基础和成对反馈配置
 tests/             当前方法、几何、时间、恢复和入口测试
@@ -104,8 +115,8 @@ docs/              方法、数据协议、重构与复核说明
 
 方法细节见 [方法与实验设计](docs/method.md)，资产和输入格式见 [数据协议](docs/data.md)，外部方法与指标口径见 [EE4D 对比协议](docs/comparison.md)，实现边界与验证见 [复核记录](docs/review.md)。
 
-正式框架默认保持 E7 的 768 维、12 层主干，可导入既有 E7 EMA 和校准 P。新原生 checkpoint 为 `egorecover_window_v2`，不直接续训清理前的 v1 诊断 checkpoint。重构前后完整尺寸网络加载相同 E7 权重后的窗口输出已经做数值比对。
+完整 G 默认保持 768 维、12 层主干；当前官方数据实验随机初始化 G，不加载 E7。E7/P 导入仅保留为兼容接口。新原生 checkpoint 为 `egorecover_window_v2`，不直接续训清理前的 v1 诊断 checkpoint。
 
-当前已验证合成训练、梯度边界、精确恢复、权重迁移和命令行流程，并恢复了真实数据核验子集。授权 SMPL-X 的检查记录由 `prepare` 生成；正式训练和外部方法复现尚未完成，不能据此声称已有精度或 GPU 延迟收益。
+当前已验证合成流程、梯度边界、精确恢复、权重迁移及中性启动先验的几何一致性。官方数据检查记录由 `prepare` 生成；本文命令是实验入口，不表示正式训练已完成，尚无对外精度或 GPU 延迟收益结论。
 
 代码来源及保留的第三方声明见 [SOURCE.md](SOURCE.md)。

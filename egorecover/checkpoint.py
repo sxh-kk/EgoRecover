@@ -12,6 +12,17 @@ FORMAT = "egorecover_window_v2"
 LEGACY_TEXT = frozenset({"embed_text_cond.weight", "embed_text_cond.bias", "mask_tokens.text"})
 
 
+def resolve_prior_mode(mode, path):
+    if mode not in ("auto", "constant_velocity", "learned"):
+        raise ValueError("Prior mode must be auto, constant_velocity or learned.")
+    resolved = ("learned" if path is not None else "constant_velocity") if mode == "auto" else mode
+    if resolved == "learned" and path is None:
+        raise ValueError("Learned P requires --prior-checkpoint trained for this dataset identity.")
+    if resolved == "constant_velocity" and path is not None:
+        raise ValueError("Constant-velocity P does not load --prior-checkpoint.")
+    return resolved
+
+
 @dataclass(frozen=True)
 class MigrationReport:
     weight_source: str

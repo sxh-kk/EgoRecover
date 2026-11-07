@@ -1,53 +1,166 @@
 {
-  "date": "2026-11-06",
-  "dataset_scope": "EE4D-Motion only; Nymeria deferred",
+  "date": "2026-11-07",
+  "dataset_scope": "Official EE4D-Motion train/val only; Nymeria deferred",
   "environment": {
-    "conda": "egorecover",
     "python": "3.12.1",
+    "prefix": "/root/miniconda3/envs/egorecover",
+    "conda_environment": "egorecover",
     "torch": "2.10.0+cu126",
     "cuda_build": "12.6",
     "cuda_available": true,
-    "cuda_devices_detected": 8,
-    "checked_gpu": "NVIDIA A800-SXM4-80GB"
+    "cuda_devices": 8,
+    "hardware": [
+      "0, NVIDIA A800-SXM4-80GB, 550.127.05, 81920 MiB",
+      "1, NVIDIA A800-SXM4-80GB, 550.127.05, 81920 MiB",
+      "2, NVIDIA A800-SXM4-80GB, 550.127.05, 81920 MiB",
+      "3, NVIDIA A800-SXM4-80GB, 550.127.05, 81920 MiB",
+      "4, NVIDIA A800-SXM4-80GB, 550.127.05, 81920 MiB",
+      "5, NVIDIA A800-SXM4-80GB, 550.127.05, 81920 MiB",
+      "6, NVIDIA A800-SXM4-80GB, 550.127.05, 81920 MiB",
+      "7, NVIDIA A800-SXM4-80GB, 550.127.05, 81920 MiB"
+    ]
   },
-  "tests": {"passed": 140, "failed": 0, "seconds": 13.76},
-  "real_asset_checks": {
-    "train_episodes": 1,
-    "dev_episodes": 1,
-    "frames_per_episode": 200,
-    "fps": 10,
-    "dense_roundtrip_max_abs_m": 0.000001430511474609375,
-    "smplx_gt_decode_max_error_mm": 0.0011449678568169475,
-    "calibrated_prior_verified": true,
-    "gpu_paired_backward": {
-      "microbatch": 2,
-      "sources": ["gaussian", "prediction"],
-      "finite_model_gradients": true,
-      "frozen_parameter_gradients_absent": true,
-      "optimizer_updates": 0,
-      "model": "untrained compact diagnostic"
-    }
+  "tests": {
+    "passed": 182,
+    "failed": 0,
+    "seconds": 19.06
   },
-  "gpu_synthetic_cli": {
-    "training_steps": 2,
-    "effective_batch": 3,
+  "static_checks": {
+    "ruff": "passed",
+    "black": "passed",
+    "diff_check": "passed"
+  },
+  "official_preparation": {
+    "status": "ready_for_training",
+    "issues": [],
+    "inventory": {
+      "train": {
+        "official_split": "train",
+        "source_sequences": 17045,
+        "source_takes": 2032,
+        "zero_floor_sources": 57,
+        "selected_clip_candidates": 143560,
+        "skipped_short_clips": 1026,
+        "official_reference_verified": false,
+        "usable_clips": 142534,
+        "uncalibrated_floor_clips": 63,
+        "scored_after_startup_frames": 7263984
+      },
+      "dev": {
+        "official_split": "val",
+        "source_sequences": 5236,
+        "source_takes": 560,
+        "zero_floor_sources": 22,
+        "selected_clip_candidates": 4405,
+        "skipped_short_clips": 26,
+        "official_reference_verified": true,
+        "usable_clips": 4379,
+        "uncalibrated_floor_clips": 3,
+        "scored_after_startup_frames": 224319
+      }
+    },
+    "small_sample_checks": {
+      "train": [
+        {
+          "episode": "iiith_cooking_108_5___39___1536_start_0",
+          "frames": 80,
+          "dense_roundtrip_max_abs_m": {
+            "1": 3.5762786865234375e-07,
+            "3": 4.172325134277344e-07,
+            "5": 4.172325134277344e-07,
+            "10": 4.172325134277344e-07
+          },
+          "bootstrap_fk_max_abs_m": 2.980232238769531e-07
+        }
+      ],
+      "dev": [
+        {
+          "episode": "indiana_cooking_23_5___0___513_start_0",
+          "frames": 80,
+          "dense_roundtrip_max_abs_m": {
+            "1": 2.8312206268310547e-07,
+            "3": 4.76837158203125e-07,
+            "5": 4.76837158203125e-07,
+            "10": 4.76837158203125e-07
+          },
+          "bootstrap_fk_max_abs_m": 1.9371509552001953e-07
+        }
+      ]
+    },
+    "large_data_identity": "size and mtime metadata; no repeated full-payload hash audit",
+    "startup": {
+      "version": "head_aligned_neutral_v1",
+      "shape_policy": "neutral_beta_zero",
+      "body_joints": 22,
+      "head_anchor": 15,
+      "device_origin_assumption": "device_origin_approximately_smpl_head_joint_15",
+      "heading": "observed_local_X_projected_yaw_only",
+      "rest_coordinates": "SMPL_Y_up_X_heading_axis",
+      "axis_conversion": "Rx_positive_90_degrees_Y_up_to_Z_up_preserve_local_X",
+      "output_coordinates": "floor_world_Z_up_X_heading_at_zero_yaw",
+      "causality": "pointwise_current_head_only",
+      "uses_gt_body": false,
+      "uses_e7": false,
+      "motion_checkpoint": null,
+      "fine_hand_reconstruction": false
+    },
+    "old_paired_cache_used": false,
+    "e7_weights_used": false,
+    "learned_P_checkpoint_used": false
+  },
+  "official_gpu_smoke": {
+    "scope": "plumbing diagnostic, not a converged experiment or benchmark",
+    "run": "exp/official-adapter-smoke",
+    "evaluation": "exp/official-adapter-evaluation",
+    "model_config": {
+      "width": 768,
+      "layers": 12,
+      "heads": 12,
+      "dropout": 0.0
+    },
+    "g_initialization": "random",
+    "prior": "constant_velocity",
+    "window": 3,
+    "source": "gaussian",
+    "steps": 4,
+    "effective_batch": 2,
     "microbatch": 2,
-    "evaluation_steps": [1, 2, 4, 10],
-    "passed": true
-  },
-  "comparison_metrics": {
-    "scope": "SMPL22 body including wrists; fine hand metrics excluded",
-    "real_dev_first_emissions_checked": 16,
-    "real_smplx_gpu_metrics_finite": true,
-    "world_mpjpe_matches_body_mm": true,
-    "official_foot_slide_random_trajectories_checked": 40,
-    "official_foot_slide_max_abs_difference_mm": 2.665e-15,
+    "target_queries_seen": 8,
+    "resume_after_step": 2,
+    "resumed_to_step": 4,
+    "loss_and_gradients_finite": true,
+    "evaluation_clips": 1,
+    "evaluation_first_emissions": 60,
+    "evaluation_nfe": 1,
+    "continuous_own_cache": true,
     "csv_export": true,
-    "temporal_metrics_use_physical_dt": true,
-    "tmr_metrics_implemented": false,
-    "egoforce_pj_auj_exact_parity_verified": false
+    "paired_diagnostics": "skipped for architecture check",
+    "accuracy_or_speedup_claims": false
+  },
+  "review": {
+    "result": "passed",
+    "blocking_findings": 0,
+    "independent_agent_review": true
+  },
+  "comparison_boundaries": {
+    "body_joints": 22,
+    "fine_hands": false,
+    "official_reference_candidates": 4405,
+    "skipped_21_frame_tails": 26,
+    "usable_val_clips": 4379,
+    "score_starts_at_frame": 20,
+    "official_val_used_for_development": true,
+    "unseen_test_claim": false,
+    "floor_unknown": "no GT fallback; foot slide null; geometry retained",
+    "shape": "fixed beta zero, not GT shape",
+    "device_to_smpl_head": "approximate anchor, no calibrated extrinsic",
+    "tmr_implemented": false,
+    "egoforce_PJ_AUJ_exact_parity_verified": false
   },
   "formal_experiments_started": false,
-  "remaining_training_assets": ["full EE4D-Motion train/dev", "E7 checkpoint"],
-  "accuracy_or_speedup_claims": false
+  "remaining_training_assets": [],
+  "previous_validation": {
+    "commit": "b6a7863d1a8ed1d05001b4a46a6c71f29c6e5bc0",
+    "scope": "historical paired-cache and comparison-metric checks, superseded as training input"
+  }
 }

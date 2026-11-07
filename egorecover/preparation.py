@@ -12,7 +12,7 @@ import torch
 
 from .assets import asset_plan, asset_registry, matches
 from .codec import MotionCodec
-from .data import PreparedWindowData, manifest_inventory
+from .data import PreparedWindowData, manifest_inventory, resolve_data_format
 from .experiments import experiment_matrix
 from .fk import FixedShapeFK, load_smpl, smpl_path
 from .io import code_identity, file_sha256, save_json
@@ -100,6 +100,13 @@ def audit_available_episodes(root, *, count=1, smpl=None):
 def prepare(args):
     if args.check_episodes < 0:
         raise ValueError("check-episodes cannot be negative.")
+    if resolve_data_format(args.data_root, getattr(args, "data_format", "auto")) == "official":
+        from .official_preparation import prepare_official
+
+        return prepare_official(args)
+    initialization = getattr(args, "initialization", "scratch")
+    if initialization not in ("scratch", "e7"):
+        raise ValueError("Choose scratch or e7 G initialization.")
     registry = asset_registry()
     matrix = experiment_matrix(args.window)
     args.output.mkdir(parents=True, exist_ok=True)
@@ -143,8 +150,10 @@ def prepare(args):
             if row["initialize_from"]:
                 checkpoint = args.output / "runs" / row["initialize_from"] / f"seed{seed}" / "best.pt"
                 command.extend(("--initialize", str(checkpoint.resolve())))
-            else:
+            elif initialization == "e7":
                 command.extend(("--e7-checkpoint", str((args.assets_root / "pretrained/e7.ckpt").resolve())))
+            else:
+                command.append("--from-scratch")
             jobs.append(
                 {
                     "name": row["name"],
@@ -157,7 +166,9 @@ def prepare(args):
                 }
             )
     save_json(args.output / "jobs.json", jobs)
-    plans = {key: asset_plan(registry, key) for key in ("metadata", "preflight", "data", "models", "training")}
+    plans = {
+        key: asset_plan(registry, key) for key in ("metadata", "preflight", "train-dev", "data", "models", "training")
+    }
     report = {
         "prepared_at": datetime.now(ZoneInfo("Asia/Shanghai")).isoformat(),
         "environment": environment_report(),
@@ -165,6 +176,7 @@ def prepare(args):
         "issues": [],
         "code": code_identity(),
         "experiments_started": False,
+        "g_initialization": initialization,
     }
     manifest_path = args.data_root / "data/manifest.json"
     smpl = None
@@ -199,8 +211,11 @@ def prepare(args):
     else:
         report["issues"].append({"kind": "missing_manifest", "path": str(manifest_path)})
     report["models"] = {}
+    required_models = {"pretrained/prior.pt"}
+    if initialization == "e7":
+        required_models.add("pretrained/e7.ckpt")
     for item in registry["files"]:
-        if item["path"].startswith("pretrained/"):
+        if item["path"] in required_models:
             path = args.assets_root / item["path"]
             valid = matches(path, item)
             report["models"][item["path"]] = {"path": str(path), "verified": valid}
@@ -223,6 +238,11 @@ def prepare(args):
         "paired_cache_source": "own_continuous_rollout",
         "reference_label_writes": 1,
         "fixed_startup_shape": True,
+        "g_initialization": initialization,
+        "predictor_initialization": "published_calibrated_prior",
+        "bootstrap_history_source": "published_teacher_predictions",
+        "bootstrap_shape_source": "published_beta_boot",
+        "entire_system_from_scratch": False,
         "test_used_for_model_selection": False,
         "selected_window_for_later_experiments": args.window,
         "window_selection_finalized": False,

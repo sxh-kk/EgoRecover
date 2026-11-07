@@ -6,9 +6,9 @@ import json
 import torch
 
 from egorecover import ModelConfig, WindowConfig, WindowReconstructor
-from egorecover.checkpoint import FORMAT, load_predictor
+from egorecover.checkpoint import FORMAT, load_predictor, resolve_prior_mode
 from egorecover.codec import MotionCodec
-from egorecover.data import PreparedWindowData
+from egorecover.data import open_window_data, resolve_data_format
 from egorecover.diagnostics import synthetic_episode
 from egorecover.evaluation import evaluate_episode, paired_anchor_diagnostics, summarize
 from egorecover.fk import joint_decoder, load_smpl, smpl_identity
@@ -34,10 +34,20 @@ def save_metrics_csv(path, report):
                         "synthetic": report["identity"]["synthetic"],
                         "episodes": len(result["rows"][mode]),
                         "takes": len({r["take"] for r in result["rows"][mode]}),
+                        "floor_calibrated_episodes": sum(r.get("floor_calibrated", True) for r in result["rows"][mode]),
                         **{name: value[key] for name, value in metrics.items()},
                     }
                 )
-    prefix = ["nfe", "mode", "aggregation", "timing_aggregation", "synthetic", "episodes", "takes"]
+    prefix = [
+        "nfe",
+        "mode",
+        "aggregation",
+        "timing_aggregation",
+        "synthetic",
+        "episodes",
+        "takes",
+        "floor_calibrated_episodes",
+    ]
     fields = prefix + sorted({key for row in rows for key in row} - set(prefix))
     with path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields)
@@ -48,23 +58,40 @@ def save_metrics_csv(path, report):
 def evaluate(args):
     if args.limit is not None and args.limit < 1:
         raise ValueError("limit must be positive")
+    skip_paired = bool(getattr(args, "skip_paired", False))
     device = torch.device(args.device)
     saved = torch.load(args.checkpoint, map_location=device, weights_only=True)
     if saved.get("format") != FORMAT or saved["identity"]["synthetic"] != args.synthetic:
         raise ValueError("Checkpoint format or synthetic/production mode mismatch.")
     config = WindowConfig(**saved["protocol"])
+    smpl = None
+    dataset_format = "synthetic"
+    dataset_protocol = {"scope": "synthetic_diagnostic"}
     if args.synthetic:
         if args.data_root or args.prior_checkpoint:
             raise ValueError("Synthetic checks do not read production assets.")
         fixture = synthetic_episode(device=device)
         data, count = None, 1
     else:
-        if not args.data_root or not args.prior_checkpoint:
-            raise ValueError("Provide the recorded dataset and calibrated predictor.")
-        data = PreparedWindowData(args.data_root, args.split, device=device)
+        if not args.data_root:
+            raise ValueError("Provide the recorded --data-root.")
+        dataset_format = resolve_data_format(args.data_root, getattr(args, "data_format", "auto"))
+        if dataset_format != saved["identity"].get("data_format", "paired"):
+            raise ValueError("Evaluation data format differs from training.")
+        smpl = load_smpl(device)
+        bootstrap = None
+        if dataset_format == "official":
+            from .bootstrap import HeadAlignedBootstrap
+
+            bootstrap = HeadAlignedBootstrap.from_smpl(smpl)
+        data = open_window_data(
+            args.data_root, args.split, device=device, data_format=dataset_format, bootstrap=bootstrap
+        )
+        dataset_protocol = getattr(data, "protocol", {"scope": "legacy_paired_cache"})
         if data.digest != saved["identity"]["manifest"]:
             raise ValueError("Evaluation manifest differs from training identity.")
-        if file_sha256(args.prior_checkpoint) != saved["identity"]["prior"]:
+        supplied_prior = file_sha256(args.prior_checkpoint) if args.prior_checkpoint else "constant_velocity"
+        if supplied_prior != saved["identity"]["prior"]:
             raise ValueError("Evaluation predictor differs from training.")
         if smpl_identity() != saved["identity"]["smpl_asset"]:
             raise ValueError("Evaluation SMPL-X asset differs from training.")
@@ -74,21 +101,25 @@ def evaluate(args):
     if args.limit:
         count = min(count, args.limit)
     codec = MotionCodec(saved["stats"]).to(device)
+    prior_mode = resolve_prior_mode(getattr(args, "prior_mode", "auto"), args.prior_checkpoint)
     predictor = load_predictor(args.prior_checkpoint, device, None if args.synthetic else data.digest)
     system = WindowReconstructor(codec, predictor, config)
     model = MotionModel(config, ModelConfig(**saved["model_config"])).to(device).eval()
     model.load_state_dict(saved["ema"], strict=True)
-    smpl = None if args.synthetic else load_smpl(device)
     args.output.mkdir(parents=True, exist_ok=True)
     metadata = {
         "checkpoint": file_sha256(args.checkpoint),
         "protocol": config.to_dict(),
         "manifest": saved["identity"]["manifest"],
+        "data_format": dataset_format,
+        "data_protocol": dataset_protocol,
+        "prior_mode": prior_mode,
         "split": args.split,
         "synthetic": args.synthetic,
         "mode": args.mode,
         "steps": args.steps,
         "anchors": args.anchors,
+        "skip_paired": skip_paired,
         "draw": args.draw,
         "limit": args.limit,
         "selection": "no model selection; explicit checkpoint",
@@ -132,16 +163,23 @@ def evaluate(args):
                             "identity": metadata,
                         },
                     )
-            diagnostics.append(
-                {
-                    "episode": episode.identifier,
-                    "take": episode.take,
-                    "cache_source": "own_continuous_rollout",
-                    "anchors": paired_anchor_diagnostics(
-                        system, model, episode, joints, anchors=args.anchors, seed=args.draw, steps=steps
-                    ),
-                }
-            )
+            if not skip_paired:
+                available = any(frame >= 20 and frame + 10 < len(episode) for frame in args.anchors)
+                diagnostics.append(
+                    {
+                        "episode": episode.identifier,
+                        "take": episode.take,
+                        "cache_source": "own_continuous_rollout",
+                        "anchors": (
+                            paired_anchor_diagnostics(
+                                system, model, episode, joints, anchors=args.anchors, seed=args.draw, steps=steps
+                            )
+                            if available
+                            else {}
+                        ),
+                        "status": "evaluated" if available else "not_available_short_clip",
+                    }
+                )
         report["results"][str(steps)] = {
             "summary": {k: summarize(v) for k, v in groups.items()},
             "rows": groups,
