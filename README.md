@@ -105,6 +105,8 @@ wait
 
 W=1/W=3 开启当前帧监督、各四GPU的随机初始化训练设置见 [本轮训练协议](docs/current_geometry_training_20261108.md)。全局batch保持64，使用逻辑双卡采样计划保留原基线的query/tau序列；不同卡数的dropout和浮点归约差异另行记录。
 
+lambda=1的运行已停止并保留产物；当前候选改为0.01，W1/W3各四卡重新随机初始化，见 [新训练协议](docs/current_geometry_0p01_training_20261108.md)。除当前帧监督权重与产物路径外，其他设置沿用原运行。
+
 当前帧监督初始权重的 [真实批次梯度审计](docs/geometry_gradient_audit_20261108.md) 记录Flow/几何分量、四卡日志重放核对、旋转与FK检查以及候选权重标定，避免把数值有限误认为训练目标已平衡。
 
 默认 `--lr-schedule uniegomotion` 将官方 epoch 调度换算为 optimizer 更新次数：取官方训练候选数 `N_ref`，在 `ceil(N_ref / effective_batch) × 300` 次更新后把学习率乘以 `--lr-decay-gamma`，默认 `0.1`。当前 `N_ref=143560`、batch=64 时，衰减点为 `673200`，第 `673201` 次更新开始使用 `3e-6`。可用 `--lr-decay-step` 显式覆盖，或用 `--lr-schedule constant` 固定学习率；合成诊断没有官方候选参考，未显式设置衰减点时不自动衰减。
