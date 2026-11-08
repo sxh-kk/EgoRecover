@@ -29,6 +29,8 @@
 
 启动前已检查：独立旧双卡采样循环与新四卡计划连续三步的全局query/tau及生成器状态完全一致；真实两组各四GPU三步中，Flow/current损失、梯度和同步hash均正常。每组初始G哈希与原基线相同：`455e73dfb7181c99fff554ed9b3e974bb897292ab69880932e9b6f42789d8fb6`。
 
+上述预检确认数值有限及分布式正确性，不代表损失权重已经平衡。首次验证退化后，逐项真实梯度审计发现lambda=1时几何参数梯度明显大于Flow，详见 [梯度尺度审计](geometry_gradient_audit_20261108.md)。审计没有修改本轮运行参数；后续低权重试验需另存配置和实验目录。
+
 ## 运行与监控
 
 运行产物位于 `exp/current-geometry-20261108/`，完整参数保存在 `launch-plan.json`，冻结源码位于 `source/`，两组进度分别在 `W1/progress.json` 和 `W3/progress.json`。原始预检报告位于 `exp/current-geometry-preflight-20261108/reference-sampling/preflight-result.json`。
