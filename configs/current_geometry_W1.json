@@ -1,0 +1,16 @@
+{
+  "history": 20,
+  "window": 1,
+  "source": "gaussian",
+  "sigma": 1.0,
+  "steps": 1,
+  "revise_recent": true,
+  "body_feedback": true,
+  "endpoint_probability": 0.1,
+  "current_weight": 1.0,
+  "feedback_weight": 1.0,
+  "feedback": "none",
+  "feedback_draws": 1,
+  "scale_m": 0.1,
+  "ema_decay": 0.999
+}
