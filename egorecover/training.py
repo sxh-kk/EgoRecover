@@ -273,7 +273,7 @@ def _train(args, context):
     final = min(args.train_steps, start + args.stop_after) if args.stop_after else args.train_steps
     for step in range(start + 1, final + 1):
         optimizer.zero_grad(set_to_none=True)
-        components = {k: 0.0 for k in ("loss", "flow", "current", "feedback")}
+        components = {k: 0.0 for k in ("loss", "flow", "hand_pca", "current", "feedback")}
         reference_plan = (
             reference_microbatch_plan(
                 train_data,

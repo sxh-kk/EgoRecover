@@ -76,7 +76,8 @@ def training_objective(
     y, reference = system.prepare(cache.detach(), observations)
     clean = system.encode(truth_window, reference).detach()
     source = build_source(y["center"], epsilon, mode=cfg.source, sigma=cfg.sigma)
-    base = flow_loss(model, clean, source, y, tau)
+    flow_components = flow_loss(model, clean, source, y, tau, return_components=True)
+    base = flow_components["flow"]
     zero = base.new_zeros(())
     current_loss, feedback_loss = zero, zero
     current = None
@@ -107,4 +108,11 @@ def training_objective(
             elif cfg.feedback == "geometry":
                 feedback_loss = geometry_loss(joints(current.current), joints(truth_current).detach(), cfg.scale_m)
     total = base + cfg.current_weight * current_loss + cfg.feedback_weight * feedback_loss
-    return {"loss": total, "flow": base, "current": current_loss, "feedback": feedback_loss, "result": current}
+    return {
+        "loss": total,
+        "flow": base,
+        "hand_pca": flow_components["hand_pca"],
+        "current": current_loss,
+        "feedback": feedback_loss,
+        "result": current,
+    }

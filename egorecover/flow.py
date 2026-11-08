@@ -32,7 +32,7 @@ def solve(model, source, condition, *, steps):
     return value
 
 
-def flow_loss(model, target, source, condition, tau):
+def flow_loss(model, target, source, condition, tau, *, return_components=False):
     if target.shape != source.shape or not bool(torch.isfinite(target).all()):
         raise ValueError("Invalid clean target window.")
     if tau.shape != (len(source),) or not bool(((tau > 0) & (tau <= 1)).all()):
@@ -41,4 +41,10 @@ def flow_loss(model, target, source, condition, tau):
     prediction = model(noisy, tau, condition)
     weights = target.new_ones(243)
     weights[198:207] = 8
-    return ((prediction - target).square() * weights).sum(-1).mean() / weights.sum()
+    squared_error = (prediction - target).square()
+    loss = (squared_error * weights).sum(-1).mean() / weights.sum()
+    if return_components:
+        # Both hands already receive supervision in the complete Flow loss.
+        # Report their normalized 12+12 PCA error without counting it twice.
+        return {"flow": loss, "hand_pca": squared_error[..., 207:231].mean()}
+    return loss
