@@ -101,6 +101,8 @@ wait
 
 `best.pt` 是供 `evaluate` 和 `--initialize` 使用的轻量 checkpoint；`resume.pt` 保留完整训练状态、两 rank 的随机状态、调度状态和恢复身份校验。`--resume` 需使用同一 world size 并保留优化器与学习率时钟；后续反馈组使用 `--initialize` 从共同预热模型开始新实验，重置优化器和学习率时钟，两者不能混用。单独运行 `evaluate` 时，`--skip-paired` 只跳过成对反馈诊断，保留连续重建指标和 CSV；本轮选窗只做重建评价，后续反馈阶段再选取足够长的片段与锚点做配对诊断。
 
+开展反馈训练前，先用 `python -m egorecover.reference_diagnostic --checkpoint PATH --output DIR --device cuda --limit 128` 检查单帧 GT 干预后的参考分支是否实际更准确。工具分别报告身体姿态干预与完整当前状态替换，包含 `E_pred/E_ref`、三类比例、任务分组和 take 簇置信区间。W=1/W=10 最终检查点的诊断结果见 [参考分支诊断报告](docs/reference_diagnostic_20261108.md)。
+
 默认 `--lr-schedule uniegomotion` 将官方 epoch 调度换算为 optimizer 更新次数：取官方训练候选数 `N_ref`，在 `ceil(N_ref / effective_batch) × 300` 次更新后把学习率乘以 `--lr-decay-gamma`，默认 `0.1`。当前 `N_ref=143560`、batch=64 时，衰减点为 `673200`，第 `673201` 次更新开始使用 `3e-6`。可用 `--lr-decay-step` 显式覆盖，或用 `--lr-schedule constant` 固定学习率；合成诊断没有官方候选参考，未显式设置衰减点时不自动衰减。
 
 是否使用完整参考预算需单独决定。官方 350 epochs 对应 `2244 × 350 = 785400` 次更新；这里每个样本是 online query，不能把这些更新称为本项目的 350 epochs。本轮 `12000 × 64 = 768000` 个 query 是单种子选窗预算，学习率保持 `3e-5`，不会为了短预算而把官方衰减点压缩到其末段。后续根据学习曲线和计算成本确定预算，补充种子验证后再评价稳定收益；`prepare` 不会自动启动上述训练或完整参考预算。详细换算见 [训练参数与预算](docs/method.md#训练参数与预算)。

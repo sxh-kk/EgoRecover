@@ -2,6 +2,7 @@
 
 import csv
 import json
+from dataclasses import dataclass
 
 import torch
 
@@ -55,16 +56,30 @@ def save_metrics_csv(path, report):
         writer.writerows(rows)
 
 
-def evaluate(args):
+@dataclass
+class EvaluationContext:
+    saved: dict
+    system: object
+    model: object
+    data: object
+    fixture: object
+    smpl: object
+    count: int
+    dataset_format: str
+    dataset_protocol: dict
+    prior_mode: str
+
+
+def load_evaluation_context(args):
+    """Load and validate the same checkpoint/assets for all evaluation tools."""
     if args.limit is not None and args.limit < 1:
         raise ValueError("limit must be positive")
-    skip_paired = bool(getattr(args, "skip_paired", False))
     device = torch.device(args.device)
     saved = torch.load(args.checkpoint, map_location=device, weights_only=True)
     if saved.get("format") != FORMAT or saved["identity"]["synthetic"] != args.synthetic:
         raise ValueError("Checkpoint format or synthetic/production mode mismatch.")
     config = WindowConfig(**saved["protocol"])
-    smpl = None
+    smpl, fixture = None, None
     dataset_format = "synthetic"
     dataset_protocol = {"scope": "synthetic_diagnostic"}
     if args.synthetic:
@@ -106,14 +121,25 @@ def evaluate(args):
     system = WindowReconstructor(codec, predictor, config)
     model = MotionModel(config, ModelConfig(**saved["model_config"])).to(device).eval()
     model.load_state_dict(saved["ema"], strict=True)
+    return EvaluationContext(
+        saved, system, model, data, fixture, smpl, count, dataset_format, dataset_protocol, prior_mode
+    )
+
+
+def evaluate(args):
+    context = load_evaluation_context(args)
+    saved, system, model = context.saved, context.system, context.model
+    data, fixture, smpl, count = context.data, context.fixture, context.smpl, context.count
+    config = system.config
+    skip_paired = bool(getattr(args, "skip_paired", False))
     args.output.mkdir(parents=True, exist_ok=True)
     metadata = {
         "checkpoint": file_sha256(args.checkpoint),
         "protocol": config.to_dict(),
         "manifest": saved["identity"]["manifest"],
-        "data_format": dataset_format,
-        "data_protocol": dataset_protocol,
-        "prior_mode": prior_mode,
+        "data_format": context.dataset_format,
+        "data_protocol": context.dataset_protocol,
+        "prior_mode": context.prior_mode,
         "split": args.split,
         "synthetic": args.synthetic,
         "mode": args.mode,
