@@ -319,7 +319,8 @@ class OfficialWindowData:
         self.cache[index] = episode
         return episode
 
-    def sample_batch(self, generator, count, rollin_frames):
+    def sample_queries(self, generator, count, rollin_frames):
+        """Plan CPU queries without loading or transferring episode payloads."""
         if self.split != "train":
             raise ValueError("Random official queries are restricted to the training split.")
         count = _integer(count, "batch count", 1)
@@ -344,13 +345,21 @@ class OfficialWindowData:
         groups = self._sampling_groups[rollin_frames]
         if not groups:
             raise ValueError(f"No official sources have the {minimum} frames required for this rollin budget.")
-        episodes = []
+        queries = []
         for _ in range(count):
             names = groups[int(torch.randint(len(groups), (), generator=generator))]
             name = names[int(torch.randint(len(names), (), generator=generator))]
             query = int(torch.randint(frame, self.source_metadata[name]["frames"] - 1, (), generator=generator))
-            episodes.append(self._episode(name, query - frame, minimum))
-        return TrainingBatch(tuple(episodes)), frame
+            queries.append((name, query - frame, minimum))
+        return queries, frame
+
+    def load_training_queries(self, queries):
+        """Materialize only the queries selected by the caller for training."""
+        return TrainingBatch(tuple(self._episode(*query) for query in queries))
+
+    def sample_batch(self, generator, count, rollin_frames):
+        queries, frame = self.sample_queries(generator, count, rollin_frames)
+        return self.load_training_queries(queries), frame
 
     def sample(self, generator):
         return self.sample_batch(generator, 1, 0)[0].episodes[0]

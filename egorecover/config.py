@@ -99,6 +99,7 @@ class TrainOptions:
     train_steps: int = 2400
     batch_size: int = 64
     microbatch_size: int = 8
+    sample_reference_world_size: int | None = None
     learning_rate: float = 3e-5
     weight_decay: float = 0.01
     grad_clip_norm: float = 1.0

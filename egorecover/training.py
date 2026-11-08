@@ -18,6 +18,7 @@ from egorecover.io import code_identity, file_sha256, save_checkpoint, save_json
 from egorecover.losses import frozen_ema, training_objective, update_ema
 from egorecover.models import MotionModel
 from egorecover.optimization import make_optimizer, make_scheduler, optimization_protocol
+from egorecover.sampling import reference_microbatch_plan
 from egorecover.selection import select_dev_records
 from egorecover.state import state_map
 
@@ -104,6 +105,25 @@ def _train(args, context):
     if args.batch_size % context.world_size:
         raise ValueError("Global batch-size must be divisible by the number of DDP ranks.")
     local_batch_size = args.batch_size // context.world_size
+    reference_world_size = (
+        context.world_size if args.sample_reference_world_size is None else args.sample_reference_world_size
+    )
+    if (
+        isinstance(args.sample_reference_world_size, bool)
+        or not isinstance(reference_world_size, int)
+        or reference_world_size < 1
+        or context.world_size % reference_world_size
+        or args.batch_size % reference_world_size
+        or (
+            args.sample_reference_world_size is not None
+            and (
+                local_batch_size % args.microbatch_size
+                or (args.batch_size // reference_world_size) % args.microbatch_size
+            )
+        )
+    ):
+        raise ValueError("Reference sampling ranks and microbatches must partition the physical/global batch.")
+    sampling_rank = context.rank // (context.world_size // reference_world_size)
     optimization_protocol(args)
     prior_mode = resolve_prior_mode(args.prior_mode, args.prior_checkpoint)
     smpl = None
@@ -144,6 +164,8 @@ def _train(args, context):
         [{"episode_id": fixture.identifier, "base_take_name": fixture.take}] if args.synthetic else dev_data.records
     )
     dev_indices, dev_selection = select_dev_records(records, args.dev_limit, args.dev_seed)
+    if args.sample_reference_world_size is not None and dataset_format != "official":
+        raise ValueError("Reference-rank sampling currently requires official data.")
     torch.manual_seed(args.seed)
     codec = MotionCodec(stats).to(device)
     prior = load_predictor(args.prior_checkpoint, device, None if args.synthetic else manifest)
@@ -188,7 +210,11 @@ def _train(args, context):
             "world_size": context.world_size,
             "global_batch_size": args.batch_size,
             "local_batch_size": local_batch_size,
-            "sample_seed": "seed + 1 + rank",
+            "sample_seed": "seed + 1 + sampling_rank",
+            "sample_reference_world_size": args.sample_reference_world_size,
+            "logical_sampling_world_size": reference_world_size,
+            "logical_batch_size": args.batch_size // reference_world_size,
+            "sampling_partition": "contiguous physical-rank microbatches within reference-rank batches",
             "dropout_seed": "seed + 100000 * rank",
         },
         "python": platform.python_version(),
@@ -223,7 +249,7 @@ def _train(args, context):
     # entire continuation. A separate moving EMA is used for model selection.
     feedback_model = frozen_ema(model)
     torch.manual_seed(args.seed + 100000 * context.rank)
-    generator = torch.Generator().manual_seed(args.seed + 1 + context.rank)
+    generator = torch.Generator().manual_seed(args.seed + 1 + sampling_rank)
     start, best, curve = 0, float("inf"), []
     if saved:
         ema.load_state_dict(saved["ema"], strict=True)
@@ -248,10 +274,30 @@ def _train(args, context):
     for step in range(start + 1, final + 1):
         optimizer.zero_grad(set_to_none=True)
         components = {k: 0.0 for k in ("loss", "flow", "current", "feedback")}
+        reference_plan = (
+            reference_microbatch_plan(
+                train_data,
+                generator,
+                rank=context.rank,
+                world_size=context.world_size,
+                reference_world_size=reference_world_size,
+                batch_size=args.batch_size,
+                microbatch_size=args.microbatch_size,
+                rollin_frames=args.rollin_frames,
+                endpoint_probability=config.endpoint_probability,
+            )
+            if args.sample_reference_world_size is not None
+            else None
+        )
         for offset in range(0, local_batch_size, args.microbatch_size):
             count = min(args.microbatch_size, local_batch_size - offset)
             global_offset = context.rank * local_batch_size + offset
-            if not args.synthetic and hasattr(train_data, "sample_batch"):
+            planned = reference_plan[offset // args.microbatch_size] if reference_plan is not None else None
+            if planned is not None:
+                if (planned["offset"], planned["global_offset"], planned["count"]) != (offset, global_offset, count):
+                    raise ValueError("Reference sampler disagrees with physical microbatch partition.")
+                batch, frame = train_data.load_training_queries(planned["queries"]), planned["frame"]
+            elif not args.synthetic and hasattr(train_data, "sample_batch"):
                 batch, frame = train_data.sample_batch(generator, count, args.rollin_frames)
             else:
                 episodes = tuple(fixture if args.synthetic else train_data.sample(generator) for _ in range(count))
@@ -275,8 +321,11 @@ def _train(args, context):
                     for draw in range(config.feedback_draws)
                 ]
             )
-            tau = 0.001 + 0.999 * torch.rand(count, generator=generator)
-            tau[torch.rand(count, generator=generator) < config.endpoint_probability] = 1.0
+            if planned is None:
+                tau = 0.001 + 0.999 * torch.rand(count, generator=generator)
+                tau[torch.rand(count, generator=generator) < config.endpoint_probability] = 1.0
+            else:
+                tau = planned["tau"]
             synchronization = (
                 training_model.no_sync()
                 if context.world_size > 1 and offset + count < local_batch_size
