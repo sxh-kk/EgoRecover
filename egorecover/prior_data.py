@@ -15,8 +15,8 @@ def reconstructed_history_count(generated_frames, window, revise_recent, history
     return min(history, count)
 
 
-def prior_example(codec, history, truth, *, generated_frames=None):
-    """Only target/truth_xyz depend on the current label; inputs use history."""
+def prior_inputs(codec, history, *, generated_frames=None):
+    """Encode predictor inputs using past physical states only."""
     if history.joints.ndim != 5 or history.joints.shape[1] != 20:
         raise ValueError("P requires exactly20 previous body states.")
     last = state_map(history, lambda value: value[:, -1])
@@ -33,10 +33,18 @@ def prior_example(codec, history, truth, *, generated_frames=None):
     return {
         "history": encoded,
         "base": base,
-        "target": codec.encode_current(truth, reference)[:, None],
         "reference": reference,
-        "truth_xyz": truth.joints[..., :3, 3],
         "body_valid": body_valid,
+    }
+
+
+def prior_example(codec, history, truth, *, generated_frames=None):
+    """Only target/truth_xyz depend on the current label; inputs use history."""
+    inputs = prior_inputs(codec, history, generated_frames=generated_frames)
+    return {
+        **inputs,
+        "target": codec.encode_current(truth, inputs["reference"])[:, None],
+        "truth_xyz": truth.joints[..., :3, 3],
     }
 
 

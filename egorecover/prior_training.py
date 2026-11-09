@@ -20,6 +20,7 @@ from .losses import geometry_loss, update_ema
 from .models import HistoryPrior
 from .official import OfficialWindowData
 from .prior_data import clean_batch, concatenate_examples, predictor_forward, select_examples
+from .prior_two_forward import replacement_count, two_forward_example
 
 MODEL_CONFIG = {"width": 256, "layers": 4, "heads": 8, "dropout": 0.1, "source_flags": True}
 
@@ -45,6 +46,9 @@ class PriorTrainOptions:
     mature_predicted_fraction: float | None = None
     evaluation_min_frame: int = 21
     checkpoint_steps: tuple[int, ...] = ()
+    two_forward_steps: int = 0
+    two_forward_fraction: float = 0.8
+    adapted_self_fraction: float = 0.0
     ema_decay: float = 0.999
 
 
@@ -194,6 +198,35 @@ def sample_prior_batch(data, codec, bank, generator, count, fraction, device, *,
     return concatenate_examples(examples), predicted_count
 
 
+def prior_phase(args, step):
+    if step <= args.clean_steps:
+        name = "clean_pretraining" if args.initial_predicted_fraction == 0 else "mixed_history_pretraining"
+        return name, args.initial_predicted_fraction, 0.0, 0
+    if step <= args.clean_steps + args.two_forward_steps:
+        replaced = replacement_count(step, args.clean_steps, args.two_forward_steps)
+        return "two_forward_pretraining", 0.0, args.two_forward_fraction, replaced
+    return "predicted_history_adaptation", args.adapted_predicted_fraction, args.adapted_self_fraction, 20
+
+
+def sample_training_batch(
+    model, data, codec, bank, generator, count, fraction, device, *, self_fraction, replaced, **kw
+):
+    if self_fraction == 0:
+        example, predicted = sample_prior_batch(data, codec, bank, generator, count, fraction, device, **kw)
+        return example, predicted, 0
+    self_count = int((torch.rand(count, generator=generator) < self_fraction).sum())
+    examples, predicted = [], 0
+    if self_count < count:
+        example, predicted = sample_prior_batch(
+            data, codec, bank, generator, count - self_count, fraction / (1 - self_fraction), device, **kw
+        )
+        examples.append(example)
+    if self_count:
+        batch, frame = data.sample_batch(generator, self_count, replaced)
+        examples.append(two_forward_example(model, codec, batch, frame, replaced))
+    return concatenate_examples(examples), predicted, self_count
+
+
 def calibrate_geometry(model, data, codec, fk, device):
     """Keep P's FK gradient below10% of the code-gradient norm initially."""
     model.eval()
@@ -229,6 +262,8 @@ def _train_prior(args, context):
         or not 0 <= args.ema_decay < 1
         or args.evaluation_min_frame < 21
         or any(step < 1 or step > args.train_steps for step in args.checkpoint_steps)
+        or args.two_forward_steps < 0
+        or (args.two_forward_steps and args.clean_steps + args.two_forward_steps > args.train_steps)
     ):
         raise ValueError("Invalid P training budget or optimizer setting.")
     if args.batch_size % context.world_size or (args.batch_size // context.world_size) % args.microbatch_size:
@@ -237,6 +272,12 @@ def _train_prior(args, context):
         raise ValueError("Invalid predicted-history mixture.")
     if args.mature_predicted_fraction is not None and not 0 <= args.mature_predicted_fraction <= 1:
         raise ValueError("Invalid mature-history mixture.")
+    if (
+        not 0 <= args.two_forward_fraction <= 1
+        or not 0 <= args.adapted_self_fraction <= 1
+        or args.adapted_self_fraction + args.adapted_predicted_fraction > 1
+    ):
+        raise ValueError("Invalid self-predicted/G/GT history mixture.")
     torch.set_num_threads(2)
     device = context.device
     smpl = load_smpl(device)
@@ -284,6 +325,17 @@ def _train_prior(args, context):
         "mature_predicted_fraction": args.mature_predicted_fraction,
         "evaluation_min_frame": args.evaluation_min_frame,
         "checkpoint_steps": list(args.checkpoint_steps),
+        "two_forward_steps": args.two_forward_steps,
+        "two_forward_fraction": args.two_forward_fraction,
+        "adapted_self_fraction": args.adapted_self_fraction,
+        "two_forward": {
+            "enabled": bool(args.two_forward_steps or args.adapted_self_fraction),
+            "replacement_counts": [1, 3, 5, 10, 20],
+            "selection": "contiguous recent suffix; increasing counts during self pretraining;20 during G adaptation",
+            "first_pass": "current raw P in eval/no_grad; independent GT-only preceding20-frame windows; no observations",
+            "second_pass": "shared trainable P on physically mixed and re-encoded history; original current GT target",
+            "sampler": "self examples need20+replacement_count past frames; take-balanced eligible official train sources",
+        },
         "history_frames": 20,
         "current_observations_to_P": False,
         "geometry_audit": audit,
@@ -323,12 +375,15 @@ def _train_prior(args, context):
     final = min(args.train_steps, step + args.stop_after) if args.stop_after else args.train_steps
     local_batch = args.batch_size // context.world_size
     for step in range(step + 1, final + 1):
-        fraction = args.initial_predicted_fraction if step <= args.clean_steps else args.adapted_predicted_fraction
+        phase, fraction, self_fraction, replaced = prior_phase(args, step)
         training_model.train()
         optimizer.zero_grad(set_to_none=True)
-        metrics = dict(code=0.0, geometry=0.0, hand_pca=0.0, loss=0.0, predicted_fraction=0.0)
+        metrics = dict(
+            code=0.0, geometry=0.0, hand_pca=0.0, loss=0.0, predicted_fraction=0.0, self_predicted_fraction=0.0
+        )
         for offset in range(0, local_batch, args.microbatch_size):
-            example, predicted_count = sample_prior_batch(
+            example, predicted_count, self_count = sample_training_batch(
+                model,
                 data,
                 codec,
                 train_bank,
@@ -336,6 +391,8 @@ def _train_prior(args, context):
                 args.microbatch_size,
                 fraction,
                 device,
+                self_fraction=self_fraction,
+                replaced=replaced,
                 groups=sampling_groups,
                 mature_fraction=args.mature_predicted_fraction,
             )
@@ -354,6 +411,7 @@ def _train_prior(args, context):
                 metrics[key] += float(losses[key].detach()) * args.microbatch_size / local_batch
             metrics["loss"] += float(loss.detach()) * args.microbatch_size / local_batch
             metrics["predicted_fraction"] += predicted_count / local_batch
+            metrics["self_predicted_fraction"] += self_count / local_batch
         norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0, error_if_nonfinite=True)
         optimizer.step()
         update_ema(ema, model, args.ema_decay)
@@ -363,11 +421,8 @@ def _train_prior(args, context):
             **metrics,
             "gradient_norm": float(norm),
             "geometry_weight": audit["weight"],
-            "phase": (
-                ("clean_pretraining" if fraction == 0 else "mixed_history_pretraining")
-                if step <= args.clean_steps
-                else "predicted_history_adaptation"
-            ),
+            "phase": phase,
+            "self_replacement_frames": replaced if self_fraction else 0,
         }
         if context.is_primary:
             save_json(args.output / "progress.json", progress)
@@ -475,6 +530,7 @@ def main():
         "microbatch-size",
         "eval-every",
         "evaluation-min-frame",
+        "two-forward-steps",
     ):
         parser.add_argument(
             "--" + name, type=int, default=PriorTrainOptions.__dataclass_fields__[name.replace("-", "_")].default
@@ -485,7 +541,14 @@ def main():
     parser.add_argument("--mature-predicted-fraction", type=float)
     parser.add_argument("--checkpoint-steps", type=int, nargs="*", default=())
     parser.add_argument("--device", default="cuda")
-    for name in ("learning-rate", "initial-predicted-fraction", "adapted-predicted-fraction", "ema-decay"):
+    for name in (
+        "learning-rate",
+        "initial-predicted-fraction",
+        "adapted-predicted-fraction",
+        "ema-decay",
+        "two-forward-fraction",
+        "adapted-self-fraction",
+    ):
         parser.add_argument(
             "--" + name, type=float, default=PriorTrainOptions.__dataclass_fields__[name.replace("-", "_")].default
         )
