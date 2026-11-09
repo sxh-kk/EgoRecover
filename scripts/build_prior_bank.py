@@ -73,6 +73,8 @@ def main(args):
                             "kind": kind,
                             "window": context.system.config.window if kind == "predicted" else 0,
                             "cv_body_mm": cv_error,
+                            "timestamp_s": float(episode.timestamps[frame]),
+                            "floor_calibrated": episode.floor_calibrated,
                         }
                     )
             if frame < max(anchors):

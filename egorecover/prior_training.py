@@ -42,6 +42,9 @@ class PriorTrainOptions:
     eval_every: int = 500
     initial_predicted_fraction: float = 0.0
     adapted_predicted_fraction: float = 0.5
+    mature_predicted_fraction: float | None = None
+    evaluation_min_frame: int = 21
+    checkpoint_steps: tuple[int, ...] = ()
     ema_decay: float = 0.999
 
 
@@ -69,7 +72,7 @@ def load_bank(path, split, manifest):
     return bank
 
 
-def summarize_prior_rows(rows):
+def summarize_prior_rows(rows, minimum_frame=21):
     def summary(selected):
         if not selected:
             return None
@@ -94,26 +97,32 @@ def summarize_prior_rows(rows):
         selected = [row for row in predicted if row["window"] == window]
         groups[f"predicted_W{window}"] = summary(selected)
         groups[f"steady_W{window}"] = summary([row for row in selected if row["frame"] > 20])
+        groups[f"mature_W{window}"] = summary([row for row in selected if row["frame"] >= 40])
+        groups[f"selection_W{window}"] = summary([row for row in selected if row["frame"] >= minimum_frame])
     groups["predicted_all"] = summary(predicted)
     groups["predicted_steady"] = summary([row for row in predicted if row["frame"] > 20])
     groups["startup"] = summary([row for row in predicted if row["frame"] == 20])
-    steady = groups["predicted_steady"]
+    groups["selection_all"] = summary([row for row in predicted if row["frame"] >= minimum_frame])
+    steady = groups["selection_all"]
+    if steady is None or any(groups[f"selection_W{window}"] is None for window in (1, 3)):
+        raise ValueError("P evaluation requires selected predicted histories for both W1 and W3.")
     deltas = np.asarray([value["delta_mm"] for value in steady["per_take"].values()])
     rng = np.random.default_rng(1062)
     boot = deltas[rng.integers(0, len(deltas), size=(2000, len(deltas)))].mean(1)
     ci = np.quantile(boot, [0.025, 0.975]).tolist()
-    passed = all(groups[f"steady_W{window}"]["delta_mm"] < 0 for window in (1, 3)) and ci[1] < 0
+    passed = all(groups[f"selection_W{window}"]["delta_mm"] < 0 for window in (1, 3)) and ci[1] < 0
     return {
         "groups": groups,
         "steady_delta_ci95_mm": ci,
         "gate_passed": bool(passed),
-        "gate_rule": "P beats CV on both W1/W3 matched predicted-history steady means; pooled take-bootstrap upper95CI below0",
+        "evaluation_min_frame": minimum_frame,
+        "gate_rule": f"P beats CV on both W1/W3 matched histories at frame>={minimum_frame}; pooled take-bootstrap upper95CI below0",
         "uncertainty_scope": "fixed validation samples/checkpoint, not training-seed uncertainty",
     }
 
 
 @torch.no_grad()
-def evaluate_prior(model, bank, codec, fk, context):
+def evaluate_prior(model, bank, codec, fk, context, *, minimum_frame=21):
     model.eval()
     indices = list(range(context.rank, len(bank["rows"]), context.world_size))
     rows = []
@@ -137,17 +146,50 @@ def evaluate_prior(model, bank, codec, fk, context):
                 }
             )
     rows = context.gather_rows(rows)
-    return {"summary": summarize_prior_rows(rows), "rows": rows}
+    return {"summary": summarize_prior_rows(rows, minimum_frame), "rows": rows}
 
 
-def sample_prior_batch(data, codec, bank, generator, count, fraction, device):
+def predicted_sampling_groups(rows, minimum_frame=40):
+    """Balance producer W independently of the startup/mature-history mixture."""
+    groups = {
+        (window, mature): torch.tensor(
+            [
+                index
+                for index, row in enumerate(rows)
+                if row["kind"] == "predicted" and row["window"] == window and (row["frame"] >= minimum_frame) == mature
+            ],
+            dtype=torch.long,
+        )
+        for window in (1, 3)
+        for mature in (False, True)
+    }
+    if any(not len(indices) for indices in groups.values()):
+        raise ValueError("Balanced P sampling requires early and mature histories from both W1 and W3.")
+    return groups
+
+
+def sample_predicted_indices(groups, generator, count, mature_fraction):
+    windows = 1 + 2 * torch.randint(2, (count,), generator=generator)
+    mature = torch.rand(count, generator=generator) < mature_fraction
+    indices = torch.empty(count, dtype=torch.long)
+    for (window, is_mature), candidates in groups.items():
+        selected = (windows == window) & (mature == is_mature)
+        indices[selected] = candidates[torch.randint(len(candidates), (int(selected.sum()),), generator=generator)]
+    return indices
+
+
+def sample_prior_batch(data, codec, bank, generator, count, fraction, device, *, groups=None, mature_fraction=None):
     predicted_count = int((torch.rand(count, generator=generator) < fraction).sum())
     examples = []
     if predicted_count < count:
         batch, frame = data.sample_batch(generator, count - predicted_count, 0)
         examples.append(clean_batch(codec, batch, frame))
     if predicted_count:
-        indices = torch.randint(len(bank["rows"]), (predicted_count,), generator=generator)
+        indices = (
+            torch.randint(len(bank["rows"]), (predicted_count,), generator=generator)
+            if groups is None
+            else sample_predicted_indices(groups, generator, predicted_count, mature_fraction)
+        )
         examples.append(select_examples(bank["tensors"], indices, device))
     return concatenate_examples(examples), predicted_count
 
@@ -185,12 +227,16 @@ def _train_prior(args, context):
         or not math.isfinite(args.learning_rate)
         or args.learning_rate <= 0
         or not 0 <= args.ema_decay < 1
+        or args.evaluation_min_frame < 21
+        or any(step < 1 or step > args.train_steps for step in args.checkpoint_steps)
     ):
         raise ValueError("Invalid P training budget or optimizer setting.")
     if args.batch_size % context.world_size or (args.batch_size // context.world_size) % args.microbatch_size:
         raise ValueError("P batch and microbatch must partition the DDP ranks.")
     if not 0 <= args.initial_predicted_fraction <= 1 or not 0 <= args.adapted_predicted_fraction <= 1:
         raise ValueError("Invalid predicted-history mixture.")
+    if args.mature_predicted_fraction is not None and not 0 <= args.mature_predicted_fraction <= 1:
+        raise ValueError("Invalid mature-history mixture.")
     torch.set_num_threads(2)
     device = context.device
     smpl = load_smpl(device)
@@ -200,6 +246,9 @@ def _train_prior(args, context):
     fk = FixedShapeFK(smpl, torch.zeros(10, device=device))
     train_bank = load_bank(args.train_bank, "train", data.digest)
     val_bank = load_bank(args.val_bank, "val", data.digest)
+    sampling_groups = (
+        predicted_sampling_groups(train_bank["rows"]) if args.mature_predicted_fraction is not None else None
+    )
     if {row["take"] for row in train_bank["rows"]} & {row["take"] for row in val_bank["rows"]}:
         raise ValueError("P train and validation histories share takes.")
     torch.manual_seed(args.seed)
@@ -232,6 +281,9 @@ def _train_prior(args, context):
         "ema_decay": args.ema_decay,
         "initial_predicted_fraction": args.initial_predicted_fraction,
         "adapted_predicted_fraction": args.adapted_predicted_fraction,
+        "mature_predicted_fraction": args.mature_predicted_fraction,
+        "evaluation_min_frame": args.evaluation_min_frame,
+        "checkpoint_steps": list(args.checkpoint_steps),
         "history_frames": 20,
         "current_observations_to_P": False,
         "geometry_audit": audit,
@@ -277,7 +329,15 @@ def _train_prior(args, context):
         metrics = dict(code=0.0, geometry=0.0, hand_pca=0.0, loss=0.0, predicted_fraction=0.0)
         for offset in range(0, local_batch, args.microbatch_size):
             example, predicted_count = sample_prior_batch(
-                data, codec, train_bank, generator, args.microbatch_size, fraction, device
+                data,
+                codec,
+                train_bank,
+                generator,
+                args.microbatch_size,
+                fraction,
+                device,
+                groups=sampling_groups,
+                mature_fraction=args.mature_predicted_fraction,
             )
             synchronize = (
                 training_model.no_sync()
@@ -314,11 +374,11 @@ def _train_prior(args, context):
             with (args.output / "train.jsonl").open("a") as stream:
                 stream.write(json.dumps(progress) + "\n")
             print(json.dumps(progress), flush=True)
-        if step % args.eval_every == 0 or step == final:
+        if step % args.eval_every == 0 or step == final or step in args.checkpoint_steps:
             if context.is_primary:
                 save_json(args.output / "status.json", {"phase": "validation", "step": step})
-            report = evaluate_prior(ema, val_bank, codec, fk, context)
-            score = report["summary"]["groups"]["predicted_steady"]["p_body_mm"]
+            report = evaluate_prior(ema, val_bank, codec, fk, context, minimum_frame=args.evaluation_min_frame)
+            score = report["summary"]["groups"]["selection_all"]["p_body_mm"]
             improved = score < best
             best = min(best, score)
             curve.append({"step": step, "summary": report["summary"]})
@@ -334,7 +394,10 @@ def _train_prior(args, context):
             if context.is_primary:
                 save_json(args.output / f"validation-step{step}.json", report)
                 save_json(args.output / "validation.json", {"step": step, **report})
-                save_json(args.output / "selection.json", {"best_predicted_steady_mm": best, "curve": curve})
+                save_json(
+                    args.output / "selection.json",
+                    {"best_selection_mm": best, "evaluation_min_frame": args.evaluation_min_frame, "curve": curve},
+                )
                 save_checkpoint(
                     args.output / "resume.pt",
                     {
@@ -362,6 +425,11 @@ def _train_prior(args, context):
                 save_checkpoint(args.output / "last.pt", export)
                 if improved:
                     save_checkpoint(args.output / "best.pt", export)
+                if step in args.checkpoint_steps:
+                    milestone = args.output / "milestones" / f"step{step}"
+                    milestone.mkdir(parents=True, exist_ok=False)
+                    for name in ("resume.pt", "last.pt", "best.pt", f"validation-step{step}.json", "selection.json"):
+                        (milestone / name).hardlink_to(args.output / name)
                 save_json(args.output / "status.json", {"phase": "training", "step": step})
             context.barrier()
     if context.is_primary:
@@ -381,7 +449,7 @@ def evaluate_checkpoint(args):
         bank = load_bank(args.val_bank, "val", saved["manifest_sha256"])
         model = HistoryPrior(**saved["model_config"]).to(context.device).eval()
         model.load_state_dict(saved["state_dict"], strict=True)
-        report = evaluate_prior(model, bank, codec, fk, context)
+        report = evaluate_prior(model, bank, codec, fk, context, minimum_frame=args.evaluation_min_frame)
         if context.is_primary:
             args.output.mkdir(parents=True, exist_ok=True)
             save_json(
@@ -399,13 +467,23 @@ def main():
     parser = argparse.ArgumentParser()
     for name in ("output", "data-root", "train-bank", "val-bank"):
         parser.add_argument("--" + name, type=Path, required=True)
-    for name in ("seed", "train-steps", "clean-steps", "batch-size", "microbatch-size", "eval-every"):
+    for name in (
+        "seed",
+        "train-steps",
+        "clean-steps",
+        "batch-size",
+        "microbatch-size",
+        "eval-every",
+        "evaluation-min-frame",
+    ):
         parser.add_argument(
             "--" + name, type=int, default=PriorTrainOptions.__dataclass_fields__[name.replace("-", "_")].default
         )
     parser.add_argument("--stop-after", type=int)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--evaluate-checkpoint", type=Path)
+    parser.add_argument("--mature-predicted-fraction", type=float)
+    parser.add_argument("--checkpoint-steps", type=int, nargs="*", default=())
     parser.add_argument("--device", default="cuda")
     for name in ("learning-rate", "initial-predicted-fraction", "adapted-predicted-fraction", "ema-decay"):
         parser.add_argument(

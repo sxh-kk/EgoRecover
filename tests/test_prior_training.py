@@ -1,5 +1,6 @@
 import copy
 
+import pytest
 import torch
 
 from egorecover.codec import MotionCodec
@@ -14,7 +15,12 @@ from egorecover.prior_data import (
     prior_example,
     reconstructed_history_count,
 )
-from egorecover.prior_training import evaluate_prior, summarize_prior_rows
+from egorecover.prior_training import (
+    evaluate_prior,
+    predicted_sampling_groups,
+    sample_predicted_indices,
+    summarize_prior_rows,
+)
 from egorecover.state import state_map
 
 
@@ -126,3 +132,50 @@ def test_initial_predictor_and_cv_are_evaluated_with_identical_batch_arithmetic(
     report = evaluate_prior(model, bank, codec, DenseJoints(), context)
     assert all(row["delta_mm"] == 0 for row in report["rows"])
     assert not report["summary"]["gate_passed"]
+
+
+def test_mature_sampling_balances_producers_despite_unequal_bank_counts_and_resumes_rng():
+    rows = [
+        {"kind": "predicted", "window": window, "frame": frame}
+        for window, count in ((1, 3), (3, 19))
+        for frame in (20, 40, 52)
+        for _ in range(count)
+    ]
+    groups = predicted_sampling_groups(rows)
+    generator = torch.Generator().manual_seed(62)
+    state = generator.get_state()
+    indices = sample_predicted_indices(groups, generator, 20000, 0.75).tolist()
+    assert abs(sum(rows[index]["window"] == 1 for index in indices) / len(indices) - 0.5) < 0.02
+    assert abs(sum(rows[index]["frame"] >= 40 for index in indices) / len(indices) - 0.75) < 0.02
+    generator.set_state(state)
+    assert indices == sample_predicted_indices(groups, generator, 20000, 0.75).tolist()
+    early = sample_predicted_indices(groups, generator, 100, 0.0)
+    mature = sample_predicted_indices(groups, generator, 100, 1.0)
+    assert all(rows[index]["frame"] < 40 for index in early)
+    assert all(rows[index]["frame"] >= 40 for index in mature)
+
+
+def test_balanced_sampling_rejects_missing_mature_histories():
+    with pytest.raises(ValueError, match="early and mature"):
+        predicted_sampling_groups([{"kind": "predicted", "window": window, "frame": 20} for window in (1, 3)])
+
+
+def test_mature_gate_cannot_be_carried_by_an_improvement_in_transient_frames():
+    rows = [
+        {
+            "take": take,
+            "kind": "predicted",
+            "window": window,
+            "frame": frame,
+            "p_body_mm": 110.0 + delta,
+            "cv_body_mm": 110.0,
+            "delta_mm": delta,
+        }
+        for take in ("a", "b", "c")
+        for window in (1, 3)
+        for frame, delta in ((20, -100.0), (21, -100.0), (40, 2.0), (60, 2.0))
+    ]
+    assert summarize_prior_rows(rows)["gate_passed"]
+    mature = summarize_prior_rows(rows, minimum_frame=40)
+    assert not mature["gate_passed"]
+    assert mature["groups"]["selection_all"]["delta_mm"] == 2.0
