@@ -37,7 +37,14 @@ def load_predictor(path, device, manifest=None):
     saved = torch.load(path, map_location="cpu", weights_only=True)
     if manifest is not None and saved.get("manifest_sha256") != manifest:
         raise ValueError("Use the calibrated P checkpoint for this data manifest.")
-    prior = HistoryPrior(**saved.get("model_config", {})).to(device)
+    target = torch.device(device)
+    rng_devices = (
+        [target.index if target.index is not None else torch.cuda.current_device()] if target.type == "cuda" else []
+    )
+    # P's temporary random initialization is overwritten by its checkpoint.
+    # Preserve RNG so CV and learned-P runs initialize G and its streams alike.
+    with torch.random.fork_rng(devices=rng_devices):
+        prior = HistoryPrior(**saved.get("model_config", {})).to(target)
     prior.load_state_dict(saved["state_dict"], strict=True)
     return prior.freeze()
 
