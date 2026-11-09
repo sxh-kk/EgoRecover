@@ -101,6 +101,19 @@ def test_features_use_nested_mapping_causal_five_hz_token_zero_and_real_timestam
     assert data.features["train_a"].untyped_storage().size() > episode.images.untyped_storage().size()
 
 
+def test_motion_only_access_preserves_identity_and_head_labels(official_root):
+    normal = OfficialWindowData(official_root, "train", bootstrap=HeadOnlySpy())
+    motion = OfficialWindowData(official_root, "train", bootstrap=HeadOnlySpy(), load_images=False)
+    assert normal.digest == motion.digest
+    assert motion.features is None
+    a, b = normal.load(0), motion.load(0)
+    torch.testing.assert_close(a.truth.joints, b.truth.joints, atol=0, rtol=0)
+    torch.testing.assert_close(a.head, b.head, atol=0, rtol=0)
+    assert bool(b.head_valid.all())
+    assert not bool(b.image_valid.any())
+    assert not bool(b.images.any())
+
+
 def test_floor_world_roundtrip_and_global_label_rotations(official_root):
     path = official_root / "uniegomotion/ee_train.pt"
     rows = torch.load(path, weights_only=False)

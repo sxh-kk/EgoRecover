@@ -37,7 +37,7 @@ def load_predictor(path, device, manifest=None):
     saved = torch.load(path, map_location="cpu", weights_only=True)
     if manifest is not None and saved.get("manifest_sha256") != manifest:
         raise ValueError("Use the calibrated P checkpoint for this data manifest.")
-    prior = HistoryPrior().to(device)
+    prior = HistoryPrior(**saved.get("model_config", {})).to(device)
     prior.load_state_dict(saved["state_dict"], strict=True)
     return prior.freeze()
 

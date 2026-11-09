@@ -38,7 +38,7 @@ def _integer(value, name, minimum=0):
 class OfficialWindowData:
     """Official train/val data with independent take-balanced training queries."""
 
-    def __init__(self, root, split, *, device="cpu", bootstrap=None, clip_frames=80, train_stride=20):
+    def __init__(self, root, split, *, device="cpu", bootstrap=None, clip_frames=80, train_stride=20, load_images=True):
         if split == "test":
             raise ValueError("The official package has train/val only; val must not be relabeled as test.")
         if split not in ("train", "dev", "val"):
@@ -54,10 +54,13 @@ class OfficialWindowData:
         self.stats = {name: torch.as_tensor(loaded[name]).float().clone() for name in STATS_NAMES}
         MotionCodec(self.stats)
         self.motion = _load(self.directory / f"ee_{self.official_split}.pt")
-        features = _load(self.directory / f"egoview_dinov2_{self.official_split}.pt")
-        if not isinstance(features, dict) or not isinstance(features.get("feats"), dict):
-            raise ValueError("Official DINO file requires its feats mapping.")
-        self.features = features["feats"]
+        if load_images:
+            features = _load(self.directory / f"egoview_dinov2_{self.official_split}.pt")
+            if not isinstance(features, dict) or not isinstance(features.get("feats"), dict):
+                raise ValueError("Official DINO file requires its feats mapping.")
+            self.features = features["feats"]
+        else:
+            self.features = None
         self._validate_sources()
         self.protocol = {
             "format": "official_ee4d_head_only_v1",
@@ -127,11 +130,12 @@ class OfficialWindowData:
             shapes.update({f"{side}_hand_pose": (count, 12) for side in ("left", "right")})
             if any(params[key].shape != shape for key, shape in shapes.items()):
                 raise ValueError("Official SMPL parameter dimensions disagree with source count.")
-            feature = self.features.get(take)
-            if not isinstance(feature, torch.Tensor) or feature.ndim != 3 or feature.shape[1:] != (5, 1024):
-                raise ValueError(f"Official DINO feats missing or invalid for {take}.")
-            if last // 6 >= len(feature):
-                raise ValueError(f"Official DINO feature timeline does not cover source {name}.")
+            if self.features is not None:
+                feature = self.features.get(take)
+                if not isinstance(feature, torch.Tensor) or feature.ndim != 3 or feature.shape[1:] != (5, 1024):
+                    raise ValueError(f"Official DINO feats missing or invalid for {take}.")
+                if last // 6 >= len(feature):
+                    raise ValueError(f"Official DINO feature timeline does not cover source {name}.")
             self.source_metadata[name] = {"take": take, "first30": first, "frames": count, "floor": float(floor)}
 
     def _identity(self):
@@ -285,7 +289,11 @@ class OfficialWindowData:
         feature_ids = torch.div(frame_ids, 6, rounding_mode="floor")
         # Advanced indexing copies only this small clip's token zero, never the
         # entire memory-mapped take or feature file.
-        images = self.features[meta["take"]][feature_ids, 0].float()
+        images = (
+            self.features[meta["take"]][feature_ids, 0].float()
+            if self.features is not None
+            else torch.zeros(count, 1024)
+        )
         if any(not bool(torch.isfinite(getattr(truth, key)).all()) for key in FIELDS):
             raise ValueError("Official clip contains nonfinite supervised body state.")
         world = torch.eye(4, device=self.device)
@@ -299,7 +307,7 @@ class OfficialWindowData:
             head.to(self.device),
             images.to(self.device),
             torch.ones(count, dtype=torch.bool, device=self.device),
-            torch.ones(count, dtype=torch.bool, device=self.device),
+            torch.full((count,), self.features is not None, dtype=torch.bool, device=self.device),
             timestamps,
             self.stats,
             world,

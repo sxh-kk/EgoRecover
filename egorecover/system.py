@@ -7,6 +7,7 @@ import torch
 from egorecover.codec import BodyState, planar_reference
 
 from .flow import build_source, solve
+from .prior_data import reconstructed_history_count
 from .state import WindowCache, state_cat, state_map
 
 
@@ -46,7 +47,15 @@ class WindowReconstructor:
                 self.predictor.eval()
                 prior_history = self.codec.encode_history(history, planar_reference(history.reference[:, 0]))
                 valid = torch.ones(prior_history.shape[:2], dtype=torch.bool, device=base.device)
-                base = self.predictor(prior_history, valid, base)
+                if getattr(self.predictor, "source_flags", False):
+                    generated = reconstructed_history_count(
+                        cache.frame - 19, cfg.window, cfg.revise_recent, cfg.history
+                    )
+                    positions = torch.arange(cfg.history, device=base.device)
+                    body_valid = (positions >= cfg.history - generated)[None].expand(len(base), -1)
+                    base = self.predictor(prior_history, valid, base, history_body_valid=body_valid)
+                else:
+                    base = self.predictor(prior_history, valid, base)
             predicted = self.codec.decode_current(base[:, 0], last.reference)
             recent = state_map(history, lambda x: x[:, cfg.fixed :])
             center_body = state_cat((recent, state_map(predicted, lambda x: x[:, None])))
