@@ -168,3 +168,21 @@ def test_duplicate_draw_nonfinite_metric_and_reversed_delta_are_rejected():
         summarize_reference_rows([{**item, "response_mm": float("inf")}])
     with pytest.raises(ValueError, match="predicted minus reference"):
         summarize_reference_rows([{**item, "delta_mm": -item["delta_mm"]}])
+
+
+def test_episode_equal_estimate_keeps_take_clusters_and_averages_draws_before_classification():
+    rows = [row(episode="a1", delta=10), row(episode="a2", delta=10), row(take="B", episode="b", delta=-20)]
+    episode = table(rows, aggregation="episode", bootstrap_samples=128)
+    take = table(rows, aggregation="take", bootstrap_samples=128)
+    assert episode["means"]["delta_mm"] == 0
+    assert take["means"]["delta_mm"] == -5
+    assert episode["fractions"]["reference_better"] == pytest.approx(2 / 3)
+    assert take["fractions"]["reference_better"] == 0.5
+    assert episode["counts"]["takes"] == 2
+    repeated = [{**r, "draw": d} for r in rows for d in range(7)]
+    again = table(repeated, aggregation="episode", bootstrap_samples=128)
+    assert episode["means"] == again["means"]
+    assert episode["ci95"] == again["ci95"]
+    assert episode["bootstrap"]["index_sha256"] == take["bootstrap"]["index_sha256"]
+    with pytest.raises(ValueError, match="aggregation"):
+        table(rows, aggregation="draw")

@@ -197,3 +197,60 @@ def test_only_available_horizons_are_emitted_for_an_anchor_near_the_tail():
     )
     assert len(rows) == 2 and {row["horizon"] for row in rows} == {1}
     assert all(row["seconds"] == pytest.approx(0.1) for row in rows)
+
+
+def test_saved_first_emissions_and_noop_intervention_are_verified_on_paired_continuations():
+    from egorecover.evaluation import evaluate_episode
+
+    episode = synthetic_episode()
+    system = WindowReconstructor(MotionCodec(episode.stats), None, WindowConfig())
+    model = NoiseDependentEndpoint()
+    expected = evaluate_episode(system, model, episode, DenseJoints(), seed=1062)["predictions"][0]
+    checks = {}
+    rows = diagnose_episode(
+        system,
+        model,
+        episode,
+        DenseJoints(),
+        anchors=(20, 24),
+        horizons=(1, 2),
+        future_seeds=(1062, 1063),
+        expected_predictions=expected,
+        verify_sham=True,
+        verification=checks,
+    )
+    assert len(rows) == 16
+    assert checks == {"baseline_comparisons": 9, "baseline_max_abs_m": 0.0, "sham_checks": 2}
+    assert all(row["anchor_dense_fk_gap_mm"] == 0 for row in rows)
+    with pytest.raises(AssertionError):
+        diagnose_episode(system, model, episode, DenseJoints(), expected_predictions=expected + 0.1)
+
+
+def test_reference_cli_preserves_explicit_learned_prior(monkeypatch, tmp_path):
+    import egorecover.reference_diagnostic as diagnostic
+
+    class Captured(Exception):
+        pass
+
+    def capture(args):
+        assert args.prior_checkpoint == tmp_path / "P.pt"
+        assert args.prior_mode == "learned"
+        assert args.selection_file == tmp_path / "selection.json"
+        raise Captured
+
+    monkeypatch.setattr(diagnostic, "load_evaluation_context", capture)
+    with pytest.raises(Captured):
+        diagnostic.main(
+            [
+                "--checkpoint",
+                str(tmp_path / "G.pt"),
+                "--output",
+                str(tmp_path / "output"),
+                "--prior-checkpoint",
+                str(tmp_path / "P.pt"),
+                "--prior-mode",
+                "learned",
+                "--selection-file",
+                str(tmp_path / "selection.json"),
+            ]
+        )

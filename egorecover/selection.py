@@ -4,8 +4,35 @@ import hashlib
 import json
 from collections.abc import Mapping
 from numbers import Integral
+from pathlib import Path
 
 ALGORITHM_VERSION = "take_balanced_sha256_round_robin_v1"
+
+
+def load_fixed_selection(records, path):
+    """Validate and reuse explicit physical clips without selecting a new subset."""
+    selection = json.loads(Path(path).read_text())
+    selected = selection["records"]
+    if not selected or len(selected) != selection["clips"]:
+        raise ValueError("Fixed selection count disagrees with its records.")
+    indices, seen = [], set()
+    for row in selected:
+        index = row["record_index"]
+        if isinstance(index, bool) or not isinstance(index, int) or not 0 <= index < len(records):
+            raise ValueError("Fixed selection has an invalid source index.")
+        actual = records[index]
+        expected = (row["episode_id"], row["source"], row["take"], row["start"], row["frames"])
+        physical = tuple(
+            actual[key]
+            for key in ("episode_id", "base_seq_name", "base_take_name", "episode_start_motion_idx", "num_frames")
+        )
+        if physical != expected or row["episode_id"] in seen:
+            raise ValueError("Fixed selection physical clip changed or was duplicated.")
+        seen.add(row["episode_id"])
+        indices.append(index)
+    if len({row["take"] for row in selected}) != selection["takes"]:
+        raise ValueError("Fixed selection take count disagrees with its records.")
+    return indices, selection
 
 
 def _sha256(value):

@@ -1,6 +1,7 @@
 """Check whether a single ground-truth current-state intervention helps."""
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -11,8 +12,8 @@ from .data import OFFICIAL_DATA_ROOT, keyed_noise
 from .evaluate import load_evaluation_context
 from .fk import joint_decoder
 from .io import code_identity, file_sha256, save_json
-from .selection import select_dev_records
-from .state import state_map
+from .selection import load_fixed_selection, select_dev_records
+from .state import FIELDS, state_map
 
 
 def intervention_state(predicted, truth, joints, mode):
@@ -37,6 +38,22 @@ def _center_joints(system, result, joints):
     return joints(state_map(center, lambda x: x[:, -1]))
 
 
+def _check_prediction(points, expected, frame, verification):
+    actual = points[0].detach().cpu()
+    torch.testing.assert_close(actual, expected[frame - 20], atol=2e-5, rtol=1e-5)
+    error = float((actual - expected[frame - 20]).abs().max())
+    verification["baseline_comparisons"] += 1
+    verification["baseline_max_abs_m"] = max(verification["baseline_max_abs_m"], error)
+
+
+def _check_cache(first, second):
+    assert (first.frame, first.generated_frames) == (second.frame, second.generated_frames)
+    for key in ("beta", "anchor"):
+        torch.testing.assert_close(getattr(first, key), getattr(second, key), atol=0, rtol=0)
+    for key in FIELDS:
+        torch.testing.assert_close(getattr(first.body, key), getattr(second.body, key), atol=0, rtol=0)
+
+
 @torch.no_grad()
 def diagnose_episode(
     system,
@@ -50,6 +67,9 @@ def diagnose_episode(
     prefix_seed=1062,
     interventions=("body_pose", "full_state"),
     steps=1,
+    expected_predictions=None,
+    verify_sham=False,
+    verification=None,
 ):
     """Keep one own-history prefix; fork paired continuations only at anchors."""
     if not anchors or any(isinstance(a, bool) or not isinstance(a, int) or a < 20 for a in anchors):
@@ -64,6 +84,10 @@ def diagnose_episode(
         raise ValueError("Unknown intervention mode.")
     if not system.config.body_feedback:
         raise ValueError("Reference diagnostics require an active body-history path.")
+    if expected_predictions is not None and expected_predictions.shape != (len(episode) - 20, 22, 3):
+        raise ValueError("Expected baseline predictions must match every first emission after startup.")
+    verification = verification if verification is not None else {}
+    verification.update(baseline_comparisons=0, baseline_max_abs_m=0.0, sham_checks=0)
     selected = sorted({a for a in anchors if a + min(horizons) < len(episode)})
     if not selected:
         return []
@@ -72,6 +96,8 @@ def diagnose_episode(
     for frame in range(20, selected[-1] + 1):
         epsilon = keyed_noise(episode.identifier, prefix_seed, frame, system.config.window, episode.beta.device)
         current = system.online(model, cache, episode.observations(frame), epsilon, steps=steps)
+        if expected_predictions is not None:
+            _check_prediction(joints(current.current), expected_predictions, frame, verification)
         # Branches below never overwrite this prefix cache, including across seeds.
         cache = current.cache.detach()
         if frame not in selected:
@@ -80,7 +106,8 @@ def diagnose_episode(
         replacements = {m: intervention_state(current.current, truth_current, joints, m) for m in interventions}
         available = sorted({h for h in horizons if frame + h < len(episode)})
         anchor_error = _mpjpe(joints(current.current), truth_current.joints[..., :3, 3])
-        for draw in future_seeds:
+        anchor_gap = _mpjpe(current.current.joints[..., :3, 3], joints(current.current))
+        for draw_index, draw in enumerate(future_seeds):
             predicted_cache = cache
             reference_caches = {m: cache.replace_current(value).detach() for m, value in replacements.items()}
             for offset in range(1, max(available) + 1):
@@ -88,6 +115,15 @@ def diagnose_episode(
                 obs = episode.observations(t)
                 noise = keyed_noise(episode.identifier, draw, t, system.config.window, episode.beta.device)
                 predicted = system.online(model, predicted_cache, obs, noise, steps=steps)
+                if verify_sham and draw_index == 0 and offset == 1:
+                    sham_cache = cache.replace_current(current.current)
+                    _check_cache(sham_cache, cache)
+                    sham = system.online(model, sham_cache, obs, noise, steps=steps)
+                    torch.testing.assert_close(sham.codes, predicted.codes, atol=0, rtol=0)
+                    _check_cache(sham.cache, predicted.cache)
+                    verification["sham_checks"] += 1
+                if expected_predictions is not None and draw == prefix_seed:
+                    _check_prediction(joints(predicted.current), expected_predictions, t, verification)
                 references = {
                     m: system.online(model, branch, obs, noise, steps=steps) for m, branch in reference_caches.items()
                 }
@@ -124,6 +160,9 @@ def diagnose_episode(
                             "center_reference_mm": cr,
                             "center_delta_mm": cp - cr,
                             "anchor_current_mm": anchor_error,
+                            "anchor_dense_fk_gap_mm": anchor_gap,
+                            "predicted_dense_fk_gap_mm": _mpjpe(predicted.current.joints[..., :3, 3], pj),
+                            "reference_dense_fk_gap_mm": _mpjpe(reference.current.joints[..., :3, 3], rj),
                             "intervened_current_mm": _mpjpe(
                                 joints(replacements[mode]), truth_current.joints[..., :3, 3]
                             ),
@@ -137,8 +176,15 @@ def main(argv=None):
     parser.add_argument("--checkpoint", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--data-root", type=Path, default=OFFICIAL_DATA_ROOT)
+    parser.add_argument("--prior-checkpoint", type=Path)
+    parser.add_argument("--prior-mode", choices=("auto", "constant_velocity", "learned"), default="auto")
+    parser.add_argument("--selection-file", type=Path)
+    parser.add_argument("--baseline-root", type=Path)
+    parser.add_argument("--verify-sham", action="store_true")
+    parser.add_argument("--aggregation", choices=("episode", "take"), default="take")
+    parser.add_argument("--episode-limit", type=int)
     parser.add_argument("--device", default="cpu")
-    parser.add_argument("--limit", type=int, default=128)
+    parser.add_argument("--limit", type=int)
     parser.add_argument("--shard-index", type=int, default=0)
     parser.add_argument("--shard-count", type=int, default=1)
     parser.add_argument("--selection-seed", type=int, default=1062)
@@ -160,10 +206,24 @@ def main(argv=None):
         parser.error("shard-index must be in [0, shard-count)")
     torch.set_num_threads(args.threads)
     args.synthetic, args.split = False, "dev"
-    args.data_format, args.prior_mode, args.prior_checkpoint = "official", "constant_velocity", None
+    if args.episode_limit is not None and args.episode_limit < 1:
+        raise ValueError("episode-limit must be positive")
+    if args.baseline_root and not args.selection_file:
+        raise ValueError("Baseline reproduction requires the exact fixed selection.")
+    args.data_format = "official"
     context = load_evaluation_context(args)
-    indices, selection = select_dev_records(context.data.records, args.limit, args.selection_seed)
+    context.model.requires_grad_(False)
+    if args.selection_file:
+        if args.limit is not None:
+            raise ValueError("Use episode-limit for a pilot without changing the fixed selection.")
+        indices, selection = load_fixed_selection(context.data.records, args.selection_file)
+        selected_records = {row["record_index"]: row for row in selection["records"]}
+    else:
+        indices, selection = select_dev_records(context.data.records, args.limit or 128, args.selection_seed)
+        selected_records = {}
     indices = indices[args.shard_index :: args.shard_count]
+    if args.episode_limit:
+        indices = indices[: args.episode_limit]
     task_path = args.data_root / "takes.json"
     tasks = {r["take_name"]: r for r in json.loads(task_path.read_text())}
     metadata = {
@@ -174,6 +234,11 @@ def main(argv=None):
         "smpl_asset": context.saved["identity"]["smpl_asset"],
         "task_metadata_sha256": file_sha256(task_path),
         "selection": selection,
+        "selection_file_sha256": file_sha256(args.selection_file) if args.selection_file else None,
+        "prior_checkpoint_sha256": context.saved["identity"]["prior"],
+        "baseline_root": str(args.baseline_root.resolve()) if args.baseline_root else None,
+        "verify_sham": args.verify_sham,
+        "aggregation": args.aggregation,
         "shard": {"index": args.shard_index, "count": args.shard_count, "episodes": len(indices)},
         "prefix_seed": args.prefix_seed,
         "future_seeds": args.future_seeds,
@@ -207,6 +272,17 @@ def main(argv=None):
             packet = json.loads(path.read_text())
         else:
             episode = context.data.load(index)
+            expected, baseline_sha = None, None
+            if args.baseline_root:
+                record = selected_records[index]
+                name = hashlib.sha256(episode.identifier.encode()).hexdigest() + ".pt"
+                baseline_path = args.baseline_root / f"shard{record['shard']}" / "predictions" / name
+                baseline = torch.load(baseline_path, map_location="cpu", weights_only=True)
+                if baseline["episode_id"] != episode.identifier or baseline["selection_sha256"] != selection["sha256"]:
+                    raise ValueError("Saved baseline prediction identity differs from the selected clip.")
+                torch.testing.assert_close(baseline["timestamps"], episode.timestamps[20:].cpu(), atol=0, rtol=0)
+                expected, baseline_sha = baseline["joints_floor_world"], file_sha256(baseline_path)
+            checks = {}
             rows = diagnose_episode(
                 context.system,
                 context.model,
@@ -218,11 +294,21 @@ def main(argv=None):
                 prefix_seed=args.prefix_seed,
                 interventions=tuple(args.interventions),
                 steps=args.steps,
+                expected_predictions=expected,
+                verify_sham=args.verify_sham,
+                verification=checks,
             )
             task = tasks[episode.take]
             for row in rows:
                 row.update({k: task[k] for k in ("task_id", "task_name", "parent_task_id", "parent_task_name")})
-            packet = {"episode": episode.identifier, "take": episode.take, "frames": len(episode), "rows": rows}
+            packet = {
+                "episode": episode.identifier,
+                "take": episode.take,
+                "frames": len(episode),
+                "rows": rows,
+                "verification": checks,
+                "baseline_sha256": baseline_sha,
+            }
             save_json(path, packet)
         lengths[packet["episode"]] = packet["frames"]
         all_rows.extend(packet["rows"])
@@ -230,7 +316,11 @@ def main(argv=None):
         if number % 16 == 0 or number == len(indices):
             boot = args.bootstrap_samples if number == len(indices) else 0
             summary = summarize_reference_rows(
-                all_rows, tolerance_mm=args.tolerance_mm, bootstrap_samples=boot, bootstrap_seed=args.selection_seed
+                all_rows,
+                tolerance_mm=args.tolerance_mm,
+                bootstrap_samples=boot,
+                bootstrap_seed=args.selection_seed,
+                aggregation=args.aggregation,
             )
             complete = {e for e, length in lengths.items() if max(args.anchors) + max(args.horizons) < length}
             complete_summary = summarize_reference_rows(
@@ -238,6 +328,7 @@ def main(argv=None):
                 tolerance_mm=args.tolerance_mm,
                 bootstrap_samples=boot,
                 bootstrap_seed=args.selection_seed,
+                aggregation=args.aggregation,
             )
             save_json(
                 args.output / "report.json",

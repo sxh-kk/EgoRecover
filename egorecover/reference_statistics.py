@@ -20,7 +20,14 @@ METRICS = (
     "center_reference_mm",
     "center_delta_mm",
 )
-OPTIONAL_METRICS = ("seconds", "anchor_current_mm", "intervened_current_mm")
+OPTIONAL_METRICS = (
+    "seconds",
+    "anchor_current_mm",
+    "intervened_current_mm",
+    "anchor_dense_fk_gap_mm",
+    "predicted_dense_fk_gap_mm",
+    "reference_dense_fk_gap_mm",
+)
 CLASSES = ("reference_better", "approximately_equal", "reference_worse")
 
 
@@ -40,7 +47,7 @@ def _quantile(values, probability):
     return ordered[lower] * (1 - fraction) + ordered[min(lower + 1, len(ordered) - 1)] * fraction
 
 
-def _bootstrap(per_take, samples, seed):
+def _bootstrap(per_take, samples, seed, aggregation):
     if not samples:
         return {}, None
     takes = sorted(per_take)
@@ -49,6 +56,7 @@ def _bootstrap(per_take, samples, seed):
         [row["means"][name] if name in METRICS else row["fractions"][name] for name in fields]
         for row in (per_take[t] for t in takes)
     ]
+    weights = [per_take[t]["episodes"] if aggregation == "episode" else 1 for t in takes]
     rng = random.Random(f"reference_take_bootstrap_v1:{seed}")
     replicates = {name: [] for name in fields}
     fingerprint = hashlib.sha256(
@@ -57,8 +65,11 @@ def _bootstrap(per_take, samples, seed):
     for _ in range(samples):
         indices = [rng.randrange(len(takes)) for _ in takes]
         fingerprint.update((",".join(map(str, indices)) + "\n").encode())
+        denominator = sum(weights[index] for index in indices)
         for column, name in enumerate(fields):
-            replicates[name].append(math.fsum(values[index][column] for index in indices) / len(takes))
+            replicates[name].append(
+                math.fsum(values[index][column] * weights[index] for index in indices) / denominator
+            )
     identity = {
         "algorithm": "paired_take_cluster_percentile_v1",
         "samples": samples,
@@ -66,11 +77,12 @@ def _bootstrap(per_take, samples, seed):
         "take_order": takes,
         "index_sha256": fingerprint.hexdigest(),
         "degenerate_one_take": len(takes) == 1,
+        "aggregation": aggregation,
     }
     return {name: [_quantile(series, 0.025), _quantile(series, 0.975)] for name, series in replicates.items()}, identity
 
 
-def _table(rows, tolerance, sensitivities, samples, seed):
+def _table(rows, tolerance, sensitivities, samples, seed, aggregation):
     metrics = (*METRICS, *(name for name in OPTIONAL_METRICS if all(name in row for row in rows)))
     anchors = defaultdict(list)
     for row in rows:
@@ -109,13 +121,16 @@ def _table(rows, tolerance, sensitivities, samples, seed):
             "anchor_units": sum(key[0] == take for key in anchors),
             "raw_draws": sum(row["take"] == take for row in rows),
         }
+
+    def aggregate(function):
+        weights = {take: value["episodes"] if aggregation == "episode" else 1 for take, value in per_take.items()}
+        return math.fsum(function(value) * weights[take] for take, value in per_take.items()) / sum(weights.values())
+
     sensitivity = {
-        str(tau): {
-            label: _mean([value["sensitivity"][str(tau)][label] for value in per_take.values()]) for label in CLASSES
-        }
+        str(tau): {label: aggregate(lambda value: value["sensitivity"][str(tau)][label]) for label in CLASSES}
         for tau in sensitivities
     }
-    ci, bootstrap = _bootstrap(per_take, samples, seed)
+    ci, bootstrap = _bootstrap(per_take, samples, seed, aggregation)
     fractions = sensitivity[str(tolerance)]
     return {
         "counts": {
@@ -124,7 +139,7 @@ def _table(rows, tolerance, sensitivities, samples, seed):
             "episodes": len(episode_units),
             "takes": len(per_take),
         },
-        "means": {name: _mean([value["means"][name] for value in per_take.values()]) for name in metrics},
+        "means": {name: aggregate(lambda value: value["means"][name]) for name in metrics},
         "fractions": fractions,
         "percentages": {name: 100 * value for name, value in fractions.items()},
         "per_take": per_take,
@@ -135,23 +150,29 @@ def _table(rows, tolerance, sensitivities, samples, seed):
     }
 
 
-def _tables(rows, tolerance, sensitivities, samples, seed):
+def _tables(rows, tolerance, sensitivities, samples, seed, aggregation):
     groups = defaultdict(list)
     for row in rows:
         groups[(row["intervention"], row["horizon"])].append(row)
     result = {}
     for (intervention, horizon), selected in sorted(groups.items()):
-        result.setdefault(intervention, {})[str(horizon)] = _table(selected, tolerance, sensitivities, samples, seed)
+        result.setdefault(intervention, {})[str(horizon)] = _table(
+            selected, tolerance, sensitivities, samples, seed, aggregation
+        )
     return result
 
 
-def summarize_reference_rows(rows, *, tolerance_mm=1.0, bootstrap_samples=2000, bootstrap_seed=1062):
-    """Average paired draws before classifying anchors, then weight takes equally.
+def summarize_reference_rows(
+    rows, *, tolerance_mm=1.0, bootstrap_samples=2000, bootstrap_seed=1062, aggregation="take"
+):
+    """Average paired draws before classification; choose episode/take weighting.
 
     Fractions and their CIs are on [0,1]; percentages are also supplied. Delta
     is E_pred-E_ref, so a positive delta favors the reference intervention.
     ``bootstrap_samples=0`` skips CIs for inexpensive progress reports.
     """
+    if aggregation not in ("take", "episode"):
+        raise ValueError("Reference aggregation must be take or episode.")
     if (
         isinstance(tolerance_mm, bool)
         or not isinstance(tolerance_mm, Real)
@@ -192,7 +213,11 @@ def summarize_reference_rows(rows, *, tolerance_mm=1.0, bootstrap_samples=2000, 
     sensitivities = sorted({0.0, 1.0, 5.0, tolerance})
     protocol = {
         "version": "reference_take_hierarchy_v1",
-        "aggregation": "paired draw mean per anchor -> anchor mean per episode -> episode mean per take -> equal takes",
+        "aggregation": (
+            "paired draw mean per anchor -> anchor mean per episode -> equal episodes; uncertainty clusters takes"
+            if aggregation == "episode"
+            else "paired draw mean per anchor -> anchor mean per episode -> episode mean per take -> equal takes"
+        ),
         "classification_unit": "anchor after paired draw averaging, before episode/take aggregation",
         "delta_definition": "predicted_mm - reference_mm; positive favors reference",
         "class_boundaries": {
@@ -232,13 +257,13 @@ def summarize_reference_rows(rows, *, tolerance_mm=1.0, bootstrap_samples=2000, 
     return {
         "status": "ok",
         "protocol": protocol,
-        "main": _tables(rows, tolerance, sensitivities, samples, seed),
+        "main": _tables(rows, tolerance, sensitivities, samples, seed, aggregation),
         "by_anchor": {
-            str(anchor): _tables(selected, tolerance, sensitivities, 0, seed)
+            str(anchor): _tables(selected, tolerance, sensitivities, 0, seed, aggregation)
             for anchor, selected in sorted(by_anchor.items())
         },
         "by_parent_task": {
-            key: {**parent_metadata[key], "main": _tables(selected, tolerance, sensitivities, 0, seed)}
+            key: {**parent_metadata[key], "main": _tables(selected, tolerance, sensitivities, 0, seed, aggregation)}
             for key, selected in sorted(by_parent.items())
         },
     }
