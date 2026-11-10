@@ -3,6 +3,7 @@ import pytest
 import torch
 
 from egorecover.metrics import foot_slide_uniegomotion
+from scripts.analyze_rewrite_frame_traces import aligned_series, within_clip_association
 from scripts.history_rewrite_metrics import association, diagnostic_metrics, paired_cluster, ranks
 
 
@@ -81,3 +82,39 @@ def test_take_cluster_pairing_and_rank_ties():
     result = association([1, 2, 3, 4], [2, 4, 6, 8], ["a", "a", "b", "c"], draws=20)
     assert result["spearman"] == pytest.approx(1)
     assert result["spearman_ci95"] == pytest.approx([1, 1])
+
+
+def test_frame_associations_respect_write_then_next_output_order():
+    positions, _, _, times = trajectories()
+    payload = {
+        "truth_joints": positions,
+        "timestamps": times,
+        "traces": {
+            "lag1_correction_mm": np.arange(1, 8),
+            "lag1_feet_xy_correction_mm": np.arange(1, 8),
+            "velocity_error_mm_s": np.arange(1, 8) * 10,
+            "acceleration_error_mm_s2": np.arange(2, 8) * 100,
+            "foot_slide_transition_mm": np.arange(1, 8),
+        },
+    }
+    for key in ["velocity_error_mm_s", "acceleration_error_mm_s2", "foot_slide_transition_mm"]:
+        current, y, _ = aligned_series(payload, key, next_frame=False)
+        previous, next_y, _ = aligned_series(payload, key, next_frame=True)
+        assert current.tolist() == [2, 3, 4, 5, 6, 7]
+        assert previous.tolist() == [1, 2, 3, 4, 5, 6]
+        np.testing.assert_array_equal(y, next_y)
+
+
+def test_within_clip_correlations_remove_between_clip_offsets():
+    x = np.arange(1, 7)
+    controls = np.zeros((6, 3))
+    result = within_clip_association(
+        [
+            ("a", x, x * 2 + 100, controls),
+            ("b", x + 100, x * 2, controls),
+        ],
+        draws=30,
+    )
+    assert result["within_clip_pearson"] == pytest.approx(1)
+    assert result["within_clip_pearson_ci95"] == pytest.approx([1, 1])
+    assert result["frames"] == 12
