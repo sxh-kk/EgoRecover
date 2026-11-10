@@ -67,8 +67,15 @@ def verify_against_b(plan, *, preflight=False):
         assert supervision["velocity_weight"] == job["velocity_weight"]
         assert [r["sampling_sha256"] for r in rows] == [r["sampling_sha256"] for r in b_rows]
         first = rows[0]
+        differences = {
+            component: abs(first[component] - b_rows[0][component])
+            for component in ("flow", "current", "hand_pca", "feedback")
+        }
         for component in ("flow", "current", "hand_pca", "feedback"):
-            assert abs(first[component] - b_rows[0][component]) < 1e-8
+            # A detached frozen-P input can select a different attention kernel;
+            # first emission/noise hashes remain exact, while scalar losses can
+            # differ by float32 rounding in the subsequent call.
+            assert differences[component] < 1e-6
         expected = b_rows[0]["loss"] + job["velocity_weight"] * first["velocity"]
         assert abs(first["loss"] - expected) < 1e-7
         assert read(directory / "sampling-first-step.json") == read(baseline / "sampling-first-step.json")
@@ -76,6 +83,8 @@ def verify_against_b(plan, *, preflight=False):
             "matched_B_sampling_steps": budget,
             "first_base_losses_match_B": True,
             "first_current_codes_match_B": True,
+            "first_base_loss_max_absolute_difference": max(differences.values()),
+            "base_loss_float32_tolerance": 1e-6,
             "first_velocity_loss": first["velocity"],
             "detach_between_steps": job["detach_between"],
             "velocity_weight": job["velocity_weight"],
