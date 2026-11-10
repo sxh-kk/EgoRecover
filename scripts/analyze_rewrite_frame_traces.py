@@ -12,9 +12,9 @@ import numpy as np
 import torch
 
 try:
-    from .history_rewrite_metrics import THRESHOLDS, correlation
+    from .history_rewrite_metrics import THRESHOLDS, correlation, paired_cluster
 except ImportError:
-    from history_rewrite_metrics import THRESHOLDS, correlation
+    from history_rewrite_metrics import THRESHOLDS, correlation, paired_cluster
 
 
 def aligned_series(payload, metric, *, next_frame):
@@ -71,8 +71,37 @@ def within_clip_association(series, *, draws=2000):
     }
 
 
-def analyze(root):
+def historical_accuracy(payload):
+    truth = np.asarray(payload["truth_joints"], dtype=float)
+    emitted = np.asarray(payload["first_emission_joints"], dtype=float)
+    windows = np.asarray(payload["candidate_window_joints"], dtype=float)
+    incoming = np.asarray(payload["incoming_cached_past_joints"], dtype=float)
     result = {}
+    for lag, slot in ((1, 1), (2, 0)):
+        label = truth[:-lag]
+
+        def error(value):
+            return np.linalg.norm(value - label, axis=-1).mean(-1) * 1000
+
+        after = error(windows[lag:, slot])
+        before = error(incoming[lag:, slot])
+        first = error(emitted[:-lag])
+        result[f"lag{lag}"] = {
+            "candidate_past_mpjpe_mm": float(after.mean()),
+            "incoming_past_mpjpe_mm": float(before.mean()),
+            "first_emission_past_mpjpe_mm": float(first.mean()),
+            "candidate_minus_incoming_mm": float((after - before).mean()),
+            "candidate_minus_first_mm": float((after - first).mean()),
+            "fraction_better_than_incoming_over1mm": float(((after - before) < -1).mean()),
+            "fraction_worse_than_incoming_over1mm": float(((after - before) > 1).mean()),
+            "fraction_better_than_first_over1mm": float(((after - first) < -1).mean()),
+            "fraction_worse_than_first_over1mm": float(((after - first) > 1).mean()),
+        }
+    return result
+
+
+def analyze(root):
+    result, accuracy = {}, {}
     for source in ("gaussian", "prediction"):
         rows = json.loads((root / f"{source}_on/report.json").read_text())["rows"]
         buckets = {
@@ -80,13 +109,27 @@ def analyze(root):
             for key in ("velocity_error_mm_s", "acceleration_error_mm_s2", "foot_slide_transition_mm")
             for following in (False, True)
         }
+        past_rows = []
         for row in rows:
             payload = torch.load(root / row["trace_file"], map_location="cpu", weights_only=True)
+            past_rows.append((row["take"], historical_accuracy(payload)))
             for (key, following), bucket in buckets.items():
                 bucket.append((row["take"], *aligned_series(payload, key, next_frame=following)))
         result[source] = {
             key + ("_next_frame" if following else "_same_frame"): within_clip_association(bucket)
             for (key, following), bucket in buckets.items()
+        }
+        accuracy[source] = {
+            lag: {
+                "means": {key: float(np.mean([r[1][lag][key] for r in past_rows])) for key in past_rows[0][1][lag]},
+                "candidate_minus_incoming": paired_cluster(
+                    [r[1][lag]["candidate_minus_incoming_mm"] for r in past_rows], [r[0] for r in past_rows]
+                ),
+                "candidate_minus_first": paired_cluster(
+                    [r[1][lag]["candidate_minus_first_mm"] for r in past_rows], [r[0] for r in past_rows]
+                ),
+            }
+            for lag in ("lag1", "lag2")
         }
     report = {
         "status": "complete",
@@ -95,6 +138,7 @@ def analyze(root):
         "next_frame": "Corrections at physical21..78 vs temporal errors ending at22..79; temporally ordered association, not causal identification.",
         "controls": "posthoc GT joint speed, acceleration, previous-frame foot contact fraction; log1p and clip fixed effects; adjusted point estimates without CI",
         "results": result,
+        "historical_pose_accuracy_rewrite_ON": accuracy,
     }
     (root / "frame-associations.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False) + "\n"

@@ -3,7 +3,7 @@ import pytest
 import torch
 
 from egorecover.metrics import foot_slide_uniegomotion
-from scripts.analyze_rewrite_frame_traces import aligned_series, within_clip_association
+from scripts.analyze_rewrite_frame_traces import aligned_series, historical_accuracy, within_clip_association
 from scripts.history_rewrite_metrics import association, diagnostic_metrics, paired_cluster, ranks
 
 
@@ -118,3 +118,21 @@ def test_within_clip_correlations_remove_between_clip_offsets():
     assert result["within_clip_pearson"] == pytest.approx(1)
     assert result["within_clip_pearson_ci95"] == pytest.approx([1, 1])
     assert result["frames"] == 12
+
+
+def test_historical_candidate_accuracy_compares_the_same_physical_frame():
+    positions, windows, previous, _ = trajectories()
+    emitted = positions.copy()
+    emitted[:, :, 0] += 0.02
+    previous[1:, 1, :, 0] += 0.02
+    previous[2:, 0, :, 0] += 0.01
+    payload = {
+        "truth_joints": positions,
+        "first_emission_joints": emitted,
+        "candidate_window_joints": windows,
+        "incoming_cached_past_joints": previous,
+    }
+    result = historical_accuracy(payload)
+    assert result["lag1"]["candidate_minus_first_mm"] == pytest.approx(-20)
+    assert result["lag2"]["candidate_minus_incoming_mm"] == pytest.approx(-10)
+    assert result["lag1"]["fraction_better_than_incoming_over1mm"] == 1
