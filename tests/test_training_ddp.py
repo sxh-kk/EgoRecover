@@ -57,10 +57,11 @@ def _assert_identical(actual, expected):
         assert actual == expected
 
 
-def test_two_rank_training_resumes_exactly_with_rank_rng_and_light_best_full_dev(tmp_path):
+@pytest.mark.parametrize("unroll_steps", (1, 2))
+def test_two_rank_training_resumes_exactly_with_rank_rng_and_light_best_full_dev(tmp_path, unroll_steps):
     if not torch.distributed.is_available() or not torch.distributed.is_gloo_available():
         pytest.skip("The real two-rank training test requires the Gloo CPU backend")
-    config = WindowConfig(window=3, feedback="none", current_weight=0)
+    config = WindowConfig(window=3, feedback="none", current_weight=0.03 if unroll_steps == 2 else 0)
     config_path = tmp_path / "architecture-W3.json"
     config_path.write_text(json.dumps(config.to_dict()))
     common = [
@@ -96,7 +97,11 @@ def test_two_rank_training_resumes_exactly_with_rank_rng_and_light_best_full_dev
         "2",
         "--threads",
         "1",
+        "--unroll-steps",
+        str(unroll_steps),
     ]
+    if unroll_steps == 2:
+        common += ["--isolate-forward-rng"]
     full_root, resumed_root = tmp_path / "full", tmp_path / "resumed"
     _run_process(common + ["--output", str(full_root)])
     _run_process(common + ["--output", str(resumed_root), "--stop-after", "2"])

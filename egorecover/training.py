@@ -18,7 +18,7 @@ from egorecover.evaluation import evaluate_episode, summarize
 from egorecover.fk import joint_decoder, load_smpl, smpl_identity
 from egorecover.history_training import HistoryTraining, sampling_signature
 from egorecover.io import code_identity, file_sha256, save_checkpoint, save_json, state_sha256
-from egorecover.losses import frozen_ema, training_objective, update_ema
+from egorecover.losses import frozen_ema, training_objective, two_step_objective, update_ema
 from egorecover.models import MotionModel
 from egorecover.optimization import make_optimizer, make_scheduler, optimization_protocol
 from egorecover.sampling import reference_microbatch_plan
@@ -91,6 +91,12 @@ def _evaluate_indices(system, model, data, fixture, indices, smpl, args, context
 def _train(args, context):
     device = context.device
     config = WindowConfig.from_json(args.config)
+    if isinstance(args.unroll_steps, bool) or args.unroll_steps not in (1, 2):
+        raise ValueError("Training unroll steps must be 1 or 2.")
+    if args.feedback_intervention not in ("full_state", "body_pose"):
+        raise ValueError("Unknown feedback intervention.")
+    if args.unroll_steps == 2 and (config.feedback != "none" or not config.current_weight):
+        raise ValueError("Two-step baseline requires current geometry and no paired feedback.")
     if args.resume and args.initialize:
         raise ValueError("Resume and initialization are mutually exclusive.")
     if args.allow_initialize_rewrite_change and not (args.initialize or args.resume):
@@ -206,6 +212,16 @@ def _train(args, context):
         "random_initial_model_sha256": initial_sha,
         "smpl_asset": "dense_diagnostic" if args.synthetic else smpl_identity(),
         "feedback_teacher": "fixed_initial_ema",
+        "supervision": {
+            "unroll_steps": args.unroll_steps,
+            "feedback_intervention": args.feedback_intervention,
+            "isolate_forward_rng": args.isolate_forward_rng,
+            "loss_reduction": "mean across supervised online calls",
+            "future_tau": "same sampled tau; each frame preserves the endpoint mixture marginal",
+            "cache_gradients": (
+                "between both calls" if args.unroll_steps == 2 else "current through frozen response only"
+            ),
+        },
         "code": code_identity(),
         "train_steps": args.train_steps,
         "batch_size": args.batch_size,
@@ -365,6 +381,15 @@ def _train(args, context):
                         "target_local_frame": frame,
                         "tau": tau.tolist(),
                         "epsilon_sha256": hashlib.sha256(epsilon.detach().cpu().numpy().tobytes()).hexdigest(),
+                        **(
+                            {
+                                "next_epsilon_sha256": hashlib.sha256(
+                                    future_noise[0].detach().cpu().numpy().tobytes()
+                                ).hexdigest()
+                            }
+                            if args.isolate_forward_rng
+                            else {}
+                        ),
                         "rollin_frames": frame - first,
                     }
                 )
@@ -374,7 +399,28 @@ def _train(args, context):
                 else nullcontext()
             )
             with synchronization:
-                result = training_objective(
+                forward_seed = (
+                    int.from_bytes(
+                        hashlib.sha256(f"objective/{args.seed}/{step}/{global_offset}".encode()).digest()[:8], "big"
+                    )
+                    % (2**62)
+                    if args.isolate_forward_rng
+                    else None
+                )
+                arguments = dict(
+                    next_observations=batch.observations(frame + 1),
+                    next_epsilon=future_noise[0] if args.unroll_steps == 2 else future_noise,
+                    forward_seed=forward_seed,
+                )
+                if args.unroll_steps == 2:
+                    arguments["next_truth_window"] = batch.target(frame + 1, config.window)
+                else:
+                    arguments.update(
+                        truth_next=state_map(batch.target(frame + 1), lambda x: x[:, -1]),
+                        feedback_intervention=args.feedback_intervention,
+                    )
+                objective = two_step_objective if args.unroll_steps == 2 else training_objective
+                result = objective(
                     system,
                     training_model,
                     feedback_model,
@@ -384,10 +430,12 @@ def _train(args, context):
                     epsilon,
                     tau.to(device),
                     joint_decoder(batch, args.synthetic, smpl),
-                    next_observations=batch.observations(frame + 1),
-                    next_epsilon=future_noise,
-                    truth_next=state_map(batch.target(frame + 1), lambda x: x[:, -1]),
+                    **arguments,
                 )
+                if controlled_history and args.isolate_forward_rng and step == 1:
+                    sampling_rows[-1]["first_current_codes_sha256"] = hashlib.sha256(
+                        result["result"].codes.detach().cpu().numpy().tobytes()
+                    ).hexdigest()
                 if not bool(torch.isfinite(result["loss"])):
                     raise ValueError("Nonfinite training objective.")
                 fraction = count / local_batch_size
@@ -408,6 +456,8 @@ def _train(args, context):
             "gradient_norm": float(norm),
             "synthetic": args.synthetic,
             "target_queries_seen": step * args.batch_size,
+            "supervised_current_frames_seen": step * args.batch_size * args.unroll_steps,
+            "unroll_steps": args.unroll_steps,
             "effective_batch_size": args.batch_size,
             "microbatch_size": args.microbatch_size,
             "learning_rate": used_lr,

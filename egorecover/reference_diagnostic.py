@@ -7,26 +7,13 @@ from pathlib import Path
 
 import torch
 
-from .codec import BodyState
 from .data import OFFICIAL_DATA_ROOT, keyed_noise
 from .evaluate import load_evaluation_context
 from .fk import joint_decoder
+from .intervention import intervention_state
 from .io import code_identity, file_sha256, save_json
 from .selection import load_fixed_selection, select_dev_records
 from .state import FIELDS, state_map
-
-
-def intervention_state(predicted, truth, joints, mode):
-    """Separate pose-only correction from the original full-state oracle."""
-    if mode == "full_state":
-        return state_map(truth, lambda x: x.detach())
-    if mode != "body_pose":
-        raise ValueError("Unknown intervention mode.")
-    # Never read GT hands/contact/beta or replace the predicted reference.
-    pose = BodyState(truth.joints.detach(), predicted.reference.detach(), predicted.auxiliary.detach())
-    transforms = pose.joints.clone()
-    transforms[..., :3, 3] = joints(pose)
-    return BodyState(transforms, pose.reference, pose.auxiliary)
 
 
 def _mpjpe(first, second):
