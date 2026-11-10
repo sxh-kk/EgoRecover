@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import math
 import platform
 from collections import Counter
 from contextlib import nullcontext
@@ -97,6 +98,12 @@ def _train(args, context):
         raise ValueError("Unknown feedback intervention.")
     if args.unroll_steps == 2 and (config.feedback != "none" or not config.current_weight):
         raise ValueError("Two-step baseline requires current geometry and no paired feedback.")
+    if (args.detach_between_steps or args.velocity_weight) and args.unroll_steps != 2:
+        raise ValueError("Cache detachment and emitted velocity supervision require two-step training.")
+    if not math.isfinite(args.velocity_weight) or args.velocity_weight < 0:
+        raise ValueError("Velocity weight must be finite and nonnegative.")
+    if not math.isfinite(args.velocity_scale_m_s) or args.velocity_scale_m_s <= 0:
+        raise ValueError("Velocity normalization must be finite and positive in m/s.")
     if args.resume and args.initialize:
         raise ValueError("Resume and initialization are mutually exclusive.")
     if args.allow_initialize_rewrite_change and not (args.initialize or args.resume):
@@ -214,12 +221,19 @@ def _train(args, context):
         "feedback_teacher": "fixed_initial_ema",
         "supervision": {
             "unroll_steps": args.unroll_steps,
+            "detach_between_steps": args.detach_between_steps,
+            "velocity_weight": args.velocity_weight,
+            "velocity_scale_m_s": args.velocity_scale_m_s,
+            "velocity_target": "consecutive emitted world FK velocities; GT uses same fixed bootstrap shape",
+            "velocity_timebase": "each training episode's measured consecutive timestamps",
             "feedback_intervention": args.feedback_intervention,
             "isolate_forward_rng": args.isolate_forward_rng,
             "loss_reduction": "mean across supervised online calls",
             "future_tau": "same sampled tau; each frame preserves the endpoint mixture marginal",
             "cache_gradients": (
-                "between both calls" if args.unroll_steps == 2 else "current through frozen response only"
+                ("stopped between both calls" if args.detach_between_steps else "between both calls")
+                if args.unroll_steps == 2
+                else "current through frozen response only"
             ),
         },
         "code": code_identity(),
@@ -319,6 +333,8 @@ def _train(args, context):
     for step in range(start + 1, final + 1):
         optimizer.zero_grad(set_to_none=True)
         components = {k: 0.0 for k in ("loss", "flow", "hand_pca", "current", "feedback")}
+        if args.unroll_steps == 2:
+            components["velocity"] = 0.0
         sampling_rows = []
         reference_plan = (
             reference_microbatch_plan(
@@ -413,7 +429,13 @@ def _train(args, context):
                     forward_seed=forward_seed,
                 )
                 if args.unroll_steps == 2:
-                    arguments["next_truth_window"] = batch.target(frame + 1, config.window)
+                    arguments.update(
+                        next_truth_window=batch.target(frame + 1, config.window),
+                        detach_between=args.detach_between_steps,
+                        velocity_weight=args.velocity_weight,
+                        velocity_scale_m_s=args.velocity_scale_m_s,
+                        dt=torch.stack([e.timestamps[frame + 1] - e.timestamps[frame] for e in batch.episodes]),
+                    )
                 else:
                     arguments.update(
                         truth_next=state_map(batch.target(frame + 1), lambda x: x[:, -1]),

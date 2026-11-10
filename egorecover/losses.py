@@ -30,6 +30,29 @@ def geometry_loss(prediction, target, scale):
     return (prediction - target).square().sum(-1).mean() / scale**2
 
 
+def emitted_velocity_loss(current, subsequent, truth_current, truth_subsequent, dt, *, scale_m_s=1.0):
+    """Match velocities of actual consecutive emissions, in common world axes.
+
+    A shared position offset cancels; genuine nonzero GT motion is preserved.
+    Ground-truth FK positions and the measured time intervals are constants.
+    """
+    if current.ndim != 3 or current.shape[-2:] != (22, 3):
+        raise ValueError("Velocity supervision requires [B,22,3] emitted FK positions.")
+    if any(value.shape != current.shape for value in (subsequent, truth_current, truth_subsequent)):
+        raise ValueError("Consecutive prediction and truth joint shapes must match.")
+    interval = torch.as_tensor(dt, dtype=current.dtype, device=current.device).detach()
+    if interval.ndim == 0:
+        interval = interval.expand(len(current))
+    if interval.shape != (len(current),) or not bool(torch.isfinite(interval).all() and (interval > 0).all()):
+        raise ValueError("Velocity supervision needs finite positive per-sample time intervals.")
+    scale = current.new_tensor(scale_m_s)
+    if scale.ndim != 0 or not bool(torch.isfinite(scale) and scale > 0):
+        raise ValueError("Velocity normalization must be a finite positive scalar in m/s.")
+    prediction = (subsequent - current) / interval[:, None, None]
+    target = (truth_subsequent.detach() - truth_current.detach()) / interval[:, None, None]
+    return geometry_loss(prediction, target, scale)
+
+
 @contextmanager
 def forward_rng(tensor, seed, role):
     """Match dropout per objective call without advancing shared RNG streams."""
@@ -118,13 +141,15 @@ def training_objective(
     base = flow_components["flow"]
     zero = base.new_zeros(())
     current_loss, feedback_loss = zero, zero
+    current_joints, truth_joints = None, None
     current = None
     if cfg.current_weight or (cfg.feedback != "none" and cfg.feedback_weight):
         with forward_rng(epsilon, forward_seed, "endpoint"):
             current = system.reconstruct(model, input_cache, observations, epsilon)
         truth_current = state_map(truth_window, lambda x: x[:, -1])
         if cfg.current_weight:
-            current_loss = geometry_loss(joints(current.current), joints(truth_current).detach(), cfg.scale_m)
+            current_joints, truth_joints = joints(current.current), joints(truth_current).detach()
+            current_loss = geometry_loss(current_joints, truth_joints, cfg.scale_m)
         if cfg.feedback != "none" and cfg.feedback_weight:
             if cfg.feedback in ("paired", "direct"):
                 if next_observations is None or next_epsilon is None:
@@ -155,6 +180,8 @@ def training_objective(
         "current": current_loss,
         "feedback": feedback_loss,
         "result": current,
+        "current_joints": current_joints,
+        "truth_joints": truth_joints,
     }
 
 
@@ -175,6 +202,9 @@ def two_step_objective(
     next_tau=None,
     forward_seed=None,
     detach_between=False,
+    velocity_weight=0.0,
+    velocity_scale_m_s=1.0,
+    dt=None,
 ):
     """Average two real online calls, keeping the cache path differentiable."""
     if system.config.feedback != "none" or not system.config.current_weight:
@@ -195,8 +225,22 @@ def two_step_objective(
         detach_history=detach_between,
         forward_seed=None if forward_seed is None else forward_seed + 1,
     )
+    velocity = first["loss"].new_zeros(())
+    if velocity_weight:
+        if dt is None:
+            raise ValueError("Velocity supervision requires measured time intervals.")
+        velocity = emitted_velocity_loss(
+            first["current_joints"],
+            second["current_joints"],
+            first["truth_joints"],
+            second["truth_joints"],
+            dt,
+            scale_m_s=velocity_scale_m_s,
+        )
     return {
-        **{key: (first[key] + second[key]) / 2 for key in ("loss", "flow", "hand_pca", "current", "feedback")},
+        **{key: (first[key] + second[key]) / 2 for key in ("flow", "hand_pca", "current", "feedback")},
+        "loss": (first["loss"] + second["loss"]) / 2 + velocity_weight * velocity,
+        "velocity": velocity,
         "result": first["result"],
         "next_result": second["result"],
         "first_loss": first["loss"],

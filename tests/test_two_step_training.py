@@ -6,7 +6,14 @@ import torch
 from egorecover import ModelConfig, WindowConfig, WindowReconstructor
 from egorecover.codec import MotionCodec
 from egorecover.diagnostics import DenseJoints, synthetic_episode
-from egorecover.losses import forward_rng, frozen_ema, paired_feedback, training_objective, two_step_objective
+from egorecover.losses import (
+    emitted_velocity_loss,
+    forward_rng,
+    frozen_ema,
+    paired_feedback,
+    training_objective,
+    two_step_objective,
+)
 from egorecover.models import HistoryPrior, MotionModel
 from egorecover.reference_diagnostic import intervention_state
 from egorecover.state import state_map
@@ -154,3 +161,49 @@ def test_two_step_rejects_unintended_feedback_combination():
             DenseJoints(),
             **arguments(episode),
         )
+
+
+def test_velocity_preserves_real_motion_and_ignores_shared_position_offset_and_truth_gradients():
+    truth = torch.zeros(2, 22, 3, requires_grad=True)
+    future_truth = torch.ones(2, 22, 3, requires_grad=True) * 0.1
+    prediction = (truth.detach() + 2).requires_grad_()
+    future_prediction = (future_truth.detach() + 2).requires_grad_()
+    loss = emitted_velocity_loss(prediction, future_prediction, truth, future_truth, torch.tensor([0.1, 0.2]))
+    assert loss.item() < 1e-11
+    # A further 0.1m x displacement is 1m/s and 0.5m/s error in the two examples.
+    shifted = future_prediction + torch.tensor([0.1, 0.0, 0.0])
+    loss = emitted_velocity_loss(prediction, shifted, truth, future_truth, torch.tensor([0.1, 0.2]))
+    assert loss.item() == pytest.approx((1.0 + 0.25) / 2, rel=1e-5)
+    gradients = torch.autograd.grad(loss, (prediction, future_prediction, truth, future_truth), allow_unused=True)
+    assert gradients[0].abs().sum() > 0 and gradients[1].abs().sum() > 0
+    assert gradients[2:] == (None, None)
+
+
+@pytest.mark.parametrize("dt", (0.0, -0.1, float("nan"), torch.ones(2)))
+def test_velocity_rejects_invalid_timebase(dt):
+    value = torch.zeros(1, 22, 3)
+    with pytest.raises(ValueError, match="time intervals"):
+        emitted_velocity_loss(value, value, value, value, dt)
+
+
+def test_two_step_velocity_uses_actual_emissions_and_leaves_both_forward_predictions_unchanged():
+    episode, system, model, teacher = fixture()
+    epsilon, tau = torch.randn(1, 3, 243), torch.tensor([0.4])
+    kwargs = arguments(episode)
+    common = (system, model, teacher, episode.cache(), episode.observations(20), episode.target(20, 3), epsilon, tau)
+    baseline = two_step_objective(*common, DenseJoints(), **kwargs)
+    result = two_step_objective(*common, DenseJoints(), velocity_weight=0.2, dt=0.1, **kwargs)
+    for key in ("result", "next_result"):
+        torch.testing.assert_close(result[key].codes, baseline[key].codes, atol=0, rtol=0)
+    expected = emitted_velocity_loss(
+        DenseJoints()(result["result"].current),
+        DenseJoints()(result["next_result"].current),
+        DenseJoints()(state_map(episode.target(20), lambda x: x[:, -1])),
+        DenseJoints()(state_map(episode.target(21), lambda x: x[:, -1])),
+        0.1,
+    )
+    torch.testing.assert_close(result["velocity"], expected, atol=0, rtol=0)
+    torch.testing.assert_close(result["loss"], baseline["loss"] + 0.2 * expected, atol=0, rtol=0)
+    gradients = torch.autograd.grad(result["velocity"], (result["result"].codes, result["next_result"].codes))
+    assert all(gradient.abs().sum() > 0 for gradient in gradients)
+    assert all(not p.requires_grad and p.grad is None for p in system.predictor.parameters())

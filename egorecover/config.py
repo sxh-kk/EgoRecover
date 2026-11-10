@@ -111,6 +111,9 @@ class TrainOptions:
     history_mode: str = "fixed"
     history_startup_fraction: float = 0.25
     unroll_steps: int = 1
+    detach_between_steps: bool = False
+    velocity_weight: float = 0.0
+    velocity_scale_m_s: float = 1.0
     feedback_intervention: str = "full_state"
     isolate_forward_rng: bool = False
     allow_initialize_rewrite_change: bool = False
