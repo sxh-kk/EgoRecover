@@ -49,7 +49,10 @@ class WindowReconstructor:
                 valid = torch.ones(prior_history.shape[:2], dtype=torch.bool, device=base.device)
                 if getattr(self.predictor, "source_flags", False):
                     generated = reconstructed_history_count(
-                        cache.frame - 19, cfg.window, cfg.revise_recent, cfg.history
+                        cache.frame - 19 if cache.generated_frames is None else cache.generated_frames,
+                        cfg.window,
+                        cfg.revise_recent,
+                        cfg.history,
                     )
                     positions = torch.arange(cfg.history, device=base.device)
                     body_valid = (positions >= cfg.history - generated)[None].expand(len(base), -1)

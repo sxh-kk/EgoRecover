@@ -1,7 +1,9 @@
 """Train the rolling-window model, with full-response paired EMA supervision."""
 
+import hashlib
 import json
 import platform
+from collections import Counter
 from contextlib import nullcontext
 
 import torch
@@ -14,6 +16,7 @@ from egorecover.diagnostics import synthetic_episode
 from egorecover.distributed import DistributedContext
 from egorecover.evaluation import evaluate_episode, summarize
 from egorecover.fk import joint_decoder, load_smpl, smpl_identity
+from egorecover.history_training import HistoryTraining, sampling_signature
 from egorecover.io import code_identity, file_sha256, save_checkpoint, save_json, state_sha256
 from egorecover.losses import frozen_ema, training_objective, update_ema
 from egorecover.models import MotionModel
@@ -23,7 +26,7 @@ from egorecover.selection import select_dev_records
 from egorecover.state import state_map
 
 
-def compatible_initialization(saved, config, identity):
+def compatible_initialization(saved, config, identity, *, allow_rewrite_change=False):
     if saved.get("format") != FORMAT:
         raise ValueError("Expected a rolling-window checkpoint.")
     for key in (
@@ -36,6 +39,8 @@ def compatible_initialization(saved, config, identity):
         "revise_recent",
         "endpoint_probability",
     ):
+        if key == "revise_recent" and allow_rewrite_change:
+            continue
         if saved["protocol"][key] != config.to_dict()[key]:
             raise ValueError(f"Initialization changes controlled setting: {key}.")
     for key in (
@@ -88,6 +93,8 @@ def _train(args, context):
     config = WindowConfig.from_json(args.config)
     if args.resume and args.initialize:
         raise ValueError("Resume and initialization are mutually exclusive.")
+    if args.allow_initialize_rewrite_change and not (args.initialize or args.resume):
+        raise ValueError("Rewrite initialization override requires --initialize or its native --resume.")
     if args.from_scratch and (args.e7_checkpoint or args.initialize):
         raise ValueError("Random G initialization cannot be combined with --e7-checkpoint or --initialize.")
     if args.dev_limit is not None and args.dev_limit < 1:
@@ -124,6 +131,8 @@ def _train(args, context):
     ):
         raise ValueError("Reference sampling ranks and microbatches must partition the physical/global batch.")
     sampling_rank = context.rank // (context.world_size // reference_world_size)
+    history_training = HistoryTraining.from_options(args, reference_world_size)
+    controlled_history = args.sampling_rollin_frames is not None
     optimization_protocol(args)
     prior_mode = resolve_prior_mode(args.prior_mode, args.prior_checkpoint)
     smpl = None
@@ -166,6 +175,8 @@ def _train(args, context):
     dev_indices, dev_selection = select_dev_records(records, args.dev_limit, args.dev_seed)
     if args.sample_reference_world_size is not None and dataset_format != "official":
         raise ValueError("Reference-rank sampling currently requires official data.")
+    if controlled_history and (dataset_format != "official" or args.sample_reference_world_size is None):
+        raise ValueError("Shared physical-target history ablations require official reference-rank sampling.")
     torch.manual_seed(args.seed)
     codec = MotionCodec(stats).to(device)
     prior = load_predictor(args.prior_checkpoint, device, None if args.synthetic else manifest)
@@ -220,6 +231,10 @@ def _train(args, context):
         "python": platform.python_version(),
         "torch": str(torch.__version__),
     }
+    if controlled_history:
+        identity["history_training"] = history_training.protocol()
+    if args.allow_initialize_rewrite_change:
+        identity["allow_initialize_rewrite_change"] = True
     args.output.mkdir(parents=True, exist_ok=True)
     identity_path = args.output / "identity.json"
     # Continuations retain their original initialization provenance on resume;
@@ -240,8 +255,22 @@ def _train(args, context):
         model.load_state_dict(saved["model"], strict=True)
     elif args.initialize:
         initial = torch.load(args.initialize, map_location=device, weights_only=True)
-        compatible_initialization(initial, config, identity)
+        compatible_initialization(initial, config, identity, allow_rewrite_change=args.allow_initialize_rewrite_change)
         model.load_state_dict(initial["ema"], strict=True)
+        loaded_sha = context.all_gather_object(state_sha256(model.state_dict()) if context.is_primary else None)[0]
+        if context.is_primary:
+            save_json(
+                args.output / "initialization.json",
+                {
+                    "checkpoint_sha256": identity["initialize"],
+                    "checkpoint_step": initial["step"],
+                    "weight_source": "ema",
+                    "loaded_model_sha256": loaded_sha,
+                    "optimizer": "fresh",
+                    "allowed_rewrite_change": args.allow_initialize_rewrite_change,
+                },
+            )
+        del initial
     elif args.e7_checkpoint:
         load_e7_weights(model, args.e7_checkpoint, weight_source="ema")
     ema = frozen_ema(model)
@@ -274,6 +303,7 @@ def _train(args, context):
     for step in range(start + 1, final + 1):
         optimizer.zero_grad(set_to_none=True)
         components = {k: 0.0 for k in ("loss", "flow", "hand_pca", "current", "feedback")}
+        sampling_rows = []
         reference_plan = (
             reference_microbatch_plan(
                 train_data,
@@ -283,7 +313,7 @@ def _train(args, context):
                 reference_world_size=reference_world_size,
                 batch_size=args.batch_size,
                 microbatch_size=args.microbatch_size,
-                rollin_frames=args.rollin_frames,
+                rollin_frames=history_training.sampling_frames,
                 endpoint_probability=config.endpoint_probability,
             )
             if args.sample_reference_world_size is not None
@@ -298,12 +328,13 @@ def _train(args, context):
                     raise ValueError("Reference sampler disagrees with physical microbatch partition.")
                 batch, frame = train_data.load_training_queries(planned["queries"]), planned["frame"]
             elif not args.synthetic and hasattr(train_data, "sample_batch"):
-                batch, frame = train_data.sample_batch(generator, count, args.rollin_frames)
+                batch, frame = train_data.sample_batch(generator, count, history_training.sampling_frames)
             else:
                 episodes = tuple(fixture if args.synthetic else train_data.sample(generator) for _ in range(count))
                 batch = TrainingBatch(episodes)
                 frame = int(torch.randint(20, min(len(e) for e in episodes) - 1, (), generator=generator))
-            first = max(20, frame - args.rollin_frames)
+            rollin_frames = history_training.frames(step, global_offset)
+            first = max(20, frame - rollin_frames)
             cache = batch.cache(first)
             model.eval()
             for t in range(first, frame):
@@ -326,6 +357,17 @@ def _train(args, context):
                 tau[torch.rand(count, generator=generator) < config.endpoint_probability] = 1.0
             else:
                 tau = planned["tau"]
+            if controlled_history:
+                sampling_rows.append(
+                    {
+                        "global_offset": global_offset,
+                        "queries": planned["queries"],
+                        "target_local_frame": frame,
+                        "tau": tau.tolist(),
+                        "epsilon_sha256": hashlib.sha256(epsilon.detach().cpu().numpy().tobytes()).hexdigest(),
+                        "rollin_frames": frame - first,
+                    }
+                )
             synchronization = (
                 training_model.no_sync()
                 if context.world_size > 1 and offset + count < local_batch_size
@@ -373,6 +415,21 @@ def _train(args, context):
             "world_size": context.world_size,
             "local_batch_size": local_batch_size,
         }
+        if controlled_history:
+            shared = [row for rank_rows in context.all_gather_object(sampling_rows) for row in rank_rows]
+            expected = list(range(0, args.batch_size, args.microbatch_size))
+            if sorted(row["global_offset"] for row in shared) != expected:
+                raise RuntimeError("Shared history queries do not partition the global batch.")
+            counts = Counter()
+            for row in shared:
+                counts[str(row["rollin_frames"])] += args.microbatch_size
+            progress["sampling_sha256"] = sampling_signature(shared)
+            progress["rollin_frames_counts"] = dict(counts)
+            progress["target_local_frame"] = 20 + history_training.sampling_frames
+            if context.is_primary and step == 1:
+                save_json(
+                    args.output / "sampling-first-step.json", sorted(shared, key=lambda row: row["global_offset"])
+                )
         if context.is_primary:
             print(json.dumps(progress, allow_nan=False), flush=True)
             save_json(args.output / "progress.json", progress)

@@ -46,6 +46,7 @@ class WindowCache:
     beta: torch.Tensor  # [B,10], fixed model-generated startup shape
     anchor: torch.Tensor  # [B,4,4], fixed startup reference for the no-feedback control
     frame: int  # last committed physical frame
+    generated_frames: int | None = None  # actual roll-ins since a neutral reset, independent of frame index
 
     def validate(self, history=20):
         b = len(self.beta)
@@ -65,10 +66,20 @@ class WindowCache:
             raise ValueError("Expected a fixed finite startup anchor.")
         if isinstance(self.frame, bool) or not isinstance(self.frame, int) or self.frame < history - 1:
             raise ValueError("Invalid cache frame index.")
+        if self.generated_frames is not None and (
+            isinstance(self.generated_frames, bool)
+            or not isinstance(self.generated_frames, int)
+            or self.generated_frames < 0
+        ):
+            raise ValueError("Invalid generated-history count.")
 
     def detach(self):
         return WindowCache(
-            state_map(self.body, lambda x: x.detach()), self.beta.detach(), self.anchor.detach(), self.frame
+            state_map(self.body, lambda x: x.detach()),
+            self.beta.detach(),
+            self.anchor.detach(),
+            self.frame,
+            self.generated_frames,
         )
 
     def advance(self, window, *, revise_recent=True):
@@ -85,8 +96,14 @@ class WindowCache:
             combined = state_cat((fixed, window))
         else:
             combined = state_cat((self.body, state_map(window, lambda x: x[:, -1:])))
-        return WindowCache(state_map(combined, lambda x: x[:, 1:]), self.beta, self.anchor, self.frame + 1)
+        return WindowCache(
+            state_map(combined, lambda x: x[:, 1:]),
+            self.beta,
+            self.anchor,
+            self.frame + 1,
+            None if self.generated_frames is None else self.generated_frames + 1,
+        )
 
     def replace_current(self, current):
         body = state_cat((state_map(self.body, lambda x: x[:, :-1].detach()), state_map(current, lambda x: x[:, None])))
-        return WindowCache(body, self.beta.detach(), self.anchor.detach(), self.frame)
+        return WindowCache(body, self.beta.detach(), self.anchor.detach(), self.frame, self.generated_frames)

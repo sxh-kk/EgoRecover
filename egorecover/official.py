@@ -313,6 +313,7 @@ class OfficialWindowData:
             world,
         )
         episode.floor_calibrated = meta["floor"] != 0
+        episode.bootstrap_only = True
         episode.cache().validate()
         episode.observations(20).validate(1, 20)
         return episode

@@ -107,6 +107,10 @@ class TrainOptions:
     lr_decay_step: int | None = None
     lr_decay_gamma: float = 0.1
     rollin_frames: int = 4
+    sampling_rollin_frames: int | None = None
+    history_mode: str = "fixed"
+    history_startup_fraction: float = 0.25
+    allow_initialize_rewrite_change: bool = False
     eval_every: int = 200
     dev_limit: int | None = None
     dev_seed: int = 1062

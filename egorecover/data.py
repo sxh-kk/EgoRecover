@@ -59,6 +59,7 @@ class Episode:
     original_world_from_floor_world: torch.Tensor
     synthetic: bool = False
     floor_calibrated: bool = True
+    bootstrap_only: bool = False
 
     def __len__(self):
         return self.head.shape[0]
@@ -73,7 +74,13 @@ class Episode:
         # Legacy packets store teacher predictions here. Official data supplies
         # a pointwise head-only neutral prior, never a ground-truth body.
         history = state_map(self.teacher, lambda x: x[frame - 20 : frame][None].detach())
-        return WindowCache(history, self.beta[None].detach(), self.teacher.reference[:1].detach(), frame - 1)
+        return WindowCache(
+            history,
+            self.beta[None].detach(),
+            self.teacher.reference[:1].detach(),
+            frame - 1,
+            0 if self.bootstrap_only else None,
+        )
 
     def observations(self, frame):
         if not 20 <= frame < len(self):
@@ -113,7 +120,16 @@ class TrainingBatch:
     def cache(self, frame):
         caches = [e.cache(frame) for e in self.episodes]
         body = BodyState(*(torch.cat([getattr(c.body, key) for c in caches]) for key in FIELDS))
-        return WindowCache(body, torch.cat([c.beta for c in caches]), torch.cat([c.anchor for c in caches]), frame - 1)
+        counts = {c.generated_frames for c in caches}
+        if len(counts) != 1:
+            raise ValueError("Training batch histories must share a roll-in count.")
+        return WindowCache(
+            body,
+            torch.cat([c.beta for c in caches]),
+            torch.cat([c.anchor for c in caches]),
+            frame - 1,
+            caches[0].generated_frames,
+        )
 
     def observations(self, frame):
         observations = [e.observations(frame) for e in self.episodes]
