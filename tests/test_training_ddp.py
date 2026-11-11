@@ -57,12 +57,12 @@ def _assert_identical(actual, expected):
         assert actual == expected
 
 
-@pytest.mark.parametrize("route", ("single", "two_step", "two_step_detached", "two_step_velocity"))
+@pytest.mark.parametrize("route", ("single", "two_step", "two_step_detached", "two_step_velocity", "eight_slow"))
 def test_two_rank_training_resumes_exactly_with_rank_rng_and_light_best_full_dev(tmp_path, route):
     if not torch.distributed.is_available() or not torch.distributed.is_gloo_available():
         pytest.skip("The real two-rank training test requires the Gloo CPU backend")
-    unroll_steps = 1 if route == "single" else 2
-    config = WindowConfig(window=3, feedback="none", current_weight=0.03 if unroll_steps == 2 else 0)
+    unroll_steps = 1 if route == "single" else (8 if route == "eight_slow" else 2)
+    config = WindowConfig(window=3, feedback="none", current_weight=0.03 if unroll_steps > 1 else 0)
     config_path = tmp_path / "architecture-W3.json"
     config_path.write_text(json.dumps(config.to_dict()))
     common = [
@@ -107,6 +107,15 @@ def test_two_rank_training_resumes_exactly_with_rank_rng_and_light_best_full_dev
         common += ["--detach-between-steps"]
     if route == "two_step_velocity":
         common += ["--velocity-weight", "0.02"]
+    if route == "eight_slow":
+        common += [
+            "--detach-between-steps",
+            "--slow-weight",
+            "0.03",
+            "--velocity-weight",
+            "0.02",
+            "--isolate-forward-rng",
+        ]
     full_root, resumed_root = tmp_path / "full", tmp_path / "resumed"
     _run_process(common + ["--output", str(full_root)])
     _run_process(common + ["--output", str(resumed_root), "--stop-after", "2"])
@@ -139,8 +148,10 @@ def test_two_rank_training_resumes_exactly_with_rank_rng_and_light_best_full_dev
         status = json.loads((root / "status.json").read_text())
         assert status == {"status": "complete", "step": 3}
         identity = checkpoint["identity"]
-        assert identity["supervision"]["detach_between_steps"] == (route == "two_step_detached")
-        assert identity["supervision"]["velocity_weight"] == (0.02 if route == "two_step_velocity" else 0.0)
+        assert identity["supervision"]["detach_between_steps"] == (route in ("two_step_detached", "eight_slow"))
+        assert identity["supervision"]["velocity_weight"] == (
+            0.02 if route in ("two_step_velocity", "eight_slow") else 0.0
+        )
         assert identity["distributed"]["world_size"] == 2
         assert identity["distributed"]["local_batch_size"] == 2
         assert identity["distributed"]["global_batch_size"] == 4

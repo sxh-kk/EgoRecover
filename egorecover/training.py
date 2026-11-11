@@ -19,7 +19,7 @@ from egorecover.evaluation import evaluate_episode, summarize
 from egorecover.fk import joint_decoder, load_smpl, smpl_identity
 from egorecover.history_training import HistoryTraining, sampling_signature
 from egorecover.io import code_identity, file_sha256, save_checkpoint, save_json, state_sha256
-from egorecover.losses import frozen_ema, training_objective, two_step_objective, update_ema
+from egorecover.losses import frozen_ema, multi_step_objective, training_objective, two_step_objective, update_ema
 from egorecover.models import MotionModel
 from egorecover.optimization import make_optimizer, make_scheduler, optimization_protocol
 from egorecover.sampling import reference_microbatch_plan
@@ -79,7 +79,11 @@ def _evaluate_indices(system, model, data, fixture, indices, smpl, args, context
     for index in indices[context.rank :: context.world_size]:
         episode = fixture if args.synthetic else data.load(index)
         row = evaluate_episode(
-            system, model, episode, joint_decoder(episode, args.synthetic, smpl), comparison=comparison
+            system,
+            model,
+            episode,
+            joint_decoder(episode, args.synthetic, smpl, shape_mode=system.config.shape_mode),
+            comparison=comparison,
         )
         row.pop("predictions")
         row.pop("body_rotations", None)
@@ -92,14 +96,20 @@ def _evaluate_indices(system, model, data, fixture, indices, smpl, args, context
 def _train(args, context):
     device = context.device
     config = WindowConfig.from_json(args.config)
-    if isinstance(args.unroll_steps, bool) or args.unroll_steps not in (1, 2):
-        raise ValueError("Training unroll steps must be 1 or 2.")
+    if isinstance(args.unroll_steps, bool) or args.unroll_steps not in (1, 2, 8):
+        raise ValueError("Training unroll steps must be 1, 2 or 8.")
     if args.feedback_intervention not in ("full_state", "body_pose"):
         raise ValueError("Unknown feedback intervention.")
-    if args.unroll_steps == 2 and (config.feedback != "none" or not config.current_weight):
+    if args.unroll_steps > 1 and (config.feedback != "none" or not config.current_weight):
         raise ValueError("Two-step baseline requires current geometry and no paired feedback.")
-    if (args.detach_between_steps or args.velocity_weight) and args.unroll_steps != 2:
-        raise ValueError("Cache detachment and emitted velocity supervision require two-step training.")
+    if (args.detach_between_steps or args.velocity_weight) and args.unroll_steps == 1:
+        raise ValueError("Cache detachment and emitted velocity supervision require multiple supervised calls.")
+    if not math.isfinite(args.slow_weight) or args.slow_weight < 0:
+        raise ValueError("Persistent-error weight must be finite and nonnegative.")
+    if args.slow_weight and args.unroll_steps != 8:
+        raise ValueError("Persistent-error supervision requires eight supervised calls.")
+    if args.unroll_steps == 8 and not args.detach_between_steps:
+        raise ValueError("The eight-call control requires explicit cache detachment between calls.")
     if not math.isfinite(args.velocity_weight) or args.velocity_weight < 0:
         raise ValueError("Velocity weight must be finite and nonnegative.")
     if not math.isfinite(args.velocity_scale_m_s) or args.velocity_scale_m_s <= 0:
@@ -190,6 +200,8 @@ def _train(args, context):
         raise ValueError("Reference-rank sampling currently requires official data.")
     if controlled_history and (dataset_format != "official" or args.sample_reference_world_size is None):
         raise ValueError("Shared physical-target history ablations require official reference-rank sampling.")
+    if args.unroll_steps == 8 and not args.synthetic and not controlled_history:
+        raise ValueError("Production eight-call training requires the controlled official query sampler.")
     torch.manual_seed(args.seed)
     codec = MotionCodec(stats).to(device)
     prior = load_predictor(args.prior_checkpoint, device, None if args.synthetic else manifest)
@@ -224,7 +236,11 @@ def _train(args, context):
             "detach_between_steps": args.detach_between_steps,
             "velocity_weight": args.velocity_weight,
             "velocity_scale_m_s": args.velocity_scale_m_s,
-            "velocity_target": "consecutive emitted world FK velocities; GT uses same fixed bootstrap shape",
+            "velocity_target": (
+                "consecutive emitted world FK velocities against official GT joints"
+                if config.geometry_target == "official"
+                else "consecutive emitted world FK velocities; GT uses same fixed bootstrap shape"
+            ),
             "velocity_timebase": "each training episode's measured consecutive timestamps",
             "feedback_intervention": args.feedback_intervention,
             "isolate_forward_rng": args.isolate_forward_rng,
@@ -232,7 +248,7 @@ def _train(args, context):
             "future_tau": "same sampled tau; each frame preserves the endpoint mixture marginal",
             "cache_gradients": (
                 ("stopped between both calls" if args.detach_between_steps else "between both calls")
-                if args.unroll_steps == 2
+                if args.unroll_steps > 1
                 else "current through frozen response only"
             ),
         },
@@ -263,6 +279,18 @@ def _train(args, context):
     }
     if controlled_history:
         identity["history_training"] = history_training.protocol()
+    if args.unroll_steps == 8:
+        identity["supervision"][
+            "cache_gradients"
+        ] = "stopped between all eight calls; each emission retains its own parameter gradient"
+        identity["supervision"]["persistent_error"] = {
+            "weight": args.slow_weight,
+            "pooling_scales": [2, 4, 8],
+            "coordinate_frame": "shared floor-calibrated world axes",
+            "reduction": "mean squared signed pooled errors; all overlapping blocks; equal per-scale weight",
+            "cache_gradients": "stopped between calls; all eight emitted output graphs retained",
+            "supervised_query_horizon": 8,
+        }
     if args.allow_initialize_rewrite_change:
         identity["allow_initialize_rewrite_change"] = True
     args.output.mkdir(parents=True, exist_ok=True)
@@ -333,8 +361,10 @@ def _train(args, context):
     for step in range(start + 1, final + 1):
         optimizer.zero_grad(set_to_none=True)
         components = {k: 0.0 for k in ("loss", "flow", "hand_pca", "current", "feedback")}
-        if args.unroll_steps == 2:
+        if args.unroll_steps > 1:
             components["velocity"] = 0.0
+        if args.unroll_steps == 8:
+            components["slow"] = 0.0
         sampling_rows = []
         reference_plan = (
             reference_microbatch_plan(
@@ -347,6 +377,7 @@ def _train(args, context):
                 microbatch_size=args.microbatch_size,
                 rollin_frames=history_training.sampling_frames,
                 endpoint_probability=config.endpoint_probability,
+                horizon=max(2, args.unroll_steps),
             )
             if args.sample_reference_world_size is not None
             else None
@@ -364,7 +395,11 @@ def _train(args, context):
             else:
                 episodes = tuple(fixture if args.synthetic else train_data.sample(generator) for _ in range(count))
                 batch = TrainingBatch(episodes)
-                frame = int(torch.randint(20, min(len(e) for e in episodes) - 1, (), generator=generator))
+                frame = int(
+                    torch.randint(
+                        20, min(len(e) for e in episodes) - max(2, args.unroll_steps) + 1, (), generator=generator
+                    )
+                )
             rollin_frames = history_training.frames(step, global_offset)
             first = max(20, frame - rollin_frames)
             cache = batch.cache(first)
@@ -441,17 +476,51 @@ def _train(args, context):
                         truth_next=state_map(batch.target(frame + 1), lambda x: x[:, -1]),
                         feedback_intervention=args.feedback_intervention,
                     )
-                objective = two_step_objective if args.unroll_steps == 2 else training_objective
+                if args.unroll_steps == 8:
+                    noises = torch.stack(
+                        [epsilon]
+                        + [
+                            batch.noise(
+                                args.seed + step, frame + i, config.window, tag="feedback", offset=global_offset
+                            )
+                            for i in range(1, 8)
+                        ]
+                    )
+                    if controlled_history:
+                        sampling_rows[-1]["all_emission_noise_sha256"] = hashlib.sha256(
+                            noises.detach().cpu().numpy().tobytes()
+                        ).hexdigest()
+                    objective = multi_step_objective
+                    current_observations = [batch.observations(frame + i) for i in range(8)]
+                    current_targets = [batch.target(frame + i, config.window) for i in range(8)]
+                    current_noise = noises
+                    arguments = {
+                        "dt": torch.stack(
+                            [
+                                e.timestamps[frame + 1 : frame + 8] - e.timestamps[frame : frame + 7]
+                                for e in batch.episodes
+                            ]
+                        ),
+                        "velocity_weight": args.velocity_weight,
+                        "velocity_scale_m_s": args.velocity_scale_m_s,
+                        "slow_weight": args.slow_weight,
+                        "forward_seed": forward_seed,
+                    }
+                else:
+                    objective = two_step_objective if args.unroll_steps == 2 else training_objective
+                    current_observations = batch.observations(frame)
+                    current_targets = batch.target(frame, config.window)
+                    current_noise = epsilon
                 result = objective(
                     system,
                     training_model,
                     feedback_model,
                     cache,
-                    batch.observations(frame),
-                    batch.target(frame, config.window),
-                    epsilon,
+                    current_observations,
+                    current_targets,
+                    current_noise,
                     tau.to(device),
-                    joint_decoder(batch, args.synthetic, smpl),
+                    joint_decoder(batch, args.synthetic, smpl, shape_mode=config.shape_mode),
                     **arguments,
                 )
                 if controlled_history and args.isolate_forward_rng and step == 1:

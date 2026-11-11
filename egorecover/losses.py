@@ -53,6 +53,98 @@ def emitted_velocity_loss(current, subsequent, truth_current, truth_subsequent, 
     return geometry_loss(prediction, target, scale)
 
 
+def persistent_error_loss(prediction, target, *, scale_m=0.1, scales=(2, 4, 8)):
+    """Penalize signed, pooled world-position errors of actual emissions.
+
+    Every complete overlapping block contributes, with equal weight per scale.
+    This augments, rather than replaces, each frame's geometry supervision.
+    """
+    if prediction.ndim != 4 or prediction.shape[-2:] != (22, 3) or target.shape != prediction.shape:
+        raise ValueError("Persistent-error supervision requires matching [B,T,22,3] positions.")
+    if (
+        not scales
+        or len(set(scales)) != len(scales)
+        or any(isinstance(s, bool) or not isinstance(s, int) or not 1 <= s <= prediction.shape[1] for s in scales)
+    ):
+        raise ValueError("Each unique pooling scale must fit the supervised emission sequence.")
+    if not 0 < scale_m < float("inf"):
+        raise ValueError("Position normalization must be finite and positive.")
+    error = prediction - target.detach()
+    values = []
+    for width in scales:
+        average = error.unfold(1, width, 1).mean(-1)
+        values.append(average.square().sum(-1).mean() / scale_m**2)
+    return torch.stack(values).mean()
+
+
+def multi_step_objective(
+    system,
+    model,
+    teacher,
+    cache,
+    observations,
+    truth_windows,
+    epsilon,
+    tau,
+    joints,
+    *,
+    dt,
+    velocity_weight=0.0,
+    velocity_scale_m_s=1.0,
+    slow_weight=0.0,
+    forward_seed=None,
+):
+    """Eight causal calls; detach caches but retain every emitted output graph."""
+    count = len(observations)
+    if count != 8 or len(truth_windows) != count or epsilon.shape[0] != count:
+        raise ValueError("The persistent-error control uses exactly eight supervised online calls.")
+    if system.config.feedback != "none" or not system.config.current_weight:
+        raise ValueError("Multi-step training requires geometry supervision and no paired teacher loss.")
+    if dt.shape != (epsilon.shape[1], count - 1):
+        raise ValueError("Each independent sequence requires seven measured time intervals.")
+    rows = []
+    for index, observation in enumerate(observations):
+        if observation.frame != observations[0].frame + index:
+            raise ValueError("Supervised observations must advance one physical frame at a time.")
+        row = training_objective(
+            system,
+            model,
+            teacher,
+            cache.detach(),
+            observation,
+            truth_windows[index],
+            epsilon[index],
+            tau,
+            joints,
+            forward_seed=None if forward_seed is None else forward_seed + index,
+        )
+        rows.append(row)
+        cache = row["result"].cache.detach()
+    predicted = torch.stack([row["current_joints"] for row in rows], dim=1)
+    truth = torch.stack([row["truth_joints"] for row in rows], dim=1)
+    velocity = emitted_velocity_loss(
+        predicted[:, :-1].reshape(-1, 22, 3),
+        predicted[:, 1:].reshape(-1, 22, 3),
+        truth[:, :-1].reshape(-1, 22, 3),
+        truth[:, 1:].reshape(-1, 22, 3),
+        dt.reshape(-1),
+        scale_m_s=velocity_scale_m_s,
+    )
+    slow = persistent_error_loss(predicted, truth, scale_m=system.config.scale_m)
+    average = {
+        key: torch.stack([row[key] for row in rows]).mean()
+        for key in ("loss", "flow", "hand_pca", "current", "feedback")
+    }
+    return {
+        **average,
+        "loss": average["loss"] + velocity_weight * velocity + slow_weight * slow,
+        "velocity": velocity,
+        "slow": slow,
+        "result": rows[0]["result"],
+        "next_result": rows[-1]["result"],
+    }
+
+
 @contextmanager
 def forward_rng(tensor, seed, role):
     """Match dropout per objective call without advancing shared RNG streams."""
@@ -148,7 +240,12 @@ def training_objective(
             current = system.reconstruct(model, input_cache, observations, epsilon)
         truth_current = state_map(truth_window, lambda x: x[:, -1])
         if cfg.current_weight:
-            current_joints, truth_joints = joints(current.current), joints(truth_current).detach()
+            current_joints = joints(current.current)
+            truth_joints = (
+                truth_current.joints[..., :3, 3].detach()
+                if cfg.geometry_target == "official"
+                else joints(truth_current).detach()
+            )
             current_loss = geometry_loss(current_joints, truth_joints, cfg.scale_m)
         if cfg.feedback != "none" and cfg.feedback_weight:
             if cfg.feedback in ("paired", "direct"):

@@ -40,7 +40,7 @@ def load_smpl(device):
     )
 
 
-def joint_decoder(episode, synthetic, smpl=None):
+def joint_decoder(episode, synthetic, smpl=None, *, shape_mode="bootstrap"):
     if synthetic:
         from .diagnostics import DenseJoints
 
@@ -48,12 +48,15 @@ def joint_decoder(episode, synthetic, smpl=None):
     if smpl is None:
         raise ValueError("Production reconstruction requires the licensed SMPL-X asset.")
     beta = episode.beta
-    return FixedShapeFK(smpl, beta[None] if beta.ndim == 1 else beta)
+    return FixedShapeFK(smpl, beta[None] if beta.ndim == 1 else beta, shape_mode=shape_mode)
 
 
 class FixedShapeFK(nn.Module):
-    def __init__(self, smpl, beta_boot):
+    def __init__(self, smpl, beta_boot, *, shape_mode="bootstrap"):
         super().__init__()
+        if shape_mode not in ("bootstrap", "predicted"):
+            raise ValueError("Shape mode must be bootstrap or predicted.")
+        self.shape_mode = shape_mode
         if (
             beta_boot.shape != (10,) and (beta_boot.ndim != 2 or beta_boot.shape[1] != 10 or beta_boot.shape[0] < 1)
         ) or not bool(torch.isfinite(beta_boot).all()):
@@ -99,7 +102,10 @@ class FixedShapeFK(nn.Module):
             dim=1,
         )
         count = len(joints)
-        if self.beta_boot.ndim == 1:
+        if self.shape_mode == "predicted":
+            betas = auxiliary[:, -10:]
+            root_offset = None
+        elif self.beta_boot.ndim == 1:
             betas = self.beta_boot.expand(count, -1)
             root_offset = self.root_offset.expand(count, -1)
         else:
@@ -111,14 +117,19 @@ class FixedShapeFK(nn.Module):
             global_orient=local[:, 0],
             body_pose=local[:, 1:22],
             betas=betas,
-            transl=joints[:, 0, :3, 3] - root_offset,
+            transl=None if root_offset is None else joints[:, 0, :3, 3] - root_offset,
             left_hand_pose=pca_to_matrix(auxiliary[:, :12], self.smpl.left_hand_components),
             right_hand_pose=pca_to_matrix(auxiliary[:, 12:24], self.smpl.right_hand_components),
             return_verts=False,
         )
         if output.joints.shape[1] < 22:
             raise ValueError("SMPL layer must expose the first 22 body joints.")
-        result = output.joints[:, :22].reshape(*prefix, 22, 3)
+        positions = output.joints[:, :22]
+        if self.shape_mode == "predicted":
+            # Recenter with this prediction's own shape-dependent pelvis. The
+            # gradient through shape is retained; no GT shape enters decoding.
+            positions = positions + (joints[:, 0, :3, 3] - positions[:, 0])[:, None]
+        result = positions.reshape(*prefix, 22, 3)
         if not bool(torch.isfinite(result).all()):
             raise ValueError("SMPL FK produced nonfinite joints.")
         return result

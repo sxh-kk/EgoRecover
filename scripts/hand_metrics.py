@@ -23,7 +23,7 @@ class EmissionRecorder:
 
 
 @torch.no_grad()
-def decode_emissions(smpl, states, beta):
+def decode_emissions(smpl, states, beta, *, shape_mode="bootstrap"):
     """Decode original emitted rotations/PCA with the existing fixed shape."""
     state = state_cat(states, dim=0)
     rotation = state.joints[..., :3, :3]
@@ -32,8 +32,10 @@ def decode_emissions(smpl, states, beta):
         [rotation[:, j] if p < 0 else rotation[:, p].transpose(-1, -2) @ rotation[:, j] for j, p in enumerate(parents)],
         dim=1,
     )
-    betas = beta.reshape(1, 10).expand(len(rotation), -1)
-    offset = smpl(betas=betas[:1], return_verts=False).joints[:, 0]
+    if shape_mode not in ("bootstrap", "predicted"):
+        raise ValueError("Unknown emission shape mode.")
+    betas = state.auxiliary[:, -10:] if shape_mode == "predicted" else beta.reshape(1, 10).expand(len(rotation), -1)
+    offset = smpl(betas=betas if shape_mode == "predicted" else betas[:1], return_verts=False).joints[:, 0]
     return smpl(
         global_orient=local[:, 0],
         body_pose=local[:, 1:22],
@@ -88,7 +90,9 @@ def metrics_from_full_prediction(predicted, truth, vertices, *, floor_calibrated
 
 @torch.no_grad()
 def supplementary_metrics(context, record, episode, recorder, body_predictions):
-    prediction = decode_emissions(context.smpl, recorder.states, episode.beta)
+    prediction = decode_emissions(
+        context.smpl, recorder.states, episode.beta, shape_mode=context.system.config.shape_mode
+    )
     truth = decode_official_truth(context.smpl, context.data, record)
     # Extra evaluation must decode the same fixed-shape body that was scored.
     torch.testing.assert_close(prediction.joints[:, :22].cpu(), body_predictions, atol=2e-5, rtol=1e-5)

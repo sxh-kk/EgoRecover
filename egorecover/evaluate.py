@@ -168,7 +168,7 @@ def evaluate(args):
         groups, diagnostics = {}, []
         for index in range(count):
             episode = fixture if args.synthetic else data.load(index)
-            joints = joint_decoder(episode, args.synthetic, smpl)
+            joints = joint_decoder(episode, args.synthetic, smpl, shape_mode=config.shape_mode)
             for matched in ((False, True) if args.mode == "both" else (args.mode == "matched",)):
                 row = evaluate_episode(
                     system, model, episode, joints, seed=args.draw, steps=steps, matched_cache=matched, comparison=True

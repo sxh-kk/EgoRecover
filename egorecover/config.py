@@ -47,6 +47,8 @@ class WindowConfig:
     feedback_draws: int = 1
     scale_m: float = 0.1
     ema_decay: float = 0.999
+    shape_mode: str = "bootstrap"
+    geometry_target: str = "fixed_fk"
 
     def __post_init__(self):
         for key in ("history", "window", "steps", "feedback_draws"):
@@ -59,6 +61,10 @@ class WindowConfig:
             raise ValueError("Solver steps must be 1,2,4,10.")
         if self.source not in ("gaussian", "prediction"):
             raise ValueError("source must be gaussian or prediction.")
+        if self.shape_mode not in ("bootstrap", "predicted"):
+            raise ValueError("Shape mode must be bootstrap or predicted.")
+        if self.geometry_target not in ("fixed_fk", "official"):
+            raise ValueError("Geometry target must be fixed_fk or official.")
         if self.feedback not in ("none", "paired", "direct", "feature", "geometry"):
             raise ValueError("Unknown feedback objective.")
         for key in ("sigma", "scale_m", "current_weight", "feedback_weight", "endpoint_probability", "ema_decay"):
@@ -114,6 +120,7 @@ class TrainOptions:
     detach_between_steps: bool = False
     velocity_weight: float = 0.0
     velocity_scale_m_s: float = 1.0
+    slow_weight: float = 0.0
     feedback_intervention: str = "full_state"
     isolate_forward_rng: bool = False
     allow_initialize_rewrite_change: bool = False

@@ -69,7 +69,15 @@ def evaluate_episode(system, model, episode, joints, *, seed=1062, steps=None, m
         "frame_interval_ms": interval_ms,
         "steps": steps or system.config.steps,
         "matched_cache": matched_cache,
-        "metric": "dense_diagnostic" if getattr(joints, "diagnostic_only", False) else "fixed_shape_smpl22",
+        "metric": (
+            "dense_diagnostic"
+            if getattr(joints, "diagnostic_only", False)
+            else (
+                "predicted_shape_smpl22"
+                if getattr(joints, "shape_mode", "bootstrap") == "predicted"
+                else "fixed_shape_smpl22"
+            )
+        ),
         "synthetic": episode.synthetic,
         "floor_calibrated": episode.floor_calibrated,
         "predictions": torch.stack(predictions, 1),

@@ -328,14 +328,16 @@ class OfficialWindowData:
         self.cache[index] = episode
         return episode
 
-    def sample_queries(self, generator, count, rollin_frames):
+    def sample_queries(self, generator, count, rollin_frames, *, horizon=2):
         """Plan CPU queries without loading or transferring episode payloads."""
         if self.split != "train":
             raise ValueError("Random official queries are restricted to the training split.")
         count = _integer(count, "batch count", 1)
         rollin_frames = _integer(rollin_frames, "rollin_frames")
-        frame, minimum = 20 + rollin_frames, 22 + rollin_frames
-        if rollin_frames not in self._sampling_groups:
+        horizon = _integer(horizon, "supervised horizon", 2)
+        frame, minimum = 20 + rollin_frames, 20 + rollin_frames + horizon
+        group_key = rollin_frames if horizon == 2 else (rollin_frames, horizon)
+        if group_key not in self._sampling_groups:
             groups = {}
             short = 0
             for name, meta in self.source_metadata.items():
@@ -343,22 +345,24 @@ class OfficialWindowData:
                     short += 1
                 else:
                     groups.setdefault(meta["take"], []).append(name)
-            self.sampling_inventory[rollin_frames] = {
+            self.sampling_inventory[group_key] = {
                 "required_source_frames": minimum,
                 "eligible_takes": len(groups),
                 "eligible_sources": sum(map(len, groups.values())),
                 "skipped_short_sources": short,
                 "skipped_short_only_takes": self.inventory["source_takes"] - len(groups),
             }
-            self._sampling_groups[rollin_frames] = list(groups.values())
-        groups = self._sampling_groups[rollin_frames]
+            self._sampling_groups[group_key] = list(groups.values())
+        groups = self._sampling_groups[group_key]
         if not groups:
             raise ValueError(f"No official sources have the {minimum} frames required for this rollin budget.")
         queries = []
         for _ in range(count):
             names = groups[int(torch.randint(len(groups), (), generator=generator))]
             name = names[int(torch.randint(len(names), (), generator=generator))]
-            query = int(torch.randint(frame, self.source_metadata[name]["frames"] - 1, (), generator=generator))
+            query = int(
+                torch.randint(frame, self.source_metadata[name]["frames"] - horizon + 1, (), generator=generator)
+            )
             queries.append((name, query - frame, minimum))
         return queries, frame
 

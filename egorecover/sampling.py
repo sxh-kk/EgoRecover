@@ -23,6 +23,7 @@ def reference_microbatch_plan(
     microbatch_size,
     rollin_frames,
     endpoint_probability,
+    horizon=2,
 ):
     """Replay all reference chunks, retaining this worker's contiguous slice.
 
@@ -64,7 +65,8 @@ def reference_microbatch_plan(
     last = first + local_batch
     plan = []
     for logical_offset in range(0, reference_batch, microbatch_size):
-        queries, frame = data.sample_queries(generator, microbatch_size, rollin_frames)
+        kwargs = {} if horizon == 2 else {"horizon": horizon}
+        queries, frame = data.sample_queries(generator, microbatch_size, rollin_frames, **kwargs)
         if len(queries) != microbatch_size:
             raise ValueError("sample_queries must return one query per requested sample.")
         tau = 0.001 + 0.999 * torch.rand(microbatch_size, generator=generator, device="cpu")
