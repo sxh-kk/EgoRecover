@@ -1,0 +1,187 @@
+{
+  "snapshot_at_beijing": "2026-11-11T14:01:45+08:00",
+  "implementation_commit": "879546c10aa3aa44d0b5e847bc96498833070d44",
+  "scope": "Aggregate statistics and provenance only; no licensed model files, dataset payloads or trained tensors.",
+  "sources": [
+    {
+      "path": "exp/official-clip400-20261108/selection.json",
+      "bytes": 104486,
+      "sha256": "7723552e557f01aea4a65f51cdd6e151e66a35414c05bdc216d6c84715fd29d6"
+    },
+    {
+      "path": "exp/official-clip400-20261108/comparison.json",
+      "bytes": 6023,
+      "sha256": "c45e6c8be6ddcdd0d6b31a888fff0a3e8df0c52e5d875c6bf6d418e00bb25a3d"
+    },
+    {
+      "path": "exp/prediction-center-0p03-20261109/evaluation400/comparison.json",
+      "bytes": 7923,
+      "sha256": "6f3873525b0d86a1d60d23d4ebaa018d6b4773eaf4b34f7922017d72600cb2d7"
+    },
+    {
+      "path": "exp/solver-steps-W3-20261109/comparison.json",
+      "bytes": 20291,
+      "sha256": "fdcad878a14f17eafae7dbf4f0e7ac59b4b22fae5967752542505d0c06f60a64"
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/evaluation400/comparison.json",
+      "bytes": 26791,
+      "sha256": "f096501679912751429273e34968d6ee29596e428c6a03685a49dd51d6a6bcfd"
+    },
+    {
+      "path": "exp/history-rewrite-newP-W3-20261110/comparison.json",
+      "bytes": 33980,
+      "sha256": "958904ee8f172e4d7019c78cb412fa5bc5ebd4decd125698c81d34ea164ed9e9"
+    },
+    {
+      "path": "exp/history-policy-ablation-20261110/evaluation400/comparison.json",
+      "bytes": 40780,
+      "sha256": "0fb52d896b8ab4a24756666f3a9789547b6d3e4cc5828964a2de351265c23d47"
+    },
+    {
+      "path": "exp/two-step-vs-paired-C-20261110/evaluation400/comparison.json",
+      "bytes": 25765,
+      "sha256": "60a799f5203d1e7473cde46f863db0b70c296dc328cd6d28f495273c925e6c2a"
+    },
+    {
+      "path": "exp/ac-detach-velocity-C-20261110/evaluation400/comparison.json",
+      "bytes": 49397,
+      "sha256": "69959f9e5f66ee6a623d3d1468d104390cd776a11f8840085a5c9e0b844be3ab"
+    },
+    {
+      "path": "exp/window-selection-20261107/W1/full-dev.json",
+      "bytes": 25122079,
+      "sha256": "4857ef0c053d75b43bbf057e305013b9347167fda9aef7687677deed96fc55c1"
+    },
+    {
+      "path": "exp/window-selection-20261107/W1/selection.json",
+      "bytes": 860016,
+      "sha256": "ea07894943015acd0574948ce94e58f034df4d16fff77c86eec6f5b492d8f056"
+    },
+    {
+      "path": "exp/window-selection-20261107/W3/full-dev.json",
+      "bytes": 25128252,
+      "sha256": "d770d2915a9cba62bd5237a2a9951b5b3ffac89ed5dc08b4fbf4153dbf03bfc3"
+    },
+    {
+      "path": "exp/window-selection-20261107/W3/selection.json",
+      "bytes": 859965,
+      "sha256": "6072d3060b2955beba89d38427c736c423ac65e1db7b648441d5f0d02a63f237"
+    },
+    {
+      "path": "exp/window-selection-20261107/W5/full-dev.json",
+      "bytes": 25130036,
+      "sha256": "af65e9fe10a9a348eaa3489e5689f590567b5a70c63943e8cda445bfa5088e7c"
+    },
+    {
+      "path": "exp/window-selection-20261107/W10/full-dev.json",
+      "bytes": 25103546,
+      "sha256": "adeb4e034fc657ad539da0b861784e273b870ab621636e57d0102173cce2bc08"
+    },
+    {
+      "path": "exp/current-geometry-0p01-20261108/W1/full-dev.json",
+      "bytes": 25101070,
+      "sha256": "91ce990134d74943a593be0af5db647053da2472e6b151ebc812cc8f20c7725d"
+    },
+    {
+      "path": "exp/current-geometry-0p01-20261108/W1/selection.json",
+      "bytes": 860020,
+      "sha256": "36a65146a520424f229e5087c7ed2a3b99b6a8993546975534a6c9bed023472d"
+    },
+    {
+      "path": "exp/current-geometry-0p01-20261108/W3/full-dev.json",
+      "bytes": 25128001,
+      "sha256": "e44251b369ed8dad4ca88eb35aabe886661f7ffecab21b605e685f4b65f01e39"
+    },
+    {
+      "path": "exp/current-geometry-0p01-20261108/W3/selection.json",
+      "bytes": 859945,
+      "sha256": "5a3b1d2d2a387735620cfbce03bba03014aec26da4a9f11b297694cec07d03cc"
+    },
+    {
+      "path": "exp/current-geometry-0p03-20261108/W1/full-dev.json",
+      "bytes": 25118148,
+      "sha256": "1035188c792c8acd3d5b2dd6b096f562df7e1b2fdcedc294d1976e1d6614fc91"
+    },
+    {
+      "path": "exp/current-geometry-0p03-20261108/W1/selection.json",
+      "bytes": 859831,
+      "sha256": "e028b279f029a6bedbb6d694f93f95cb6b7d76bdc1acfeeced87a075b2c565e0"
+    },
+    {
+      "path": "exp/current-geometry-0p03-20261108/W3/full-dev.json",
+      "bytes": 25117732,
+      "sha256": "df06ca7b3e8e625b210663b809043e64e760bb985027d7c485d7c9b1cb8f37b5"
+    },
+    {
+      "path": "exp/current-geometry-0p03-20261108/W3/selection.json",
+      "bytes": 859740,
+      "sha256": "fcc9e01eb9a6aa7cad15fa1182618f338f5348846ebcad49742007932a1c1062"
+    },
+    {
+      "path": "exp/current-weight-W1-2k-20261108/comparison.json",
+      "bytes": 3765,
+      "sha256": "5f6911287e38bf2c765e6c66fce40f8b06f9ec2a050852ad4b94d1b490901441"
+    },
+    {
+      "path": "exp/prediction-center-0p03-20261109/source-comparison.json",
+      "bytes": 8429,
+      "sha256": "4083acabef074a366c1d9174626668d51689a809353a9f3bc0ae9a47fc6b9ff2"
+    },
+    {
+      "path": "exp/prior-learning-20261109/final400-evaluation/report.json",
+      "bytes": 25077716,
+      "sha256": "7e9fa7b2d2305c4d5c5332a33df3edba78e96cc8d08051a434e058ba7145ddb8"
+    },
+    {
+      "path": "exp/prior-mature-history-20261109/final400-temporal.json",
+      "bytes": 975459,
+      "sha256": "ce33d1d601aa90a278988a941c5429a355438a5209b91d42aff9db0684777d97"
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/final400-evaluation/report.json",
+      "bytes": 25271726,
+      "sha256": "5dddd0ff58506ad9c17daf0b55c34654dedb4b7f217b515ba80c95119bb5121b"
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/comparison-with-previous.json",
+      "bytes": 7092,
+      "sha256": "3ca15773d78c2baea6e338c80d768f0c06d57e093b584601984aeceb497d68b4"
+    },
+    {
+      "path": "exp/reference-C-mixed-20261110/report.json",
+      "bytes": 93353504,
+      "sha256": "49528fdc6ab04e69bd56216b2e0bf205e77ed5276f2fd73f43d813ef09730228"
+    },
+    {
+      "path": "exp/ac-detach-velocity-C-20261110/evaluation400/error-frequency-diagnosis.json",
+      "bytes": 8399,
+      "sha256": "237c5a8fba593e49b71503888f8b185af5fe4691750b5536d7da8909b7901919"
+    },
+    {
+      "path": "exp/ac-detach-velocity-C-20261110/evaluation400/shape-oracle-diagnosis.json",
+      "bytes": 147388,
+      "sha256": "5177c090ecb3f5d105af999a5b999583f6695e57b4d4b47363b1a9cba7e810aa"
+    },
+    {
+      "path": "exp/shape-persistent-W3-20261111/plan.json",
+      "bytes": 7931,
+      "sha256": "5763799c833c873c17714b7516e3fe5fe980c20ef62a70b39fa93dd58b8f95e1"
+    },
+    {
+      "path": "exp/shape-persistent-W3-20261111/status.json",
+      "bytes": 770,
+      "sha256": "2c083402c4c20513572c5b5d25158d5c9978fe25a9dd51a577c1adebe0810041"
+    },
+    {
+      "path": "exp/shape-persistent-W3-20261111/asset-backed-FK-review.json",
+      "bytes": 445,
+      "sha256": "c415c45f8b952ea7299825f945cb3c005126ee2887f678d0e71dac0af44f83f0"
+    }
+  ],
+  "outputs": {
+    "data/experiment_summary.json": "b310d1c008910d06ac7024a2b059006f9a3edcd1d40139baab61062d380d9da8",
+    "data/metrics.csv": "a87feeca8085304104fe3a859c8fa30a7b52a0b96839a6f392d250ee5b30f620",
+    "data/paired_effects.csv": "c5705d45ccafb98b4b271906ece40420cf6a963568060ad35a88f1e290b835ad"
+  }
+}

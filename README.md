@@ -4,6 +4,12 @@
 
 当前仓库只维护这一套实现。清理前的代码、实验脚本和结果保留在 [归档分支](https://github.com/sxh-kk/EgoRecover/tree/archive/before-cleanup-20261106)。恢复方法及本次删除范围见 [重构记录](docs/refactor.md)。
 
+## 实验结果报告
+
+[EE4D 在线重建实验报告](docs/reports/ee4d_experiments_20261111.md)汇总截至2026-11-11的窗口和权重选择、预测中心、学习P、求解步数、历史回写、成熟历史适配、参考分支干预、连续训练、成对监督、停止梯度及速度监督结果，并记录体型和频率诊断。配套提供[指标CSV](docs/reports/data/metrics.csv)、[配对变化CSV](docs/reports/data/paired_effects.csv)、[汇总JSON](docs/reports/data/experiment_summary.json)及[来源校验](docs/reports/data/source_manifest.json)。
+
+报告区分完整4379片段、固定400片段和预测器诊断，不将它们混为同一排名。预测体型参与FK与多尺度持续偏差两组实验已建立自动等待队列，归档时尚无新训练指标。以下保留各历史阶段的训练入口，最新实验状态与结论以报告快照为准。
+
 ## 安装
 
 使用 Conda 管理环境；当前环境配置为 Python 3.12 / PyTorch 2.10 / CUDA 12.6：
@@ -31,7 +37,7 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 pytest -q
 
 ## EE4D 对比指标
 
-当前只做 SMPL22 身体重建，包含左右手腕，不增加手指输出或 MPJPE-H。`evaluate` 自动生成 `report.json` 和可用于表格对比的 `metrics.csv`：世界坐标 MPJPE、逐帧 PA-MPJPE、手腕/头部误差、旋转矩阵误差、根轨迹、上游脚滑指标及单帧延迟。整段相似对齐误差另列，避免混淆不同论文的 MPJPE。CSV 分别输出 take 等权和 episode 等权统计，在线主结果使用 `rollout` 行；`matched` 是内部诊断。
+主任务为 SMPL22 身体重建，包含左右手腕；表示中保留左右手PCA并使用Flow监督。`evaluate` 自动生成 `report.json` 和 `metrics.csv`：世界坐标 MPJPE、逐帧 PA-MPJPE、手腕/头部误差、旋转矩阵误差、根轨迹、上游脚滑指标及单帧延迟。固定400片段评测另通过 `scripts/hand_metrics.py` 解码手PCA，补充手指MPJPE、左眼平移误差和网格离地指标；它们使用官方SMPL-X拟合标签，不能将手腕误差当作手指误差。CSV 分别输出 take 等权和 episode 等权统计，在线主结果使用 `rollout` 行；`matched` 是内部诊断。
 
 TMR Semantic/FID 尚未接入；jerk 以明确的诊断名称输出，尚不作为 EgoForce 原论文 PJ/AUJ。字段定义、单位、对齐方式和排除项写入评估身份；详细口径见 [对比协议](docs/comparison.md)。
 
@@ -61,7 +67,7 @@ conda run -n egorecover --no-capture-output python -m egorecover prepare \
   --output exp/official-preparation --device cuda
 ```
 
-报告位于 `exp/official-preparation/preparation.json`，各窗口配置位于其 `configs/architecture/`。当前启动历史是只由当时头轨迹构造的直立中性 SMPL22 先验：使用头部 yaw，固定 `beta=0`，将设备原点近似为头关节 15，不使用 GT 身体或 E7。P 采用解析常速度，当前阶段不需要 E7 或学习型 P checkpoint。图像仍读取官方预计算 DINO 特征；5 Hz 特征向 10 Hz 身体时刻作因果保持，不读取下一帧特征。
+报告位于 `exp/official-preparation/preparation.json`，各窗口配置位于其 `configs/architecture/`。启动历史是只由当时头轨迹构造的直立中性 SMPL22 先验：使用头部 yaw，固定 `beta=0`，将设备原点近似为头关节 15，不使用 GT 身体或 E7。首轮P采用解析常速度，后续学习型P和冻结P对照见实验报告。图像读取官方预计算 DINO 特征；5 Hz 特征向 10 Hz 身体时刻作因果保持，不读取下一帧特征。
 
 训练优化参数对齐 UniEgoMotion：AdamW 学习率 `3e-5`、weight decay `0.01`、betas `(0.9, 0.999)`、eps `1e-8`，L2 梯度裁剪 `1.0`，每次优化更新后 EMA `0.999`，有效 batch `64`，seed `62`。完整网络 dropout 为 `0.1`；合成诊断用的 compact 网络保持 dropout `0`。配置及实现来源固定为上游提交 `580c92c6d70a91672c4106bab30ca82cdd80f379`：[配置](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/config/uem.yaml)、[优化器与调度](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/module/uem_module.py)、[训练入口](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/run/train_uem.py)、[网络](https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/model/uniegomotion.py)。
 
@@ -105,7 +111,7 @@ wait
 
 W=1/W=3 开启当前帧监督、各四GPU的随机初始化训练设置见 [本轮训练协议](docs/current_geometry_training_20261108.md)。全局batch保持64，使用逻辑双卡采样计划保留原基线的query/tau序列；不同卡数的dropout和浮点归约差异另行记录。
 
-lambda=1的运行已停止并保留产物；当前候选改为0.01，W1/W3各四卡重新随机初始化，见 [新训练协议](docs/current_geometry_0p01_training_20261108.md)。除当前帧监督权重与产物路径外，其他设置沿用原运行。
+lambda=1的运行已停止并保留产物；2026-11-08这一轮将候选改为0.01，W1/W3各四卡重新随机初始化，见 [该轮训练协议](docs/current_geometry_0p01_training_20261108.md)。后续0.03筛选与连续训练结果见最新实验报告。
 
 当前帧监督初始权重的 [真实批次梯度审计](docs/geometry_gradient_audit_20261108.md) 记录Flow/几何分量、四卡日志重放核对、旋转与FK检查以及候选权重标定，避免把数值有限误认为训练目标已平衡。
 
@@ -113,7 +119,7 @@ lambda=1的运行已停止并保留产物；当前候选改为0.01，W1/W3各四
 
 是否使用完整参考预算需单独决定。官方 350 epochs 对应 `2244 × 350 = 785400` 次更新；这里每个样本是 online query，不能把这些更新称为本项目的 350 epochs。本轮 `12000 × 64 = 768000` 个 query 是单种子选窗预算，学习率保持 `3e-5`，不会为了短预算而把官方衰减点压缩到其末段。后续根据学习曲线和计算成本确定预算，补充种子验证后再评价稳定收益；`prepare` 不会自动启动上述训练或完整参考预算。详细换算见 [训练参数与预算](docs/method.md#训练参数与预算)。
 
-官方包只有 train/val；`dev` 是 val 的别名，不能把它称为独立 test。默认验证选择当前发布包中的 4,405 个官方参考候选，跳过 26 个只有 21 帧的短尾，实际评价 4,379 个片段。每段前 20 帧只建立启动历史，不评分，因此这些在线结果不能直接与论文整段 80 帧数值相减。当前只输出并评价 SMPL22 身体，不增加手指重建；更多数据与评分边界见 [数据协议](docs/data.md)。旧 `restore` 和 `--data-format paired` 仅保留兼容用途，不是当前主路径。
+官方包只有 train/val；`dev` 是 val 的别名，不能把它称为独立 test。默认验证选择当前发布包中的 4,405 个官方参考候选，跳过 26 个只有 21 帧的短尾，实际评价 4,379 个片段。每段前 20 帧只建立启动历史，不评分，因此这些在线结果不能直接与论文整段 80 帧数值相减。主指标评价 SMPL22 身体，固定400片段另有手PCA解码后的补充手指误差；更多数据与评分边界见 [数据协议](docs/data.md)及最新实验报告。旧 `restore` 和 `--data-format paired` 仅保留兼容用途，不是当前主路径。
 
 ## 代码结构
 
@@ -148,6 +154,6 @@ docs/              方法、数据协议、重构与复核说明
 
 完整 G 默认保持 768 维、12 层主干；当前官方数据实验随机初始化 G，不加载 E7。E7/P 导入仅保留为兼容接口。新原生 checkpoint 为 `egorecover_window_v2`，不直接续训清理前的 v1 诊断 checkpoint。
 
-当前已验证合成流程、梯度边界、精确恢复、权重迁移及中性启动先验的几何一致性。官方数据检查记录由 `prepare` 生成；本文命令是实验入口，不表示正式训练已完成，尚无对外精度或 GPU 延迟收益结论。
+当前已验证合成流程、梯度边界、精确恢复、权重迁移及中性启动先验的几何一致性；已完成的内部精度和隔离时延结果见实验报告。官方数据检查记录由 `prepare` 生成；本文命令本身不表示某次运行已完成，内部结果也不能直接作为与外部论文同口径的排名。
 
 代码来源及保留的第三方声明见 [SOURCE.md](SOURCE.md)。
