@@ -257,7 +257,7 @@ def build(workspace, output, *, figures=True):
         "source_artifact",
     ]
     with (output / "data/metrics.csv").open("w", newline="") as stream:
-        writer = csv.DictWriter(stream, fields)
+        writer = csv.DictWriter(stream, fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(csv_rows)
     deltas = []
@@ -308,6 +308,7 @@ def build(workspace, output, *, figures=True):
         writer = csv.DictWriter(
             stream,
             ["family", "contrast", "subset", "source", "nfe", "window", "metric", "delta", "ci95_low", "ci95_high"],
+            lineterminator="\n",
         )
         writer.writeheader()
         writer.writerows(deltas)
