@@ -304,7 +304,8 @@
       ],
       "first_training": "Freeze P/G parameters; train U from final-output geometry and velocity. Evaluate fused-state feedback in actual causal rollout.",
       "meaning": "KalmanNet-inspired causal body correction; not an implementation of the original KalmanNet estimator.",
-      "P_retention_test": "learned P + U versus CV + U under matched protocols; P single-step accuracy alone is insufficient."
+      "P_retention_test": "learned P + U versus CV + U under matched protocols; P single-step accuracy alone is insufficient.",
+      "FFT_branch": "F0 diagnosis after T1; F2 independent supervision after initial P/U comparison; F3 combination only if both effective. See fft_todo_branch."
     }
   ],
   "resources": {
@@ -565,5 +566,99 @@
       "prediction-center source",
       "paired supervision"
     ]
+  },
+  "fft_todo_branch": {
+    "recorded_at_beijing": "2026-11-12T20:41:00+08:00",
+    "status": "retained_conditional_research_not_scheduled",
+    "mainline_order_unchanged": true,
+    "evidence_note": "docs/fft_low_frequency_loss_20261111.md",
+    "old_spectrum": "docs/reports/data/fft_error_spectrum_20261111.json",
+    "existing_multiscale_result": {
+      "A_MPJPE_mm": 86.46750349876612,
+      "B_MPJPE_mm": 86.48953633128777,
+      "slow_weights": [
+        0,
+        0.03
+      ],
+      "K": 8,
+      "interpretation": "No MPJPE gain; velocity, acceleration and foot slide worse. Low-frequency energy concentration alone is not evidence this loss improves reconstruction."
+    },
+    "items": [
+      {
+        "id": "F0_spectrum",
+        "after": "T1_G evaluation",
+        "before_or_parallel_to": "T2_P/T3/T4 planning; no training changes",
+        "task": "Reanalyse DC/nonzero-low/high absolute error energies on new G, same D400 and separately continuous intervals. Preserve world/relative-body decomposition.",
+        "requires_training": false,
+        "prediction_source": "Reuse saved first emissions or replay fixed checkpoint/noise/selection if only summary artifacts exist.",
+        "auto_start": false
+      },
+      {
+        "id": "F1_protocol",
+        "depends_on": [
+          "F0_spectrum"
+        ],
+        "task": "If persistent error remains, separately specify DC and nonzero-low penalties, frequency bands, normalization and weights. Equal full-spectrum orthonormal FFT MSE is ordinary time MSE.",
+        "constraints": [
+          "Preserve complex difference and phase",
+          "Correct rFFT interior-bin weights",
+          "Old95% low-frequency share is not transferable or achievable MPJPE reduction"
+        ],
+        "auto_start": false
+      },
+      {
+        "id": "F2_loss_ablation",
+        "after": "Initial T3/T4 comparison reviewed; use G+CV if learned P/U are not retained",
+        "depends_on": [
+          "F1_protocol"
+        ],
+        "controls": [
+          "base loss",
+          "ordinary geometry-weight increase",
+          "additional DC penalty",
+          "DC plus nonzero-low-frequency penalty"
+        ],
+        "match": [
+          "initial checkpoint",
+          "continuous supervision length",
+          "history policy",
+          "update count",
+          "supervised-frame budget"
+        ],
+        "record": [
+          "weighted loss/gradient scales",
+          "training cost",
+          "MPJPE",
+          "absolute DC/nonzero-low energies",
+          "velocity",
+          "acceleration",
+          "foot slide"
+        ],
+        "auto_start": false
+      },
+      {
+        "id": "F3_combination",
+        "condition": "U and low-frequency supervision each provide useful closed-loop gains",
+        "controls": [
+          "common baseline",
+          "U only",
+          "low-frequency supervision only",
+          "U plus low-frequency supervision"
+        ],
+        "feedback": "Score first emissions after actual fused-state feedback; match adaptation budgets.",
+        "auto_start": false
+      }
+    ],
+    "temporal_resolution": {
+      "motion_fps": 10,
+      "K8_frequency_spacing_Hz": 1.25,
+      "K8_nonzero_bins_below_1Hz": 0,
+      "candidate_K16_spacing_Hz": 0.625,
+      "candidate_K32_spacing_Hz": 0.3125,
+      "implementation": "Longer training horizons require implementation and recovery verification; all loss controls use the same horizon.",
+      "D400_60frame_spacing_Hz": 0.16666666666666666
+    },
+    "training_changes_now": false,
+    "first_PG_U_comparisons_add_FFT_loss": false
   }
 }
