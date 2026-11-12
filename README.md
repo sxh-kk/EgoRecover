@@ -6,7 +6,7 @@
 
 ## 实验结果报告
 
-[EE4D 正式实验主线 v1](docs/formal_experiment_plan_20261112.md)从随机初始化训练W1/W3基础G，各4卡，标准32000步；后续再用新G历史训练P并检验闭环收益。2026-11-12已归档清理旧检查点、释放约49.81 GiB，并在1000步处完成第一轮工程提速；第二轮FP32历史合批与编译优化已通过核验，安排两组保存第2000步后自动切换。预算、损失与学习率不变。详见[提速核验记录](docs/reports/data/training_speedup_20261112.json)，实时进度以项目实验目录为准。
+[EE4D 正式实验主线](docs/formal_experiment_plan_20261112.md)现采用v2预算修订：W1/W3各4卡，总计12000步，前10000步使用3e-5，随后使用3e-6；保留原随机初始化训练前缀与优化器状态，取消自动延长。两组在共同10k保存点迁移到新编号，完成后进行固定400片段及50段连续区间评测。本轮用于窗口筛选，训练充分性仍需检查；后续P不自动启动。原v1记录保留，FP32提速实现继续使用。详见[预算修订](docs/reports/data/formal_budget12k_revision_20261112.json)与[提速核验记录](docs/reports/data/training_speedup_20261112.json)，实时状态见`exp/formal-v2-12k-20261112/`。
 
 [EE4D 在线重建实验报告](docs/reports/ee4d_experiments_20261111.md)汇总截至2026-11-11的窗口和权重选择、预测中心、学习P、求解步数、历史回写、成熟历史适配、参考分支干预、连续训练、成对监督、停止梯度及速度监督结果，并记录体型和频率诊断。配套提供[指标CSV](docs/reports/data/metrics.csv)、[配对变化CSV](docs/reports/data/paired_effects.csv)、[汇总JSON](docs/reports/data/experiment_summary.json)及[来源校验](docs/reports/data/source_manifest.json)。
 

@@ -1,4 +1,4 @@
-"""Supervise only formal-v1 foundation G controls and their fixed evaluations."""
+"""Supervise planned G training budgets and their fixed evaluations."""
 
 import argparse
 import fcntl
@@ -34,6 +34,32 @@ METRICS = (
 )
 
 
+def training_budgets(plan):
+    """A single declared budget has no automatic extension stage."""
+    standard = plan.get("standard_updates", 32000)
+    cap = plan.get("native_checkpoint_total_cap", 40000)
+    if (
+        isinstance(standard, bool)
+        or not isinstance(standard, int)
+        or standard < 1
+        or isinstance(cap, bool)
+        or not isinstance(cap, int)
+        or cap < standard
+    ):
+        raise ValueError("Training budgets must start at the standard budget and increase within the native cap.")
+    budgets = plan.get("training_budgets", [standard, cap] if cap > standard else [standard])
+    if (
+        not isinstance(budgets, (list, tuple))
+        or not 1 <= len(budgets) <= 2
+        or any(isinstance(value, bool) or not isinstance(value, int) or value < 1 for value in budgets)
+        or budgets[0] != standard
+        or any(a >= b for a, b in zip(budgets, budgets[1:]))
+        or budgets[-1] > cap
+    ):
+        raise ValueError("Training budgets must start at the standard budget and increase within the native cap.")
+    return tuple(budgets)
+
+
 def command(plan, job, output, *, preflight=False, resume=False, stop_after=None):
     result = [
         plan["python"],
@@ -60,7 +86,7 @@ def command(plan, job, output, *, preflight=False, resume=False, stop_after=None
         "--seed",
         "62",
         "--train-steps",
-        "2" if preflight else "40000",
+        "2" if preflight else str(plan.get("native_checkpoint_total_cap", 40000)),
         "--batch-size",
         "16",
         "--microbatch-size",
@@ -88,9 +114,9 @@ def command(plan, job, output, *, preflight=False, resume=False, stop_after=None
         "--lr-schedule",
         "uniegomotion",
         "--lr-decay-step",
-        "1" if preflight else "12000",
+        "1" if preflight else str(plan.get("lr_decay_step", 12000)),
         "--lr-decay-gamma",
-        "0.3",
+        str(plan.get("lr_decay_gamma", 0.3)),
         "--eval-every",
         "1" if preflight else "1000",
         "--dev-selection-file",
@@ -118,8 +144,11 @@ def environment(plan, gpu):
         NCCL_DEBUG="WARN",
         SMPLX_MODEL_PATH=plan["smpl_directory"],
     )
-    if plan.get("runtime_revision") == "runtime3":
-        env["TORCHINDUCTOR_COMPILE_THREADS"] = "1"
+    compile_threads = plan.get("compile_threads_per_rank", 1 if plan.get("runtime_revision") == "runtime3" else None)
+    if compile_threads is not None:
+        if isinstance(compile_threads, bool) or not isinstance(compile_threads, int) or compile_threads < 1:
+            raise ValueError("Compile threads per rank must be a positive integer.")
+        env["TORCHINDUCTOR_COMPILE_THREADS"] = str(compile_threads)
     return env
 
 
@@ -152,7 +181,7 @@ def checkpoint_milestones(plan):
     for job in plan["jobs"]:
         directory = root / job["name"]
         selection = read(directory / "selection.json") or {}
-        for step in (12000, 24000):
+        for step in plan.get("checkpoint_milestones", (12000, 24000)):
             target = directory / f"ema-step{step}.pt"
             if target.exists() or not any(row["step"] == step for row in selection.get("curve", [])):
                 continue
@@ -195,8 +224,10 @@ def run_jobs(plan, specs, phase):
                     "phase": phase,
                     "at_beijing": now(),
                     "jobs": states,
-                    "standard_budget": 32000,
-                    "conditional_cap": 40000,
+                    "standard_budget": plan.get("standard_updates", 32000),
+                    "conditional_cap": plan.get("native_checkpoint_total_cap", 40000),
+                    "training_role": plan.get("training_role", "foundation"),
+                    "training_budgets": list(training_budgets(plan)),
                 },
             )
             if any(row["exit_code"] not in (None, 0) for row in states):
@@ -272,8 +303,9 @@ def verify_preflight(plan):
         assert all(
             math.isfinite(row[key]) for row in rows for key in ("loss", "flow", "current", "velocity", "gradient_norm")
         )
-        assert math.isclose(rows[-1]["learning_rate"], 9e-6, rel_tol=1e-12)
-        assert math.isclose(rows[-1]["next_learning_rate"], 2.7e-6, rel_tol=1e-12)
+        gamma = plan.get("lr_decay_gamma", 0.3)
+        assert math.isclose(rows[-1]["learning_rate"], 3e-5 * gamma, rel_tol=1e-12)
+        assert math.isclose(rows[-1]["next_learning_rate"], 3e-5 * gamma**2, rel_tol=1e-12)
         identity = full["identity"]
         evidence[job["name"]] = {
             "initial_model_sha256": identity["random_initial_model_sha256"],
@@ -329,7 +361,7 @@ def verify_preflight(plan):
                 (root / "preflight" / job["name"] / kind / name).unlink()
 
 
-def platform_decision(curves, *, standard=32000, window=4000, threshold=0.5):
+def platform_decision(curves, *, standard=32000, cap=40000, window=4000, threshold=0.5):
     gains = {}
     for name, curve in curves.items():
 
@@ -343,7 +375,7 @@ def platform_decision(curves, *, standard=32000, window=4000, threshold=0.5):
         "extend_both": any(value >= threshold for value in gains.values()),
         "best_MPJPE_gain_last4000_mm": gains,
         "threshold_mm": threshold,
-        "rule": "Any case still improves by>=0.5mm: both continue from native state to40000; no further extension.",
+        "rule": f"Any case still improves by>={threshold:g}mm: both continue from native state to{cap}; no further extension.",
     }
 
 
@@ -497,6 +529,7 @@ def collect(plan, *, long=False):
 
 def supervise(plan):
     root = Path(plan["output"])
+    budgets = training_budgets(plan)
     for rel, digest in plan["source_hashes"].items():
         assert hashlib.sha256((Path(plan["source_snapshot"]) / rel).read_bytes()).hexdigest() == digest
     if not (root / "preflight-verification.json").exists():
@@ -514,10 +547,10 @@ def supervise(plan):
                 )
             run_jobs(plan, specs, "preflight-" + kind + ("-resume" if resume else "-start"))
         verify_preflight(plan)
-    for budget in (32000, 40000):
-        if budget == 40000:
+    for index, budget in enumerate(budgets):
+        if index:
             curves = {job["name"]: read(root / job["name"] / "selection.json")["curve"] for job in plan["jobs"]}
-            decision = platform_decision(curves)
+            decision = platform_decision(curves, standard=budgets[0], cap=budget)
             write(root / "platform-decision.json", decision)
             if not decision["extend_both"]:
                 break
@@ -558,7 +591,15 @@ def supervise(plan):
         collect(plan, long=long)
     write(
         root / "status.json",
-        {"phase": "foundation_complete_awaiting_review", "at_beijing": now(), "P_training_started": False},
+        {
+            "phase": plan.get("training_role", "foundation") + "_complete_awaiting_review",
+            "at_beijing": now(),
+            "P_training_started": False,
+            "training_role": plan.get("training_role", "foundation"),
+            "standard_budget": plan.get("standard_updates", 32000),
+            "conditional_cap": plan.get("native_checkpoint_total_cap", 40000),
+            "training_budgets": list(budgets),
+        },
     )
 
 

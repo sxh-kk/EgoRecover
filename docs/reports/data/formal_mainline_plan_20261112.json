@@ -1,8 +1,8 @@
 {
-  "version": "formal_v1_20261112",
+  "version": "formal-v2-budget12k-with-v1-history",
   "created_at_beijing": "2026-11-12T11:42:52+08:00",
-  "status": "foundation_training",
-  "authorized_this_turn": "checkpoint cleanup and formal planning only",
+  "status": "budget_revision_queued_parent_training_continues",
+  "authorized_this_turn": "Total12000 includes original prefix; decay after update10000 to3e-6, both windows4GPUs each; no automatic extension or P.",
   "old_experiments": "exploratory, preserved; no warm-starting formal G/P",
   "data": {
     "train": "full official train",
@@ -113,10 +113,10 @@
       "P_preparation_status": "deferred until S2; not loaded by S1"
     },
     {
-      "id": "S1_foundation",
+      "id": "S1_budget_screening_v2",
       "run_ids": [
-        "V1_G_CV_W1_s62",
-        "V1_G_CV_W3_s62"
+        "V2_G_CV_W1_12k_s62",
+        "V2_G_CV_W3_12k_s62"
       ],
       "factors": [
         {
@@ -139,15 +139,15 @@
         }
       ],
       "initialization": "identical random G; matched physical queries and current-slot epsilon; no E7 or old G; CV prior",
-      "updates": 32000,
-      "conditional_joint_extension": 8000,
-      "max_updates": 40000,
+      "updates": 12000,
+      "conditional_joint_extension": 0,
+      "max_updates": 12000,
       "learning_rate": 3e-05,
-      "lr_step_size": 12000,
-      "lr_gamma": 0.3,
+      "lr_step_size": 10000,
+      "lr_gamma": 0.1,
       "eval_every": 1000,
-      "supervised_bodies_per_run": 4096000,
-      "platform_rule": "last4000 updates best D128 MPJPE gain below0.5mm after low-LR phase; inspect train/val and long rollout; not global convergence proof",
+      "supervised_bodies_per_run": 1536000,
+      "platform_rule": "No automatic extension; not a fully-converged claim. Review12k curves and final rolling evaluation before deciding later training.",
       "window_rule": {
         "mpjpe_margin_mm": 1.0,
         "within_margin_prefer_temporal_if_improved_metrics_at_least": 2,
@@ -155,7 +155,11 @@
         "otherwise": "lower MPJPE",
         "abnormal_long_rollout": "diagnose before locking window"
       },
-      "status": "running"
+      "status": "queued_handoff_at10000",
+      "learning_rates": {
+        "1..10000": 3e-05,
+        "10001..12000": 3e-06
+      }
     },
     {
       "id": "S2_P",
@@ -293,7 +297,7 @@
       162,
       262
     ],
-    "formal_output": "/root/workspace/songxuhua/exp/formal-v1-20261112",
+    "formal_output": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112",
     "min_free_before_launch_GiB": 20,
     "min_free_running_GiB": 10,
     "retention": [
@@ -390,5 +394,61 @@
     },
     "four_GPU_speed_pending": true,
     "evidence": "training_speedup_20261112.json"
-  }
+  },
+  "protocol_history": [
+    {
+      "version": "v1_original_32k",
+      "revised_at_beijing": "2026-11-12T20:07:45+08:00",
+      "stage1": {
+        "id": "S1_foundation",
+        "run_ids": [
+          "V1_G_CV_W1_s62",
+          "V1_G_CV_W3_s62"
+        ],
+        "factors": [
+          {
+            "window": 1,
+            "gpus": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "window": 3,
+            "gpus": [
+              4,
+              5,
+              6,
+              7
+            ]
+          }
+        ],
+        "initialization": "identical random G; matched physical queries and current-slot epsilon; no E7 or old G; CV prior",
+        "updates": 32000,
+        "conditional_joint_extension": 8000,
+        "max_updates": 40000,
+        "learning_rate": 3e-05,
+        "lr_step_size": 12000,
+        "lr_gamma": 0.3,
+        "eval_every": 1000,
+        "supervised_bodies_per_run": 4096000,
+        "platform_rule": "last4000 updates best D128 MPJPE gain below0.5mm after low-LR phase; inspect train/val and long rollout; not global convergence proof",
+        "window_rule": {
+          "mpjpe_margin_mm": 1.0,
+          "within_margin_prefer_temporal_if_improved_metrics_at_least": 2,
+          "remaining_temporal_metric_max_regression_pct": 5.0,
+          "otherwise": "lower MPJPE",
+          "abnormal_long_rollout": "diagnose before locking window"
+        },
+        "status": "running"
+      },
+      "note": "Historical plan superseded by authorized12k budget. Prefix remains the same random-initialization training."
+    }
+  ],
+  "latest_authorization": "Total12000 includes original prefix; decay after update10000 to3e-6, both windows4GPUs each; no automatic extension or P.",
+  "active_runtime_plan": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112/plan.json",
+  "budget_revision_record": "docs/reports/data/formal_budget12k_revision_20261112.json",
+  "initial_authorization": "checkpoint cleanup and formal planning only"
 }

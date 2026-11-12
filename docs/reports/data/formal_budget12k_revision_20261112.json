@@ -1,0 +1,198 @@
+{
+  "revision": "formal-v2-12k-20261112",
+  "recorded_at_beijing": "2026-11-12T20:06:30+08:00",
+  "status": "watcher_started_waiting_for_parent10000",
+  "runtime_plan": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112/plan.json",
+  "parent_plan": "/root/workspace/songxuhua/exp/formal-v1-20261112/plan.json",
+  "authorized_schedule": {
+    "total_updates": 12000,
+    "learning_rates": {
+      "1..10000": 3e-05,
+      "10001..12000": 3e-06
+    },
+    "decay_after_update": 10000,
+    "decay_fraction": 0.8333333333333334,
+    "automatic_extension": false,
+    "automatic_P_training": false
+  },
+  "budget_reduction_vs_original_32000": 0.625,
+  "cases": [
+    {
+      "name": "V2_G_CV_W1_12k_s62",
+      "window": 1,
+      "gpus": "0,1,2,3",
+      "port": 30911,
+      "config": "/root/workspace/songxuhua/exp/formal-v1-20261112/configs/W1.json"
+    },
+    {
+      "name": "V2_G_CV_W3_12k_s62",
+      "window": 3,
+      "gpus": "4,5,6,7",
+      "port": 30915,
+      "config": "/root/workspace/songxuhua/exp/formal-v1-20261112/configs/W3.json"
+    }
+  ],
+  "continuation": {
+    "parent_plan": "/root/workspace/songxuhua/exp/formal-v1-20261112/plan.json",
+    "parent_cases": [
+      "V1_G_CV_W1_s62",
+      "V1_G_CV_W3_s62"
+    ],
+    "retained_prefix": 10000,
+    "remaining_updates_after_handoff": 2000,
+    "checkpoint_changes": [
+      "identity.train_steps",
+      "identity.optimization.scheduler.decay_step",
+      "identity.optimization.scheduler.gamma",
+      "optimizer.param_groups[*].lr",
+      "scheduler.step_size",
+      "scheduler.gamma",
+      "scheduler._last_lr"
+    ],
+    "unchanged_state": [
+      "model",
+      "ema",
+      "feedback_model",
+      "optimizer moments",
+      "scheduler counters",
+      "base and initial LR",
+      "rank RNG",
+      "best and validation curve"
+    ],
+    "fully_converged_claim": false
+  },
+  "training_settings": {
+    "initialization": "original common random initialization; retained prefix, no new random restart",
+    "gpus_each": 4,
+    "prior": "CV",
+    "source": "gaussian",
+    "K": 8,
+    "batch_size": 16,
+    "microbatch_size": 2,
+    "current_weight": 0.03,
+    "velocity_weight": 0.013409926806430328,
+    "all_non_budget_settings_unchanged": true
+  },
+  "validation": {
+    "selection": "same fixed D128; best EMA by world MPJPE",
+    "final_quality": "same D400 and long50 manifests; original metric and aggregation definitions",
+    "fixed_paired_bootstrap_helper": "Restored missing formal_paired_helper.py, identical weighting/2000 draws/seed1062 to prior fixed400 collector."
+  },
+  "evidence_at_preparation": {
+    "current_steps": {
+      "V1_G_CV_W1_s62": 6863,
+      "V1_G_CV_W3_s62": 6688
+    },
+    "D128_curves": {
+      "V1_G_CV_W1_s62": [
+        {
+          "step": 1000,
+          "selection_body_mm": 137.9832525664824
+        },
+        {
+          "step": 2000,
+          "selection_body_mm": 102.70899334112376
+        },
+        {
+          "step": 3000,
+          "selection_body_mm": 98.93560807419514
+        },
+        {
+          "step": 4000,
+          "selection_body_mm": 96.60838567482035
+        },
+        {
+          "step": 5000,
+          "selection_body_mm": 95.3580534842331
+        },
+        {
+          "step": 6000,
+          "selection_body_mm": 94.65573180568754
+        }
+      ],
+      "V1_G_CV_W3_s62": [
+        {
+          "step": 1000,
+          "selection_body_mm": 131.86987379255393
+        },
+        {
+          "step": 2000,
+          "selection_body_mm": 102.22424746025354
+        },
+        {
+          "step": 3000,
+          "selection_body_mm": 98.57922125471912
+        },
+        {
+          "step": 4000,
+          "selection_body_mm": 96.42101328475594
+        },
+        {
+          "step": 5000,
+          "selection_body_mm": 95.30608594771668
+        },
+        {
+          "step": 6000,
+          "selection_body_mm": 94.60394436027855
+        }
+      ]
+    },
+    "native_package_hashes_unchanged": true,
+    "tests": "Final full suite451 passed, including schedule boundaries, retained state, filesystem capture, orchestration and paired-bootstrap helper."
+  },
+  "interpretation": "A resource-limited window screening revision, not proof of full convergence. The original32k plan and artifacts remain historical; no automatic return to32k or40k. AdamW moments, EMA, fixed teacher, all RNG and scheduler counters are audited at the actual10k handoff.",
+  "watcher": {
+    "pid": 2504728,
+    "at_beijing": "2026-11-12T20:09:03+08:00",
+    "log": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112/budget-revision.log",
+    "parent_plan": "/root/workspace/songxuhua/exp/formal-v1-20261112/plan.json",
+    "revised_plan": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112/plan.json",
+    "source_snapshot": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112/source"
+  },
+  "review": {
+    "at_beijing": "2026-11-12T20:09:03+08:00",
+    "result": "No blocking issues found in read-only review.",
+    "actual_parent_checkpoints_checked": "Both W1/W3 saved6000 native identities and new resume CLI.",
+    "native_Python_files_identical": 43,
+    "optimizer_identity_changed_only_decay_step_and_gamma": true,
+    "resume_CLI_budget": 12000,
+    "resume_CLI_stop_after": 2000,
+    "automatic_extension": false,
+    "final_paired_helper_frozen": true,
+    "actual_10000_state_audit": "pending actual boundary; enforced by migration script"
+  },
+  "verification": {
+    "at_beijing": "2026-11-12T20:10:37+08:00",
+    "full_suite": {
+      "passed": 451,
+      "elapsed_seconds": 124.26,
+      "log": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112/pytest-budget12k-final.log"
+    },
+    "ruff": "passed",
+    "diff_check": "passed",
+    "files_sha256": {
+      "scripts/revise_training_budget.py": "a2b8c219c6079e95a394d813e112577304930456f8e593c02f4878eb9f584dad",
+      "scripts/run_formal_mainline.py": "f786eae871bd98e63be4c59b203a7a74265e612ad23b3db2b4464f2ba2db556e",
+      "scripts/formal_paired_helper.py": "d53481d2b963ff533cccf6bfafea0ea6729e19d1b628dcf971ac1e500cbc1fbc",
+      "tests/test_budget_revision.py": "2cb4b1789f9d84263086291b2fd48cce9d08855a696311c7ecbdd60bf302a2d6",
+      "tests/test_formal_runner.py": "19ab976e1f536910e47d6049b80b83c78801f70750ae58250d06ae54df842f5f"
+    },
+    "actual10k_handoff": "pending; strict native-state preservation audit enforced before resume"
+  },
+  "execution": {
+    "phase": "waiting_for_parent_checkpoint",
+    "at_beijing": "2026-11-12T20:10:35+08:00",
+    "checkpoint_step": 10000,
+    "parent_steps": {
+      "V1_G_CV_W1_s62": 6968,
+      "V1_G_CV_W3_s62": 6789
+    },
+    "new_total_updates": 12000,
+    "new_learning_rates": {
+      "1..10000": 3e-05,
+      "10001..12000": 3e-06
+    },
+    "watcher_pid": 2504728,
+    "actual_LR_decay_performed": false
+  }
+}
