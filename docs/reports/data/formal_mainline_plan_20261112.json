@@ -1,8 +1,8 @@
 {
-  "version": "formal-v2-budget12k-with-v1-history",
+  "version": "formal-v3-budget10k-with-v1-v2-history",
   "created_at_beijing": "2026-11-12T11:42:52+08:00",
-  "status": "budget_revision_queued_parent_training_continues",
-  "authorized_this_turn": "Total12000 includes original prefix; decay after update10000 to3e-6, both windows4GPUs each; no automatic extension or P.",
+  "status": "budget10k_revision_queued_parent_training_continues",
+  "authorized_this_turn": "Total10000 includes original8000-update prefix; decay after update8000 to3e-6, both windows4GPUs each; no automatic extension or P.",
   "old_experiments": "exploratory, preserved; no warm-starting formal G/P",
   "data": {
     "train": "full official train",
@@ -113,10 +113,10 @@
       "P_preparation_status": "deferred until S2; not loaded by S1"
     },
     {
-      "id": "S1_budget_screening_v2",
+      "id": "S1_budget_screening_v3",
       "run_ids": [
-        "V2_G_CV_W1_12k_s62",
-        "V2_G_CV_W3_12k_s62"
+        "V3_G_CV_W1_10k_s62",
+        "V3_G_CV_W3_10k_s62"
       ],
       "factors": [
         {
@@ -139,15 +139,15 @@
         }
       ],
       "initialization": "identical random G; matched physical queries and current-slot epsilon; no E7 or old G; CV prior",
-      "updates": 12000,
+      "updates": 10000,
       "conditional_joint_extension": 0,
-      "max_updates": 12000,
+      "max_updates": 10000,
       "learning_rate": 3e-05,
-      "lr_step_size": 10000,
+      "lr_step_size": 8000,
       "lr_gamma": 0.1,
       "eval_every": 1000,
-      "supervised_bodies_per_run": 1536000,
-      "platform_rule": "No automatic extension; not a fully-converged claim. Review12k curves and final rolling evaluation before deciding later training.",
+      "supervised_bodies_per_run": 1280000,
+      "platform_rule": "No automatic extension. Budget-limited window screening; review10k curves and rolling evaluation before treating G as a fixed baseline.",
       "window_rule": {
         "mpjpe_margin_mm": 1.0,
         "within_margin_prefer_temporal_if_improved_metrics_at_least": 2,
@@ -155,10 +155,10 @@
         "otherwise": "lower MPJPE",
         "abnormal_long_rollout": "diagnose before locking window"
       },
-      "status": "queued_handoff_at10000",
+      "status": "queued_handoff_at8000",
       "learning_rates": {
-        "1..10000": 3e-05,
-        "10001..12000": 3e-06
+        "1..8000": 3e-05,
+        "8001..10000": 3e-06
       }
     },
     {
@@ -317,7 +317,7 @@
       162,
       262
     ],
-    "formal_output": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112",
+    "formal_output": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112",
     "min_free_before_launch_GiB": 20,
     "min_free_running_GiB": 10,
     "retention": [
@@ -465,11 +465,66 @@
         "status": "running"
       },
       "note": "Historical plan superseded by authorized12k budget. Prefix remains the same random-initialization training."
+    },
+    {
+      "version": "v2_unexecuted_12k",
+      "revised_at_beijing": "2026-11-12T20:56:15+08:00",
+      "stage1": {
+        "id": "S1_budget_screening_v2",
+        "run_ids": [
+          "V2_G_CV_W1_12k_s62",
+          "V2_G_CV_W3_12k_s62"
+        ],
+        "factors": [
+          {
+            "window": 1,
+            "gpus": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "window": 3,
+            "gpus": [
+              4,
+              5,
+              6,
+              7
+            ]
+          }
+        ],
+        "initialization": "identical random G; matched physical queries and current-slot epsilon; no E7 or old G; CV prior",
+        "updates": 12000,
+        "conditional_joint_extension": 0,
+        "max_updates": 12000,
+        "learning_rate": 3e-05,
+        "lr_step_size": 10000,
+        "lr_gamma": 0.1,
+        "eval_every": 1000,
+        "supervised_bodies_per_run": 1536000,
+        "platform_rule": "No automatic extension; not a fully-converged claim. Review12k curves and final rolling evaluation before deciding later training.",
+        "window_rule": {
+          "mpjpe_margin_mm": 1.0,
+          "within_margin_prefer_temporal_if_improved_metrics_at_least": 2,
+          "remaining_temporal_metric_max_regression_pct": 5.0,
+          "otherwise": "lower MPJPE",
+          "abnormal_long_rollout": "diagnose before locking window"
+        },
+        "status": "queued_handoff_at10000",
+        "learning_rates": {
+          "1..10000": 3e-05,
+          "10001..12000": 3e-06
+        }
+      },
+      "status": "superseded_before_handoff",
+      "note": "V2 was waiting for10000; no native12k continuation ran. V3 reuses parent V1/runtime3 saved8000 prefix."
     }
   ],
-  "latest_authorization": "Total12000 includes original prefix; decay after update10000 to3e-6, both windows4GPUs each; no automatic extension or P.",
-  "active_runtime_plan": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112/plan.json",
-  "budget_revision_record": "docs/reports/data/formal_budget12k_revision_20261112.json",
+  "latest_authorization": "Total10000 includes original8000-update prefix; decay after update8000 to3e-6, both windows4GPUs each; no automatic extension or P.",
+  "active_runtime_plan": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/plan.json",
+  "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json",
   "initial_authorization": "checkpoint cleanup and formal planning only",
   "confirmed_todo_sequence": {
     "confirmed_at_beijing": "2026-11-12T20:36:49+08:00",
@@ -484,20 +539,20 @@
     "items": [
       {
         "id": "T1_G",
-        "stage": "S1_budget_screening_v2",
+        "stage": "S1_budget_screening_v3",
         "status": "in_progress",
-        "task": "完成当前W1/W3各12000步G，固定评测后选择窗口与基础检查点",
+        "task": "完成当前W1/W3各10000步G，固定评测后选择窗口与基础检查点",
         "schedule": {
-          "total_updates": 12000,
+          "total_updates": 10000,
           "learning_rates": {
-            "1..10000": 3e-05,
-            "10001..12000": 3e-06
+            "1..8000": 3e-05,
+            "8001..10000": 3e-06
           }
         },
         "checks": [
           "D128选择best EMA，保留final EMA",
           "固定D400与50段连续区间评测",
-          "检查曲线、训练充分性与滚动稳定性，登记G版本及SHA；12k不是自动收敛证明"
+          "检查曲线、训练充分性与滚动稳定性，登记G版本及SHA；10k不是自动收敛证明"
         ],
         "auto_extension": false
       },
@@ -565,7 +620,9 @@
       "FFT-informed losses",
       "prediction-center source",
       "paired supervision"
-    ]
+    ],
+    "budget_updated_at_beijing": "2026-11-12T20:56:15+08:00",
+    "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json"
   },
   "fft_todo_branch": {
     "recorded_at_beijing": "2026-11-12T20:41:00+08:00",

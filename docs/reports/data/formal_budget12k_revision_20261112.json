@@ -1,7 +1,7 @@
 {
   "revision": "formal-v2-12k-20261112",
   "recorded_at_beijing": "2026-11-12T20:06:30+08:00",
-  "status": "watcher_started_waiting_for_parent10000",
+  "status": "superseded_before_handoff",
   "runtime_plan": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112/plan.json",
   "parent_plan": "/root/workspace/songxuhua/exp/formal-v1-20261112/plan.json",
   "authorized_schedule": {
@@ -194,5 +194,11 @@
     },
     "watcher_pid": 2504728,
     "actual_LR_decay_performed": false
+  },
+  "superseded_by": {
+    "at_beijing": "2026-11-12T20:54:05+08:00",
+    "report": "formal_budget10k_revision_20261112.json",
+    "plan": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/plan.json",
+    "reason": "User requested first LR decay after8000 updates, total10000."
   }
 }

@@ -207,6 +207,7 @@ def wait_and_continue(args):
     torch.set_num_threads(2)
     old, revised = read(args.parent_plan), read(args.revised_plan)
     old_root, new_root = Path(old["output"]), Path(revised["output"])
+    revision = revised.get("runtime_revision", "budget12k")
     if len(old["jobs"]) != 2 or len(revised["jobs"]) != 2:
         raise ValueError("Both window jobs are required.")
     if old_root.resolve() == new_root.resolve():
@@ -289,10 +290,10 @@ def wait_and_continue(args):
             "parent_checkpoint_step": args.checkpoint_step,
         },
     )
-    process = start_supervisor(revised, args.revised_plan, "budget12k")
+    process = start_supervisor(revised, args.revised_plan, revision)
     save_json(
         status_path,
-        {"phase": "restoring_budget12k_continuations", "at_beijing": now(), "pid": process.pid, "records": records},
+        {"phase": f"restoring_{revision}_continuations", "at_beijing": now(), "pid": process.pid, "records": records},
     )
     deadline = time.monotonic() + 1200
     while True:
@@ -304,7 +305,7 @@ def wait_and_continue(args):
                 if not math.isclose(row["learning_rate"], 3e-6, rel_tol=1e-12):
                     raise ValueError("A resumed training job did not use the intended low learning rate.")
             result = {
-                "phase": "budget12k_training_running",
+                "phase": f"{revision}_training_running",
                 "at_beijing": now(),
                 "total_updates": revised["standard_updates"],
                 "auto_extension": False,
@@ -314,7 +315,12 @@ def wait_and_continue(args):
                 "fully_converged_claim": False,
             }
             save_json(status_path, result)
-            report_path = Path(revised["workspace"]) / "docs/reports/data/formal_budget12k_revision_20261112.json"
+            report_path = Path(
+                revised.get(
+                    "budget_revision_report",
+                    Path(revised["workspace"]) / "docs/reports/data/formal_budget12k_revision_20261112.json",
+                )
+            )
             report = read(report_path) or {}
             report["execution"] = result
             save_json(report_path, report)

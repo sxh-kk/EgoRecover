@@ -201,9 +201,13 @@ def test_two_window_file_handoff_keeps_parent_artifacts_and_pins_overwritten_che
     assert (new_root / "preflight-verification.json").exists()
 
 
-def test_orchestrator_uses_captured_boundary_and_starts_only_the_compressed_budget(tmp_path, monkeypatch):
+@pytest.mark.parametrize("revision", ["budget12k", "budget10k"])
+def test_orchestrator_uses_captured_boundary_and_starts_only_the_compressed_budget(tmp_path, monkeypatch, revision):
     old, new, _, _ = boundary_fixture(tmp_path)
     old_root, new_root = tmp_path / "old", tmp_path / "new"
+    if revision == "budget10k":
+        new["runtime_revision"] = revision
+        new["budget_revision_report"] = str(tmp_path / "reports/budget10k.json")
     save_json(old_root / "plan.json", old)
     save_json(new_root / "plan.json", new)
     save_json(old_root / "status.json", {"phase": "training", "jobs": [{"exit_code": None}]})
@@ -214,7 +218,7 @@ def test_orchestrator_uses_captured_boundary_and_starts_only_the_compressed_budg
         actions.append("stop")
 
     def start(plan, path, suffix):
-        assert plan == new and suffix == "budget12k"
+        assert plan == new and suffix == revision
         assert plan["training_budgets"] == [6]
         actions.append("start")
         for job in plan["jobs"]:
@@ -232,7 +236,12 @@ def test_orchestrator_uses_captured_boundary_and_starts_only_the_compressed_budg
     wait_and_continue(args)
     assert actions == ["stop", "start"]
     state = json.loads((new_root / "budget-revision-status.json").read_text())
-    assert state["phase"] == "budget12k_training_running" and state["auto_extension"] is False
+    assert state["phase"] == f"{revision}_training_running" and state["auto_extension"] is False
     assert state["learning_rate"] == 3e-6
     assert json.loads((old_root / "status.json").read_text())["phase"] == "continued_under_budget_revision"
-    assert (tmp_path / "docs/reports/data/formal_budget12k_revision_20261112.json").exists()
+    default_report = tmp_path / "docs/reports/data/formal_budget12k_revision_20261112.json"
+    if revision == "budget10k":
+        assert (tmp_path / "reports/budget10k.json").exists()
+        assert not default_report.exists()
+    else:
+        assert default_report.exists()

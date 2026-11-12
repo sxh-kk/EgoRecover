@@ -1,0 +1,204 @@
+{
+  "revision": "formal-v3-10k-20261112",
+  "recorded_at_beijing": "2026-11-12T20:54:05+08:00",
+  "status": "watcher_started_waiting_for_parent8000",
+  "runtime_plan": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/plan.json",
+  "parent_plan": "/root/workspace/songxuhua/exp/formal-v1-20261112/plan.json",
+  "superseded_unexecuted_plan": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112/plan.json",
+  "authorized_schedule": {
+    "total_updates": 10000,
+    "learning_rates": {
+      "1..8000": 3e-05,
+      "8001..10000": 3e-06
+    },
+    "decay_after_update": 8000,
+    "low_LR_updates": 2000,
+    "automatic_extension": false,
+    "automatic_P_training": false
+  },
+  "cases": [
+    {
+      "name": "V3_G_CV_W1_10k_s62",
+      "window": 1,
+      "gpus": "0,1,2,3",
+      "port": 30911,
+      "config": "/root/workspace/songxuhua/exp/formal-v1-20261112/configs/W1.json"
+    },
+    {
+      "name": "V3_G_CV_W3_10k_s62",
+      "window": 3,
+      "gpus": "4,5,6,7",
+      "port": 30915,
+      "config": "/root/workspace/songxuhua/exp/formal-v1-20261112/configs/W3.json"
+    }
+  ],
+  "continuation": {
+    "parent_plan": "/root/workspace/songxuhua/exp/formal-v1-20261112/plan.json",
+    "parent_cases": [
+      "V1_G_CV_W1_s62",
+      "V1_G_CV_W3_s62"
+    ],
+    "retained_prefix": 8000,
+    "remaining_updates_after_handoff": 2000,
+    "checkpoint_changes": [
+      "identity.train_steps",
+      "identity.optimization.scheduler.decay_step",
+      "identity.optimization.scheduler.gamma",
+      "optimizer.param_groups[*].lr",
+      "scheduler.step_size",
+      "scheduler.gamma",
+      "scheduler._last_lr"
+    ],
+    "unchanged_state": [
+      "model",
+      "ema",
+      "feedback_model",
+      "optimizer moments",
+      "scheduler counters",
+      "base and initial LR",
+      "rank RNG",
+      "best and validation curve"
+    ],
+    "fully_converged_claim": false,
+    "supersedes_unexecuted_plan": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112/plan.json"
+  },
+  "unchanged": {
+    "native_Python_package_hashes": true,
+    "gpus_per_case": 4,
+    "CV": true,
+    "gaussian": true,
+    "K": 8,
+    "global_batch": 16,
+    "microbatch": 2,
+    "current_weight": 0.03,
+    "velocity_weight": 0.013409926806430328,
+    "all_other_training_and_validation_settings": true
+  },
+  "evidence_at_preparation": {
+    "steps": {
+      "V1_G_CV_W1_s62": 8022,
+      "V1_G_CV_W3_s62": 7827
+    },
+    "D128_curves": {
+      "V1_G_CV_W1_s62": [
+        {
+          "step": 1000,
+          "selection_body_mm": 137.9832525664824
+        },
+        {
+          "step": 2000,
+          "selection_body_mm": 102.70899334112376
+        },
+        {
+          "step": 3000,
+          "selection_body_mm": 98.93560807419514
+        },
+        {
+          "step": 4000,
+          "selection_body_mm": 96.60838567482035
+        },
+        {
+          "step": 5000,
+          "selection_body_mm": 95.3580534842331
+        },
+        {
+          "step": 6000,
+          "selection_body_mm": 94.65573180568754
+        },
+        {
+          "step": 7000,
+          "selection_body_mm": 93.8816725552897
+        },
+        {
+          "step": 8000,
+          "selection_body_mm": 93.41320177312203
+        }
+      ],
+      "V1_G_CV_W3_s62": [
+        {
+          "step": 1000,
+          "selection_body_mm": 131.86987379255393
+        },
+        {
+          "step": 2000,
+          "selection_body_mm": 102.22424746025354
+        },
+        {
+          "step": 3000,
+          "selection_body_mm": 98.57922125471912
+        },
+        {
+          "step": 4000,
+          "selection_body_mm": 96.42101328475594
+        },
+        {
+          "step": 5000,
+          "selection_body_mm": 95.30608594771668
+        },
+        {
+          "step": 6000,
+          "selection_body_mm": 94.60394436027855
+        },
+        {
+          "step": 7000,
+          "selection_body_mm": 93.9205830351663
+        }
+      ]
+    },
+    "tests": "452 full-suite tests passed, including59 focused scheduler/controller/continuation tests."
+  },
+  "interpretation": "Resource-limited window screening, not proof G is fully trained. Latest6k-to7k D128 gains~0.7mm show continued learning. This revision removes2000 high-LR updates versus V2 and preserves2000 low-LR updates; all old records retained.",
+  "actual8000_checkpoint_audit": "pending; exact model/EMA/teacher/moments/RNG/curve retention enforced before resume",
+  "watcher": {
+    "pid": 2510106,
+    "at_beijing": "2026-11-12T20:54:05+08:00",
+    "log": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/budget-revision.log",
+    "parent_plan": "/root/workspace/songxuhua/exp/formal-v1-20261112/plan.json",
+    "revised_plan": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/plan.json",
+    "source_snapshot": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/source",
+    "checkpoint_step": 8000
+  },
+  "verification": {
+    "at_beijing": "2026-11-12T20:57:17+08:00",
+    "full_suite": {
+      "passed": 452,
+      "elapsed_seconds": 126.02,
+      "log": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/pytest-budget10k-final.log"
+    },
+    "focused_schedule_and_handoff_tests": 59,
+    "black": "passed",
+    "ruff": "passed",
+    "files_sha256": {
+      "scripts/revise_training_budget.py": "18586e5cafacbe33863e85c2b7aa28ab574328404bf99a43b421f44f01cd1e7c",
+      "tests/test_budget_revision.py": "b3f2e149128c435c97e60403f7c4ae717fb70f09c7b695ce7f0601134be56896"
+    },
+    "native_package_same_as_parent": true
+  },
+  "review": {
+    "at_beijing": "2026-11-12T20:57:17+08:00",
+    "result": "No blocking issues found.",
+    "checks": [
+      "Frozen43 native Python files equal parent runtime3",
+      "Resume CLI fields and optimization identity match except authorized total/decay settings",
+      "Real W1 saved8000 checkpoint memory migration audit retains moments/EMA/teacher/RNG/curve and scheduler counters",
+      "CPU continuation schedule8001..10000 remains3e-6",
+      "V3 writes independent budget10k report and phase; V2 watcher stopped before handoff"
+    ],
+    "W3_actual8000_checkpoint_audit": "pending boundary; watcher enforces full audit before resume"
+  },
+  "execution": {
+    "phase": "waiting_for_parent_checkpoint",
+    "at_beijing": "2026-11-12T20:57:14+08:00",
+    "checkpoint_step": 8000,
+    "parent_steps": {
+      "V1_G_CV_W1_s62": 8101,
+      "V1_G_CV_W3_s62": 7904
+    },
+    "new_total_updates": 10000,
+    "new_learning_rates": {
+      "1..8000": 3e-05,
+      "8001..10000": 3e-06
+    },
+    "watcher_pid": 2510106
+  }
+}
