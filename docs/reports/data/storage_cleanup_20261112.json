@@ -1,0 +1,1268 @@
+{
+  "status": "complete",
+  "started_at_beijing": "2026-11-12T11:35:27+08:00",
+  "project_root": "/root/workspace/songxuhua",
+  "archive_root": "/gaozt-test1/datasets/EgoRecover-archives/cleanup-20261112-113429",
+  "plan_sha256": "555d53ce7dfc29c4c0f5c394b066346afb706b14e97e0307927de4c64ff6deed",
+  "before_project_free_bytes": 5755949056,
+  "selected_paths": 65,
+  "selected_unique_files": 61,
+  "completed": [
+    {
+      "paths": [
+        "exp/ac-detach-velocity-C-20261110/A_two_step_detached/resume.pt"
+      ],
+      "bytes": 1811298680,
+      "allocated_bytes": 1811304448,
+      "sha256": "f228f9f311c02748822919361eeda9615771f39fa5b657161a44bcc56afd2e07",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/current-geometry-0p01-20261108/W1/resume.pt"
+      ],
+      "bytes": 1811472888,
+      "allocated_bytes": 1811480576,
+      "sha256": "700b28100d6862bea0edde498a34f8b3637339c0a0e96dfebe97ecc654761e66",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/current-geometry-0p01-20261108/W3/resume.pt"
+      ],
+      "bytes": 1811472888,
+      "allocated_bytes": 1811480576,
+      "sha256": "951b19ebf1228cb500ee89ec1741b6ef63d848a0fafdb0d2423699c0bb19e6df",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/current-geometry-0p03-20261108/W1/resume.pt"
+      ],
+      "bytes": 1811475896,
+      "allocated_bytes": 1811480576,
+      "sha256": "8718afbd2b45f2a3985a525291660f79c096b64fd1bec5297879635603d779fd",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/current-geometry-0p03-20261108/W3/resume.pt"
+      ],
+      "bytes": 1811472888,
+      "allocated_bytes": 1811480576,
+      "sha256": "36f171404c1d0ea60c45c44812e25c8e4025e554a4b255c1234007c8f31c6956",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/current-geometry-20261108/W1/resume.pt"
+      ],
+      "bytes": 1811252792,
+      "allocated_bytes": 1811259392,
+      "sha256": "e1a2f7d8f3859c64222ad31e14aba654837608a2e04a6626f12ec10bdc9ddae5",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/current-geometry-20261108/W3/resume.pt"
+      ],
+      "bytes": 1811252792,
+      "allocated_bytes": 1811259392,
+      "sha256": "4b68f9f657085bc1d2c4738f5ef292a64e02feddc11da42e045fa5591f2c692b",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/current-weight-W1-2k-20261108/W1_weight0p003/resume.pt"
+      ],
+      "bytes": 1811252792,
+      "allocated_bytes": 1811259392,
+      "sha256": "74df86acc0a82047034cfef6b0c727e075dbd29a7ed95f9414c6b498dbff55aa",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/current-weight-W1-2k-20261108/W1_weight0p03/resume.pt"
+      ],
+      "bytes": 1811252792,
+      "allocated_bytes": 1811259392,
+      "sha256": "196e3f84a184827eb0f06bdd45bb5169569a98c49ab214ff49d635066301c776",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/history-policy-ablation-20261110/A_short_on/resume.pt"
+      ],
+      "bytes": 1811297848,
+      "allocated_bytes": 1811304448,
+      "sha256": "d4cb6b9ccd852fa8d916f1d9f48248d757ee8110520c1a0c3c5a47af6746e7c0",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/history-policy-ablation-20261110/B_short_off/resume.pt"
+      ],
+      "bytes": 1811297912,
+      "allocated_bytes": 1811304448,
+      "sha256": "cf9dfe7e1cfc5b707c99966f5a077bbd673f986a67d446de8b0e5ccd0a5adbd5",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/history-policy-ablation-20261110/C_mixed_on/resume.pt"
+      ],
+      "bytes": 1811297848,
+      "allocated_bytes": 1811304448,
+      "sha256": "89b33827bfb1ce05315bfc06af5579af3c1207a2d05f0cdc064460c728ec6e3b",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/history-policy-ablation-20261110/D_mixed_off/resume.pt"
+      ],
+      "bytes": 1811297912,
+      "allocated_bytes": 1811304448,
+      "sha256": "f7eeb68db18987ebd4ac2ee85ea13b4f6544403e322868166c358c673a373e49",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/gaussian/milestones/step2000/resume.pt"
+      ],
+      "bytes": 1811253240,
+      "allocated_bytes": 1811259392,
+      "sha256": "ee87aeafcddd76c2ffc310488e7f155c0313d737b9acd3e57a03d98602ad5414",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/gaussian/resume.pt"
+      ],
+      "bytes": 1811476792,
+      "allocated_bytes": 1811484672,
+      "sha256": "529b157f4f553ac6f63d066caf9926391e9a86e7338614a6c7b414a193d9aa57",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/prediction/milestones/step2000/resume.pt"
+      ],
+      "bytes": 1811253240,
+      "allocated_bytes": 1811259392,
+      "sha256": "4b559122756ad4a01cbae0bd29ccac31d6423db7bc24af851971e355b31cbaec",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/prediction/resume.pt"
+      ],
+      "bytes": 1811476792,
+      "allocated_bytes": 1811484672,
+      "sha256": "8063b3e2ad5899e55c5dd85c547f05c962915ef3e70762d4916f38980bdd0ac6",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prediction-center-0p03-20261109/W1/resume.pt"
+      ],
+      "bytes": 1811472888,
+      "allocated_bytes": 1811480576,
+      "sha256": "26f9f0423fd3e5068a3096680e4c90abd19212d7525f41c91d94ced565998527",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prediction-center-0p03-20261109/W3/resume.pt"
+      ],
+      "bytes": 1811472888,
+      "allocated_bytes": 1811480576,
+      "sha256": "5ad9104922167ddca9b0410e513aba43147c7ac56f673a6fb3e4ab7f6c88e9a8",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/preparation/gpu-smoke/resume.pt"
+      ],
+      "bytes": 5997963,
+      "allocated_bytes": 6000640,
+      "sha256": "c3d76d771e88294ced15908598aa2aaafd922ac448bf44f17c0a0726faa96eaf",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-learning-20261109/attempt1-clean/resume.pt"
+      ],
+      "bytes": 64498763,
+      "allocated_bytes": 64499712,
+      "sha256": "ea6b73ef867363526fb0f77e5babf9ba9f2195347a050aa53fb71b8bfe435977",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-learning-20261109/checkpoint-preflight/resume.pt"
+      ],
+      "bytes": 63057419,
+      "allocated_bytes": 63057920,
+      "sha256": "4e4e135c50b43609484a633b1ff747aab8b68fdae6be27b7af0deb8cb8b0e3fe",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-learning-20261109/milestones/step2000/resume.pt"
+      ],
+      "bytes": 63188363,
+      "allocated_bytes": 63188992,
+      "sha256": "6325fcbc45270b8f0f94503213f1f998166cf741e40b616b9f29ac3319f14c43",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-mature-history-20261109/preflight/milestones/step1/resume.pt"
+      ],
+      "bytes": 63022347,
+      "allocated_bytes": 63025152,
+      "sha256": "27ccf55c6d6f37b5e39b5323e4788aeefeab25b06cb2a107713be5779e041f00",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-mature-history-20261109/preflight/milestones/step2/resume.pt",
+        "exp/prior-mature-history-20261109/preflight/resume.pt"
+      ],
+      "bytes": 63119051,
+      "allocated_bytes": 63119360,
+      "sha256": "61023b5ac53024959b64f90c53b4f64859b24d8109985b2b55668ae9c4d203cf",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-mature-history-20261109/training/milestones/step1000/resume.pt"
+      ],
+      "bytes": 63120075,
+      "allocated_bytes": 63123456,
+      "sha256": "d8323630fd850609c6358353f09661e1635d08da2c95e2dedac1373a24e1d32e",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-mature-history-20261109/training/milestones/step12000/resume.pt",
+        "exp/prior-mature-history-20261109/training/resume.pt"
+      ],
+      "bytes": 65249163,
+      "allocated_bytes": 65249280,
+      "sha256": "e1ed9f79d8020ae398c5cd3acc2226c6be93f0bd362f077ca13554601581730c",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-mature-history-20261109/training/milestones/step2000/resume.pt"
+      ],
+      "bytes": 63313547,
+      "allocated_bytes": 63315968,
+      "sha256": "9854470be155d6ccccc61f5f4fb70c4b724877de9a77d4248234761c3c2f7a9b",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-mature-history-20261109/training/milestones/step4000/resume.pt"
+      ],
+      "bytes": 63701451,
+      "allocated_bytes": 63705088,
+      "sha256": "c52fb0d82d0f07782d800afd6e1a755413f7102d417cafe52e5168f9c64870cc",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-mature-history-20261109/training/milestones/step8000/resume.pt"
+      ],
+      "bytes": 64475339,
+      "allocated_bytes": 64479232,
+      "sha256": "6e782b434d6f3e7fc34cfdd3d742098b9b86c309374c5a29274dfcb0dacbd33e",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-two-forward-20261109/preflight/milestones/step1/resume.pt",
+        "exp/prior-two-forward-20261109/preflight/resume.pt"
+      ],
+      "bytes": 63023115,
+      "allocated_bytes": 63025152,
+      "sha256": "0e4fc5512cc51fb157fd014252c161e85c3c56af86ab1dc25e59d2e84ec0ef65",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-two-forward-20261109/preflight-vectorized/milestones/step1/resume.pt"
+      ],
+      "bytes": 63023115,
+      "allocated_bytes": 63025152,
+      "sha256": "7c7b8d2ecbabf3098f64eb22669e28766d7d59ac72935fab05c36bcef431867e",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-two-forward-20261109/preflight-vectorized/milestones/step2/resume.pt"
+      ],
+      "bytes": 63118859,
+      "allocated_bytes": 63119360,
+      "sha256": "1cd97b49a102c1951b315e4161a78f6dae7ad742274f6f7c946f1fc8b8f0e064",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-two-forward-20261109/preflight-vectorized/milestones/step3/resume.pt",
+        "exp/prior-two-forward-20261109/preflight-vectorized/resume.pt"
+      ],
+      "bytes": 63215627,
+      "allocated_bytes": 63217664,
+      "sha256": "65d7dccbba3eb994fe784bb4b6e27a1233ee946b8f1b4fcc1c7153eb304db66e",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-two-forward-20261109/training/milestones/step1000/resume.pt"
+      ],
+      "bytes": 63120907,
+      "allocated_bytes": 63123456,
+      "sha256": "fdbb2e870a1f28160e346ee52608a54fe5aadfc845eb5fd78436bab98b78692d",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-two-forward-20261109/training/milestones/step2000/resume.pt"
+      ],
+      "bytes": 63314379,
+      "allocated_bytes": 63315968,
+      "sha256": "3d6565c85a81446facb8accde3f1a3a237ca96630c2704e44500b08dd636ca03",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-two-forward-20261109/training/milestones/step4000/resume.pt"
+      ],
+      "bytes": 63702283,
+      "allocated_bytes": 63705088,
+      "sha256": "c610aa8681fa5076a67c0ffe4ea50687762cfa9e92fa3c28d8c42b8e1a5bdb25",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-two-forward-20261109/training/milestones/step6000/resume.pt"
+      ],
+      "bytes": 64089547,
+      "allocated_bytes": 64090112,
+      "sha256": "30f905c8f308e81aeb305e0516e83abf96aa91d109bd13a261cb4af204817b1f",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/prior-two-forward-20261109/training/milestones/step8000/resume.pt"
+      ],
+      "bytes": 64476491,
+      "allocated_bytes": 64479232,
+      "sha256": "9d3d787695aeb42b25208795a9243e4ad137d6788298ae854ff9d1fb0f59a373",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/shape-persistent-W3-20261111/B_shape_real_slow/resume.pt"
+      ],
+      "bytes": 1811299256,
+      "allocated_bytes": 1811304448,
+      "sha256": "b09488b14acdd5786f649c108cc350826fb6358de8391a6281da16ff7eeec1f1",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/two-step-vs-paired-C-20261110/paired_one_step/resume.pt"
+      ],
+      "bytes": 1811298424,
+      "allocated_bytes": 1811304448,
+      "sha256": "3b1d3556ce83bef06fdfb799328aa92c464daa520317b02600dc1a03a41e6cb8",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/two-step-vs-paired-C-20261110/two_step/resume.pt"
+      ],
+      "bytes": 1811298360,
+      "allocated_bytes": 1811304448,
+      "sha256": "e8f541eb0bdd89e9c6129d69c98282a82a15aa0aecfde9dceff3e4b6f40cd46c",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/window-selection-20261107/W1/resume.pt"
+      ],
+      "bytes": 1811449970,
+      "allocated_bytes": 1811456000,
+      "sha256": "04ac99ecddecd7723d8227e819330b51300ed3f4f33068dc691c6c73ba17ab98",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/window-selection-20261107/W10/resume.pt"
+      ],
+      "bytes": 1811449970,
+      "allocated_bytes": 1811456000,
+      "sha256": "53bba896ee1f661cfe8bd00a407ddb7e94a519f28e0cb2a8fd0070fc3c716e8b",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/window-selection-20261107/W3/resume.pt"
+      ],
+      "bytes": 1811449970,
+      "allocated_bytes": 1811456000,
+      "sha256": "55b6efda3fb36d32dd1dd7ea58b118205fa2f1bfb22f279cdfb4b7e9998e24f8",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/window-selection-20261107/W5/resume.pt"
+      ],
+      "bytes": 1811449970,
+      "allocated_bytes": 1811456000,
+      "sha256": "5d316ac61b76aff95c3419190886e747dce5adaeb47ed90f7ffd99fb8ecfca60",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/window_review/final/resume.pt"
+      ],
+      "bytes": 5993483,
+      "allocated_bytes": 5996544,
+      "sha256": "f266dfb48b87e8568f197bd5f58be0f9a9efb2105a19517dfa28830a53df48ef",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/window_review/smoke/resume.pt"
+      ],
+      "bytes": 4414603,
+      "allocated_bytes": 4415488,
+      "sha256": "8020c108d4c33bce45b48895827ad8691294263831e37d68e9367bba964287ec",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/window_review/verified/resume.pt"
+      ],
+      "bytes": 5993483,
+      "allocated_bytes": 5996544,
+      "sha256": "5b3dbb9283d75bd4b546f2a9f4cc7c761a7e37ab9b7cfc9933924048e24a1890",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/geometry-gradient-audit-20261108/W1-step1000.pt"
+      ],
+      "bytes": 736794225,
+      "allocated_bytes": 736800768,
+      "sha256": "62677606b3e819c399644c11b7d97094265c0c950e590793d88e81502b65a8ba",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/geometry-gradient-audit-20261108/W3-step1000.pt"
+      ],
+      "bytes": 736794225,
+      "allocated_bytes": 736800768,
+      "sha256": "cf90580207b00d2c56a6b519b79ffbdee21d88f87cf9f3a847d84044a29ffeae",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/two-step-vs-paired-C-20261110/preflight/two_step/best.pt"
+      ],
+      "bytes": 368379679,
+      "allocated_bytes": 368386048,
+      "sha256": "60f84fd96b8425837d42e99f178930e006d9286ec66aaed6eca7a6950d4955ed",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/two-step-vs-paired-C-20261110/preflight/paired_one_step/best.pt"
+      ],
+      "bytes": 368379743,
+      "allocated_bytes": 368386048,
+      "sha256": "90357d8e540a554518ca05b595ccdbd97dc9b54a5685e9f7fa7f7d6d8e2aca40",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/gaussian/milestones/step2000/best.pt"
+      ],
+      "bytes": 368385823,
+      "allocated_bytes": 368390144,
+      "sha256": "72647a38d78016e74457245d225d4b0c2937754d2886ef19a8ba640c4e652c6c",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/gaussian/milestones/step2000/ema.pt"
+      ],
+      "bytes": 368367559,
+      "allocated_bytes": 368373760,
+      "sha256": "9f81246c06e10af5c432da8e49959488ab48463efe522070ef6ea26d33f61216",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/gaussian/milestones/step6000/best.pt"
+      ],
+      "bytes": 368385823,
+      "allocated_bytes": 368390144,
+      "sha256": "61267ad2f997cc64262d9ad5c635d672946c3a53e07bdf35c56d30c26109ff8e",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/gaussian/milestones/step6000/ema.pt"
+      ],
+      "bytes": 368367559,
+      "allocated_bytes": 368373760,
+      "sha256": "0772c96fc1f457c0212ece4514a02892c0028dc3dd3947baba5429c185a46dad",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/prediction/milestones/step2000/best.pt"
+      ],
+      "bytes": 368385823,
+      "allocated_bytes": 368390144,
+      "sha256": "6cae26ce822e72745736b493fa4acce2e69a2913b51f96b22d9249d3f46eff96",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/prediction/milestones/step2000/ema.pt"
+      ],
+      "bytes": 368367559,
+      "allocated_bytes": 368373760,
+      "sha256": "eb78d8c6a77ec09e348b85548d6e1e4d39d208349a26f93381dd212d63cfc237",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/prediction/milestones/step6000/best.pt"
+      ],
+      "bytes": 368385823,
+      "allocated_bytes": 368386048,
+      "sha256": "a8bb6edbb65ee494652c3e90b2e2011e8c4d097e6e513a191d7068df995aceaf",
+      "archive_verified": true,
+      "sources_removed": true
+    },
+    {
+      "paths": [
+        "exp/learned-prior-G-W3-20261109/prediction/milestones/step6000/ema.pt"
+      ],
+      "bytes": 368367559,
+      "allocated_bytes": 368373760,
+      "sha256": "51809f7b80e9f2f7a248df4e2cf69ac8c63d0a752380be6de6fcb7f77bbde673",
+      "archive_verified": true,
+      "sources_removed": true
+    }
+  ],
+  "protected_sha256": {
+    "exp/history-policy-ablation-20261110/checkpoints/P-fixed.pt": "a7aafba8140f52d17f7dcb7453e61473199652b274f86dd96e1fcdbaaa9417a0",
+    "exp/history-policy-ablation-20261110/checkpoints/G-common-12000.pt": "f7fe31ffc36981e867c1deca93259cf38227a26889a50d41daa02fd74411527c",
+    "exp/history-policy-ablation-20261110/C_mixed_on/final-ema.pt": "258bfb5efbfe9ddb5b035a335cfd0cea8b9bd09ad2301a6a0315e378dff408e9",
+    "exp/ac-detach-velocity-C-20261110/C_two_step_velocity/final-ema.pt": "a7723ef6b965191879667ac4b2746708237abc73925823b9ff18f74c7bce0449",
+    "exp/shape-persistent-W3-20261111/A_shape_real/best.pt": "deefdad695306d01c7139cfcb8a767396adf2800128caba83f8d62e7f2b1cd5a",
+    "exp/shape-persistent-W3-20261111/A_shape_real/final-ema.pt": "d00eb8517526604d703a441ecd9baa496885585fa46978fb65d5ebadc5d15d6c",
+    "exp/shape-persistent-W3-20261111/B_shape_real_slow/best.pt": "b6da2b25472d98f93274f3adde7aabdf036f68bb8ab6ad8fc111f398fd3ccf85",
+    "exp/shape-persistent-W3-20261111/B_shape_real_slow/final-ema.pt": "458a9fe8e53d1c46c367dc648443da11ca9ab1aa34c8a9c84772a345ed679d78",
+    "exp/shape-persistent-W3-20261111/A_shape_real/resume.pt": "d82dd33292798acdb555ce7448e719183035072b16d1cafccdb4e5f13e27ca1b",
+    "exp/ac-detach-velocity-C-20261110/C_two_step_velocity/resume.pt": "4d2ce12118a2333d9515c1d88d464a377a457316a8eb9e2b9dffdc5d4bf3b196",
+    "exp/prior-two-forward-20261109/training/resume.pt": "304c1c53eb6cd2f14bc653432a4872ae01dd4bc7d6e1be5b621f2b63e9d38525"
+  },
+  "protected_all_unchanged": true,
+  "completed_at_beijing": "2026-11-12T11:37:52+08:00",
+  "after_project_free_bytes": 59239137280,
+  "removed_unique_allocated_bytes": 53483368448,
+  "observed_free_increase_bytes": 53483188224,
+  "selected_files": [
+    {
+      "path": "exp/ac-detach-velocity-C-20261110/A_two_step_detached/resume.pt",
+      "bytes": 1811298680,
+      "allocated_bytes": 1811304448,
+      "device": 65040,
+      "inode": 4898700,
+      "mtime_ns": 1794320323638953553,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/current-geometry-0p01-20261108/W1/resume.pt",
+      "bytes": 1811472888,
+      "allocated_bytes": 1811480576,
+      "device": 65040,
+      "inode": 4850025,
+      "mtime_ns": 1794116651976208623,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/current-geometry-0p01-20261108/W3/resume.pt",
+      "bytes": 1811472888,
+      "allocated_bytes": 1811480576,
+      "device": 65040,
+      "inode": 4850188,
+      "mtime_ns": 1794116639223994508,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/current-geometry-0p03-20261108/W1/resume.pt",
+      "bytes": 1811475896,
+      "allocated_bytes": 1811480576,
+      "device": 65040,
+      "inode": 4852458,
+      "mtime_ns": 1794148586463217277,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/current-geometry-0p03-20261108/W3/resume.pt",
+      "bytes": 1811472888,
+      "allocated_bytes": 1811480576,
+      "device": 65040,
+      "inode": 4852446,
+      "mtime_ns": 1794149672920481843,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/current-geometry-20261108/W1/resume.pt",
+      "bytes": 1811252792,
+      "allocated_bytes": 1811259392,
+      "device": 65040,
+      "inode": 4852104,
+      "mtime_ns": 1794104741389898966,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/current-geometry-20261108/W3/resume.pt",
+      "bytes": 1811252792,
+      "allocated_bytes": 1811259392,
+      "device": 65040,
+      "inode": 4852101,
+      "mtime_ns": 1794104690684045014,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/current-weight-W1-2k-20261108/W1_weight0p003/resume.pt",
+      "bytes": 1811252792,
+      "allocated_bytes": 1811259392,
+      "device": 65040,
+      "inode": 4852220,
+      "mtime_ns": 1794136961763792296,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/current-weight-W1-2k-20261108/W1_weight0p03/resume.pt",
+      "bytes": 1811252792,
+      "allocated_bytes": 1811259392,
+      "device": 65040,
+      "inode": 4852322,
+      "mtime_ns": 1794136960593772662,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/history-policy-ablation-20261110/A_short_on/resume.pt",
+      "bytes": 1811297848,
+      "allocated_bytes": 1811304448,
+      "device": 65040,
+      "inode": 5140486,
+      "mtime_ns": 1794278060858342429,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/history-policy-ablation-20261110/B_short_off/resume.pt",
+      "bytes": 1811297912,
+      "allocated_bytes": 1811304448,
+      "device": 65040,
+      "inode": 5140491,
+      "mtime_ns": 1794278029617815609,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/history-policy-ablation-20261110/C_mixed_on/resume.pt",
+      "bytes": 1811297848,
+      "allocated_bytes": 1811304448,
+      "device": 65040,
+      "inode": 5140524,
+      "mtime_ns": 1794282687023850074,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/history-policy-ablation-20261110/D_mixed_off/resume.pt",
+      "bytes": 1811297912,
+      "allocated_bytes": 1811304448,
+      "device": 65040,
+      "inode": 5140517,
+      "mtime_ns": 1794282675131647695,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/gaussian/milestones/step2000/resume.pt",
+      "bytes": 1811253240,
+      "allocated_bytes": 1811259392,
+      "device": 65040,
+      "inode": 4890557,
+      "mtime_ns": 1794234183872501982,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/gaussian/resume.pt",
+      "bytes": 1811476792,
+      "allocated_bytes": 1811484672,
+      "device": 65040,
+      "inode": 4890865,
+      "mtime_ns": 1794244245575593729,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/prediction/milestones/step2000/resume.pt",
+      "bytes": 1811253240,
+      "allocated_bytes": 1811259392,
+      "device": 65040,
+      "inode": 4890872,
+      "mtime_ns": 1794234185896536194,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/prediction/resume.pt",
+      "bytes": 1811476792,
+      "allocated_bytes": 1811484672,
+      "device": 65040,
+      "inode": 4890560,
+      "mtime_ns": 1794244322123889255,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prediction-center-0p03-20261109/W1/resume.pt",
+      "bytes": 1811472888,
+      "allocated_bytes": 1811480576,
+      "device": 65040,
+      "inode": 5116867,
+      "mtime_ns": 1794166367386602382,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prediction-center-0p03-20261109/W3/resume.pt",
+      "bytes": 1811472888,
+      "allocated_bytes": 1811480576,
+      "device": 65040,
+      "inode": 5116796,
+      "mtime_ns": 1794166379851811646,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/preparation/gpu-smoke/resume.pt",
+      "bytes": 5997963,
+      "allocated_bytes": 6000640,
+      "device": 65040,
+      "inode": 5111944,
+      "mtime_ns": 1793981018605977253,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-learning-20261109/attempt1-clean/resume.pt",
+      "bytes": 64498763,
+      "allocated_bytes": 64499712,
+      "device": 65040,
+      "inode": 5112794,
+      "mtime_ns": 1794196062301893674,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-learning-20261109/checkpoint-preflight/resume.pt",
+      "bytes": 63057419,
+      "allocated_bytes": 63057920,
+      "device": 65040,
+      "inode": 5138460,
+      "mtime_ns": 1794192697815420324,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-learning-20261109/milestones/step2000/resume.pt",
+      "bytes": 63188363,
+      "allocated_bytes": 63188992,
+      "device": 65040,
+      "inode": 5138465,
+      "mtime_ns": 1794193032317023589,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-mature-history-20261109/preflight/milestones/step1/resume.pt",
+      "bytes": 63022347,
+      "allocated_bytes": 63025152,
+      "device": 65040,
+      "inode": 4885276,
+      "mtime_ns": 1794202578604733604,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-mature-history-20261109/preflight/milestones/step2/resume.pt",
+      "bytes": 63119051,
+      "allocated_bytes": 63119360,
+      "device": 65040,
+      "inode": 4885284,
+      "mtime_ns": 1794202708789923449,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-mature-history-20261109/preflight/resume.pt",
+      "bytes": 63119051,
+      "allocated_bytes": 63119360,
+      "device": 65040,
+      "inode": 4885284,
+      "mtime_ns": 1794202708789923449,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-mature-history-20261109/training/milestones/step1000/resume.pt",
+      "bytes": 63120075,
+      "allocated_bytes": 63123456,
+      "device": 65040,
+      "inode": 4885389,
+      "mtime_ns": 1794203924588356296,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-mature-history-20261109/training/milestones/step12000/resume.pt",
+      "bytes": 65249163,
+      "allocated_bytes": 65249280,
+      "device": 65040,
+      "inode": 4885437,
+      "mtime_ns": 1794205883813324898,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-mature-history-20261109/training/milestones/step2000/resume.pt",
+      "bytes": 63313547,
+      "allocated_bytes": 63315968,
+      "device": 65040,
+      "inode": 4885385,
+      "mtime_ns": 1794204088668112764,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-mature-history-20261109/training/milestones/step4000/resume.pt",
+      "bytes": 63701451,
+      "allocated_bytes": 63705088,
+      "device": 65040,
+      "inode": 4885416,
+      "mtime_ns": 1794204559122031250,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-mature-history-20261109/training/milestones/step8000/resume.pt",
+      "bytes": 64475339,
+      "allocated_bytes": 64479232,
+      "device": 65040,
+      "inode": 4885428,
+      "mtime_ns": 1794205220444163208,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-mature-history-20261109/training/resume.pt",
+      "bytes": 65249163,
+      "allocated_bytes": 65249280,
+      "device": 65040,
+      "inode": 4885437,
+      "mtime_ns": 1794205883813324898,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/preflight/milestones/step1/resume.pt",
+      "bytes": 63023115,
+      "allocated_bytes": 63025152,
+      "device": 65040,
+      "inode": 4885471,
+      "mtime_ns": 1794217315533794326,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/preflight/resume.pt",
+      "bytes": 63023115,
+      "allocated_bytes": 63025152,
+      "device": 65040,
+      "inode": 4885471,
+      "mtime_ns": 1794217315533794326,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/preflight-vectorized/milestones/step1/resume.pt",
+      "bytes": 63023115,
+      "allocated_bytes": 63025152,
+      "device": 65040,
+      "inode": 4885482,
+      "mtime_ns": 1794217504639978032,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/preflight-vectorized/milestones/step2/resume.pt",
+      "bytes": 63118859,
+      "allocated_bytes": 63119360,
+      "device": 65040,
+      "inode": 4885487,
+      "mtime_ns": 1794217505643994935,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/preflight-vectorized/milestones/step3/resume.pt",
+      "bytes": 63215627,
+      "allocated_bytes": 63217664,
+      "device": 65040,
+      "inode": 4885493,
+      "mtime_ns": 1794217671865793392,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/preflight-vectorized/resume.pt",
+      "bytes": 63215627,
+      "allocated_bytes": 63217664,
+      "device": 65040,
+      "inode": 4885493,
+      "mtime_ns": 1794217671865793392,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/training/milestones/step1000/resume.pt",
+      "bytes": 63120907,
+      "allocated_bytes": 63123456,
+      "device": 65040,
+      "inode": 4885575,
+      "mtime_ns": 1794218315528629897,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/training/milestones/step2000/resume.pt",
+      "bytes": 63314379,
+      "allocated_bytes": 63315968,
+      "device": 65040,
+      "inode": 4885581,
+      "mtime_ns": 1794218747861914549,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/training/milestones/step4000/resume.pt",
+      "bytes": 63702283,
+      "allocated_bytes": 63705088,
+      "device": 65040,
+      "inode": 4885598,
+      "mtime_ns": 1794219479421243777,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/training/milestones/step6000/resume.pt",
+      "bytes": 64089547,
+      "allocated_bytes": 64090112,
+      "device": 65040,
+      "inode": 4885617,
+      "mtime_ns": 1794220218607712653,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/training/milestones/step8000/resume.pt",
+      "bytes": 64476491,
+      "allocated_bytes": 64479232,
+      "device": 65040,
+      "inode": 4885625,
+      "mtime_ns": 1794220812642726270,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/shape-persistent-W3-20261111/B_shape_real_slow/resume.pt",
+      "bytes": 1811299256,
+      "allocated_bytes": 1811304448,
+      "device": 65040,
+      "inode": 4904485,
+      "mtime_ns": 1794430815537090579,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/two-step-vs-paired-C-20261110/paired_one_step/resume.pt",
+      "bytes": 1811298424,
+      "allocated_bytes": 1811304448,
+      "device": 65040,
+      "inode": 4896460,
+      "mtime_ns": 1794308903626468663,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/two-step-vs-paired-C-20261110/two_step/resume.pt",
+      "bytes": 1811298360,
+      "allocated_bytes": 1811304448,
+      "device": 65040,
+      "inode": 4896458,
+      "mtime_ns": 1794309162989861215,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/window-selection-20261107/W1/resume.pt",
+      "bytes": 1811449970,
+      "allocated_bytes": 1811456000,
+      "device": 65040,
+      "inode": 6032163,
+      "mtime_ns": 1794068784887213267,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/window-selection-20261107/W10/resume.pt",
+      "bytes": 1811449970,
+      "allocated_bytes": 1811456000,
+      "device": 65040,
+      "inode": 6032167,
+      "mtime_ns": 1794068599224082998,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/window-selection-20261107/W3/resume.pt",
+      "bytes": 1811449970,
+      "allocated_bytes": 1811456000,
+      "device": 65040,
+      "inode": 6032170,
+      "mtime_ns": 1794068786035232622,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/window-selection-20261107/W5/resume.pt",
+      "bytes": 1811449970,
+      "allocated_bytes": 1811456000,
+      "device": 65040,
+      "inode": 6032152,
+      "mtime_ns": 1794068163036729845,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/window_review/final/resume.pt",
+      "bytes": 5993483,
+      "allocated_bytes": 5996544,
+      "device": 65040,
+      "inode": 4986706,
+      "mtime_ns": 1793974889221417580,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/window_review/smoke/resume.pt",
+      "bytes": 4414603,
+      "allocated_bytes": 4415488,
+      "device": 65040,
+      "inode": 4852999,
+      "mtime_ns": 1793974510261017347,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/window_review/verified/resume.pt",
+      "bytes": 5993483,
+      "allocated_bytes": 5996544,
+      "device": 65040,
+      "inode": 4987413,
+      "mtime_ns": 1793975094954893462,
+      "reason": "Finished exploratory/preflight/milestone optimizer state; inference weights and results retained."
+    },
+    {
+      "path": "exp/geometry-gradient-audit-20261108/W1-step1000.pt",
+      "bytes": 736794225,
+      "allocated_bytes": 736800768,
+      "device": 65040,
+      "inode": 4850021,
+      "mtime_ns": 1794104426256612652,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    },
+    {
+      "path": "exp/geometry-gradient-audit-20261108/W3-step1000.pt",
+      "bytes": 736794225,
+      "allocated_bytes": 736800768,
+      "device": 65040,
+      "inode": 4852098,
+      "mtime_ns": 1794104427025625530,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    },
+    {
+      "path": "exp/two-step-vs-paired-C-20261110/preflight/two_step/best.pt",
+      "bytes": 368379679,
+      "allocated_bytes": 368386048,
+      "device": 65040,
+      "inode": 4896444,
+      "mtime_ns": 1794303848295728479,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    },
+    {
+      "path": "exp/two-step-vs-paired-C-20261110/preflight/paired_one_step/best.pt",
+      "bytes": 368379743,
+      "allocated_bytes": 368386048,
+      "device": 65040,
+      "inode": 4896436,
+      "mtime_ns": 1794303850522766288,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/gaussian/milestones/step2000/best.pt",
+      "bytes": 368385823,
+      "allocated_bytes": 368390144,
+      "device": 65040,
+      "inode": 4890867,
+      "mtime_ns": 1794234203412832270,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/gaussian/milestones/step2000/ema.pt",
+      "bytes": 368367559,
+      "allocated_bytes": 368373760,
+      "device": 65040,
+      "inode": 4890868,
+      "mtime_ns": 1794234212160980139,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/gaussian/milestones/step6000/best.pt",
+      "bytes": 368385823,
+      "allocated_bytes": 368390144,
+      "device": 65040,
+      "inode": 4890864,
+      "mtime_ns": 1794238298191046491,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/gaussian/milestones/step6000/ema.pt",
+      "bytes": 368367559,
+      "allocated_bytes": 368373760,
+      "device": 65040,
+      "inode": 4890893,
+      "mtime_ns": 1794238303676139274,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/prediction/milestones/step2000/best.pt",
+      "bytes": 368385823,
+      "allocated_bytes": 368390144,
+      "device": 65040,
+      "inode": 4890870,
+      "mtime_ns": 1794234203686836901,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/prediction/milestones/step2000/ema.pt",
+      "bytes": 368367559,
+      "allocated_bytes": 368373760,
+      "device": 65040,
+      "inode": 4890881,
+      "mtime_ns": 1794234212617987863,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/prediction/milestones/step6000/best.pt",
+      "bytes": 368385823,
+      "allocated_bytes": 368386048,
+      "device": 65040,
+      "inode": 4890875,
+      "mtime_ns": 1794238234706972622,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    },
+    {
+      "path": "exp/learned-prior-G-W3-20261109/prediction/milestones/step6000/ema.pt",
+      "bytes": 368367559,
+      "allocated_bytes": 368373760,
+      "device": 65040,
+      "inode": 4890898,
+      "mtime_ns": 1794238304139147106,
+      "reason": "Superseded early diagnostic/preflight or intermediate G; final/best result checkpoints retained."
+    }
+  ],
+  "retained_resume_paths": [
+    {
+      "path": "exp/ac-detach-velocity-C-20261110/C_two_step_velocity/resume.pt",
+      "bytes": 1811298680,
+      "allocated_bytes": 1811304448,
+      "device": 65040,
+      "inode": 4896477,
+      "mtime_ns": 1794320561027973793
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/training/milestones/step12000/resume.pt",
+      "bytes": 65250379,
+      "allocated_bytes": 65253376,
+      "device": 65040,
+      "inode": 4885637,
+      "mtime_ns": 1794221999866753608
+    },
+    {
+      "path": "exp/prior-two-forward-20261109/training/resume.pt",
+      "bytes": 65250379,
+      "allocated_bytes": 65253376,
+      "device": 65040,
+      "inode": 4885637,
+      "mtime_ns": 1794221999866753608
+    },
+    {
+      "path": "exp/shape-persistent-W3-20261111/A_shape_real/resume.pt",
+      "bytes": 1811299256,
+      "allocated_bytes": 1811304448,
+      "device": 65040,
+      "inode": 4904168,
+      "mtime_ns": 1794430909050669321
+    }
+  ],
+  "retained_resume_unique_files": 3,
+  "retained_resume_allocated_bytes": 3687862272,
+  "recovery": "Archived source-relative paths under archive_root; copy a chosen file back to project_root/path to restore. Model weights and dataset are not stored in Git."
+}

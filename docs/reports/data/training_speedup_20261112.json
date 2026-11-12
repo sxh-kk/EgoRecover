@@ -1,0 +1,387 @@
+{
+  "at_beijing": "2026-11-12T15:52:15+08:00",
+  "status": "runtime2_training_throughput_measured",
+  "engineering_changes": [
+    "Shape-aware 22-joint FK with pre-regressed shape bases; full local rotation composition and predicted-beta gradients retained; full reference backend retained.",
+    "Merge finite-value GPU reductions without removing field checks; replace boolean-indexed observation checks with masked reductions.",
+    "Eval/rollin only: do not request unused attention weights. Training attention and dropout RNG path unchanged.",
+    "Supervisor budgets continue from saved optimizer checkpoint step instead of unsaved progress."
+  ],
+  "unchanged": {
+    "training_from_random_initialization": true,
+    "prior": "CV",
+    "source": "gaussian",
+    "NFE": 1,
+    "windows": [
+      1,
+      3
+    ],
+    "GPU_per_job": 4,
+    "global_batch": 16,
+    "microbatch": 2,
+    "K": 8,
+    "history": "75% mature20 +25% startup0/1/4",
+    "current_weight": 0.03,
+    "velocity_weight": 0.013409926806430328,
+    "slow_weight": 0,
+    "LR": 3e-05,
+    "LR_decay_step": 12000,
+    "LR_decay_gamma": 0.3,
+    "standard_updates": 32000,
+    "conditional_common_cap": 40000,
+    "seed": 62,
+    "dev_selection": "/root/workspace/songxuhua/exp/formal-v1-20261112/configs/dev128.json",
+    "evaluation_selection": "/root/workspace/songxuhua/exp/formal-v1-20261112/configs/evaluation400.json"
+  },
+  "tests": {
+    "full_suite": "412 passed in117.65s",
+    "real_SMPLX_GPU_tests": 8,
+    "format_and_lint": "black and ruff passed; git diff --check passed",
+    "matched_microbatch": {
+      "W1": {
+        "W": 1,
+        "before_median_microbatch_seconds": 1.6102422948461026,
+        "after_median_microbatch_seconds": 1.4586009720806032,
+        "speed_ratio": 1.103963541549813,
+        "codes_max_abs_diff": 9.5367431640625e-07,
+        "gradient_global_relative_L2": 6.611293631152736e-07,
+        "worst_parameter_gradient_relative_L2": [
+          [
+            "tsfm.8.attn1.norm.weight",
+            1.6510727796261295e-06
+          ],
+          [
+            "tsfm.1.attn1.norm.bias",
+            1.574536077951902e-06
+          ],
+          [
+            "tsfm.11.attn1.norm.weight",
+            1.5558862614527396e-06
+          ],
+          [
+            "tsfm.9.attn1.norm.weight",
+            1.5518866319430463e-06
+          ],
+          [
+            "tsfm.1.attn1.norm.weight",
+            1.5351095158890577e-06
+          ]
+        ],
+        "scalar_abs_diff": {
+          "loss": 2.9802322387695312e-08,
+          "flow": 0.0,
+          "current": 3.5762786865234375e-07,
+          "velocity": 8.940696716308594e-08,
+          "slow": 5.960464477539062e-07
+        },
+        "passed": true
+      },
+      "W3": {
+        "W": 3,
+        "before_median_microbatch_seconds": 1.7168565508909523,
+        "after_median_microbatch_seconds": 1.49519534711726,
+        "speed_ratio": 1.1482489924818557,
+        "codes_max_abs_diff": 4.947185516357422e-06,
+        "gradient_global_relative_L2": 7.033764264066938e-07,
+        "worst_parameter_gradient_relative_L2": [
+          [
+            "tsfm.11.attn1.norm.weight",
+            1.4309739621738092e-06
+          ],
+          [
+            "tsfm.11.attn1.norm.bias",
+            1.4053947314366287e-06
+          ],
+          [
+            "tsfm.10.attn1.norm.weight",
+            1.2839157916874014e-06
+          ],
+          [
+            "tsfm.9.attn1.norm.weight",
+            1.2713421788796762e-06
+          ],
+          [
+            "tsfm.8.attn1.norm.weight",
+            1.2552441221838538e-06
+          ]
+        ],
+        "scalar_abs_diff": {
+          "loss": 0.0,
+          "flow": 0.0,
+          "current": 3.5762786865234375e-07,
+          "velocity": 1.1920928955078125e-07,
+          "slow": 4.76837158203125e-07
+        },
+        "passed": true
+      }
+    },
+    "checkpoint_migration": {
+      "at_beijing": "2026-11-12T15:46:17.184708+08:00",
+      "records": [
+        {
+          "case": "V1_G_CV_W1_s62",
+          "resume_step": 1000,
+          "original_checkpoint_sha256": "a8a21ba92680b1d9fec0d6cd8d248bdbdcbb6b7e4c61c516cabe481b4acaae30",
+          "upgraded_checkpoint_sha256": "d42d339708e4953c4236c61bce7a207ae505560e8731171cc8e4391fa5046c50",
+          "all_other_checkpoint_fields_bit_exact": true,
+          "learning_rate": 3e-05,
+          "scheduler_epoch": 1000,
+          "optimizer_step_range": [
+            1000,
+            1000
+          ],
+          "rank_rng_states": 4,
+          "original_identity": "/root/workspace/songxuhua/exp/formal-v1-20261112/runtime-upgrade-20261112/full-fk/V1_G_CV_W1_s62/identity.json",
+          "old_best_keeps_original_source_provenance": true
+        },
+        {
+          "case": "V1_G_CV_W3_s62",
+          "resume_step": 1000,
+          "original_checkpoint_sha256": "55358ebcf599e16929d1a9560f6a47fade89803c4cf66d7c911d23da7d1caffd",
+          "upgraded_checkpoint_sha256": "c08d60b0e1fc6d2eded6494f318bcce54fbebd13b48c15f4fb07fbf5d49e4f70",
+          "all_other_checkpoint_fields_bit_exact": true,
+          "learning_rate": 3e-05,
+          "scheduler_epoch": 1000,
+          "optimizer_step_range": [
+            1000,
+            1000
+          ],
+          "rank_rng_states": 4,
+          "original_identity": "/root/workspace/songxuhua/exp/formal-v1-20261112/runtime-upgrade-20261112/full-fk/V1_G_CV_W3_s62/identity.json",
+          "old_best_keeps_original_source_provenance": true
+        }
+      ],
+      "changed_package_files": [
+        "fk.py",
+        "flow.py",
+        "models/layers.py",
+        "models/motion.py",
+        "state.py"
+      ],
+      "original_source": "/root/workspace/songxuhua/exp/formal-v1-20261112/source",
+      "new_source": "/root/workspace/songxuhua/exp/formal-v1-20261112/source-runtime2",
+      "backup": "/root/workspace/songxuhua/exp/formal-v1-20261112/runtime-upgrade-20261112/full-fk",
+      "all_hyperparameters_and_numerical_checkpoint_states_unchanged": true,
+      "old_unsaved_updates_replayed_from1000": true
+    },
+    "resumed_jobs": [
+      {
+        "case": "V1_G_CV_W1_s62",
+        "live_step": 1043,
+        "compared_replayed_updates": 43,
+        "physical_sampling_and_noise_hashes_match": true,
+        "first_replayed_loss_difference": -7.450580596923828e-09,
+        "status": {
+          "status": "training",
+          "start_step": 1000,
+          "world_size": 4
+        },
+        "gpus": "0,1,2,3"
+      },
+      {
+        "case": "V1_G_CV_W3_s62",
+        "live_step": 1041,
+        "compared_replayed_updates": 41,
+        "physical_sampling_and_noise_hashes_match": true,
+        "first_replayed_loss_difference": 1.862645149230957e-09,
+        "status": {
+          "status": "training",
+          "start_step": 1000,
+          "world_size": 4
+        },
+        "gpus": "4,5,6,7"
+      }
+    ],
+    "source_manifest_files_verified": 64
+  },
+  "timing": {
+    "scope": "Production wall-clock update intervals from file timestamps; both 4-GPU jobs simultaneously, no validation or extra CUDA benchmark contexts. Before/after windows are short measurements, not whole-run guarantees.",
+    "production": [
+      {
+        "case": "V1_G_CV_W1_s62",
+        "before": {
+          "first_step": 1057,
+          "last_step": 1079,
+          "updates": 22,
+          "seconds_per_update": 3.2927827878181817
+        },
+        "after": {
+          "first_step": 1010,
+          "last_step": 1034,
+          "updates": 24,
+          "seconds_per_update": 3.0995939748750003
+        },
+        "speed_ratio": 1.0623271352664738,
+        "elapsed_reduction_percent": 5.867037864079383,
+        "remaining_31000_updates_hours_excluding_validation": 26.69094811697917,
+        "saved_training_hours_for_31000_updates": 1.663570333677395
+      },
+      {
+        "case": "V1_G_CV_W3_s62",
+        "before": {
+          "first_step": 1029,
+          "last_step": 1051,
+          "updates": 22,
+          "seconds_per_update": 3.3781933198181817
+        },
+        "after": {
+          "first_step": 1010,
+          "last_step": 1033,
+          "updates": 23,
+          "seconds_per_update": 3.2579245453913046
+        },
+        "speed_ratio": 1.0369157642392335,
+        "elapsed_reduction_percent": 3.560150738601009,
+        "remaining_31000_updates_hours_excluding_validation": 28.05435025198068,
+        "saved_training_hours_for_31000_updates": 1.0356477797869974
+      }
+    ],
+    "before_capture": "/root/workspace/songxuhua/exp/speedup-20261112/production-before.json",
+    "after_capture": "/root/workspace/songxuhua/exp/speedup-20261112/production-after.json",
+    "matched_microbatch_scope": "Isolated GPU mature20/K8 batch2 forward and backward, no optimizer/DDP; distinct from full training-step throughput.",
+    "microbatch_speed_ratios": {
+      "W1": 1.103963541549813,
+      "W3": 1.1482489924818557
+    }
+  },
+  "provenance": {
+    "original_source": "/root/workspace/songxuhua/exp/formal-v1-20261112/source",
+    "new_source": "/root/workspace/songxuhua/exp/formal-v1-20261112/source-runtime2",
+    "runtime_plan": "/root/workspace/songxuhua/exp/formal-v1-20261112/plan.json",
+    "backup": "/root/workspace/songxuhua/exp/formal-v1-20261112/runtime-upgrade-20261112/full-fk",
+    "checkpoint_tensor_state": "bit-exact after serialization; only identity.code changed",
+    "reproducibility_limit": "New FK and inference attention can introduce float32 roundoff; subsequent GPU trajectories are not claimed bit-exact.",
+    "old_unsaved_updates_replayed_from1000": {
+      "W1": 94,
+      "W3": 65
+    },
+    "code_git_base": "a60595b964eb36d3080d2dd0733f1cf797addabd"
+  },
+  "runtime3": {
+    "status": "queued_for_common_saved_checkpoint2000",
+    "at_beijing": "2026-11-12T16:22:01+08:00",
+    "scheduler": {
+      "pid": 2495043,
+      "at_beijing": "2026-11-12T16:21:59+08:00",
+      "checkpoint_step": 2000,
+      "source_snapshot": "/root/workspace/songxuhua/exp/formal-v1-20261112/source-runtime3",
+      "prepared_plan": "/root/workspace/songxuhua/exp/formal-v1-20261112/plan-runtime3.json",
+      "log": "/root/workspace/songxuhua/exp/formal-v1-20261112/runtime-upgrade-runtime3.log",
+      "current_trainers_left_running": true
+    },
+    "methods": [
+      "FP32 packed same-length rollins; logical micro2 preserved",
+      "FP32 no-grad eval decoder CUDAgraph compile only",
+      "Reuse deterministic prepare within each Flow/endpoint pair"
+    ],
+    "tests": {
+      "full_suite": "427 passed",
+      "matched_rank_workload": {
+        "W1": {
+          "W": 1,
+          "before_median_microbatch_seconds": 3.7196674649603665,
+          "after_median_microbatch_seconds": 2.5970617767889053,
+          "speed_ratio": 1.4322599093347286,
+          "codes_max_abs_diff": 3.6954879760742188e-06,
+          "gradient_global_relative_L2": 7.040877713641043e-07,
+          "worst_parameter_gradient_relative_L2": [
+            [
+              "tsfm.10.attn1.norm.weight",
+              1.5422422799648141e-06
+            ],
+            [
+              "tsfm.8.attn1.norm.weight",
+              1.4248819220979752e-06
+            ],
+            [
+              "tsfm.10.attn1.norm.bias",
+              1.4234779287991226e-06
+            ],
+            [
+              "tsfm.11.attn1.norm.weight",
+              1.4153508828968653e-06
+            ],
+            [
+              "tsfm.9.attn1.norm.weight",
+              1.3561732053093474e-06
+            ]
+          ],
+          "scalar_abs_diff": {
+            "loss": 2.9802322387695312e-08,
+            "flow": 5.960464477539063e-08,
+            "current": 1.1920928955078125e-07,
+            "velocity": 2.086162567138672e-07,
+            "slow": 1.1920928955078125e-07
+          },
+          "passed": true
+        },
+        "W3": {
+          "W": 3,
+          "before_median_microbatch_seconds": 3.711054041981697,
+          "after_median_microbatch_seconds": 2.6046275598928332,
+          "speed_ratio": 1.4247925880560013,
+          "codes_max_abs_diff": 6.67572021484375e-06,
+          "gradient_global_relative_L2": 6.957388546059992e-07,
+          "worst_parameter_gradient_relative_L2": [
+            [
+              "tsfm.11.attn1.norm.weight",
+              1.6119083966963866e-06
+            ],
+            [
+              "tsfm.11.ff.net.0.bias",
+              1.5128329822586514e-06
+            ],
+            [
+              "tsfm.11.ff.net.0.weight",
+              1.511128468494973e-06
+            ],
+            [
+              "tsfm.10.attn1.norm.weight",
+              1.377313677565878e-06
+            ],
+            [
+              "tsfm.11.attn1.norm.bias",
+              1.3716709369409566e-06
+            ]
+          ],
+          "scalar_abs_diff": {
+            "loss": 2.9802322387695312e-08,
+            "flow": 2.9802322387695312e-08,
+            "current": 0.0,
+            "velocity": 1.1920928955078125e-07,
+            "slow": 0.0
+          },
+          "passed": true
+        }
+      },
+      "CUDA_parameter_and_output_lifetime": {
+        "passed": true,
+        "rows": [
+          {
+            "batch": 2,
+            "forward_max_abs_error": 1.7285346984863281e-06,
+            "updated_parameter_max_abs_error": 1.8775463104248047e-06,
+            "old_output_not_overwritten": true,
+            "reads_inplace_parameter_update": true
+          },
+          {
+            "batch": 4,
+            "forward_max_abs_error": 1.9073486328125e-06,
+            "updated_parameter_max_abs_error": 2.384185791015625e-06,
+            "old_output_not_overwritten": true,
+            "reads_inplace_parameter_update": true
+          }
+        ],
+        "state_dict_keys_unchanged": true
+      },
+      "independent_read_only_review": "no blocker in FP32 path; do not deepcopy a model after enabling bound compile cache"
+    },
+    "numerical_precision": "FP32; BF16 not enabled",
+    "candidate_scope": "shared-GPU rank workload, 2 logical microbatches x2 anchors, mature20 history plus K8; no optimizer or DDP",
+    "candidate_speed_ratios": {
+      "W1": 1.4322599093347286,
+      "W3": 1.4247925880560013
+    },
+    "full_four_GPU_timing": "Automatically captured after both resume and warm up; pending."
+  }
+}

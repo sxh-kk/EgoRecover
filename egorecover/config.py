@@ -126,6 +126,7 @@ class TrainOptions:
     allow_initialize_rewrite_change: bool = False
     eval_every: int = 200
     dev_limit: int | None = None
+    dev_selection_file: Path | None = None
     dev_seed: int = 1062
     full_dev_final: bool = False
     stop_after: int | None = None

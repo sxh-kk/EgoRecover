@@ -22,8 +22,9 @@ from egorecover.io import code_identity, file_sha256, save_checkpoint, save_json
 from egorecover.losses import frozen_ema, multi_step_objective, training_objective, two_step_objective, update_ema
 from egorecover.models import MotionModel
 from egorecover.optimization import make_optimizer, make_scheduler, optimization_protocol
+from egorecover.rollin import RollinChunk, packed_rollin_caches
 from egorecover.sampling import reference_microbatch_plan
-from egorecover.selection import select_dev_records
+from egorecover.selection import select_training_dev_records
 from egorecover.state import state_map
 
 
@@ -195,7 +196,11 @@ def _train(args, context):
     records = (
         [{"episode_id": fixture.identifier, "base_take_name": fixture.take}] if args.synthetic else dev_data.records
     )
-    dev_indices, dev_selection = select_dev_records(records, args.dev_limit, args.dev_seed)
+    if args.dev_selection_file is not None and dataset_format != "official":
+        raise ValueError("An explicit physical development selection requires official data.")
+    dev_indices, dev_selection = select_training_dev_records(
+        records, args.dev_limit, args.dev_seed, selection_file=args.dev_selection_file
+    )
     if args.sample_reference_world_size is not None and dataset_format != "official":
         raise ValueError("Reference-rank sampling currently requires official data.")
     if controlled_history and (dataset_format != "official" or args.sample_reference_world_size is None):
@@ -351,6 +356,12 @@ def _train(args, context):
             torch.cuda.set_rng_state(rank_rng["cuda_rng"].cpu(), device)
         start, best, curve = saved["step"], saved["best"], saved["curve"]
         del saved
+    if controlled_history and device.type == "cuda":
+        # Enable only after EMA/teacher deepcopy and exact native-state restore.
+        # Compiled eval cores read these same live parameter storages; gradient-
+        # bearing training and feedback calls continue through the eager graph.
+        model.enable_eval_compile()
+        ema.enable_eval_compile()
     if context.is_primary:
         save_json(identity_path, identity)
         save_json(
@@ -382,6 +393,26 @@ def _train(args, context):
             if args.sample_reference_world_size is not None
             else None
         )
+        packed_chunks, packed_caches = None, None
+        if controlled_history and reference_plan is not None and len(reference_plan) > 1:
+            # Keep micro2 as the sampling/history/dropout/gradient unit. Only
+            # detached eval histories with equal lengths share larger forwards.
+            packed_chunks = []
+            for index, planned in enumerate(reference_plan):
+                offset = index * args.microbatch_size
+                count = min(args.microbatch_size, local_batch_size - offset)
+                global_offset = context.rank * local_batch_size + offset
+                if (planned["offset"], planned["global_offset"], planned["count"]) != (offset, global_offset, count):
+                    raise ValueError("Reference sampler disagrees with physical microbatch partition.")
+                packed_chunks.append(
+                    RollinChunk(
+                        train_data.load_training_queries(planned["queries"]),
+                        planned["frame"],
+                        global_offset,
+                        history_training.frames(step, global_offset),
+                    )
+                )
+            packed_caches = packed_rollin_caches(system, model, packed_chunks, seed=args.seed + step)
         for offset in range(0, local_batch_size, args.microbatch_size):
             count = min(args.microbatch_size, local_batch_size - offset)
             global_offset = context.rank * local_batch_size + offset
@@ -389,7 +420,11 @@ def _train(args, context):
             if planned is not None:
                 if (planned["offset"], planned["global_offset"], planned["count"]) != (offset, global_offset, count):
                     raise ValueError("Reference sampler disagrees with physical microbatch partition.")
-                batch, frame = train_data.load_training_queries(planned["queries"]), planned["frame"]
+                if packed_chunks is None:
+                    batch, frame = train_data.load_training_queries(planned["queries"]), planned["frame"]
+                else:
+                    chunk = packed_chunks[offset // args.microbatch_size]
+                    batch, frame = chunk.batch, chunk.frame
             elif not args.synthetic and hasattr(train_data, "sample_batch"):
                 batch, frame = train_data.sample_batch(generator, count, history_training.sampling_frames)
             else:
@@ -400,13 +435,20 @@ def _train(args, context):
                         20, min(len(e) for e in episodes) - max(2, args.unroll_steps) + 1, (), generator=generator
                     )
                 )
-            rollin_frames = history_training.frames(step, global_offset)
+            rollin_frames = (
+                history_training.frames(step, global_offset)
+                if packed_chunks is None
+                else packed_chunks[offset // args.microbatch_size].rollin_frames
+            )
             first = max(20, frame - rollin_frames)
-            cache = batch.cache(first)
-            model.eval()
-            for t in range(first, frame):
-                noise = batch.noise(args.seed + step, t, config.window, tag="rollin", offset=global_offset)
-                cache = system.online(model, cache, batch.observations(t), noise).cache.detach()
+            if packed_caches is None:
+                cache = batch.cache(first)
+                model.eval()
+                for t in range(first, frame):
+                    noise = batch.noise(args.seed + step, t, config.window, tag="rollin", offset=global_offset)
+                    cache = system.online(model, cache, batch.observations(t), noise).cache.detach()
+            else:
+                cache = packed_caches[offset // args.microbatch_size]
             training_model.train()
             # Stateless streams keep episode/time/endpoint draws identical when
             # W or feedback draw count changes. Terminal slots match across W.
@@ -432,6 +474,9 @@ def _train(args, context):
                         "target_local_frame": frame,
                         "tau": tau.tolist(),
                         "epsilon_sha256": hashlib.sha256(epsilon.detach().cpu().numpy().tobytes()).hexdigest(),
+                        "current_epsilon_sha256": hashlib.sha256(
+                            epsilon[:, -1:].detach().cpu().numpy().tobytes()
+                        ).hexdigest(),
                         **(
                             {
                                 "next_epsilon_sha256": hashlib.sha256(
@@ -489,6 +534,9 @@ def _train(args, context):
                     if controlled_history:
                         sampling_rows[-1]["all_emission_noise_sha256"] = hashlib.sha256(
                             noises.detach().cpu().numpy().tobytes()
+                        ).hexdigest()
+                        sampling_rows[-1]["all_current_emission_noise_sha256"] = hashlib.sha256(
+                            noises[:, :, -1:].detach().cpu().numpy().tobytes()
                         ).hexdigest()
                     objective = multi_step_objective
                     current_observations = [batch.observations(frame + i) for i in range(8)]
@@ -585,9 +633,10 @@ def _train(args, context):
                 system, ema, dev_data, fixture if args.synthetic else None, dev_indices, smpl, args, context
             )
             score = summarize(rows)
-            curve.append({"step": step, "scores": score})
-            improved = score["body_mm"]["mean"] < best
-            best = min(best, score["body_mm"]["mean"])
+            selection_score = score["body_mm"]["episode_mean" if args.dev_selection_file else "mean"]
+            curve.append({"step": step, "scores": score, "selection_body_mm": selection_score})
+            improved = selection_score < best
+            best = min(best, selection_score)
             rank_state = {
                 **_rng_state(generator, device),
                 "model_sha256": state_sha256(model.state_dict()),

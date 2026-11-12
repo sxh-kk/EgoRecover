@@ -19,6 +19,7 @@ def build_parser():
     for name in ("seed", "train-steps", "batch-size", "microbatch-size", "rollin-frames", "eval-every"):
         train.add_argument(f"--{name}", type=int, default=getattr(TrainOptions, name.replace("-", "_")))
     train.add_argument("--dev-limit", type=int)
+    train.add_argument("--dev-selection-file", type=Path)
     train.add_argument("--sample-reference-world-size", type=int)
     train.add_argument("--sampling-rollin-frames", type=int)
     train.add_argument("--history-mode", choices=("fixed", "mixed"), default=TrainOptions.history_mode)

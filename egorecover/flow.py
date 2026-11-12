@@ -8,7 +8,7 @@ def build_source(center, epsilon, *, mode, sigma):
         raise ValueError("Center and standard noise must be [B,W,243].")
     if center.device != epsilon.device or center.dtype != epsilon.dtype:
         raise ValueError("Center and noise must share device and dtype.")
-    if not bool(torch.isfinite(epsilon).all()) or not bool(torch.isfinite(center).all()):
+    if not bool(torch.isfinite(epsilon).all() & torch.isfinite(center).all()):
         raise ValueError("Nonfinite center or noise.")
     if mode not in ("gaussian", "prediction"):
         raise ValueError("Unknown source mode.")

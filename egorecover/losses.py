@@ -237,7 +237,7 @@ def training_objective(
     current = None
     if cfg.current_weight or (cfg.feedback != "none" and cfg.feedback_weight):
         with forward_rng(epsilon, forward_seed, "endpoint"):
-            current = system.reconstruct(model, input_cache, observations, epsilon)
+            current = system.reconstruct_prepared(model, input_cache, source, y, reference)
         truth_current = state_map(truth_window, lambda x: x[:, -1])
         if cfg.current_weight:
             current_joints = joints(current.current)

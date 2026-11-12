@@ -37,7 +37,10 @@ class Attention(nn.Module):
         x = self.norm(x)
         if mask is not None:
             mask = mask.squeeze([1, 2]).bool().logical_not()
-        out = self.attn(x, kv_x, kv_x, key_padding_mask=mask)[0]
+        # Roll-in/evaluation never consumes attention weights. The no-weights
+        # path permits PyTorch's optimized attention implementation. Preserve
+        # the training path (including its dropout RNG consumption) exactly.
+        out = self.attn(x, kv_x, kv_x, key_padding_mask=mask, need_weights=self.training)[0]
         out = self.out_dropout(out)
         return out
 

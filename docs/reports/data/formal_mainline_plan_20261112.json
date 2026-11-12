@@ -1,0 +1,394 @@
+{
+  "version": "formal_v1_20261112",
+  "created_at_beijing": "2026-11-12T11:42:52+08:00",
+  "status": "foundation_training",
+  "authorized_this_turn": "checkpoint cleanup and formal planning only",
+  "old_experiments": "exploratory, preserved; no warm-starting formal G/P",
+  "data": {
+    "train": "full official train",
+    "val": "official val for development and final report, not independent test",
+    "root": "/gaozt-test1/datasets/EE4D-Motion/ee4d_motion_uniegomotion",
+    "motion_hz": 10
+  },
+  "common_G": {
+    "history": 20,
+    "source": "gaussian",
+    "sigma": 1.0,
+    "NFE": 1,
+    "endpoint_probability": 0.1,
+    "shape_mode": "predicted",
+    "geometry_target": "official",
+    "current_weight": 0.03,
+    "velocity_weight": 0.013409926806430328,
+    "velocity_scale_m_s": 1.0,
+    "slow_weight": 0.0,
+    "paired_weight": 0.0,
+    "body_feedback": true,
+    "revise_recent": true,
+    "cache_representation": "existing dense state; no additional FK projection",
+    "history_mature_fraction": 0.75,
+    "rollin_mature": 20,
+    "rollin_startup_choices": [
+      0,
+      1,
+      4
+    ],
+    "unroll_steps": 8,
+    "detach_between_steps": true,
+    "global_anchor_batch": 16,
+    "microbatch": 2,
+    "supervised_bodies_per_update": 128,
+    "optimizer": "AdamW",
+    "weight_decay": 0.01,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "grad_clip_norm": 1.0,
+    "ema_decay": 0.999,
+    "model": {
+      "width": 768,
+      "layers": 12,
+      "heads": 12,
+      "dropout": 0.1
+    }
+  },
+  "evaluation": {
+    "D128": {
+      "path": "docs/reports/data/formal_dev128_20261112.json",
+      "selection_id": "2788c54eeb5b21887d8ea0efc218d812df365d9945f4f2f57837930571fde60f",
+      "file_sha256": "04c6bcc767922bbbc77ee11168a73274349143390843bdcefb48a6e54bae4f81",
+      "clips": 128,
+      "takes": 128,
+      "score_frames": 60,
+      "selection_for": "EMA best checkpoint only; replaces old128"
+    },
+    "D400": {
+      "selection_id": "07c11f0bb0d7393e8384d5b427682cd88ba754142a2023298e66e7c71b5720b9",
+      "clips": 400,
+      "takes": 212,
+      "score_frames": 60,
+      "role": "stage acceptance only"
+    },
+    "long_rollout": {
+      "target_takes": 50,
+      "selection_status": "frozen_before_training",
+      "no_crossing_annotation_gaps": true,
+      "selection_file": "exp/formal-v1-20261112/configs/long50.json",
+      "maximum_input_frames": 1200,
+      "actual_input_frame_range": [
+        229,
+        1200
+      ],
+      "scored_frames_total_per_case": 36858
+    },
+    "full_val": {
+      "clips": 4379,
+      "role": "final baseline and final method, not every pilot"
+    },
+    "primary_aggregation": "clip_equal",
+    "secondary_aggregation": "take_equal",
+    "quality_noise_seed": 1062,
+    "bootstrap_take_draws": 2000,
+    "checkpoint_rule": "D128 best EMA, also report final; no400 checkpoint reselection",
+    "external_paper_boundary": "online post-startup60-frame scoring differs from original full80 and additional-input methods",
+    "quality_noise_coupling": "Key by clip/query/physical frame slot. W1/W3 current-slot epsilon equal; extra W3 slots have separate deterministic keys. Same tensor seed alone is insufficient."
+  },
+  "stages": [
+    {
+      "id": "S0_prepare",
+      "kind": "implementation_and_protocol_freeze",
+      "status": "foundation_ready_GPU_preflight_running",
+      "requirements": [
+        "Fixed D128 loading in G and P, with all60 scored frames",
+        "Physical-query/slot keyed noise, shared current epsilon for W1/W3 and independent added slots",
+        "P predicted-shape FK in training and evaluation",
+        "P scheduled LR and exact scheduler/RNG resume",
+        "History-bank producer/checkpoint/split identities and global mixture quotas",
+        "Predeclared continuous-validation source intervals, target50 takes",
+        "Asset-backed gradients, causal inputs, DDP exact resume, storage and throughput review"
+      ],
+      "launches_training": false,
+      "P_preparation_status": "deferred until S2; not loaded by S1"
+    },
+    {
+      "id": "S1_foundation",
+      "run_ids": [
+        "V1_G_CV_W1_s62",
+        "V1_G_CV_W3_s62"
+      ],
+      "factors": [
+        {
+          "window": 1,
+          "gpus": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "window": 3,
+          "gpus": [
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      ],
+      "initialization": "identical random G; matched physical queries and current-slot epsilon; no E7 or old G; CV prior",
+      "updates": 32000,
+      "conditional_joint_extension": 8000,
+      "max_updates": 40000,
+      "learning_rate": 3e-05,
+      "lr_step_size": 12000,
+      "lr_gamma": 0.3,
+      "eval_every": 1000,
+      "supervised_bodies_per_run": 4096000,
+      "platform_rule": "last4000 updates best D128 MPJPE gain below0.5mm after low-LR phase; inspect train/val and long rollout; not global convergence proof",
+      "window_rule": {
+        "mpjpe_margin_mm": 1.0,
+        "within_margin_prefer_temporal_if_improved_metrics_at_least": 2,
+        "remaining_temporal_metric_max_regression_pct": 5.0,
+        "otherwise": "lower MPJPE",
+        "abnormal_long_rollout": "diagnose before locking window"
+      },
+      "status": "running"
+    },
+    {
+      "id": "S2_P",
+      "run_ids": [
+        "V1_P_s62"
+      ],
+      "gpus": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "initialization": "random P",
+      "model": {
+        "width": 256,
+        "layers": 4,
+        "heads": 8,
+        "dropout": 0.1,
+        "source_flags": true
+      },
+      "history_producers": "frozen S1 W1/W3 G checkpoints, balanced1:1",
+      "train_bank": "only official train; maximize eligible take coverage and report exclusions",
+      "validation_bank": "D128-v1 from frozen S1 models",
+      "updates": 18000,
+      "conditional_extension": 6000,
+      "max_updates": 24000,
+      "warmup_GT_updates": 2000,
+      "post_warmup_mixture": {
+        "frozen_G": 0.8,
+        "GT": 0.2,
+        "self_P": 0.0,
+        "TwoForward": false
+      },
+      "allocation": "global cumulative quotas, logged realized counts; no independent per-microbatch rounding",
+      "G_history_mature_fraction": 0.75,
+      "batch_size": 64,
+      "microbatch": 8,
+      "learning_rate": 3e-05,
+      "lr_step_size": 6000,
+      "lr_gamma": 0.3,
+      "eval_every": 1000,
+      "shape_mode": "predicted",
+      "geometry_target": "official",
+      "geometry_calibration": {
+        "split": "train_only",
+        "seed": 9062,
+        "weight_cap": 0.03,
+        "initial_gradient_ratio_target": 0.1,
+        "freeze_after_calibration": true
+      },
+      "gate": {
+        "paired_MPJPE_gain_at_selected_W_mm": 1.0,
+        "paired_95CI_upper_on_P_minus_CV_below": 0,
+        "max_velocity_regression_pct": 5,
+        "max_acceleration_regression_pct": 5,
+        "platform_window_updates": 4000,
+        "platform_gain_below_mm": 0.5
+      }
+    },
+    {
+      "id": "S3_PG",
+      "run_ids": [
+        "V1_G_CV_control_s62",
+        "V1_G_P_s62"
+      ],
+      "factors": [
+        {
+          "prior": "CV",
+          "gpus": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "prior": "S2_frozen_P",
+          "gpus": [
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      ],
+      "initialization": "same selected S1 EMA; equally reset optimizers",
+      "updates": 8000,
+      "conditional_joint_extension": 4000,
+      "max_updates": 12000,
+      "learning_rate": 1e-05,
+      "lr_step_size": 4000,
+      "lr_gamma": 0.3,
+      "eval_every": 1000,
+      "additional_supervised_bodies_per_run": 1024000,
+      "source": "gaussian",
+      "gate": {
+        "paired_MPJPE_gain_mm": 1.0,
+        "paired_95CI_upper_on_P_minus_CV_G_below": 0,
+        "max_each_temporal_metric_regression_pct": 5
+      },
+      "postfit_audit": "Run P and CV on identical histories from each newly trained G, report producer distribution drift. P cost separate from matched G updates."
+    },
+    {
+      "id": "S4_one_innovation",
+      "status": "conditional_not_scheduled",
+      "priority_candidate": "causal prior/candidate correction gate after new P/G diagnostics",
+      "prerequisites": [
+        "S1-S3 accepted or documented analysis justifies candidate",
+        "Repeat fusion-space diagnosis on new models; old7mm oracle result does not transfer",
+        "k=1 reproduces original G state and full rollout",
+        "Keep feedback representation fixed; projected-state changes need matched controls"
+      ],
+      "controls": [
+        "G alone",
+        "train-fitted constant gate",
+        "causal learned gate"
+      ],
+      "training_budget": "Lock a separate protocol before any S4 training",
+      "deferred": [
+        "prediction-center source",
+        "paired supervision",
+        "TwoForward P",
+        "multiscale weight sweep",
+        "W5/W10",
+        "multi-NFE retraining"
+      ]
+    }
+  ],
+  "resources": {
+    "max_simultaneous_training_jobs": 2,
+    "gpus_per_G_job": 4,
+    "gpus_per_P_job": 4,
+    "initial_seed": 62,
+    "confirmation_seeds": [
+      162,
+      262
+    ],
+    "formal_output": "/root/workspace/songxuhua/exp/formal-v1-20261112",
+    "min_free_before_launch_GiB": 20,
+    "min_free_running_GiB": 10,
+    "retention": [
+      "latest resumable state",
+      "D128 best EMA",
+      "final EMA",
+      "two prescribed intermediate EMA checkpoints"
+    ],
+    "completed_inactive_resumes": "archive to data disk before source deletion"
+  },
+  "cleanup": {
+    "manifest": "docs/reports/data/storage_cleanup_20261112.json",
+    "archive_root": "/gaozt-test1/datasets/EgoRecover-archives/cleanup-20261112-113429",
+    "removed_unique_files": 61,
+    "removed_paths": 65,
+    "released_GiB": 49.81010055541992,
+    "retained_resume_unique_files": 3
+  },
+  "evidence_20261112": {
+    "source": "exp/shape-persistent-W3-20261111/evaluation400/comparison.json",
+    "results": [
+      {
+        "case": "A_shape_real",
+        "clips": 400,
+        "takes": 212,
+        "mpjpe_world_mm": 86.46750349876612,
+        "pa_mpjpe_mm": 53.11907092630496,
+        "wrist_pe_mm": 144.00737561779653,
+        "mpjre_f": 0.4981138278491619,
+        "head_joint_pe_mm": 27.282967062500216,
+        "velocity_error_mm_s": 195.2730466133921,
+        "acceleration_error_mm_s2": 2376.642157319302,
+        "foot_slide_uniegomotion_mm": 4.010920232178706,
+        "root_mean_initial_translation_mm": 51.71235902381384,
+        "root_final_initial_translation_mm": 63.99781191909506,
+        "head_rot_f": 0.22728363021693057,
+        "mpjpe_hand_mm": 170.67001295089722,
+        "head_translation_leye_mm": 29.239274722337722,
+        "foot_contact_mesh_mm": 17.871348907351493
+      },
+      {
+        "case": "B_shape_real_slow",
+        "clips": 400,
+        "takes": 212,
+        "mpjpe_world_mm": 86.48953633128777,
+        "pa_mpjpe_mm": 53.1415036417838,
+        "wrist_pe_mm": 143.95895219673613,
+        "mpjre_f": 0.49811270353645076,
+        "head_joint_pe_mm": 27.258524153054882,
+        "velocity_error_mm_s": 199.4262711272251,
+        "acceleration_error_mm_s2": 2458.4738860573366,
+        "foot_slide_uniegomotion_mm": 4.231417989851076,
+        "root_mean_initial_translation_mm": 52.07533614864373,
+        "root_final_initial_translation_mm": 64.30640213955036,
+        "head_rot_f": 0.22771132504880925,
+        "mpjpe_hand_mm": 170.5836887359619,
+        "head_translation_leye_mm": 29.274903302192687,
+        "foot_contact_mesh_mm": 18.1187024140358
+      }
+    ],
+    "interpretation": "A recipe retained as starting configuration; B persistent term not included; neither is the new formal baseline."
+  },
+  "references": [
+    {
+      "url": "https://chaitanya100100.github.io/UniEgoMotion/Patel2025UniEgoMotion.pdf",
+      "use": "optimizer/network reference; our online schedule is a separate engineering choice"
+    },
+    {
+      "url": "https://proceedings.mlr.press/v15/ross11a.html",
+      "use": "motivation for training on induced history distribution, not a transferred theoretical guarantee"
+    }
+  ],
+  "first_loss_comparison": "Record first loss. Require equality only for components that the experimental factor cannot alter; W/prior contrasts do not require identical flow loss.",
+  "environment": "Conda egorecover",
+  "runtime_plan": "exp/formal-v1-20261112/plan.json",
+  "runtime_upgrade": {
+    "at_beijing": "2026-11-12T15:52:15+08:00",
+    "record": "training_speedup_20261112.json",
+    "source_snapshot": "/root/workspace/songxuhua/exp/formal-v1-20261112/source-runtime2",
+    "resume_step": 1000,
+    "training_protocol_unchanged": true
+  },
+  "runtime3_preflight": {
+    "at_beijing": "2026-11-12T16:24:00+08:00",
+    "status": "scheduled_after_common_checkpoint2000",
+    "tests": "427 passed",
+    "source_snapshot": "exp/formal-v1-20261112/source-runtime3",
+    "scheduler_pid": 2495043,
+    "FP32": true,
+    "supervision_and_hyperparameters_unchanged": true,
+    "rank_candidate_speed_ratios": {
+      "W1": 1.4322599093347286,
+      "W3": 1.4247925880560013
+    },
+    "four_GPU_speed_pending": true,
+    "evidence": "training_speedup_20261112.json"
+  }
+}

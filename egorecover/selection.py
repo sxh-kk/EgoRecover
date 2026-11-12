@@ -9,6 +9,21 @@ from pathlib import Path
 ALGORITHM_VERSION = "take_balanced_sha256_round_robin_v1"
 
 
+def select_training_dev_records(records, count=None, seed=1062, *, selection_file=None):
+    """Bind checkpoint selection to an explicit, physically verified clip list."""
+    if selection_file is None:
+        return select_dev_records(records, count, seed)
+    indices, selection = load_fixed_selection(records, selection_file)
+    if count is not None and count != len(indices):
+        raise ValueError("dev-limit must match the explicit development selection.")
+    return indices, {
+        **selection,
+        "mode": "fixed_physical_clips",
+        "selection_file_sha256": hashlib.sha256(Path(selection_file).read_bytes()).hexdigest(),
+        "primary_aggregation": "clip_equal",
+    }
+
+
 def load_fixed_selection(records, path):
     """Validate and reuse explicit physical clips without selecting a new subset."""
     selection = json.loads(Path(path).read_text())

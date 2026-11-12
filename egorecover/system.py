@@ -91,10 +91,18 @@ class WindowReconstructor:
     def reconstruct(self, model, cache, observations, epsilon, *, steps=None):
         y, reference = self.prepare(cache, observations)
         source = build_source(y["center"], epsilon, mode=self.config.source, sigma=self.config.sigma)
-        codes = solve(model, source, y, steps=self.config.steps if steps is None else steps)
+        return self.reconstruct_prepared(model, cache, source, y, reference, steps=steps)
+
+    def reconstruct_prepared(self, model, cache, source, condition, reference, *, steps=None):
+        """Reuse one call's deterministic preparation for Flow and geometry.
+
+        The caller must supply the unchanged cache and conditions from prepare;
+        no prepared values are cached across physical frames or updates.
+        """
+        codes = solve(model, source, condition, steps=self.config.steps if steps is None else steps)
         body = self.decode(codes, reference)
         updated = cache.advance(body, revise_recent=self.config.revise_recent)
-        return WindowResult(codes, body, updated, reference, y["center"])
+        return WindowResult(codes, body, updated, reference, condition["center"])
 
     @torch.no_grad()
     def online(self, model, cache, observations, epsilon, *, steps=None):

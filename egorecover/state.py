@@ -28,16 +28,23 @@ class ObservationWindow:
     def validate(self, batch, frame, history=20):
         if isinstance(self.frame, bool) or not isinstance(self.frame, int) or self.frame != frame:
             raise ValueError("Observation window must end at the requested physical frame.")
+        finite = []
+        names = ("head", "images")
         for name, width, valid_name in (("head", 9, "head_valid"), ("images", 1024, "image_valid")):
             value, valid = getattr(self, name), getattr(self, valid_name)
             if value.shape != (batch, history + 1, width) or not value.is_floating_point():
                 raise ValueError(f"Invalid observation shape/dtype: {name}.")
             if valid.shape != (batch, history + 1) or valid.dtype != torch.bool or valid.device != value.device:
                 raise ValueError(f"Invalid availability: {valid_name}.")
-            if not bool(torch.isfinite(value[valid]).all()):
-                raise ValueError(f"Nonfinite available observation: {name}.")
+            # Boolean indexing needs a GPU-to-CPU size query. Mask the finite
+            # flags instead, retaining exactly the available-value check.
+            finite.append((torch.isfinite(value) | ~valid[..., None]).all())
         if self.head.device != self.images.device or self.head.dtype != self.images.dtype:
             raise ValueError("Observation payloads must share device and dtype.")
+        if not bool(torch.stack(finite).all()):
+            for name, flag in zip(names, finite):
+                if not bool(flag):
+                    raise ValueError(f"Nonfinite available observation: {name}.")
 
 
 @dataclass(frozen=True)
@@ -50,20 +57,32 @@ class WindowCache:
 
     def validate(self, history=20):
         b = len(self.beta)
+        finite = []
+        messages = []
         for name, shape in (
             ("joints", (b, history, 22, 4, 4)),
             ("reference", (b, history, 4, 4)),
             ("auxiliary", (b, history, 36)),
         ):
             value = getattr(self.body, name)
-            if value.shape != shape or not bool(torch.isfinite(value).all()):
+            if value.shape != shape:
                 raise ValueError(f"Invalid world cache: {name}.")
             if value.device != self.beta.device or value.dtype != self.beta.dtype:
                 raise ValueError("Cache fields must share device and dtype.")
-        if self.beta.shape != (b, 10) or b < 1 or not bool(torch.isfinite(self.beta).all()):
+            finite.append(torch.isfinite(value).all())
+            messages.append(f"Invalid world cache: {name}.")
+        if self.beta.shape != (b, 10) or b < 1:
             raise ValueError("Expected fixed finite startup beta [B,10].")
-        if self.anchor.shape != (b, 4, 4) or not bool(torch.isfinite(self.anchor).all()):
+        if self.anchor.shape != (b, 4, 4):
             raise ValueError("Expected a fixed finite startup anchor.")
+        if self.anchor.device != self.beta.device or self.anchor.dtype != self.beta.dtype:
+            raise ValueError("Cache fields must share device and dtype.")
+        finite.extend((torch.isfinite(self.beta).all(), torch.isfinite(self.anchor).all()))
+        messages.extend(("Expected fixed finite startup beta [B,10].", "Expected a fixed finite startup anchor."))
+        if not bool(torch.stack(finite).all()):
+            for flag, message in zip(finite, messages):
+                if not bool(flag):
+                    raise ValueError(message)
         if isinstance(self.frame, bool) or not isinstance(self.frame, int) or self.frame < history - 1:
             raise ValueError("Invalid cache frame index.")
         if self.generated_frames is not None and (

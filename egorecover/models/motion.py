@@ -38,7 +38,19 @@ class MotionModel(nn.Module):
         self.state_embedding = nn.Embedding(2, cfg.width)
         self.frame_time_proj = nn.Linear(cfg.width, cfg.width)
         self.mu_proj = nn.Linear(243, cfg.width)
+        self._compiled_eval_core = None
         self.reset_history_parameters()
+
+    def enable_eval_compile(self):
+        """Compile only the no-grad decoder; training retains its eager graph."""
+        self._compiled_eval_core = torch.compile(
+            self._decode_layers, mode="reduce-overhead", fullgraph=True, dynamic=False
+        )
+
+    def _decode_layers(self, motion, memory, body_valid, obs_valid):
+        for block in self.tsfm:
+            motion = block(motion, memory, mask=body_valid[:, None, None], context_mask=obs_valid[:, None, None])
+        return motion
 
     def reset_history_parameters(self):
         for layer in (self.state_embedding, self.frame_time_proj, self.mu_proj):
@@ -68,14 +80,17 @@ class MotionModel(nn.Module):
         for key in ("fixed_valid", "head_valid", "image_valid"):
             if y[key].dtype != torch.bool:
                 raise ValueError(f"{key} must be boolean.")
-        if timesteps.shape != (b,) or not bool(((timesteps > 0) & (timesteps <= 1)).all()):
+        if timesteps.shape != (b,):
             raise ValueError("Flow times must be [B] in (0,1].")
         fixed = torch.where(y["fixed_valid"][..., None], y["fixed_motion"], 0)
         traj = torch.where(y["head_valid"][..., None], y["traj"], 0)
         images = torch.where(y["image_valid"][..., None], y["images"], 0)
-        for value in (x, fixed, traj, images, y["center"]):
-            if not bool(torch.isfinite(value).all()):
-                raise ValueError("Nonfinite available model input.")
+        valid_time = ((timesteps > 0) & (timesteps <= 1)).all()
+        finite = [torch.isfinite(value).all() for value in (x, fixed, traj, images, y["center"])]
+        if not bool(torch.stack([valid_time, *finite]).all()):
+            if not bool(valid_time):
+                raise ValueError("Flow times must be [B] in (0,1].")
+            raise ValueError("Nonfinite available model input.")
         motion = self.pos_enc(self.input_process(torch.cat((fixed, x), 1)))
         ids = torch.cat((torch.zeros(f, device=x.device), torch.ones(w, device=x.device))).long()
         motion = motion + self.state_embedding(ids)[None]
@@ -104,6 +119,10 @@ class MotionModel(nn.Module):
         obs_valid = torch.cat(
             (torch.ones(b, 1, dtype=torch.bool, device=x.device), y["head_valid"] | y["image_valid"]), 1
         )
-        for block in self.tsfm:
-            motion = block(motion, memory, mask=body_valid[:, None, None], context_mask=obs_valid[:, None, None])
+        core = self._decode_layers
+        if not self.training and not torch.is_grad_enabled() and self._compiled_eval_core is not None:
+            core = self._compiled_eval_core
+        motion = core(motion, memory, body_valid, obs_valid)
+        # Eager projection creates independent output storage before the next
+        # no-grad CUDAgraph replay; emitted codes must never be overwritten.
         return self.output_process(motion[:, -w:])

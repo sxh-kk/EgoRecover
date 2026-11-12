@@ -1,0 +1,188 @@
+{
+  "at_beijing": "2026-11-12T15:18:04+08:00",
+  "scope": "Offline shape-matched batch2/W3/K8 microbatch, mature rollin20, on GPU6 shared with active training. Existing A EMA used with CV solely to profile operations. No optimizer update or active run changes. Not an isolated full-update throughput benchmark.",
+  "FK_verification": {
+    "max_position_error_m": 3.5762786865234375e-07,
+    "gradient_relative_L2": {
+      "rotation6d": 9.089258696803881e-07,
+      "beta": 2.2436913127421576e-07,
+      "root": 1.1535247779193014e-07
+    },
+    "passed": true
+  },
+  "FK_local_timings": {
+    "full_SMPLX_forward_backward_ms": 92.45262949261814,
+    "candidate_body_only_forward_backward_ms": 7.157956995069981
+  },
+  "profiled_microbatch_seconds_with_profiler": 3.477530452888459,
+  "profile_loss_finite": true,
+  "selected_operations": [
+    {
+      "name": "audit_rollin20",
+      "count": 1,
+      "self_cpu_ms": 223.9553180000067,
+      "cpu_total_ms": 1130.436768,
+      "self_device_ms": 0.0
+    },
+    {
+      "name": "cudaStreamSynchronize",
+      "count": 2859,
+      "self_cpu_ms": 688.4225510000038,
+      "cpu_total_ms": 688.4225510000038,
+      "self_device_ms": 0.0
+    },
+    {
+      "name": "audit_rollin20",
+      "count": 1,
+      "self_cpu_ms": 0.0,
+      "cpu_total_ms": 0.0,
+      "self_device_ms": 1128.971935
+    },
+    {
+      "name": "aten::isfinite",
+      "count": 1326,
+      "self_cpu_ms": 7.750712000001336,
+      "cpu_total_ms": 88.73950399999845,
+      "self_device_ms": 0.0
+    },
+    {
+      "name": "aten::item",
+      "count": 3581,
+      "self_cpu_ms": 4.259697999996005,
+      "cpu_total_ms": 634.7000519999943,
+      "self_device_ms": 0.0
+    },
+    {
+      "name": "aten::_local_scalar_dense",
+      "count": 3581,
+      "self_cpu_ms": 13.503001999999707,
+      "cpu_total_ms": 630.4403539999983,
+      "self_device_ms": 5.097834999996431
+    },
+    {
+      "name": "aten::bmm",
+      "count": 5248,
+      "self_cpu_ms": 80.65360500000028,
+      "cpu_total_ms": 110.13877300000176,
+      "self_device_ms": 49.446248999975275
+    },
+    {
+      "name": "aten::addmm",
+      "count": 2052,
+      "self_cpu_ms": 46.90720499999788,
+      "cpu_total_ms": 65.03922100000321,
+      "self_device_ms": 41.16861600000165
+    },
+    {
+      "name": "aten::mm",
+      "count": 5076,
+      "self_cpu_ms": 90.12779799998702,
+      "cpu_total_ms": 133.08173699996206,
+      "self_device_ms": 80.3833810000091
+    },
+    {
+      "name": "audit_K8_forward",
+      "count": 1,
+      "self_cpu_ms": 205.12470699998784,
+      "cpu_total_ms": 1250.7986180000003,
+      "self_device_ms": 0.0
+    },
+    {
+      "name": "audit_K8_forward",
+      "count": 1,
+      "self_cpu_ms": 0.0,
+      "cpu_total_ms": 0.0,
+      "self_device_ms": 1250.6736660000001
+    },
+    {
+      "name": "audit_backward",
+      "count": 1,
+      "self_cpu_ms": 1075.582131000001,
+      "cpu_total_ms": 1083.567124,
+      "self_device_ms": 0.0
+    },
+    {
+      "name": "audit_backward",
+      "count": 1,
+      "self_cpu_ms": 0.0,
+      "cpu_total_ms": 0.0,
+      "self_device_ms": 0.0019199999999254941
+    },
+    {
+      "name": "cudaDeviceSynchronize",
+      "count": 2,
+      "self_cpu_ms": 0.015094000000040977,
+      "cpu_total_ms": 0.015094000000040977,
+      "self_device_ms": 0.0
+    }
+  ],
+  "top_CPU_self": [
+    {
+      "name": "audit_backward",
+      "count": 1,
+      "self_cpu_ms": 1075.582131000001
+    },
+    {
+      "name": "cudaStreamSynchronize",
+      "count": 2859,
+      "self_cpu_ms": 688.4225510000038
+    },
+    {
+      "name": "cudaLaunchKernel",
+      "count": 85788,
+      "self_cpu_ms": 437.5281059999421
+    },
+    {
+      "name": "audit_rollin20",
+      "count": 1,
+      "self_cpu_ms": 223.9553180000067
+    },
+    {
+      "name": "audit_K8_forward",
+      "count": 1,
+      "self_cpu_ms": 205.12470699998784
+    },
+    {
+      "name": "aten::empty",
+      "count": 22199,
+      "self_cpu_ms": 98.13302599997697
+    },
+    {
+      "name": "aten::mm",
+      "count": 5076,
+      "self_cpu_ms": 90.12779799998702
+    },
+    {
+      "name": "aten::bmm",
+      "count": 5248,
+      "self_cpu_ms": 80.65360500000028
+    },
+    {
+      "name": "aten::copy_",
+      "count": 11822,
+      "self_cpu_ms": 75.21476299997957
+    },
+    {
+      "name": "aten::cat",
+      "count": 5389,
+      "self_cpu_ms": 54.66178700001448
+    },
+    {
+      "name": "aten::mul",
+      "count": 6038,
+      "self_cpu_ms": 53.42801299998625
+    },
+    {
+      "name": "aten::add_",
+      "count": 8783,
+      "self_cpu_ms": 50.77441900000866
+    }
+  ],
+  "active_training_modified": false,
+  "peak_allocated_GiB": 1.3290882110595703,
+  "profile_script_sha256": "4a16df0e44957ecff95889eb05b7f95d7aad4e584f6b0b1b657b736d5fe792ca",
+  "FK_local_speed_ratio": 12.916063837250572,
+  "max_FK_position_difference_mm": 0.00035762786865234375,
+  "not_a_production_speedup_claim": true,
+  "current_method_constraints": "No training budget, W, K, global batch, learning rate, model weights or running source snapshot changed."
+}
