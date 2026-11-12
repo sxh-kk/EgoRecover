@@ -217,7 +217,8 @@
         "max_acceleration_regression_pct": 5,
         "platform_window_updates": 4000,
         "platform_gain_below_mm": 0.5
-      }
+      },
+      "budget_status": "draft_to_refreeze_after_G_review; TODO confirmation did not launch this training"
     },
     {
       "id": "S3_PG",
@@ -260,7 +261,20 @@
         "paired_95CI_upper_on_P_minus_CV_G_below": 0,
         "max_each_temporal_metric_regression_pct": 5
       },
-      "postfit_audit": "Run P and CV on identical histories from each newly trained G, report producer distribution drift. P cost separate from matched G updates."
+      "postfit_audit": "Run P and CV on identical histories from each newly trained G, report producer distribution drift. P cost separate from matched G updates.",
+      "budget_status": "draft_to_refreeze_after_G_review; TODO confirmation did not launch this training",
+      "postfit_fusion_diagnostic": {
+        "models": "new adapted P/G only",
+        "same_history_and_noise": true,
+        "scopes": [
+          "whole body",
+          "body parts",
+          "temporal effects"
+        ],
+        "GT_gate_diagnostic_only": true,
+        "GT_gate_writes_history": false,
+        "required_before_U": true
+      }
     },
     {
       "id": "S4_one_innovation",
@@ -273,9 +287,11 @@
         "Keep feedback representation fixed; projected-state changes need matched controls"
       ],
       "controls": [
-        "G alone",
-        "train-fitted constant gate",
-        "causal learned gate"
+        "CV + G direct (reuse T3)",
+        "learned P + G direct (reuse T3)",
+        "CV + U",
+        "learned P + U",
+        "train-fitted constant gate reference"
       ],
       "training_budget": "Lock a separate protocol before any S4 training",
       "deferred": [
@@ -285,7 +301,10 @@
         "multiscale weight sweep",
         "W5/W10",
         "multi-NFE retraining"
-      ]
+      ],
+      "first_training": "Freeze P/G parameters; train U from final-output geometry and velocity. Evaluate fused-state feedback in actual causal rollout.",
+      "meaning": "KalmanNet-inspired causal body correction; not an implementation of the original KalmanNet estimator.",
+      "P_retention_test": "learned P + U versus CV + U under matched protocols; P single-step accuracy alone is insufficient."
     }
   ],
   "resources": {
@@ -450,5 +469,101 @@
   "latest_authorization": "Total12000 includes original prefix; decay after update10000 to3e-6, both windows4GPUs each; no automatic extension or P.",
   "active_runtime_plan": "/root/workspace/songxuhua/exp/formal-v2-12k-20261112/plan.json",
   "budget_revision_record": "docs/reports/data/formal_budget12k_revision_20261112.json",
-  "initial_authorization": "checkpoint cleanup and formal planning only"
+  "initial_authorization": "checkpoint cleanup and formal planning only",
+  "confirmed_todo_sequence": {
+    "confirmed_at_beijing": "2026-11-12T20:36:49+08:00",
+    "scope": "Record the agreed TODO order and gates; no new training or runtime changes.",
+    "current": "T1_G",
+    "ordered_ids": [
+      "T1_G",
+      "T2_P",
+      "T3_G_adaptation_and_fusion_diagnostic",
+      "T4_U"
+    ],
+    "items": [
+      {
+        "id": "T1_G",
+        "stage": "S1_budget_screening_v2",
+        "status": "in_progress",
+        "task": "完成当前W1/W3各12000步G，固定评测后选择窗口与基础检查点",
+        "schedule": {
+          "total_updates": 12000,
+          "learning_rates": {
+            "1..10000": 3e-05,
+            "10001..12000": 3e-06
+          }
+        },
+        "checks": [
+          "D128选择best EMA，保留final EMA",
+          "固定D400与50段连续区间评测",
+          "检查曲线、训练充分性与滚动稳定性，登记G版本及SHA；12k不是自动收敛证明"
+        ],
+        "auto_extension": false
+      },
+      {
+        "id": "T2_P",
+        "stage": "S2_P",
+        "status": "pending_T1_review",
+        "task": "使用新G真实滚动历史训练P，在相同历史上与CV比较",
+        "depends_on": [
+          "T1_G"
+        ],
+        "checks": [
+          "历史生产者与训练/验证/评测划分登记；训练数据仅来自官方train",
+          "预测体型FK、官方关节监督与恢复准备",
+          "启动/成熟历史上的位置、速度和加速度比较；P单独精度不能代替系统收益"
+        ],
+        "training_protocol": "Budget and final recipe to be frozen after T1 review; previous S2 values remain a draft.",
+        "auto_start": false
+      },
+      {
+        "id": "T3_G_adaptation_and_fusion_diagnostic",
+        "stage": "S3_PG",
+        "status": "pending_T2_review",
+        "task": "从同一基础G做CV/P等预算适配，再在新P/G上诊断融合空间",
+        "depends_on": [
+          "T2_P"
+        ],
+        "checks": [
+          "CV与学习P两组共享基础G与新增G预算，P训练成本另计",
+          "保持损失、查询、噪声与高斯起点协议匹配",
+          "新模型同缓存下的整体/分部位融合诊断与时序统计",
+          "GT门控仅作推理后诊断，不回写，不把旧7mm空间当作新结果"
+        ],
+        "training_protocol": "Budget and final recipe to be frozen before this stage; previous S3 values remain a draft.",
+        "auto_start": false
+      },
+      {
+        "id": "T4_U",
+        "stage": "S4_one_innovation",
+        "status": "conditional_pending_new_fusion_diagnostic",
+        "task": "有融合依据后，冻结P/G训练KalmanNet启发的因果校正U",
+        "depends_on": [
+          "T3_G_adaptation_and_fusion_diagnostic"
+        ],
+        "controls": [
+          "CV + G direct (reuse T3)",
+          "learned P + G direct (reuse T3)",
+          "CV + U",
+          "learned P + U",
+          "train-fitted constant gate reference"
+        ],
+        "checks": [
+          "首轮只更新U参数；具体网络和预算单独冻结",
+          "显式k=1复现原G完整滚动",
+          "缓存表示与FK回写规则不同时改变",
+          "U仅使用截至当前的因果输入，最终几何与速度监督",
+          "融合结果真实回写后在D400和连续区间评价精度、时序和新增耗时",
+          "P+U相对CV+U决定学习P的独立价值"
+        ],
+        "auto_start": false
+      }
+    ],
+    "advancement_rule": "Review each stage before proceeding. A direct-P gain failure requires documented new fusion-space evidence before U; retain P/U only if they provide useful closed-loop gains.",
+    "deferred_parallel_changes": [
+      "FFT-informed losses",
+      "prediction-center source",
+      "paired supervision"
+    ]
+  }
 }
