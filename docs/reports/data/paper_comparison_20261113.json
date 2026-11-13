@@ -1,0 +1,294 @@
+{
+  "recorded_at_beijing": "2026-11-13T10:52:59+08:00",
+  "status": "literature_reference_only_not_common_protocol_ranking",
+  "our_configuration": "Formal V3 W3, random-initialized G, CV prior, Gaussian source, NFE1, K8, current_weight0.03, predicted-beta FK, official joint targets,10000 updates; no learned P/U/FFT loss.",
+  "sources": {
+    "UniEgoMotion_original": {
+      "paper": "https://arxiv.org/html/2508.01126v1",
+      "table": 1,
+      "task": "egocentric motion reconstruction only",
+      "scope": "Original80-frame reconstruction protocol and validation set; approximately4400 windows."
+    },
+    "EgoForce": {
+      "paper": "https://arxiv.org/html/2605.13041v1",
+      "table": 1,
+      "task": "clean-input egocentric motion reconstruction; no noisy Table2 mixing",
+      "scope": "Offline windows stitched or online streaming, metrics over full motion sequences.",
+      "inputs": "Head pose plus visible/masked left/right wrist poses and image features."
+    },
+    "UniEgoMotion_metric_implementation": "https://github.com/chaitanya100100/UniEgoMotion/blob/580c92c6d70a91672c4106bab30ca82cdd80f379/eval/metrics.py"
+  },
+  "paper_values": {
+    "UniEgoMotion_original": {
+      "mpjpe_world_mm": 100.0,
+      "pa_mpjpe_mm": 53.0,
+      "mpjpe_hand_mm": 180.0,
+      "head_rot_f": 0.26,
+      "head_translation_leye_mm": 58.0,
+      "foot_slide_uniegomotion_mm": 3.62,
+      "foot_contact_mesh_mm": 27.0,
+      "semantic_similarity": 0.918,
+      "FID": 0.027,
+      "online": false
+    },
+    "UniEgoMotion_in_EgoForce": {
+      "mpjpe_world_mm": 91.0,
+      "wrist_pe_mm": 89.0,
+      "mpjre_f": 0.497,
+      "paper_head_PE_mm": 34.0,
+      "semantic_similarity": 0.917,
+      "FID": 0.024,
+      "paper_PJ": 0.738,
+      "paper_AUJ": 12.7,
+      "paper_Time_s": 2.05,
+      "online": false
+    },
+    "EgoForce": {
+      "mpjpe_world_mm": 73.0,
+      "wrist_pe_mm": 76.0,
+      "mpjre_f": 0.138,
+      "paper_head_PE_mm": 72.0,
+      "semantic_similarity": 0.987,
+      "FID": 0.016,
+      "paper_PJ": 0.318,
+      "paper_AUJ": 10.8,
+      "paper_Time_s": 0.08,
+      "online": true
+    }
+  },
+  "ours": {
+    "evaluation400": {
+      "source": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/evaluation400/comparison.json",
+      "source_sha256": "a28f0971b9db23ac675804d1f7ba786fae672a9d85d63df287eb6c2b10474d03",
+      "selection_sha256": "07c11f0bb0d7393e8384d5b427682cd88ba754142a2023298e66e7c71b5720b9",
+      "aggregation": "clip_equal primary; paired take-cluster bootstrap2000",
+      "result": {
+        "case": "V3_G_CV_W3_10k_s62",
+        "window": 3,
+        "clips": 400,
+        "takes": 212,
+        "scored_frames": 24000,
+        "mpjpe_world_mm": 88.63393467439553,
+        "pa_mpjpe_mm": 54.49103370425711,
+        "velocity_error_mm_s": 204.41911021890917,
+        "acceleration_error_mm_s2": 2538.6662286706724,
+        "foot_slide_uniegomotion_mm": 4.241640460459461,
+        "wrist_pe_mm": 147.57888778459963,
+        "head_joint_pe_mm": 27.915025469982893,
+        "mpjre_f": 0.5089051757960691,
+        "head_rot_f": 0.22652727173338644,
+        "root_mean_initial_translation_mm": 51.29100592473194,
+        "root_final_initial_translation_mm": 63.509511915893775,
+        "mpjpe_hand_mm": 175.19131034851074,
+        "head_translation_leye_mm": 29.89881538629532,
+        "foot_contact_mesh_mm": 17.56029489994049
+      }
+    },
+    "evaluation-long": {
+      "source": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/evaluation-long/comparison.json",
+      "source_sha256": "8a05cea50aab3256bdb24c94e796c6f43a2d3a35ebb50254ed3d34a97e7ba54e",
+      "selection_sha256": "4bb1f5c9983b56863ec44270b257355de703bcbed40569250dbf91d975627a1d",
+      "aggregation": "clip_equal primary; paired take-cluster bootstrap2000",
+      "result": {
+        "case": "V3_G_CV_W3_10k_s62",
+        "window": 3,
+        "clips": 50,
+        "takes": 50,
+        "scored_frames": 36858,
+        "mpjpe_world_mm": 97.4998114205701,
+        "pa_mpjpe_mm": 59.155058374761786,
+        "velocity_error_mm_s": 256.3799052535945,
+        "acceleration_error_mm_s2": 3020.8323949987343,
+        "foot_slide_uniegomotion_mm": 4.711454468964343,
+        "wrist_pe_mm": 167.53558172216353,
+        "head_joint_pe_mm": 35.147791060950325,
+        "mpjre_f": 0.5331944920715377,
+        "head_rot_f": 0.26005596292830496,
+        "root_mean_initial_translation_mm": 73.97105110416373,
+        "root_final_initial_translation_mm": 75.29749420760714
+      }
+    }
+  },
+  "numerical_reference_differences": {
+    "UniEgoMotion_original": {
+      "evaluation400": {
+        "mpjpe_world_mm": {
+          "ours": 88.63393467439553,
+          "paper": 100.0,
+          "ours_minus_paper": -11.366065325604467,
+          "numerical_error_reduction_percent": 11.366065325604469
+        },
+        "pa_mpjpe_mm": {
+          "ours": 54.49103370425711,
+          "paper": 53.0,
+          "ours_minus_paper": 1.491033704257113,
+          "numerical_error_reduction_percent": -2.8132711401077604
+        },
+        "mpjpe_hand_mm": {
+          "ours": 175.19131034851074,
+          "paper": 180.0,
+          "ours_minus_paper": -4.80868965148926,
+          "numerical_error_reduction_percent": 2.671494250827367
+        },
+        "head_rot_f": {
+          "ours": 0.22652727173338644,
+          "paper": 0.26,
+          "ours_minus_paper": -0.03347272826661357,
+          "numerical_error_reduction_percent": 12.874126256389836
+        },
+        "head_translation_leye_mm": {
+          "ours": 29.89881538629532,
+          "paper": 58.0,
+          "ours_minus_paper": -28.10118461370468,
+          "numerical_error_reduction_percent": 48.45031829949083
+        },
+        "foot_slide_uniegomotion_mm": {
+          "ours": 4.241640460459461,
+          "paper": 3.62,
+          "ours_minus_paper": 0.621640460459461,
+          "numerical_error_reduction_percent": -17.172388410482345
+        },
+        "foot_contact_mesh_mm": {
+          "ours": 17.56029489994049,
+          "paper": 27.0,
+          "ours_minus_paper": -9.43970510005951,
+          "numerical_error_reduction_percent": 34.961870740961146
+        }
+      },
+      "evaluation-long": {
+        "mpjpe_world_mm": {
+          "ours": 97.4998114205701,
+          "paper": 100.0,
+          "ours_minus_paper": -2.500188579429903,
+          "numerical_error_reduction_percent": 2.500188579429903
+        },
+        "pa_mpjpe_mm": {
+          "ours": 59.155058374761786,
+          "paper": 53.0,
+          "ours_minus_paper": 6.155058374761786,
+          "numerical_error_reduction_percent": -11.613317688229785
+        },
+        "head_rot_f": {
+          "ours": 0.26005596292830496,
+          "paper": 0.26,
+          "ours_minus_paper": 5.596292830495342e-05,
+          "numerical_error_reduction_percent": -0.021524203194212853
+        },
+        "foot_slide_uniegomotion_mm": {
+          "ours": 4.711454468964343,
+          "paper": 3.62,
+          "ours_minus_paper": 1.0914544689643426,
+          "numerical_error_reduction_percent": -30.15067593824151
+        }
+      }
+    },
+    "UniEgoMotion_in_EgoForce": {
+      "evaluation400": {
+        "mpjpe_world_mm": {
+          "ours": 88.63393467439553,
+          "paper": 91.0,
+          "ours_minus_paper": -2.366065325604467,
+          "numerical_error_reduction_percent": 2.600071786378535
+        },
+        "wrist_pe_mm": {
+          "ours": 147.57888778459963,
+          "paper": 89.0,
+          "ours_minus_paper": 58.57888778459963,
+          "numerical_error_reduction_percent": -65.81897503887599
+        },
+        "mpjre_f": {
+          "ours": 0.5089051757960691,
+          "paper": 0.497,
+          "ours_minus_paper": 0.01190517579606909,
+          "numerical_error_reduction_percent": -2.3954076048428754
+        }
+      },
+      "evaluation-long": {
+        "mpjpe_world_mm": {
+          "ours": 97.4998114205701,
+          "paper": 91.0,
+          "ours_minus_paper": 6.499811420570097,
+          "numerical_error_reduction_percent": -7.1426499127143925
+        },
+        "wrist_pe_mm": {
+          "ours": 167.53558172216353,
+          "paper": 89.0,
+          "ours_minus_paper": 78.53558172216353,
+          "numerical_error_reduction_percent": -88.24222665411632
+        },
+        "mpjre_f": {
+          "ours": 0.5331944920715377,
+          "paper": 0.497,
+          "ours_minus_paper": 0.03619449207153769,
+          "numerical_error_reduction_percent": -7.282593978176597
+        }
+      }
+    },
+    "EgoForce": {
+      "evaluation400": {
+        "mpjpe_world_mm": {
+          "ours": 88.63393467439553,
+          "paper": 73.0,
+          "ours_minus_paper": 15.633934674395533,
+          "numerical_error_reduction_percent": -21.416348869034977
+        },
+        "wrist_pe_mm": {
+          "ours": 147.57888778459963,
+          "paper": 76.0,
+          "ours_minus_paper": 71.57888778459963,
+          "numerical_error_reduction_percent": -94.1827470849995
+        },
+        "mpjre_f": {
+          "ours": 0.5089051757960691,
+          "paper": 0.138,
+          "ours_minus_paper": 0.3709051757960691,
+          "numerical_error_reduction_percent": -268.77186651889065
+        }
+      },
+      "evaluation-long": {
+        "mpjpe_world_mm": {
+          "ours": 97.4998114205701,
+          "paper": 73.0,
+          "ours_minus_paper": 24.499811420570097,
+          "numerical_error_reduction_percent": -33.56138550763027
+        },
+        "wrist_pe_mm": {
+          "ours": 167.53558172216353,
+          "paper": 76.0,
+          "ours_minus_paper": 91.53558172216353,
+          "numerical_error_reduction_percent": -120.4415548975836
+        },
+        "mpjre_f": {
+          "ours": 0.5331944920715377,
+          "paper": 0.138,
+          "ours_minus_paper": 0.3951944920715377,
+          "numerical_error_reduction_percent": -286.37282034169397
+        }
+      }
+    }
+  },
+  "metric_review": {
+    "position_units": "Paper position values converted from meters to millimeters; UEM Foot Slide code already reports millimeters.",
+    "body": "22-joint world MPJPE and per-frame similarity PA-MPJPE definitions checked against UEM official code.",
+    "hands": "SMPL-X25:55 in both UEM official code and our full-mesh supplementary metric.",
+    "head_translation_UEM": "Left-eye joint23, use head_translation_leye_mm, not head_joint_pe_mm.",
+    "head_rotation_UEM": "Global head joint15 Frobenius rotation difference; equivalent orthogonal-matrix relative-error norm.",
+    "foot_slide_UEM": "Same7/10/8/11 joints,0.08/0.04m thresholds, height-weighted displacement sum/T, four-point average,mm.",
+    "foot_contact_UEM": "Official compute_metrics calls get_contact_validity on mesh vertices: abs(min_z per frame) mean. Our foot_contact_mesh_mm has the same full-mesh statistic; not a foot-joint proxy or contact-classification accuracy.",
+    "Head_PE_EgoForce": "Paper lists34/72mm for UEM/EgoForce. Exact anatomical/device reference still unverified; our SMPL15 values are not ranked against them.",
+    "MPJRE_F_EgoForce": "Same metric family; final joint selection/rotation convention and evaluation protocol still require common validation.",
+    "missing": [
+      "Semantic/FID not computed with matched TMR checkpoint/protocol",
+      "PJ/AUJ not reproduced; velocity/acceleration errors are different metrics",
+      "No isolated matched-hardware Time benchmark"
+    ]
+  },
+  "comparison_boundaries": [
+    "Only our model was evaluated locally; no UniEgoMotion/EgoForce rerun requested or performed.",
+    "D400 has40080-frame clips/212takes, first20frames startup, last60scored:24000frames.",
+    "Long diagnostic has50continuous annotated intervals/50takes,36858scored frames; it is not the full benchmark.",
+    "Both are development validation subsets; no same-sample paper-baseline scores.",
+    "Our current inputs do not include EgoForce visible wrist pose controls.",
+    "All differences are arithmetic comparisons of published reports and our subset statistics, not matched-protocol causal gains."
+  ]
+}
