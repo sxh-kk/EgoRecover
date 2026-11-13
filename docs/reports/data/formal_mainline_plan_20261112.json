@@ -1,7 +1,7 @@
 {
   "version": "formal-v3-budget10k-with-v1-v2-history",
   "created_at_beijing": "2026-11-12T11:42:52+08:00",
-  "status": "budget10k_revision_queued_parent_training_continues",
+  "status": "G_budget_screening_reviewed_P_not_started",
   "authorized_this_turn": "Total10000 includes original8000-update prefix; decay after update8000 to3e-6, both windows4GPUs each; no automatic extension or P.",
   "old_experiments": "exploratory, preserved; no warm-starting formal G/P",
   "data": {
@@ -155,11 +155,15 @@
         "otherwise": "lower MPJPE",
         "abnormal_long_rollout": "diagnose before locking window"
       },
-      "status": "queued_handoff_at8000",
+      "status": "complete_budget_screening_reviewed",
       "learning_rates": {
         "1..8000": 3e-05,
         "8001..10000": 3e-06
-      }
+      },
+      "recommended_window": 3,
+      "best_step": 10000,
+      "convergence_confirmed": false,
+      "analysis": "docs/reports/data/formal_g_analysis_20261113.json"
     },
     {
       "id": "S2_P",
@@ -540,7 +544,7 @@
       {
         "id": "T1_G",
         "stage": "S1_budget_screening_v3",
-        "status": "in_progress",
+        "status": "complete_budget_screening_reviewed",
         "task": "完成当前W1/W3各10000步G，固定评测后选择窗口与基础检查点",
         "schedule": {
           "total_updates": 10000,
@@ -554,12 +558,15 @@
           "固定D400与50段连续区间评测",
           "检查曲线、训练充分性与滚动稳定性，登记G版本及SHA；10k不是自动收敛证明"
         ],
-        "auto_extension": false
+        "auto_extension": false,
+        "recommended_window": 3,
+        "convergence_confirmed": false,
+        "analysis": "docs/reports/data/formal_g_analysis_20261113.json"
       },
       {
         "id": "T2_P",
         "stage": "S2_P",
-        "status": "pending_T1_review",
+        "status": "pending_P_implementation_and_history_preparation",
         "task": "使用新G真实滚动历史训练P，在相同历史上与CV比较",
         "depends_on": [
           "T1_G"
@@ -622,11 +629,13 @@
       "paired supervision"
     ],
     "budget_updated_at_beijing": "2026-11-12T20:56:15+08:00",
-    "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json"
+    "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json",
+    "next": "T2_P",
+    "current_status": "T1 screening completed; next P preparation pending; no training launched."
   },
   "fft_todo_branch": {
     "recorded_at_beijing": "2026-11-12T20:41:00+08:00",
-    "status": "retained_conditional_research_not_scheduled",
+    "status": "F0_complete_loss_experiments_not_scheduled",
     "mainline_order_unchanged": true,
     "evidence_note": "docs/fft_low_frequency_loss_20261111.md",
     "old_spectrum": "docs/reports/data/fft_error_spectrum_20261111.json",
@@ -648,7 +657,11 @@
         "task": "Reanalyse DC/nonzero-low/high absolute error energies on new G, same D400 and separately continuous intervals. Preserve world/relative-body decomposition.",
         "requires_training": false,
         "prediction_source": "Reuse saved first emissions or replay fixed checkpoint/noise/selection if only summary artifacts exist.",
-        "auto_start": false
+        "auto_start": false,
+        "status": "complete_CPU_saved_prediction_analysis",
+        "completed_at_beijing": "2026-11-13T11:16:12+08:00",
+        "analysis": "docs/reports/data/formal_g_analysis_20261113.json",
+        "full_long_interval_FFT_completed": true
       },
       {
         "id": "F1_protocol",
@@ -716,6 +729,9 @@
       "D400_60frame_spacing_Hz": 0.16666666666666666
     },
     "training_changes_now": false,
-    "first_PG_U_comparisons_add_FFT_loss": false
+    "first_PG_U_comparisons_add_FFT_loss": false,
+    "new_position_error_low_band_share_percent": 94.85587994628413,
+    "loss_effectiveness_confirmed": false,
+    "new_long_position_error_low_band_share_percent": 92.43359922088611
   }
 }
