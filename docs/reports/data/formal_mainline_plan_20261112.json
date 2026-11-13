@@ -1,7 +1,7 @@
 {
   "version": "formal-v3-budget10k-with-v1-v2-history",
   "created_at_beijing": "2026-11-12T11:42:52+08:00",
-  "status": "P02_AB_r1_review_fixes_verified_queued_waiting_for_SIMPLE",
+  "status": "P02_AB_r1_queue_cancelled_by_user_before_training",
   "authorized_this_turn": "User authorized trainer adaptation, history preparation, four-GPU2k P pilot and same-state continuation to10k if predeclared gate passes.",
   "old_experiments": "exploratory, preserved; no warm-starting formal G/P",
   "data": {
@@ -319,7 +319,7 @@
     },
     {
       "id": "S2_P02_AB",
-      "status": "r1_queued_waiting_for_SIMPLE_GPU_preflight_pending",
+      "status": "queue_cancelled_by_user_at0_updates",
       "run_ids": [
         "A_P02_commonCV_s62_r1",
         "B_P02_commonCV_holdBeta_s62_r1"
@@ -443,7 +443,9 @@
       ],
       "superseded_runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/plan.json",
       "fix_record": "docs/reports/data/code_review_fixes_20261113.json",
-      "review_fixes": "R01-R08"
+      "review_fixes": "R01-R08",
+      "auto_start": false,
+      "cancellation_record": "docs/reports/data/formal_p02_queue_cancelled_20261114.json"
     },
     {
       "id": "S3_PG",
@@ -812,7 +814,7 @@
       "note": "New W3 selection replaces W1/W3 mixing, GT warmup and18k budget; current P01 is planning only."
     }
   ],
-  "latest_authorization": "A/B each4GPUs random initialization2000updates; keep other settings matched; continue only after original gate passes. Existing preference: wait for SIMPLE completion without migration or GPU sharing.",
+  "latest_authorization": "2026-11-14: User requested 取消当前队列. P02 A/B queue cancelled at0formal updates. No automatic restart or launch after SIMPLE; a new explicit user launch instruction is required.",
   "active_runtime_plan": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/plan.json",
   "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json",
   "initial_authorization": "checkpoint cleanup and formal planning only",
@@ -852,7 +854,7 @@
       {
         "id": "T2_P",
         "stage": "S2_P02_AB",
-        "status": "P02_AB_r1_queued_waiting_for_SIMPLE",
+        "status": "queue_cancelled_by_user_at0_updates",
         "task": "使用新G真实滚动历史训练P，在相同历史上与CV比较",
         "depends_on": [
           "T1_G"
@@ -865,7 +867,7 @@
           "Dense mature clip-equal P/CV comparison, startup/long/temporal guards; native producer identity and visit coverage"
         ],
         "training_protocol": "docs/reports/data/code_review_fixes_20261113.json",
-        "auto_start": true,
+        "auto_start": false,
         "case_protocols": {
           "A": "docs/reports/data/formal_p02_a_r1_plan_20261113.json",
           "B": "docs/reports/data/formal_p02_b_r1_plan_20261113.json"
@@ -875,8 +877,9 @@
           "A_P02_commonCV_s62_r1",
           "B_P02_commonCV_holdBeta_s62_r1"
         ],
-        "auto_start_condition": "bound SIMPLE wrapper finished and all8GPUs idle stable60s; real4GPU preflight must pass",
-        "runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/plan.json"
+        "auto_start_condition": "disabled_by_user_cancellation; explicit new launch authorization required",
+        "runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/plan.json",
+        "cancellation_record": "docs/reports/data/formal_p02_queue_cancelled_20261114.json"
       },
       {
         "id": "T3_G_adaptation_and_fusion_diagnostic",
@@ -930,7 +933,7 @@
     "budget_updated_at_beijing": "2026-11-12T20:56:15+08:00",
     "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json",
     "next": "T2_P",
-    "current_status": "P01 remains stopped/diagnosed; P02 original zero-step runtime retired with source preserved. R01-R08 fixed,599CPU tests plus final frozen-source4rank A/B proof passed. Revised P02r1 queue waiting for SIMPLE; trueGPU preflight mandatory,2k pilots and original same-state continuation gates unchanged."
+    "current_status": "User cancelled P02r1 queue before formal training; supervisor exited and no owned jobs remain. All logs/checkpoints/configurations retained. SIMPLE untouched. No automatic restart; wait for explicit user launch authorization."
   },
   "fft_todo_branch": {
     "recorded_at_beijing": "2026-11-12T20:41:00+08:00",
@@ -1046,7 +1049,7 @@
     "B": "docs/reports/data/formal_p02_b_r1_plan_20261113.json"
   },
   "active_P_runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/plan.json",
-  "P02_recorded_at_beijing": "2026-11-13T23:53:01+08:00",
+  "P02_recorded_at_beijing": "2026-11-14T00:03:26+08:00",
   "P01_historical_record_fields": [
     "P_training_plan",
     "P_runtime_plan",
@@ -1054,5 +1057,6 @@
     "P_pilot_result",
     "P_diagnosis"
   ],
-  "P02_AB_fix_record": "docs/reports/data/code_review_fixes_20261113.json"
+  "P02_AB_fix_record": "docs/reports/data/code_review_fixes_20261113.json",
+  "P02_queue_cancellation_record": "docs/reports/data/formal_p02_queue_cancelled_20261114.json"
 }

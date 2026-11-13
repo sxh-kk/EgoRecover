@@ -1,0 +1,45 @@
+{
+  "phase": "cancelled_by_user",
+  "at_beijing": "2026-11-14T00:03:26+08:00",
+  "reason": "User requested 取消当前队列",
+  "controller_pid": 1854936,
+  "previous_phase": "waiting_for_gpus",
+  "completed_at_beijing": "2026-11-14T00:03:26+08:00",
+  "controller_stopped": true,
+  "signals": [
+    {
+      "pid": 1854936,
+      "signal": "SIGTERM",
+      "start_ticks": 131965531
+    }
+  ],
+  "owned_job_cleanup": {
+    "reason": "explicit_user_queue_cancellation",
+    "owned_processes": [],
+    "signals": [],
+    "remaining": []
+  },
+  "cases_at_cancellation": {
+    "A": {
+      "formal_resume_exists": false,
+      "progress": null,
+      "GPU_preflight_passed": false
+    },
+    "B": {
+      "formal_resume_exists": false,
+      "progress": null,
+      "GPU_preflight_passed": false
+    }
+  },
+  "formal_updates": {
+    "A": 0,
+    "B": 0
+  },
+  "GPU_preflight_started": false,
+  "automatic_restart": false,
+  "artifacts_preserved": true,
+  "SIMPLE_interrupted": false,
+  "SIMPLE_still_running": true,
+  "SIMPLE_start_ticks": 129424218,
+  "P_training_started": false
+}
