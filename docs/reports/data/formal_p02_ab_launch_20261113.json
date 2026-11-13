@@ -1,0 +1,276 @@
+{
+  "version": "egorecover_formal_P02_AB_launch_v1",
+  "recorded_at_beijing": "2026-11-13T19:32:05+08:00",
+  "status_at_record": "queued_waiting_for_SIMPLE_all8_GPUs",
+  "state_fields_are_recording_snapshot_not_live": true,
+  "user_authorization": "A/B each4GPUs random initialization2000updates; keep other settings matched; continue only after original gate passes. Existing preference: wait for SIMPLE completion without migration or GPU sharing.",
+  "runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/plan.json",
+  "live_status": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/status.json",
+  "controller": {
+    "pid": 1262069,
+    "command": [
+      "/root/miniconda3/envs/egorecover/bin/python3.12",
+      "-m",
+      "scripts.run_formal_prior_ab",
+      "run",
+      "--plan",
+      "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/plan.json"
+    ],
+    "cwd": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/source",
+    "launched_at_utc": "2026-11-13T11:29:32.085616+00:00",
+    "log": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/controller.log"
+  },
+  "controller_state_at_record": "waiting_for_gpus",
+  "source_snapshot": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/source",
+  "source_manifest_sha256": "79c2b36510e633ae5c05866a94bf2bd9cbebb2f50115e27ba1be8c652696e77d",
+  "cases": {
+    "A": {
+      "run_id": "A_P02_commonCV_s62",
+      "protocol": "docs/reports/data/formal_p02_a_plan_20261113.json",
+      "protocol_sha256": "11b8a81cc81e4aeabdbf4bb6086bfff66f955ac69abd3f4edf6051fe652ff862",
+      "frozen_protocol": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/A/protocol.json",
+      "runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/A/plan.json",
+      "output": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/A/A_P02_commonCV_s62",
+      "GPUs": "0,1,2,3",
+      "hold_beta": false,
+      "actual_updates_at_record": 0,
+      "GPU_preflight_status_at_record": "pending_resources"
+    },
+    "B": {
+      "run_id": "B_P02_commonCV_holdBeta_s62",
+      "protocol": "docs/reports/data/formal_p02_b_plan_20261113.json",
+      "protocol_sha256": "686d902b0bd894b4611ce2e2831bc3634d5c429d1bbb947b10b5ed34c39bb6a3",
+      "frozen_protocol": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/B/protocol.json",
+      "runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/B/plan.json",
+      "output": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/B/B_P02_commonCV_holdBeta_s62",
+      "GPUs": "4,5,6,7",
+      "hold_beta": true,
+      "actual_updates_at_record": 0,
+      "GPU_preflight_status_at_record": "pending_resources"
+    }
+  },
+  "scientific_controls": {
+    "objective": "common_cv_valid_state",
+    "physical_geometry": "Original decoded physical P, own predicted-beta FK, official22GT,0.1m scale",
+    "fixed_geometry_weight": 0.008869197811349056,
+    "weight_source": {
+      "P01_identity": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/P01_W3G10k_s62/identity.json",
+      "identity_sha256": "ea26c30e3a46e5dfb7cefce8aca8d4cba4ceeaa4bc3eb7df9f3c4101992fb1d7",
+      "recalibrate": false
+    },
+    "recalibrated": false,
+    "seed": 62,
+    "initialization": "matched random trunk and zero residual head; initial output equals CV",
+    "initial_model_state_sha256": "901031c48efb76f43ea4b7b6cbddbf50fe22d10b586331fdbeda43b0d503d077",
+    "shared_producer": {
+      "checkpoint": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/V3_G_CV_W3_10k_s62/best.pt",
+      "sha256": "4f748009e20193b68efca7cc5e47b28c3613995cac96bcfe4cd397ad01131d67",
+      "step": 10000,
+      "window": 3,
+      "seed": 62,
+      "prior": "constant_velocity",
+      "source": "gaussian",
+      "NFE": 1,
+      "shape_mode": "predicted",
+      "geometry_target": "official",
+      "revise_recent": true,
+      "cache_representation": "existing dense state, no new FK projection",
+      "native_checkpoint_manifest": "eadd4e5cb98257adf6fcd068ffdf4fdaa78f78e3530b309f8a18a9b23d6b1d42",
+      "source_snapshot": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/source",
+      "convergence_confirmed": false,
+      "identity_rule": "Match actual frozen producer data/statistics/bootstrap identity; preliminary planning digest is not interchangeable."
+    },
+    "existing_banks": {
+      "train": {
+        "path": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/banks/train/bank.pt",
+        "sha256": "7c99b1db4f9d7ef4eb77448e3fb1be1d838e651e507383d6c8988b2ed05348a8"
+      },
+      "D128": {
+        "path": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/banks/D128/bank.pt",
+        "sha256": "f0170673454eee64e7e49e594b7a41b39046e94f24eea36bded7ed0f5287b926"
+      },
+      "preflight_train": {
+        "path": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/banks/preflight-train/bank.pt",
+        "sha256": "744f89ec09f34adb70cc4d35e467076b52acc5e1d92316d719756d2b485a9d5d"
+      },
+      "preflight_D128": {
+        "path": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/banks/preflight-D128/bank.pt",
+        "sha256": "34b86be3d4fbfd03cc2c94fc2f03d71b6cca7823ed707e31c07e8f592a847c51"
+      }
+    },
+    "bank_regeneration_required": false,
+    "global_batch": 64,
+    "microbatch": 8,
+    "global_mature_early": [
+      48,
+      16
+    ],
+    "learning_rates": {
+      "1..8000": 3e-05,
+      "8001..10000": 3e-06
+    },
+    "ema_decay": 0.999,
+    "first_updates_per_case": 2000,
+    "max_updates_per_case": 10000,
+    "primary_metrics_and_gates_changed": false,
+    "supplemental_foot_diagnostics": [
+      "foot_slide_gt_height_weight_mm",
+      "foot_z_mae_mm",
+      "foot_z_mae_gt_height_contact_mm",
+      "foot_z_mae_gt_height_noncontact_mm",
+      "foot_low_height_contact_fraction",
+      "foot_gt_noncontact_false_contact_fraction",
+      "foot_negative_z_fraction",
+      "gt_foot_negative_z_fraction",
+      "left_ankle_z_mae_mm",
+      "left_toe_z_mae_mm",
+      "right_ankle_z_mae_mm",
+      "right_toe_z_mae_mm"
+    ]
+  },
+  "resource_wait": {
+    "enabled": true,
+    "gpus": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "max_memory_MiB": 2048,
+    "stable_seconds": 60,
+    "poll_seconds": 15,
+    "blocking_processes": [
+      {
+        "pid": 2537348,
+        "start_ticks": 129424218,
+        "cmdline_sha256": "2b9f30ac299511892429350db7cb1ed0b9b5e21ed63fca2ea806a3c17bae4875"
+      }
+    ]
+  },
+  "resource_observation_at_record": {
+    "at_beijing": "2026-11-13T19:31:57+08:00",
+    "GPU_used_MiB": {
+      "0": 61579,
+      "1": 61575,
+      "2": 61409,
+      "3": 61455,
+      "4": 61519,
+      "5": 61509,
+      "6": 61487,
+      "7": 61441
+    },
+    "blocking_launchers_alive": [
+      {
+        "pid": 2537348,
+        "start_ticks": 129424218,
+        "cmdline_sha256": "2b9f30ac299511892429350db7cb1ed0b9b5e21ed63fca2ea806a3c17bae4875",
+        "observed_cmdline_sha256": "2b9f30ac299511892429350db7cb1ed0b9b5e21ed63fca2ea806a3c17bae4875",
+        "command_changed": false
+      }
+    ],
+    "stable_free_seconds": 0.0,
+    "SIMPLE_interrupted": false,
+    "share_GPUs": false
+  },
+  "verification": {
+    "targeted_pytest": {
+      "passed": 158,
+      "failed": 0
+    },
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "CPU_four_rank_development_proof": {
+      "path": "/root/workspace/songxuhua/exp/formal-p02-cpu-preflight-20261113/verification.json",
+      "sha256": "506ce59b5341564c4a7ad02b75798a318ed176c8091168afbc24f70262f52568",
+      "result": {
+        "status": "passed",
+        "device": "cpu",
+        "ranks_per_case": 4,
+        "cases": [
+          {
+            "status": "passed",
+            "device": "cpu",
+            "ranks": 4,
+            "scope": "CPU Gloo integration only; real GPU preflight remains required",
+            "case": "A",
+            "max_weight_differences": {
+              "model": 3.725290298461914e-09,
+              "ema": 7.105427357601002e-15
+            },
+            "random_initial_model_sha256": "901031c48efb76f43ea4b7b6cbddbf50fe22d10b586331fdbeda43b0d503d077",
+            "objective": "common_cv_valid_state",
+            "hold_beta": false,
+            "geometry_weight": 0.008869197811349056,
+            "trace_hashes": [
+              "704def0067083416e362b5b539979624e19d940c2ec80b49ca564f8c096dbf10",
+              "d3dd05ed2c0cf23a77e11785e77d044bbc74eb5626c1ef393be4f7ffc3e827e8"
+            ],
+            "initial_losses": {
+              "code": 0.3765747845172882,
+              "geometry": 0.8976132199168205,
+              "loss": 0.38453589752316475
+            }
+          },
+          {
+            "status": "passed",
+            "device": "cpu",
+            "ranks": 4,
+            "scope": "CPU Gloo integration only; real GPU preflight remains required",
+            "case": "B",
+            "max_weight_differences": {
+              "model": 7.450580596923828e-09,
+              "ema": 7.105427357601002e-15
+            },
+            "random_initial_model_sha256": "901031c48efb76f43ea4b7b6cbddbf50fe22d10b586331fdbeda43b0d503d077",
+            "objective": "common_cv_valid_state",
+            "hold_beta": true,
+            "geometry_weight": 0.008869197811349056,
+            "trace_hashes": [
+              "704def0067083416e362b5b539979624e19d940c2ec80b49ca564f8c096dbf10",
+              "d3dd05ed2c0cf23a77e11785e77d044bbc74eb5626c1ef393be4f7ffc3e827e8"
+            ],
+            "initial_losses": {
+              "code": 0.3765747845172882,
+              "geometry": 0.8976132199168205,
+              "loss": 0.38453589752316475
+            }
+          }
+        ],
+        "A_B_initialization_queries_first_loss_match": true,
+        "GPU_preflight_passed": false
+      },
+      "scope": "Development CPU/Gloo only, before final supplemental-foot-evaluator addition. No CUDA resources used. Not accepted as frozen-source realGPU preflight."
+    },
+    "final_readonly_review": "passed: frozen sources/protocols/bank SHAs, persistent beta policy, resource blocker, separate2k gates and full-state continuation/final-evaluation paths",
+    "real_GPU_preflight": "pending; mandatory for each case after SIMPLE and resource guard release"
+  },
+  "automatic_sequence": [
+    "Wait for bound SIMPLE wrapper PID/start identity to finish and all8GPUs idle for60seconds",
+    "A/B each real4CUDA-rank continuous2 versus1+resume1 preflight across LR transition",
+    "Audit matching initial state, banks, queries and first loss; validate CUDA RNG recovery",
+    "A/B each train2000updates and validate every500steps",
+    "Audit shared training prefix and independently apply original pilot gates",
+    "Failed case stops and retains logs/checkpoints; passed case resumes same optimizer/EMA/scheduler/RNG/sampler to10k cap",
+    "Passed-through10k cases evaluate D128-selected bestEMA on fixed D400/long50; no G adaptation/U/FFT auto-start"
+  ],
+  "pilot_gates": {
+    "negative_mature_P_minus_CV_at_steps": [
+      1500,
+      2000
+    ],
+    "minimum_mature_gain_at2000_mm": 0.5,
+    "max_each_temporal_regression_pct": 5,
+    "numerics_and_sampling_and_gradients_pass": true,
+    "failure": "Stop at2k, diagnose by phase/part/shape/gradient/coverage. Any changed method uses new P02 identity, no automatic extra steps.",
+    "temporal_gate_phases": [
+      "D128 mature query40..79",
+      "D128 all query20..79"
+    ]
+  },
+  "system_G_gain_established": false,
+  "monitor_command": "cd /root/workspace/songxuhua/exp/formal-p02-ab-20261113/source && /root/miniconda3/envs/egorecover/bin/python3.12 -m scripts.run_formal_prior_ab monitor --plan /root/workspace/songxuhua/exp/formal-p02-ab-20261113/plan.json"
+}

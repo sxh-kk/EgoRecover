@@ -137,10 +137,17 @@ class BetaFK:
         return body.joints[..., :3, 3] + body.auxiliary[..., -10:-9, None] * 0.01
 
 
-def test_formal_training_cpu_resume_preserves_lr_samples_optimizer_and_ema(tmp_path, monkeypatch):
+@pytest.mark.parametrize(
+    ("objective", "hold_beta"),
+    [("raw_code", False), ("common_cv_valid_state", False), ("common_cv_valid_state", True)],
+)
+def test_formal_training_cpu_resume_preserves_lr_samples_optimizer_and_ema(tmp_path, monkeypatch, objective, hold_beta):
     import egorecover.formal_prior_training as training
 
     p = protocol()
+    if objective != "raw_code":
+        p["loss"].update(objective=objective, fixed_geometry_weight=0.008869197811349056)
+        p["model"]["hold_beta"] = hold_beta
     protocol_file = tmp_path / "protocol.json"
     protocol_file.write_text(json.dumps(p))
     paths = {}
@@ -174,6 +181,13 @@ def test_formal_training_cpu_resume_preserves_lr_samples_optimizer_and_ema(tmp_p
 
     full, resumed = load(options.output), load(interrupted.output)
     assert full["identity"] == resumed["identity"]
+    assert full["identity"]["objective"] == objective
+    assert full["identity"]["hold_beta"] == hold_beta
+    if objective != "raw_code":
+        audit = full["identity"]["geometry_audit"]
+        assert audit["weight"] == 0.008869197811349056
+        assert audit["weight_mode"] == "P01_fixed_not_recalibrated"
+        assert audit["target_weighted_geometry_ratio"] is None
     assert full["scheduler"] == resumed["scheduler"]
     assert full["step"] == resumed["step"] == 2
     assert full["optimizer"]["param_groups"] == resumed["optimizer"]["param_groups"]

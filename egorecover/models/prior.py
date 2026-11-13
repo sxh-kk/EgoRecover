@@ -7,8 +7,11 @@ from .layers import PositionalEncoding
 
 
 class HistoryPrior(nn.Module):
-    def __init__(self, width=256, layers=4, heads=8, dropout=0.1, source_flags=False):
+    def __init__(self, width=256, layers=4, heads=8, dropout=0.1, source_flags=False, hold_beta=False):
         super().__init__()
+        if not isinstance(hold_beta, bool):
+            raise ValueError("hold_beta must be boolean.")
+        self.hold_beta = hold_beta
         self.input = nn.Linear(243, width)
         self.positions = PositionalEncoding(width, dropout)
         self.source_flags = source_flags
@@ -65,4 +68,8 @@ class HistoryPrior(nn.Module):
         encoded = self.encoder(self.positions(embedded), src_key_padding_mask=~valid)
         indices = torch.arange(length, device=history.device).expand(batch, -1).masked_fill(~valid, -1).max(1).values
         correction = self.output(encoded[torch.arange(batch, device=history.device), indices])[:, None]
+        if self.hold_beta:
+            # Beta is static over this prediction step. Retain the CV/G value
+            # and its input gradients; downstream FK still uses this shape.
+            correction = torch.cat((correction[..., :-10], torch.zeros_like(correction[..., -10:])), dim=-1)
         return base_mu + correction

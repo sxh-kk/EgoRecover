@@ -1,4 +1,4 @@
-"""Supervise frozen-history P01 preparation, four-rank preflight and gated training."""
+"""Supervise frozen-history P preparation, four-rank preflight and gated training."""
 
 import argparse
 import fcntl
@@ -26,6 +26,47 @@ HEALTH_CHECKS = {
     "train_val_take_disjoint",
     "gradient_diagnostics_finite",
 }
+
+BANK_KEYS = {
+    "train": "train_bank",
+    "D128": "val_bank",
+    "preflight_train": "preflight_train_bank",
+    "preflight_D128": "preflight_val_bank",
+}
+
+
+def validate_protocol_family(protocol):
+    run_id = protocol.get("run_id", "")
+    if not run_id or Path(run_id).name != run_id or run_id in (".", ".."):
+        raise ValueError("The P run_id must be a single output-directory name.")
+    if protocol["producer"]["window"] != 3:
+        raise ValueError("The runtime must bind the reviewed W3 history producer.")
+    if run_id == "P01_W3G10k_s62":
+        return "P01"
+    if protocol.get("experiment_family") != "P02_common_cv_ab" or protocol.get("case") not in ("A", "B"):
+        raise ValueError("The runtime requires a reviewed P01 or P02 A/B protocol.")
+    expected_hold = protocol["case"] == "B"
+    if (
+        protocol["loss"].get("objective") != "common_cv_valid_state"
+        or protocol["model"].get("hold_beta", False) is not expected_hold
+        or protocol["loss"].get("fixed_geometry_weight") != 0.008869197811349056
+    ):
+        raise ValueError("P02 objective, beta policy or fixed geometry coefficient changed.")
+    if not set(BANK_KEYS) <= protocol.get("existing_banks", {}).keys():
+        raise ValueError("P02 must reuse the frozen formal and preflight history banks.")
+    return "P02"
+
+
+def verify_existing_banks(plan):
+    """Bind reusable histories to content, not a mutable filename or marker."""
+    for name, item in plan.get("existing_banks", {}).items():
+        if not isinstance(item, dict) or not item.get("path") or not item.get("sha256"):
+            raise ValueError(f"Incomplete existing-bank identity: {name}")
+        path = Path(item["path"])
+        if not path.is_absolute():
+            raise ValueError(f"Existing-bank path must be absolute: {name}")
+        if not path.is_file() or sha256(path) != item["sha256"]:
+            raise ValueError(f"Existing-bank identity mismatch: {name}")
 
 
 def sha256(path):
@@ -89,20 +130,29 @@ def bank_stages(plan, cohort, directory, *, limit=None):
 def configure_bank_jobs(plan, *, include_final_evaluation=True):
     """Populate durable argv specifications; nothing runs during configuration."""
     root = Path(plan["output"])
-    plan["preflight_bank_jobs"] = bank_stages(
-        plan, "train", Path(plan["preflight_train_bank"]).parent, limit=16
-    ) + bank_stages(plan, "D128", Path(plan["preflight_val_bank"]).parent, limit=4)
-    plan["bank_jobs"] = bank_stages(plan, "train", Path(plan["train_bank"]).parent) + bank_stages(
-        plan, "D128", Path(plan["val_bank"]).parent
-    )
+    reused = plan.get("existing_banks", {})
+    plan["preflight_bank_jobs"] = []
+    for name, cohort, path_key, limit in (
+        ("preflight_train", "train", "preflight_train_bank", 16),
+        ("preflight_D128", "D128", "preflight_val_bank", 4),
+    ):
+        if name not in reused:
+            plan["preflight_bank_jobs"] += bank_stages(plan, cohort, Path(plan[path_key]).parent, limit=limit)
+    plan["bank_jobs"] = []
+    for name, path_key in (("train", "train_bank"), ("D128", "val_bank")):
+        if name not in reused:
+            plan["bank_jobs"] += bank_stages(plan, name, Path(plan[path_key]).parent)
     plan["evaluation_jobs"] = []
+    plan["evaluation_banks"] = {}
     if include_final_evaluation:
         for cohort in ("D400", "long50"):
-            bank = root / "banks" / cohort
-            plan["evaluation_jobs"] += bank_stages(plan, cohort, bank)
+            bank = Path(reused[cohort]["path"]) if cohort in reused else root / "banks" / cohort / "bank.pt"
+            plan["evaluation_banks"][cohort] = str(bank)
+            if cohort not in reused:
+                plan["evaluation_jobs"] += bank_stages(plan, cohort, bank.parent)
             output = root / "evaluation" / cohort
             argv = train_command(plan, output)
-            argv[argv.index("--val-bank") + 1] = str(bank / "bank.pt")
+            argv[argv.index("--val-bank") + 1] = str(bank)
             argv += ["--evaluate-checkpoint", str(Path(plan["run_directory"]) / "best.pt")]
             plan["evaluation_jobs"].append(
                 [
@@ -119,27 +169,33 @@ def configure_bank_jobs(plan, *, include_final_evaluation=True):
     return plan
 
 
-def initialize(protocol_file, output, source, *, python=sys.executable, gpus="0,1,2,3", port=31071):
+def initialize(
+    protocol_file, output, source, *, python=sys.executable, gpus="0,1,2,3", port=31071, shared_snapshot=None
+):
     """Freeze a completed implementation; this does not start GPU work."""
     protocol_file, output, source = map(lambda value: Path(value).resolve(), (protocol_file, output, source))
     if (output / "plan.json").exists():
         raise FileExistsError("An initialized P runtime already exists; continue its frozen plan.")
     protocol = read(protocol_file)
-    if protocol["run_id"] != "P01_W3G10k_s62" or protocol["producer"]["window"] != 3:
-        raise ValueError("The runtime must bind the reviewed P01 W3 protocol.")
+    family = validate_protocol_family(protocol)
     if sha256(protocol["producer"]["checkpoint"]) != protocol["producer"]["sha256"]:
         raise ValueError("The frozen G producer checkpoint changed.")
     output.mkdir(parents=True, exist_ok=True)
-    snapshot = output / "source"
-    if snapshot.exists():
-        raise FileExistsError("Refusing to overwrite an existing source snapshot.")
-    snapshot.mkdir()
-    for name in ("egorecover", "scripts"):
-        shutil.copytree(source / name, snapshot / name, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    snapshot = Path(shared_snapshot).resolve() if shared_snapshot is not None else output / "source"
+    if shared_snapshot is None:
+        if snapshot.exists():
+            raise FileExistsError("Refusing to overwrite an existing source snapshot.")
+        snapshot.mkdir()
+        for name in ("egorecover", "scripts"):
+            shutil.copytree(source / name, snapshot / name, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    elif not all((snapshot / name).is_dir() for name in ("egorecover", "scripts")):
+        raise ValueError("Shared frozen source snapshot is incomplete.")
     shutil.copy2(protocol_file, output / "protocol.json")
     hashes = {str(path.relative_to(snapshot)): sha256(path) for path in sorted(snapshot.rglob("*.py"))}
     plan = {
         "format": "egorecover_formal_prior_runtime_v1",
+        "experiment_family": family,
+        "case": protocol.get("case"),
         "created_at_beijing": now(),
         "output": str(output),
         "protocol": str(output / "protocol.json"),
@@ -164,7 +220,12 @@ def initialize(protocol_file, output, source, *, python=sys.executable, gpus="0,
         "bank_jobs": [],
         "evaluation_jobs": [],
         "status": "initialized_waiting_for_bank_job_configuration",
+        "existing_banks": protocol.get("existing_banks", {}),
     }
+    for name, key in BANK_KEYS.items():
+        if name in plan["existing_banks"]:
+            plan[key] = str(Path(plan["existing_banks"][name]["path"]).resolve())
+    verify_existing_banks(plan)
     configure_bank_jobs(plan)
     write(output / "plan.json", plan)
     write(output / "status.json", {"phase": plan["status"], "at_beijing": now(), "P_training_started": False})
@@ -173,7 +234,7 @@ def initialize(protocol_file, output, source, *, python=sys.executable, gpus="0,
 
 def verify_identity(plan):
     if sha256(plan["protocol"]) != plan["protocol_sha256"]:
-        raise ValueError("P01 protocol changed after runtime freeze.")
+        raise ValueError("P protocol changed after runtime freeze.")
     actual_files = {
         str(path.relative_to(plan["source_snapshot"])) for path in Path(plan["source_snapshot"]).rglob("*.py")
     }
@@ -186,7 +247,17 @@ def verify_identity(plan):
     if sha256(protocol["producer"]["checkpoint"]) != protocol["producer"]["sha256"]:
         raise ValueError("Frozen G producer changed.")
     if plan["pilot_updates"] != 2000 or plan["max_updates"] != 10000:
-        raise ValueError("P01 must use the reviewed 2k pilot and 10k cap.")
+        raise ValueError("P must use the reviewed 2k pilot and 10k cap.")
+    if plan.get("experiment_family") == "P02":
+        validate_protocol_family(protocol)
+        if plan.get("existing_banks") != protocol["existing_banks"]:
+            raise ValueError("Existing-bank bindings differ from the frozen protocol.")
+        for name, key in BANK_KEYS.items():
+            if Path(plan[key]).resolve() != Path(protocol["existing_banks"][name]["path"]).resolve():
+                raise ValueError(f"Runtime bank path differs from its frozen binding: {name}")
+        if plan["run_id"] != protocol["run_id"] or plan.get("case") != protocol["case"]:
+            raise ValueError("Runtime P02 case differs from the frozen protocol.")
+    verify_existing_banks(plan)
 
 
 def environment(plan, gpus):
@@ -207,7 +278,7 @@ def environment(plan, gpus):
 
 def train_command(plan, output, *, preflight=False, resume=False, stop_after=None):
     if len(plan["training_gpus"].split(",")) != 4:
-        raise ValueError("P01 and its resume preflight require exactly four GPUs.")
+        raise ValueError("P and its resume preflight require exactly four GPUs.")
     argv = [
         plan["python"],
         "-m",
@@ -386,6 +457,13 @@ def verify_preflight(plan):
     )
     assert len(full["rank_rng_states"]) == len(resumed["rank_rng_states"]) == 4
     for left, right in zip(full["rank_rng_states"], resumed["rank_rng_states"]):
+        if any(
+            not isinstance(row.get("cuda_rng"), torch.Tensor)
+            or row["cuda_rng"].dtype != torch.uint8
+            or row["cuda_rng"].numel() == 0
+            for row in (left, right)
+        ):
+            raise AssertionError("A four-GPU preflight requires actual CUDA RNG states on all ranks.")
         _assert_tree_equal(
             {k: v for k, v in left.items() if k != "model_sha256"},
             {k: v for k, v in right.items() if k != "model_sha256"},
@@ -410,6 +488,7 @@ def verify_preflight(plan):
         "source_hashes": plan["source_hashes"],
         "updates": 2,
         "ranks": 4,
+        "CUDA_RNG_state_present_for_all_ranks": True,
         "preflight_bank_hashes": {key: sha256(plan[key]) for key in ("preflight_train_bank", "preflight_val_bank")},
         "RNG_sampling_trace_scheduler_optimizer_steps_exact": True,
         "weight_max_abs_differences": differences,
@@ -500,7 +579,7 @@ def final_decision(plan):
         if report.get("checkpoint_sha256") != digest:
             raise ValueError(f"{cohort} evaluation did not use the current D128-selected best checkpoint.")
         expected = read(plan["protocol"])["evaluation"][cohort]
-        bank = root / "banks" / cohort / "bank.pt"
+        bank = Path(plan.get("evaluation_banks", {}).get(cohort, root / "banks" / cohort / "bank.pt"))
         if (
             report.get("bank_cohort") != cohort
             or report.get("bank_selection_sha256") != expected["selection_id"]
@@ -521,6 +600,8 @@ def final_decision(plan):
 
 
 def supervise(plan):
+    if plan.get("pair_managed"):
+        raise ValueError("Use run_formal_prior_ab for a matched A/B experiment.")
     verify_identity(plan)
     run_bank_jobs(plan, "preflight_bank_jobs", "preflight-banks")
     preflight(plan)
@@ -566,7 +647,7 @@ def supervise(plan):
         }
         run_processes(plan, [spec], "training-to10000")
     if checkpoint_step(directory) != plan["max_updates"]:
-        raise RuntimeError("P01 did not end at its declared 10k cap.")
+        raise RuntimeError("P did not end at its declared 10k cap.")
     run_bank_jobs(plan, "evaluation_jobs", "fixed-evaluation")
     final = final_decision(plan)
     write(

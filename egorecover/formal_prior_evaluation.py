@@ -23,6 +23,67 @@ PARTS = {
     "feet_mm": (10, 11),
     "root_mm": (0,),
 }
+FOOT_POINTS = {"left_ankle": 7, "left_toe": 10, "right_ankle": 8, "right_toe": 11}
+FOOT_THRESHOLDS_M = (0.08, 0.04, 0.08, 0.04)
+FOOT_DIAGNOSTIC_METRICS = (
+    "foot_slide_gt_height_weight_mm",
+    "foot_z_mae_mm",
+    "foot_z_mae_gt_height_contact_mm",
+    "foot_z_mae_gt_height_noncontact_mm",
+    "foot_low_height_contact_fraction",
+    "foot_gt_noncontact_false_contact_fraction",
+    "foot_negative_z_fraction",
+    "gt_foot_negative_z_fraction",
+    *(f"{name}_z_mae_mm" for name in FOOT_POINTS),
+)
+
+
+def _foot_diagnostic_counts(truth, floor_calibrated):
+    if not floor_calibrated:
+        return None
+    height = truth.detach().cpu().double()[:, list(FOOT_POINTS.values()), 2]
+    contact = height < height.new_tensor(FOOT_THRESHOLDS_M)
+    return {
+        "foot_samples": height.numel(),
+        "gt_height_contact_samples": int(contact.sum()),
+        "gt_height_noncontact_samples": int((~contact).sum()),
+    }
+
+
+def _foot_diagnostics(prediction, truth, floor_calibrated):
+    """Height-based joint proxies; GT affects scoring only, never prediction."""
+    result = dict.fromkeys(FOOT_DIAGNOSTIC_METRICS)
+    if not floor_calibrated:
+        return result
+    feet, target = (value[:, list(FOOT_POINTS.values())] for value in (prediction, truth))
+    height, target_height = feet[..., 2], target[..., 2]
+    threshold = height.new_tensor(FOOT_THRESHOLDS_M)
+    gt_contact, predicted_contact = target_height < threshold, height < threshold
+    error_mm = (height - target_height).abs() * 1000
+    result.update(
+        foot_z_mae_mm=float(error_mm.mean()),
+        foot_low_height_contact_fraction=float(predicted_contact.double().mean()),
+        foot_negative_z_fraction=float((height < 0).double().mean()),
+        gt_foot_negative_z_fraction=float((target_height < 0).double().mean()),
+    )
+    for suffix, selected in (("contact", gt_contact), ("noncontact", ~gt_contact)):
+        result[f"foot_z_mae_gt_height_{suffix}_mm"] = float(error_mm[selected].mean()) if bool(selected.any()) else None
+    result["foot_gt_noncontact_false_contact_fraction"] = (
+        float(predicted_contact[~gt_contact].double().mean()) if bool((~gt_contact).any()) else None
+    )
+    for index, name in enumerate(FOOT_POINTS):
+        result[f"{name}_z_mae_mm"] = float(error_mm[:, index].mean())
+    if len(feet) > 1:
+        # Match the official four joints, start-of-transition height convention,
+        # soft weights and T normalization, but hold weights to the same GT.
+        contact = gt_contact[:-1]
+        ratio = torch.where(contact, target_height[:-1] / threshold, 0)
+        weight = torch.where(contact, 2 - torch.exp2(ratio), 0)
+        displacement = torch.diff(feet[..., :2], dim=0).norm(dim=-1)
+        result["foot_slide_gt_height_weight_mm"] = float(
+            (weight * displacement).abs().sum(0).mean() * (1000 / len(feet))
+        )
+    return result
 
 
 def _integer(value, name, minimum):
@@ -72,7 +133,9 @@ def _validate_bank(bank):
     return grouped
 
 
-def formal_center_metrics(prediction, truth, times, floor_calibrated, *, include_pa=False, include_parts=False):
+def formal_center_metrics(
+    prediction, truth, times, floor_calibrated, *, include_pa=False, include_parts=False, include_foot_diagnostics=False
+):
     """Score one clip phase; derivative stencils stay inside that phase."""
     prediction, truth, times = [value.detach().cpu().double() for value in (prediction, truth, times)]
     if prediction.shape != truth.shape or prediction.ndim != 3 or prediction.shape[1:] != (22, 3):
@@ -102,6 +165,8 @@ def formal_center_metrics(prediction, truth, times, floor_calibrated, *, include
         result["pa_mpjpe_mm"] = float((_similarity_align(prediction, truth) - truth).norm(dim=-1).mean() * 1000)
     if include_parts:
         result.update({name: float(distances[:, indices].mean() * 1000) for name, indices in PARTS.items()})
+    if include_foot_diagnostics:
+        result.update(_foot_diagnostics(prediction, truth, floor_calibrated))
     return result
 
 
@@ -158,6 +223,7 @@ def summarize_formal_prior_rows(rows, *, bootstrap_samples=2000, bootstrap_seed=
     if any(row["phase"] not in PHASES for row in rows):
         raise ValueError("Unknown formal P evaluation phase.")
     summary = {}
+    include_foot_diagnostics = any("foot_diagnostic_counts" in row for row in rows)
     for phase in PHASES:
         selected = [row for row in rows if row["phase"] == phase]
         names = sorted(set(METRICS) | {name for row in selected for name in row["P"]})
@@ -168,6 +234,21 @@ def summarize_formal_prior_rows(rows, *, bootstrap_samples=2000, bootstrap_seed=
             "floor_calibrated_clips": sum(row["floor_calibrated"] for row in selected),
             "metrics": {name: _paired_metric(selected, name, samples, int(bootstrap_seed)) for name in names},
         }
+        if include_foot_diagnostics:
+            counts = [
+                row["foot_diagnostic_counts"] for row in selected if row.get("foot_diagnostic_counts") is not None
+            ]
+            summary[phase]["foot_diagnostics"] = {
+                "floor_calibrated_clips": len(counts),
+                **{
+                    name: sum(row[name] for row in counts)
+                    for name in ("foot_samples", "gt_height_contact_samples", "gt_height_noncontact_samples")
+                },
+                **{
+                    f"gt_height_{kind}_valid_clips": sum(row[f"gt_height_{kind}_samples"] > 0 for row in counts)
+                    for kind in ("contact", "noncontact")
+                },
+            }
     return summary
 
 
@@ -185,6 +266,7 @@ def evaluate_formal_prior(
     include_parts=False,
     include_beta=False,
     include_shared_beta=False,
+    include_foot_diagnostics=False,
     bootstrap_samples=2000,
     bootstrap_seed=1062,
 ):
@@ -248,6 +330,7 @@ def evaluate_formal_prior(
                     floor,
                     include_pa=include_pa,
                     include_parts=include_parts,
+                    include_foot_diagnostics=include_foot_diagnostics,
                 )
                 for name in ("P", "CV")
             }
@@ -273,6 +356,11 @@ def evaluate_formal_prior(
                     "phase": phase,
                     "frames": int(selected.sum()),
                     "floor_calibrated": floor,
+                    **(
+                        {"foot_diagnostic_counts": _foot_diagnostic_counts(outputs["truth"][selected], floor)}
+                        if include_foot_diagnostics
+                        else {}
+                    ),
                     **metrics,
                 }
             )
@@ -303,6 +391,22 @@ def evaluate_formal_prior(
             "scope": "one-step predictions on the same frozen G histories; no P feedback or final-G gain claim",
             "parts": {name: list(indices) for name, indices in PARTS.items()} if include_parts else None,
             "diagnostic_only": bool(getattr(fk, "diagnostic_only", False)),
+            **(
+                {
+                    "foot_diagnostics": {
+                        "auxiliary_only": True,
+                        "joints": FOOT_POINTS,
+                        "height_thresholds_m": list(FOOT_THRESHOLDS_M),
+                        "contact": "GT z below joint threshold; height proxy, not physical contact labels",
+                        "slide": "fixed GT start-height soft weight times predicted XY displacement; divide by T",
+                        "aggregation": "clip-equal paired metrics; conditional empty groups unavailable",
+                        "floor": "all foot-height diagnostics unavailable without floor calibration",
+                        "negative_z": "joint-height proxy, not mesh penetration",
+                    }
+                }
+                if include_foot_diagnostics
+                else {}
+            ),
         },
     }
 

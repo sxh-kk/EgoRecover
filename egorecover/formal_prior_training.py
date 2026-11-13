@@ -19,7 +19,7 @@ from .io import code_identity, file_sha256, save_checkpoint, save_json, state_sh
 from .losses import update_ema
 from .models import HistoryPrior
 from .prior_data import TENSOR_FIELDS, predictor_forward, reconstructed_history_count, select_examples
-from .prior_training import prior_losses
+from .prior_objectives import prior_objective_losses
 
 
 class FormalPriorSampler:
@@ -145,6 +145,14 @@ def load_formal_bank(path, split, protocol, *, check_tensors=True, cohort=None, 
 def formal_settings(args, protocol, context):
     opt = protocol["optimization"]
     sampling = protocol["sampling"]
+    objective = protocol["loss"].get("objective", "raw_code")
+    if objective not in ("raw_code", "common_cv_valid_state"):
+        raise ValueError("Unknown formal P objective.")
+    fixed_weight = protocol["loss"].get("fixed_geometry_weight")
+    if fixed_weight is not None and (
+        isinstance(fixed_weight, bool) or not math.isfinite(fixed_weight) or fixed_weight <= 0
+    ):
+        raise ValueError("A fixed P geometry weight must be finite and positive.")
     if (
         args.batch_size != sampling["global_batch"]
         or args.microbatch_size != sampling["microbatch"]
@@ -182,14 +190,16 @@ def formal_settings(args, protocol, context):
     }
 
 
-def gradient_audit(model, example_tensors, indices, codec, fk, device, *, microbatch=8):
+def gradient_audit(model, example_tensors, indices, codec, fk, device, *, microbatch=8, objective="raw_code"):
     """Norms of mean gradients over a fixed train-only diagnostic batch."""
     model.eval()
     parameters = tuple(model.parameters())
     accum = {key: [torch.zeros_like(p) for p in parameters] for key in ("code", "geometry")}
     for start in range(0, len(indices), microbatch):
         selected = indices[start : start + microbatch]
-        losses = prior_losses(model, select_examples(example_tensors, selected, device), codec, fk)
+        losses = prior_objective_losses(
+            model, select_examples(example_tensors, selected, device), codec, fk, objective=objective
+        )
         for key in accum:
             grads = torch.autograd.grad(losses[key], parameters, retain_graph=key == "code", allow_unused=True)
             for target, gradient in zip(accum[key], grads):
@@ -213,18 +223,27 @@ def calibrate_formal_geometry(model, bank, codec, fk, device, protocol):
     indices = []
     for _ in range(calibration["samples"] // 8):
         indices.extend(sampler.sample(generator, 8))
-    audit = gradient_audit(model, bank["tensors"], indices, codec, fk, device)
+    objective = protocol["loss"].get("objective", "raw_code")
+    audit = gradient_audit(model, bank["tensors"], indices, codec, fk, device, objective=objective)
     norms = audit["gradient_norms"]
     if min(norms.values()) <= 1e-12:
         raise ValueError("Degenerate P geometry calibration gradients.")
-    weight = min(calibration["weight_cap"], calibration["gradient_ratio_target"] * norms["code"] / norms["geometry"])
+    fixed_weight = protocol["loss"].get("fixed_geometry_weight")
+    weight = (
+        float(fixed_weight)
+        if fixed_weight is not None
+        else min(calibration["weight_cap"], calibration["gradient_ratio_target"] * norms["code"] / norms["geometry"])
+    )
     return {
         **audit,
         "weight": weight,
         "indices": indices,
         "calibration_seed": calibration["seed"],
         "samples": len(indices),
-        "target_weighted_geometry_ratio": calibration["gradient_ratio_target"],
+        "target_weighted_geometry_ratio": calibration["gradient_ratio_target"] if fixed_weight is None else None,
+        "initial_weighted_geometry_to_code_ratio": weight * norms["geometry"] / norms["code"],
+        "weight_mode": "P01_fixed_not_recalibrated" if fixed_weight is not None else "train_gradient_calibration",
+        "objective": objective,
     }
 
 
@@ -248,8 +267,16 @@ def initial_health(model, bank, codec, fk, device):
     }
 
 
-def _formal_report(model, bank, codec, fk, context):
-    return evaluate_formal_prior(model, bank, codec, fk, device=context.device, context=context)
+def _formal_report(model, bank, codec, fk, context, *, foot_diagnostics=False):
+    return evaluate_formal_prior(
+        model,
+        bank,
+        codec,
+        fk,
+        device=context.device,
+        context=context,
+        include_foot_diagnostics=foot_diagnostics,
+    )
 
 
 def train_formal_prior(args):
@@ -308,6 +335,8 @@ def _train_formal_prior(args, context):
     fk = FixedShapeFK(smpl, torch.zeros(10, device=device), shape_mode="predicted")
     torch.manual_seed(args.seed)
     model_config = {key: protocol["model"][key] for key in ("width", "layers", "heads", "dropout", "source_flags")}
+    if "hold_beta" in protocol["model"]:
+        model_config["hold_beta"] = protocol["model"]["hold_beta"]
     model = HistoryPrior(**model_config).to(device)
     # This copy never receives DDP reducer hooks; train-only autograd diagnostics
     # must not start a rank0-only backward on the live distributed parameters.
@@ -354,6 +383,8 @@ def _train_formal_prior(args, context):
         "learning_rate": args.learning_rate,
         "ema_decay": args.ema_decay,
         "geometry_audit": audit,
+        "objective": protocol["loss"].get("objective", "raw_code"),
+        "hold_beta": model_config.get("hold_beta", False),
         "code": code_identity(),
         "shape_mode": "predicted",
         "geometry_target": "official",
@@ -402,7 +433,14 @@ def _train_formal_prior(args, context):
         save_json(args.output / "health_checks.json", {"step": start, "passed": True, "checks": health})
     context.barrier()
     if not start:
-        report = _formal_report(ema, val_bank, codec, fk, context)
+        report = _formal_report(
+            ema,
+            val_bank,
+            codec,
+            fk,
+            context,
+            foot_diagnostics=protocol["evaluation"].get("foot_diagnostics", False),
+        )
         if (
             abs(float(report["selection_score"]) - float(report["summary"]["mature"]["metrics"]["mpjpe_mm"]["CV"]))
             > 1e-6
@@ -431,7 +469,7 @@ def _train_formal_prior(args, context):
                 else nullcontext()
             )
             with sync:
-                losses = prior_losses(training_model, example, codec, fk)
+                losses = prior_objective_losses(training_model, example, codec, fk, objective=identity["objective"])
                 loss = losses["code"] + audit["weight"] * losses["geometry"]
                 if not bool(torch.isfinite(loss)):
                     raise ValueError("Nonfinite formal P objective.")
@@ -473,7 +511,15 @@ def _train_formal_prior(args, context):
         if step in protocol["loss"]["geometry_calibration"]["diagnostic_steps"] or args.formal_preflight:
             if context.is_primary:
                 audit_model.load_state_dict(model.state_dict(), strict=True)
-                diagnostic = gradient_audit(audit_model, train_bank["tensors"], audit["indices"], codec, fk, device)
+                diagnostic = gradient_audit(
+                    audit_model,
+                    train_bank["tensors"],
+                    audit["indices"],
+                    codec,
+                    fk,
+                    device,
+                    objective=identity["objective"],
+                )
             else:
                 diagnostic = None
             diagnostic = context.all_gather_object(diagnostic)[0]
@@ -488,7 +534,14 @@ def _train_formal_prior(args, context):
         if step % args.eval_every == 0 or step == final:
             if context.is_primary:
                 save_json(args.output / "status.json", {"phase": "validation", "step": step})
-            report = _formal_report(ema, val_bank, codec, fk, context)
+            report = _formal_report(
+                ema,
+                val_bank,
+                codec,
+                fk,
+                context,
+                foot_diagnostics=protocol["evaluation"].get("foot_diagnostics", False),
+            )
             score = float(report["selection_score"])
             if not math.isfinite(score):
                 raise ValueError("Nonfinite formal P validation.")
@@ -605,6 +658,7 @@ def evaluate_formal_checkpoint(args):
             include_parts=True,
             include_beta=True,
             include_shared_beta=True,
+            include_foot_diagnostics=protocol["evaluation"].get("foot_diagnostics", False),
         )
         if context.is_primary:
             save_json(

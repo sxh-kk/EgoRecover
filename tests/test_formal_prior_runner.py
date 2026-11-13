@@ -195,6 +195,17 @@ def test_preflight_rejects_lost_rng_even_when_final_weights_are_identical(tmp_pa
         runner.verify_preflight(plan)
 
 
+def test_cpu_rank_preflight_cannot_be_marked_as_a_real_four_gpu_preflight(tmp_path):
+    plan = plan_at(tmp_path)
+    saved = make_preflight(plan)
+    for row in saved["rank_rng_states"]:
+        row["cuda_rng"] = None
+    for kind in ("full", "resumed"):
+        torch.save(saved, tmp_path / "preflight" / kind / "resume.pt")
+    with pytest.raises(AssertionError, match="actual CUDA RNG"):
+        runner.verify_preflight(plan)
+
+
 def test_preflight_rejects_different_actual_sampling_trace(tmp_path):
     plan = plan_at(tmp_path)
     make_preflight(plan)
