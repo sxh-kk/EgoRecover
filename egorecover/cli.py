@@ -32,6 +32,11 @@ def build_parser():
     train.add_argument("--feedback-intervention", choices=("full_state", "body_pose"), default="full_state")
     train.add_argument("--isolate-forward-rng", action="store_true")
     train.add_argument("--allow-initialize-rewrite-change", action="store_true")
+    train.add_argument(
+        "--allow-initialize-prior-change",
+        action="store_true",
+        help="Allow a new CV-to-learned-P experiment from --initialize; never valid with --resume",
+    )
     train.add_argument("--dev-seed", type=int, default=TrainOptions.dev_seed)
     train.add_argument("--full-dev-final", action="store_true")
     train.add_argument("--stop-after", type=int)

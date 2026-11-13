@@ -252,6 +252,80 @@ def summarize_formal_prior_rows(rows, *, bootstrap_samples=2000, bootstrap_seed=
     return summary
 
 
+def selection_take_excluded_report(
+    report, excluded_takes, *, selection_id, bootstrap_samples=2000, bootstrap_seed=1062
+):
+    """A supplemental estimand; never replace the fixed-cohort primary gate."""
+    takes = set(excluded_takes)
+    if any(not isinstance(take, str) or not take for take in takes):
+        raise ValueError("Selection exclusions require nonempty take identifiers.")
+    rows = report["rows"]
+    selected = [row for row in rows if row["take"] not in takes]
+    clips = {row["episode"] for row in selected}
+    source_clips = {row["episode"] for row in rows}
+    return {
+        "status": "ok" if clips else "no_clips_after_exclusion",
+        "selection_id": selection_id,
+        "excluded_takes": sorted(takes),
+        "source_clips": len(source_clips),
+        "overlap_clips": len(source_clips - clips),
+        "clips": len(clips),
+        "takes": len({row["take"] for row in selected}),
+        "summary": summarize_formal_prior_rows(
+            selected, bootstrap_samples=bootstrap_samples, bootstrap_seed=bootstrap_seed
+        ),
+        "scope": "Supplement excluding all D128 selection takes; original fixed-cohort gates unchanged.",
+    }
+
+
+def predictor_plateau_status(curve, *, start_step=8000, end_step=10000, minimum_gain_mm=0.5):
+    """Describe the late-budget trend without asserting convergence or extending."""
+    _integer(start_step, "plateau start step", 1)
+    _integer(end_step, "plateau end step", start_step + 1)
+    if isinstance(minimum_gain_mm, bool) or not isinstance(minimum_gain_mm, Real) or not math.isfinite(minimum_gain_mm):
+        raise ValueError("Plateau margin must be finite and positive.")
+    if minimum_gain_mm <= 0:
+        raise ValueError("Plateau margin must be finite and positive.")
+    points = {}
+    for row in curve:
+        step, value = row.get("step"), row.get("selection_score")
+        _integer(step, "selection step", 1)
+        if (
+            step in points
+            or isinstance(value, bool)
+            or not isinstance(value, Real)
+            or not math.isfinite(value)
+            or value < 0
+        ):
+            raise ValueError("Plateau diagnostics require unique steps and finite nonnegative selection scores.")
+        points[step] = float(value)
+    result = {
+        "status": "insufficient_curve",
+        "start_step": start_step,
+        "end_step": end_step,
+        "minimum_gain_mm": float(minimum_gain_mm),
+        "convergence_confirmed": False,
+        "automatic_extension": False,
+    }
+    if start_step not in points or end_step not in points:
+        return result
+    before = min(value for step, value in points.items() if step <= start_step)
+    after = min(value for step, value in points.items() if step <= end_step)
+    gain = before - after
+    result.update(
+        status="near_plateau_at_declared_budget" if gain < minimum_gain_mm else "still_improving_at_budget_cap",
+        best_at_start_mm=before,
+        best_at_end_mm=after,
+        gain_mm=gain,
+        training_sufficiency=(
+            "late-budget improvement below screening margin; not proof of convergence"
+            if gain < minimum_gain_mm
+            else "budget complete; training sufficiency unconfirmed"
+        ),
+    )
+    return result
+
+
 @torch.no_grad()
 def evaluate_formal_prior(
     model,

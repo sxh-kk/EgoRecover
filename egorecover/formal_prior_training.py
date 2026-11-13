@@ -4,6 +4,7 @@ import copy
 import hashlib
 import json
 import math
+import pickle
 import time
 from collections import Counter, defaultdict
 from contextlib import nullcontext
@@ -14,7 +15,7 @@ import torch
 from .codec import MotionCodec
 from .distributed import DistributedContext
 from .fk import FixedShapeFK, load_smpl, smpl_identity
-from .formal_prior_evaluation import evaluate_formal_prior
+from .formal_prior_evaluation import evaluate_formal_prior, selection_take_excluded_report
 from .io import code_identity, file_sha256, save_checkpoint, save_json, state_sha256
 from .losses import update_ema
 from .models import HistoryPrior
@@ -284,6 +285,153 @@ def train_formal_prior(args):
         return _train_formal_prior(args, context)
 
 
+def _checkpoint_export(ema, model_config, identity, stats, step, summary):
+    # The best snapshot must not share mutable EMA storage with later updates.
+    weights = {key: value.detach().cpu().clone() for key, value in ema.items()}
+    return {
+        "format": "egorecover_prior_v1",
+        "manifest_sha256": identity["manifest_sha256"],
+        "model_config": copy.deepcopy(model_config),
+        "state_dict": weights,
+        "state_sha256": state_sha256(weights),
+        "step": step,
+        "validation_summary": copy.deepcopy(summary),
+        "identity": identity,
+        "stats": stats,
+    }
+
+
+def _publish_prior_export(path, export):
+    """Preserve an already valid file, including its externally bound byte SHA."""
+    path = Path(path)
+    if path.exists():
+        try:
+            existing = torch.load(path, weights_only=True, map_location="cpu")
+            metadata = (
+                "format",
+                "manifest_sha256",
+                "model_config",
+                "step",
+                "validation_summary",
+                "identity",
+                "state_sha256",
+            )
+            if (
+                isinstance(existing, dict)
+                and all(existing.get(key) == export[key] for key in metadata)
+                and existing["stats"].keys() == export["stats"].keys()
+                and all(torch.equal(existing["stats"][key], export["stats"][key]) for key in export["stats"])
+                and state_sha256(existing["state_dict"]) == export["state_sha256"]
+            ):
+                return
+        except (
+            OSError,
+            RuntimeError,
+            ValueError,
+            EOFError,
+            pickle.UnpicklingError,
+            KeyError,
+            TypeError,
+            AttributeError,
+        ):
+            pass  # A damaged derived export is repairable from the committed resume.
+    save_checkpoint(path, export)
+
+
+def _recover_uncommitted_logs(directory, step):
+    """Keep committed traces, preserving rolled-back tails as audit artifacts."""
+    directory = Path(directory)
+    log = directory / "train.jsonl"
+    kept, discarded = [], []
+    if step and not log.exists():
+        raise ValueError("Committed training trace is missing; recover the original log before continuing.")
+    if log.exists():
+        lines = log.read_bytes().splitlines(keepends=True)
+        previous = 0
+        for ordinal, line in enumerate(lines):
+            try:
+                row = json.loads(line)
+                row_step = int(row["step"])
+            except (ValueError, KeyError, TypeError):
+                if ordinal != len(lines) - 1:
+                    raise ValueError("Invalid committed training trace; refuse to rewrite history.") from None
+                discarded.append(line)
+                continue
+            if row_step > step:
+                discarded.append(line)
+            else:
+                if discarded or row_step != previous + 1:
+                    raise ValueError("Committed training trace is duplicated or out of order.")
+                kept.append(line)
+                previous = row_step
+        if step and previous != step:
+            raise ValueError("Committed training trace does not reach the recovery checkpoint.")
+    future = []
+    for pattern in ("validation-step*.json", "gradient-step*.json"):
+        for path in directory.glob(pattern):
+            number = path.stem.rsplit("step", 1)[1]
+            if number.isdigit() and int(number) > step:
+                future.append(path)
+    if not discarded and not future:
+        return None
+    archive = directory / "recovery" / str(time.time_ns())
+    archive.mkdir(parents=True)
+    if discarded:
+        (archive / "uncommitted-train.jsonl").write_bytes(b"".join(discarded))
+        temporary = log.with_suffix(".jsonl.tmp")
+        temporary.write_bytes(b"".join(kept))
+        temporary.replace(log)
+    for path in future:
+        path.replace(archive / path.name)
+    save_json(archive / "rollback.json", {"committed_step": step, "discarded_log_lines": len(discarded)})
+    return str(archive)
+
+
+def recover_formal_checkpoint(directory, saved=None):
+    """Republish derived artifacts from one committed, self-contained resume.
+
+    The controller can call this after workers exit even if a pilot/cap step is
+    already complete. Never call it while a worker is writing this directory.
+    Older snapshots remain readable; only v3 owns the new recovery contract.
+    """
+    directory = Path(directory)
+    if saved is None:
+        path = directory / "resume.pt"
+        if not path.exists():
+            return {"status": "no_checkpoint"}
+        saved = torch.load(path, weights_only=True, map_location="cpu")
+    if saved.get("format") != "egorecover_formal_prior_resume_v3":
+        return {"status": "legacy_checkpoint", "step": saved.get("step")}
+    step, identity = saved["step"], saved["identity"]
+    current, best = saved["export"], saved["best_export"]
+    record = min(saved["curve"], key=lambda row: row["selection_score"])
+    if not math.isclose(float(record["selection_score"]), float(saved["best"]), rel_tol=0, abs_tol=1e-9):
+        raise ValueError("Committed best score differs from its selection curve.")
+    for export, expected_step in ((current, step), (best, record["step"])):
+        if (
+            export["identity"] != identity
+            or export["step"] != expected_step
+            or export["model_config"] != identity["model_config"]
+            or export["state_sha256"] != state_sha256(export["state_dict"])
+        ):
+            raise ValueError("Committed P export identity, step or weights are inconsistent.")
+    if current["state_sha256"] != state_sha256(saved["ema"]):
+        raise ValueError("Committed current export does not match the recoverable EMA.")
+    saved_identity = directory / "identity.json"
+    if saved_identity.exists() and json.loads(saved_identity.read_text()) != identity:
+        raise ValueError("Cannot repair exports under a different run identity.")
+    archive = _recover_uncommitted_logs(directory, step)
+    _publish_prior_export(directory / "last.pt", current)
+    _publish_prior_export(directory / "best.pt", best)
+    if step in (2000, 8000):
+        _publish_prior_export(directory / f"ema-step{step}.pt", current)
+    if step == identity["settings"]["train_steps"]:
+        _publish_prior_export(directory / "final.pt", current)
+    for name, value in saved["artifacts"].items():
+        save_json(directory / name, value)
+    return {"status": "recovered", "step": step, "best_step": best["step"], "rollback_archive": archive}
+
+
 def _train_formal_prior(args, context):
     torch.set_num_threads(2)
     protocol = json.loads(args.formal_protocol.read_text())
@@ -407,7 +555,7 @@ def _train_formal_prior(args, context):
     generator = torch.Generator().manual_seed(args.seed + 1 + context.rank)
     sampler = FormalPriorSampler(train_bank["rows"])
     torch.manual_seed(args.seed + 100000 * context.rank)
-    start, best, curve = 0, float("inf"), []
+    start, best, curve, best_export = 0, float("inf"), [], None
     if args.resume:
         saved = torch.load(args.output / "resume.pt", weights_only=True, map_location="cpu")
         if saved["identity"] != identity:
@@ -423,14 +571,32 @@ def _train_formal_prior(args, context):
         if device.type == "cuda":
             torch.cuda.set_rng_state(state["cuda_rng"], device)
         start, best, curve = saved["step"], saved["best"], saved["curve"]
+        if context.is_primary:
+            recover_formal_checkpoint(args.output, saved)
+            best_export = saved.get("best_export")
+            if best_export is None:
+                # Legacy v2 checkpoints cannot recover a missing historical
+                # best, so fail closed rather than silently substituting last.
+                candidate = args.output / "best.pt"
+                if not candidate.exists():
+                    raise ValueError("Legacy P resume has no best export; recover its original checkpoint first.")
+                best_export = torch.load(candidate, weights_only=True, map_location="cpu")
+                best_record = min(curve, key=lambda row: row["selection_score"])
+                if best_export["identity"] != identity or best_export["step"] != best_record["step"]:
+                    raise ValueError("Legacy P best export differs from the committed selection curve.")
+                best_export["state_sha256"] = state_sha256(best_export["state_dict"])
+        if "artifacts" in saved:
+            health = dict(saved["artifacts"]["health_checks.json"]["checks"])
         del saved
     if context.is_primary:
+        if not start:
+            _recover_uncommitted_logs(args.output, 0)
         save_json(args.output / "identity.json", identity)
         save_json(args.output / "geometry-calibration.json", audit)
         save_json(
             args.output / "status.json", {"phase": "initial_validation" if not start else "training", "step": start}
         )
-        save_json(args.output / "health_checks.json", {"step": start, "passed": True, "checks": health})
+        save_json(args.output / "health_checks.json", {"step": start, "passed": all(health.values()), "checks": health})
     context.barrier()
     if not start:
         report = _formal_report(
@@ -559,19 +725,17 @@ def _train_formal_prior(args, context):
             if len({s["model_sha256"] for s in rank_states}) != 1:
                 raise RuntimeError("Formal P DDP rank model weights disagree.")
             if context.is_primary:
-                save_json(args.output / f"validation-step{step}.json", {"step": step, **report})
-                save_json(args.output / "validation.json", {"step": step, **report})
-                save_json(
-                    args.output / "selection.json",
-                    {"best_selection_mm": best, "selection_key": report["selection_key"], "curve": curve},
-                )
-                save_json(
-                    args.output / "health_checks.json", {"step": step, "passed": all(health.values()), "checks": health}
-                )
                 seen = set().union(*(set(s["visited_indices"]) for s in rank_states))
-                save_json(
-                    args.output / "coverage.json",
-                    {
+                artifacts = {
+                    f"validation-step{step}.json": {"step": step, **report},
+                    "validation.json": {"step": step, **report},
+                    "selection.json": {
+                        "best_selection_mm": best,
+                        "selection_key": report["selection_key"],
+                        "curve": curve,
+                    },
+                    "health_checks.json": {"step": step, "passed": all(health.values()), "checks": dict(health)},
+                    "coverage.json": {
                         "step": step,
                         "unique_anchors": len(seen),
                         "bank_anchors": len(train_bank["rows"]),
@@ -581,39 +745,33 @@ def _train_formal_prior(args, context):
                         "unique_takes": len({train_bank["rows"][i]["take"] for i in seen}),
                         "sampling_counts_per_rank": [s["sampling_counts"] for s in rank_states],
                     },
-                )
-                save_checkpoint(
-                    args.output / "resume.pt",
-                    {
-                        "format": "egorecover_formal_prior_resume_v2",
-                        "identity": identity,
-                        "model": model.state_dict(),
-                        "ema": ema.state_dict(),
-                        "optimizer": optimizer.state_dict(),
-                        "scheduler": scheduler.state_dict(),
-                        "rank_rng_states": rank_states,
-                        "step": step,
-                        "best": best,
-                        "curve": curve,
-                    },
-                )
-                export = {
-                    "format": "egorecover_prior_v1",
-                    "manifest_sha256": train_bank["manifest_sha256"],
-                    "model_config": model_config,
-                    "state_dict": ema.state_dict(),
-                    "step": step,
-                    "validation_summary": report["summary"],
-                    "identity": identity,
-                    "stats": train_bank["stats"],
+                    "progress.json": progress,
                 }
-                save_checkpoint(args.output / "last.pt", export)
+                export = _checkpoint_export(
+                    ema.state_dict(), model_config, identity, train_bank["stats"], step, report["summary"]
+                )
                 if improved:
-                    save_checkpoint(args.output / "best.pt", export)
-                if step in (2000, 8000):
-                    save_checkpoint(args.output / f"ema-step{step}.pt", export)
-                if step == args.train_steps:
-                    save_checkpoint(args.output / "final.pt", export)
+                    best_export = export
+                committed = {
+                    "format": "egorecover_formal_prior_resume_v3",
+                    "identity": identity,
+                    "model": model.state_dict(),
+                    "ema": export["state_dict"],
+                    "optimizer": optimizer.state_dict(),
+                    "scheduler": scheduler.state_dict(),
+                    "rank_rng_states": rank_states,
+                    "step": step,
+                    "best": best,
+                    "curve": curve,
+                    "export": export,
+                    "best_export": best_export,
+                    "artifacts": artifacts,
+                }
+                # One atomic commit owns weights, the immutable historical
+                # best and selection/health records. All other files can be
+                # republished after any interruption, including at2k/10k.
+                save_checkpoint(args.output / "resume.pt", committed)
+                recover_formal_checkpoint(args.output, committed)
                 save_json(args.output / "status.json", {"phase": "training", "step": step})
             context.barrier()
     if context.is_primary:
@@ -661,6 +819,39 @@ def evaluate_formal_checkpoint(args):
             include_foot_diagnostics=protocol["evaluation"].get("foot_diagnostics", False),
         )
         if context.is_primary:
+            supplement = {}
+            if bank["cohort"] in ("D400", "long50"):
+                selection = protocol["evaluation"]["D128"]
+                selection_path = Path(selection["file"])
+                frozen = json.loads(selection_path.read_text())
+                if frozen["sha256"] != selection["selection_id"]:
+                    raise ValueError("D128 exclusion selection differs from the frozen protocol.")
+                expected_hash = selection.get("selection_file_sha256")
+                if expected_hash is not None and file_sha256(selection_path) != expected_hash:
+                    raise ValueError("D128 exclusion file contents changed after protocol freeze.")
+                excluded = {row["take"] for row in frozen["records"]}
+                if (
+                    len(frozen["records"]) != selection["clips"]
+                    or len(frozen["records"]) != frozen["clips"]
+                    or len(excluded) != frozen["takes"]
+                ):
+                    raise ValueError("D128 exclusion selection has inconsistent clip/take counts.")
+                supplementary = selection_take_excluded_report(
+                    report,
+                    excluded,
+                    selection_id=selection["selection_id"],
+                    bootstrap_samples=protocol["evaluation"]["paired_CI"]["replicates"],
+                    bootstrap_seed=protocol["evaluation"]["paired_CI"]["seed"],
+                )
+                expected = protocol["evaluation"]["selection_and_report_overlap"][bank["cohort"]]
+                if (
+                    supplementary["overlap_clips"] != expected["overlap_clips"]
+                    or supplementary["clips"] != expected["remaining_clips_excluding_D128_takes"]
+                    or supplementary["takes"] != expected["remaining_takes_excluding_D128"]
+                ):
+                    raise ValueError("D128-take-excluded coverage differs from the declared protocol.")
+                supplementary.update(selection_file_sha256=file_sha256(selection_path))
+                supplement["selection_take_excluded"] = supplementary
             save_json(
                 args.output / "report.json",
                 {
@@ -672,5 +863,6 @@ def evaluate_formal_checkpoint(args):
                     "bank_rows": len(bank["rows"]),
                     "bank_clips": len({row["episode"] for row in bank["rows"]}),
                     **report,
+                    **supplement,
                 },
             )

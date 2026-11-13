@@ -11,6 +11,8 @@ from egorecover.formal_prior_evaluation import (
     final_gate,
     formal_center_metrics,
     pilot_gate,
+    predictor_plateau_status,
+    selection_take_excluded_report,
     summarize_formal_prior_rows,
 )
 from egorecover.models import HistoryPrior
@@ -166,6 +168,45 @@ def test_clip_equal_means_and_take_cluster_bootstrap_retain_cluster_multiplicity
     shifted_metric = summarize_formal_prior_rows(shifted)["mature"]["metrics"]["mpjpe_mm"]
     assert shifted_metric["bootstrap"] == metric["bootstrap"]
     assert shifted_metric["delta_ci95"] == [1, 7]
+
+
+def test_take_exclusion_reports_an_unseen_take_estimand_without_changing_primary():
+    rows = [
+        clip_row(episode, take, delta, phase=phase)
+        for phase in ("all", "mature", "startup")
+        for episode, take, delta in (("a1", "A", -5), ("a2", "A", -5), ("b", "B", 2), ("c", "C", -1))
+    ]
+    report = {"rows": rows, "summary": summarize_formal_prior_rows(rows)}
+    original = copy.deepcopy(report)
+    supplement = selection_take_excluded_report(report, {"A"}, selection_id="D128-fixture")
+    assert report == original
+    assert supplement["source_clips"] == 4 and supplement["overlap_clips"] == 2
+    assert supplement["clips"] == supplement["takes"] == 2
+    assert supplement["excluded_takes"] == ["A"] and supplement["selection_id"] == "D128-fixture"
+    metric = supplement["summary"]["mature"]["metrics"]["mpjpe_mm"]
+    assert metric["delta"] == 0.5 and metric["delta_ci95"] == [-1, 2]
+    assert report["summary"]["mature"]["metrics"]["mpjpe_mm"]["delta"] == -2.25
+    empty = selection_take_excluded_report(report, {"A", "B", "C"}, selection_id="all")
+    assert empty["status"] == "no_clips_after_exclusion" and empty["clips"] == 0
+    assert empty["summary"]["mature"]["metrics"]["mpjpe_mm"] is None
+
+
+def test_predictor_platform_uses_best_scores_not_latest_and_never_claims_convergence():
+    curve = [
+        {"step": step, "selection_score": score}
+        for step, score in ((1000, 90), (8000, 80), (8500, 79.8), (9000, 80.1), (10000, 80.2))
+    ]
+    result = predictor_plateau_status(curve)
+    assert result["status"] == "near_plateau_at_declared_budget"
+    assert result["best_at_start_mm"] == 80 and result["best_at_end_mm"] == 79.8
+    assert result["gain_mm"] == pytest.approx(0.2)
+    assert result["convergence_confirmed"] is result["automatic_extension"] is False
+    curve[-1]["selection_score"] = 79.5
+    result = predictor_plateau_status(curve)
+    assert result["status"] == "still_improving_at_budget_cap" and result["gain_mm"] == 0.5
+    assert predictor_plateau_status(curve[:-1])["status"] == "insufficient_curve"
+    with pytest.raises(ValueError, match="unique steps"):
+        predictor_plateau_status(curve + [curve[-1]])
 
 
 def test_unknown_floor_reports_paired_coverage_without_dropping_other_metrics():

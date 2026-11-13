@@ -259,6 +259,10 @@ def wait_for_gpus(plan):
     config = plan["resource_wait"]
     if config.get("enabled") is not True:
         raise ValueError("P02 must wait for an explicit free-GPU resource check.")
+    training_started = any(
+        any((Path(read(path)["run_directory"]) / name).exists() for name in ("resume.pt", "progress.json"))
+        for path in plan.get("cases", {}).values()
+    )
     stable_since = None
     while True:
         try:
@@ -275,7 +279,8 @@ def wait_for_gpus(plan):
         status = {
             "phase": "waiting_for_gpus",
             "at_beijing": now(),
-            "P_training_started": False,
+            "P_training_started": training_started,
+            "resuming_existing_training": training_started,
             "policy": "Wait for all8 free GPUs and known launcher completion; no sharing or preemption.",
             "observed": observed,
             "reasons": reasons,
@@ -368,6 +373,9 @@ def _worker_spec(child, phase, *, stop_after=None, resume=False):
 
 def supervise_ab(plan):
     children = verify_pair_identity(plan)
+    single.cleanup_owned_jobs(plan, reason="startup_recovery_before_resource_wait")
+    for child in children.values():
+        single.recover_checkpoint_exports(child["run_directory"])
     wait_for_gpus(plan)
     preflights = [
         {
@@ -388,6 +396,8 @@ def supervise_ab(plan):
             workers.append(_worker_spec(child, "pilot", resume=step > 0, stop_after=2000 - step))
     if workers:
         single.run_processes(plan, workers, "AB-training-to2000")
+    for child in children.values():
+        single.recover_checkpoint_exports(child["run_directory"])
     if any(single.checkpoint_step(c["run_directory"]) < 2000 for c in children.values()):
         raise RuntimeError("A/B pilot lacks a recoverable2k state.")
     audit_matched_pair(plan, children)
@@ -413,6 +423,8 @@ def supervise_ab(plan):
             workers.append(_worker_spec(child, "continuation", resume=True, stop_after=10000 - step))
     if workers:
         single.run_processes(plan, workers, "AB-passed-continuations-to10000")
+    for child in children.values():
+        single.recover_checkpoint_exports(child["run_directory"])
     audit_matched_pair(plan, children)
     for case, child in children.items():
         if not decisions[case]["passed"]:
@@ -530,14 +542,22 @@ def main():
         except BlockingIOError as exc:
             raise SystemExit("This A/B runtime is already supervised.") from exc
         write(output / "controller.json", {"pid": os.getpid(), "at_beijing": now()})
-        try:
-            supervise_ab(plan)
-        except BaseException:
-            write(
-                output / "status.json",
-                {"phase": "failed", "at_beijing": now(), "error": traceback.format_exc(), "artifacts_preserved": True},
-            )
-            raise
+        with single.termination_signals():
+            try:
+                supervise_ab(plan)
+            except BaseException as exc:
+                write(
+                    output / "status.json",
+                    {
+                        "phase": "interrupted" if isinstance(exc, single.SupervisorInterrupted) else "failed",
+                        "at_beijing": now(),
+                        "error": traceback.format_exc(),
+                        "artifacts_preserved": True,
+                    },
+                )
+                raise
+            finally:
+                single.cleanup_owned_jobs(plan, reason="pair_supervisor_exit")
 
 
 if __name__ == "__main__":

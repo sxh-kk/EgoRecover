@@ -207,3 +207,134 @@ def test_formal_training_cpu_resume_preserves_lr_samples_optimizer_and_ema(tmp_p
     ]
     assert [row["trace_hash"] for row in logs[0]] == [row["trace_hash"] for row in logs[1]]
     assert [row["lr"] for row in logs[0]] == pytest.approx([3e-5, 3e-6])
+
+
+@pytest.fixture
+def publication_case(tmp_path, monkeypatch):
+    import egorecover.formal_prior_training as training
+
+    plan = protocol()
+    plan["loss"].update(objective="common_cv_valid_state", fixed_geometry_weight=0.008869197811349056)
+    plan["model"]["hold_beta"] = True
+    protocol_file = tmp_path / "protocol.json"
+    protocol_file.write_text(json.dumps(plan))
+    paths = {split: tmp_path / f"{split}.pt" for split in ("train", "val")}
+    for split, path in paths.items():
+        torch.save(make_bank(plan, split), path)
+    monkeypatch.setattr(training, "load_smpl", lambda device: None)
+    monkeypatch.setattr(training, "FixedShapeFK", lambda *a, **kw: BetaFK())
+    monkeypatch.setattr(training, "smpl_identity", lambda: "asset-free-fixture")
+    monkeypatch.setattr(training, "code_identity", lambda: {"test": "publication-frozen"})
+    real_report = training._formal_report
+    scores = iter((100.0, 50.0, 60.0))
+
+    def controlled_report(*args, **kwargs):
+        report = real_report(*args, **kwargs)
+        score = next(scores)
+        report["selection_score"] = score
+        metric = report["summary"]["mature"]["metrics"]["mpjpe_mm"]
+        metric.update(P=score, CV=100.0, delta=score - 100.0)
+        return report
+
+    monkeypatch.setattr(training, "_formal_report", controlled_report)
+    options = PriorTrainOptions(
+        output=tmp_path / "preflight-publication",
+        data_root=tmp_path,
+        train_bank=paths["train"],
+        val_bank=paths["val"],
+        train_steps=2,
+        eval_every=1,
+        formal_protocol=protocol_file,
+        formal_preflight=True,
+        lr_decay_step=1,
+    )
+    return training, options, DistributedContext(0, 1, 0, torch.device("cpu"))
+
+
+def test_interruption_between_resume_commit_and_best_export_recovers_historical_best(publication_case, monkeypatch):
+    training, options, context = publication_case
+    save = training.save_checkpoint
+    fail = True
+
+    def interrupt(path, value):
+        nonlocal fail
+        if Path(path).name == "best.pt" and fail:
+            fail = False
+            raise RuntimeError("interrupted after commit before best")
+        return save(path, value)
+
+    monkeypatch.setattr(training, "save_checkpoint", interrupt)
+    with pytest.raises(RuntimeError, match="after commit"):
+        training._train_formal_prior(options, context)
+    saved = torch.load(options.output / "resume.pt", weights_only=True)
+    assert saved["step"] == 1 and saved["best"] == 50
+    assert not (options.output / "best.pt").exists()
+    training._train_formal_prior(replace(options, resume=True), context)
+    best = torch.load(options.output / "best.pt", weights_only=True)
+    last = torch.load(options.output / "last.pt", weights_only=True)
+    assert best["step"] == 1 and last["step"] == 2
+    for key, value in best["state_dict"].items():
+        torch.testing.assert_close(value, saved["best_export"]["state_dict"][key], atol=0, rtol=0)
+    assert any(not torch.equal(value, last["state_dict"][key]) for key, value in best["state_dict"].items())
+
+
+def test_controller_can_repair_stale_best_without_another_optimizer_update(publication_case, monkeypatch):
+    from egorecover.io import file_sha256
+
+    training, options, context = publication_case
+    training._train_formal_prior(options, context)
+    before = file_sha256(options.output / "resume.pt")
+    stale = torch.load(options.output / "last.pt", weights_only=True)
+    torch.save(stale, options.output / "best.pt")
+    (options.output / "final.pt").unlink()
+    (options.output / "selection.json").unlink()
+    result = training.recover_formal_checkpoint(options.output)
+    assert result["step"] == 2 and result["best_step"] == 1
+    assert torch.load(options.output / "best.pt", weights_only=True)["step"] == 1
+    assert torch.load(options.output / "final.pt", weights_only=True)["step"] == 2
+    assert json.loads((options.output / "selection.json").read_text())["best_selection_mm"] == 50
+    assert file_sha256(options.output / "resume.pt") == before
+    hashes = {name: file_sha256(options.output / name) for name in ("best.pt", "last.pt", "final.pt")}
+
+    def reject_republication(path, value):
+        raise AssertionError("A matching export must not be rewritten")
+
+    monkeypatch.setattr(training, "save_checkpoint", reject_republication)
+    training.recover_formal_checkpoint(options.output)
+    assert hashes == {name: file_sha256(options.output / name) for name in hashes}
+
+
+def test_resume_preserves_but_removes_uncommitted_trace_and_future_reports(publication_case):
+    training, options, context = publication_case
+    training._train_formal_prior(replace(options, stop_after=1), context)
+    tail = b'{"step": 2, "uncommitted": true}\n{"step":3'
+    with (options.output / "train.jsonl").open("ab") as stream:
+        stream.write(tail)
+    (options.output / "validation-step3.json").write_text('{"uncommitted":true}')
+    (options.output / "gradient-step3.json").write_text('{"uncommitted":true}')
+    training._train_formal_prior(replace(options, resume=True), context)
+    rows = [json.loads(line) for line in (options.output / "train.jsonl").read_text().splitlines()]
+    assert [row["step"] for row in rows] == [1, 2]
+    archived = list((options.output / "recovery").glob("*/uncommitted-train.jsonl"))
+    assert len(archived) == 1 and archived[0].read_bytes() == tail
+    assert (archived[0].parent / "validation-step3.json").exists()
+    assert (archived[0].parent / "gradient-step3.json").exists()
+    assert not (options.output / "validation-step3.json").exists()
+
+
+def test_resume_rejects_a_corrupted_embedded_best_snapshot(publication_case):
+    training, options, context = publication_case
+    training._train_formal_prior(replace(options, stop_after=1), context)
+    saved = torch.load(options.output / "resume.pt", weights_only=True)
+    saved["best_export"]["state_sha256"] = "wrong"
+    with pytest.raises(ValueError, match="weights are inconsistent"):
+        training.recover_formal_checkpoint(options.output, saved)
+
+
+def test_resume_fails_closed_before_any_updates_if_committed_trace_is_missing(publication_case):
+    training, options, context = publication_case
+    training._train_formal_prior(replace(options, stop_after=1), context)
+    (options.output / "train.jsonl").unlink()
+    with pytest.raises(ValueError, match="trace is missing"):
+        training._train_formal_prior(replace(options, resume=True), context)
+    assert torch.load(options.output / "resume.pt", weights_only=True)["step"] == 1

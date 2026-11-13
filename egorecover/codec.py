@@ -25,26 +25,50 @@ def rigid_inverse(transform):
     return rigid_transform(rotation, -(rotation @ transform[..., :3, 3, None])[..., 0])
 
 
+def _rotation_validity(rotation, tolerance):
+    """Check SO(3), including the orthogonality needed by rigid_inverse."""
+    with torch.no_grad():
+        checked = rotation if rotation.dtype == torch.float64 else rotation.float()
+        identity = torch.eye(3, device=checked.device, dtype=checked.dtype)
+        orthogonality = (checked.transpose(-1, -2) @ checked - identity).abs().amax(dim=(-2, -1))
+        determinant = torch.linalg.det(checked)
+        valid = (orthogonality <= tolerance) & ((determinant - 1).abs() <= tolerance)
+    return valid, determinant, orthogonality
+
+
 def transform_from_9d(value):
     if value.shape[-1] != 9 or not bool(torch.isfinite(value).all()):
         raise ValueError("A transform requires nine finite rotation6d+xyz channels.")
     rotation = rotation_6d_to_matrix(value[..., :6])
     # Zero/collinear rotation codes do not define a rotation. Do not quietly
     # turn them into an invalid SE(3) matrix and contaminate a physical cache.
-    determinant = torch.linalg.det(rotation.float())
-    if not bool((determinant > 0.99).all()):
-        # A finite large code can overflow the squared float32 norm. This is
-        # different from genuinely zero/collinear axes. Retry the SAME 6D
-        # projection in float64; no replacement axis or clipping is invented.
-        precise_rotation = rotation_6d_to_matrix(value[..., :6].double())
-        determinant64 = torch.linalg.det(precise_rotation)
-        if not bool((determinant64 > 0.99).all()):
+    tolerance = max(1e-5, 2 * torch.finfo(value.dtype).eps)
+    valid, determinant, orthogonality = _rotation_validity(rotation, tolerance)
+    if not bool(valid.all()):
+        # Overflow or cancellation for nearly parallel axes can spoil the
+        # float32 projection even when its determinant remains close to one.
+        # Retry the SAME 6D values in float64; never invent replacement axes.
+        axes = value[..., :6].reshape(-1, 6)
+        good = valid.reshape(-1)
+        precise_rotation = rotation_6d_to_matrix(axes[~good].double())
+        valid64, determinant64, orthogonality64 = _rotation_validity(precise_rotation, tolerance)
+        retried_rotation = precise_rotation.to(value.dtype)
+        valid_cast, _, _ = _rotation_validity(retried_rotation, tolerance)
+        if not bool(valid64.all() and valid_cast.all()):
             raise ValueError(
                 "Degenerate 6D rotation cannot define a physical transform. "
-                f"min_det32={float(determinant.min()):.6g}, min_det64={float(determinant64.min()):.6g}, "
-                f"rotation_code_max_abs={float(value[..., :6].abs().max()):.6g}"
+                f"min_det={float(determinant.min()):.6g}, min_det64={float(determinant64.min()):.6g}, "
+                f"max_orth_error={float(orthogonality.max()):.6g}, "
+                f"max_orth_error64={float(orthogonality64.max()):.6g}, "
+                f"rotation_code_max_abs={float(value[..., :6].detach().abs().max()):.6g}"
             )
-        rotation = precise_rotation.to(value.dtype)
+        # Preserve healthy float32 values exactly. Recompute only their branch
+        # for autograd: an unused overflowing projection can otherwise produce
+        # NaN gradients through a masked 0 * inf in a mixed batch.
+        restored = rotation.new_empty(len(axes), 3, 3)
+        restored[good] = rotation_6d_to_matrix(axes[good])
+        restored[~good] = retried_rotation
+        rotation = restored.reshape(*value.shape[:-1], 3, 3)
     return rigid_transform(rotation, value[..., 6:9])
 
 

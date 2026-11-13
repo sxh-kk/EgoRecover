@@ -1,4 +1,7 @@
+import copy
+import hashlib
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -171,7 +174,65 @@ def make_preflight(plan):
             for step in (1, 2)
         ]
         (directory / "train.jsonl").write_text("".join(json.dumps(row) + "\n" for row in rows))
+    first = copy.deepcopy(saved)
+    first["step"] = 1
+    torch.save(first, root / "preflight/resumed/resume-step1.pt")
+    segments = []
+    for index, (branch, start, end, resume) in enumerate(
+        [("full", 0, 2, False), ("resumed", 0, 1, False), ("resumed", 1, 2, True)]
+    ):
+        argv = runner.train_command(
+            plan, root / "preflight" / branch, preflight=True, resume=resume, stop_after=end - start
+        )
+        pid = 9100 + index
+        checkpoint = (
+            root / "preflight" / branch / ("resume-step1.pt" if branch == "resumed" and end == 1 else "resume.pt")
+        )
+        segments.append(
+            {
+                "branch": branch,
+                "from_step": start,
+                "to_step": end,
+                "resume": resume,
+                "checkpoint_sha256": runner.sha256(checkpoint),
+                "worker": {
+                    "exit_code": 0,
+                    "argv": argv,
+                    "token": f"{index + 1:032x}",
+                    "leader": {
+                        "pid": pid,
+                        "start_ticks": index + 1,
+                        "pgid": pid,
+                        "session_id": pid,
+                        "cmdline_sha256": hashlib.sha256(
+                            b"\0".join(os.fsencode(value) for value in argv) + b"\0"
+                        ).hexdigest(),
+                    },
+                },
+            }
+        )
+    (root / "preflight/execution-segments.json").write_text(
+        json.dumps(
+            {
+                "format": "egorecover_preflight_segments_v1",
+                "complete": True,
+                "protocol_sha256": plan["protocol_sha256"],
+                "source_hashes": plan["source_hashes"],
+                "segments": segments,
+            }
+        )
+    )
     return saved
+
+
+def refresh_preflight_checkpoint_hashes(plan):
+    base = Path(plan["output"]) / "preflight"
+    path = base / "execution-segments.json"
+    value = json.loads(path.read_text())
+    for segment in value["segments"]:
+        filename = "resume-step1.pt" if segment["branch"] == "resumed" and segment["to_step"] == 1 else "resume.pt"
+        segment["checkpoint_sha256"] = runner.sha256(base / segment["branch"] / filename)
+    path.write_text(json.dumps(value))
 
 
 def test_preflight_evidence_binds_real_states_sampling_lr_and_bank_identities(tmp_path):
@@ -191,6 +252,7 @@ def test_preflight_rejects_lost_rng_even_when_final_weights_are_identical(tmp_pa
     saved = make_preflight(plan)
     saved["rank_rng_states"][3]["sample_rng"] = torch.tensor([99], dtype=torch.uint8)
     torch.save(saved, tmp_path / "preflight/resumed/resume.pt")
+    refresh_preflight_checkpoint_hashes(plan)
     with pytest.raises(AssertionError, match="RNG"):
         runner.verify_preflight(plan)
 
@@ -202,8 +264,70 @@ def test_cpu_rank_preflight_cannot_be_marked_as_a_real_four_gpu_preflight(tmp_pa
         row["cuda_rng"] = None
     for kind in ("full", "resumed"):
         torch.save(saved, tmp_path / "preflight" / kind / "resume.pt")
+    refresh_preflight_checkpoint_hashes(plan)
     with pytest.raises(AssertionError, match="actual CUDA RNG"):
         runner.verify_preflight(plan)
+
+
+def test_preflight_rejects_a_resumed_full_branch_even_when_states_match(tmp_path):
+    plan = plan_at(tmp_path)
+    make_preflight(plan)
+    path = tmp_path / "preflight/execution-segments.json"
+    value = json.loads(path.read_text())
+    value["segments"][0].update(from_step=1, resume=True)
+    path.write_text(json.dumps(value))
+    with pytest.raises(ValueError, match="full0-to2"):
+        runner.verify_preflight(plan)
+
+
+def test_interrupted_full_is_preserved_and_rerun_from_zero(tmp_path, monkeypatch):
+    plan = plan_at(tmp_path)
+    for key in ("preflight_train_bank", "preflight_val_bank"):
+        Path(plan[key]).write_bytes(b"fixture")
+    old = tmp_path / "preflight/full/resume.pt"
+    old.parent.mkdir(parents=True)
+    torch.save({"step": 1}, old)
+    calls = []
+
+    def execute(plan, specs, phase):
+        spec = specs[0]
+        argv = spec["argv"]
+        directory = Path(spec["directory"])
+        directory.mkdir(parents=True, exist_ok=True)
+        start = runner.checkpoint_step(directory)
+        updates = int(argv[argv.index("--stop-after") + 1])
+        calls.append({"name": spec["name"], "start": start, "resume": "--resume" in argv, "updates": updates})
+        torch.save({"step": start + updates}, directory / "resume.pt")
+        pid = 9200 + len(calls)
+        return [
+            {
+                "exit_code": 0,
+                "argv": argv,
+                "token": f"{pid:032x}",
+                "leader": {
+                    "pid": pid,
+                    "start_ticks": len(calls),
+                    "pgid": pid,
+                    "session_id": pid,
+                    "cmdline_sha256": hashlib.sha256(
+                        b"\0".join(os.fsencode(value) for value in argv) + b"\0"
+                    ).hexdigest(),
+                },
+            }
+        ]
+
+    monkeypatch.setattr(runner, "run_processes", execute)
+    monkeypatch.setattr(runner, "verify_preflight", runner.verify_preflight_segments)
+    result = runner.preflight(plan)
+    assert result["continuous_full0_to2_verified"]
+    assert calls == [
+        {"name": "preflight-full-to2", "start": 0, "resume": False, "updates": 2},
+        {"name": "preflight-resumed-to1", "start": 0, "resume": False, "updates": 1},
+        {"name": "preflight-resumed-to2", "start": 1, "resume": True, "updates": 1},
+    ]
+    archives = list((tmp_path / "preflight-interrupted").glob("*/full/resume.pt"))
+    assert len(archives) == 1
+    assert torch.load(archives[0], weights_only=True)["step"] == 1
 
 
 def test_preflight_rejects_different_actual_sampling_trace(tmp_path):
@@ -330,3 +454,124 @@ def test_final_acceptance_rejects_wrong_cohort_even_from_the_same_P_checkpoint(t
         path.write_text(json.dumps({"checkpoint_sha256": runner.sha256(directory / "best.pt"), "bank_cohort": "D128"}))
     with pytest.raises(ValueError, match="bank/cohort/selection"):
         runner.final_decision(plan)
+
+
+def complete_final_reports(plan, tmp_path):
+    directory = Path(plan["run_directory"])
+    directory.mkdir()
+    (directory / "best.pt").write_bytes(b"D128-selected-EMA")
+    selection_file = tmp_path / "D128-selection.json"
+    selection_file.write_text(json.dumps({"sha256": "selection128", "records": [{"take": "dev-take"}]}))
+    evaluation = {
+        "D128": {
+            "file": str(selection_file),
+            "selection_id": "selection128",
+            "selection_file_sha256": runner.sha256(selection_file),
+        },
+        "D400": {"selection_id": "fixed400", "clips": 2},
+        "long50": {"selection_id": "fixed50", "clips": 1},
+        "selection_and_report_overlap": {
+            "D400": {
+                "overlap_clips": 1,
+                "remaining_clips_excluding_D128_takes": 1,
+                "remaining_takes_excluding_D128": 1,
+            },
+            "long50": {
+                "overlap_clips": 0,
+                "remaining_clips_excluding_D128_takes": 1,
+                "remaining_takes_excluding_D128": 1,
+            },
+        },
+    }
+    Path(plan["protocol"]).write_text(json.dumps({"evaluation": evaluation}))
+    metric = {"P": 98.0, "CV": 100.0, "delta": -2.0, "delta_ci95": [-3.0, -1.0]}
+    summary = {
+        phase: {
+            "metrics": {
+                name: copy.deepcopy(metric)
+                for name in ("mpjpe_mm", "velocity_mm_s", "acceleration_mm_s2", "foot_slide_mm")
+            }
+        }
+        for phase in ("mature", "all", "startup")
+    }
+    paths = {}
+    for cohort in ("D400", "long50"):
+        bank = tmp_path / "banks" / cohort / "bank.pt"
+        bank.parent.mkdir(parents=True)
+        bank.write_bytes(cohort.encode())
+        path = tmp_path / "evaluation" / cohort / "report.json"
+        path.parent.mkdir(parents=True)
+        path.write_text(
+            json.dumps(
+                {
+                    "checkpoint_sha256": runner.sha256(directory / "best.pt"),
+                    "bank_cohort": cohort,
+                    "bank_selection_sha256": evaluation[cohort]["selection_id"],
+                    "bank_clips": evaluation[cohort]["clips"],
+                    "bank_sha256": runner.sha256(bank),
+                    "summary": summary,
+                    "selection_take_excluded": {
+                        "status": "ok",
+                        "selection_id": "selection128",
+                        "selection_file_sha256": runner.sha256(selection_file),
+                        "excluded_takes": ["dev-take"],
+                        "source_clips": evaluation[cohort]["clips"],
+                        "overlap_clips": evaluation["selection_and_report_overlap"][cohort]["overlap_clips"],
+                        "clips": 1,
+                        "takes": 1,
+                        "summary": {phase: {**value, "clips": 1, "takes": 1} for phase, value in summary.items()},
+                    },
+                }
+            )
+        )
+        paths[cohort] = path
+    return paths
+
+
+def test_final_gate_reports_late_improvement_without_changing_accuracy_acceptance(tmp_path):
+    plan = plan_at(tmp_path)
+    complete_final_reports(plan, tmp_path)
+    (Path(plan["run_directory"]) / "selection.json").write_text(
+        json.dumps({"curve": [{"step": 8000, "selection_score": 100.0}, {"step": 10000, "selection_score": 99.2}]})
+    )
+    result = runner.final_decision(plan)
+    assert result["passed"] is True
+    assert result["training_sufficiency"]["status"] == "still_improving_at_budget_cap"
+    assert result["training_sufficiency"]["convergence_confirmed"] is False
+    assert all(
+        row["status"] == "verified_supplement_main_gate_unchanged"
+        for row in result["selection_take_excluded_verification"].values()
+    )
+
+
+def test_final_gate_marks_missing_curve_instead_of_claiming_a_plateau(tmp_path):
+    plan = plan_at(tmp_path)
+    complete_final_reports(plan, tmp_path)
+    result = runner.final_decision(plan)
+    assert result["passed"] is True
+    assert result["training_sufficiency"]["status"] == "insufficient_curve"
+    assert result["training_sufficiency"]["convergence_confirmed"] is False
+
+
+def test_final_gate_rejects_changed_excluded_take_coverage(tmp_path):
+    plan = plan_at(tmp_path)
+    paths = complete_final_reports(plan, tmp_path)
+    report = json.loads(paths["D400"].read_text())
+    report["selection_take_excluded"]["clips"] = 2
+    paths["D400"].write_text(json.dumps(report))
+    with pytest.raises(ValueError, match="D128-take-excluded"):
+        runner.final_decision(plan)
+
+
+def test_final_gate_legacy_protocol_reports_missing_exclusion_binding(tmp_path):
+    plan = plan_at(tmp_path)
+    complete_final_reports(plan, tmp_path)
+    protocol = json.loads(Path(plan["protocol"]).read_text())
+    del protocol["evaluation"]["selection_and_report_overlap"]
+    Path(plan["protocol"]).write_text(json.dumps(protocol))
+    result = runner.final_decision(plan)
+    assert result["passed"] is True
+    assert all(
+        row["status"] == "legacy_protocol_without_exclusion_metadata"
+        for row in result["selection_take_excluded_verification"].values()
+    )

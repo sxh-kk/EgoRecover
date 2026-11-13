@@ -124,6 +124,7 @@ class TrainOptions:
     feedback_intervention: str = "full_state"
     isolate_forward_rng: bool = False
     allow_initialize_rewrite_change: bool = False
+    allow_initialize_prior_change: bool = False
     eval_every: int = 200
     dev_limit: int | None = None
     dev_selection_file: Path | None = None

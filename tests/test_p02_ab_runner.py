@@ -171,6 +171,39 @@ def test_gpu_guard_resets_stability_after_an_occupied_interval(tmp_path, monkeyp
     assert json.loads((tmp_path / "resource-verification.json").read_text())["stable_free_seconds"] == 30
 
 
+def test_startup_recovers_owned_jobs_before_waiting_for_all_gpus(tmp_path, monkeypatch):
+    calls = []
+    children = {case: {"run_directory": str(tmp_path / case / "run")} for case in ("A", "B")}
+    plan = {"output": str(tmp_path)}
+    monkeypatch.setattr(ab, "verify_pair_identity", lambda plan: children)
+    monkeypatch.setattr(single, "cleanup_owned_jobs", lambda *a, **kw: calls.append("owned_recovery"))
+    monkeypatch.setattr(single, "recover_checkpoint_exports", lambda directory: calls.append("checkpoint_recovery"))
+
+    def wait(plan):
+        calls.append("resource_wait")
+        raise RuntimeError("stop_before_any_launch")
+
+    monkeypatch.setattr(ab, "wait_for_gpus", wait)
+    with pytest.raises(RuntimeError, match="stop_before_any_launch"):
+        ab.supervise_ab(plan)
+    assert calls == ["owned_recovery", "checkpoint_recovery", "checkpoint_recovery", "resource_wait"]
+
+
+def test_restart_resource_wait_preserves_training_started_state(tmp_path, monkeypatch):
+    directory = tmp_path / "A/run"
+    directory.mkdir(parents=True)
+    (directory / "progress.json").write_text('{"step":100}')
+    child = tmp_path / "A/plan.json"
+    child.write_text(json.dumps({"run_directory": str(directory)}))
+    times = iter([0, 30])
+    monkeypatch.setattr(ab, "gpu_snapshot", free_observation)
+    monkeypatch.setattr(ab.time, "monotonic", lambda: next(times))
+    monkeypatch.setattr(ab.time, "sleep", lambda seconds: None)
+    result = ab.wait_for_gpus({"output": str(tmp_path), "resource_wait": resource_config(), "cases": {"A": str(child)}})
+    assert result["P_training_started"] is True
+    assert result["resuming_existing_training"] is True
+
+
 def setup_pair_evidence(plan, *, steps=2):
     children = {case: single.read(path) for case, path in plan["cases"].items()}
     for case, p in children.items():

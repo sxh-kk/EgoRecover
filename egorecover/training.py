@@ -28,9 +28,18 @@ from egorecover.selection import select_training_dev_records
 from egorecover.state import state_map
 
 
-def compatible_initialization(saved, config, identity, *, allow_rewrite_change=False):
+def compatible_initialization(saved, config, identity, *, allow_rewrite_change=False, allow_prior_change=False):
     if saved.get("format") != FORMAT:
         raise ValueError("Expected a rolling-window checkpoint.")
+    if allow_prior_change:
+        if allow_rewrite_change:
+            raise ValueError("A controlled prior change cannot also change the rewrite policy.")
+        if (
+            saved["identity"].get("prior") != "constant_velocity"
+            or identity.get("prior_mode") != "learned"
+            or identity.get("prior") in (None, "constant_velocity")
+        ):
+            raise ValueError("Prior-change initialization only permits constant-velocity G to a learned P.")
     for key in (
         "history",
         "window",
@@ -55,8 +64,65 @@ def compatible_initialization(saved, config, identity, *, allow_rewrite_change=F
         "data_format",
         "data_protocol",
     ):
+        if key == "prior" and allow_prior_change:
+            continue
         if saved["identity"][key] != identity[key]:
             raise ValueError(f"Initialization identity changed: {key}.")
+
+
+def prior_change_provenance(saved, config, identity, stats, prior_checkpoint):
+    """Validate one explicit CV-to-P initialization, without relaxing resume.
+
+    This opt-in is for the matched-producer P/G adaptation stage. The usual P
+    loader still checks manifest, architecture/weight shapes and frozen eval
+    mode; this additional guard binds normalization, FK and the source G.
+    """
+    compatible_initialization(saved, config, identity, allow_prior_change=True)
+    if file_sha256(prior_checkpoint) != identity["prior"]:
+        raise ValueError("Prior checkpoint changed while preparing initialization.")
+    prior = torch.load(prior_checkpoint, map_location="cpu", weights_only=True)
+    if prior.get("format") != "egorecover_prior_v1" or prior.get("manifest_sha256") != identity["manifest"]:
+        raise ValueError("Prior-change initialization requires a manifest-bound native P export.")
+    for label, normalization in (("G", saved.get("stats")), ("P", prior.get("stats"))):
+        if (
+            not isinstance(normalization, dict)
+            or normalization.keys() != stats.keys()
+            or any(not torch.equal(torch.as_tensor(normalization[k]).cpu(), stats[k].cpu()) for k in stats)
+        ):
+            raise ValueError(f"Prior-change initialization {label} normalization differs from current data.")
+        MotionCodec(normalization)
+    prior_identity = prior.get("identity", {})
+    if (
+        saved["protocol"].get("shape_mode") != config.shape_mode
+        or prior_identity.get("shape_mode") != config.shape_mode
+        or saved["protocol"].get("geometry_target") != config.geometry_target
+        or prior_identity.get("geometry_target") != config.geometry_target
+    ):
+        raise ValueError("Prior-change initialization changes the registered FK shape/geometry policy.")
+    if prior_identity.get("smpl_asset_sha256") != identity["smpl_asset"]:
+        raise ValueError("Prior-change initialization P uses a different SMPL asset.")
+    producer = prior_identity.get("producer", {})
+    if (
+        producer.get("checkpoint_sha256") != identity["initialize"]
+        or producer.get("training_manifest") != identity["manifest"]
+        or producer.get("window") != config.window
+        or producer.get("shape_mode") != config.shape_mode
+        or producer.get("source") != config.source
+        or producer.get("NFE") != config.steps
+        or producer.get("revise_recent") != config.revise_recent
+        or producer.get("prior") != "constant_velocity"
+    ):
+        raise ValueError("Prior-change initialization P history producer differs from the source G.")
+    return {
+        "from_prior": saved["identity"]["prior"],
+        "to_prior": identity["prior"],
+        "target_P_checkpoint": str(prior_checkpoint.resolve()),
+        "source_G_checkpoint_sha256": identity["initialize"],
+        "manifest_stats_shape_smpl_and_producer_checked": True,
+        "P_load_policy": "strict model state; frozen eval; no P parameters copied into G",
+        "G_weight_source": "source G EMA",
+        "optimizer": "fresh",
+    }
 
 
 def train(args):
@@ -117,6 +183,10 @@ def _train(args, context):
         raise ValueError("Velocity normalization must be finite and positive in m/s.")
     if args.resume and args.initialize:
         raise ValueError("Resume and initialization are mutually exclusive.")
+    if args.allow_initialize_prior_change and (args.initialize is None or args.resume):
+        raise ValueError("Prior-change override requires --initialize and cannot be combined with --resume.")
+    if args.allow_initialize_prior_change and args.allow_initialize_rewrite_change:
+        raise ValueError("A controlled prior change cannot also change the rewrite policy.")
     if args.allow_initialize_rewrite_change and not (args.initialize or args.resume):
         raise ValueError("Rewrite initialization override requires --initialize or its native --resume.")
     if args.from_scratch and (args.e7_checkpoint or args.initialize):
@@ -298,6 +368,12 @@ def _train(args, context):
         }
     if args.allow_initialize_rewrite_change:
         identity["allow_initialize_rewrite_change"] = True
+    initial = None
+    if args.allow_initialize_prior_change:
+        initial = torch.load(args.initialize, map_location=device, weights_only=True)
+        identity["initialization_prior_change"] = prior_change_provenance(
+            initial, config, identity, stats, args.prior_checkpoint
+        )
     args.output.mkdir(parents=True, exist_ok=True)
     identity_path = args.output / "identity.json"
     # Continuations retain their original initialization provenance on resume;
@@ -305,6 +381,8 @@ def _train(args, context):
     if args.resume and identity_path.is_file():
         original_identity = json.loads(identity_path.read_text())
         identity["initialize"] = original_identity.get("initialize")
+        if "initialization_prior_change" in original_identity:
+            identity["initialization_prior_change"] = original_identity["initialization_prior_change"]
     if identity_path.exists() and json.loads(identity_path.read_text()) != identity:
         raise ValueError("Run identity changed; use a new output directory.")
     checkpoint_path = args.output / "resume.pt"
@@ -317,8 +395,15 @@ def _train(args, context):
             raise ValueError("Resume identity changed.")
         model.load_state_dict(saved["model"], strict=True)
     elif args.initialize:
-        initial = torch.load(args.initialize, map_location=device, weights_only=True)
-        compatible_initialization(initial, config, identity, allow_rewrite_change=args.allow_initialize_rewrite_change)
+        if initial is None:
+            initial = torch.load(args.initialize, map_location=device, weights_only=True)
+        compatible_initialization(
+            initial,
+            config,
+            identity,
+            allow_rewrite_change=args.allow_initialize_rewrite_change,
+            allow_prior_change=args.allow_initialize_prior_change,
+        )
         model.load_state_dict(initial["ema"], strict=True)
         loaded_sha = context.all_gather_object(state_sha256(model.state_dict()) if context.is_primary else None)[0]
         if context.is_primary:
@@ -331,6 +416,11 @@ def _train(args, context):
                     "loaded_model_sha256": loaded_sha,
                     "optimizer": "fresh",
                     "allowed_rewrite_change": args.allow_initialize_rewrite_change,
+                    **(
+                        {"prior_change": identity["initialization_prior_change"]}
+                        if "initialization_prior_change" in identity
+                        else {}
+                    ),
                 },
             )
         del initial

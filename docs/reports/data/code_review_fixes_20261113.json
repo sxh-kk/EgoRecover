@@ -1,0 +1,243 @@
+{
+  "version": "egorecover_review_fixes_20261113_v1",
+  "recorded_at_beijing": "2026-11-13T23:53:01+08:00",
+  "authorization": "User requested 进行修改 after overall review; preserve A/B scientific recipe, restart revised queue with new frozen code only.",
+  "review_record": "docs/reports/data/code_review_20261113.json",
+  "fixes": {
+    "R01": {
+      "status": "fixed",
+      "change": "Atomic v3 resume embeds immutable current/best exports and authoritative selection/health/progress; recover repairs missing/stale derivatives with stable valid-file SHA, archives uncommitted trace tail, refuses missing committed trace. Controller repairs even when pilot/cap already reached.",
+      "tests": [
+        "interruption after resume commit before best",
+        "old best survives later EMA updates",
+        "controller repair with no optimizer update",
+        "repeated repair never republishes valid exports",
+        "uncommitted/partial trace and future reports archived",
+        "missing trace fails before optimizer update",
+        "corrupt embedded state rejected"
+      ]
+    },
+    "R02": {
+      "status": "fixed",
+      "change": "Unverified interrupted preflight preserved in archive and rerun from scratch; three execution segments bind uninterrupted0to2 and0to1+resume1to2 to PID/start/argv/group/exit/checkpoint SHA."
+    },
+    "R03": {
+      "status": "fixed",
+      "change": "TERM/INT cleanup; KILL restart cleans only nonce-bound journal-owned jobs before GPU wait, including nested workers; pidfd and identity rechecks protect unrelated processes. Existing training status retained.",
+      "SIMPLE_targeted": false
+    },
+    "R04": {
+      "status": "fixed",
+      "change": "Validate rotation orthogonality and determinant; retry only unstable rows in float64 with same6D; recast revalidated, healthy FP32 branch unchanged, gradients finite.",
+      "reproducer_maximum_orthogonality_and_inverse_error_before": [
+        0.0829026848077774,
+        0.07560133934020996
+      ],
+      "after": [
+        5.960464477539063e-08,
+        5.960464477539063e-08
+      ],
+      "actual_bank_normal_path_check": "train/D128256 rows each, base/target joints/reference/auxiliary exactly equal to frozen old decoder"
+    },
+    "R05": {
+      "status": "fixed",
+      "change": "Explicit --allow-initialize-prior-change for new CV-to-learned-P G initialization only; strict manifest/stats/shape/SMPL/source-G producer/parameter checks; provenance retained on strict resume; fresh optimizer; no T3 training launched."
+    },
+    "R06": {
+      "status": "fixed",
+      "change": "Final D400/long50 outputs add all-D128-take-excluded supplemental clip-equal summaries with take-cluster CIs; original reports/gates preserved; exclusion membership/file SHA/counts verified.",
+      "coverage": {
+        "D400": {
+          "clips": 159,
+          "takes": 84
+        },
+        "long50": {
+          "clips": 29,
+          "takes": 29
+        }
+      },
+      "D128_file_sha_bound_in_new_protocol": true
+    },
+    "R07": {
+      "status": "fixed",
+      "change": "Separate late-budget best D128 gain8000to10000 and sufficiency status; missing curve explicitly insufficient; never declares convergence or extends training automatically."
+    },
+    "R08": {
+      "status": "fixed",
+      "change": "Current method/data/comparison docs distinguish predicted-beta final FK from zero-beta startup, body geometry from hand PCA supplementary metrics, W3/K8/detach/NFE1 and remaining staged work."
+    }
+  },
+  "scientific_recipe_changed": false,
+  "old_results_or_checkpoints_modified": false,
+  "SIMPLE_interrupted": false,
+  "preserved_controls": [
+    "same W3G10k producer and immutable train/D128/preflight banks",
+    "seed62 and random trunk/zero residual head",
+    "A/B only beta-residual policy differs",
+    "same common-CV physical-state objective and geometry coefficient0.008869197811349056",
+    "global64/micro8 and48mature16early",
+    "2k original gate, native10k cap and8k LR decay",
+    "same original D128/D400/long50 physical clips and primary gates"
+  ],
+  "verification": {
+    "pytest": {
+      "passed": 599,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "elapsed_seconds": 213.903,
+      "junit_xml": "/root/workspace/songxuhua/exp/code-review-fixes-20261113/pytest.xml"
+    },
+    "ruff": {
+      "status": "passed",
+      "tracked_and_new_task_Python_files": 142,
+      "pre_existing_untracked_oracle_drafts": "left untouched"
+    },
+    "frozen_source_files": 80,
+    "source_snapshot_matches_workspace": true,
+    "independent_recheck": [
+      "R01 immutable best, journal recovery, missing trace fail-closed, RNG and export-SHA idempotence",
+      "R02/R03 nested nonce scope, execution command hash, pidfd safety and SIMPLE exclusion",
+      "R06/R07 actual frozen selections159/84 and29/29; primary gates unchanged"
+    ],
+    "final_frozen_CPU_four_rank_proof": {
+      "status": "passed",
+      "device": "cpu",
+      "ranks_per_case": 4,
+      "matched_initialization_first_loss_queries": true,
+      "GPU_preflight_passed": false,
+      "source_snapshot": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/source",
+      "proof_path": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/cpu-preflight/verification.json",
+      "proof_sha256": "d188507ab7dc0a76110882df191891c46b5f89692b708a0f63a4704ec0936c91",
+      "cases": [
+        {
+          "case": "A",
+          "weight_max_abs_differences": {
+            "model": 3.725290298461914e-09,
+            "ema": 7.105427357601002e-15,
+            "optimizer": 9.313225746154785e-10
+          },
+          "optimizer_RNG_sampler_scheduler_compared": true,
+          "random_initial_model_sha256": "901031c48efb76f43ea4b7b6cbddbf50fe22d10b586331fdbeda43b0d503d077",
+          "geometry_weight": 0.008869197811349056,
+          "initial_losses": {
+            "code": 0.3765747845172882,
+            "geometry": 0.8976132199168205,
+            "loss": 0.38453589752316475
+          },
+          "trace_hashes": [
+            "704def0067083416e362b5b539979624e19d940c2ec80b49ca564f8c096dbf10",
+            "d3dd05ed2c0cf23a77e11785e77d044bbc74eb5626c1ef393be4f7ffc3e827e8"
+          ],
+          "CUDA_RNG_present": false
+        },
+        {
+          "case": "B",
+          "weight_max_abs_differences": {
+            "model": 7.450580596923828e-09,
+            "ema": 7.105427357601002e-15,
+            "optimizer": 9.313225746154785e-10
+          },
+          "optimizer_RNG_sampler_scheduler_compared": true,
+          "random_initial_model_sha256": "901031c48efb76f43ea4b7b6cbddbf50fe22d10b586331fdbeda43b0d503d077",
+          "geometry_weight": 0.008869197811349056,
+          "initial_losses": {
+            "code": 0.3765747845172882,
+            "geometry": 0.8976132199168205,
+            "loss": 0.38453589752316475
+          },
+          "trace_hashes": [
+            "704def0067083416e362b5b539979624e19d940c2ec80b49ca564f8c096dbf10",
+            "d3dd05ed2c0cf23a77e11785e77d044bbc74eb5626c1ef393be4f7ffc3e827e8"
+          ],
+          "CUDA_RNG_present": false
+        }
+      ]
+    },
+    "pre_fix_post_fix_CPU_initialization_losses_queries_identical": true,
+    "real_GPU_preflight": "pending; required independently for A and B after SIMPLE/resources are free"
+  },
+  "retired_runtime": {
+    "plan": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/plan.json",
+    "controller_pid": 1262069,
+    "retirement_record": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/maintenance-retirement.json",
+    "formal_updates": {
+      "A": 0,
+      "B": 0
+    },
+    "frozen_source_and_protocol_preserved": true
+  },
+  "new_runtime": {
+    "plan": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/plan.json",
+    "source_snapshot": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/source",
+    "controller": {
+      "pid": 1854936,
+      "start_ticks": 131965531,
+      "command": [
+        "/root/miniconda3/envs/egorecover/bin/python3.12",
+        "-m",
+        "scripts.run_formal_prior_ab",
+        "run",
+        "--plan",
+        "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/plan.json"
+      ],
+      "cwd": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/source",
+      "launched_at_beijing": "2026-11-13T23:50:24+08:00",
+      "log": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/controller.log",
+      "replaces_runtime": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/plan.json"
+    },
+    "phase_at_record": "waiting_for_gpus",
+    "state_timestamp_beijing": "2026-11-13T23:52:50+08:00",
+    "cases": {
+      "A": {
+        "run_id": "A_P02_commonCV_s62_r1",
+        "protocol": "docs/reports/data/formal_p02_a_r1_plan_20261113.json",
+        "protocol_sha256": "850eea542db5f463d4423a33fc16892aeb55013d4bf1c7e9f7628383f63f7afe",
+        "runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/A/plan.json",
+        "GPUs": "0,1,2,3",
+        "actual_formal_updates": 0
+      },
+      "B": {
+        "run_id": "B_P02_commonCV_holdBeta_s62_r1",
+        "protocol": "docs/reports/data/formal_p02_b_r1_plan_20261113.json",
+        "protocol_sha256": "d38abb3362ec11bd57e163531dd3d070a19d6620ae7a8bcad71bfc8a895afb31",
+        "runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/B/plan.json",
+        "GPUs": "4,5,6,7",
+        "actual_formal_updates": 0
+      }
+    },
+    "P_training_started": false,
+    "resource_wait": {
+      "enabled": true,
+      "gpus": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "max_memory_MiB": 2048,
+      "stable_seconds": 60,
+      "poll_seconds": 15,
+      "blocking_processes": [
+        {
+          "pid": 2537348,
+          "start_ticks": 129424218,
+          "cmdline_sha256": "2b9f30ac299511892429350db7cb1ed0b9b5e21ed63fca2ea806a3c17bae4875"
+        }
+      ]
+    },
+    "GPU_preflight_passed": false,
+    "queue_log": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/controller.log"
+  },
+  "monitor_command": "cd /root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/source && /root/miniconda3/envs/egorecover/bin/python3.12 -m scripts.run_formal_prior_ab monitor --plan /root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/plan.json",
+  "remaining_research_questions": [
+    "P02 model quality not measured yet",
+    "Reference decomposition gauge still requires audit before G adaptation; no new model-input canonicalization introduced",
+    "No G/P adaptation, U or FFT training launched",
+    "No exclusive GPU latency claim or unified-paper SOTA claim"
+  ]
+}

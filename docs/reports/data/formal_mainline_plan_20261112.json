@@ -1,7 +1,7 @@
 {
   "version": "formal-v3-budget10k-with-v1-v2-history",
   "created_at_beijing": "2026-11-12T11:42:52+08:00",
-  "status": "P02_AB_queued_waiting_for_SIMPLE_GPU_preflight_pending",
+  "status": "P02_AB_r1_review_fixes_verified_queued_waiting_for_SIMPLE",
   "authorized_this_turn": "User authorized trainer adaptation, history preparation, four-GPU2k P pilot and same-state continuation to10k if predeclared gate passes.",
   "old_experiments": "exploratory, preserved; no warm-starting formal G/P",
   "data": {
@@ -319,16 +319,16 @@
     },
     {
       "id": "S2_P02_AB",
-      "status": "queued_waiting_for_SIMPLE_GPU_preflight_pending",
+      "status": "r1_queued_waiting_for_SIMPLE_GPU_preflight_pending",
       "run_ids": [
-        "A_P02_commonCV_s62",
-        "B_P02_commonCV_holdBeta_s62"
+        "A_P02_commonCV_s62_r1",
+        "B_P02_commonCV_holdBeta_s62_r1"
       ],
       "case_protocols": {
-        "A": "docs/reports/data/formal_p02_a_plan_20261113.json",
-        "B": "docs/reports/data/formal_p02_b_plan_20261113.json"
+        "A": "docs/reports/data/formal_p02_a_r1_plan_20261113.json",
+        "B": "docs/reports/data/formal_p02_b_r1_plan_20261113.json"
       },
-      "runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/plan.json",
+      "runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/plan.json",
       "launch_record": "docs/reports/data/formal_p02_ab_launch_20261113.json",
       "first_updates_per_case": 2000,
       "max_updates_per_case": 10000,
@@ -436,7 +436,14 @@
       },
       "same_state_continuation": true,
       "real_GPU_preflight_passed_at_record": false,
-      "automatic_G_U_FFT": false
+      "automatic_G_U_FFT": false,
+      "previous_run_ids": [
+        "A_P02_commonCV_s62",
+        "B_P02_commonCV_holdBeta_s62"
+      ],
+      "superseded_runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/plan.json",
+      "fix_record": "docs/reports/data/code_review_fixes_20261113.json",
+      "review_fixes": "R01-R08"
     },
     {
       "id": "S3_PG",
@@ -845,7 +852,7 @@
       {
         "id": "T2_P",
         "stage": "S2_P02_AB",
-        "status": "P02_AB_queued_waiting_for_SIMPLE",
+        "status": "P02_AB_r1_queued_waiting_for_SIMPLE",
         "task": "使用新G真实滚动历史训练P，在相同历史上与CV比较",
         "depends_on": [
           "T1_G"
@@ -857,19 +864,19 @@
           "W3-only history producer, no GT warmup;2k trend gate,10k cap with8k LR decay",
           "Dense mature clip-equal P/CV comparison, startup/long/temporal guards; native producer identity and visit coverage"
         ],
-        "training_protocol": "docs/reports/data/formal_p02_ab_launch_20261113.json",
+        "training_protocol": "docs/reports/data/code_review_fixes_20261113.json",
         "auto_start": true,
         "case_protocols": {
-          "A": "docs/reports/data/formal_p02_a_plan_20261113.json",
-          "B": "docs/reports/data/formal_p02_b_plan_20261113.json"
+          "A": "docs/reports/data/formal_p02_a_r1_plan_20261113.json",
+          "B": "docs/reports/data/formal_p02_b_r1_plan_20261113.json"
         },
         "previous_run_id": "P01_W3G10k_s62",
         "run_ids": [
-          "A_P02_commonCV_s62",
-          "B_P02_commonCV_holdBeta_s62"
+          "A_P02_commonCV_s62_r1",
+          "B_P02_commonCV_holdBeta_s62_r1"
         ],
         "auto_start_condition": "bound SIMPLE wrapper finished and all8GPUs idle stable60s; real4GPU preflight must pass",
-        "runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/plan.json"
+        "runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/plan.json"
       },
       {
         "id": "T3_G_adaptation_and_fusion_diagnostic",
@@ -923,7 +930,7 @@
     "budget_updated_at_beijing": "2026-11-12T20:56:15+08:00",
     "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json",
     "next": "T2_P",
-    "current_status": "P01 remains stopped at2k and diagnosed. Authorized P02 A/B implementations/protocols are frozen; background controller is waiting for SIMPLE completion. Each case4GPUs, realGPU preflight then2k; only gate-passed cases continue same state to10k."
+    "current_status": "P01 remains stopped/diagnosed; P02 original zero-step runtime retired with source preserved. R01-R08 fixed,599CPU tests plus final frozen-source4rank A/B proof passed. Revised P02r1 queue waiting for SIMPLE; trueGPU preflight mandatory,2k pilots and original same-state continuation gates unchanged."
   },
   "fft_todo_branch": {
     "recorded_at_beijing": "2026-11-12T20:41:00+08:00",
@@ -1035,16 +1042,17 @@
   "diagnosis_completed_at_beijing": "2026-11-13T16:34:43+08:00",
   "P02_AB_launch_record": "docs/reports/data/formal_p02_ab_launch_20261113.json",
   "active_P_training_plans": {
-    "A": "docs/reports/data/formal_p02_a_plan_20261113.json",
-    "B": "docs/reports/data/formal_p02_b_plan_20261113.json"
+    "A": "docs/reports/data/formal_p02_a_r1_plan_20261113.json",
+    "B": "docs/reports/data/formal_p02_b_r1_plan_20261113.json"
   },
-  "active_P_runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/plan.json",
-  "P02_recorded_at_beijing": "2026-11-13T19:32:05+08:00",
+  "active_P_runtime_plan": "/root/workspace/songxuhua/exp/formal-p02-ab-r1-20261113/plan.json",
+  "P02_recorded_at_beijing": "2026-11-13T23:53:01+08:00",
   "P01_historical_record_fields": [
     "P_training_plan",
     "P_runtime_plan",
     "P_launch_record",
     "P_pilot_result",
     "P_diagnosis"
-  ]
+  ],
+  "P02_AB_fix_record": "docs/reports/data/code_review_fixes_20261113.json"
 }

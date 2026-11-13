@@ -7,13 +7,22 @@ import json
 import math
 import os
 import shutil
-import signal
 import subprocess
 import sys
 import time
 import traceback
 from pathlib import Path
 
+from scripts.formal_prior_processes import (
+    ROOT_ENV,
+    TOKEN_ENV,
+    SupervisorInterrupted,
+    bind_job,
+    cleanup_owned_jobs,
+    finish_job,
+    journal_job,
+    termination_signals,
+)
 from scripts.run_history_ablation import now, read, write
 
 HEALTH_CHECKS = {
@@ -336,27 +345,54 @@ def checkpoint_step(directory):
     return int(torch.load(path, map_location="cpu", weights_only=True, mmap=True)["step"]) if path.exists() else 0
 
 
+def recover_checkpoint_exports(directory):
+    """Repair committed exports only after the owning worker has exited."""
+    if not (Path(directory) / "resume.pt").exists():
+        return {"status": "no_resume_checkpoint"}
+    from egorecover.formal_prior_training import recover_formal_checkpoint
+
+    return recover_formal_checkpoint(Path(directory))
+
+
 def run_processes(plan, specs, phase):
     """Each explicit argv runs in a new process group; failures preserve artifacts."""
+    with termination_signals():
+        return _run_processes(plan, specs, phase)
+
+
+def _run_processes(plan, specs, phase):
     root, processes = Path(plan["output"]), []
     try:
         for spec in specs:
             directory = Path(spec["directory"])
             directory.mkdir(parents=True, exist_ok=True)
             log = (directory / f"{phase}-{time.time_ns()}.log").open("x")
+            journal, record = journal_job(plan, spec)
+            env = environment(plan, spec["gpus"])
+            env.update({ROOT_ENV: record["runtime"], TOKEN_ENV: record["token"]})
             process = subprocess.Popen(
                 spec["argv"],
                 cwd=plan["source_snapshot"],
-                env=environment(plan, spec["gpus"]),
+                env=env,
                 stdin=subprocess.DEVNULL,
                 stdout=log,
                 stderr=subprocess.STDOUT,
                 start_new_session=True,
             )
-            processes.append((spec, process, log))
+            processes.append((spec, process, log, journal, record))
+            bind_job(journal, record, process)
         write(
             root / f"{phase}-processes.json",
-            [{"name": spec["name"], "pid": process.pid, "gpus": spec["gpus"]} for spec, process, _ in processes],
+            [
+                {
+                    "name": spec["name"],
+                    "pid": process.pid,
+                    "gpus": spec["gpus"],
+                    "journal": str(journal),
+                    "identity": record["leader"],
+                }
+                for spec, process, _, journal, record in processes
+            ],
         )
         while True:
             jobs = [
@@ -368,7 +404,7 @@ def run_processes(plan, specs, phase):
                     "progress": read(Path(spec["directory"]) / "progress.json"),
                     "status": read(Path(spec["directory"]) / "status.json"),
                 }
-                for spec, process, _ in processes
+                for spec, process, _, _, _ in processes
             ]
             write(
                 root / "status.json",
@@ -385,16 +421,15 @@ def run_processes(plan, specs, phase):
         for spec in specs:
             if spec.get("expected_output") and not Path(spec["expected_output"]).is_file():
                 raise RuntimeError(f"Worker completed without required output: {spec['name']}")
+        return [finish_job(journal, record, process.returncode) for _, process, _, journal, record in processes]
     finally:
-        for _, process, log in processes:
-            if process.poll() is None:
-                os.killpg(process.pid, signal.SIGTERM)
-                try:
-                    process.wait(timeout=30)
-                except subprocess.TimeoutExpired:
-                    os.killpg(process.pid, signal.SIGKILL)
+        try:
+            cleanup_owned_jobs(plan, reason="worker_scope_exit")
+        finally:
+            for _, process, log, _, _ in processes:
+                if process.poll() is not None:
                     process.wait()
-            log.close()
+                log.close()
 
 
 def run_bank_jobs(plan, key, phase):
@@ -433,6 +468,61 @@ def _assert_tree_equal(left, right, *, floating=False):
     return 0.0
 
 
+def verify_preflight_segments(plan):
+    base = Path(plan["output"]) / "preflight"
+    ledger_path = base / "execution-segments.json"
+    ledger = read(ledger_path)
+    if (
+        not ledger
+        or ledger.get("format") != "egorecover_preflight_segments_v1"
+        or ledger.get("complete") is not True
+        or ledger.get("protocol_sha256") != plan["protocol_sha256"]
+        or ledger.get("source_hashes") != plan["source_hashes"]
+    ):
+        raise ValueError("Preflight needs complete, frozen single-process execution-segment evidence.")
+    segments = ledger.get("segments", [])
+    expected = [("full", 0, 2, False), ("resumed", 0, 1, False), ("resumed", 1, 2, True)]
+    if len(segments) != len(expected):
+        raise ValueError("Preflight must contain one continuous full run and two separate resume runs.")
+    identities = []
+    for segment, (branch, start, end, resume) in zip(segments, expected):
+        if (segment.get("branch"), segment.get("from_step"), segment.get("to_step"), segment.get("resume")) != (
+            branch,
+            start,
+            end,
+            resume,
+        ):
+            raise ValueError("Preflight execution segments are not full0-to2 versus resumed0-to1-plus1-to2.")
+        worker = segment.get("worker", {})
+        identity = worker.get("leader") or {}
+        argv = worker.get("argv", [])
+        expected_argv = train_command(plan, base / branch, preflight=True, resume=resume, stop_after=end - start)
+        command_hash = hashlib.sha256(b"\0".join(os.fsencode(value) for value in expected_argv) + b"\0").hexdigest()
+        if (
+            worker.get("exit_code") != 0
+            or argv != expected_argv
+            or not isinstance(identity.get("pid"), int)
+            or identity["pid"] <= 0
+            or identity.get("start_ticks", 0) <= 0
+            or identity.get("pgid") != identity["pid"]
+            or identity.get("session_id") != identity["pid"]
+            or identity.get("cmdline_sha256") != command_hash
+            or not worker.get("token")
+        ):
+            raise ValueError("Preflight worker PID/start/argv/group or successful-exit identity is incomplete.")
+        identities.append((identity["pid"], identity["start_ticks"], worker["token"]))
+        checkpoint = base / branch / ("resume-step1.pt" if branch == "resumed" and end == 1 else "resume.pt")
+        if not checkpoint.is_file() or segment.get("checkpoint_sha256") != sha256(checkpoint):
+            raise ValueError("Preflight execution checkpoint identity changed.")
+        import torch
+
+        if torch.load(checkpoint, map_location="cpu", weights_only=True, mmap=True)["step"] != end:
+            raise ValueError("Preflight execution checkpoint does not contain its declared end step.")
+    if len(set(identities)) != 3:
+        raise ValueError("Preflight must use three separate process executions.")
+    return {"execution_segments_sha256": sha256(ledger_path), "continuous_full0_to2_verified": True}
+
+
 def verify_preflight(plan):
     import torch
 
@@ -440,6 +530,9 @@ def verify_preflight(plan):
 
     root = Path(plan["output"])
     base = root / "preflight"
+    execution = verify_preflight_segments(plan)
+    for branch in ("full", "resumed"):
+        recover_checkpoint_exports(base / branch)
     full = torch.load(base / "full/resume.pt", map_location="cpu", weights_only=True, mmap=True)
     resumed = torch.load(base / "resumed/resume.pt", map_location="cpu", weights_only=True, mmap=True)
     assert full["step"] == resumed["step"] == 2
@@ -494,6 +587,7 @@ def verify_preflight(plan):
         "weight_max_abs_differences": differences,
         "GPU_precision_rule": "model/EMA float32 rtol1e-7 atol2e-8; optimizer tensor relative max-difference1e-5; RNG, sampling and scheduler exact",
         "validation_is_accuracy_claim": False,
+        **execution,
     }
     write(root / "preflight-verification.json", evidence)
     return evidence
@@ -512,23 +606,64 @@ def preflight(plan):
         for key, expected in completed["preflight_bank_hashes"].items():
             if sha256(plan[key]) != expected:
                 raise ValueError("Preflight bank changed after verification.")
+        execution = verify_preflight_segments(plan)
+        if any(completed.get(key) != value for key, value in execution.items()):
+            raise ValueError("Preflight execution evidence differs from its accepted verification.")
         return completed
     for key in ("preflight_train_bank", "preflight_val_bank"):
         if not Path(plan[key]).is_file():
             raise FileNotFoundError(f"Prepare the small preflight bank first: {key}")
-    for kind, target in (("full", 2), ("resumed", 1), ("resumed", 2)):
-        directory = root / "preflight" / kind
-        step = checkpoint_step(directory)
-        if step >= target:
-            continue
+    base = root / "preflight"
+    if base.exists():
+        archive = root / "preflight-interrupted" / str(time.time_ns())
+        archive.parent.mkdir(parents=True, exist_ok=True)
+        base.rename(archive)
+        write(
+            archive / "archive-reason.json",
+            {
+                "reason": "Unverified preflight; preserve evidence and rerun continuous full0-to2 from scratch.",
+                "at_beijing": now(),
+            },
+        )
+    ledger = {
+        "format": "egorecover_preflight_segments_v1",
+        "complete": False,
+        "protocol_sha256": plan["protocol_sha256"],
+        "source_hashes": plan["source_hashes"],
+        "segments": [],
+    }
+    for kind, start, target, resume in (("full", 0, 2, False), ("resumed", 0, 1, False), ("resumed", 1, 2, True)):
+        directory = base / kind
+        if checkpoint_step(directory) != start:
+            raise ValueError("Preflight checkpoint does not match its declared execution-segment start.")
         spec = {
             "name": f"preflight-{kind}-to{target}",
-            "argv": train_command(plan, directory, preflight=True, resume=step > 0, stop_after=target - step),
+            "argv": train_command(plan, directory, preflight=True, resume=resume, stop_after=target - start),
             "directory": str(directory),
             "gpus": plan["training_gpus"],
             "expected_output": str(directory / "resume.pt"),
         }
-        run_processes(plan, [spec], spec["name"])
+        workers = run_processes(plan, [spec], spec["name"])
+        recover_checkpoint_exports(directory)
+        if checkpoint_step(directory) != target:
+            raise ValueError("Preflight worker did not commit the requested execution-segment end.")
+        checkpoint = directory / "resume.pt"
+        if kind == "resumed" and target == 1:
+            checkpoint = directory / "resume-step1.pt"
+            shutil.copy2(directory / "resume.pt", checkpoint)
+        ledger["segments"].append(
+            {
+                "branch": kind,
+                "from_step": start,
+                "to_step": target,
+                "resume": resume,
+                "worker": workers[0],
+                "checkpoint_sha256": sha256(checkpoint),
+            }
+        )
+        write(base / "execution-segments.json", ledger)
+    ledger["complete"] = True
+    write(base / "execution-segments.json", ledger)
     return verify_preflight(plan)
 
 
@@ -550,6 +685,7 @@ def pilot_decision(plan):
     from egorecover.formal_prior_evaluation import pilot_gate
 
     root = Path(plan["output"])
+    recover_checkpoint_exports(plan["run_directory"])
     report = read(Path(plan["run_directory"]) / "selection.json")
     if not report or not isinstance(report.get("curve"), list):
         raise ValueError("P pilot has no validation curve; cannot authorize continuation.")
@@ -567,18 +703,21 @@ def pilot_decision(plan):
 
 
 def final_decision(plan):
-    from egorecover.formal_prior_evaluation import final_gate
+    from egorecover.formal_prior_evaluation import final_gate, predictor_plateau_status
 
     root = Path(plan["output"])
+    recover_checkpoint_exports(plan["run_directory"])
     paths = {cohort: root / "evaluation" / cohort / "report.json" for cohort in ("D400", "long50")}
     if not all(path.is_file() for path in paths.values()):
         return None
     reports = {cohort: read(path) for cohort, path in paths.items()}
     digest = sha256(Path(plan["run_directory"]) / "best.pt")
+    protocol = read(plan["protocol"])
+    exclusions = {}
     for cohort, report in reports.items():
         if report.get("checkpoint_sha256") != digest:
             raise ValueError(f"{cohort} evaluation did not use the current D128-selected best checkpoint.")
-        expected = read(plan["protocol"])["evaluation"][cohort]
+        expected = protocol["evaluation"][cohort]
         bank = Path(plan.get("evaluation_banks", {}).get(cohort, root / "banks" / cohort / "bank.pt"))
         if (
             report.get("bank_cohort") != cohort
@@ -588,7 +727,47 @@ def final_decision(plan):
             or report.get("bank_sha256") != sha256(bank)
         ):
             raise ValueError(f"{cohort} evaluation bank/cohort/selection identity differs from the frozen protocol.")
+        overlap = protocol["evaluation"].get("selection_and_report_overlap", {}).get(cohort)
+        if overlap is None:
+            exclusions[cohort] = {"status": "legacy_protocol_without_exclusion_metadata"}
+            continue
+        supplementary = report.get("selection_take_excluded") or {}
+        selection = protocol["evaluation"]["D128"]
+        selection_path = Path(selection["file"])
+        frozen = read(selection_path)
+        excluded_takes = sorted({row["take"] for row in frozen["records"]})
+        if (
+            frozen.get("sha256") != selection["selection_id"]
+            or supplementary.get("selection_id") != selection["selection_id"]
+            or supplementary.get("excluded_takes") != excluded_takes
+            or supplementary.get("source_clips") != expected["clips"]
+            or supplementary.get("overlap_clips") != overlap["overlap_clips"]
+            or supplementary.get("clips") != overlap["remaining_clips_excluding_D128_takes"]
+            or supplementary.get("takes") != overlap["remaining_takes_excluding_D128"]
+            or supplementary.get("selection_file_sha256") != sha256(selection_path)
+            or (
+                selection.get("selection_file_sha256") is not None
+                and supplementary.get("selection_file_sha256") != selection["selection_file_sha256"]
+            )
+            or not isinstance(supplementary.get("summary"), dict)
+            or supplementary.get("status") != "ok"
+            or any(
+                supplementary.get("summary", {}).get(phase, {}).get("clips") != supplementary.get("clips")
+                or supplementary.get("summary", {}).get(phase, {}).get("takes") != supplementary.get("takes")
+                for phase in ("all", "mature", "startup")
+            )
+        ):
+            raise ValueError(f"{cohort} D128-take-excluded report coverage/identity differs from the frozen protocol.")
+        exclusions[cohort] = {
+            "status": "verified_supplement_main_gate_unchanged",
+            "selection_id": selection["selection_id"],
+            "clips": supplementary["clips"],
+            "takes": supplementary["takes"],
+        }
     result = final_gate(reports["D400"], reports["long50"])
+    selection_curve = read(Path(plan["run_directory"]) / "selection.json") or {}
+    result["training_sufficiency"] = predictor_plateau_status(selection_curve.get("curve", []))
+    result["selection_take_excluded_verification"] = exclusions
     result.update(
         at_beijing=now(),
         protocol_sha256=plan["protocol_sha256"],
@@ -603,6 +782,8 @@ def supervise(plan):
     if plan.get("pair_managed"):
         raise ValueError("Use run_formal_prior_ab for a matched A/B experiment.")
     verify_identity(plan)
+    cleanup_owned_jobs(plan, reason="startup_recovery_before_any_launch")
+    recover_checkpoint_exports(plan["run_directory"])
     run_bank_jobs(plan, "preflight_bank_jobs", "preflight-banks")
     preflight(plan)
     run_bank_jobs(plan, "bank_jobs", "formal-banks")
@@ -620,6 +801,7 @@ def supervise(plan):
             "expected_output": str(directory / "resume.pt"),
         }
         run_processes(plan, [spec], "training-to2000")
+    recover_checkpoint_exports(directory)
     if checkpoint_step(directory) < plan["pilot_updates"]:
         raise RuntimeError("Training worker did not produce its requested recoverable pilot checkpoint.")
     decision = pilot_decision(plan)
@@ -646,6 +828,7 @@ def supervise(plan):
             "expected_output": str(directory / "resume.pt"),
         }
         run_processes(plan, [spec], "training-to10000")
+    recover_checkpoint_exports(directory)
     if checkpoint_step(directory) != plan["max_updates"]:
         raise RuntimeError("P did not end at its declared 10k cap.")
     run_bank_jobs(plan, "evaluation_jobs", "fixed-evaluation")
@@ -753,22 +936,32 @@ def main():
         except BlockingIOError as error:
             raise SystemExit("This P runtime is already being supervised.") from error
         write(root / "controller.json", {"pid": os.getpid(), "action": args.action, "at_beijing": now()})
-        try:
-            if args.action == "run":
-                supervise(plan)
-            elif args.action == "preflight":
-                verify_identity(plan)
-                run_bank_jobs(plan, "preflight_bank_jobs", "preflight-banks")
-                preflight(plan)
-            else:
-                verify_identity(plan)
-                verify_preflight(plan)
-        except BaseException:
-            write(
-                root / "status.json",
-                {"phase": "failed", "at_beijing": now(), "error": traceback.format_exc(), "artifacts_preserved": True},
-            )
-            raise
+        with termination_signals():
+            try:
+                if args.action == "run":
+                    supervise(plan)
+                elif args.action == "preflight":
+                    verify_identity(plan)
+                    cleanup_owned_jobs(plan, reason="preflight_startup_recovery")
+                    run_bank_jobs(plan, "preflight_bank_jobs", "preflight-banks")
+                    preflight(plan)
+                else:
+                    verify_identity(plan)
+                    cleanup_owned_jobs(plan, reason="verification_startup_recovery")
+                    verify_preflight(plan)
+            except BaseException as exc:
+                write(
+                    root / "status.json",
+                    {
+                        "phase": "interrupted" if isinstance(exc, SupervisorInterrupted) else "failed",
+                        "at_beijing": now(),
+                        "error": traceback.format_exc(),
+                        "artifacts_preserved": True,
+                    },
+                )
+                raise
+            finally:
+                cleanup_owned_jobs(plan, reason="supervisor_exit")
 
 
 if __name__ == "__main__":
