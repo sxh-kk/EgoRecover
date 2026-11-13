@@ -1,7 +1,7 @@
 {
   "version": "formal-v3-budget10k-with-v1-v2-history",
   "created_at_beijing": "2026-11-12T11:42:52+08:00",
-  "status": "P01_pilot2000_stopped_gate_failed",
+  "status": "P01_pilot_failed_diagnosis_complete_P02_not_started",
   "authorized_this_turn": "User authorized trainer adaptation, history preparation, four-GPU2k P pilot and same-state continuation to10k if predeclared gate passes.",
   "old_experiments": "exploratory, preserved; no warm-starting formal G/P",
   "data": {
@@ -312,7 +312,9 @@
       "auto_start": false,
       "runtime_plan": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/plan.json",
       "actual_updates": 2000,
-      "pilot_result": "docs/reports/data/formal_p_pilot_20261113.json"
+      "pilot_result": "docs/reports/data/formal_p_pilot_20261113.json",
+      "diagnosis_status": "complete_no_new_training",
+      "diagnosis_record": "docs/reports/data/formal_p_diagnosis_20261113.json"
     },
     {
       "id": "S3_PG",
@@ -721,7 +723,7 @@
       {
         "id": "T2_P",
         "stage": "S2_P",
-        "status": "pilot2000_complete_gate_failed_pending_diagnosis",
+        "status": "pilot_failed_diagnosis_completed_next_protocol_pending",
         "task": "使用新G真实滚动历史训练P，在相同历史上与CV比较",
         "depends_on": [
           "T1_G"
@@ -789,7 +791,7 @@
     "budget_updated_at_beijing": "2026-11-12T20:56:15+08:00",
     "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json",
     "next": "T2_P",
-    "current_status": "P01 completed2k; no mature MPJPE gain and foot-slide guard failed, automatically stopped; G adaptation/U/FFT not launched."
+    "current_status": "P01 remains stopped at2k; data/EMA/gradient and physical-factor diagnostics complete; representation supervision and beta correction need controlled follow-up, no P02/G/U/FFT launched."
   },
   "fft_todo_branch": {
     "recorded_at_beijing": "2026-11-12T20:41:00+08:00",
@@ -896,5 +898,7 @@
   "P_protocol_updated_at_beijing": "2026-11-13T12:08:06+08:00",
   "P_runtime_plan": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/plan.json",
   "P_launch_record": "docs/reports/data/formal_p_launch_20261113.json",
-  "P_pilot_result": "docs/reports/data/formal_p_pilot_20261113.json"
+  "P_pilot_result": "docs/reports/data/formal_p_pilot_20261113.json",
+  "P_diagnosis": "docs/reports/data/formal_p_diagnosis_20261113.json",
+  "diagnosis_completed_at_beijing": "2026-11-13T16:34:43+08:00"
 }
