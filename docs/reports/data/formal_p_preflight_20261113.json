@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "at_beijing": "2026-11-13T14:59:02+08:00",
+  "protocol_sha256": "4ba8151d5ec57236de939fe6e3d5cc08e82a00854005ce252bf952e7806ca9db",
+  "updates": 2,
+  "ranks": 4,
+  "preflight_bank_hashes": {
+    "preflight_train_bank": "744f89ec09f34adb70cc4d35e467076b52acc5e1d92316d719756d2b485a9d5d",
+    "preflight_val_bank": "34b86be3d4fbfd03cc2c94fc2f03d71b6cca7823ed707e31c07e8f592a847c51"
+  },
+  "RNG_sampling_trace_scheduler_optimizer_steps_exact": true,
+  "weight_max_abs_differences": {
+    "model": 7.450580596923828e-09,
+    "ema": 2.1316282072803006e-14,
+    "optimizer": 2.3283064365386963e-10
+  },
+  "GPU_precision_rule": "model/EMA float32 rtol1e-7 atol2e-8; optimizer tensor relative max-difference1e-5; RNG, sampling and scheduler exact",
+  "validation_is_accuracy_claim": false,
+  "live_evidence_file": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/preflight-verification.json",
+  "note": "Preflight only; fresh random P will be trained on full new-G bank; not predictor accuracy evidence."
+}

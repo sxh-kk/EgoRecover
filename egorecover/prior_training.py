@@ -50,6 +50,10 @@ class PriorTrainOptions:
     two_forward_fraction: float = 0.8
     adapted_self_fraction: float = 0.0
     ema_decay: float = 0.999
+    formal_protocol: Path | None = None
+    formal_preflight: bool = False
+    lr_decay_step: int | None = None
+    lr_gamma: float = 0.1
 
 
 def prior_losses(model, example, codec, fk):
@@ -245,6 +249,10 @@ def calibrate_geometry(model, data, codec, fk, device):
 
 
 def train_prior(args):
+    if args.formal_protocol is not None:
+        from .formal_prior_training import train_formal_prior
+
+        return train_formal_prior(args)
     with DistributedContext.from_environment(args.device) as context:
         _train_prior(args, context)
 
@@ -495,6 +503,10 @@ def _train_prior(args, context):
 
 
 def evaluate_checkpoint(args):
+    if args.formal_protocol is not None:
+        from .formal_prior_training import evaluate_formal_checkpoint
+
+        return evaluate_formal_checkpoint(args)
     with DistributedContext.from_environment(args.device) as context:
         torch.set_num_threads(2)
         saved = torch.load(args.evaluate_checkpoint, map_location="cpu", weights_only=True)
@@ -537,6 +549,10 @@ def main():
         )
     parser.add_argument("--stop-after", type=int)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--formal-protocol", type=Path)
+    parser.add_argument("--formal-preflight", action="store_true")
+    parser.add_argument("--lr-decay-step", type=int)
+    parser.add_argument("--lr-gamma", type=float, default=0.1)
     parser.add_argument("--evaluate-checkpoint", type=Path)
     parser.add_argument("--mature-predicted-fraction", type=float)
     parser.add_argument("--checkpoint-steps", type=int, nargs="*", default=())

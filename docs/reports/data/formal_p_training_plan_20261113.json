@@ -1,14 +1,14 @@
 {
   "version": "formal-P01-W3G10k-plan-v1",
   "recorded_at_beijing": "2026-11-13T12:03:47+08:00",
-  "status": "planned_requires_implementation_preflight_and_banks",
-  "authorized_scope": "Design and record a training plan on new G histories; no GPU launch or full bank generation in this turn.",
+  "status": "implementation_reviewed_pending_real_GPU_preflight",
+  "authorized_scope": "User authorized trainer adaptation, history preparation, four-GPU2k P pilot and same-state continuation to10k if predeclared gate passes.",
   "run_id": "P01_W3G10k_s62",
   "proposed_output_root": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113",
   "conda_environment": "egorecover",
   "training_started": false,
   "banks_generated": false,
-  "runtime_config_ready": false,
+  "runtime_config_ready": true,
   "question": "Can a history-only learned CV residual reduce error on the same actual frozen-W3-G cache, without worsening temporal quality?",
   "producer": {
     "checkpoint": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/V3_G_CV_W3_10k_s62/best.pt",
@@ -355,23 +355,23 @@
         "egorecover/prior_evaluation.py",
         "scripts/build_prior_bank.py"
       ],
-      "status": "not_implemented_this_turn"
+      "status": "implemented_CPU_tests_passed_real_preflight_pending"
     },
     {
       "task": "pure new-G mode; W3-only producer validation; phase/take/source/anchor quotas and actual visit coverage",
-      "status": "not_implemented_this_turn"
+      "status": "implemented_CPU_tests_passed_real_preflight_pending"
     },
     {
       "task": "source/context builder up to160 frames, local-L semantics, bank producer identity validation",
-      "status": "not_implemented_this_turn"
+      "status": "implemented_CPU_tests_passed_real_preflight_pending"
     },
     {
       "task": "dense clip-equal evaluation, mature selection and paired take-cluster CI",
-      "status": "not_implemented_this_turn"
+      "status": "implemented_CPU_tests_passed_real_preflight_pending"
     },
     {
       "task": "learning-rate scheduler and stateful resume with unchanged10k identity",
-      "status": "not_implemented_this_turn"
+      "status": "implemented_CPU_tests_passed_real_preflight_pending"
     },
     {
       "task": "small-bank causality/CV equivalence/beta gradients; real4GPU interrupted-vs-continuous preflight across shortened LR boundary",
@@ -393,9 +393,22 @@
     "independent_plan_review": "review_preparation: no blocking logical issue; require local-L semantics, per-phase eligible pools, actual visitation coverage, and validation overlap disclosure",
     "code_or_training_tests_this_turn": false,
     "reason": "Planning/documentation changes only, implementation preflight remains pending.",
-    "status": "plan_review_passed_after_explicit_temporal_phase_correction",
+    "status": "implementation_reviewed_targeted_tests_passed_GPU_preflight_pending",
     "corrected_issue": "Temporal5% guards apply to BOTH mature and all groups at pilot, D400 and long50; not selectable after results.",
-    "implementation_review_completed": false,
-    "reviewed_at_beijing": "2026-11-13T12:08:06+08:00"
-  }
+    "implementation_review_completed": true,
+    "reviewed_at_beijing": "2026-11-13T12:08:06+08:00",
+    "corrections": [
+      "Separate rank0 diagnostic model from live DDP reducer hooks",
+      "Bind cohort, full-bank status, selection ID and dense frame/clip counts",
+      "Bind current SMPL asset to bank producer asset",
+      "Controller reexecutes frozen source and binds final report bank SHA"
+    ]
+  },
+  "execution_authorization": {
+    "at_beijing": "2026-11-13T14:53:37+08:00",
+    "scope": "User authorized trainer adaptation, history preparation, four-GPU2k P pilot and same-state continuation to10k if predeclared gate passes.",
+    "request": "ok 按这个计划推进，先完成训练器适配和历史库准备，再用4张卡训练P 2000步，达标后继续续训。"
+  },
+  "state_fields_are_at_protocol_freeze_not_live": true,
+  "live_runtime_plan": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/plan.json"
 }

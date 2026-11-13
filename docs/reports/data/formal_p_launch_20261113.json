@@ -1,0 +1,88 @@
+{
+  "version": "formal-P01-launch-v1",
+  "updated_at_beijing": "2026-11-13T15:01:14+08:00",
+  "status": "real_4GPU_preflight_passed_full_history_generation_running",
+  "run_id": "P01_W3G10k_s62",
+  "runtime_root": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113",
+  "runtime_plan": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/plan.json",
+  "protocol_sha256": "4ba8151d5ec57236de939fe6e3d5cc08e82a00854005ce252bf952e7806ca9db",
+  "producer_G": {
+    "checkpoint": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/V3_G_CV_W3_10k_s62/best.pt",
+    "sha256": "4f748009e20193b68efca7cc5e47b28c3613995cac96bcfe4cd397ad01131d67",
+    "step": 10000,
+    "window": 3,
+    "seed": 62,
+    "prior": "constant_velocity",
+    "source": "gaussian",
+    "NFE": 1,
+    "shape_mode": "predicted",
+    "geometry_target": "official",
+    "revise_recent": true,
+    "cache_representation": "existing dense state, no new FK projection",
+    "native_checkpoint_manifest": "eadd4e5cb98257adf6fcd068ffdf4fdaa78f78e3530b309f8a18a9b23d6b1d42",
+    "source_snapshot": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/source",
+    "convergence_confirmed": false,
+    "identity_rule": "Match actual frozen producer data/statistics/bootstrap identity; preliminary planning digest is not interchangeable."
+  },
+  "training_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "full_bank_GPUs": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "P_training_started": false,
+  "P_training_updates": 0,
+  "actual_GPU_resume_preflight_passed": true,
+  "implementation_tests": {
+    "passed": 121,
+    "asset_backed_SMPL_FK": true,
+    "Ruff": "passed",
+    "diff_check": "passed"
+  },
+  "implementation_files": [
+    "egorecover/formal_prior_training.py",
+    "egorecover/formal_prior_evaluation.py",
+    "egorecover/formal_prior_bank.py",
+    "egorecover/prior_training.py",
+    "scripts/build_formal_prior_bank.py",
+    "scripts/run_formal_prior.py"
+  ],
+  "independent_review": {
+    "status": "completed_and_findings_corrected",
+    "corrections": [
+      "rank0 gradients use independent audit model, real preflight exercises this path",
+      "controller gate imports pinned to frozen source",
+      "bank cohort/full selection/clip-frame coverage/SMPL asset binding",
+      "final report checkpoint and bank checksum binding"
+    ]
+  },
+  "execution_order": [
+    "small train16/D1284 banks",
+    "real four-GPU continuous2 vs1+resume1 across LR decay",
+    "full train/D128 bank generation and strict coverage validation",
+    "four-GPU P2000",
+    "pilot gate:1500/2000 matched mature gain and mature/all temporal guards plus health",
+    "same-state continuation to10000 only when gate passes",
+    "D400/long50 fixed best-EMA predictor acceptance"
+  ],
+  "runtime_state_authoritative": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/status.json",
+  "scientific_recipe_changed": false,
+  "system_G_gain_claimed": false,
+  "training_sufficiency_claimed": false,
+  "preflight_record": "docs/reports/data/formal_p_preflight_20261113.json",
+  "actual_preflight_weight_max_abs_differences": {
+    "model": 7.450580596923828e-09,
+    "ema": 2.1316282072803006e-14,
+    "optimizer": 2.3283064365386963e-10
+  }
+}

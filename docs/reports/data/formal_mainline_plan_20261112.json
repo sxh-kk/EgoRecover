@@ -1,8 +1,8 @@
 {
   "version": "formal-v3-budget10k-with-v1-v2-history",
   "created_at_beijing": "2026-11-12T11:42:52+08:00",
-  "status": "G_reviewed_P_protocol_planned_not_started",
-  "authorized_this_turn": "Design a P training plan on new G histories; no training launch in this turn.",
+  "status": "P_preflight_passed_full_history_generation_running",
+  "authorized_this_turn": "User authorized trainer adaptation, history preparation, four-GPU2k P pilot and same-state continuation to10k if predeclared gate passes.",
   "old_experiments": "exploratory, preserved; no warm-starting formal G/P",
   "data": {
     "train": "full official train",
@@ -170,7 +170,7 @@
       "run_ids": [
         "P01_W3G10k_s62"
       ],
-      "status": "planned_requires_implementation_preflight_and_banks",
+      "status": "real_4GPU_preflight_passed_full_history_generation_running",
       "plan_record": "docs/reports/data/formal_p_training_plan_20261113.json",
       "gpus": "one group of4, allocate idle devices at launch",
       "initialization": "random trunk and zero residual head; initial P equals CV",
@@ -308,8 +308,9 @@
         },
         "system_gain": "Only later same-baseG/equal-additional-G-budget CV vs P adaptation, then new-model fusion diagnostic, can establish final reconstruction usefulness."
       },
-      "budget_status": "Designed after G review; not executed, requires implementation, preflight and banks. No auto extension.",
-      "auto_start": false
+      "budget_status": "Authorized2k pilot, then resume same state to10k only after gate; real preflight and formal banks precede training.",
+      "auto_start": true,
+      "runtime_plan": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/plan.json"
     },
     {
       "id": "S3_PG",
@@ -678,7 +679,7 @@
       "note": "New W3 selection replaces W1/W3 mixing, GT warmup and18k budget; current P01 is planning only."
     }
   ],
-  "latest_authorization": "Design a P training plan on new G histories; no training launch in this turn.",
+  "latest_authorization": "User authorized trainer adaptation, history preparation, four-GPU2k P pilot and same-state continuation to10k if predeclared gate passes.",
   "active_runtime_plan": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/plan.json",
   "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json",
   "initial_authorization": "checkpoint cleanup and formal planning only",
@@ -718,7 +719,7 @@
       {
         "id": "T2_P",
         "stage": "S2_P",
-        "status": "planned_requires_implementation_preflight_and_banks",
+        "status": "real_4GPU_preflight_passed_full_history_generation_running",
         "task": "使用新G真实滚动历史训练P，在相同历史上与CV比较",
         "depends_on": [
           "T1_G"
@@ -731,7 +732,7 @@
           "Dense mature clip-equal P/CV comparison, startup/long/temporal guards; native producer identity and visit coverage"
         ],
         "training_protocol": "docs/reports/data/formal_p_training_plan_20261113.json",
-        "auto_start": false,
+        "auto_start": true,
         "run_id": "P01_W3G10k_s62"
       },
       {
@@ -786,7 +787,7 @@
     "budget_updated_at_beijing": "2026-11-12T20:56:15+08:00",
     "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json",
     "next": "T2_P",
-    "current_status": "P protocol designed; implementation, preflight and banks pending; training not started."
+    "current_status": "121 tests and actual4GPU interrupted-vs-continuous preflight passed; full new-W3-G banks generating on8GPUs; fresh P pilot follows automatically, not yet started."
   },
   "fft_todo_branch": {
     "recorded_at_beijing": "2026-11-12T20:41:00+08:00",
@@ -890,5 +891,7 @@
     "new_long_position_error_low_band_share_percent": 92.43359922088611
   },
   "P_training_plan": "docs/reports/data/formal_p_training_plan_20261113.json",
-  "P_protocol_updated_at_beijing": "2026-11-13T12:08:06+08:00"
+  "P_protocol_updated_at_beijing": "2026-11-13T12:08:06+08:00",
+  "P_runtime_plan": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/plan.json",
+  "P_launch_record": "docs/reports/data/formal_p_launch_20261113.json"
 }
