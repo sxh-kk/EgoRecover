@@ -1,7 +1,7 @@
 {
   "version": "formal-P01-launch-v1",
-  "updated_at_beijing": "2026-11-13T15:01:14+08:00",
-  "status": "real_4GPU_preflight_passed_full_history_generation_running",
+  "updated_at_beijing": "2026-11-13T15:29:17+08:00",
+  "status": "pilot2000_complete_gate_failed_stopped",
   "run_id": "P01_W3G10k_s62",
   "runtime_root": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113",
   "runtime_plan": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113/plan.json",
@@ -40,8 +40,8 @@
     6,
     7
   ],
-  "P_training_started": false,
-  "P_training_updates": 0,
+  "P_training_started": true,
+  "P_training_updates": 2000,
   "actual_GPU_resume_preflight_passed": true,
   "implementation_tests": {
     "passed": 121,
@@ -84,5 +84,8 @@
     "model": 7.450580596923828e-09,
     "ema": 2.1316282072803006e-14,
     "optimizer": 2.3283064365386963e-10
-  }
+  },
+  "pilot_result": "docs/reports/data/formal_p_pilot_20261113.json",
+  "continued_to10000": false,
+  "full_train_and_D128_banks_complete": true
 }

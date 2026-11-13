@@ -1,0 +1,1005 @@
+{
+  "version": "P01-pilot2000-result-v1",
+  "recorded_at_beijing": "2026-11-13T15:29:17+08:00",
+  "run_id": "P01_W3G10k_s62",
+  "status": "stopped_gate_failed",
+  "completed_updates": 2000,
+  "completion_time_beijing": "2026-11-13T15:23:52+08:00",
+  "training_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "training_health": {
+    "step": 2000,
+    "passed": true,
+    "checks": {
+      "initial_P_equals_CV": true,
+      "causal_inputs_test": true,
+      "beta_FK_gradient": true,
+      "producer_identity": true,
+      "train_val_take_disjoint": true,
+      "finite_objective_and_gradients": true,
+      "exact_phase_quota": true,
+      "gradient_diagnostics_finite": true
+    }
+  },
+  "pilot_decision": {
+    "passed": false,
+    "gate_passed": false,
+    "checks": {
+      "numerics_sampling_gradients": true,
+      "mature_delta_negative_at1500": false,
+      "mature_delta_negative_at2000": false,
+      "mature_gain_at2000_ge0_5mm": false,
+      "D128_step2000_mature_velocity_mm_s_regression_le5pct": true,
+      "D128_step2000_mature_acceleration_mm_s2_regression_le5pct": true,
+      "D128_step2000_mature_foot_slide_mm_regression_le5pct": false,
+      "D128_step2000_all_velocity_mm_s_regression_le5pct": true,
+      "D128_step2000_all_acceleration_mm_s2_regression_le5pct": true,
+      "D128_step2000_all_foot_slide_mm_regression_le5pct": false
+    },
+    "failures": [
+      "mature_delta_negative_at1500",
+      "mature_delta_negative_at2000",
+      "mature_gain_at2000_ge0_5mm",
+      "D128_step2000_mature_foot_slide_mm_regression_le5pct",
+      "D128_step2000_all_foot_slide_mm_regression_le5pct"
+    ],
+    "scope": "P01 continuation after2k; does not grant final acceptance",
+    "at_beijing": "2026-11-13T15:23:52+08:00",
+    "protocol_sha256": "4ba8151d5ec57236de939fe6e3d5cc08e82a00854005ce252bf952e7806ca9db",
+    "standalone_predictor_only": true
+  },
+  "continued_to10000": false,
+  "automatic_restart": false,
+  "G_adaptation_started": false,
+  "D400_evaluated": false,
+  "long50_evaluated": false,
+  "evaluation_scope": "Fixed D128, matching frozen W3-G histories. P is current-frame one-step predictor, not final G reconstruction. Mature local queries40..79, startup20..39, all20..79; clip-equal with take-cluster CI.",
+  "curve": [
+    {
+      "step": 0,
+      "selection_score_mm": 96.50871459289364,
+      "phases": {
+        "mature": {
+          "acceleration_mm_s2": {
+            "P": 4961.280766538751,
+            "CV": 4961.280766538751,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 8.319181118024325,
+            "CV": 8.319181118024325,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 96.50871459289364,
+            "CV": 96.50871459289364,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 340.1638694311148,
+            "CV": 340.1638694311148,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        },
+        "all": {
+          "acceleration_mm_s2": {
+            "P": 5388.377084140336,
+            "CV": 5388.377084140336,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 12.983594546428503,
+            "CV": 12.983594546428503,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 99.68620599950542,
+            "CV": 99.68620599950542,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 385.11521948014615,
+            "CV": 385.11521948014615,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        },
+        "startup": {
+          "acceleration_mm_s2": {
+            "P": 6353.834208794944,
+            "CV": 6353.834208794944,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 21.91405120596539,
+            "CV": 21.91405120596539,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 106.041188812729,
+            "CV": 106.041188812729,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 480.41205930728756,
+            "CV": 480.41205930728756,
+            "delta": 0.0,
+            "regression_pct": 0.0,
+            "delta_ci95": [
+              0.0,
+              0.0
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        }
+      }
+    },
+    {
+      "step": 500,
+      "selection_score_mm": 96.52700957812185,
+      "phases": {
+        "mature": {
+          "acceleration_mm_s2": {
+            "P": 5011.909094154429,
+            "CV": 4961.280766538751,
+            "delta": 50.628327615678245,
+            "regression_pct": 1.020468907084233,
+            "delta_ci95": [
+              48.2251215547902,
+              53.01804186157258
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 8.802513967104913,
+            "CV": 8.319181118024325,
+            "delta": 0.48333284908058793,
+            "regression_pct": 5.80986087721302,
+            "delta_ci95": [
+              0.3531893008748948,
+              0.6120555747165417
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 96.52700957812185,
+            "CV": 96.50871459289364,
+            "delta": 0.01829498522820927,
+            "regression_pct": 0.01895682198792482,
+            "delta_ci95": [
+              -0.1707000653438447,
+              0.21421671072610374
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 342.8348290573173,
+            "CV": 340.1638694311148,
+            "delta": 2.670959626202489,
+            "regression_pct": 0.7851979196583587,
+            "delta_ci95": [
+              2.5409914587120275,
+              2.810983814862697
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        },
+        "all": {
+          "acceleration_mm_s2": {
+            "P": 5403.849318818924,
+            "CV": 5388.377084140336,
+            "delta": 15.472234678588393,
+            "regression_pct": 0.2871409041532742,
+            "delta_ci95": [
+              12.075692990986676,
+              19.017815334174042
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 12.827998296408083,
+            "CV": 12.983594546428503,
+            "delta": -0.15559625002041955,
+            "regression_pct": -1.1984065696446182,
+            "delta_ci95": [
+              -0.29801939404834543,
+              -0.020279011179599068
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 99.22274056811355,
+            "CV": 99.68620599950542,
+            "delta": -0.46346543139186736,
+            "regression_pct": -0.46492433606527944,
+            "delta_ci95": [
+              -0.6703607284343688,
+              -0.25161058297877603
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 384.10716139891906,
+            "CV": 385.11521948014615,
+            "delta": -1.008058081227091,
+            "regression_pct": -0.2617549320922279,
+            "delta_ci95": [
+              -1.2271731840813347,
+              -0.7714329211564397
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        },
+        "startup": {
+          "acceleration_mm_s2": {
+            "P": 6290.921093232501,
+            "CV": 6353.834208794944,
+            "delta": -62.91311556244273,
+            "regression_pct": -0.9901598545860502,
+            "delta_ci95": [
+              -69.6867513685069,
+              -55.6499616579861
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 20.454571700051286,
+            "CV": 21.91405120596539,
+            "delta": -1.4594795059141035,
+            "regression_pct": -6.660016864051169,
+            "delta_ci95": [
+              -1.736890274254226,
+              -1.1780840636097447
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 104.61420254809696,
+            "CV": 106.041188812729,
+            "delta": -1.426986264632049,
+            "regression_pct": -1.3456905572344509,
+            "delta_ci95": [
+              -1.7287570618142616,
+              -1.1262330350792609
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 471.65458842387557,
+            "CV": 480.41205930728756,
+            "delta": -8.757470883411997,
+            "regression_pct": -1.82290821259556,
+            "delta_ci95": [
+              -9.297177273125158,
+              -8.182159950291862
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        }
+      }
+    },
+    {
+      "step": 1000,
+      "selection_score_mm": 96.73365676665183,
+      "phases": {
+        "mature": {
+          "acceleration_mm_s2": {
+            "P": 5070.7487668798985,
+            "CV": 4961.280766538751,
+            "delta": 109.46800034114767,
+            "regression_pct": 2.206446389397113,
+            "delta_ci95": [
+              103.15259530366124,
+              115.92622493519376
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 10.475906679997061,
+            "CV": 8.319181118024325,
+            "delta": 2.1567255619727366,
+            "regression_pct": 25.924733833477653,
+            "delta_ci95": [
+              1.898822319740356,
+              2.4232484896667392
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 96.73365676665183,
+            "CV": 96.50871459289364,
+            "delta": 0.22494217375819403,
+            "regression_pct": 0.23307964954986304,
+            "delta_ci95": [
+              -0.030990694626300243,
+              0.4973967672970169
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 345.88297214975495,
+            "CV": 340.1638694311148,
+            "delta": 5.719102718640158,
+            "regression_pct": 1.6812787108180256,
+            "delta_ci95": [
+              5.362643363017102,
+              6.088744727541624
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        },
+        "all": {
+          "acceleration_mm_s2": {
+            "P": 5368.366779907572,
+            "CV": 5388.377084140336,
+            "delta": -20.0103042327637,
+            "regression_pct": -0.37136050280631305,
+            "delta_ci95": [
+              -31.026289216470136,
+              -8.293046804382994
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 13.963324523740399,
+            "CV": 12.983594546428503,
+            "delta": 0.9797299773118961,
+            "regression_pct": 7.545907058391608,
+            "delta_ci95": [
+              0.669343175709538,
+              1.2988388771594037
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 98.60332456655142,
+            "CV": 99.68620599950542,
+            "delta": -1.0828814329539966,
+            "regression_pct": -1.0862901462609273,
+            "delta_ci95": [
+              -1.3390624164416343,
+              -0.8235062317767103
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 377.80057413181135,
+            "CV": 385.11521948014615,
+            "delta": -7.314645348334807,
+            "regression_pct": -1.8993394647473543,
+            "delta_ci95": [
+              -8.068681438393076,
+              -6.470431719730639
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        },
+        "startup": {
+          "acceleration_mm_s2": {
+            "P": 6045.5871618199,
+            "CV": 6353.834208794944,
+            "delta": -308.2470469750442,
+            "regression_pct": -4.851354896046394,
+            "delta_ci95": [
+              -334.22298460946683,
+              -279.6232173064369
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 20.4270196593078,
+            "CV": 21.91405120596539,
+            "delta": -1.4870315466575903,
+            "regression_pct": -6.785744601403478,
+            "delta_ci95": [
+              -2.258188635404325,
+              -0.7222256980493708
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 102.3426601663504,
+            "CV": 106.041188812729,
+            "delta": -3.6985286463786053,
+            "regression_pct": -3.487822692095885,
+            "delta_ci95": [
+              -4.059511816212005,
+              -3.3340204484968594
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 445.648524248475,
+            "CV": 480.41205930728756,
+            "delta": -34.76353505881258,
+            "regression_pct": -7.236191179076265,
+            "delta_ci95": [
+              -36.798204659216026,
+              -32.504791759572804
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        }
+      }
+    },
+    {
+      "step": 1500,
+      "selection_score_mm": 96.95264395654583,
+      "phases": {
+        "mature": {
+          "acceleration_mm_s2": {
+            "P": 5112.584249338935,
+            "CV": 4961.280766538751,
+            "delta": 151.3034828001837,
+            "regression_pct": 3.0496859565103978,
+            "delta_ci95": [
+              138.81232732406193,
+              165.2033581882602
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 11.843476930200733,
+            "CV": 8.319181118024325,
+            "delta": 3.5242958121764083,
+            "regression_pct": 42.363494221091955,
+            "delta_ci95": [
+              3.0968505629266874,
+              3.9748086668540963
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 96.95264395654583,
+            "CV": 96.50871459289364,
+            "delta": 0.44392936365218816,
+            "regression_pct": 0.4599888885939805,
+            "delta_ci95": [
+              0.09875945933926791,
+              0.8069226996007304
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 347.95643819376073,
+            "CV": 340.1638694311148,
+            "delta": 7.792568762645942,
+            "regression_pct": 2.2908278811850664,
+            "delta_ci95": [
+              7.160262297958272,
+              8.48501703652591
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        },
+        "all": {
+          "acceleration_mm_s2": {
+            "P": 5331.707801725399,
+            "CV": 5388.377084140336,
+            "delta": -56.66928241493679,
+            "regression_pct": -1.051694815155607,
+            "delta_ci95": [
+              -78.03296542558331,
+              -34.672283489688134
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 14.893764909444922,
+            "CV": 12.983594546428503,
+            "delta": 1.9101703630164195,
+            "regression_pct": 14.712184335283828,
+            "delta_ci95": [
+              1.391974590119952,
+              2.424073422652701
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 98.15655923549562,
+            "CV": 99.68620599950542,
+            "delta": -1.5296467640097973,
+            "regression_pct": -1.5344618131192458,
+            "delta_ci95": [
+              -1.8991946923330325,
+              -1.1709278117070714
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 372.06576048090625,
+            "CV": 385.11521948014615,
+            "delta": -13.049458999239903,
+            "regression_pct": -3.3884558020986346,
+            "delta_ci95": [
+              -14.517276512356185,
+              -11.514136091597127
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        },
+        "startup": {
+          "acceleration_mm_s2": {
+            "P": 5834.752664182358,
+            "CV": 6353.834208794944,
+            "delta": -519.0815446125862,
+            "regression_pct": -8.16957962003598,
+            "delta_ci95": [
+              -570.1815941911714,
+              -465.46997271161973
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 20.413364943222025,
+            "CV": 21.91405120596539,
+            "delta": -1.5006862627433648,
+            "regression_pct": -6.84805492438957,
+            "delta_ci95": [
+              -2.629522724462217,
+              -0.39283013683405915
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 100.56438979339518,
+            "CV": 106.041188812729,
+            "delta": -5.476799019333825,
+            "regression_pct": -5.164784628174972,
+            "delta_ci95": [
+              -6.036218026485545,
+              -4.911651624150045
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 423.4763997484282,
+            "CV": 480.41205930728756,
+            "delta": -56.935659558859356,
+            "regression_pct": -11.851421806720595,
+            "delta_ci95": [
+              -60.87625748702873,
+              -52.704761664967336
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        }
+      }
+    },
+    {
+      "step": 2000,
+      "selection_score_mm": 97.08062109809273,
+      "phases": {
+        "mature": {
+          "acceleration_mm_s2": {
+            "P": 5138.029888565569,
+            "CV": 4961.280766538751,
+            "delta": 176.74912202681844,
+            "regression_pct": 3.562570439852931,
+            "delta_ci95": [
+              155.60136359024227,
+              204.23325502107852
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 12.39528565304211,
+            "CV": 8.319181118024325,
+            "delta": 4.076104535017786,
+            "regression_pct": 48.99646344021173,
+            "delta_ci95": [
+              3.5169986245054785,
+              4.667533219901034
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 97.08062109809273,
+            "CV": 96.50871459289364,
+            "delta": 0.5719065051990952,
+            "regression_pct": 0.5925957128447831,
+            "delta_ci95": [
+              0.17372750530765155,
+              0.9638403336609975
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 349.1175018060173,
+            "CV": 340.1638694311148,
+            "delta": 8.953632374902497,
+            "regression_pct": 2.632152670968973,
+            "delta_ci95": [
+              7.870127522366603,
+              10.42659942229316
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        },
+        "all": {
+          "acceleration_mm_s2": {
+            "P": 5305.995487426545,
+            "CV": 5388.377084140336,
+            "delta": -82.38159671379071,
+            "regression_pct": -1.5288758642424134,
+            "delta_ci95": [
+              -114.79238705777625,
+              -48.352145376827465
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 15.155966067872816,
+            "CV": 12.983594546428503,
+            "delta": 2.1723715214443136,
+            "regression_pct": 16.731664822681054,
+            "delta_ci95": [
+              1.4913016589136596,
+              2.8422678217676287
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 97.85897024297154,
+            "CV": 99.68620599950542,
+            "delta": -1.8272357565338808,
+            "regression_pct": -1.8329875615317794,
+            "delta_ci95": [
+              -2.2562575655856176,
+              -1.4100283153285942
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 368.1618549696636,
+            "CV": 385.11521948014615,
+            "delta": -16.953364510482572,
+            "regression_pct": -4.402153862775752,
+            "delta_ci95": [
+              -19.202207309323885,
+              -14.64717388424583
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        },
+        "startup": {
+          "acceleration_mm_s2": {
+            "P": 5696.173430732128,
+            "CV": 6353.834208794944,
+            "delta": -657.6607780628165,
+            "regression_pct": -10.35061281820174,
+            "delta_ci95": [
+              -731.0398725832555,
+              -581.0934900125445
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "foot_slide_mm": {
+            "P": 20.069895196082232,
+            "CV": 21.91405120596539,
+            "delta": -1.8441560098831573,
+            "regression_pct": -8.415404310916028,
+            "delta_ci95": [
+              -3.217269627439769,
+              -0.4986706519135467
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "mpjpe_mm": {
+            "P": 99.4156685327291,
+            "CV": 106.041188812729,
+            "delta": -6.625520279999904,
+            "regression_pct": -6.248062997200751,
+            "delta_ci95": [
+              -7.335960319018021,
+              -5.92891056727898
+            ],
+            "clips": 128,
+            "takes": 128
+          },
+          "velocity_mm_s": {
+            "P": 408.9216403760529,
+            "CV": 480.41205930728756,
+            "delta": -71.49041893123467,
+            "regression_pct": -14.881062526681292,
+            "delta_ci95": [
+              -77.37404876118222,
+              -65.44306930391132
+            ],
+            "clips": 128,
+            "takes": 128
+          }
+        }
+      }
+    }
+  ],
+  "best_EMA_step": 500,
+  "best_mature_MPJPE_mm": 96.52700957812185,
+  "best_vs_CV_mature_delta_mm": 0.01829498522820927,
+  "geometry_calibration": {
+    "gradient_norms": {
+      "code": 0.41887179017066956,
+      "geometry": 4.722769737243652
+    },
+    "gradient_cosine": 0.0379856092629617,
+    "finite": true,
+    "weight": 0.008869197811349056,
+    "calibration_seed": 9062,
+    "samples": 256,
+    "target_weighted_geometry_ratio": 0.1
+  },
+  "gradient_diagnostics": {
+    "100": {
+      "gradient_norms": {
+        "code": 0.4103491008281708,
+        "geometry": 8.755805015563965
+      },
+      "gradient_cosine": 0.07072212350268788,
+      "finite": true,
+      "weighted_geometry_to_code_ratio": 0.1892460992942617
+    },
+    "500": {
+      "gradient_norms": {
+        "code": 0.282146692276001,
+        "geometry": 6.289439678192139
+      },
+      "gradient_cosine": 0.08000895318728815,
+      "finite": true,
+      "weighted_geometry_to_code_ratio": 0.197706675837498
+    },
+    "2000": {
+      "gradient_norms": {
+        "code": 0.573369026184082,
+        "geometry": 5.964868545532227
+      },
+      "gradient_cosine": 0.08308528829919165,
+      "finite": true,
+      "weighted_geometry_to_code_ratio": 0.09226797513131513
+    }
+  },
+  "training_summary": [
+    {
+      "steps": [
+        1,
+        100
+      ],
+      "code": 0.6991885912418365,
+      "geometry": 1.9966972978785633,
+      "hand_pca": 0.9886647773161531,
+      "loss": 0.7168976954370737,
+      "gradient_norm": 0.8642161291837692,
+      "elapsed_seconds": 0.05651039615273476
+    },
+    {
+      "steps": [
+        401,
+        500
+      ],
+      "code": 0.6476563695445656,
+      "geometry": 1.8565547999739647,
+      "hand_pca": 0.8084584313631058,
+      "loss": 0.6641225221939385,
+      "gradient_norm": 0.8496371936798096,
+      "elapsed_seconds": 0.05384192702360451
+    },
+    {
+      "steps": [
+        901,
+        1000
+      ],
+      "code": 0.6530290905572474,
+      "geometry": 1.7670466884970666,
+      "hand_pca": 0.8074077675119042,
+      "loss": 0.6687013754062354,
+      "gradient_norm": 0.888218080997467,
+      "elapsed_seconds": 0.05376565835205838
+    },
+    {
+      "steps": [
+        1401,
+        1500
+      ],
+      "code": 0.5726826483942569,
+      "geometry": 1.7786576937884093,
+      "hand_pca": 0.7880317812412977,
+      "loss": 0.5884579158946872,
+      "gradient_norm": 0.7158473336696625,
+      "elapsed_seconds": 0.05534576794365421
+    },
+    {
+      "steps": [
+        1901,
+        2000
+      ],
+      "code": 0.6147446300461888,
+      "geometry": 1.8395439898967743,
+      "hand_pca": 0.7994078166782856,
+      "loss": 0.6310599108040332,
+      "gradient_norm": 0.9269466266036034,
+      "elapsed_seconds": 0.056996889191214
+    }
+  ],
+  "bank_coverage": {
+    "train": {
+      "sha256": "7c99b1db4f9d7ef4eb77448e3fb1be1d838e651e507383d6c8988b2ed05348a8",
+      "coverage": {
+        "rows": 112381,
+        "contexts": 16760,
+        "sources": 16760,
+        "takes": 2031,
+        "early_rows": 49457,
+        "mature_rows": 62924
+      },
+      "G_calls": 1196450
+    },
+    "D128": {
+      "sha256": "f0170673454eee64e7e49e594b7a41b39046e94f24eea36bded7ed0f5287b926",
+      "coverage": {
+        "rows": 7680,
+        "contexts": 128,
+        "sources": 128,
+        "takes": 128,
+        "early_rows": 2560,
+        "mature_rows": 5120
+      },
+      "G_calls": 7552
+    }
+  },
+  "actual_training_visitation": {
+    "step": 2000,
+    "unique_anchors": 50138,
+    "bank_anchors": 112381,
+    "unique_sources": 13846,
+    "unique_takes": 2031,
+    "draw_counts": {
+      "mature": 96000,
+      "early": 32000
+    }
+  },
+  "checkpoints_retained": {
+    "best.pt": "D128-selected step500 EMA",
+    "last.pt": "step2000 EMA",
+    "ema-step2000.pt": "step2000 EMA milestone",
+    "resume.pt": "step2000 model/EMA/optimizer/scheduler/RNG/sampling state"
+  },
+  "findings": [
+    "All numerics, provenance, phase quotas and causality health checks passed.",
+    "Startup improves6.6255mm; mature worsens0.5719mm at2k, paired95CI [0.1737,0.9638]mm.",
+    "All-frame1.8272mm gain hides mature regression; mature foot-slide+48.9965% and all-frame+16.7317% violate5% guard.",
+    "Every post-training mature validation is worse than CV; best500 near parity, not proven improvement.",
+    "No gradient explosion evidenced in logged checks; initial calibrated geometry weight0.0088692, monitored weighted ratios0.0923..0.1977."
+  ],
+  "interpretation_limits": [
+    "This2k-budget result does not prove all learned predictors are ineffective or fully trained.",
+    "No final-G reconstruction improvement or harm established; no P-conditioned G training was run.",
+    "Phase gradient conflict, shape correction and foot contact effects require separate diagnosis before method changes."
+  ],
+  "next": "Keep P01 stopped. Diagnose mature position/shape/foot-slide changes before any P02 or extra budget; do not change P01 recipe retroactively."
+}
