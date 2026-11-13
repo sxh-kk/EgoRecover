@@ -1,8 +1,8 @@
 {
   "version": "formal-v3-budget10k-with-v1-v2-history",
   "created_at_beijing": "2026-11-12T11:42:52+08:00",
-  "status": "G_budget_screening_reviewed_P_not_started",
-  "authorized_this_turn": "Total10000 includes original8000-update prefix; decay after update8000 to3e-6, both windows4GPUs each; no automatic extension or P.",
+  "status": "G_reviewed_P_protocol_planned_not_started",
+  "authorized_this_turn": "Design a P training plan on new G histories; no training launch in this turn.",
   "old_experiments": "exploratory, preserved; no warm-starting formal G/P",
   "data": {
     "train": "full official train",
@@ -168,15 +168,12 @@
     {
       "id": "S2_P",
       "run_ids": [
-        "V1_P_s62"
+        "P01_W3G10k_s62"
       ],
-      "gpus": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "initialization": "random P",
+      "status": "planned_requires_implementation_preflight_and_banks",
+      "plan_record": "docs/reports/data/formal_p_training_plan_20261113.json",
+      "gpus": "one group of4, allocate idle devices at launch",
+      "initialization": "random trunk and zero residual head; initial P equals CV",
       "model": {
         "width": 256,
         "layers": 4,
@@ -184,45 +181,135 @@
         "dropout": 0.1,
         "source_flags": true
       },
-      "history_producers": "frozen S1 W1/W3 G checkpoints, balanced1:1",
-      "train_bank": "only official train; maximize eligible take coverage and report exclusions",
-      "validation_bank": "D128-v1 from frozen S1 models",
-      "updates": 18000,
-      "conditional_extension": 6000,
-      "max_updates": 24000,
-      "warmup_GT_updates": 2000,
-      "post_warmup_mixture": {
-        "frozen_G": 0.8,
-        "GT": 0.2,
-        "self_P": 0.0,
-        "TwoForward": false
+      "history_producers": "only selected frozen S1 W3 G10k best EMA; W1 optional final diagnostic",
+      "producer": {
+        "checkpoint": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/V3_G_CV_W3_10k_s62/best.pt",
+        "sha256": "4f748009e20193b68efca7cc5e47b28c3613995cac96bcfe4cd397ad01131d67",
+        "step": 10000,
+        "window": 3,
+        "seed": 62,
+        "prior": "constant_velocity",
+        "source": "gaussian",
+        "NFE": 1,
+        "shape_mode": "predicted",
+        "geometry_target": "official",
+        "revise_recent": true,
+        "cache_representation": "existing dense state, no new FK projection",
+        "native_checkpoint_manifest": "eadd4e5cb98257adf6fcd068ffdf4fdaa78f78e3530b309f8a18a9b23d6b1d42",
+        "source_snapshot": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/source",
+        "convergence_confirmed": false,
+        "identity_rule": "Match actual frozen producer data/statistics/bootstrap identity; preliminary planning digest is not interchangeable."
       },
-      "allocation": "global cumulative quotas, logged realized counts; no independent per-microbatch rounding",
+      "train_bank": "one <=160-frame context per16760 eligible train source,2031 takes; up to8 anchors, expected112381 rows",
+      "validation_bank": "dense frozen-W3-G D128; select on mature query40..79, clip-equal",
+      "updates": 10000,
+      "initial_stop_after": 2000,
+      "conditional_extension": 0,
+      "max_updates": 10000,
+      "warmup_GT_updates": 0,
+      "mixture": {
+        "frozen_G": 1.0,
+        "GT_history": 0.0,
+        "self_P_history": 0.0,
+        "GT_warmup_updates": 0,
+        "TwoForward": false,
+        "U": false,
+        "prediction_center_switch": false,
+        "FFT_loss": false,
+        "W1": "optional final producer generalization diagnostic, not training or selection gate"
+      },
+      "allocation": {
+        "global_batch": 64,
+        "microbatch": 8,
+        "GPUs": 4,
+        "local_batch": 16,
+        "gradient_accumulation_per_rank": 2,
+        "global_mature": 48,
+        "global_early": 16,
+        "per_microbatch_mature": 6,
+        "per_microbatch_early": 2,
+        "hierarchy": "within each phase, uniformly take -> eligible source/context -> anchor",
+        "missing_phase_source": "exclude from that phase pool, retain in valid phase; never silently change48:16 quota",
+        "GT_queries_are_labels_only": true
+      },
       "G_history_mature_fraction": 0.75,
       "batch_size": 64,
       "microbatch": 8,
       "learning_rate": 3e-05,
-      "lr_step_size": 6000,
-      "lr_gamma": 0.3,
-      "eval_every": 1000,
+      "lr_step_size": 8000,
+      "lr_gamma": 0.1,
+      "eval_every": 500,
       "shape_mode": "predicted",
       "geometry_target": "official",
       "geometry_calibration": {
-        "split": "train_only",
+        "split": "train_only_new_G_bank",
         "seed": 9062,
+        "samples": 256,
+        "mature": 192,
+        "early": 64,
+        "formula": "min(0.03, 0.1 * norm(mean code gradient) / norm(mean geometry gradient))",
         "weight_cap": 0.03,
-        "initial_gradient_ratio_target": 0.1,
-        "freeze_after_calibration": true
+        "gradient_ratio_target": 0.1,
+        "freeze_after_calibration": true,
+        "abort_on_degenerate_or_nonfinite_gradients": true,
+        "initial_zero_head_caveat": "initial gradients mainly reach output head; monitor later full gradients, not an all-training guarantee",
+        "diagnostic_steps": [
+          0,
+          100,
+          500,
+          2000
+        ],
+        "diagnostic_fields": [
+          "code and geometry gradient norms",
+          "weighted ratio",
+          "gradient cosine"
+        ],
+        "val_tuning": false
       },
       "gate": {
-        "paired_MPJPE_gain_at_selected_W_mm": 1.0,
-        "paired_95CI_upper_on_P_minus_CV_below": 0,
-        "max_velocity_regression_pct": 5,
-        "max_acceleration_regression_pct": 5,
-        "platform_window_updates": 4000,
-        "platform_gain_below_mm": 0.5
+        "pilot_2000": {
+          "negative_mature_P_minus_CV_at_steps": [
+            1500,
+            2000
+          ],
+          "minimum_mature_gain_at2000_mm": 0.5,
+          "max_each_temporal_regression_pct": 5,
+          "numerics_and_sampling_and_gradients_pass": true,
+          "failure": "Stop at2k, diagnose by phase/part/shape/gradient/coverage. Any changed method uses new P02 identity, no automatic extra steps.",
+          "temporal_gate_phases": [
+            "D128 mature query40..79",
+            "D128 all query20..79"
+          ]
+        },
+        "final_predictor": {
+          "D400_mature_gain_mm_at_least": 1.0,
+          "D400_paired_CI_upper_P_minus_CV_below_mm": 0,
+          "D400_all60_mean_improves": true,
+          "D400_max_startup_regression_mm": 1.0,
+          "max_each_velocity_acceleration_foot_slide_regression_pct": 5,
+          "long50_mature_mean_improves": true,
+          "long50_temporal_regression_limit_pct": 5,
+          "long50_CI_reported_without_significance_claim": true,
+          "near_plateau_window_updates": [
+            8000,
+            10000
+          ],
+          "near_plateau_best_D128_gain_below_mm": 0.5,
+          "if_still_improving_at_cap": "budget complete, training sufficiency unconfirmed; no auto extension",
+          "interpretation": "Minimum stage-entry criteria, not a paper contribution or proof of final-G gains.",
+          "D400_temporal_gate_phases": [
+            "mature query40..79",
+            "all query20..79"
+          ],
+          "long50_temporal_gate_phases": [
+            "mature local query>=40",
+            "all valid local query>=20"
+          ]
+        },
+        "system_gain": "Only later same-baseG/equal-additional-G-budget CV vs P adaptation, then new-model fusion diagnostic, can establish final reconstruction usefulness."
       },
-      "budget_status": "draft_to_refreeze_after_G_review; TODO confirmation did not launch this training"
+      "budget_status": "Designed after G review; not executed, requires implementation, preflight and banks. No auto extension.",
+      "auto_start": false
     },
     {
       "id": "S3_PG",
@@ -524,16 +611,81 @@
       },
       "status": "superseded_before_handoff",
       "note": "V2 was waiting for10000; no native12k continuation ran. V3 reuses parent V1/runtime3 saved8000 prefix."
+    },
+    {
+      "version": "S2_original_18k_unexecuted_draft",
+      "revised_at_beijing": "2026-11-13T12:03:47+08:00",
+      "stage2": {
+        "id": "S2_P",
+        "run_ids": [
+          "V1_P_s62"
+        ],
+        "gpus": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "initialization": "random P",
+        "model": {
+          "width": 256,
+          "layers": 4,
+          "heads": 8,
+          "dropout": 0.1,
+          "source_flags": true
+        },
+        "history_producers": "frozen S1 W1/W3 G checkpoints, balanced1:1",
+        "train_bank": "only official train; maximize eligible take coverage and report exclusions",
+        "validation_bank": "D128-v1 from frozen S1 models",
+        "updates": 18000,
+        "conditional_extension": 6000,
+        "max_updates": 24000,
+        "warmup_GT_updates": 2000,
+        "post_warmup_mixture": {
+          "frozen_G": 0.8,
+          "GT": 0.2,
+          "self_P": 0.0,
+          "TwoForward": false
+        },
+        "allocation": "global cumulative quotas, logged realized counts; no independent per-microbatch rounding",
+        "G_history_mature_fraction": 0.75,
+        "batch_size": 64,
+        "microbatch": 8,
+        "learning_rate": 3e-05,
+        "lr_step_size": 6000,
+        "lr_gamma": 0.3,
+        "eval_every": 1000,
+        "shape_mode": "predicted",
+        "geometry_target": "official",
+        "geometry_calibration": {
+          "split": "train_only",
+          "seed": 9062,
+          "weight_cap": 0.03,
+          "initial_gradient_ratio_target": 0.1,
+          "freeze_after_calibration": true
+        },
+        "gate": {
+          "paired_MPJPE_gain_at_selected_W_mm": 1.0,
+          "paired_95CI_upper_on_P_minus_CV_below": 0,
+          "max_velocity_regression_pct": 5,
+          "max_acceleration_regression_pct": 5,
+          "platform_window_updates": 4000,
+          "platform_gain_below_mm": 0.5
+        },
+        "budget_status": "draft_to_refreeze_after_G_review; TODO confirmation did not launch this training"
+      },
+      "status": "superseded_without_execution",
+      "note": "New W3 selection replaces W1/W3 mixing, GT warmup and18k budget; current P01 is planning only."
     }
   ],
-  "latest_authorization": "Total10000 includes original8000-update prefix; decay after update8000 to3e-6, both windows4GPUs each; no automatic extension or P.",
+  "latest_authorization": "Design a P training plan on new G histories; no training launch in this turn.",
   "active_runtime_plan": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/plan.json",
   "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json",
   "initial_authorization": "checkpoint cleanup and formal planning only",
   "confirmed_todo_sequence": {
     "confirmed_at_beijing": "2026-11-12T20:36:49+08:00",
     "scope": "Record the agreed TODO order and gates; no new training or runtime changes.",
-    "current": "T1_G",
+    "current": "T2_P",
     "ordered_ids": [
       "T1_G",
       "T2_P",
@@ -566,7 +718,7 @@
       {
         "id": "T2_P",
         "stage": "S2_P",
-        "status": "pending_P_implementation_and_history_preparation",
+        "status": "planned_requires_implementation_preflight_and_banks",
         "task": "使用新G真实滚动历史训练P，在相同历史上与CV比较",
         "depends_on": [
           "T1_G"
@@ -574,10 +726,13 @@
         "checks": [
           "历史生产者与训练/验证/评测划分登记；训练数据仅来自官方train",
           "预测体型FK、官方关节监督与恢复准备",
-          "启动/成熟历史上的位置、速度和加速度比较；P单独精度不能代替系统收益"
+          "启动/成熟历史上的位置、速度和加速度比较；P单独精度不能代替系统收益",
+          "W3-only history producer, no GT warmup;2k trend gate,10k cap with8k LR decay",
+          "Dense mature clip-equal P/CV comparison, startup/long/temporal guards; native producer identity and visit coverage"
         ],
-        "training_protocol": "Budget and final recipe to be frozen after T1 review; previous S2 values remain a draft.",
-        "auto_start": false
+        "training_protocol": "docs/reports/data/formal_p_training_plan_20261113.json",
+        "auto_start": false,
+        "run_id": "P01_W3G10k_s62"
       },
       {
         "id": "T3_G_adaptation_and_fusion_diagnostic",
@@ -631,7 +786,7 @@
     "budget_updated_at_beijing": "2026-11-12T20:56:15+08:00",
     "budget_revision_record": "docs/reports/data/formal_budget10k_revision_20261112.json",
     "next": "T2_P",
-    "current_status": "T1 screening completed; next P preparation pending; no training launched."
+    "current_status": "P protocol designed; implementation, preflight and banks pending; training not started."
   },
   "fft_todo_branch": {
     "recorded_at_beijing": "2026-11-12T20:41:00+08:00",
@@ -733,5 +888,7 @@
     "new_position_error_low_band_share_percent": 94.85587994628413,
     "loss_effectiveness_confirmed": false,
     "new_long_position_error_low_band_share_percent": 92.43359922088611
-  }
+  },
+  "P_training_plan": "docs/reports/data/formal_p_training_plan_20261113.json",
+  "P_protocol_updated_at_beijing": "2026-11-13T12:08:06+08:00"
 }

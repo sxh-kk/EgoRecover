@@ -1,0 +1,401 @@
+{
+  "version": "formal-P01-W3G10k-plan-v1",
+  "recorded_at_beijing": "2026-11-13T12:03:47+08:00",
+  "status": "planned_requires_implementation_preflight_and_banks",
+  "authorized_scope": "Design and record a training plan on new G histories; no GPU launch or full bank generation in this turn.",
+  "run_id": "P01_W3G10k_s62",
+  "proposed_output_root": "/root/workspace/songxuhua/exp/formal-p-w3-g10k-20261113",
+  "conda_environment": "egorecover",
+  "training_started": false,
+  "banks_generated": false,
+  "runtime_config_ready": false,
+  "question": "Can a history-only learned CV residual reduce error on the same actual frozen-W3-G cache, without worsening temporal quality?",
+  "producer": {
+    "checkpoint": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/V3_G_CV_W3_10k_s62/best.pt",
+    "sha256": "4f748009e20193b68efca7cc5e47b28c3613995cac96bcfe4cd397ad01131d67",
+    "step": 10000,
+    "window": 3,
+    "seed": 62,
+    "prior": "constant_velocity",
+    "source": "gaussian",
+    "NFE": 1,
+    "shape_mode": "predicted",
+    "geometry_target": "official",
+    "revise_recent": true,
+    "cache_representation": "existing dense state, no new FK projection",
+    "native_checkpoint_manifest": "eadd4e5cb98257adf6fcd068ffdf4fdaa78f78e3530b309f8a18a9b23d6b1d42",
+    "source_snapshot": "/root/workspace/songxuhua/exp/formal-v3-10k-20261112/source",
+    "convergence_confirmed": false,
+    "identity_rule": "Match actual frozen producer data/statistics/bootstrap identity; preliminary planning digest is not interchangeable."
+  },
+  "model": {
+    "width": 256,
+    "layers": 4,
+    "heads": 8,
+    "dropout": 0.1,
+    "history_frames": 20,
+    "output_channels": 243,
+    "source_flags": true,
+    "seed": 62,
+    "initialization": "random trunk and zero residual head; initial P equals CV",
+    "inputs": "body states up to t-1 and reconstructed/bootstrap flags only",
+    "output": "current frame t, one 0.1s step after last history frame",
+    "residual": "P(history) = CV(history) + R_theta(history)"
+  },
+  "history_distribution": {
+    "frozen_G": 1.0,
+    "GT_history": 0.0,
+    "self_P_history": 0.0,
+    "GT_warmup_updates": 0,
+    "TwoForward": false,
+    "U": false,
+    "prediction_center_switch": false,
+    "FFT_loss": false,
+    "W1": "optional final producer generalization diagnostic, not training or selection gate"
+  },
+  "data": {
+    "root": "/gaozt-test1/datasets/EE4D-Motion/ee4d_motion_uniegomotion",
+    "motion_hz": 10,
+    "train_inventory": {
+      "sources": 17045,
+      "takes": 2032,
+      "motion_frames": 3037079,
+      "minimum_context_frames": 22,
+      "eligible_sources": 16760,
+      "eligible_takes": 2031,
+      "excluded_short_sources": 285,
+      "takes_without_eligible_source": 1,
+      "early_pool_sources": 16760,
+      "early_pool_takes": 2031,
+      "mature_pool_sources": 12934,
+      "mature_pool_takes": 2014,
+      "scope": "Metadata counts only, not a full data re-audit."
+    },
+    "train_context": {
+      "per_eligible_source": 1,
+      "frames": "min(160, source length)",
+      "start": "fixed seed2062 keyed by source, uniform integer in [0,T-context_len]",
+      "startup": "head-only neutral first20 local frames, then uninterrupted frozen-G online rollout",
+      "no_cross_gap_stitching": true,
+      "L": "actual previous G calls in local context; query=20+L; Lmax=context_len-21",
+      "early_queries": "local20..39",
+      "mature_queries": "local>=40, at least20 actual G calls",
+      "max_early_anchors_per_context": 3,
+      "early_L_candidates": [
+        0,
+        1,
+        4,
+        8,
+        12,
+        19
+      ],
+      "early_selection": "deterministic without replacement among valid candidates; L-uniformity is soft because short sources cannot supply all L",
+      "max_mature_anchors_per_context": 5,
+      "mature_selection": "unique evenly spaced valid L from20 to Lmax, include both endpoints when at least2 anchors",
+      "samples_extracted": "before current G call, using actual cached states including previous W3 rewrites",
+      "metadata": [
+        "take",
+        "source",
+        "context_start",
+        "context_length",
+        "local_query",
+        "L",
+        "source_absolute_query",
+        "timestamp_s",
+        "source_flags",
+        "floor_valid"
+      ],
+      "production_noise": "existing query/slot-keyed noise seed1062; episode key includes context identity",
+      "context_selection_seed": 2062
+    },
+    "bank_size": {
+      "max_rows": 134080,
+      "expected_rows_from_length_metadata": 112381,
+      "raw_bytes_per_row": 21732,
+      "max_raw_tensor_GiB": 2.713712453842163,
+      "expected_raw_tensor_GiB": 2.274535495787859,
+      "frozen_G_call_upper_bound": 1206989,
+      "overhead_and_eval_banks_excluded_from_raw_estimate": true,
+      "workspace_headroom_GiB_at_planning": 35,
+      "generation_merge_and_checkpoint_reserve_GiB": 10,
+      "minimum_remaining_workspace_GiB": 10
+    },
+    "bank_identity": {
+      "required": [
+        "split",
+        "selection hash",
+        "producer SHA256",
+        "producer step",
+        "producer W",
+        "shape mode",
+        "data/statistics/codec/bootstrap identities",
+        "source flags semantics",
+        "noise seed/key scheme",
+        "code snapshot"
+      ],
+      "new_version_required": true,
+      "reuse_old_P_banks": false,
+      "bind_manifest": "producer native identity, no substituted preliminary digest",
+      "split_manifest_rule": "Store producer training manifest separately from each bank split manifest; val/train hashes are not required to be identical."
+    },
+    "storage": "Banks, checkpoints and logs in project directory; official dataset remains on data disk.",
+    "coverage_reporting": [
+      "bank unique takes/sources/contexts/anchors",
+      "training actually visited unique takes/sources/anchors",
+      "phase and local-L quotas",
+      "exclusions by source length"
+    ],
+    "full_source_bank_does_not_mean": "all motion frames traversed or every bank row visited during2k pilot"
+  },
+  "sampling": {
+    "global_batch": 64,
+    "microbatch": 8,
+    "GPUs": 4,
+    "local_batch": 16,
+    "gradient_accumulation_per_rank": 2,
+    "global_mature": 48,
+    "global_early": 16,
+    "per_microbatch_mature": 6,
+    "per_microbatch_early": 2,
+    "hierarchy": "within each phase, uniformly take -> eligible source/context -> anchor",
+    "missing_phase_source": "exclude from that phase pool, retain in valid phase; never silently change48:16 quota",
+    "GT_queries_are_labels_only": true
+  },
+  "loss": {
+    "code": "243-dimensional normalized weighted MSE; channels198:207 weight8; hand PCA included",
+    "geometry": "own predicted-beta FK body22 against current official GT joints, scale0.1m",
+    "CV_geometry": "CV own beta for main comparison, never GT beta",
+    "additional_hand_geometry": false,
+    "velocity_training_loss": false,
+    "acceleration_training_loss": false,
+    "foot_slide_training_loss": false,
+    "geometry_calibration": {
+      "split": "train_only_new_G_bank",
+      "seed": 9062,
+      "samples": 256,
+      "mature": 192,
+      "early": 64,
+      "formula": "min(0.03, 0.1 * norm(mean code gradient) / norm(mean geometry gradient))",
+      "weight_cap": 0.03,
+      "gradient_ratio_target": 0.1,
+      "freeze_after_calibration": true,
+      "abort_on_degenerate_or_nonfinite_gradients": true,
+      "initial_zero_head_caveat": "initial gradients mainly reach output head; monitor later full gradients, not an all-training guarantee",
+      "diagnostic_steps": [
+        0,
+        100,
+        500,
+        2000
+      ],
+      "diagnostic_fields": [
+        "code and geometry gradient norms",
+        "weighted ratio",
+        "gradient cosine"
+      ],
+      "val_tuning": false
+    }
+  },
+  "optimization": {
+    "optimizer": "AdamW",
+    "learning_rate": 3e-05,
+    "weight_decay": 0.01,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "clip_norm": 1.0,
+    "ema_decay": 0.999,
+    "initial_stop_after": 2000,
+    "native_identity_train_steps_from_start": 10000,
+    "max_updates": 10000,
+    "automatic_extension": false,
+    "learning_rates": {
+      "1..8000": 3e-05,
+      "8001..10000": 3e-06
+    },
+    "lr_step_size": 8000,
+    "lr_gamma": 0.1,
+    "eval_every": 500,
+    "initial_CV_equivalence_evaluation": true,
+    "queries_at_pilot": 128000,
+    "queries_at_cap": 640000,
+    "resume": "Keep optimizer, EMA, scheduler, CPU/CUDA RNG and sampler counters; initial stop_after2000 does not change max-step identity.",
+    "checkpoint_retention": [
+      "latest resume",
+      "D128 best EMA",
+      "final EMA",
+      "2000/8000 EMA"
+    ],
+    "budget_rationale": "Engineering screening cap, not an epoch-equivalent or convergence guarantee; stage2k prevents committing full budget without trend."
+  },
+  "evaluation": {
+    "selection": "D128 mature query40..79 clip-equal MPJPE, EMA only",
+    "D128": {
+      "file": "/root/workspace/songxuhua/exp/formal-v1-20261112/configs/dev128.json",
+      "selection_id": "2788c54eeb5b21887d8ea0efc218d812df365d9945f4f2f57837930571fde60f",
+      "clips": 128,
+      "dense_queries": [
+        20,
+        79
+      ],
+      "main_queries": [
+        40,
+        79
+      ],
+      "startup_queries": [
+        20,
+        39
+      ],
+      "total_prediction_rows": 7680
+    },
+    "D400": {
+      "file": "/root/workspace/songxuhua/exp/formal-v1-20261112/configs/evaluation400.json",
+      "selection_id": "07c11f0bb0d7393e8384d5b427682cd88ba754142a2023298e66e7c71b5720b9",
+      "clips": 400,
+      "dense_queries": [
+        20,
+        79
+      ],
+      "total_prediction_rows": 24000
+    },
+    "long50": {
+      "file": "/root/workspace/songxuhua/exp/formal-v1-20261112/configs/long50.json",
+      "selection_id": "4bb1f5c9983b56863ec44270b257355de703bcbed40569250dbf91d975627a1d",
+      "clips": 50,
+      "mature_queries": "local>=40",
+      "dense_queries": "all valid after20 startup frames",
+      "intervals_not_full_takes": true
+    },
+    "main_comparison": "P and CV on identical cache before current G call; no P feedback or own rollout in this standalone test.",
+    "metrics": [
+      "world body22 MPJPE",
+      "PA-MPJPE supplemental",
+      "velocity error",
+      "acceleration error",
+      "foot slide with floor coverage",
+      "upper/lower body",
+      "wrists/feet",
+      "root trajectory",
+      "beta magnitude and variation"
+    ],
+    "temporal_rule": "Only adjacent dense anchors with actual dt; no sparse-anchor differencing. Mature temporal metrics use stencils fully inside the mature group.",
+    "paired_CI": {
+      "replicates": 2000,
+      "seed": 1062,
+      "cluster": "take",
+      "aggregation": "paired clip means; resample take clusters and maintain clip-equal means"
+    },
+    "primary_shape": "each predictor own beta",
+    "supplemental_shape": "use same CV beta for P and CV to separate shape and dynamics",
+    "selection_and_report_overlap": {
+      "D400": {
+        "overlap_clips": 241,
+        "remaining_clips_excluding_D128_takes": 159,
+        "remaining_takes_excluding_D128": 84
+      },
+      "long50": {
+        "overlap_clips": 21,
+        "remaining_clips_excluding_D128_takes": 29,
+        "remaining_takes_excluding_D128": 29
+      }
+    },
+    "independence_statement": "D128 is part of D400; shared-take long50 also not independent test. Preserve original lists; report a D128-take-excluded supplement.",
+    "no_D400_checkpoint_selection": true,
+    "end_only_D400_and_long50": true,
+    "optional_FFT_diagnostic_not_training": true
+  },
+  "gates": {
+    "pilot_2000": {
+      "negative_mature_P_minus_CV_at_steps": [
+        1500,
+        2000
+      ],
+      "minimum_mature_gain_at2000_mm": 0.5,
+      "max_each_temporal_regression_pct": 5,
+      "numerics_and_sampling_and_gradients_pass": true,
+      "failure": "Stop at2k, diagnose by phase/part/shape/gradient/coverage. Any changed method uses new P02 identity, no automatic extra steps.",
+      "temporal_gate_phases": [
+        "D128 mature query40..79",
+        "D128 all query20..79"
+      ]
+    },
+    "final_predictor": {
+      "D400_mature_gain_mm_at_least": 1.0,
+      "D400_paired_CI_upper_P_minus_CV_below_mm": 0,
+      "D400_all60_mean_improves": true,
+      "D400_max_startup_regression_mm": 1.0,
+      "max_each_velocity_acceleration_foot_slide_regression_pct": 5,
+      "long50_mature_mean_improves": true,
+      "long50_temporal_regression_limit_pct": 5,
+      "long50_CI_reported_without_significance_claim": true,
+      "near_plateau_window_updates": [
+        8000,
+        10000
+      ],
+      "near_plateau_best_D128_gain_below_mm": 0.5,
+      "if_still_improving_at_cap": "budget complete, training sufficiency unconfirmed; no auto extension",
+      "interpretation": "Minimum stage-entry criteria, not a paper contribution or proof of final-G gains.",
+      "D400_temporal_gate_phases": [
+        "mature query40..79",
+        "all query20..79"
+      ],
+      "long50_temporal_gate_phases": [
+        "mature local query>=40",
+        "all valid local query>=20"
+      ]
+    },
+    "system_gain": "Only later same-baseG/equal-additional-G-budget CV vs P adaptation, then new-model fusion diagnostic, can establish final reconstruction usefulness."
+  },
+  "preparation_required": [
+    {
+      "task": "predicted-beta FK for P training, P/CV evaluation and bank baseline fields",
+      "files": [
+        "egorecover/prior_training.py",
+        "egorecover/prior_evaluation.py",
+        "scripts/build_prior_bank.py"
+      ],
+      "status": "not_implemented_this_turn"
+    },
+    {
+      "task": "pure new-G mode; W3-only producer validation; phase/take/source/anchor quotas and actual visit coverage",
+      "status": "not_implemented_this_turn"
+    },
+    {
+      "task": "source/context builder up to160 frames, local-L semantics, bank producer identity validation",
+      "status": "not_implemented_this_turn"
+    },
+    {
+      "task": "dense clip-equal evaluation, mature selection and paired take-cluster CI",
+      "status": "not_implemented_this_turn"
+    },
+    {
+      "task": "learning-rate scheduler and stateful resume with unchanged10k identity",
+      "status": "not_implemented_this_turn"
+    },
+    {
+      "task": "small-bank causality/CV equivalence/beta gradients; real4GPU interrupted-vs-continuous preflight across shortened LR boundary",
+      "status": "not_run"
+    },
+    {
+      "task": "freeze implementation, generate train/D128 banks; train-only calibration and measured G/P throughput before any ETA",
+      "status": "not_run"
+    }
+  ],
+  "downstream_order": [
+    "Review standalone P gate",
+    "Equal-budget CV/P G adaptation from same newG, recipe separately finalized",
+    "New P/G oracle fusion and error correlation diagnostics",
+    "If evidence supports, freeze P/G and train causal U with CV+U vs P+U controls",
+    "Separate FFT-loss controls after initial P/U tests, combine only after independent gain"
+  ],
+  "review": {
+    "independent_plan_review": "review_preparation: no blocking logical issue; require local-L semantics, per-phase eligible pools, actual visitation coverage, and validation overlap disclosure",
+    "code_or_training_tests_this_turn": false,
+    "reason": "Planning/documentation changes only, implementation preflight remains pending.",
+    "status": "plan_review_passed_after_explicit_temporal_phase_correction",
+    "corrected_issue": "Temporal5% guards apply to BOTH mature and all groups at pilot, D400 and long50; not selectable after results.",
+    "implementation_review_completed": false,
+    "reviewed_at_beijing": "2026-11-13T12:08:06+08:00"
+  }
+}
