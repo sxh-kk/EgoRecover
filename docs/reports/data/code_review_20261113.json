@@ -1,0 +1,482 @@
+{
+  "version": "egorecover_overall_review_20261113_v1",
+  "recorded_at_beijing": "2026-11-13T23:01:58+08:00",
+  "user_request": "整体代码review并核对技术细节",
+  "reviewed_git_head": "4e1b912fa6596f52953122cf3d1b9f05b480e87e",
+  "scope": [
+    "official data/coordinates/timebase",
+    "codec/rotations/SMPL-X FK",
+    "G rollout/FM/history/detach/first emissions",
+    "formal P bank/objectives/gradients",
+    "A/B queues/preflight/checkpoints/resume/gates",
+    "metrics/external definition parity/final report completeness",
+    "current and historical method documentation"
+  ],
+  "conclusion": "No confirmed first-launch blocker for P02 or evidence invalidating completed formal G results; four reproduced current recovery/numerical boundaries require correction, plus staged integration/report/documentation gaps. All findings remain unfixed in this review.",
+  "production_code_changed": false,
+  "frozen_runtime_changed": false,
+  "SIMPLE_interrupted": false,
+  "GPU_used_for_review": false,
+  "findings": [
+    {
+      "id": "R01",
+      "priority": "P2",
+      "title": "resume提交与best导出不一致",
+      "location": {
+        "file": "egorecover/formal_prior_training.py",
+        "line": 585
+      },
+      "trigger": "保存了含新best的resume之后、写best.pt之前中断，恢复后的验证未再次打破该best。",
+      "observed": "真实CPU训练循环注入中断：resume.step=1,best=50但best不存在；恢复到step2、分数60后，best仍不存在。",
+      "impact": "终评可能因best缺失失败，或错误使用较差旧best；普通正常首次运行不触发。",
+      "recommendation": "让恢复包与导出结果有事务一致性/身份校验和可恢复路径，不能仅凭best数值跳过补导出。",
+      "scope": "current_P02",
+      "kind": "confirmed_implementation_boundary",
+      "fixed_in_this_review": false
+    },
+    {
+      "id": "R02",
+      "priority": "P2",
+      "title": "预检full恢复后不再是连续两步参照",
+      "location": {
+        "file": "scripts/run_formal_prior.py",
+        "line": 519
+      },
+      "trigger": "full参考分支完成step1后中断，再启动preflight。",
+      "observed": "实际命令选择full-to2 --resume --stop-after1，另一边同样1+resume1；末端校验没有记录full是否跨过进程恢复。",
+      "impact": "可能生成缺少独立不中断参照的通过证据；当前GPU预检未开始，尚未触发。",
+      "recommendation": "隔离已中断full后重跑完整0→2，或记录执行段并拒绝把恢复过的full作为连续参照。",
+      "scope": "current_P02",
+      "kind": "confirmed_implementation_boundary",
+      "fixed_in_this_review": false
+    },
+    {
+      "id": "R03",
+      "priority": "P2",
+      "title": "监督进程退出后遗留子任务且重启无法接管",
+      "location": {
+        "file": "scripts/run_formal_prior_ab.py",
+        "line": 371
+      },
+      "trigger": "控制器运行GPU子任务时收到SIGTERM/SIGKILL，独立会话子进程继续，随后重启控制器。",
+      "observed": "真实run_processes的CPU dummy在控制器exit=-15后继续存活；重启先等待所有卡空闲，不识别本任务进程。",
+      "impact": "可能把自身训练误报为foreign/未启动，等待子任务自然退出；有限任务不一定永久阻塞。当前控制器未中断。",
+      "recommendation": "为工作进程记录PID与启动时间，提供可信接管及信号清理，监控区分等待外部任务和自身残留。",
+      "scope": "current_P02",
+      "kind": "confirmed_implementation_boundary",
+      "fixed_in_this_review": false
+    },
+    {
+      "id": "R04",
+      "priority": "P2",
+      "title": "仅检查行列式不足以保证6D解码旋转正交",
+      "location": {
+        "file": "egorecover/codec.py",
+        "line": 35
+      },
+      "trigger": "float32近共线6D，例[1,1,1,1,1,1.000002,.2,.3,.4]。",
+      "observed": {
+        "torch.float32": {
+          "accepted": true,
+          "determinant": 0.9931270480155945,
+          "maximum_rotation_orthogonality_error": 0.0829026848077774,
+          "maximum_inverse_roundtrip_error": 0.07560133934020996
+        },
+        "torch.float64": {
+          "accepted": true,
+          "determinant": 1.0,
+          "maximum_rotation_orthogonality_error": 3.14018533398297e-10,
+          "maximum_inverse_roundtrip_error": 2.9605951024080923e-10
+        }
+      },
+      "impact": "被接受的非正交旋转使转置不再等于逆，污染刚体变换；尚未在所扫描base/target旋转中出现。",
+      "recommendation": "同时检查RR^T和det，触发同一6D的现有float64重算，再验证后转回原dtype；不需要创造替代轴。",
+      "scope": "current_P02",
+      "kind": "confirmed_implementation_boundary",
+      "fixed_in_this_review": false
+    },
+    {
+      "id": "R05",
+      "priority": "P2",
+      "title": "CV基础G切换学习P的受控初始化入口缺失",
+      "location": {
+        "file": "egorecover/training.py",
+        "line": 48
+      },
+      "trigger": "T3从同一CV基础G分叉，其中一组将prior替换为新学习P。",
+      "observed": "真实W3身份仅改prior，compatible_initialization报Initialization identity changed: prior.",
+      "impact": "当前P02不受影响；未来T3无法通过现有initialize入口启动。",
+      "recommendation": "T3前增加显式授权范围内的先验切换初始化选项并登记旧/新P，保持普通resume身份严格。",
+      "scope": "future_T3",
+      "kind": "confirmed_stage_integration_gap",
+      "fixed_in_this_review": false
+    },
+    {
+      "id": "R06",
+      "priority": "P2",
+      "title": "缺少剔除D128 take后的最终补充汇总",
+      "location": {
+        "file": "egorecover/formal_prior_training.py",
+        "line": 650
+      },
+      "trigger": "达标P完成10k后自动生成D400/long50最终报告。",
+      "observed": "当前仅全量evaluate_formal_prior，没有按D128 take排除后汇总；计划要求159片段/84take和29长区间。",
+      "impact": "不能把共享选模take的D400/long50报告当作独立test；不改变原2k门槛。",
+      "recommendation": "保留原集合与原门槛，另外从相同逐片段结果补剔除D128 take的汇总及CI，记录实际数量。",
+      "scope": "final_reporting",
+      "kind": "confirmed_protocol_reporting_gap",
+      "fixed_in_this_review": false
+    },
+    {
+      "id": "R07",
+      "priority": "P3",
+      "title": "末段平台性尚未由最终控制器计算",
+      "location": {
+        "file": "egorecover/formal_prior_evaluation.py",
+        "line": 475
+      },
+      "trigger": "10k结束并判断P能否最终冻结。",
+      "observed": "final_gate只看D400/long50精度/时序；协议中的8k→10k最好D128改善阈值0.5mm没有计算。",
+      "impact": "当前终态awaiting_review且不自动开G/U，人工仍可审查；通过精度门槛不代表充分训练。",
+      "recommendation": "补报告末段曲线改善及充分性状态，或明确保持人工曲线复核，不自动宣称收敛。",
+      "scope": "final_freeze",
+      "kind": "reporting_completeness",
+      "fixed_in_this_review": false
+    },
+    {
+      "id": "R08",
+      "priority": "P3",
+      "title": "方法和数据文档仍含旧固定体型与手部范围描述",
+      "location": {
+        "file": "docs/data.md",
+        "line": 52
+      },
+      "trigger": "用docs/data.md或docs/method.md说明当前正式算法。",
+      "observed": {
+        "additional_location": "docs/method.md:191",
+        "stale_claims": [
+          "主FK始终beta=0",
+          "官方训练固定零beta",
+          "不计算手指MPJPE"
+        ],
+        "actual": "V3/P02使用predicted-beta FK；启动为beta0；D400另解码手PCA评测手指"
+      },
+      "impact": "论文或后续实现可能按旧定义理解当前实验；代码本身不因此失效。",
+      "recommendation": "按版本更新方法/数据文档，区分启动体型、最终预测体型、身体FK与补充手指评测。",
+      "scope": "documentation",
+      "kind": "documentation_mismatch",
+      "fixed_in_this_review": false
+    }
+  ],
+  "technical_facts": {
+    "authoritative_plan": "plan.docx + latest staged protocol in docs/formal_experiment_plan_20261112.md and P02 A/B JSON; exploratory features are not automatically active",
+    "data": {
+      "split": "official train/val, no test relabel",
+      "motion_fps": 10,
+      "image_feature_fps": 5,
+      "image_mapping": "floor(original30Hz frame_id/6), token0, no next feature",
+      "GT_scope": "labels and scoring only; floor calibration is declared official provided constant"
+    },
+    "G": {
+      "window": 3,
+      "active_slots": "past2 + current1",
+      "P_history_frames": 20,
+      "observation_frames": "past20 + current1",
+      "public_output": "current first emission; later historical rewrites internal only",
+      "source": "gaussian with explicit CV/P center condition",
+      "NFE": 1,
+      "time_direction": "tau1 to0",
+      "NFE1": "direct endpoint prediction",
+      "unroll_K": 8,
+      "detach_between_calls": true,
+      "not_eight_step_BPTT": true,
+      "loss_weights": {
+        "Flow": 1,
+        "current_geometry": 0.03,
+        "velocity": 0.013409926806430328,
+        "paired": 0,
+        "slow": 0,
+        "acceleration": 0,
+        "foot_slide": 0,
+        "FFT": 0
+      },
+      "geometry_target": "official22 joints",
+      "shape_mode": "predicted beta",
+      "startup_shape": "beta0"
+    },
+    "P02": {
+      "history_frames": 20,
+      "inputs": "past body up to t-1 + source flags only",
+      "GT_current_input": false,
+      "bank_query_saved_before_G_current_call": true,
+      "common_reference": "history-only CV predicted current reference",
+      "objective": "projected valid physical state reencoded into common CV reference, normalized243 weighted MSE + original physical FK geometry",
+      "not_SO3_geodesic_loss": true,
+      "not_pure_MPJPE": true,
+      "reference9_error_identically_zero": true,
+      "reference9_weight8_effect": "no direct error or gradient after common reencoding; denominator306 retained",
+      "code_fields": "dense22 translations and rotations, reference9, handPCA24, contacts2, beta10",
+      "body22_FK_depends_on": "root position, body rotations, beta; no nonroot dense translation or handPCA",
+      "B_hold_beta": "mask residual last10 inside model; persisted in checkpoint model_config",
+      "fixed_geometry_weight": 0.008869197811349056,
+      "initial_weighted_geometry_to_code_gradient_ratio": {
+        "A": 0.093448,
+        "B": 0.09157,
+        "P01_reference": 0.1
+      },
+      "gradient_diagnostic_samples": 256,
+      "gradient_diagnostic_split": "same train-only frozen indices and real SMPL-X CPU",
+      "eval_scope": "one-step matched immutable frozen-G histories, no P feedback; not final-G usefulness"
+    },
+    "interface_caveats": {
+      "internal_dense_state_not_FK_projection": true,
+      "common_reference_gauge": "P physical objective invariant to equivalent internal-reference decomposition; G center still consumes original code, so audit/canonicalize before T3"
+    },
+    "G_W1_W3_matching": {
+      "initial_model_SHA_equal": true,
+      "first_step_microbatches": 8,
+      "matched_fields": [
+        "queries",
+        "global_offset",
+        "tau",
+        "rollin_frames",
+        "current_epsilon_hash",
+        "current_slot_epsilon_for_all8_calls"
+      ],
+      "full_window_noise_hash": "different due W shapes, expected",
+      "actual_updates8001to10000_lr": 3e-06,
+      "step8000_next_lr_old_value": "pre-migration historical log retained; budget-revision records later schedule"
+    },
+    "evaluation": {
+      "body_joints": 22,
+      "positions": "world meters -> errors mm",
+      "PA": "per-frame proper similarity",
+      "foot_slide": "4 feet height-weighted XY displacement, sum/T, mm",
+      "temporal": "actual dt, stencils inside scored phase",
+      "D128_selection": "mature query40..79, EMA clip-equal",
+      "D400_score": "query20..79 after neutral20 startup; first emissions",
+      "P_vs_CV": "same immutable frozen G caches",
+      "CI": "2000 paired take-cluster bootstrap, clip-equal denominator retained",
+      "not_independent_test": "D128 overlaps D400/long50 takes; supplement not yet auto-generated",
+      "not_implemented_same_paper_metrics": [
+        "TMR Semantic",
+        "TMR FID",
+        "EgoForce PJ",
+        "EgoForce AUJ"
+      ],
+      "latency": "no new exclusive GPU timing in this review"
+    }
+  },
+  "verification": {
+    "pytest": {
+      "passed": 554,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_seconds": 204.339,
+      "junit_xml": "/root/workspace/songxuhua/exp/code-review-20261113/pytest.xml",
+      "scope": "whole current workspace, including pre-existing untracked oracle diagnostic test; CUDA_VISIBLE_DEVICES empty, licensed SMPL-X CPU tests executed"
+    },
+    "tracked_code_ruff": {
+      "passed": true,
+      "tracked_python_files": 138
+    },
+    "whole_worktree_ruff": {
+      "passed": false,
+      "findings": 3,
+      "scope": "only pre-existing untracked scripts, left untouched",
+      "locations": [
+        "scripts/analyze_oracle_gate.py:3 I001",
+        "scripts/analyze_oracle_gate.py:332 E702",
+        "scripts/replay_oracle_candidates.py:40 F401"
+      ]
+    },
+    "frozen_source_identity": {
+      "files": 79,
+      "snapshot_and_worktree_mismatches": [],
+      "snapshot": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/source"
+    },
+    "numerical_rotation_counterexample": {
+      "torch.float32": {
+        "accepted": true,
+        "determinant": 0.9931270480155945,
+        "maximum_rotation_orthogonality_error": 0.0829026848077774,
+        "maximum_inverse_roundtrip_error": 0.07560133934020996
+      },
+      "torch.float64": {
+        "accepted": true,
+        "determinant": 1.0,
+        "maximum_rotation_orthogonality_error": 3.14018533398297e-10,
+        "maximum_inverse_roundtrip_error": 2.9605951024080923e-10
+      }
+    },
+    "scanned_bank_rotations": {
+      "count": 5282684,
+      "fields": [
+        "train base",
+        "train target",
+        "D128 base",
+        "D128 target"
+      ],
+      "maximum_orthogonality_error": 5.960464477539062e-07,
+      "greater_than1e_4_count": 0,
+      "not_scanned": [
+        "all history rotations",
+        "new P outputs"
+      ]
+    },
+    "official_metric_parity": {
+      "status": "passed",
+      "trajectory_count": 40,
+      "dtype": "float64",
+      "seed": 1062,
+      "upstream_commit": "580c92c6d70a91672c4106bab30ca82cdd80f379",
+      "upstream_path": "eval/metrics.py",
+      "upstream_blob_sha": "642bb854c19e746dfbfaf5dd59932a13085c3259",
+      "upstream_source_sha256": "311f66a844ce1b0baa665b7cb64b2d55da3baef8f7115bc2aa06d709b2385521",
+      "maximum_abs_difference": {
+        "foot_slide_mm": 1.1368683772161603e-13,
+        "pa_mpjpe_mm": 2.2737367544323206e-13,
+        "foot_contact_mesh_mm": 0.0,
+        "head_rotation_frobenius": 8.881784197001252e-16
+      },
+      "scope": "Metric function parity on same physical inputs only; does not unify train/val splits, input sensors, startup, scoring frames, data weighting or EgoForce metrics."
+    },
+    "controller_boundary_reproductions": {
+      "recorded_at_beijing": "2026-11-13T22:57:58+08:00",
+      "python": "/root/miniconda3/envs/egorecover/bin/python",
+      "repository": "/root/workspace/songxuhua",
+      "source_sha256": {
+        "egorecover/formal_prior_training.py": "deb6825024803aa0a11d30ac134104faeefd76857604a736904a3b560236bcb4",
+        "scripts/run_formal_prior.py": "88b0be07b549d880b473fe0147a3fcd31e3fc73b50ee9d500cfebb9a72459d1c",
+        "scripts/run_formal_prior_ab.py": "ff8f9eb7bb796f38f25b3f76340c8eb8feff7fe016f022cc742baa8ca8e1f2eb",
+        "tests/test_formal_prior_training.py": "cec0dbf977a9854937392ac97ace7c395b7da9b76629671d7b80446b37024289"
+      },
+      "GPU_used": false,
+      "production_runtime_modified": false,
+      "scope": "Operational interruption boundaries; not model-quality experiments and not GPU preflight evidence",
+      "findings": {
+        "checkpoint_export_transaction": {
+          "status": "reproduced",
+          "trigger": "Interrupt checkpoint publication after resume.pt commit and before best.pt publication; the next validation is worse than the committed best score.",
+          "mock_scope": [
+            "Synthetic banks and tiny model from existing CPU integration test",
+            "SMPL/FK replaced by existing BetaFK fixture; no licensed asset or GPU used",
+            "Validation scores controlled to100(initial),50(step1),60(step2)",
+            "A RuntimeError is injected immediately before the first best.pt write"
+          ],
+          "real_executed": "Actual _train_formal_prior optimizer/EMA/scheduler, checkpoint publication, and resume loop on CPU",
+          "injected_error": "injected interruption after resume commit, before best export",
+          "after_interruption": {
+            "resume_step": 1,
+            "best_selection_score": 50.0,
+            "best_pt_exists": false,
+            "checkpoint_files": [
+              "last.pt",
+              "resume.pt"
+            ]
+          },
+          "after_recovery": {
+            "resume_step": 2,
+            "best_selection_score": 50.0,
+            "curve_selection_scores": [
+              50.0,
+              60.0
+            ],
+            "best_pt_exists": false,
+            "checkpoint_files": [
+              "final.pt",
+              "last.pt",
+              "resume.pt"
+            ]
+          },
+          "training_stdout": [
+            "{\"step\": 1, \"code\": 1.0105938599735964e-05, \"geometry\": 0.014056469197385013, \"hand_pca\": 0.0, \"loss\": 0.00013477555148710962, \"lr\": 3e-05, \"lr_next\": 3e-06, \"gradient_norm\": 0.010829616338014603, \"geometry_weight\": 0.008869197811349056, \"phase\": \"frozen_W3_G_history\", \"mature_count\": 48, \"early_count\": 16, \"trace_hash\": \"760d5314d7e2a84d36df1402bea1dda8a2b95036e78c2ca6526bb91691b23b1b\", \"elapsed_seconds\": 0.11260556313209236}",
+            "{\"step\": 2, \"code\": 1.0028926965333085e-05, \"geometry\": 0.013947413535788655, \"hand_pca\": 0.0, \"loss\": 0.0001337313033218379, \"lr\": 3e-06, \"lr_next\": 3.0000000000000004e-07, \"gradient_norm\": 0.007859179750084877, \"geometry_weight\": 0.008869197811349056, \"phase\": \"frozen_W3_G_history\", \"mature_count\": 48, \"early_count\": 16, \"trace_hash\": \"b2c69bdf8c0c21c50e1e116f21a83ca28ac082d14f0fd6af4305ddae162a62cf\", \"elapsed_seconds\": 0.11444490402936935}"
+          ],
+          "implication": "Recovery skips step1 and retains best=50 but never recreates best.pt if later validations do not beat50. An existing stale best file would likewise not be replaced.",
+          "locations": [
+            "egorecover/formal_prior_training.py:411-425",
+            "egorecover/formal_prior_training.py:453",
+            "egorecover/formal_prior_training.py:585-616"
+          ]
+        },
+        "continuous_preflight_reference": {
+          "status": "reproduced_command_selection",
+          "trigger": "The uninterrupted-reference full directory already contains a completed step1 resume after an interrupted preflight.",
+          "mock_scope": [
+            "Temporary one-field step checkpoints",
+            "run_processes mocked to record actual generated argv and advance the temporary step checkpoint",
+            "verify_preflight mocked to avoid fabricating any CUDA proof; no passing GPU evidence was produced"
+          ],
+          "real_executed": "Actual single.preflight, checkpoint_step, and train_command selection",
+          "observed_jobs": [
+            {
+              "name": "preflight-full-to2",
+              "starting_checkpoint_step": 1,
+              "resume_flag": true,
+              "requested_updates": 1
+            },
+            {
+              "name": "preflight-resumed-to1",
+              "starting_checkpoint_step": 0,
+              "resume_flag": false,
+              "requested_updates": 1
+            },
+            {
+              "name": "preflight-resumed-to2",
+              "starting_checkpoint_step": 1,
+              "resume_flag": true,
+              "requested_updates": 1
+            }
+          ],
+          "implication": "The full branch is resumed for one update, so both branches may become1+resume1. Final step/log/state comparison does not record whether full ran0-to2 in one process.",
+          "locations": [
+            "scripts/run_formal_prior.py:519-531",
+            "scripts/run_formal_prior.py:443-483"
+          ]
+        },
+        "orphan_worker_after_supervisor_SIGTERM": {
+          "status": "reproduced_process_lifecycle",
+          "trigger": "Supervisor receives SIGTERM while run_processes owns a separately-sessioned child.",
+          "mock_scope": [
+            "The workload is a temporary CPU sleep dummy that imports no CUDA code"
+          ],
+          "real_executed": "Actual run_processes subprocess/session creation and operating-system SIGTERM behavior",
+          "observed": {
+            "supervisor_exit_code": -15,
+            "worker_survived_SIGTERM": true,
+            "worker_state": "S",
+            "CUDA_VISIBLE_DEVICES_for_worker": ""
+          },
+          "cleanup": "Only the temporary test supervisor and dummy worker process group were terminated; production PIDs were untouched.",
+          "implication": "Restarted AB supervisor first waits for all GPUs to be idle and has no reattachment of durable job PIDs, so surviving own GPU jobs would be reported as foreign until they exit. Finite jobs may finish naturally; this is not necessarily a permanent deadlock.",
+          "locations": [
+            "scripts/run_formal_prior.py:347-355",
+            "scripts/run_formal_prior.py:388-397",
+            "scripts/run_formal_prior_ab.py:229",
+            "scripts/run_formal_prior_ab.py:371"
+          ]
+        }
+      }
+    },
+    "controller_reproduction_script": "/root/workspace/songxuhua/exp/code-review-20261113/controller-boundaries/reproduce_controller_boundaries.py",
+    "controller_reproduction_script_sha256": "b274f0a762edda59cfb6117e364113f19ae8cc6c22b31d15b33ec2d382b2577c"
+  },
+  "queue_at_record": {
+    "observed_at_beijing": "2026-11-13T23:01:49+08:00",
+    "phase": "waiting_for_gpus",
+    "A_updates": 0,
+    "B_updates": 0,
+    "real_GPU_preflight_started": false,
+    "controller_PID": 1262069,
+    "live_status": "/root/workspace/songxuhua/exp/formal-p02-ab-20261113/status.json",
+    "unchanged_in_review": true
+  },
+  "recommended_order": [
+    "Correct R01-R04 before new real GPU preflight, without mutating existing frozen snapshot silently; preserve old identity and refreeze/reverify under explicit runtime record",
+    "At T3 add controlled prior-swap initialization and audit center gauge",
+    "Before final acceptance supplement D128-take-excluded reports and platform status",
+    "Update stale methods/data wording before paper reporting"
+  ]
+}
