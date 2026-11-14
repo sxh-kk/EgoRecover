@@ -1,0 +1,1486 @@
+{
+  "version": "egorecover_server_migration_inventory_v1",
+  "recorded_at_beijing": "2026-11-14T20:03:56+08:00",
+  "scope": "Current formal P02 A/B asset preparation. Shared storage is excluded from all inventory traversal, size totals, file list and checksums.",
+  "source_project_root": "/root/workspace/songxuhua",
+  "code_baseline_commit": "9b7d64cc78473b025a729d8b8d70a0368c436b31",
+  "code_from": "GitHub repository sxh-kk/EgoRecover; obtain the commit containing this checklist and keep the frozen producer snapshot for old G",
+  "shared_storage": {
+    "path": "/gaozt-test1/datasets/EE4D-Motion/ee4d_motion_uniegomotion",
+    "included_in_copy_list": false,
+    "included_in_size_or_checksum_calculation": false,
+    "target_must_access_same_dataset": true
+  },
+  "queue_state": {
+    "phase": "cancelled_by_user",
+    "formal_updates": {
+      "A": 0,
+      "B": 0
+    },
+    "automatic_restart": false,
+    "new_launch_authorization_required": true
+  },
+  "environment": {
+    "management": "conda",
+    "definition": "environment.yml",
+    "python_observed": "3.12.1",
+    "packages_observed": {
+      "torch": "2.10.0+cu126",
+      "numpy": "1.26.4",
+      "smplx": "0.1.28",
+      "joblib": "1.6.0",
+      "scipy": "1.17.1",
+      "pytest": "9.2.0"
+    },
+    "environment_definition_pinning": "environment.yml pins torch2.10.0+cu126 and Python3.12 series; compare observed versions for stricter reproduction; driver/GPU validated on destination"
+  },
+  "total_files": 172,
+  "total_bytes": 3120959001,
+  "total_GiB": 2.906619572080672,
+  "excluded_from_size": [
+    "Shared storage files",
+    "Git clone/source code fetched separately",
+    "Conda installation/downloads",
+    "Future training outputs",
+    "Old unused checkpoints",
+    "Duplicate history-bank shards/chunks",
+    "Old process/PID/lock/session state",
+    "CPU integration-test checkpoint bundles"
+  ],
+  "groups": {
+    "G_producer_checkpoint": {
+      "bytes": 368405471,
+      "GiB": 0.343104331754148
+    },
+    "G_producer_metadata": {
+      "bytes": 51671,
+      "GiB": 4.812236875295639e-05
+    },
+    "G_producer_source": {
+      "bytes": 1178078,
+      "GiB": 0.0010971706360578537
+    },
+    "P01_weight_provenance": {
+      "bytes": 9454,
+      "GiB": 8.804723620414734e-06
+    },
+    "P02_frozen_source": {
+      "bytes": 1477659,
+      "GiB": 0.0013761771842837334
+    },
+    "P_history_banks": {
+      "bytes": 2634706900,
+      "GiB": 2.453762013465166
+    },
+    "P_history_metadata": {
+      "bytes": 6218675,
+      "GiB": 0.005791592411696911
+    },
+    "SMPL_X_asset": {
+      "bytes": 108752058,
+      "GiB": 0.10128324665129185
+    },
+    "evaluation_selections": {
+      "bytes": 159035,
+      "GiB": 0.00014811288565397263
+    }
+  },
+  "scientific_invariants": [
+    "same selected W3G10k best EMA SHA",
+    "same4 merged bank content SHAs",
+    "same SMPL-X asset SHA",
+    "same physical D128/D400/long50 selections",
+    "fixed geometry coefficient0.008869197811349056",
+    "global64/micro8; maturity quota48:16; seed62; original2k gate and10k cap"
+  ],
+  "relocation_policy": "Do not edit transferred best.pt or bank.pt contents. Regenerate destination-host protocol/runtime paths, Python, GPUs/ports and resource waits; do not reuse cancelled old launch state or source-host SIMPLE PID.",
+  "files": [
+    {
+      "path": "body_models/smplx/SMPLX_NEUTRAL.npz",
+      "group": "SMPL_X_asset",
+      "role": "User-provided neutral model; final FK asset",
+      "bytes": 108752058,
+      "sha256": "376021446ddc86e99acacd795182bbef903e61d33b76b9d8b359c2b0865bd992",
+      "mtime_ns": 1793979315437198523
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/P01_W3G10k_s62/identity.json",
+      "group": "P01_weight_provenance",
+      "role": "Provenance for fixed geometry coefficient",
+      "bytes": 9454,
+      "sha256": "ea26c30e3a46e5dfb7cefce8aca8d4cba4ceeaa4bc3eb7df9f3c4101992fb1d7",
+      "mtime_ns": 1794554509576140925
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/D128/bank.pt",
+      "group": "P_history_banks",
+      "role": "Merged immutable D128 bank",
+      "bytes": 167932293,
+      "sha256": "f0170673454eee64e7e49e594b7a41b39046e94f24eea36bded7ed0f5287b926",
+      "mtime_ns": 1794554485178726612
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/D128/complete.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 1632,
+      "sha256": "573edf3371bc98dc477a7313db5f50ed328d834d4797d8674353d65ac862b431",
+      "mtime_ns": 1794554485421730738
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/D128/identity.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 29874,
+      "sha256": "e3a3d5c100d5105c2fc0b1089c3ea11c5fc6425604a46321507bb5a8a2d02f06",
+      "mtime_ns": 1794554474744549420
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/D128/selection.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 128122,
+      "sha256": "e8e6126e53a40719c10b0cc52c8de8815a909c58efd6cc1346cc5cf10b507832",
+      "mtime_ns": 1794554474742549386
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/preflight-D128/bank.pt",
+      "group": "P_history_banks",
+      "role": "Merged immutable preflight_D128 bank",
+      "bytes": 5271685,
+      "sha256": "34b86be3d4fbfd03cc2c94fc2f03d71b6cca7823ed707e31c07e8f592a847c51",
+      "mtime_ns": 1794553092081093682
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/preflight-D128/complete.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 1506,
+      "sha256": "97eb04573d62eb8f1e5bc55feec231fd7f2537e67cf8e187e9c5a6c1e6688e43",
+      "mtime_ns": 1794553092122094376
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/preflight-D128/identity.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 29870,
+      "sha256": "bc705f77c353cb6b7b7bb2f8a92aa922c35d25f72963267486b80939b8f619d6",
+      "mtime_ns": 1794553087029008052
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/preflight-D128/selection.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 4990,
+      "sha256": "6aa9796e0d4ffa8b8f0212e18978f9e29874a113f4c28805a277272553a04744",
+      "mtime_ns": 1794553087028008036
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/preflight-train/bank.pt",
+      "group": "P_history_banks",
+      "role": "Merged immutable preflight_train bank",
+      "bytes": 2364677,
+      "sha256": "744f89ec09f34adb70cc4d35e467076b52acc5e1d92316d719756d2b485a9d5d",
+      "mtime_ns": 1794553042070246035
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/preflight-train/complete.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 1104,
+      "sha256": "f043c747c50ee5ad2f14c164582aeeda7177095942b787cc28bf7046d4825b8f",
+      "mtime_ns": 1794553042104246612
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/preflight-train/identity.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 29754,
+      "sha256": "7fdac38c22349a48ef166ade3f0ec5e6b8fc16ee088ca9de76d5d1d1601d8955",
+      "mtime_ns": 1794553028449015166
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/preflight-train/selection.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 6148,
+      "sha256": "2a406fc2634b177bc27a694adfb625543626f8fd1b7ab43445bf68e5e79baf03",
+      "mtime_ns": 1794553028448015150
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/train/bank.pt",
+      "group": "P_history_banks",
+      "role": "Merged immutable train bank",
+      "bytes": 2459138245,
+      "sha256": "7c99b1db4f9d7ef4eb77448e3fb1be1d838e651e507383d6c8988b2ed05348a8",
+      "mtime_ns": 1794554430678801102
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/train/complete.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 2780,
+      "sha256": "0aebd1f0449a7380b35f6336a5abd9076498a643598a843fe40541061c02c5a6",
+      "mtime_ns": 1794554433837854749
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/train/identity.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 29761,
+      "sha256": "e820faae03446da824f0e766fdbf2629905302ad9e093668447eb6922bba4de1",
+      "mtime_ns": 1794553290092449831
+    },
+    {
+      "path": "exp/formal-p-w3-g10k-20261113/banks/train/selection.json",
+      "group": "P_history_metadata",
+      "role": "Bank identity/context selection/completion evidence",
+      "bytes": 5953134,
+      "sha256": "27398170fa71a3977fc1e2ec647e7e9d8b6d1a113337f32fac0171b8a60f9266",
+      "mtime_ns": 1794553290088449763
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/__init__.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 315,
+      "sha256": "975002d51f41e058e4c722ca479b70b3d8d92c05e2e3a3af31e24da63def1354",
+      "mtime_ns": 1793975954320413734
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/__main__.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 30,
+      "sha256": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "mtime_ns": 1793976137735513088
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/assets.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8075,
+      "sha256": "0b6584a390a5e6b588916973b139de1615678484bc90fdb0cd82daf06bacfbe7",
+      "mtime_ns": 1793982820455411987
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/bootstrap.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4290,
+      "sha256": "5ff8d997667ba0be0254c448b39e0602791141ad545b18877e76112c39a581e0",
+      "mtime_ns": 1794051014561623907
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/checkpoint.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4882,
+      "sha256": "04e7091ff3200fcc29c5fc6fb8e25181bf3e93de874f861f2ef9b52a34af5bda",
+      "mtime_ns": 1794230271923490613
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/cli.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8112,
+      "sha256": "2ca74d3bf5f58a584abf970c1f55aa2dc95fbce4b749fee5f34afdacbd47b946",
+      "mtime_ns": 1794582912656475293
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/codec.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 10416,
+      "sha256": "8ea78928965f8b580b336f9de7b81fdbb61fcb0ddf46f63bc15df3f2fdf498ee",
+      "mtime_ns": 1794582820129869543
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/config.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 5207,
+      "sha256": "feee3c69ff3f7a3e152c909a787fa504c67a7e1173a9a82ebe4e81eba537873a",
+      "mtime_ns": 1794582912655475276
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/data.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 12084,
+      "sha256": "ed8573bec7ddfe1825f4d7045a38abb882940ee433e4e7cbc1848581882a6f75",
+      "mtime_ns": 1794274053656919687
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/diagnostics.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2128,
+      "sha256": "8c5d98a2552c5e718484a1e82002108152551b53fe4f119abafaf10816449c99",
+      "mtime_ns": 1793976033300748343
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/distributed.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 5392,
+      "sha256": "0f14ffde38b3b5aa22f68def623ee134a71b47fbb7a6a14f80fe26eee5fd63f5",
+      "mtime_ns": 1794050741792042112
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/evaluate.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 11171,
+      "sha256": "be9679a086afac457c732ccf6214c22bc76ba20b36cb60bc3d1e4c4ff149f5cb",
+      "mtime_ns": 1794375230968573899
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/evaluation.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 10283,
+      "sha256": "de6732bbd27d29a7c0067709b31712b0e81d5e9623d69eaf67231eca1d52788d",
+      "mtime_ns": 1794375386260248280
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/experiments.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 3134,
+      "sha256": "12055d787ddd22b12994d706d2d6178100582cc66fd0e47bc027a52349254e47",
+      "mtime_ns": 1793975898626472614
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/fk.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8459,
+      "sha256": "7758b9ca8bb63e120fb9a45ef4e8a749345da8834b6e156fa8dc28d3e437a4bb",
+      "mtime_ns": 1794468958173423354
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/flow.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2456,
+      "sha256": "7c7f626eb7c4215d6f75cd109dd50784f4402d097b06e0b2d9a3223bc9e3dfd6",
+      "mtime_ns": 1794468873774000698
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/formal_prior_bank.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 36046,
+      "sha256": "f330a48c237ba93c59fb621c3a31baed8dd8f7927c00234df4eba44347fb44f3",
+      "mtime_ns": 1794552691918312776
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/formal_prior_evaluation.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 27176,
+      "sha256": "6e6a6228cd8df445935370325eb43e504a04911b87ce82c88f34f99392cc86a6",
+      "mtime_ns": 1794583826794336533
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/formal_prior_training.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 43018,
+      "sha256": "0f6fe8ab7732ba77609f9a90af60b08a260a1e5e36bdca8db17c428fc4636e4b",
+      "mtime_ns": 1794584443997029278
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/history_training.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 3846,
+      "sha256": "b8f142e14e93f7488b7348207088f98cd349eeba27d1ad6b47f25e1a69f33293",
+      "mtime_ns": 1794273701075010530
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/intervention.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 636,
+      "sha256": "d301c79ce6a0a77ff13bc48943619a89cb922ff53e9c74c07ce77ec7130306b1",
+      "mtime_ns": 1794302601089547029
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/io.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 1325,
+      "sha256": "b8bab2ee17fd8715c89e929c4325a22c8306a43f5b52e28ca504364bbeeef766",
+      "mtime_ns": 1794273631037836947
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/losses.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 13283,
+      "sha256": "5490f94045f1ed5ec44c02f84e1b7919187aa8c39488932d3c49848d87208473",
+      "mtime_ns": 1794470678137443495
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/metrics.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 10943,
+      "sha256": "bc802b6b43a4f392fb00a4599aa2a51509f1c2ed5a7ba7b0dfb2f2fcab7625d3",
+      "mtime_ns": 1793981708918639137
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/models/__init__.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 173,
+      "sha256": "abd09eb0fbcede90c0ad04d3a423f2b328128a89a3e7914c97cab5ddc8631c1c",
+      "mtime_ns": 1793975954320413734
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/models/layers.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4313,
+      "sha256": "3228bf4504346c130417e05f4c5c904e76ac2344c2ed0c18ffe0c83ce9cbd5e5",
+      "mtime_ns": 1794469388730684531
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/models/motion.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 6345,
+      "sha256": "5e25eb937910754920ba0a7bebc8b0d594194b08f88ac6e950aa1bb7fb06193d",
+      "mtime_ns": 1794470592471997652
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/models/prior.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 3710,
+      "sha256": "47c4594d23c80c90ab19f5fe194a5ecad950121a52806da030bf0df4182e943b",
+      "mtime_ns": 1794567815829703182
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/official.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 19852,
+      "sha256": "ce67556c0b2862fefaf35408fe0edbdd05129da92256ee58eb4dc07b3e2bf5c7",
+      "mtime_ns": 1794375386401250708
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/official_preparation.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8731,
+      "sha256": "70d703bb15760a85a3918fabc60963623ba6ed5fe7b357b442013056759de6b5",
+      "mtime_ns": 1794049251703011893
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/optimization.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4569,
+      "sha256": "414f506cbb4beeb0b026c601251a10d521be72b2bb110e80dfce5bcb96816cd1",
+      "mtime_ns": 1794049316225095747
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/preparation.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 12085,
+      "sha256": "f20fff7eab7cb6ad198a6d6768c22920ae2ef1864d368ce0e591470eda04aa78",
+      "mtime_ns": 1794049252773029867
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/prior_data.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2763,
+      "sha256": "ef74373f68232509464a4b387b9b87caaa5eb516d046dba3c9c984c322530d7b",
+      "mtime_ns": 1794216437773019294
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/prior_evaluation.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8810,
+      "sha256": "ba7fbac6f3f5a55cf46b3c6341c8f5219a9b289dcd6f0913e44650e3211c4bf3",
+      "mtime_ns": 1794202162407732773
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/prior_objectives.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2150,
+      "sha256": "cf5ce545058b10b94054b27c4568c28bfd5dc653a01594810ffc07c28357c4d6",
+      "mtime_ns": 1794567815829703182
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/prior_training.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 27419,
+      "sha256": "2f56cf8764f8cb10d9ad6032de11cdf376b3b466d3523dfc7065fd244c5a8787",
+      "mtime_ns": 1794551523696539000
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/prior_two_forward.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2353,
+      "sha256": "3944affd782e74fe3c161558210b7c2e16ed522ec4f7f58682137fc0d8d87ed3",
+      "mtime_ns": 1794217363816607179
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/reference_diagnostic.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 17325,
+      "sha256": "c800a73ba5c3503d19c09082821af247a4eafb7744fa8305a68bba42c26faa59",
+      "mtime_ns": 1794302869643110289
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/reference_statistics.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 12024,
+      "sha256": "b5885b30579f7d99f9c71d0066312d3bb585cf6c7e517ccdd0295959373b420f",
+      "mtime_ns": 1794299306714591879
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/resources/assets.json.gz",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 532078,
+      "sha256": "71f7c009fc807b6d024a704acb6408c369db5c274bae1306b041223ec8d2901a",
+      "mtime_ns": 1793975807631935058
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/rollin.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2070,
+      "sha256": "7f9a7411c079cd269a26d6ce54bdec1ceefa59f6d6c7e73c0472f38e060726af",
+      "mtime_ns": 1794470633540690775
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/rotations.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4745,
+      "sha256": "e30bbbd68cb2a76623da811b6c24f9edc9b48a4263f3827aafdcc3fa08add4f3",
+      "mtime_ns": 1793975898643472901
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/sampling.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 3785,
+      "sha256": "2c884f125800c297565327c51cbfc4d7fbb2a112e99adf45ea568e616ac25677",
+      "mtime_ns": 1794375274856329719
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/selection.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 5461,
+      "sha256": "b4960cd7da4afc3cf1ccf7a0eb8bd5531cd14ed8541f15c48adb948efe175fc9",
+      "mtime_ns": 1794463172671860585
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/state.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 6094,
+      "sha256": "115791d52c04d341852487b74ce4992339c18d4aa4d2a511ef7d41f4ec08656f",
+      "mtime_ns": 1794468873773000681
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/system.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 5395,
+      "sha256": "cf842c654957768b59d6ad09b4eee7fb09223d9bd62bbfe7a78db9294b523044",
+      "mtime_ns": 1794470678136443478
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/timing.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 6009,
+      "sha256": "76638b54d21952235a12ba2d707a2a3493fd1fbcd93df27e4628e9907d71ae6c",
+      "mtime_ns": 1793975898626472614
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/egorecover/training.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 42159,
+      "sha256": "049d8e97abf88090b87310da86d18cf32e4fa48698aea1038961d069d52ccfcb",
+      "mtime_ns": 1794582912656475293
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/analyze_error_spectrum.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 19326,
+      "sha256": "1dd070e387d8dc054c79bb482be585d4750823c7312ed4a8696a04bb629526fe",
+      "mtime_ns": 1794487353599441318
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/analyze_oracle_gate.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 19371,
+      "sha256": "c4ab2ec85f9dfda88374d5c6caec6f0dabd245aaf3caf24f04e7070062f7d423",
+      "mtime_ns": 1794407587172073550
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/analyze_rewrite_frame_traces.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 7477,
+      "sha256": "f414c32ae78e29e00254f7f759efcb89c6c1799ac91bc943e9e8030ff7f86a36",
+      "mtime_ns": 1794271953575751310
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/benchmark_formal_runtime.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 6842,
+      "sha256": "56839ab78b459d4a1ecf7f6b5ca2ebf518e47d69571a71182ca8e0856e247562",
+      "mtime_ns": 1794470913836422717
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/build_experiment_report.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 41182,
+      "sha256": "765c9270f06e82fb95f46e8978311e0bfa7339ab33fdeb115274ecfd9fc9edfa",
+      "mtime_ns": 1794377184543189073
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/build_formal_prior_bank.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 6797,
+      "sha256": "e7637661d3d0e75b08dcde6fa1e5ecc88597d5e26dd3959a3710ebd00e6f6833",
+      "mtime_ns": 1794552691917312759
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/build_prior_bank.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 5453,
+      "sha256": "cfae13eedeb0c618e91f361ce86eb4923a6c135ff02870447f0803686fe4e540",
+      "mtime_ns": 1794202101172702744
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/calibrate_feedback.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 7306,
+      "sha256": "6200e1268317425307d370f1eb29c0c0eb65f0d7029e85b0c48a474a9f5c4da6",
+      "mtime_ns": 1794302955660571897
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/calibrate_velocity.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 7332,
+      "sha256": "20d39ad7f12684683d20fd2ca7d5b0dca3f123c5c8db4f04961fe10da4caf068",
+      "mtime_ns": 1794314291433984273
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/diagnose_geometry_gradients.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 13215,
+      "sha256": "602850ccfd15e84e9c12f438b6b3424bd84a4ade48a739277d0a3ffe712add92",
+      "mtime_ns": 1794104580925202813
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/diagnose_history_rewrite.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 28015,
+      "sha256": "46c240058c964b44bd51c1e9595f3045f79a76ed7798f465ea4161d650422d9c",
+      "mtime_ns": 1794271296250747790
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/diagnose_p01_corrections.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 13595,
+      "sha256": "a805b4c0e3c2a21aa163f4e026c01953e7fcda793af05ececb696ef4b2b32b47",
+      "mtime_ns": 1794558137694181842
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/diagnose_p01_distribution.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 34947,
+      "sha256": "b0c2b9c6b25281f747de53f70ec5a03a7ec3b8602931a5d29411720d519b33f3",
+      "mtime_ns": 1794557980351544641
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/diagnose_p01_feet.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 24224,
+      "sha256": "d9acf87858c49f4b871355b5bd9c2474e6aba8c5d1756b3637c165beec369b22",
+      "mtime_ns": 1794556628355466839
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/diagnose_p01_gauge.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 7618,
+      "sha256": "f512daf93147dd277a2e155e9943283b99ba6ca76731c89c0a43b31a3b55011d",
+      "mtime_ns": 1794558137555179512
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/diagnose_p01_gradients.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 21253,
+      "sha256": "0ed5ab5b7e6f43100e37e018da035f8a15a6b9383fe5c24669432717d56fd9fe",
+      "mtime_ns": 1794556715288959248
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/diagnose_reference_paths.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8410,
+      "sha256": "dcb069a6f58aade3e2dfcc0704bdfcc8e2527dd78a93aaee1a782dd9afebe847",
+      "mtime_ns": 1794099763054513166
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/formal_paired_helper.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 921,
+      "sha256": "d53481d2b963ff533cccf6bfafea0ea6729e19d1b628dcf971ac1e500cbc1fbc",
+      "mtime_ns": 1794485148487458295
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/formal_prior_processes.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 9770,
+      "sha256": "90d6e949d09d70eefd55bfba94598ceb6a55d5213e1a4f08c3048855971fe91c",
+      "mtime_ns": 1794583800914887576
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/formal_runtime_migration.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2652,
+      "sha256": "f4f6aa516fed1e0a4e3298ead1fec8d7e7bf55b28c6f839bfd2b8c8912b2d04e",
+      "mtime_ns": 1794471152656454630
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/hand_metrics.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4552,
+      "sha256": "411e0d9defdb87086e4cd209a8f80bd332d8d0e98c6d363784411877209bd767",
+      "mtime_ns": 1794375439953172962
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/history_rewrite_metrics.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 9697,
+      "sha256": "0e8b8fd0168e02fa17625eabfaf9a3901e0c6491ba068ce40e260b0eaa2d2dbc",
+      "mtime_ns": 1794271295938742567
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/replay_oracle_candidates.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 10468,
+      "sha256": "937e0cbfc51974b1d34810cd0417227ab33401d26133f8355a880595fec0345c",
+      "mtime_ns": 1794407315604397933
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/revise_training_budget.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 18120,
+      "sha256": "18586e5cafacbe33863e85c2b7aa28ab574328404bf99a43b421f44f01cd1e7c",
+      "mtime_ns": 1794487947855433226
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/run_ac_training.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 12591,
+      "sha256": "25c41a2b4b2cd250bc2faffccc4404616ef50dacf862698995e3e3e4c61d10d4",
+      "mtime_ns": 1794314985792692938
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/run_c_reference.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 11353,
+      "sha256": "1019fc05d8b9f64664a8f052d3846c100f4851bcee2a3a61817e7be399100e9d",
+      "mtime_ns": 1794299306715591896
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/run_formal_mainline.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 25492,
+      "sha256": "f786eae871bd98e63be4c59b203a7a74265e612ad23b3db2b4464f2ba2db556e",
+      "mtime_ns": 1794484101979933001
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/run_formal_prior.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 41988,
+      "sha256": "ca4984ea52c28ecd7973687c3a72ba163e91ac776a8f254a89ba41787a8a2311",
+      "mtime_ns": 1794584209480970106
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/run_formal_prior_ab.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 23282,
+      "sha256": "2b1376029be4bf0396f1bd7e3fa6f5b1dfabd6e5ddf369f73a6e4dd4de0de4e9",
+      "mtime_ns": 1794583665356535903
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/run_history_ablation.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 19433,
+      "sha256": "49b62a2199254621b530a76e1977577dfdeb2a15f01b41f582ddecd744646fcc",
+      "mtime_ns": 1794274430967245307
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/run_shape_persistent.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 14145,
+      "sha256": "720c94ce1fceea4993a093d132950111053f9669700a177d41352806165f14c9",
+      "mtime_ns": 1794375600923942828
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/run_two_route_training.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 11541,
+      "sha256": "652a1d35590cb624dd662446dfdae0aee5778f0cb0c23088d3f77a678782afd5",
+      "mtime_ns": 1794303056857291431
+    },
+    {
+      "path": "exp/formal-p02-ab-r1-20261113/source/scripts/schedule_formal_runtime.py",
+      "group": "P02_frozen_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 16166,
+      "sha256": "1e6b242ce27e0c228666864b7704be844d4d1b5670b6622906f7acdb5e864fc2",
+      "mtime_ns": 1794471681077388172
+    },
+    {
+      "path": "exp/formal-v1-20261112/configs/dev128.json",
+      "group": "evaluation_selections",
+      "role": "Frozen D128 physical clips",
+      "bytes": 38574,
+      "sha256": "04c6bcc767922bbbc77ee11168a73274349143390843bdcefb48a6e54bae4f81",
+      "mtime_ns": 1794455188890741645
+    },
+    {
+      "path": "exp/formal-v1-20261112/configs/evaluation400.json",
+      "group": "evaluation_selections",
+      "role": "Frozen D400 physical clips",
+      "bytes": 104486,
+      "sha256": "7723552e557f01aea4a65f51cdd6e151e66a35414c05bdc216d6c84715fd29d6",
+      "mtime_ns": 1794153114736296261
+    },
+    {
+      "path": "exp/formal-v1-20261112/configs/long50.json",
+      "group": "evaluation_selections",
+      "role": "Frozen long50 physical clips",
+      "bytes": 15975,
+      "sha256": "bf69d5a78cd116b75a5b79f18895ba4a658a6253d74dd0171ee39742ad96ea9c",
+      "mtime_ns": 1794463645999955020
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/V3_G_CV_W3_10k_s62/best.pt",
+      "group": "G_producer_checkpoint",
+      "role": "W3G10k best EMA and native identity",
+      "bytes": 368405471,
+      "sha256": "4f748009e20193b68efca7cc5e47b28c3613995cac96bcfe4cd397ad01131d67",
+      "mtime_ns": 1794493760875062074
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/V3_G_CV_W3_10k_s62/identity.json",
+      "group": "G_producer_metadata",
+      "role": "Original native G experiment identity",
+      "bytes": 51671,
+      "sha256": "81dc61b832b6838c07548fa5c82c51031331dfeb981627f73d03bd5d9ef83e1c",
+      "mtime_ns": 1794488763850199946
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/__init__.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 315,
+      "sha256": "975002d51f41e058e4c722ca479b70b3d8d92c05e2e3a3af31e24da63def1354",
+      "mtime_ns": 1793975954320413734
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/__main__.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 30,
+      "sha256": "6d8b7d7846a845059d7a3107143f11131f63c5511d669b44085b15ec5e3d2279",
+      "mtime_ns": 1793976137735513088
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/assets.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8075,
+      "sha256": "0b6584a390a5e6b588916973b139de1615678484bc90fdb0cd82daf06bacfbe7",
+      "mtime_ns": 1793982820455411987
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/bootstrap.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4290,
+      "sha256": "5ff8d997667ba0be0254c448b39e0602791141ad545b18877e76112c39a581e0",
+      "mtime_ns": 1794051014561623907
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/checkpoint.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4882,
+      "sha256": "04e7091ff3200fcc29c5fc6fb8e25181bf3e93de874f861f2ef9b52a34af5bda",
+      "mtime_ns": 1794230271923490613
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/cli.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 7910,
+      "sha256": "f5694c5f9d54686ee167bdc631b6b7504c4a7b7349b63861c95ed88a00c581df",
+      "mtime_ns": 1794463172670860568
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/codec.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8963,
+      "sha256": "a1c195314e6739447e4b99972c7a226922ef4e7d931de86b2dca9d7b03844bdc",
+      "mtime_ns": 1793976385996708218
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/config.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 5159,
+      "sha256": "27ee62c411effed6c2f7cc837febce15261af899628f01a5a5dea90f7fe2c44b",
+      "mtime_ns": 1794463172670860568
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/data.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 12084,
+      "sha256": "ed8573bec7ddfe1825f4d7045a38abb882940ee433e4e7cbc1848581882a6f75",
+      "mtime_ns": 1794274053656919687
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/diagnostics.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2128,
+      "sha256": "8c5d98a2552c5e718484a1e82002108152551b53fe4f119abafaf10816449c99",
+      "mtime_ns": 1793976033300748343
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/distributed.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 5392,
+      "sha256": "0f14ffde38b3b5aa22f68def623ee134a71b47fbb7a6a14f80fe26eee5fd63f5",
+      "mtime_ns": 1794050741792042112
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/evaluate.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 11171,
+      "sha256": "be9679a086afac457c732ccf6214c22bc76ba20b36cb60bc3d1e4c4ff149f5cb",
+      "mtime_ns": 1794375230968573899
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/evaluation.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 10283,
+      "sha256": "de6732bbd27d29a7c0067709b31712b0e81d5e9623d69eaf67231eca1d52788d",
+      "mtime_ns": 1794375386260248280
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/experiments.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 3134,
+      "sha256": "12055d787ddd22b12994d706d2d6178100582cc66fd0e47bc027a52349254e47",
+      "mtime_ns": 1793975898626472614
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/fk.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8459,
+      "sha256": "7758b9ca8bb63e120fb9a45ef4e8a749345da8834b6e156fa8dc28d3e437a4bb",
+      "mtime_ns": 1794468958173423354
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/flow.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2456,
+      "sha256": "7c7f626eb7c4215d6f75cd109dd50784f4402d097b06e0b2d9a3223bc9e3dfd6",
+      "mtime_ns": 1794468873774000698
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/history_training.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 3846,
+      "sha256": "b8f142e14e93f7488b7348207088f98cd349eeba27d1ad6b47f25e1a69f33293",
+      "mtime_ns": 1794273701075010530
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/intervention.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 636,
+      "sha256": "d301c79ce6a0a77ff13bc48943619a89cb922ff53e9c74c07ce77ec7130306b1",
+      "mtime_ns": 1794302601089547029
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/io.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 1325,
+      "sha256": "b8bab2ee17fd8715c89e929c4325a22c8306a43f5b52e28ca504364bbeeef766",
+      "mtime_ns": 1794273631037836947
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/losses.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 13283,
+      "sha256": "5490f94045f1ed5ec44c02f84e1b7919187aa8c39488932d3c49848d87208473",
+      "mtime_ns": 1794470678137443495
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/metrics.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 10943,
+      "sha256": "bc802b6b43a4f392fb00a4599aa2a51509f1c2ed5a7ba7b0dfb2f2fcab7625d3",
+      "mtime_ns": 1793981708918639137
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/models/__init__.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 173,
+      "sha256": "abd09eb0fbcede90c0ad04d3a423f2b328128a89a3e7914c97cab5ddc8631c1c",
+      "mtime_ns": 1793975954320413734
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/models/layers.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4313,
+      "sha256": "3228bf4504346c130417e05f4c5c904e76ac2344c2ed0c18ffe0c83ce9cbd5e5",
+      "mtime_ns": 1794469388730684531
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/models/motion.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 6345,
+      "sha256": "5e25eb937910754920ba0a7bebc8b0d594194b08f88ac6e950aa1bb7fb06193d",
+      "mtime_ns": 1794470592471997652
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/models/prior.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 3265,
+      "sha256": "31769fcd8c2b63f6be9a5f050fd539a17ffb03b4811a23a156ace1b9032e4f29",
+      "mtime_ns": 1794191130757133797
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/official.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 19852,
+      "sha256": "ce67556c0b2862fefaf35408fe0edbdd05129da92256ee58eb4dc07b3e2bf5c7",
+      "mtime_ns": 1794375386401250708
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/official_preparation.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8731,
+      "sha256": "70d703bb15760a85a3918fabc60963623ba6ed5fe7b357b442013056759de6b5",
+      "mtime_ns": 1794049251703011893
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/optimization.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4569,
+      "sha256": "414f506cbb4beeb0b026c601251a10d521be72b2bb110e80dfce5bcb96816cd1",
+      "mtime_ns": 1794049316225095747
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/preparation.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 12085,
+      "sha256": "f20fff7eab7cb6ad198a6d6768c22920ae2ef1864d368ce0e591470eda04aa78",
+      "mtime_ns": 1794049252773029867
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/prior_data.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2763,
+      "sha256": "ef74373f68232509464a4b387b9b87caaa5eb516d046dba3c9c984c322530d7b",
+      "mtime_ns": 1794216437773019294
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/prior_evaluation.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8810,
+      "sha256": "ba7fbac6f3f5a55cf46b3c6341c8f5219a9b289dcd6f0913e44650e3211c4bf3",
+      "mtime_ns": 1794202162407732773
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/prior_training.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 26738,
+      "sha256": "f0b4548f7f2a4cae13cb2d8be260b33c0f4685042f2f8bc9dcb2876dd3ece7a7",
+      "mtime_ns": 1794216999564475722
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/prior_two_forward.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2353,
+      "sha256": "3944affd782e74fe3c161558210b7c2e16ed522ec4f7f58682137fc0d8d87ed3",
+      "mtime_ns": 1794217363816607179
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/reference_diagnostic.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 17325,
+      "sha256": "c800a73ba5c3503d19c09082821af247a4eafb7744fa8305a68bba42c26faa59",
+      "mtime_ns": 1794302869643110289
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/reference_statistics.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 12024,
+      "sha256": "b5885b30579f7d99f9c71d0066312d3bb585cf6c7e517ccdd0295959373b420f",
+      "mtime_ns": 1794299306714591879
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/resources/assets.json.gz",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 532078,
+      "sha256": "71f7c009fc807b6d024a704acb6408c369db5c274bae1306b041223ec8d2901a",
+      "mtime_ns": 1793975807631935058
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/rollin.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2070,
+      "sha256": "7f9a7411c079cd269a26d6ce54bdec1ceefa59f6d6c7e73c0472f38e060726af",
+      "mtime_ns": 1794470633540690775
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/rotations.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4745,
+      "sha256": "e30bbbd68cb2a76623da811b6c24f9edc9b48a4263f3827aafdcc3fa08add4f3",
+      "mtime_ns": 1793975898643472901
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/sampling.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 3785,
+      "sha256": "2c884f125800c297565327c51cbfc4d7fbb2a112e99adf45ea568e616ac25677",
+      "mtime_ns": 1794375274856329719
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/selection.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 5461,
+      "sha256": "b4960cd7da4afc3cf1ccf7a0eb8bd5531cd14ed8541f15c48adb948efe175fc9",
+      "mtime_ns": 1794463172671860585
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/state.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 6094,
+      "sha256": "115791d52c04d341852487b74ce4992339c18d4aa4d2a511ef7d41f4ec08656f",
+      "mtime_ns": 1794468873773000681
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/system.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 5395,
+      "sha256": "cf842c654957768b59d6ad09b4eee7fb09223d9bd62bbfe7a78db9294b523044",
+      "mtime_ns": 1794470678136443478
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/timing.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 6009,
+      "sha256": "76638b54d21952235a12ba2d707a2a3493fd1fbcd93df27e4628e9907d71ae6c",
+      "mtime_ns": 1793975898626472614
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/egorecover/training.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 37271,
+      "sha256": "ffb215a29cce2f2070182e2560e404c8d6b3cbc81604ce0dd5ccc080a28325fe",
+      "mtime_ns": 1794470889809017070
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/analyze_error_spectrum.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 19326,
+      "sha256": "1dd070e387d8dc054c79bb482be585d4750823c7312ed4a8696a04bb629526fe",
+      "mtime_ns": 1794487353599441318
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/analyze_oracle_gate.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 19371,
+      "sha256": "c4ab2ec85f9dfda88374d5c6caec6f0dabd245aaf3caf24f04e7070062f7d423",
+      "mtime_ns": 1794407587172073550
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/analyze_rewrite_frame_traces.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 7477,
+      "sha256": "f414c32ae78e29e00254f7f759efcb89c6c1799ac91bc943e9e8030ff7f86a36",
+      "mtime_ns": 1794271953575751310
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/benchmark_formal_runtime.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 6842,
+      "sha256": "56839ab78b459d4a1ecf7f6b5ca2ebf518e47d69571a71182ca8e0856e247562",
+      "mtime_ns": 1794470913836422717
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/build_experiment_report.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 41182,
+      "sha256": "765c9270f06e82fb95f46e8978311e0bfa7339ab33fdeb115274ecfd9fc9edfa",
+      "mtime_ns": 1794377184543189073
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/build_prior_bank.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 5453,
+      "sha256": "cfae13eedeb0c618e91f361ce86eb4923a6c135ff02870447f0803686fe4e540",
+      "mtime_ns": 1794202101172702744
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/calibrate_feedback.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 7306,
+      "sha256": "6200e1268317425307d370f1eb29c0c0eb65f0d7029e85b0c48a474a9f5c4da6",
+      "mtime_ns": 1794302955660571897
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/calibrate_velocity.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 7332,
+      "sha256": "20d39ad7f12684683d20fd2ca7d5b0dca3f123c5c8db4f04961fe10da4caf068",
+      "mtime_ns": 1794314291433984273
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/diagnose_geometry_gradients.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 13215,
+      "sha256": "602850ccfd15e84e9c12f438b6b3424bd84a4ade48a739277d0a3ffe712add92",
+      "mtime_ns": 1794104580925202813
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/diagnose_history_rewrite.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 28015,
+      "sha256": "46c240058c964b44bd51c1e9595f3045f79a76ed7798f465ea4161d650422d9c",
+      "mtime_ns": 1794271296250747790
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/diagnose_reference_paths.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 8410,
+      "sha256": "dcb069a6f58aade3e2dfcc0704bdfcc8e2527dd78a93aaee1a782dd9afebe847",
+      "mtime_ns": 1794099763054513166
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/formal_paired_helper.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 921,
+      "sha256": "d53481d2b963ff533cccf6bfafea0ea6729e19d1b628dcf971ac1e500cbc1fbc",
+      "mtime_ns": 1794485148487458295
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/formal_runtime_migration.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 2652,
+      "sha256": "f4f6aa516fed1e0a4e3298ead1fec8d7e7bf55b28c6f839bfd2b8c8912b2d04e",
+      "mtime_ns": 1794471152656454630
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/hand_metrics.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 4552,
+      "sha256": "411e0d9defdb87086e4cd209a8f80bd332d8d0e98c6d363784411877209bd767",
+      "mtime_ns": 1794375439953172962
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/history_rewrite_metrics.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 9697,
+      "sha256": "0e8b8fd0168e02fa17625eabfaf9a3901e0c6491ba068ce40e260b0eaa2d2dbc",
+      "mtime_ns": 1794271295938742567
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/replay_oracle_candidates.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 10468,
+      "sha256": "937e0cbfc51974b1d34810cd0417227ab33401d26133f8355a880595fec0345c",
+      "mtime_ns": 1794407315604397933
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/revise_training_budget.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 18120,
+      "sha256": "18586e5cafacbe33863e85c2b7aa28ab574328404bf99a43b421f44f01cd1e7c",
+      "mtime_ns": 1794487947855433226
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/run_ac_training.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 12591,
+      "sha256": "25c41a2b4b2cd250bc2faffccc4404616ef50dacf862698995e3e3e4c61d10d4",
+      "mtime_ns": 1794314985792692938
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/run_c_reference.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 11353,
+      "sha256": "1019fc05d8b9f64664a8f052d3846c100f4851bcee2a3a61817e7be399100e9d",
+      "mtime_ns": 1794299306715591896
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/run_formal_mainline.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 25492,
+      "sha256": "f786eae871bd98e63be4c59b203a7a74265e612ad23b3db2b4464f2ba2db556e",
+      "mtime_ns": 1794484101979933001
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/run_history_ablation.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 19433,
+      "sha256": "49b62a2199254621b530a76e1977577dfdeb2a15f01b41f582ddecd744646fcc",
+      "mtime_ns": 1794274430967245307
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/run_shape_persistent.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 14145,
+      "sha256": "720c94ce1fceea4993a093d132950111053f9669700a177d41352806165f14c9",
+      "mtime_ns": 1794375600923942828
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/run_two_route_training.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 11541,
+      "sha256": "652a1d35590cb624dd662446dfdae0aee5778f0cb0c23088d3f77a678782afd5",
+      "mtime_ns": 1794303056857291431
+    },
+    {
+      "path": "exp/formal-v3-10k-20261112/source/scripts/schedule_formal_runtime.py",
+      "group": "G_producer_source",
+      "role": "Frozen code/resources; exclude Python bytecode",
+      "bytes": 16166,
+      "sha256": "1e6b242ce27e0c228666864b7704be844d4d1b5670b6622906f7acdb5e864fc2",
+      "mtime_ns": 1794471681077388172
+    }
+  ],
+  "source_validation": {
+    "listed_files_SHA256_verified": 172,
+    "all_listed_files_match": true,
+    "copy_list_and_checksum_paths_match_manifest": true,
+    "shared_storage_scanned_or_hashed": false,
+    "relative_document_links_checked": true,
+    "bash_examples_syntax_checked": 5,
+    "rsync_available_on_source_at_record": false,
+    "actual_transfer_performed": false,
+    "target_environment_or_training_started": false
+  }
+}

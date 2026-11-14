@@ -2,6 +2,8 @@
 
 更新于2026-11-13。当前主实验使用作者官方 EE4D-Motion processed 发布包和官方train/val划分。正式V3 G从随机初始化、解析CV、高斯起点完成W1/W3各10000步，本轮选W3；P02在该冻结G的真实历史上训练，进度以运行目录为准。G/P适配、U和新的FFT监督尚未启动。Nymeria留到后期；当前不依赖E7或已删除的旧项目200帧paired cache。最新配方见[正式实验主线](formal_experiment_plan_20261112.md)。
 
+换服务器时，按[迁移清单](server_migration_checklist_20261114.md)准备约2.9066 GiB本地资产；共享数据盘不计入迁移量，附逐文件复制列表与SHA256。P02队列已取消，迁移准备不会自动恢复训练。
+
 ## 官方文件与入口
 
 使用 [作者发布的 `ee4d_motion_uniegomotion.zip`](https://github.com/chaitanya100100/UniEgoMotion/blob/main/DATASET.md)，下载和解压命令见 [README](../README.md#正式训练)。`--data-root` 必须指向同时包含以下文件的目录，默认是 `datasets/ee4d_official/ee4d_motion_uniegomotion`：
