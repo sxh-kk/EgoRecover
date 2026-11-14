@@ -1,0 +1,71 @@
+{
+  "version": "egorecover_server_asset_transfer_v1",
+  "recorded_at_beijing": "2026-11-14T20:55:38+08:00",
+  "completed_at_beijing": "2026-11-14T20:47:51+08:00",
+  "status": "complete_assets_verified",
+  "target": {
+    "alias": "4953",
+    "hostname": "di-20261106193215-2f6lr",
+    "project_root": "/root/workspace/songxuhua"
+  },
+  "scope": "Copy the existing local P02 assets to the authorized target. Original shared EE4D dataset is reused, not copied.",
+  "assets": {
+    "manifest": "docs/reports/data/server_migration_manifest_20261114.json",
+    "manifest_sha256": "05b1ceb2260f523be63941a728717ed7018a6e09d6178681f265f6c2367f452f",
+    "verified_files": 172,
+    "verified_bytes": 3120959001,
+    "verified_GiB": 2.906619572080672,
+    "mismatches": [],
+    "mtime_differences": [],
+    "existing_matching_files": 0,
+    "destination_existing_assets_overwritten": false,
+    "transfer_and_final_verification_seconds": 23.87
+  },
+  "code": {
+    "installed": true,
+    "commit": "b78ac41fcb9490baba29bb4ec38ec78cc7fc04c1",
+    "origin": "git@github.com:sxh-kk/EgoRecover.git",
+    "method": "Git bundle containing the same published main commit, copied through shared storage",
+    "direct_target_GitHub_clone": "timed out; code delivery used verified bundle instead",
+    "bundle_sha256": "72d05ff7baf854477c60c2d6423233394b3359f6a1d7007da205f720af6df062",
+    "bundle_bytes": 20332341,
+    "bundle_path": "/gaozt-test1/datasets/EgoRecover-transfer/code-main-b78ac41.bundle",
+    "Git_worktree_clean_after_asset_delivery": true
+  },
+  "shared_storage": {
+    "original_dataset_copied": false,
+    "dataset_accessible_from_target": true,
+    "relay_directory": "/gaozt-test1/datasets/EgoRecover-transfer/p02-r1-b78ac41-20261114T203937",
+    "relay_copy_retained": true,
+    "target_receipt": "/gaozt-test1/datasets/EgoRecover-transfer/p02-r1-b78ac41-20261114T203937/target-receipt.json"
+  },
+  "temporary_access": {
+    "destination_temporary_key_removed": true,
+    "matching_entries_removed": 1,
+    "unrelated_authorized_key_lines_preserved": true,
+    "source_temporary_private_and_public_key_files_deleted": true
+  },
+  "runtime": {
+    "environment_installed_by_transfer": false,
+    "GPU_preflight_run_by_transfer": false,
+    "training_started_by_transfer": false,
+    "automatic_queue_created_on_target": false,
+    "source_queue_phase": "cancelled_by_user",
+    "source_formal_P02_updates": {
+      "A": 0,
+      "B": 0
+    },
+    "explicit_new_training_instruction_required": true
+  },
+  "target_local_receipts": [
+    "exp/server-transfer-20261114/code-receipt.json",
+    "exp/server-transfer-20261114/receipt.json",
+    "exp/server-transfer-20261114/access-cleanup.json"
+  ],
+  "next_steps": [
+    "Recreate and validate Conda environment on target",
+    "Confirm target-host paths, GPU IDs and ports in a new runtime plan; no old SIMPLE PID wait",
+    "Run target-specific CPU and four-GPU preflight",
+    "Start training only on a new explicit user instruction"
+  ]
+}
